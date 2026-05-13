@@ -1,0 +1,1233 @@
+{
+  "version": 1,
+  "puzzles": [
+    {
+      "id": "diagnosis-1",
+      "title": "Diagnosis Day",
+      "topic": "Pulpal & Periapical Diagnosis",
+      "categories": [
+        { "difficulty": "yellow", "name": "AAE 2009 Pulpal Dx Terms",
+          "terms": ["Reversible pulpitis", "Symptomatic irreversible", "Asymptomatic irreversible", "Previously initiated"],
+          "pearl": "AAE 2009 standardized 5 pulpal diagnoses (also 'Normal pulp' and 'Pulp necrosis'). 'Asymptomatic irreversible pulpitis' is real and often found radiographically or during caries removal — pulp is biologically dying without symptoms." },
+        { "difficulty": "green", "name": "AAE 2009 Periapical Dx Terms",
+          "terms": ["Asymptomatic apical periodontitis", "Symptomatic apical periodontitis", "Chronic apical abscess", "Condensing osteitis"],
+          "pearl": "Six AAE periapical diagnoses total (also 'Normal apical tissues' and 'Acute apical abscess'). CAA: long-standing draining sinus tract, usually asymptomatic, drains spontaneously through mucosa or skin." },
+        { "difficulty": "blue", "name": "Adjuncts for Cracked-Tooth Dx",
+          "terms": ["Tooth slooth bite test", "Methylene blue staining", "Transillumination", "Selective anesthesia"],
+          "pearl": "Pain on RELEASE from a bite stick is pathognomonic for cracked cusp. Methylene blue stains crack lines after exploratory access. Selective anesthesia helps localize ambiguous pain." },
+        { "difficulty": "purple", "name": "Endo Outcome Scoring Systems",
+          "terms": ["Strindberg criteria", "PAI (Ørstavik)", "Molven/Rud", "CBCT-PAI (Estrela)"],
+          "pearl": "Strindberg 1956: strict binary success/failure. PAI 1986: 5-point ordinal from PA radiographs. Molven/Rud: post-surgery outcomes (4 categories). CBCT-PAI (Estrela 2008): 0-5 volumetric scoring." }
+      ]
+    },
+    {
+      "id": "instruments-1",
+      "title": "Files & Friends",
+      "topic": "Instrumentation & NiTi Metallurgy",
+      "categories": [
+        { "difficulty": "yellow", "name": "NiTi Rotary Systems",
+          "terms": ["ProTaper Gold", "TruNatomy", "Vortex Blue", "EndoSequence"],
+          "pearl": "Modern NiTi systems differ in cross-section, taper, and heat treatment. ProTaper has variable taper. TruNatomy uses a regressive shape with 0.04 max taper to preserve coronal dentin." },
+        { "difficulty": "green", "name": "NiTi Heat Treatments",
+          "terms": ["M-Wire", "CM-Wire", "Gold wire", "Blue wire"],
+          "pearl": "Heat treatment shifts the Af temperature upward → more martensite at body temperature → greater flexibility and cyclic-fatigue resistance. CM-Wire holds a pre-bent shape." },
+        { "difficulty": "blue", "name": "NiTi Metallurgy Concepts",
+          "terms": ["Austenite phase", "Martensite phase", "R-phase", "Transformation temperature"],
+          "pearl": "NiTi exists in two crystalline phases — austenite (stiff, high-temp) and martensite (flexible, low-temp). R-phase is an intermediate rhombohedral phase. Heat treatment shifts transformation temperature toward body temperature." },
+        { "difficulty": "purple", "name": "Endo Eponyms (People)",
+          "terms": ["Hedström", "Schilder", "Hertwig", "Walia & Brantley"],
+          "pearl": "Hedström → H-file. Schilder → vertical compaction and 5 shaping objectives (1967/1974). Hertwig → epithelial root sheath. Walia & Brantley → introduced NiTi to endodontics in 1988." }
+      ]
+    },
+    {
+      "id": "irrigation-1",
+      "title": "Irrigation Station",
+      "topic": "Irrigation & Disinfection",
+      "categories": [
+        { "difficulty": "yellow", "name": "Standard Irrigant Concentrations",
+          "terms": ["5.25% NaOCl", "17% EDTA", "2% chlorhexidine", "10% citric acid"],
+          "pearl": "NaOCl typically 0.5-6%. EDTA 17% for smear-layer removal. CHX 2% liquid most antimicrobial form. Citric acid 10% as alternative chelator." },
+        { "difficulty": "green", "name": "Irrigant Activation Methods",
+          "terms": ["Passive ultrasonic", "Sonic (EndoActivator)", "Multisonic (GentleWave)", "Apical negative pressure"],
+          "pearl": "PUI uses a non-cutting #15-20 file at 1 mm short of WL in a flooded canal. GentleWave uses multisonic energy + degassed fluid. EndoVac/iVac = apical negative pressure (prevents extrusion)." },
+        { "difficulty": "blue", "name": "NaOCl Accident Findings",
+          "terms": ["Air emphysema", "Soft-tissue necrosis", "Severe immediate pain", "Paresthesia"],
+          "pearl": "Severe pain mid-irrigation = extrusion past apex. Management: stop, copious saline, ice → warm compresses, analgesics, antibiotics (controversial), close follow-up, document thoroughly." },
+        { "difficulty": "purple", "name": "Historical Endo Disinfectants",
+          "terms": ["Formocresol", "Camphorated phenol", "Beechwood creosote", "Iodoform paste"],
+          "pearl": "Once routine intracanal medicaments, now largely abandoned for cytotoxicity. Formocresol contains formaldehyde — IARC group 1 carcinogen. Still appears in some pediatric pulpotomy protocols." }
+      ]
+    },
+    {
+      "id": "materials-1",
+      "title": "Materials Matter",
+      "topic": "Bioceramics & Endo Materials",
+      "categories": [
+        { "difficulty": "yellow", "name": "Bioceramic Repair Products",
+          "terms": ["MTA", "Biodentine", "BC Putty", "EndoSequence Root Repair"],
+          "pearl": "Bioceramics set in moisture, form hydroxyapatite at the dentin interface, induce hard-tissue formation. Premixed putties avoid mixing variability." },
+        { "difficulty": "green", "name": "Sealer Chemistry Categories",
+          "terms": ["Epoxy resin (AH Plus)", "Calcium silicate (BC Sealer)", "Zinc oxide eugenol (PCS)", "Glass ionomer (Ketac-Endo)"],
+          "pearl": "AH Plus = epoxy resin, long-standing gold standard. BC Sealer = calcium silicate, hydrophilic, sets in moisture. PCS = ZOE-based classic. Ketac-Endo = GI, mostly historical." },
+        { "difficulty": "blue", "name": "MTA Properties on Setting",
+          "terms": ["pH ~12.5", "Forms hydroxyapatite", "~4 hour set time", "Radiopacity ~7 mm Al"],
+          "pearl": "ProRoot MTA: alkaline pH → antimicrobial + dentin-bridge formation. Hydrates to form HA at the dentin interface. ~4-hour final set. Radiopacity ~7 mm Al equivalent." },
+        { "difficulty": "purple", "name": "Components of MTA Powder",
+          "terms": ["Tricalcium silicate", "Dicalcium silicate", "Bismuth oxide", "Calcium sulfate"],
+          "pearl": "ProRoot MTA ≈ refined Portland cement (tri/dicalcium silicate) + bismuth oxide radiopacifier + calcium sulfate setting regulator. Bismuth oxide causes discoloration → newer formulations use zirconium oxide." }
+      ]
+    },
+    {
+      "id": "trauma-1",
+      "title": "Trauma & Avulsion",
+      "topic": "Traumatic Dental Injuries",
+      "categories": [
+        { "difficulty": "yellow", "name": "Luxation Injury Types",
+          "terms": ["Concussion", "Subluxation", "Lateral luxation", "Intrusion"],
+          "pearl": "Andreasen classification. Concussion: TTP only, no mobility. Subluxation: mobile, no displacement. Intrusion: axial displacement into socket — worst prognosis (PDL crush, pulp necrosis >85%, ankylosis common)." },
+        { "difficulty": "green", "name": "Avulsion Storage Media (Best→Worst)",
+          "terms": ["HBSS / Viaspan", "Cold milk", "Saliva", "Saline"],
+          "pearl": "PDL cell viability rank: HBSS > milk > saliva > saline > water (hypotonic, lyses cells). Critical period <30 min. >60 min dry time → ankylosis expected." },
+        { "difficulty": "blue", "name": "Tooth Resorption Types",
+          "terms": ["External cervical (ECR)", "External inflammatory", "Internal resorption", "Replacement (ankylosis)"],
+          "pearl": "External inflammatory = damaged cementum + infected pulp; treat with RCT + Ca(OH)₂. ECR = clastic invasion below CEJ (Heithersay classes 1-4). Replacement = direct bone-dentin fusion, no PDL." },
+        { "difficulty": "purple", "name": "Andreasen Root-Fracture Healing Modes",
+          "terms": ["Hard tissue callus", "Connective tissue", "Bone + CT", "Granulation with infection"],
+          "pearl": "Four healing patterns for horizontal root fractures. Hard tissue callus = best outcome (junction indistinguishable). Granulation with infection = treatment failure." }
+      ]
+    },
+    {
+      "id": "anesthesia-1",
+      "title": "Numb It Up",
+      "topic": "Local Anesthesia",
+      "categories": [
+        { "difficulty": "yellow", "name": "Amide Local Anesthetics",
+          "terms": ["Lidocaine", "Articaine", "Mepivacaine", "Bupivacaine"],
+          "pearl": "Amides metabolized in the LIVER (CYP450). Articaine has a thiophene ring → better bone diffusion. Bupivacaine: long-acting (~7 h soft tissue). Amide mnemonic: two 'i's in the name." },
+        { "difficulty": "green", "name": "Mandibular Block Techniques",
+          "terms": ["Inferior alveolar (Halstead)", "Gow-Gates", "Vazirani-Akinosi", "Mental/incisive"],
+          "pearl": "Gow-Gates targets the neck of the condyle — anesthetizes all V3 branches. Vazirani-Akinosi: closed-mouth technique, useful for trismus. Mental/incisive: for premolar-forward mandibular work." },
+        { "difficulty": "blue", "name": "Reasons IANB Fails in Hot Tooth",
+          "terms": ["Accessory mylohyoid innervation", "Reduced pH in inflammation", "TTX-resistant Na channels", "Cross-innervation"],
+          "pearl": "Pulpitis lowers tissue pH → less unionized (base) form of LA crosses neuron membrane. Nav1.8 channels are upregulated in inflamed pulp and less affected by lidocaine." },
+        { "difficulty": "purple", "name": "Ester Local Anesthetics",
+          "terms": ["Procaine", "Tetracaine", "Benzocaine", "Cocaine"],
+          "pearl": "Esters metabolized in PLASMA by pseudocholinesterase → PABA metabolite triggers allergic reactions. One 'i' before -caine = ester. Benzocaine survives as the most common topical." }
+      ]
+    },
+    {
+      "id": "microbiology-1",
+      "title": "The Bugs",
+      "topic": "Endodontic Microbiology",
+      "categories": [
+        { "difficulty": "yellow", "name": "Primary Endo Infection Genera",
+          "terms": ["Fusobacterium", "Prevotella", "Porphyromonas", "Treponema"],
+          "pearl": "Primary infections: polymicrobial, anaerobic Gram-negative dominant. Fusobacterium nucleatum is a key bridging organism — binds early and late colonizers in mixed biofilm." },
+        { "difficulty": "green", "name": "Persistent / Secondary Infection",
+          "terms": ["Enterococcus faecalis", "Candida albicans", "Actinomyces species", "Propionibacterium"],
+          "pearl": "E. faecalis: facultative, survives Ca(OH)₂ via proton pump, invades dentinal tubules. Actinomyces: extraradicular biofilm, classic 'sulfur granules' in tissue specimens — typically requires surgery." },
+        { "difficulty": "blue", "name": "Bacterial Virulence Factors",
+          "terms": ["Lipopolysaccharide (LPS)", "Lipoteichoic acid (LTA)", "Hemolysins", "Capsular polysaccharide"],
+          "pearl": "LPS = Gram-negative endotoxin, drives bone resorption via TLR4 → cytokines (IL-1, TNF, PGE₂). LTA = Gram-positive analog. Endotoxin levels correlate with severity and size of periapical lesion." },
+        { "difficulty": "purple", "name": "Oxygen Tolerance Categories",
+          "terms": ["Obligate anaerobe", "Facultative anaerobe", "Microaerophile", "Aerotolerant anaerobe"],
+          "pearl": "Mature canal infections shift toward obligate anaerobes as O₂ is consumed. Aerotolerant anaerobes survive but don't grow in O₂. Microaerophiles need low O₂ (2-10%) to grow." }
+      ]
+    },
+    {
+      "id": "surgery-1",
+      "title": "Microsurgery",
+      "topic": "Surgical Endodontics",
+      "categories": [
+        { "difficulty": "yellow", "name": "Microsurgery Numerical Targets",
+          "terms": ["3 mm resection", "0-10° bevel", "20-25× magnification", "10-0 suture"],
+          "pearl": "Modern microsurgery: 3 mm resection removes most apical ramifications; shallow/zero bevel preserves dentin and exposes all canals; high-mag scope; atraumatic small suture." },
+        { "difficulty": "green", "name": "Flap Designs",
+          "terms": ["Triangular", "Trapezoidal", "Submarginal (Ochsenbein-Luebke)", "Papilla-base"],
+          "pearl": "Submarginal (Ochsenbein-Luebke) preserves marginal gingiva but requires ≥3 mm attached gingiva apical to crown margin. Papilla-base preserves anterior papilla aesthetics." },
+        { "difficulty": "blue", "name": "Intraoperative Hemostatic Agents",
+          "terms": ["Epinephrine pellets", "Ferric sulfate", "Aluminum chloride", "Calcium sulfate"],
+          "pearl": "Topical hemostasis = clear field for retroprep and retrofill. Epinephrine pellets (Racellet) most common. Ferric sulfate effective but stains tissue if not fully curetted." },
+        { "difficulty": "purple", "name": "Molven/Rud Healing Outcomes",
+          "terms": ["Complete healing", "Incomplete (scar)", "Uncertain healing", "Unsatisfactory healing"],
+          "pearl": "Molven/Rud criteria for surgical outcomes, assessed at ≥1 year. Incomplete = fibrous scar (clinically acceptable). Uncertain → reassess at 4 years before declaring failure." }
+      ]
+    },
+    {
+      "id": "imaging-1",
+      "title": "Read the Film",
+      "topic": "Imaging & CBCT",
+      "categories": [
+        { "difficulty": "yellow", "name": "Dental Imaging Modalities",
+          "terms": ["Periapical", "Bitewing", "Panoramic", "CBCT"],
+          "pearl": "Two-angle PAs reveal MB2 in ~70% of cases. Match dose to diagnostic question (AAE/AAOMR 2015 joint position paper)." },
+        { "difficulty": "green", "name": "CBCT Field-of-View Categories",
+          "terms": ["Small (≤5 cm)", "Medium (5-10 cm)", "Large (10-15 cm)", "Extended (>15 cm)"],
+          "pearl": "Small/limited FOV for single-tooth endo: lower dose, higher resolution, smaller voxels. Larger FOV for multi-quadrant or trauma." },
+        { "difficulty": "blue", "name": "AAE/AAOMR 2015 CBCT Indications",
+          "terms": ["Suspected fracture", "Complex canal anatomy", "Surgical planning", "Resorption assessment"],
+          "pearl": "AAE/AAOMR 2015 joint position paper. CBCT also indicated for non-specific signs/symptoms with normal 2D imaging, dental trauma evaluation, and pre-implant assessment of endo-treated teeth." },
+        { "difficulty": "purple", "name": "Radiographic Signs of Pathology",
+          "terms": ["J-shaped lesion (VRF)", "Tram-track (ECR)", "Punched-out (myeloma)", "Sun-ray (osteosarcoma)"],
+          "pearl": "Pattern recognition. J-shaped = vertical root fracture or endo-perio. Tram-track = external cervical resorption. Punched-out = multiple myeloma. Sun-ray spicules = osteosarcoma — never miss malignancy mimickers." }
+      ]
+    },
+    {
+      "id": "obturation-1",
+      "title": "Pack It Up",
+      "topic": "Obturation",
+      "categories": [
+        { "difficulty": "yellow", "name": "Obturation Techniques",
+          "terms": ["Lateral compaction", "Warm vertical (Schilder)", "Carrier-based", "Single cone"],
+          "pearl": "Warm vertical (Schilder 1967): hydraulic plasticized GP fills lateral anatomy. Single cone now viable with bioceramic hydraulic sealers (sealer-based obturation paradigm)." },
+        { "difficulty": "green", "name": "Continuous-Wave Down-Pack Steps",
+          "terms": ["Master cone fit", "Sealer placement", "Down-pack to 5 mm short", "Backfill in increments"],
+          "pearl": "Buchanan continuous wave: pre-fit plugger 5 mm short of WL, single ~3-second heat pull, then backfill in 3-4 mm increments. Heat plugger should grip GP — not the dentin walls." },
+        { "difficulty": "blue", "name": "Gutta-Percha Composition",
+          "terms": ["Trans-polyisoprene (~20%)", "Zinc oxide (~65%)", "Heavy metal salts (~10%)", "Wax/resin (~5%)"],
+          "pearl": "β-phase at room temp → α-phase when heated above ~42-49°C → amorphous above ~56°C. Cooling from α to β causes ~2% shrinkage — continued packing pressure compensates." },
+        { "difficulty": "purple", "name": "Sealer Chemistry Repeat",
+          "terms": ["Epoxy resin", "Calcium silicate", "Zinc oxide eugenol", "Glass ionomer"],
+          "pearl": "AH Plus = epoxy (gold standard). BC/EndoSequence = Ca-silicate (hydraulic, bioceramic). Pulp Canal Sealer = ZOE (classic). Ketac-Endo = GI (mostly historical)." }
+      ]
+    },
+    {
+      "id": "anatomy-1",
+      "title": "Know the Anatomy",
+      "topic": "Canal Anatomy",
+      "categories": [
+        { "difficulty": "yellow", "name": "Canal Anatomy Terms",
+          "terms": ["Apical foramen", "Lateral canal", "Isthmus", "Apical delta"],
+          "pearl": "Apical constriction (minor diameter) sits ~0.5 mm coronal to the apical foramen. Average foramen-to-radiographic-apex: 0.5-2 mm. Isthmus prevalence in mesial roots of mandibular molars: ~80%." },
+        { "difficulty": "green", "name": "MB2 Detection Methods",
+          "terms": ["DG-16 explorer", "Troughing 2-3 mm MP", "Operating microscope", "Small-FOV CBCT"],
+          "pearl": "MB2 prevalence in maxillary first molars: 75-95% (CBCT studies). Look ~2-3 mm mesiopalatal of MB1, under the MB pulp horn shelf." },
+        { "difficulty": "blue", "name": "Anatomic Variants",
+          "terms": ["C-shaped canal", "Radix entomolaris", "Taurodontism", "Dens invaginatus"],
+          "pearl": "C-shaped: most common in mandibular 2nd molars (~30%+ East Asian populations). Radix entomolaris: distolingual extra root on mandibular 1st molars (~5% Caucasian, ~30%+ East Asian)." },
+        { "difficulty": "purple", "name": "Vertucci Canal Configurations",
+          "terms": ["Type I (1)", "Type II (2-1)", "Type IV (2-2)", "Type VIII (3-3)"],
+          "pearl": "Vertucci I = single canal apex-to-orifice. II = two canals merge to one apically. IV = two separate canals. VIII = three separate canals (rare). Sert & Bayirli added supplemental configurations." }
+      ]
+    },
+    {
+      "id": "outcomes-1",
+      "title": "Outcomes & Healing",
+      "topic": "Outcomes & Prognosis",
+      "categories": [
+        { "difficulty": "yellow", "name": "PAI Score Levels 1-4",
+          "terms": ["1 — Normal", "2 — Small bony changes", "3 — Mineral loss", "4 — Well-defined RL"],
+          "pearl": "PAI 1986: 5-point ordinal scale (PAI 5 = severe with exacerbation features). Reference radiographs required for calibration. Used widely in outcome research and meta-analyses." },
+        { "difficulty": "green", "name": "Predictors of NSRCT Success",
+          "terms": ["Absence of preop PARL", "Fill within 2 mm of apex", "Adequate coronal restoration", "Apical patency maintained"],
+          "pearl": "Ng et al. meta-analyses (2007-2011): preoperative lesion, fill quality (length & density), and coronal seal are the strongest outcome predictors." },
+        { "difficulty": "blue", "name": "Common Reasons for Endo Failure",
+          "terms": ["Missed canal (esp. MB2)", "Coronal leakage", "Persistent intraradicular biofilm", "Extraradicular infection"],
+          "pearl": "Ray & Trope 1995: coronal seal correlates with outcome as strongly as apical seal. Missed MB2 is the #1 cause of maxillary molar failure. Extraradicular infection requires surgical intervention." },
+        { "difficulty": "purple", "name": "Tissues Regenerated in Complete Healing",
+          "terms": ["Cementum", "Periodontal ligament", "Alveolar bone", "Apical dentin"],
+          "pearl": "Complete healing (Andreasen) = regeneration of cementum, PDL, and bone. Fibrous scar (incomplete) = acceptable, clinically asymptomatic." }
+      ]
+    },
+    {
+      "id": "pulp-biology-1",
+      "title": "What's Inside",
+      "topic": "Pulp Biology & Histology",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Primary Pulp Cell Types",
+          "terms": ["Odontoblast", "Fibroblast", "Undifferentiated MSC", "Dendritic cell"],
+          "pearl": "Odontoblasts form the peripheral layer and extend processes into dentinal tubules. They are responsible for primary, secondary, and tertiary dentin deposition. Undifferentiated mesenchymal stem cells (MSCs) provide regenerative reserve and can differentiate into odontoblast-like cells." },
+        { "difficulty": "green", "name": "Pulp Zone Layers (Periphery→Core)",
+          "terms": ["Odontoblastic layer", "Cell-free zone (Weil)", "Cell-rich zone", "Pulp core"],
+          "pearl": "The cell-free zone of Weil contains unmyelinated nerve fibers and capillaries. It is most prominent in the coronal pulp and may be obliterated in inflammation. The cell-rich zone contains fibroblasts and undifferentiated cells." },
+        { "difficulty": "blue", "name": "Pulp Innervation Types",
+          "terms": ["A-δ fibers (myelinated)", "C fibers (unmyelinated)", "Sympathetic adrenergic", "Mechanoreceptors"],
+          "pearl": "A-δ fibers mediate sharp, well-localized pain (hydrodynamic theory — dentinal stimuli). C fibers mediate dull, burning, poorly localized pain and are active in irreversible pulpitis. Sympathetics regulate vasomotion." },
+        { "difficulty": "purple", "name": "Pulp Defense Mechanisms",
+          "terms": ["Tertiary dentin deposition", "Intrapulpal pressure rise", "Inflammatory mediators", "Macrophage/DC recruitment"],
+          "pearl": "Tertiary dentin: reactionary (deposited by surviving odontoblasts) vs. reparative (deposited by odontoblast-like cells from MSCs). Intrapulpal pressure is ~10-15 mmHg at baseline; rises significantly in pulpitis, can impair vascularity in rigid dentin walls." }
+      ]
+    },
+    {
+      "id": "pulp-diagnosis-2",
+      "title": "Hot & Cold",
+      "topic": "Pulpal & Periapical Diagnosis",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Pulp Sensibility Test Types",
+          "terms": ["Cold (Endo Ice)", "Heat (hot GP)", "Electric pulp test (EPT)", "Test cavity"],
+          "pearl": "Sensibility tests assess nerve function, NOT pulp vitality (vascularity). False negatives: calcified canals, recent trauma, immature apex, recent LA. Test cavity = last resort; response to cutting dentin indicates vital pulp." },
+        { "difficulty": "green", "name": "Lingering Cold Response Interpretation",
+          "terms": ["Symptomatic irreversible pulpitis", "Hyperalgesia", "C-fiber sensitization", "Spontaneous pain likely"],
+          "pearl": "Pain lingering >30 seconds after cold removal is a cardinal sign of symptomatic irreversible pulpitis. Central sensitization and C-fiber upregulation in inflammation lower pain thresholds. Spontaneous pain often follows." },
+        { "difficulty": "blue", "name": "Periapical Lesion Differential Dx",
+          "terms": ["Periapical granuloma", "Periapical cyst", "Periapical abscess", "Periapical scar"],
+          "pearl": "Periapical granuloma (~50-70% of lesions) and cysts (~10-30%) cannot be reliably distinguished on radiograph. Definitive diagnosis requires histology. Periapical cysts: lined by non-keratinized stratified squamous epithelium from rests of Malassez." },
+        { "difficulty": "purple", "name": "Tests That Assess Pulp Vascularity",
+          "terms": ["Laser Doppler flowmetry", "Pulse oximetry", "Dual-wavelength spectroscopy", "Tissue oxygen tension"],
+          "pearl": "True vitality tests assess blood flow, not nerve function. Laser Doppler flowmetry is the research gold standard — detects red cell movement. Not yet in routine clinical use. Pulse oximetry promising but technically difficult in the mouth." }
+      ]
+    },
+    {
+      "id": "micro-pathogens-1",
+      "title": "Wanted: Dead or Alive",
+      "topic": "Microbiology — Specific Pathogens",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Key Gram-Negative Anaerobes in Endo",
+          "terms": ["Fusobacterium nucleatum", "Prevotella intermedia", "Porphyromonas endodontalis", "Tannerella forsythia"],
+          "pearl": "P. endodontalis is highly specific to endodontic infections (rarely found in healthy mouths). P. intermedia uses heme as a growth factor — produces black-pigmented colonies. F. nucleatum is the master co-aggregator bridging early/late colonizers." },
+        { "difficulty": "green", "name": "Properties of E. faecalis",
+          "terms": ["Resists Ca(OH)₂ alkalinity", "Enters dentinal tubules", "Forms biofilm readily", "Facultative gram-positive"],
+          "pearl": "E. faecalis resists Ca(OH)₂ by maintaining intracellular pH via proton pumps. It can survive in dentin tubules where irrigants do not penetrate. Found in ~25-40% of retreatment cases. Key target for retreatment disinfection." },
+        { "difficulty": "blue", "name": "Organisms Causing Extraradicular Infection",
+          "terms": ["Actinomyces israelii", "Propionibacterium propionicum", "E. faecalis biofilm", "Candida albicans"],
+          "pearl": "Extraradicular colonization prevents healing even with good RCT. Actinomyces forms sulfur granules (actinomycotic colonies) visible in periapical curettage specimens — requires surgery for resolution, not additional antibiotics alone." },
+        { "difficulty": "purple", "name": "Bacterial Features Detectable by AAE Biofilm Studies",
+          "terms": ["Quorum sensing", "Horizontal gene transfer", "Efflux pump resistance", "Persister cell formation"],
+          "pearl": "Biofilm bacteria are 1,000× more resistant to antimicrobials than planktonic cells. Persister cells are a dormant subpopulation that survive treatment and repopulate. Quorum sensing coordinates biofilm behavior through chemical signaling (e.g., autoinducers)." }
+      ]
+    },
+    {
+      "id": "niti-metallurgy-2",
+      "title": "Phase Transition",
+      "topic": "NiTi Metallurgy & File Systems",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Rotary vs Reciprocating Motion",
+          "terms": ["Full rotation (360°)", "Reciprocation (CW/CCW)", "Adaptive motion", "Controlled memory"],
+          "pearl": "Reciprocation reduces cyclic fatigue by limiting the arc of flexion. WaveOne Gold: 150° CW / 30° CCW. Reciproc: larger angles. Adaptive motion (TF Adaptive) switches between reciprocation and full rotation based on load." },
+        { "difficulty": "green", "name": "File System Taper Concepts",
+          "terms": ["0.02 ISO taper", "Variable taper", "Regressive taper", "Constant taper"],
+          "pearl": "Standard ISO files: 0.02 taper (2% increase per mm). ProTaper has variable taper (from 7% at tip to 4% more coronally). TruNatomy uses regressive taper to preserve coronal dentin — max 0.04 taper." },
+        { "difficulty": "blue", "name": "Cyclic Fatigue vs Torsional Failure",
+          "terms": ["Bending stress at curve", "Locked file torque", "Tip separation", "Fatigue crack propagation"],
+          "pearl": "Cyclic fatigue: repeated flex/extension at a curvature causes crack propagation and fracture without torque loading. Torsional failure: file tip locks in dentin while body rotates → twisting fracture. Both require different prevention strategies (speed, angle, advance technique)." },
+        { "difficulty": "purple", "name": "Austenite Finish Temperature (Af) Effects",
+          "terms": ["Below body temp → superelastic", "Above body temp → flexible", "R-phase near body temp", "Shape memory effect"],
+          "pearl": "Superelastic NiTi: Af < body temp → austenite at 37°C → stiff, returns to shape. Flexible NiTi (e.g., heat-treated): Af near body temp → more martensite at 37°C → flexible. This is the key clinical distinction between 'superelastic' and 'heat-treated' files." }
+      ]
+    },
+    {
+      "id": "niti-file-systems-3",
+      "title": "Size Matters",
+      "topic": "NiTi Metallurgy & File Systems",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Single-File Systems",
+          "terms": ["WaveOne Gold", "Reciproc Blue", "F6 SkyTaper", "XP-endo Shaper"],
+          "pearl": "Single-file systems reduce chair time and cross-contamination risk. XP-endo Shaper expands at body temperature from a small ISO 30 tip to a wider shape — useful for complex anatomy." },
+        { "difficulty": "green", "name": "Glide Path File Systems",
+          "terms": ["PathFile", "ProGlider", "G-File", "ScoutRace"],
+          "pearl": "Glide path establishment before NiTi rotary use reduces torsional stress and transportation. Mechanical glide path (PathFile, ProGlider) safer than manual #8-10 K-file alone in calcified or curved canals." },
+        { "difficulty": "blue", "name": "Cross-Section Geometries",
+          "terms": ["S-shaped (ProTaper)", "Convex triangular (Vortex)", "Off-center parallelogram", "Variable flute depth"],
+          "pearl": "Cross-section affects flexibility, cutting efficiency, and debris removal. S-shaped ProTaper: high cutting efficiency. Convex triangular (e.g., Vortex Blue): better flexibility. Variable flute spacing improves debris evacuation and reduces screw-in effect." },
+        { "difficulty": "purple", "name": "File Dimensions: Tip Size & Taper Combos",
+          "terms": ["25/.08 (ProTaper F2)", "25/.04 (common rotary)", "40/.04 (finishing)", "20/.01 (glide path)"],
+          "pearl": "ProTaper Final: F1=20/.07, F2=25/.08, F3=30/.09. Understanding that a larger tip size or greater taper removes more canal wall is critical for case selection. Over-instrumentation risks strip perforation in curved roots." }
+      ]
+    },
+    {
+      "id": "irrigation-chemistry-2",
+      "title": "Bleach Chemistry",
+      "topic": "Irrigation Chemistry & Activation",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "NaOCl Tissue-Dissolution Mechanisms",
+          "terms": ["Saponification (fats)", "Protein denaturation", "Chloramination", "Oxidation of amino acids"],
+          "pearl": "NaOCl dissolves organic tissue via saponification of fatty acids, chloramination of amino groups, and oxidation of amino acids to chloramines. Higher concentration AND temperature increase efficacy — heated 1% NaOCl ≈ room temp 5.25% for tissue dissolution." },
+        { "difficulty": "green", "name": "EDTA Effects on Dentin",
+          "terms": ["Chelates Ca²⁺", "Removes smear layer", "Opens dentinal tubules", "Softens surface dentin"],
+          "pearl": "EDTA at 17% removes the inorganic smear layer by chelating calcium. Used after NaOCl as a final rinse. RC-Prep = EDTA + carbamide peroxide (used as a lubricant, not a final flush). Do NOT use together with NaOCl simultaneously — they neutralize each other." },
+        { "difficulty": "blue", "name": "NaOCl + CHX Reaction Products",
+          "terms": ["Parachloroaniline (PCA)", "Orange-brown precipitate", "Cytotoxic byproduct", "Do not combine sequentially"],
+          "pearl": "NaOCl followed immediately by 2% CHX produces parachloroaniline (PCA) — an orange precipitate and known carcinogen. Separate them with a distilled water or saline rinse. PCA is cytotoxic and blocks dentinal tubules." },
+        { "difficulty": "purple", "name": "Final Flush Sequence (Evidence-Based)",
+          "terms": ["NaOCl (working length)", "EDTA 17% (1 min)", "Final NaOCl flush", "MTAD or citric acid option"],
+          "pearl": "AAE recommended: NaOCl throughout instrumentation → EDTA 17% for 1 min (smear layer) → final NaOCl flush (eliminates bacteria exposed by opened tubules). MTAD (mix of tetracycline, acid, detergent) was proposed but not widely adopted." }
+      ]
+    },
+    {
+      "id": "obturation-sealers-2",
+      "title": "Seal the Deal",
+      "topic": "Obturation & Sealers",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Sealer Desired Properties (Grossman's)",
+          "terms": ["Radiopaque", "Dimensionally stable", "Insoluble in tissue fluids", "Antibacterial"],
+          "pearl": "Grossman's 1958 criteria for ideal root canal sealer: tacky when mixed, radiopaque, dimensional stability on setting, insoluble in tissue fluids, antibacterial, good seal, non-irritating, soluble in common solvents for retreatment." },
+        { "difficulty": "green", "name": "BC Sealer (Bioceramic) Properties",
+          "terms": ["Hydrophilic set", "Alkaline pH", "Expansive set (~0%)", "Bonds to GP and dentin"],
+          "pearl": "BC Sealer (EndoSequence BC Sealer): calcium silicate-based, sets by absorbing moisture from dentin, slightly alkaline (pH ~10), nearly zero dimensional change on setting, biocompatible, bonds to both GP and dentin through HA formation." },
+        { "difficulty": "blue", "name": "AH Plus Sealer Properties",
+          "terms": ["Epoxy-amine resin", "Excellent adhesion to dentin", "Long working time", "Very low solubility (ISO)"],
+          "pearl": "AH Plus: epoxy resin + amine hardener. Creates covalent bonds with collagen amino groups → outstanding adhesion. Very low solubility (passes ISO). Excellent long-term seal. Disadvantage: difficult to remove at retreatment (requires solvent)." },
+        { "difficulty": "purple", "name": "Sealers That Expand on Setting",
+          "terms": ["MTA Fillapex", "EndoSequence BC Sealer", "Calcium hydroxide sealers", "Apexit Plus"],
+          "pearl": "Most ZOE and epoxy sealers shrink slightly on setting — undesirable. Ca-silicate (bioceramic) sealers expand slightly (~0.2%) due to crystal growth, helping adapt to canal walls. Apexit Plus (Ca-hydroxide based) also expands. Expansion compensates for GP dimensional change." }
+      ]
+    },
+    {
+      "id": "bioceramics-mta-2",
+      "title": "Calcium Silicate Deep Dive",
+      "topic": "Bioceramic Materials & MTA",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Calcium Silicate Setting Reaction Products",
+          "terms": ["Calcium silicate hydrate (C-S-H)", "Calcium hydroxide", "Hydroxyapatite", "Portlandite"],
+          "pearl": "C₃S + H₂O → C-S-H (main binding phase) + Ca(OH)₂ (portlandite). Ca(OH)₂ reacts with tissue phosphates to form hydroxyapatite at the interface — the bioactive mechanism of MTA/Biodentine. C-S-H provides the compressive strength." },
+        { "difficulty": "green", "name": "MTA Clinical Indications",
+          "terms": ["Perforation repair", "Apexification", "Pulp capping", "Root-end fill"],
+          "pearl": "MTA is the gold standard for all four indications. For apexification, single-visit MTA apical plug (≥4 mm) has largely replaced multi-visit Ca(OH)₂. Pulp capping: superior to Ca(OH)₂ (Parirokh & Torabinejad systematic review 2010)." },
+        { "difficulty": "blue", "name": "Biodentine vs ProRoot MTA",
+          "terms": ["Faster set (Biodentine ~12 min)", "Less discoloration (Biodentine)", "Better handling (Biodentine)", "Longer track record (MTA)"],
+          "pearl": "Biodentine uses calcium chloride as an accelerator → 12 min vs. ~4 hour set time for original ProRoot MTA. Biodentine uses zirconium oxide radiopacifier → less tooth discoloration than bismuth oxide in ProRoot. Similar biocompatibility, both form HA interface." },
+        { "difficulty": "purple", "name": "Calcium Silicate Discoloration Causes",
+          "terms": ["Bismuth oxide oxidation", "Blood pigments interaction", "Collagen breakdown products", "Coronal placement technique"],
+          "pearl": "Bismuth oxide in original ProRoot MTA reacts with blood and collagen breakdown → bismuth sulfide = gray/black discoloration. Coronal MTA placement is most problematic for esthetics. Solutions: use white MTA, Biodentine, or zirconium-oxide–based bioceramics (e.g., TotalFill BC RRM)." }
+      ]
+    },
+    {
+      "id": "vital-pulp-therapy-1",
+      "title": "Keep It Alive",
+      "topic": "Vital Pulp Therapy",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "VPT Procedure Types",
+          "terms": ["Indirect pulp cap", "Direct pulp cap", "Partial pulpotomy (Cvek)", "Full coronal pulpotomy"],
+          "pearl": "Cvek partial pulpotomy: removes 2 mm of exposed coronal pulp to healthy tissue, MTA or bioceramic placed. Indicated for traumatic exposures with good prognosis. Full coronal pulpotomy increasingly supported in mature permanent teeth (BSPD guidance 2019)." },
+        { "difficulty": "green", "name": "Criteria for Direct Pulp Cap",
+          "terms": ["Mechanical or carious exposure", "Bleeding controllable in ≤5 min", "No signs of irreversible pulpitis", "Adequate isolation achievable"],
+          "pearl": "Simon et al. 2008: bleeding control time and appearance predict pulp status better than history. Exposure ≤1 mm, bleeding stops quickly, no spontaneous pain, no sinus, no PAL = good DPC candidate. IADT: traumatic exposure in immature tooth = Cvek." },
+        { "difficulty": "blue", "name": "Evidence for MTA Over Ca(OH)₂ in VPT",
+          "terms": ["Higher bridge formation rate", "Fewer tunnel defects", "Better sealing ability", "Parirokh & Torabinejad 2010"],
+          "pearl": "Parirokh & Torabinejad systematic review 2010: MTA significantly better than Ca(OH)₂ for direct pulp capping — higher success, thicker and more uniform dentin bridges, fewer tunnel defects (which allow bacterial ingress through the bridge)." },
+        { "difficulty": "purple", "name": "Long-Term VPT Outcome Predictors",
+          "terms": ["Preoperative pulp status", "Time since exposure", "Carious vs. mechanical exposure", "Coronal restoration quality"],
+          "pearl": "Mechanical exposure in healthy young tooth: >90% 10-year success with MTA. Carious exposure (infected) has lower success regardless of material. Most important predictor: duration and quality of final coronal restoration, not the cap material itself." }
+      ]
+    },
+    {
+      "id": "regenerative-endo-1",
+      "title": "REP Protocol",
+      "topic": "Regenerative Endodontics",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "AAE REP Protocol Steps",
+          "terms": ["Diagnose necrotic immature tooth", "17% EDTA irrigation (no NaOCl)", "Induce bleeding to CEJ", "Seal with MTA or bioceramic"],
+          "pearl": "AAE 2016 protocol: low-concentration NaOCl (1.5%) first visit + triple antibiotic paste or Ca(OH)₂ → second visit: EDTA 17% only (no NaOCl) → scaffold creation by over-instrumenting to cause bleeding → MTA collar 3mm above scaffold + GIC over-build." },
+        { "difficulty": "green", "name": "Triple Antibiotic Paste Components",
+          "terms": ["Metronidazole", "Ciprofloxacin", "Minocycline", "Each at 1:1:1 ratio"],
+          "pearl": "TAP developed by Hoshino et al. 1996. Minocycline causes coronal discoloration → substitute with clindamycin or cefaclor. Concentration: originally 25 mg/mL each, now often reduced to 0.1 mg/mL to preserve SCAPs. Ca(OH)₂ is an alternative to TAP." },
+        { "difficulty": "blue", "name": "Biological Basis of REP",
+          "terms": ["Stem cells of apical papilla (SCAPs)", "Hertwig's epithelial root sheath (HERS)", "EDTA releases growth factors", "Blood clot scaffold"],
+          "pearl": "SCAPs are the key cell population for continued root development. EDTA (not NaOCl) releases TGF-β, BMP, VEGF from dentin matrix to stimulate SCAPs. Blood clot provides fibrin scaffold. HERS activity determines whether true root elongation occurs." },
+        { "difficulty": "purple", "name": "REP vs Apexification Outcomes",
+          "terms": ["Continued root development (REP)", "Apical barrier only (MTA apex)", "Pulp sensibility return ~50% (REP)", "Higher fracture risk in apexification"],
+          "pearl": "REP: true continued root development in ~60-80% of cases, pulp sensibility return in ~28-50% (indicates some neural regeneration). MTA apexification: predictable apical seal, no root development. Thin immature roots are fracture-prone regardless of treatment." }
+      ]
+    },
+    {
+      "id": "regenerative-endo-2",
+      "title": "Scaffold Science",
+      "topic": "Regenerative Endodontics",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Scaffold Types for REP",
+          "terms": ["Blood clot (conventional)", "PRF (platelet-rich fibrin)", "PRP (platelet-rich plasma)", "Collagen matrix"],
+          "pearl": "Blood clot is the simplest and most common scaffold. PRF (Choukroun) is a second-generation platelet concentrate — leukocyte-rich PRF contains growth factors (PDGF, VEGF, TGF-β) and is obtained by centrifuging whole blood without anticoagulant." },
+        { "difficulty": "green", "name": "Growth Factors in Dentin Matrix",
+          "terms": ["TGF-β1", "BMP-2 and BMP-7", "VEGF", "FGF-2"],
+          "pearl": "Dentin matrix proteins (DMPs) contain sequestered growth factors released by EDTA demineralization. TGF-β1 stimulates odontoblast-like cell differentiation. BMP-2/7 are osteogenic/dentinogenic. VEGF is angiogenic — critical for revascularization of the scaffold." },
+        { "difficulty": "blue", "name": "Histologic Outcomes of REP",
+          "terms": ["Cementum-like tissue", "Bone-like tissue", "PDL-like fibers", "True pulp-dentin complex"],
+          "pearl": "Histologic studies (Shimizu et al. 2012, Diogenes et al.) show REP produces mainly cementum-like and bone-like tissue, NOT a true pulp-dentin complex. However, continued root development and apical closure still occur clinically. True pulp regeneration remains elusive." },
+        { "difficulty": "purple", "name": "REP Follow-Up Success Criteria",
+          "terms": ["Resolution of symptoms", "Radiographic lesion healing", "Root length increase", "Positive sensibility test return"],
+          "pearl": "AAE outcome hierarchy: Resolution of symptoms + radiographic healing = minimum success (all other criteria are bonus). Root wall thickening or lengthening = preferred outcome. Positive sensibility = ideal outcome. Most published series show ~80-90% achieve minimum, ~30-60% achieve preferred." }
+      ]
+    },
+    {
+      "id": "trauma-iadt-2",
+      "title": "IADT By the Numbers",
+      "topic": "Trauma & IADT Guidelines",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "IADT 2020 Avulsion Splinting Time",
+          "terms": ["Dry <60 min: 4 weeks", "Dry >60 min: 4 weeks", "Open apex, wet: 2 weeks", "Flexible splint always"],
+          "pearl": "IADT 2020: avulsion with closed apex — replant, flexible splint ×4 weeks. Open apex (immature) — replant, flexible splint ×2 weeks (to preserve REP potential). Rigid splint → ankylosis risk. Do NOT suture gingival lacerations that would impede replantation." },
+        { "difficulty": "green", "name": "IADT Follow-Up Intervals for Luxations",
+          "terms": ["6-8 weeks (all luxations)", "3 months", "6 months", "1 year, then annually"],
+          "pearl": "IADT 2020 schedule: 6-8 weeks, 3 months, 6 months, 1 year, then yearly for 5 years (intrusions and avulsions). Earlier visits for acute infections. Key tests at each visit: PA radiograph + cold/EPT + percussion + mobility + color/transillumination." },
+        { "difficulty": "blue", "name": "Intrusion: When to Reposition",
+          "terms": ["<7 mm: spontaneous re-eruption (immature)", ">7 mm: orthodontic/surgical", "Closed apex: reposit urgently", "Open apex: allow spontaneous eruption"],
+          "pearl": "IADT 2020: immature tooth intruded <7 mm → allow spontaneous re-eruption (2-4 weeks max). Mature (closed apex): surgical or orthodontic repositioning for any degree of intrusion. Delaying repositioning in mature teeth → ankylosis. Pulp necrosis rate in intrusion: >85%." },
+        { "difficulty": "purple", "name": "Sports Guards and Trauma Prevention Evidence",
+          "terms": ["Reduces dental injury ~60%", "Mouth-formed vs custom", "Posterior coverage matters", "Mandatory in contact sports"],
+          "pearl": "Custom-fitted mouthguards reduce oral/dental injury ~60% vs no guard. Boil-and-bite provides less protection than custom (thinner, less retention). Dual-arch or posterior coverage controversial — may increase condylar fracture protection. AAP/AAPD endorse for all contact sports." }
+      ]
+    },
+    {
+      "id": "trauma-pulp-status-3",
+      "title": "After the Impact",
+      "topic": "Trauma & IADT Guidelines",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Signs of Pulp Necrosis Post-Trauma",
+          "terms": ["Gray discoloration", "Negative cold test", "Periapical RL development", "Sinus tract formation"],
+          "pearl": "Gray/brown discoloration post-trauma: hemoglobin breakdown products (hemosiderin, hematoidin) in dentinal tubules → ominous but not diagnostic alone. Concurrent periapical RL + symptoms + negative sensibility = treat. Yellow discoloration = obliteration, NOT necrosis." },
+        { "difficulty": "green", "name": "Pulp Canal Obliteration (PCO) Management",
+          "terms": ["Yellow/golden crown color", "Calcific metamorphosis (Cvek)", "High pulp necrosis risk (~8%)", "Monitor ≥5 yrs before intervention"],
+          "pearl": "PCO (calcific metamorphosis) post-trauma: yellow discoloration, canal barely visible on PA. Cvek data: only ~7-16% develop necrosis. Do NOT prophylactically treat. Monitor with PA and sensibility tests annually for 5 years. Access only if signs/symptoms develop." },
+        { "difficulty": "blue", "name": "Root Resorption Complicating Trauma",
+          "terms": ["External inflammatory (EIR)", "External cervical (ECR)", "Replacement resorption", "Internal resorption"],
+          "pearl": "EIR post-avulsion: damaged cementum + infected necrotic pulp → TRAP-positive clasts → bowl-shaped external resorption. Treat urgently with Ca(OH)₂ — fills tubules, raises pH, kills odontoclasts. Replacement resorption = ankylosis; no treatment stops it in adults." },
+        { "difficulty": "purple", "name": "Root Development Stage and Trauma Prognosis",
+          "terms": ["Stage 4 (1/2 root): best REP outcome", "Stage 9 (closed apex): worst for avulsion", "Apical width correlates with revascularization", "Nolla stages 1-10"],
+          "pearl": "Nolla stage (root development) is the most important prognosis factor for avulsed immature teeth. Wider apical diameter → better revascularization → better REP outcome. Stage 4-6 (open apex ≥1 mm): excellent REP. Closed apex → no revascularization possible → NSRCT post-replantation." }
+      ]
+    },
+    {
+      "id": "root-resorption-1",
+      "title": "Eating Away",
+      "topic": "Root Resorption Types",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Heithersay ECR Classification",
+          "terms": ["Class 1 (small, coronal)", "Class 2 (crown, near pulp)", "Class 3 (extends to cervical third)", "Class 4 (beyond cervical third)"],
+          "pearl": "Heithersay 1999 classification: Class 1 = small, limited to enamel/superficial dentin. Class 2 = crown, close to pulp. Class 3 = coronal + cervical root dentin, not canal wall. Class 4 = extensive, into root canal — worst prognosis. Classes 1-2: trichloroacetic acid + excavation + MTA/GIC. Class 4: extract." },
+        { "difficulty": "green", "name": "Distinguishing Internal from External Resorption",
+          "terms": ["Internal: centered in canal (PA)", "External: off-center (angled PA)", "Internal: smooth borders", "External: irregular/invasive borders"],
+          "pearl": "Key radiographic rule: rotate the horizontal angle. Internal resorption stays centered relative to canal on all angulations (Clark's rule: SLOB = Same Lingual, Opposite Buccal). External resorption moves separately from canal. CBCT is definitive when 2D is ambiguous." },
+        { "difficulty": "blue", "name": "External Inflammatory Root Resorption Treatment",
+          "terms": ["NSRCT + Ca(OH)₂ dressing", "Ca(OH)₂ changed every 3 months", "MTA final obturation", "Arrest confirmed radiographically"],
+          "pearl": "EIR requires removal of the necrotic infected pulp (stimulus for resorption). Ca(OH)₂ dressing raises intratubular pH to >9 → kills TRAP-positive osteoclasts in cementum defect. Change Ca(OH)₂ every 3 months until resorption arrest confirmed, then obturate (MTA apical if open)." },
+        { "difficulty": "purple", "name": "CBCT Findings in Internal vs ECR",
+          "terms": ["Internal: canal expansion centered", "ECR: pericanal 'clover leaf' on cross-section", "ECR: separate from root canal lumen", "Internal: contiguous with canal lumen"],
+          "pearl": "CBCT cross-section for ECR: resorptive defect is pericanal — resorbs around the canal but leaves canal walls intact until late stage (hence 'clover leaf' appearance in axial slices). Internal resorption: defect IS the expanded canal lumen. Critical distinction for treatment planning and prognosis." }
+      ]
+    },
+    {
+      "id": "root-resorption-2",
+      "title": "Resorption Round 2",
+      "topic": "Root Resorption Types",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Classic Resorption Stimuli",
+          "terms": ["Pressure (orthodontic)", "Infection (inflammatory)", "Trauma (physical)", "Idiopathic (cervical)"],
+          "pearl": "Resorption requires loss of protective pre-cementum AND presence of active clast stimulation. Orthodontic forces: pressure zones on root surface → apical external resorption. Infection: LPS stimulates osteoclasts via RANKL pathway." },
+        { "difficulty": "green", "name": "Invasive Cervical Resorption Risk Factors",
+          "terms": ["Internal bleaching history", "Orthodontic treatment", "Trauma history", "Surgical trauma (surgical endo)"],
+          "pearl": "Heithersay identified these risk factors for ECR in his 1999 series. Intracoronal bleaching with hydrogen peroxide / thermocatalytic technique carries highest risk — bleaching agent migrates through dentinal tubules to PDL. Bleach no higher than 1-2 mm below CEJ to minimize risk." },
+        { "difficulty": "blue", "name": "Replacement Resorption (Ankylosis) Features",
+          "terms": ["High percussion tone", "No PDL space on radiograph", "Progressive root shortening", "Infraocclusion in growing patient"],
+          "pearl": "Ankylosis replaces root with bone directly (no PDL buffer). In growing patients, adjacent bone grows vertically while ankylosed tooth does not → progressive submergence (infraocclusion). In adults, root progressively resorbs over years. No treatment reverses it — decoronation in young patients preserves alveolar bone." },
+        { "difficulty": "purple", "name": "RANKL/OPG Pathway in Resorption",
+          "terms": ["RANKL stimulates osteoclastogenesis", "OPG inhibits RANKL", "M-CSF: osteoclast survival", "LPS → IL-1 → RANKL upregulation"],
+          "pearl": "RANKL (on osteoblasts/fibroblasts) binds RANK on osteoclast precursors → differentiation into active osteoclasts. OPG (osteoprotegerin) is a decoy receptor that blocks RANKL → inhibits resorption. Bacterial LPS → IL-1β/TNF-α → upregulate RANKL, downregulate OPG → net resorption. This is the direct mechanistic pathway for periapical bone loss." }
+      ]
+    },
+    {
+      "id": "surgery-retrofill-2",
+      "title": "Root End Repair",
+      "topic": "Surgical Endo & Microsurgery",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Retroprep Depth and Dimensions",
+          "terms": ["3 mm deep", "Class I preparation", "Parallel to long axis", "Ultrasonic tip (CT-series)"],
+          "pearl": "Retroprepared cavity: 3 mm deep, class I box, prepared along the long axis of the root (not the bevel angle). Ultrasonic tips (CT-series KiS tips, etc.) allow coaxial access that hand microinstruments cannot achieve. 3 mm depth encompasses 93% of lateral canals (Gilheany et al.)." },
+        { "difficulty": "green", "name": "Retrofill Material Comparison",
+          "terms": ["MTA (gold standard)", "Biodentine (faster set)", "IRM (legacy)", "Super-EBA (legacy)"],
+          "pearl": "Traditional materials (IRM, Super-EBA) replaced by MTA in modern practice based on Kim & Kratchman 2006 review. MTA/bioceramics: better seal, biocompatibility, hard-tissue induction. IRM (ZOE + polymer): adequate seal, still used when MTA handling is difficult." },
+        { "difficulty": "blue", "name": "Surgical Outcomes Meta-Analysis Findings",
+          "terms": ["~91% success with MTA retrofill", "Microscope use improves outcome", "Bevel ≤10° improves success", "Isthmuses must be included"],
+          "pearl": "Song et al. 2011 meta-analysis: MTA retrofill → 91.4% success at 1 year vs. 86.2% IRM and 88.4% Super-EBA. Kim & Kratchman 2006: surgical endodontics with microscope = outcomes comparable to nonsurgical retreatment. Including isthmus in retroprep is critical for molar MB roots." },
+        { "difficulty": "purple", "name": "Microscope Magnification Levels Used in Surgery",
+          "terms": ["Low (4-8×): flap management", "Medium (8-16×): inspection/hemostasis", "High (16-25×): retroprep/fill", "Ultra-high (25×+): rarely surgical"],
+          "pearl": "Surgical microscope is used dynamically at varying magnification. Low magnification for orientation and flap reflection. Medium for inspecting resected surface for fractures, missed canals, isthmuses. High for ultrasonic retroprep and retrofilling. High magnification narrows depth of field — requires precise technique." }
+      ]
+    },
+    {
+      "id": "surgery-anatomy-3",
+      "title": "Danger Zones",
+      "topic": "Surgical Endo & Microsurgery",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Anatomical Structures at Risk in Surgery",
+          "terms": ["Mental nerve (premolars)", "Maxillary sinus (posterior max)", "Inferior alveolar nerve (mandibular)", "Adjacent root apices"],
+          "pearl": "Mental foramen: typically between premolar apices or apical to 2nd premolar — widely variable. Anterior loop of inferior alveolar nerve can extend several mm anterior to foramen. CBCT surgical planning critical for posterior mandible and premolar cases." },
+        { "difficulty": "green", "name": "Cortical Plate Thickness (Average Values)",
+          "terms": ["Max anterior: 0.5-1.5 mm", "Max posterior buccal: 1-3 mm", "Mand anterior: 1-2 mm", "Mand posterior buccal: 2-4 mm"],
+          "pearl": "Cortical plate thickness determines how far from the buccal surface the root apex lies. Thick cortical bone requires larger osteotomy and better magnification. Maxillary anterior teeth have thin buccal plates — easier access. Mandibular posterior: thick, dense cortical bone, limited access." },
+        { "difficulty": "blue", "name": "Maxillary Sinus Proximity Management",
+          "terms": ["Schneiderian membrane elevation", "Sinus floor perforation risk", "Bone graft after curettage", "CBCT pre-surgical measurement"],
+          "pearl": "Maxillary posterior roots (especially palatal root of maxillary 1st molar) may extend into the maxillary sinus. CBCT measures sinus proximity before surgery. If Schneiderian membrane perforated: bone graft + absorbable membrane to prevent sinusitis. Refer to ENT if extensive." },
+        { "difficulty": "purple", "name": "Mandibular Posterior Surgical Anatomy Hazards",
+          "terms": ["Lingual plate perforation (lingual nerve)", "Submandibular fossa depression", "Alveolar nerve proximity", "Limited buccal access (thick bone)"],
+          "pearl": "Mandibular 2nd molars: apices often very close to inferior alveolar nerve (IAN). Mandibular 1st molar roots: mesial root buccally accessible; distal root may be lingual. Submandibular fossa depression (concavity on lingual) limits apical resection depth. Lingual nerve at risk with lingual perforation. Use CBCT for all mandibular molar surgical cases." }
+      ]
+    },
+    {
+      "id": "retreatment-1",
+      "title": "Try Again",
+      "topic": "Retreatment & Outcomes",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Retreatment Success Predictors",
+          "terms": ["Absence of PARL pre-retreat", "Adequate original fill", "Post removable", "New access possible"],
+          "pearl": "Friedman & Abitbol 2006: retreatment success lower than initial treatment when preoperative lesion is present (57-88% vs 92-98% for initial no-lesion cases). Adequacy of original treatment and ability to access and instrument the full length are the strongest technical predictors." },
+        { "difficulty": "green", "name": "GP Removal Techniques",
+          "terms": ["Gates-Glidden drills coronally", "Solvent (eucalyptol/chloroform)", "Heat with plugger", "Rotary retreatment files (ProTaper Retreatment)"],
+          "pearl": "ProTaper Retreatment (D1-D3): D1 starts coronally, D2 middle, D3 apically. Solvent (chloroform most effective, restricted in some states; eucalyptol safer) softens GP for rotary removal. Never use chloroform apically — cytotoxic." },
+        { "difficulty": "blue", "name": "PES Score Components (Post-Extraction Score Alternative)",
+          "terms": ["Canal obturation length", "Canal obturation density", "Coronal restoration quality", "Absence of periapical pathology"],
+          "pearl": "Friedman's retreatment decision framework: quality of existing RCT, restorability, strategic value of tooth, and patient factors. Poorly obtured tooth without lesion may need monitoring but not immediate retreatment if coronal seal is intact." },
+        { "difficulty": "purple", "name": "Retreatment vs Apical Surgery Decision Factors",
+          "terms": ["Intraradicular etiology → retreat first", "Extraradicular → surgery", "Access risk high → surgery", "Failed retreatment → surgery"],
+          "pearl": "Retreatment addresses intraradicular biofilm — the cause of most failures. If access cannot re-establish proper working length (post, calcification, ledge), surgery is preferred. Extraradicular colonization (Actinomyces) or cystic lesion requires surgery regardless of root canal quality." }
+      ]
+    },
+    {
+      "id": "retreatment-instruments-2",
+      "title": "Taking It Apart",
+      "topic": "Retreatment & Outcomes",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Separated Instrument Retrieval Tools",
+          "terms": ["Ultrasonic (IQ tips)", "Instrument Removal System (IRS)", "Masserann kit", "Micro-Tube technique"],
+          "pearl": "Ultrasonics are first-line for coronal and middle third separated instruments — troughing around the file with a thin US tip, then engaging with a Hedström or IRS loop. Masserann: hollow trepan drills around the fragment. Micro-tube: thin tube with cyanoacrylate adhesive (limited evidence)." },
+        { "difficulty": "green", "name": "Factors Predicting Instrument Retrieval Success",
+          "terms": ["Coronal third: ~80% success", "Middle third: ~60% success", "Apical third: ~30% success", "Curved canals: lower success"],
+          "pearl": "Location is the main predictor: the more apical and the greater the curvature, the harder and riskier the retrieval. In apical third, bypass and monitor is often the better choice if patient is asymptomatic and file is short of WL." },
+        { "difficulty": "blue", "name": "Post Removal Techniques",
+          "terms": ["Ultrasonic post loosening", "Ruddle Post Removal System", "Extractor tubes (Gonon kit)", "Sectioning + elevator"],
+          "pearl": "Ultrasonic energy applied around post margins breaks the cement and vibrates the post loose in 3-10 minutes. Gonon/Ruddle kits use a counterclockwise threaded extractor attached to the post. Risk: root fracture — lateral forces during extraction are the main danger." },
+        { "difficulty": "purple", "name": "Bypass Strategy for Non-Retrievable Instruments",
+          "terms": ["Confirm patency past file", "Shape and irrigate to WL", "Obturate, treating file as GP", "Monitor 2-4 years"],
+          "pearl": "If an instrument cannot be safely retrieved, bypass with small K-files and treat the canal to full working length with the fragment in place. Prognosis is similar to a missed canal — better than leaving necrotic tissue apically. AAE position: manage to prevent as root WL, document thoroughly." }
+      ]
+    },
+    {
+      "id": "canal-anatomy-2",
+      "title": "Molar Geometry",
+      "topic": "Canal Anatomy & Morphology",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Maxillary First Molar Root Canals",
+          "terms": ["MB: MB1 + MB2 (~85%)", "DB: usually 1 canal", "Palatal: largest, oval", "4 canals total most common"],
+          "pearl": "Maxillary 1st molar: MB root has highest anatomic complexity. MB2 prevalence: 75-95% by CBCT. MB2 located 1.82 mm mesiopalatal to MB1 (Weine). Palatal root is the longest and straightest — easiest to instrument and obturate fully." },
+        { "difficulty": "green", "name": "Mandibular First Molar Canal Numbers",
+          "terms": ["Mesial root: 2 canals (ML + MB)", "Distal root: 1 or 2", "Middle mesial canal (~15%)", "5+ canals possible"],
+          "pearl": "Mandibular 1st molar: most common = 3-4 canals. Middle mesial (MM) canal found in ~15-30% (between ML and MB) — requires troughing the developmental groove floor. Distal root: 1 wide oval canal in ~70%, 2 in ~30%. C-shaped anatomy rare but possible." },
+        { "difficulty": "blue", "name": "Weine Classification of Canal Systems",
+          "terms": ["Type I: 1-1", "Type II: 2-1", "Type III: 2-2", "Type IV: 1-2"],
+          "pearl": "Weine (1969): 4 canal configurations. Type I = one canal throughout. Type II = two coronal, join to one apical (most common in MB of max molars). Type III = two separate canals. Type IV = starts single, divides to two — important: apex has TWO exits, both must be obturated." },
+        { "difficulty": "purple", "name": "Canal Transportation Mechanisms",
+          "terms": ["Ledging in curved canals", "Zipping at apex (flexible files)", "Stripping (furcal danger)", "Apical foramen relocation"],
+          "pearl": "Transportation occurs when file removes more dentin on the outer curve vs inner curve. Flexible NiTi files maintain canal curvature better than SS. 'Danger zone' of furcal root stripping: mesial root of mandibular molars at furcation level — thin inner wall. CBCT-confirmed danger zone: <1.5 mm dentin remaining." }
+      ]
+    },
+    {
+      "id": "canal-anatomy-3",
+      "title": "The Forgotten Canals",
+      "topic": "Canal Anatomy & Morphology",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Mandibular Incisors and Canines Anatomy",
+          "terms": ["2 canals in ~40% of mandibular incisors", "Labial + lingual orifices", "Oval cross-section", "Access extended lingually"],
+          "pearl": "Mandibular incisors: 2 canals in ~35-45%, often joining at apex (Vertucci Type III most common). Oval cross-section requires oval/controlled memory files or reciprocation to clean labial/lingual extensions. Access: extended lingually to find second orifice." },
+        { "difficulty": "green", "name": "Maxillary Premolar Canal Anatomy",
+          "terms": ["Max 1st premolar: 2 roots 90%+", "Max 2nd premolar: 1 canal ~50%", "3 roots (rare, trifid)", "Furcation high on 1st premolar"],
+          "pearl": "Maxillary 1st premolar: most consistently two-rooted (buccal + lingual). Furcation point is variable but often high. Maxillary 2nd premolar: ~50% one canal, ~50% two — oval/figure-8 cross-section in single root version requires thorough irrigation of the fins." },
+        { "difficulty": "blue", "name": "C-Shaped Anatomy Classification (Melton)",
+          "terms": ["Class I: continuous C (no separation)", "Class II: C with 1 canal detached", "Class III: separate canals (no C)", "Radicular groove on lingual"],
+          "pearl": "Melton classification of C-shaped canals. Most prevalent: mandibular 2nd molars, East Asian populations (30%+). Lingual groove on root surface is the external marker. Danger: fins between C-shaped canals harbor bacteria, are impossible to instrument, rely entirely on irrigation. Copious NaOCl + activation critical." },
+        { "difficulty": "purple", "name": "Isthmus Classification (Hsu & Kim)",
+          "terms": ["Type I: 2 canals no connection", "Type II: 2 canals + isthmus", "Type III: 3 canals + isthmus", "Type IV/V: incomplete connections"],
+          "pearl": "Hsu & Kim 1997: isthmus in 100% of MB roots of mandibular molars at mid-root. Types II and III most common. During surgery, retroprep must include the isthmus — oval-shaped preparations with ultrasonic tips. Failure to include isthmus = most common cause of surgical failure in molar roots." }
+      ]
+    },
+    {
+      "id": "cbct-imaging-2",
+      "title": "CBCT Interpretation",
+      "topic": "CBCT & Imaging",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "CBCT Dose Comparison",
+          "terms": ["Full-mouth PA series: ~170 μSv", "CBCT small FOV: ~40-100 μSv", "Panoramic: ~2-24 μSv", "Medical CT head: ~2000 μSv"],
+          "pearl": "Limited FOV CBCT: typically 40-135 μSv effective dose (varies by unit and FOV). Comparable to or lower than FMX in many modern units. Medical CT dramatically higher. Effective dose (mSv) accounts for tissue sensitivity — more relevant than entrance dose." },
+        { "difficulty": "green", "name": "CBCT Artifacts Affecting Diagnosis",
+          "terms": ["Beam hardening (metal streak)", "Scatter from GP/posts", "Motion artifact (blurring)", "Partial volume averaging (small structures)"],
+          "pearl": "Beam hardening: X-ray beam preferentially attenuates lower-energy photons as it passes through dense objects → cupping artifact or streaks near metal. Dense GP, posts, and crowns cause significant scatter reducing diagnostic quality in adjacent areas. Partial volume averaging can simulate or hide small structures (lateral canals, small cysts)." },
+        { "difficulty": "blue", "name": "CBCT vs 2D for Specific Endo Diagnoses",
+          "terms": ["VRF: CBCT superior", "MB2: CBCT superior", "Working length: 2D equivalent", "Perforations: CBCT superior"],
+          "pearl": "CBCT consistently outperforms 2D for VRF (halo sign, cortical plate discontinuity), missed canals (MB2), and perforation localization. For working length, digital radiograph is equivalent and lower dose. CBCT shows 3D extent of lesions not apparent on 2D — changes treatment plan in ~40% of complex cases (Ee et al. 2014)." },
+        { "difficulty": "purple", "name": "CBCT-PAI Scoring (Estrela 2008)",
+          "terms": ["0: normal", "1: small lesion (≤5 mm)", "2: medium (5-10 mm)", "3: large (>10 mm with expansion)"],
+          "pearl": "CBCT-PAI 0-4 scale. Grade 1: periapical lesion ≤5 mm. Grade 2: 5-10 mm, no cortical expansion. Grade 3: >10 mm no expansion. Grade 4: expansion of cortical bone. Uses the largest diameter in any plane. Superior to 2D PAI for quantifying lesion volume changes at follow-up." }
+      ]
+    },
+    {
+      "id": "perio-endo-1",
+      "title": "Double Trouble",
+      "topic": "Perio-Endo & Systemic Considerations",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Endo-Perio Lesion Classification (Simon 1972)",
+          "terms": ["Primary endo", "Primary endo–secondary perio", "Primary perio", "Primary perio–secondary endo"],
+          "pearl": "Simon classification (1972): Primary endo lesions respond completely to NSRCT. Primary endo + secondary perio: endo treatment first — any remaining attachment loss indicates true periodontal disease. True combined lesion: treatment of both required; prognosis poorest." },
+        { "difficulty": "green", "name": "How Pulpal Disease Affects Periodontium",
+          "terms": ["Lateral canal drainage", "Apical abscess → perio pocket", "Furcal accessory canals", "Retrograde pulpitis"],
+          "pearl": "Pulpal necrosis can drain via lateral canals into the PDL → creates isolated deep narrow pocket mimicking vertical bone loss. Furcal accessory canals (present in ~46% of mandibular molars): pulp infection drains into furcal PDL → furcation involvement that resolves with NSRCT alone." },
+        { "difficulty": "blue", "name": "Retrograde Pulpitis Mechanism",
+          "terms": ["Deep perio pockets expose apical foramina", "Bacterial invasion via apex", "Pulp necrosis from periodontal disease", "Rare but documented"],
+          "pearl": "Retrograde pulpitis: severe periodontal disease exposes accessory foramina or main apex, allowing bacterial invasion of the pulp retrograde. Rare in true form. More commonly, shared blood supply compromise from severe periodontal disease contributes to pulp degeneration." },
+        { "difficulty": "purple", "name": "Systemic Conditions Affecting Endo Prognosis",
+          "terms": ["Diabetes (impaired healing)", "Bisphosphonate-related ONMJ", "HIV/immunosuppression", "Radiation-induced xerostomia"],
+          "pearl": "Diabetes: periapical healing is impaired in poorly controlled T2DM (HbA1c >8%). Bisphosphonate/denosumab-related ONMJ: periapical surgery risk — notify prescribing physician, consider drug holiday for IV bisphosphonates. HIV: endo outcomes comparable to healthy patients in modern ART era." }
+      ]
+    },
+    {
+      "id": "pharmacology-antibiotics-1",
+      "title": "Antibiotic Stewardship",
+      "topic": "Pharmacology & Pain Management",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "AAE Antibiotic Prescribing Guidelines",
+          "terms": ["Acute apical abscess with systemic signs", "Penicillin VK first-line", "Amoxicillin for odontogenic", "No antibiotic for localized infections"],
+          "pearl": "AAE 2019 position: antibiotics only when systemic involvement (fever >38.5°C, trismus, malaise, lymphadenopathy, elevated HR/RR). Local infections: incision + drainage + debridement. Penicillin VK 500 mg q6h × 5-7 days. No evidence for prophylactic antibiotics for endo procedures in healthy patients." },
+        { "difficulty": "green", "name": "Antibiotic Coverage for Endo Infections",
+          "terms": ["Amoxicillin + clavulanate (Augmentin)", "Metronidazole added for anaerobes", "Clindamycin for penicillin allergy", "Azithromycin (weakest evidence)"],
+          "pearl": "Metronidazole added to penicillin for severe mixed infections (excellent anaerobic coverage). Clindamycin for penicillin allergy: covers most oral anaerobes and streptococci. Note: C. difficile risk with clindamycin. Azithromycin has the weakest evidence base for odontogenic infections." },
+        { "difficulty": "blue", "name": "Prophylactic Antibiotics in Endo — Indications",
+          "terms": ["Prosthetic cardiac valves (per AHA)", "History of infective endocarditis", "Cardiac transplant with valvulopathy", "NOT for most joint replacements"],
+          "pearl": "AHA 2007: prophylaxis for dental procedures causing gingival/periapical manipulation in HIGH-RISK cardiac patients (prosthetic valve, prior IE, specific congenital heart disease, cardiac transplant with valvulopathy). AAOS/ADA 2012: antibiotic prophylaxis for ALL dental procedures is no longer recommended for joint replacements." },
+        { "difficulty": "purple", "name": "Antibiotic Resistance in Endodontic Bacteria",
+          "terms": ["Beta-lactamase producing strains", "VRE (vancomycin-resistant enterococcus)", "Metronidazole resistance in Prevotella", "Minimum inhibitory concentration (MIC)"],
+          "pearl": "Beta-lactamase–producing strains of Prevotella and Fusobacterium exist — amoxicillin alone may fail; Augmentin (amoxicillin + clavulanate) handles these. E. faecalis is intrinsically resistant to metronidazole and cephalosporins. VRE rare in orofacial infections but emerging." }
+      ]
+    },
+    {
+      "id": "pharmacology-analgesics-2",
+      "title": "Pain Management",
+      "topic": "Pharmacology & Pain Management",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "NSAIDs Mechanism in Endo Pain",
+          "terms": ["COX-1 and COX-2 inhibition", "Prostaglandin synthesis blocked", "Peripheral sensitization reduced", "Preemptive dosing effective"],
+          "pearl": "NSAIDs (ibuprofen 400-600 mg q6h) are the most effective analgesic for endo pain. Preemptive dosing (1 hr before procedure) more effective than post-procedure. COX-2 selective agents (celecoxib) have less GI risk but similar analgesic efficacy." },
+        { "difficulty": "green", "name": "Opioid Use in Endodontics",
+          "terms": ["No superior efficacy vs NSAID+APAP", "Hydrocodone/APAP limited role", "CDC 2022 guidelines: minimize", "Combination therapy preferred"],
+          "pearl": "Moore et al. studies: ibuprofen 400 mg + APAP 500 mg combination is SUPERIOR to opioid-containing combos for acute dental pain and with fewer side effects. Reserve opioids for when NSAIDs contraindicated. CDC 2022: prescribe lowest effective dose for shortest duration." },
+        { "difficulty": "blue", "name": "Drug Interactions Relevant to Endo Practice",
+          "terms": ["NSAIDs + warfarin (bleeding risk)", "NSAIDs + ACE inhibitors (renal)", "Metronidazole + alcohol (disulfiram effect)", "LA epinephrine + TCAs"],
+          "pearl": "NSAIDs increase INR in warfarin patients — use APAP instead. NSAIDs reduce antihypertensive effect of ACE inhibitors/ARBs and risk renal failure. Metronidazole inhibits alcohol dehydrogenase → disulfiram-like reaction (avoid alcohol). TCAs sensitize adrenergic receptors → limit epi in LA to 0.04 mg per appointment." },
+        { "difficulty": "purple", "name": "Intracanal Anesthesia Supplemental Techniques",
+          "terms": ["Intraligamentary (PDL) injection", "Intrapulpal injection", "Intraosseous (Stabident/X-tip)", "Computer-controlled LA (CCLAD/Wand)"],
+          "pearl": "Intrapulpal injection: works by hydraulic pressure + direct anesthetic contact with C fibers. Must be delivered under pressure against resistance for efficacy — causes brief intense pain followed by profound anesthesia. Most reliable supplemental technique for truly hot mandibular molars." }
+      ]
+    },
+    {
+      "id": "cracked-teeth-1",
+      "title": "Crack the Code",
+      "topic": "Cracked Teeth",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "AAEP Crack Classification (5 Types)",
+          "terms": ["Craze lines", "Fractured cusp", "Cracked tooth", "Split tooth"],
+          "pearl": "AAEP: Craze lines (enamel only, no tx), Fractured cusp (usually vital, good Px), Cracked tooth (incomplete, Px varies with depth), Split tooth (complete through furcation, extract or hemisect), Vertical root fracture (always extract or surgery)." },
+        { "difficulty": "green", "name": "Cracked Tooth Syndrome Classic Presentation",
+          "terms": ["Sharp pain on biting", "Pain on release (sometimes)", "Sensitivity to cold", "Difficult to localize"],
+          "pearl": "Diagnostic hallmark: pain on release from a bite stick placed on a specific cusp. Cold sensitivity may occur if cracks extend toward pulp (pulp is inflamed). Localization difficult because patients cannot reliably point to the tooth. Selective anesthesia + bite test + transillumination." },
+        { "difficulty": "blue", "name": "Cracked Tooth Treatment Decision Points",
+          "terms": ["Crack limited to crown: crown", "Crack to CEJ: crown + RCT", "Crack past CEJ: extract or hemi", "VRF: extract"],
+          "pearl": "Key decision: where does the crack end? If crack confirmed below CEJ on one root but not through furcation → hemisection/root amputation possible. If crack extends through furcation → split tooth → extract. Inability to visualize crack extent with CBCT does not mean it's not there." },
+        { "difficulty": "purple", "name": "VRF Diagnostic Features",
+          "terms": ["J-shaped radiolucency", "Halo RL around root", "Narrow isolated perio pocket", "Buccal sinus tract at mid-root"],
+          "pearl": "VRF produces pathognomonic J-shaped or halo-shaped RL because bone loses contact on BOTH buccal and lingual sides simultaneously. Isolated narrow 'knife-blade' pocket without obvious perio history. Buccal sinus at mid-root rather than apex = VRF until proven otherwise. CBCT: cortical plate discontinuity, bone loss pattern." }
+      ]
+    },
+    {
+      "id": "cracked-teeth-2",
+      "title": "Broken Inside",
+      "topic": "Cracked Teeth",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Risk Factors for Cracked Teeth",
+          "terms": ["Large MOD restorations", "Bruxism/parafunctional habits", "Prior RCT (brittle tooth)", "Cusp-to-cusp opposing contact"],
+          "pearl": "Root-canal-treated teeth are ~2× more brittle than vital teeth (debate: primarily due to moisture loss vs. dentin removal). Cuspal coverage recommended for RCT posterior teeth. Bruxism dramatically accelerates crack propagation. Large MOD cavities reduce cuspal flexural resistance." },
+        { "difficulty": "green", "name": "Cracked Tooth Prognosis Data",
+          "terms": ["Symptomatic: ~85% 5-yr survival with crown", "Signs of pulpitis: worse px", "Crack beyond CEJ: poor px", "Cattabriga et al. 2001 data"],
+          "pearl": "Cattabriga et al. 2001: 5-yr survival of cracked teeth treated with crown + RCT = ~85%. Teeth with periodontal involvement from crack = significantly worse prognosis. Davis et al. 2017: preoperative symptoms of pulpitis are the strongest negative predictor of tooth survival." },
+        { "difficulty": "blue", "name": "Tx Options for Fractured Cusp",
+          "terms": ["Remove cusp + buildup", "Crown (if vital)", "Crown + RCT (if symptomatic pulpitis)", "Monitor (small craze/cusp chip)"],
+          "pearl": "Fractured cusp: best prognosis of the crack categories. If confined to enamel-dentin, removal of the fractured cusp piece eliminates the pump mechanism that stresses the PDL. Crown placement without RCT is appropriate if pulp is healthy. Success >90% at 5 years in most series." },
+        { "difficulty": "purple", "name": "Dye Penetration in Crack Diagnosis",
+          "terms": ["Methylene blue stains crack line", "Penetrates pre-cemental defects", "Cannot confirm pulpal extension", "Used post-access under scope"],
+          "pearl": "Methylene blue dye is applied to the floor of the access cavity after RCT, then viewed under scope at high magnification. The dye tracks into crack lines by capillary action → makes cracks visible. Critical limitation: dye penetration cannot predict whether crack extends below CEJ or into root — clinical and CBCT findings needed for prognosis." }
+      ]
+    },
+    {
+      "id": "landmark-studies-1",
+      "title": "Ng et al. Universe",
+      "topic": "Landmark Studies & Authors",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Ng et al. 2007-2011 Findings (Nonsurgical)",
+          "terms": ["Preop lesion: biggest predictor", "Fill 0-2 mm short: ~90% success", "Void/short fill: drops to ~75%", "Coronal seal = equal to apical seal"],
+          "pearl": "Ng et al. 2007 (primary NSRCT): Absence of preoperative periapical lesion + fill within 0-2 mm = highest success. Ng 2008 (retreatment): success rates 77% (with lesion) vs 83% (without). Coronal restoration quality as impactful as obturation quality." },
+        { "difficulty": "green", "name": "Ng et al. Technical Factor Odds Ratios",
+          "terms": ["Preop PARL: 0.44 OR (failure)", "Glide path length: nonsignificant", "Irrigation volume: significant", "Rubber dam use: borderline"],
+          "pearl": "Preoperative periapical lesion is the single largest predictor of failure (OR 0.44 = 56% less likely to succeed than no-lesion). Irrigation volume and concentration were significant — reinforcing the role of NaOCl in outcome. Rubber dam use was statistically borderline but biologically plausible." },
+        { "difficulty": "blue", "name": "Ray & Trope 1995 — The Coronal Seal Paper",
+          "terms": ["Radiographic quality evaluated", "2000 teeth studied", "Coronal seal > apical seal", "Poor crown + good RCT: still 44% RL"],
+          "pearl": "Ray & Trope 1995 (OOOE): radiographic evaluation of 2,000 teeth. Good coronal restoration with poor RCT: 68% periapical health. Good RCT with poor coronal: 44% health. Good coronal + good RCT: 91% health. Established that the coronal seal is critically important — not just the root filling." },
+        { "difficulty": "purple", "name": "Friedman Retreatment vs Surgery Meta-Analysis",
+          "terms": ["Retreatment: ~77% healed", "Surgery: ~74% healed (Torabinejad)", "Combined retreat + surgery: highest", "Prognostic factors same as primary"],
+          "pearl": "Torabinejad et al. 2009 systematic review: nonsurgical retreatment (77%) vs periapical surgery (74%) similar short-term success. Long-term (≥4 yr): retreatment outcomes decline (63%) vs surgery more stable (77%). Combined approach (retreat then surgery if needed) offers best long-term outcomes." }
+      ]
+    },
+    {
+      "id": "landmark-studies-2",
+      "title": "Classic Papers",
+      "topic": "Landmark Studies & Authors",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Kakehashi 1965 Germ-Free Rat Study",
+          "terms": ["Germ-free rats: no periapical pathology", "Conventional rats: PA lesion developed", "Proves bacteria cause PA lesion", "Pulp exposed, canals left open"],
+          "pearl": "Kakehashi et al. 1965: pulps exposed to oral environment in germ-free vs conventional rats. Germ-free rats: no pulp necrosis, no PA lesions. Conventional rats: periapical pathology developed. Definitively proved bacteria, not simply physical exposure, are required to cause endodontic disease." },
+        { "difficulty": "green", "name": "Sjogren Antimicrobial Studies 1991-1997",
+          "terms": ["Ca(OH)₂ eliminated 92% organisms", "Remaining organisms correlated with failure", "Instrumentation alone: bacteria remain", "E. faecalis most resistant"],
+          "pearl": "Sjogren et al. 1991 (OOOOE): Ca(OH)₂ dressing between visits eliminated bacteria in 92% of canals. 1997 follow-up: cases with bacteria at obturation had significantly higher failure rates. Established evidence basis for Ca(OH)₂ inter-appointment dressing." },
+        { "difficulty": "blue", "name": "Strindberg 1956 Outcome Criteria",
+          "terms": ["Strict radiographic criteria", "Success = no periapical change", "Failure = any RL development", "10-year follow-up data"],
+          "pearl": "Strindberg's 1956 doctoral thesis established first standardized outcomes criteria for NSRCT. Strict binary: success = periapical radiograph unchanged or improved. Failure = any new or growing periapical radiolucency. Set the template for all subsequent endo outcome research." },
+        { "difficulty": "purple", "name": "Orstavik PAI Validation Study 1986",
+          "terms": ["5-point scale published 1986", "Validated against histologic specimens", "Reference periapical films", "Inter- and intra-rater reliability"],
+          "pearl": "Ørstavik et al. 1986: PAI validated against histologic sections of cadaver jawbones. Reference radiographs of known-histology specimens calibrate examiners to each score level. Strong correlation between PAI score and degree of apical periodontitis histologically confirmed. Became the most widely used outcome measure in endo research." }
+      ]
+    },
+    {
+      "id": "landmark-studies-3",
+      "title": "Who Did What",
+      "topic": "Landmark Studies & Authors",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Endodontic Eponyms — What They Did",
+          "terms": ["Schilder: vertical compaction", "Weine: canal classification", "Buchanan: continuous wave", "Ingle: standardized file sizes"],
+          "pearl": "Schilder 1967/1974: lateral compaction replaced by warm vertical compaction + 5 canal shaping objectives. Weine 1969: 4-type canal classification. Ingle 1961: standardized ISO file sizes and tapers (still used today). Buchanan 1994: System B continuous wave obturation technique." },
+        { "difficulty": "green", "name": "Andreasen's Landmark Contributions",
+          "terms": ["Luxation injury classification", "Root fracture healing types", "Trauma textbook (1972)", "Dental trauma guide (IADT)"],
+          "pearl": "Jens Andreasen: authored the Textbook and Color Atlas of Traumatic Injuries to the Teeth (1972), still the definitive reference. Classified luxation injuries and root fracture healing modes. Founded the International Association of Dental Traumatology (IADT) and co-developed the IADT guidelines." },
+        { "difficulty": "blue", "name": "Heithersay's Contributions",
+          "terms": ["ECR classification (1999)", "Ca(OH)₂ for resorption arrest", "Invasive cervical resorption", "TCA dentin etching technique"],
+          "pearl": "Graeme Heithersay 1999 series: defined invasive cervical resorption, developed Heithersay classification (1-4), identified risk factors (bleaching, ortho, trauma, surgery), and described trichloroacetic acid (TCA) technique for restorative management of ECR." },
+        { "difficulty": "purple", "name": "Researchers Behind REP Protocol",
+          "terms": ["Banchs & Trope 2004 (case series)", "Hoshino et al. 1996 (triple antibiotic paste)", "Diogenes et al. (bioactive dentin)", "AAE 2016 (clinical considerations)"],
+          "pearl": "Banchs & Trope 2004 (JOE): published the first contemporary REP case series — established the clinical protocol of double antibiotic paste + induction of bleeding scaffold. Hoshino 1996: developed triple antibiotic paste. Diogenes (UT Health SA): EDTA releases dentinal growth factors for SCAP stimulation." }
+      ]
+    },
+    {
+      "id": "landmark-studies-4",
+      "title": "The Numbers Game",
+      "topic": "Landmark Studies & Authors",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Key Endodontic Percentages to Know",
+          "terms": ["MB2 in max 1st molar: ~85%", "Isthmus in mand molar mesial: ~80%", "E. faecalis in retreatment: ~25-40%", "REP: continued root dev't ~60-80%"],
+          "pearl": "Board-high-yield numbers: MB2 prevalence ~75-95% (CBCT studies). Isthmus in mandibular molar mesial root at mid-root: nearly 100% (Hsu & Kim). E. faecalis in failed RCT: ~25-40%. VRF in root-filled teeth with post: ~1.3-11% per year of function." },
+        { "difficulty": "green", "name": "Endo Outcome Percentages (Approximate)",
+          "terms": ["NSRCT, no lesion: ~92%", "NSRCT, with lesion: ~74%", "Surgical (MTA retrofill): ~91%", "Retreatment with lesion: ~77%"],
+          "pearl": "Approximate success rates for boards: Initial NSRCT without lesion ~92%. With lesion ~74%. Retreatment without lesion ~83%. With lesion ~77%. Surgery with MTA ~91% at 1 year. Combined retreatment + surgery if needed: highest long-term outcomes." },
+        { "difficulty": "blue", "name": "Irrigation Research Numbers",
+          "terms": ["5.25% NaOCl dissolves tissue in minutes", "Heated NaOCl: 10× more effective", "EDTA 17% for 1 min sufficient", "GentleWave: 1-visit in 65 min"],
+          "pearl": "Concentration AND temperature drive NaOCl efficacy. Hata et al.: heated 1% NaOCl dissolves pulp tissue as well as 5.25% at room temp. EDTA 17% for 1 min removes smear layer equivalent to longer times (Calt & Serper 2002). Excessive EDTA contact time softens dentin." },
+        { "difficulty": "purple", "name": "NiTi Instrument Failure Statistics",
+          "terms": ["Torsional fracture: majority", "Cyclic fatigue: minority", "Incidence: <1% clinical use", "Prognosis if short of WL: good"],
+          "pearl": "Separated NiTi instruments: incidence in clinical practice ~0.4-2% depending on file system. Most fail in the apical third of curved canals. Torsional fracture (tip binding) more common than cyclic fatigue in clinical settings (vs. lab testing where cyclic fatigue dominates). If fragment is apical to WL in an infected case: retrieve or bypass; if sterile and short: monitor." }
+      ]
+    },
+    {
+      "id": "landmark-studies-5",
+      "title": "Study Design",
+      "topic": "Landmark Studies & Authors",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Evidence Hierarchy in Endo Research",
+          "terms": ["Systematic review/meta-analysis", "RCT", "Prospective cohort", "Retrospective case series"],
+          "pearl": "Most endo outcome data is prospective cohort or retrospective — RCTs are difficult due to ethical and practical constraints. Ng et al. systematic reviews are among the most cited in endo outcomes research. Grading of Recommendation, Assessment, Development and Evaluation (GRADE) framework used for guideline development." },
+        { "difficulty": "green", "name": "Criteria for Assessing NSRCT Outcomes",
+          "terms": ["Strindberg criteria", "Ørstavik PAI", "Friedman CBCT criteria", "Patient-reported outcomes"],
+          "pearl": "Radiographic criteria underestimate healing (lesions must grow before visible on 2D). PAI more sensitive than binary Strindberg criteria. CBCT detects early healing and residual disease better than 2D but is not used routinely for outcome assessment due to dose. Patient-reported outcome measures (pain, function) increasingly required in journals." },
+        { "difficulty": "blue", "name": "Molven & Rud Criteria for Surgical Outcomes",
+          "terms": ["Complete healing: normal PDL", "Incomplete: reduced RL, scar", "Uncertain: small residual RL", "Failure: persistent/growing RL"],
+          "pearl": "Molven 1987 / Rud 1972: standardized four surgical outcome categories. 'Incomplete' healing (fibrous scar, non-osseous repair) = clinically successful — scar tissue can withstand function without symptoms. Reassess 'uncertain' cases at 4 years. Only 'failure' requires retreatment." },
+        { "difficulty": "purple", "name": "Bias Types in Endodontic Studies",
+          "terms": ["Selection bias (case series)", "Observer bias (radiographic)", "Recall bias (retrospective)", "Publication bias (positive results)"],
+          "pearl": "Case series: selection bias (operator selects favorable cases). Radiographic observer bias: knowing treatment status affects periapical lesion interpretation. Recall bias in retrospective studies misclassifies lost-to-follow-up (assumed success). Publication bias: positive outcome studies 3-5× more likely to be published. CONSORT checklist for RCTs, STROBE for observational studies." }
+      ]
+    },
+    {
+      "id": "landmark-studies-6",
+      "title": "Vital Pulp Therapy Evidence",
+      "topic": "Landmark Studies & Authors",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "VPT Evidence Landmarks",
+          "terms": ["Parirokh & Torabinejad 2010", "Bogen et al. 2008 (MTA DPC)", "Kundzina et al. 2017 (RCT)", "Simon et al. 2008 (bleeding test)"],
+          "pearl": "Parirokh & Torabinejad 2010 systematic review: MTA superior to Ca(OH)₂ for DPC. Bogen 2008: 97.9% success rate with MTA for deep carious exposures at 5 yrs. Kundzina 2017 RCT: MTA vs Biodentine equivalent outcomes. Simon 2008: bleeding control time predicts pulp status better than clinical history alone." },
+        { "difficulty": "green", "name": "Full Coronal Pulpotomy Evidence",
+          "terms": ["Bjørndal et al. 2017", "Zanini et al. 2012 systematic review", "BSPD 2019 guidance", "Ferracane et al. 2019 (AAE joint)"],
+          "pearl": "Growing evidence that full coronal pulpotomy (FCP) in mature permanent molars has success rates comparable to NSRCT at 2-5 years. Bjørndal 2017 and similar studies: MTA pulpotomy vs stepwise excavation. BSPD 2019: FCP endorsed as first-line for deep caries with reversible or irreversible pulpitis if good case selection." },
+        { "difficulty": "blue", "name": "Calcium Silicate VPT Mechanisms",
+          "terms": ["Alkaline pH → antimicrobial", "Releases Ca²⁺ → dentinogenesis", "Forms HA at dentin interface", "Stimulates BMP-2 via signaling"],
+          "pearl": "MTA/Biodentine placed on pulp: releases Ca(OH)₂ (alkaline pH → antibacterial), Ca²⁺ ions stimulate hard tissue deposition, forms HA at dentin-material interface. Also shown to upregulate BMP-2, TGF-β, angiogenic factors in pulp cells — actively promotes wound healing and bridge formation." },
+        { "difficulty": "purple", "name": "Criteria for VPT Case Selection (High-Yield ABE)",
+          "terms": ["No spontaneous pain for direct cap", "Bleeding controls in ≤5 min", "No radiographic PA pathology", "Adequate isolation achievable"],
+          "pearl": "ABE boards frequently test VPT selection criteria. Key: (1) No history of spontaneous or nocturnal pain; (2) exposure is mechanical or small carious; (3) bleeding at exposure site controllable ≤5 min with NaOCl/saline; (4) normal periapical radiograph; (5) isolation achievable; (6) patient agrees to crown. Any criterion failing → NSRCT." }
+      ]
+    },
+    {
+      "id": "micro-irrigation-2",
+      "title": "Smear or Not",
+      "topic": "Microbiology & Irrigation Chemistry",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Smear Layer Components",
+          "terms": ["Ground dentin particles", "Remnant odontoblast processes", "Bacteria and their byproducts", "Organic + inorganic matrix"],
+          "pearl": "Smear layer forms during instrumentation — ground dentin packed onto canal walls 1-2 μm thick. Superficial and plugging dentinal tubule orifices. Contains bacteria and LPS. Removal with EDTA/citric acid opens tubules for better irrigant and sealer penetration." },
+        { "difficulty": "green", "name": "Debate: Remove or Retain Smear Layer?",
+          "terms": ["Remove: better irrigant penetration", "Remove: better sealer adaptation", "Retain: occludes tubular bacteria", "Retain: temporary seal argument"],
+          "pearl": "Most authorities advocate smear layer removal (AAE, ESE). Better irrigant access to tubular bacteria + better sealer-dentin bond (especially AH Plus, which bonds to collagen). Retained smear layer may mask deeper bacteria and dissolves over time, leaving micro-leakage pathway. Remove it." },
+        { "difficulty": "blue", "name": "Irrigant Volume and Flow Research",
+          "terms": ["5 mL per visit minimum", "Vapor lock blocks apical flow", "Positive vs negative pressure", "GentleWave vs syringe delivery"],
+          "pearl": "Vapor lock (gas trapped apically) prevents irrigants from reaching the apical mm. Apical negative pressure (EndoVac) sucks irrigant apically past the vapor lock without extrusion risk. GentleWave degassed solutions + multisonic energy = better apical penetration. Adequate irrigant volume (5-20 mL/visit) correlates with outcomes." },
+        { "difficulty": "purple", "name": "Biofilm-Specific Resistance Mechanisms",
+          "terms": ["EPS matrix blocks penetration", "Dormant persister cells", "Slow metabolic rate of deep cells", "Phenotypic heterogeneity"],
+          "pearl": "Endodontic biofilm embedded in extracellular polysaccharide (EPS) matrix — physical barrier to irrigants. Only outer layers are metabolically active and affected by antibiotics. Persister cells are dormant subpopulations that survive any antibiotic or antiseptic treatment and repopulate after withdrawal. No currently available irrigant eliminates mature biofilm 100%." }
+      ]
+    },
+    {
+      "id": "perio-systemic-2",
+      "title": "Body Connections",
+      "topic": "Perio-Endo & Systemic Considerations",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "MRONJ Risk Factors for Endo Patients",
+          "terms": ["IV bisphosphonates (high risk)", "Oral bisphosphonates > 4 yr", "Denosumab (similar risk)", "Dental extractions trigger > endo"],
+          "pearl": "MRONJ (medication-related osteonecrosis of jaw) risk: IV bisphosphonates (zoledronic acid) carry highest risk (~1%). Oral bisphosphonates <4 years: low risk; >4 years: moderate risk. Denosumab (anti-RANKL): risk similar to IV bisphosphonates. NSRCT preferred over extraction in high-risk patients. Consult prescribing physician." },
+        { "difficulty": "green", "name": "Endo Treatment in Diabetic Patients",
+          "terms": ["Healing impaired if HbA1c >8%", "Increased infection risk", "Periapical lesion larger on average", "NSRCT outcomes similar if controlled"],
+          "pearl": "Well-controlled diabetes (HbA1c <7%): NSRCT outcomes comparable to healthy patients. Poorly controlled DM: impaired neutrophil function, altered wound healing, enhanced inflammatory response → larger periapical lesions, slower healing. Dental extraction may destabilize glycemic control — endo preferred when feasible." },
+        { "difficulty": "blue", "name": "Head and Neck Radiation Effects on Endo",
+          "terms": ["Osteoradionecrosis risk post-extraction", "Radiation caries (rampant)", "Xerostomia (salivary gland damage)", "NSRCT strongly preferred to extraction"],
+          "pearl": "After head and neck radiation (≥50 Gy to jaw): hypoxic-hypovascular-hypocellular bone → markedly impaired healing. Osteoradionecrosis risk with extraction is 5-15%. NSRCT (even over extraction) is the gold standard approach. Xerostomia → radiation caries → must restore crown margins above CEJ." },
+        { "difficulty": "purple", "name": "Endodontic Flare-Up Mechanisms",
+          "terms": ["Extrusion of debris/irrigant", "Exacerbation of apical periodontitis", "Hypersensitivity reaction to materials", "Aggressive instrumentation"],
+          "pearl": "Flare-up definition: inter-appointment pain and/or swelling requiring unscheduled visit. Incidence: ~1.4-5.5%. Risk factors: symptomatic tooth, necrotic pulp with PARL, female sex, high preoperative pain, history of premedication. Single-visit treatment does NOT increase flare-up risk vs two-visit (meta-analysis evidence)." }
+      ]
+    },
+    {
+      "id": "obturation-outcomes-3",
+      "title": "Fill Quality",
+      "topic": "Obturation & Sealers",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Ideal Obturation Length Criteria",
+          "terms": ["0-2 mm short of radiographic apex", "At apical constriction (0.5 mm short)", "Not beyond foramen", "Consistent with WL measurement"],
+          "pearl": "Optimum fill length: 0-2 mm from radiographic apex (correlates with ~0.5-1 mm from histologic apex). Ng et al. 2007: fill 0-2 mm short = highest success. Overfill: not necessarily worse if no symptoms, but sealer extrusion may cause delayed pain. Underfill (>2 mm): significantly worse outcomes." },
+        { "difficulty": "green", "name": "Voids and Density in Obturation",
+          "terms": ["Radiographic density correlates with outcome", "Voids = bacteria harbors", "Lateral compaction worst for voids", "Warm vertical best density (Dentsply)"],
+          "pearl": "GP void percentage on cross-sections: warm vertical compaction produces consistently denser fills than lateral compaction. Voids especially problematic coronally (coronal leakage pathway). Single-cone + bioceramic sealer ('sealer-based obturation'): acceptable void rates if sealer gap-fills properly." },
+        { "difficulty": "blue", "name": "Apical Transportation and Obturation",
+          "terms": ["Transportation → imperfect apical seat", "Ovoid vs round prepared apex", "Sealer compensates for minor irregularity", "ZIP (zipping) prevents master cone fit"],
+          "pearl": "Canal transportation: if apex is ovoid or irregular, a round GP master cone will not adapt. Bioceramic sealers are most forgiving — they fill irregularities as a hydraulic paste. Severely transported canals (zipping): modify master cone or use warm fill to adapt. Prevention > correction." },
+        { "difficulty": "purple", "name": "Retreatability of Sealers",
+          "terms": ["AH Plus: difficult (epoxy bond)", "Eugenol-based: easy (dissolves in solvent)", "BC Sealer: intermediate (water-based)", "MTA Fillapex: harder than BC"],
+          "pearl": "Retreatability is a key clinical consideration. AH Plus forms covalent epoxy bonds to dentin → very difficult to remove completely; requires mechanical + solvent (eucalyptol). ZOE sealers dissolve readily in chloroform/eucalyptol. BC Sealer: sets hard but no covalent bond — intermediate difficulty. Choosing a sealer affects future retreatment options." }
+      ]
+    },
+    {
+      "id": "niti-irrigation-3",
+      "title": "Taper & Flow",
+      "topic": "NiTi Metallurgy & Irrigation Chemistry",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Glide Path Importance (Evidence)",
+          "terms": ["Reduces NiTi torsional stress by 90%", "Pre-flaring improves irrigant flow", "Mechanical > manual glide path", "Confirmed by #10 K-file passivity"],
+          "pearl": "Glide path ensures a smooth reproducible path for NiTi rotaries. Reduces instrument fracture risk by eliminating torsional binding. Pre-flaring (Gates-Glidden or orifice openers) improves irrigant flow into apical third by removing coronal constrictions. Confirm with passive #10 K-file to WL before rotary use." },
+        { "difficulty": "green", "name": "Apical Preparation Size and Bacterial Elimination",
+          "terms": ["#30 removes most dentinal walls", "#35-40 improves NaOCl penetration", "Size 20 insufficient for irrigation", "Larger size → more dentin removal"],
+          "pearl": "Coldero et al.: preparation to size 30 contacts ~40% of apical dentin walls; size 40 contacts ~80%. Larger preparations allow better irrigant volume delivery. But: excessive apical preparation in curved roots → transportation. Balance minimum preparation for irrigation vs. dentin conservation." },
+        { "difficulty": "blue", "name": "Syringe Irrigation Depth and Safety",
+          "terms": ["1-2 mm from WL: optimal placement", "Positive pressure: extrusion risk", "27-gauge side-vented needle", "Never bind needle in canal"],
+          "pearl": "Safe syringe irrigation: side-vented (notched) tip, placed 1-2 mm short of WL passively. Never wedge needle — if resistance met, withdraw and irrigate shallower. Positive pressure irrigation with 30+ gauge needles placed at WL = most common cause of NaOCl extrusion accidents." },
+        { "difficulty": "purple", "name": "Chlorhexidine Substantivity in Endo",
+          "terms": ["12-week substantivity in dentin", "Binds to hydroxyapatite in tubules", "Slow release as CHX reservoir", "Not a replacement for NaOCl"],
+          "pearl": "CHX substantivity: binds to dentin HA and releases slowly over 12 weeks, providing prolonged antimicrobial action. Used as a final rinse ONLY (cannot dissolve organic tissue). CHX + NaOCl = PCA precipitate (avoid). CHX particularly effective against E. faecalis. Does not substitute for NaOCl's tissue-dissolving and broad-spectrum action." }
+      ]
+    },
+    {
+      "id": "access-cavity-1",
+      "title": "Open It Up",
+      "topic": "Access Cavity Design & Anatomy",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Traditional vs Conservative Access Goals",
+          "terms": ["Straight-line access (traditional)", "Ninja/TruNatomy access (conservative)", "Orifice barriers removed (traditional)", "Preserve peri-cervical dentin (conservative)"],
+          "pearl": "Traditional access: remove entire pulp roof, establish straight-line access to all orifices. Conservative endodontic cavity (CEC) / ninja access: preserves peri-cervical dentin, smaller access, but may sacrifice irrigant delivery and visualization. Debate ongoing — traditional remains standard of care in most programs." },
+        { "difficulty": "green", "name": "Access Outline Forms by Tooth",
+          "terms": ["Max central incisor: triangular", "Max molar: trapezoidal/rhomboid", "Mand molar: trapezoidal", "Max premolar: oval/elongated"],
+          "pearl": "Maxillary central incisor: triangular access, apex pointing incisally. Maxillary molar: trapezoidal — wider at MB-DB than DB-P. Mandibular molar: trapezoidal — 4 corners (MB, ML, DB, DL orifices). Maxillary premolar: oval (buccal-lingual), to accommodate two canals in oval root." },
+        { "difficulty": "blue", "name": "Danger Zones During Access",
+          "terms": ["Pulp chamber floor perforation", "Furcal danger zone (thin inner wall)", "Strip perforation (rotary lateral)", "Enameloplasty before access (tipped teeth)"],
+          "pearl": "Perforation of the pulp chamber floor is most common in calcified teeth — operator drills toward the furcation without recognizing the pulp roof is already removed. Reference point: pulp chamber floor is at CEJ level in most teeth. Furcal danger zone: inner wall of mesial root of mandibular molars — <1.5 mm dentin in many cases." },
+        { "difficulty": "purple", "name": "Magnification and Illumination for Access",
+          "terms": ["3-4× loupes: minimum for access", "Scope 8-12×: orifice detection", "Coaxial illumination: no shadow", "DG-16 explorer: orifice confirmation"],
+          "pearl": "Coaxial illumination (from scope or LED loupes headlight) eliminates instrument shadow that blocks orifice visualization. DG-16 explorer: slim shank, sharp tip catches into orifice funnel. Troughing developmental grooves (MB groove from MB1 to MB2 in max molars) done at 12-16× under scope." }
+      ]
+    },
+    {
+      "id": "working-length-1",
+      "title": "How Far Do You Go",
+      "topic": "Working Length Determination",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Working Length Determination Methods",
+          "terms": ["Electronic apex locator (EAL)", "Radiographic WL", "Paper point bleeding point", "Tactile sensation (least reliable)"],
+          "pearl": "EALs (5th generation, multi-frequency) are accurate to ±0.5 mm in >90% of cases. Accepted clinical end-point: 0.5-1 mm from radiographic apex (minor foramen). Paper point: first dry point placed at WL = moisture from PDL → confirms proximity to foramen. Combine EAL + radiograph for highest accuracy." },
+        { "difficulty": "green", "name": "Apex Locator Interference Factors",
+          "terms": ["Perforations: false short reading", "Pulp remnants in canal: variable", "Electrolyte in canal: affects reading", "Irrigant flooding: most common error"],
+          "pearl": "EALs use impedance measurement between file and oral mucosa. Perforations (direct contact with PDL tissue) give a 'false short' reading (reads 'apex' prematurely). Dry canal: poor conductivity; must irrigate before using EAL. Conductive irrigants (saline, NaOCl) improve accuracy; CHX slightly less conductive." },
+        { "difficulty": "blue", "name": "Apical Constriction Anatomy",
+          "terms": ["Minor foramen: most apical constriction", "Major foramen: exit of canal", "CDJ: ~0.5-1 mm from minor", "Foramen width increases with age"],
+          "pearl": "Classic anatomy: minor foramen (apical constriction) is ~0.5-1 mm from major foramen (radiographic apex). The cementodentinal junction (CDJ) corresponds approximately to the minor foramen. With age, secondary cementum deposition narrows the major foramen and the minor foramen shifts apically. EALs detect the major foramen." },
+        { "difficulty": "purple", "name": "Foramen Location vs Radiographic Apex",
+          "terms": ["Up to 2-3 mm off-axis possible", "Curved roots: foramen exits lateral", "Calcified canals: foramen obscured", "CBCT identifies true 3D foramen position"],
+          "pearl": "The apical foramen is NOT always at the radiographic apex. Green & Serafino (1955): foramen exits lateral wall in 17-46% of teeth. Distance from foramen to radiographic apex: 0.5-3 mm. CBCT can localize the foramen precisely — critical for surgical cases. Working long (past foramen) causes apical extrusion and foreign body reaction." }
+      ]
+    },
+    {
+      "id": "intracanal-medicaments-1",
+      "title": "Between Visits",
+      "topic": "Intracanal Medicaments",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Calcium Hydroxide Properties",
+          "terms": ["pH ~12.5-12.8", "Dissociates to Ca²⁺ + OH⁻", "Bactericidal within dentin", "Dissolves necrotic pulp tissue"],
+          "pearl": "Ca(OH)₂: mechanism = OH⁻ ions diffuse through dentinal tubules → raises intratubular pH → damages bacterial cell membranes, denatures proteins. Also dissolves remnant organic tissue. Effective against most endodontic bacteria except E. faecalis (proton pump resistance) and some biofilm organisms." },
+        { "difficulty": "green", "name": "Indications for Ca(OH)₂ Dressing",
+          "terms": ["Infected necrotic pulp with PARL", "External inflammatory resorption", "Apexification (before MTA)", "Interappointment dressing (2+ visit)"],
+          "pearl": "Ca(OH)₂ dressing between visits: Sjogren 1991 data shows elimination of bacteria in 92% of canals. Most effective when placed in direct contact with apical tissue. Replace every 3 months for resorption cases. Single-visit treatment is equally effective for most cases — Ca(OH)₂ dressing is NOT mandatory for uncomplicated NSRCT." },
+        { "difficulty": "blue", "name": "Ca(OH)₂ Failure Organisms",
+          "terms": ["Enterococcus faecalis", "Candida albicans", "Actinomyces species", "Biofilm-embedded organisms"],
+          "pearl": "E. faecalis: proton pump maintains internal pH against external alkalinity → survives Ca(OH)₂. Candida: resistant fungal cell wall. Actinomyces: in biofilm, resistant to Ca(OH)₂ penetration. These are exactly the organisms found in Ca(OH)₂-treated failing cases — the reason Ca(OH)₂ is NOT sufficient as the sole disinfection strategy." },
+        { "difficulty": "purple", "name": "Triple Antibiotic Paste vs Ca(OH)₂",
+          "terms": ["TAP: broader spectrum", "Ca(OH)₂: simpler, less resistance risk", "TAP: discoloration risk (minocycline)", "Both: limited to REP in current guidelines"],
+          "pearl": "Ca(OH)₂ remains preferred for standard NSRCT inter-appointment dressing. TAP (metronidazole, ciprofloxacin, minocycline) is reserved for REP cases (Banchs & Trope protocol). Minocycline discolors coronal dentin — substitute clindamycin or reduce concentration to 0.1 mg/mL. Both fail against biofilm — full instrumentation/irrigation is required." }
+      ]
+    },
+    {
+      "id": "rubber-dam-1",
+      "title": "Dam It",
+      "topic": "Rubber Dam & Isolation",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Rubber Dam Standard of Care",
+          "terms": ["AAE mandates for NSRCT", "Prevents aspiration accidents", "Improves field visibility", "Prevents recontamination of canals"],
+          "pearl": "Rubber dam (RD) is the standard of care for all endo procedures (AAE, ESE, GDC). Prevents aspiration/ingestion of instruments (most common endo emergency without RD). Keeps canal sterile by excluding oral bacteria. Studies show patients actually prefer RD to no isolation once they experience it." },
+        { "difficulty": "green", "name": "Rubber Dam Clamp Selection",
+          "terms": ["#8, #14: molars", "#7, #2A: premolars and anterior", "Winged vs wingless", "Butterfly clamp: subgingival"],
+          "pearl": "Winged clamps: can hold dam and clamp simultaneously before seating (convenient). Wingless: clamp seated first, then dam placed over. Butterfly (B) clamp: double-bowed, used subgingivally for broken-down teeth. Ivory clamp selection based on root trunk morphology and crown height." },
+        { "difficulty": "blue", "name": "Isolation Challenges and Solutions",
+          "terms": ["Broken-down tooth: orthodontic band", "No tooth structure above gingiva: surgically extrude", "Crown margin subgingival: soft clamp + caulk", "Partial rubber dam for 2nd molar"],
+          "pearl": "Heavily broken-down teeth: build-up or orthodontic band + dam before endo. Crown/bridge: perforate dam to fit around abutments. Deep subgingival margins: soft tissue retraction cord + Oraseal/Ultradent putty to seal periphery. Posterior teeth with limited access: 'split dam' technique using separate sheets." },
+        { "difficulty": "purple", "name": "Rubber Dam Accidents and Management",
+          "terms": ["Clamp aspiration/swallowing", "Latex allergy (use non-latex)", "Clamp wing retraction injury", "Chemical burn from NaOCl leak"],
+          "pearl": "Clamp aspiration is the most feared endo emergency — most incidents occur when rubber dam not used. All clamps should have floss tied through the bow before placement. Latex allergy (1.9% of general population): use nitrile (Hygenic Dentsply non-latex) dam. NaOCl leak: rinse with water, neutralize with sodium thiosulfate if needed." }
+      ]
+    },
+    {
+      "id": "pulp-calcification-1",
+      "title": "Calcified Canals",
+      "topic": "Pulp Biology & Diagnosis",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Types of Pulp Calcifications",
+          "terms": ["True denticles (organized)", "False denticles (dystrophic)", "Diffuse/linear calcifications", "Obliterative calcification (PCO)"],
+          "pearl": "True denticles: organized, tubular dentin formed by odontoblast-like cells — seen as free-floating or attached in pulp chamber. False denticles: irregular mineral deposits around blood vessels or necrotic cells (dystrophic). Diffuse: fine needle-like apatite crystals in matrix. PCO (calcific metamorphosis): entire pulp chamber/canal obliterated after trauma." },
+        { "difficulty": "green", "name": "Calcified Canal Negotiation Strategy",
+          "terms": ["Pre-flare with Gates-Glidden", "06 or 08 K-file with EDTA lubricant", "Ultrasonic tip to trough", "Watch-winding motion, not rotation"],
+          "pearl": "Calcified canal approach: pre-flare coronal third to improve straight-line access and lubricant delivery. Small K-files (#6, #8) with RC Prep/EDTA lubricant in watch-winding motion (no rotation) to avoid transportation. Ultrasonic tips (CPR tips) effective for troughing calcified pulp chambers. Patience > force." },
+        { "difficulty": "blue", "name": "Radiographic Interpretation of Calcifications",
+          "terms": ["Canal visible but narrow (early PCO)", "Canal not visible (late PCO)", "Pulp stone in chamber (radiopaque focus)", "Obliterated root: treat if signs of failure"],
+          "pearl": "PCO on radiograph: absence of visible canal is NOT the same as absence of canal tissue — a fibrous remnant canal almost always exists. Take two angled PAs + CBCT for calcified maxillary molars. Obliterated canal does NOT require treatment unless periapical pathology develops (monitor annually)." },
+        { "difficulty": "purple", "name": "Pulp Stone Etiology",
+          "terms": ["Degenerative response to chronic irritation", "Long-term restorations", "Systemic conditions (cardiovascular)", "Aging (universal in 90% by 70 yrs)"],
+          "pearl": "Prevalence of pulp stones increases dramatically with age (90%+ of people by 70 years). Associated with cardiovascular disease in several studies (shared calcification tendency). Chronic low-grade irritation (old restorations, caries near pulp) stimulates calcification. Clinical relevance: may obscure orifices and make access challenging." }
+      ]
+    },
+    {
+      "id": "outcomes-healing-2",
+      "title": "Lesion Watch",
+      "topic": "Outcomes, Healing & PAI",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Periapical Lesion Healing Timeline",
+          "terms": ["Symptomatic improvement: 1-7 days", "Radiographic improvement: 3-6 months", "Complete radiographic healing: 12-24 months", "Reassess uncertain at 4 years"],
+          "pearl": "OOOE consensus: reassess periapical lesions at 6-12 months, then annually. Most healing (if it occurs) is visible radiographically by 12-24 months. Cases showing no improvement at 1 year but no worsening: reassess at 4 years before declaring failure (Molven criteria for 'uncertain')." },
+        { "difficulty": "green", "name": "Periapical Granuloma vs Cyst Healing",
+          "terms": ["Granuloma: heals with NSRCT alone", "True radicular cyst: may not heal (controversial)", "Bayhood cyst: heals with NSRCT", "Surgical enucleation: for true cyst"],
+          "pearl": "Lin et al. (2009): true radicular cysts contain epithelium forming a closed cavity and may not fully heal with NSRCT alone. Bay (open) cysts communicate with canal and DO heal with NSRCT. Clinical implication: lesion >2 cm that fails to show improvement at 12 months → suspect true cyst → surgery." },
+        { "difficulty": "blue", "name": "Periapical Scar (Fibrous Healing)",
+          "terms": ["Radiolucency persists post-tx", "Asymptomatic, no progression", "Fibrous CT fills defect", "More common in upper anteriors"],
+          "pearl": "Periapical scar: fibrous connective tissue fills old periapical defect instead of bone. Radiograph shows persistent radiolucency that does NOT grow. Most common in maxillary anterior region (dense cortical plates limit bone regeneration). Stable clinical findings + no symptoms = scar, not failure. CBCT confirms cortical plate integrity." },
+        { "difficulty": "purple", "name": "Periapical Lesion Size and Healing Prognosis",
+          "terms": ["Small (<5 mm): excellent healing", "Large (>10 mm): slower/incomplete healing", "Cortical plate perforation: surgical bias", "Cystic transformation likely >15 mm"],
+          "pearl": "Lesion size negatively correlates with healing rate and completeness. Large lesions (>10 mm) may require 2-4 years to fully resolve. Lesions that perforate the cortical plate: bone regeneration does not occur — fibrous scar or incomplete fill common. Lesions >15 mm have high likelihood of true cystic cavity." }
+      ]
+    },
+    {
+      "id": "endo-emergencies-1",
+      "title": "Oh No",
+      "topic": "Endo Emergencies & Complications",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Endo-Related Emergencies",
+          "terms": ["Acute apical abscess", "Cellulitis (Ludwig's angina risk)", "NaOCl extrusion accident", "Instrument aspiration"],
+          "pearl": "Ludwig's angina: bilateral floor-of-mouth cellulitis, airway emergency. Any floor-of-mouth swelling from mandibular molar infection → urgent hospital referral. Do NOT attempt I&D of Ludwig's in office. NaOCl accident: most common endo emergency in literature — requires immediate management protocol." },
+        { "difficulty": "green", "name": "Flare-Up Management",
+          "terms": ["Re-enter canal (establish drainage)", "I&D if fluctuant swelling present", "NSAIDs ± antibiotics for systemic signs", "Occlusal relief (debated evidence)"],
+          "pearl": "Flare-up (inter-appointment acute exacerbation): re-enter canal to establish drainage if canal is not fully debrided. I&D only if fluctuant swelling present. Antibiotics only if systemic involvement. Occlusal reduction: reduces preoperative pain but weak evidence for preventing flare-ups." },
+        { "difficulty": "blue", "name": "Instrument Aspiration Protocol",
+          "terms": ["Immediate CXR", "Refer to pulmonologist/ER if in bronchus", "Most ingested: resolve spontaneously", "Document immediately"],
+          "pearl": "Aspiration (into airway): coughing, choking → immediate CXR. If file in bronchus (usually right mainstem): bronchoscopy for retrieval. If patient is calm and asymptomatic: ingestion (GI tract) is more likely — serial abdominal films to confirm passage. Document in chart immediately regardless of outcome." },
+        { "difficulty": "purple", "name": "NaOCl Extrusion Accident Immediate Management",
+          "terms": ["Stop irrigation immediately", "Copious saline through canal", "Ice pack first 24 h, then warm", "Analgesics, monitor for infection"],
+          "pearl": "NaOCl extrusion protocol: stop; copious saline irrigation through canal to dilute remaining NaOCl; apply ice pack for first 24 hours (vasoconstriction limits spread), then warm compresses after 24 hours (promote resolution); NSAIDs + opioids for pain; antibiotics if infection develops. Warn patient of bruising/swelling. Consider referral if significant. Document everything." }
+      ]
+    },
+    {
+      "id": "restoration-endo-1",
+      "title": "After the Root Canal",
+      "topic": "Restoration of Endo-Treated Teeth",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Post-Endo Restoration Principles",
+          "terms": ["Crown for all posterior teeth", "Ferrule ≥2 mm critical", "No post needed if adequate coronal tooth", "Core build-up before crown"],
+          "pearl": "Ferrule effect: ≥2 mm of vertical tooth structure circumferentially above the margin is required for crown retention and fracture resistance. Absence of ferrule dramatically increases fracture risk regardless of post material/design. Anterior teeth with adequate tooth structure may be restored with composite without crown." },
+        { "difficulty": "green", "name": "Post Types and Indications",
+          "terms": ["Fiber post: lower modulus (preferred)", "Cast metal post: high modulus (historical)", "Prefabricated tapered post: avoid", "No post needed: ≥50% tooth structure remaining"],
+          "pearl": "Fiber-reinforced composite (FRC) posts: modulus of elasticity close to dentin → stress distributed along root, less catastrophic fracture. Cast post-and-core: transfers stress to root apex → root fracture mode of failure (catastrophic). Prefabricated stainless steel/titanium tapered posts: wedge stress at apex — avoid unless no alternative." },
+        { "difficulty": "blue", "name": "Timing of Post-Space Preparation",
+          "terms": ["Minimum 3-5 mm apical seal preserved", "Immediate (same day preferred)", "Avoid eugenol sealers if fiber post", "Gutta-percha removed with heated plugger/Gates"],
+          "pearl": "Post space: preserve minimum 3-5 mm of GP apically (4-5 mm preferred). If prepared immediately after obturation: warm GP easier to remove. Eugenol sealers (ZOE) can inhibit resin polymerization — affect fiber post adhesion. Use resin cements with eugenol-containing sealers is avoided unless self-cure cement." },
+        { "difficulty": "purple", "name": "Survival Data for Endo-Treated Teeth",
+          "terms": ["With crown: ~81% at 10 yrs (Salehrabi)", "Without crown: ~36% at 10 yrs", "Molars: lower survival than anteriors", "Ferrule absent: 5× higher failure rate"],
+          "pearl": "Salehrabi & Rotstein 2004: 10-yr survival of endo-treated teeth = 97% (broad definition); survival with functional restoration = 81%. Teeth without crown post-NSRCT (especially premolars/molars): dramatically lower survival. Multi-rooted teeth restored with crown: comparable survival to single-rooted." }
+      ]
+    },
+    {
+      "id": "access-design-2",
+      "title": "Tipped and Tilted",
+      "topic": "Access Cavity Design & Anatomy",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Anatomical Landmarks for Access",
+          "terms": ["Pulp horns (radiographic guidance)", "CEJ level = chamber floor", "Developmental grooves guide orifice search", "Furcation as depth landmark"],
+          "pearl": "Pulp chamber floor is at the level of the CEJ in most teeth — useful when chamber height is unknown (heavily calcified or previously restored). Developmental grooves on the chamber floor: MB groove leads from MB1 to MB2. In maxillary molars, P groove leads to palatal orifice (wide, lingual to center)." },
+        { "difficulty": "green", "name": "Malposed Tooth Access Challenges",
+          "terms": ["Tipped molar: offset access toward pulp", "Rotated premolar: access not centered", "Over-erupted tooth: altered CEJ level", "Supraerupted tooth: altered pulp position"],
+          "pearl": "Malposed teeth require redirected access — the long axis of the file must align with the root canal, NOT the crown long axis. Tipped mandibular molars: access shifted mesially to align with canal trajectory. Radiograph in multiple planes before access. CBCT invaluable for severely malposed or rotated teeth." },
+        { "difficulty": "blue", "name": "Conservative Endodontic Cavity (CEC) Evidence",
+          "terms": ["Preserves peri-cervical dentin", "May increase fracture resistance", "May reduce irrigant delivery apically", "Clinical evidence: mixed"],
+          "pearl": "CEC (Krishan, Clark, et al.): retains peri-cervical dentin → theoretically stronger remaining tooth. BUT multiple studies show decreased bacterial elimination (less irrigant volume, less activation possible). AAE 2022 statement: CEC is an option for uncomplicated cases; traditional access preferred for calcified, complex, or retreatment cases." },
+        { "difficulty": "purple", "name": "Endodontic Triangle of Success",
+          "terms": ["Biomechanical debridement", "Adequate disinfection", "Three-dimensional obturation", "Coronal seal integration"],
+          "pearl": "The traditional 3-leg framework of NSRCT success (Schilder's original premise): shape, clean, fill. Modern framework adds the coronal seal as an essential fourth component (Ray & Trope 1995, Ng 2007). All four must be achieved for optimal outcome. Failure of any single component significantly reduces success probability." }
+      ]
+    },
+    {
+      "id": "perio-endo-2",
+      "title": "Pocket or Canal?",
+      "topic": "Perio-Endo & Systemic Considerations",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Differentiating Endo from Perio Lesion",
+          "terms": ["Endo: narrow, isolated pocket", "Perio: generalized bone loss pattern", "Endo: responds to cold test (if vital)", "Perio: multiple teeth affected"],
+          "pearl": "Narrow isolated pocket to the apex with normal adjacent periodontium = endo-primary. Broad, generalized bone loss with multiple affected teeth = perio-primary. Critical first step: test pulp. If vital pulp → perio only. Necrotic pulp in isolated pocket → endo. Treat the endo first before concluding combined etiology." },
+        { "difficulty": "green", "name": "Furcation Involvement Origins",
+          "terms": ["Accessory canals at furcation (~46% mandibular molars)", "Periodontal bone loss from apical", "Endo-perio drainage via furcation", "Furcal perforation (iatrogenic)"],
+          "pearl": "De Deus (1975): accessory/lateral canals in furcal area in 46% of mandibular molars. These allow pulpal infection to drain directly into the furcal PDL → furcation involvement that can mimic advanced perio. Diagnosis: vital pulp + furcation = perio. Necrotic + furcation → could be endo. NSRCT alone → resolution of furcal bone loss if truly endo-primary." },
+        { "difficulty": "blue", "name": "Endo Treatment Timing in Combined Lesions",
+          "terms": ["Endo ALWAYS first", "Wait 3 months before re-evaluating perio component", "Residual pocket after NSRCT = true perio", "Perio surgery only after endo healing"],
+          "pearl": "Treatment sequence is non-negotiable: endo first, then re-evaluate. Never do simultaneous periodontal surgery and NSRCT — cannot assess what resolves. Wait 3+ months (ideally 6) post-NSRCT before re-evaluating residual probing depth. Any residual periodontitis after endo healing = true combined → address with perio treatment." },
+        { "difficulty": "purple", "name": "Prognostic Factors for Combined Endo-Perio Teeth",
+          "terms": ["Furcation class I-II: resectable", "Furcation class III: poor prognosis", "Adjacent tooth periodontal status", "Patient compliance/OHI maintenance"],
+          "pearl": "Combined lesion prognosis: furcation class I-II with good bone support = acceptable if patient maintains hygiene. Class III furcation in combined lesion = poor prognosis, consider extraction/implant planning. Patient compliance and regular SPT attendance are the strongest determinants of long-term survival for periodontally compromised endo-treated teeth." }
+      ]
+    },
+    {
+      "id": "obturation-alternatives-4",
+      "title": "New Wave Obturation",
+      "topic": "Obturation & Sealers",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Carrier-Based Obturation (Thermafil)",
+          "terms": ["Plastic carrier with alpha-phase GP", "Alpha-GP flows at lower temp", "Carrier remains in canal", "Retrievable with Gates-Glidden"],
+          "pearl": "Thermafil/GuttaCore: plastic (or GP) carrier coated with alpha-phase GP. Heated and inserted to WL. Alpha-phase GP flows at lower temperatures than beta, better adapts to canal walls. Disadvantage: carrier cannot be removed for retreatment (use solvent + rotary retreatment files)." },
+        { "difficulty": "green", "name": "Single-Cone (Sealer-Based) Obturation",
+          "terms": ["Relies on hydraulic sealer", "BC Sealer + matched GP cone", "Sealer is the primary filler", "GP cone = 'handle'"],
+          "pearl": "Sealer-based obturation: bioceramic sealer (BC Sealer, Total Fill) placed into canal → matched taper GP cone placed to WL. Sealer fills irregularities hydraulically. Reliance on sealer is the key paradigm shift — requires adequate canal preparation to 'clean and shape' before sealer placement. Poor preparation → voids in sealer layer." },
+        { "difficulty": "blue", "name": "Obturation in Curved Canals",
+          "terms": ["Pre-curve master cone", "Verify length radiographically", "Warm vertical: maintain curvature", "Carrier: follow natural curvature"],
+          "pearl": "Curved canals: warm vertical compaction most forgiving — plugger pre-curved to match canal. Carrier-based: carrier naturally follows canal shape if heated appropriately. Lateral compaction in curved canals → risk of straightening curve and transporting fill. Confirm master cone length with PA before obturation in all curved canals." },
+        { "difficulty": "purple", "name": "Overfill: When It Matters and When It Doesn't",
+          "terms": ["ZOE sealer overfill: poor prognosis", "Epoxy sealer overfill: controversial", "Bioceramic overfill: biocompatible", "GP overfill: remove if symptomatic"],
+          "pearl": "Overfill prognosis depends heavily on material. ZOE overfill: cytotoxic, persistent symptoms, worse outcomes (eugenol tissue irritation). Epoxy resin overfill: irritating initially, usually resorbs or walled off, acceptable in most cases. Bioceramic/MTA overfill: best biocompatibility, forms HA interface with bone. GP in healthy tissue: generally tolerated, resorbs slowly." }
+      ]
+    },
+    {
+      "id": "microbiology-biofilm-3",
+      "title": "Biofilm Basics",
+      "topic": "Microbiology — Biofilm & Resistance",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Biofilm Formation Stages",
+          "terms": ["Reversible attachment", "Irreversible attachment", "Microcolony formation", "Dispersal/shedding"],
+          "pearl": "Four-stage model: 1) Reversible attachment — planktonic bacteria adhere to surface (pellicle). 2) Irreversible — type IV pili, other adhesins anchor bacteria. 3) Microcolony + EPS matrix production. 4) Dispersal — bacteria shed from mature biofilm to seed new sites. Stage 3 is most resistant to antimicrobials." },
+        { "difficulty": "green", "name": "Quorum Sensing in Endodontic Biofilm",
+          "terms": ["Autoinducer molecules", "Population-density signaling", "Coordinate virulence factor expression", "Disrupt with furanone compounds"],
+          "pearl": "Quorum sensing (QS): bacteria produce autoinducer molecules (AHLs, AI-2) → at threshold concentration, coordinate gene expression for biofilm formation, virulence factor production, and antibiotic resistance. Breaking QS with quorum-quenching compounds or furanones is an active research area for biofilm management in endo." },
+        { "difficulty": "blue", "name": "EPS Matrix Components",
+          "terms": ["Polysaccharides (EPS backbone)", "Extracellular DNA (eDNA)", "Proteins/enzymes", "Water channels (~75% of biofilm volume)"],
+          "pearl": "EPS matrix: ~75% water by volume (water channels allow nutrient/waste exchange). Polysaccharides provide structural scaffold. Extracellular DNA (eDNA, released from lysed cells) contributes to biofilm stability and promotes horizontal gene transfer. eDNA and polysaccharides together are primary barriers to antimicrobial penetration." },
+        { "difficulty": "purple", "name": "Endodontic Biofilm Location in Failed Cases",
+          "terms": ["Apical 3 mm of root canal", "Lateral canals not cleaned", "Dentinal tubule invasion (0.1-1 mm)", "Extraradicular biofilm (Actinomyces)"],
+          "pearl": "Sundqvist's seminal work: bacteria persist in the apical 3 mm regardless of coronal debridement technique. Lateral canals and isthmus areas harbor surviving biofilm. Dentinal tubule invasion: bacteria penetrate 0.1-1 mm (rarely deeper than 2 mm). Extraradicular biofilm forms on cementum surface, inaccessible to irrigants — requires surgery." }
+      ]
+    },
+    {
+      "id": "apical-anatomy-final",
+      "title": "The Last Millimeter",
+      "topic": "Canal Anatomy & Morphology",
+      "date_added": "2026-05-12",
+      "categories": [
+        { "difficulty": "yellow", "name": "Apical Anatomy Terminology",
+          "terms": ["Minor foramen (apical constriction)", "Major foramen (exit)", "Apical delta", "Cementodentinal junction (CDJ)"],
+          "pearl": "Minor foramen = apical constriction (narrowest point inside root canal, ~0.5-1 mm from apex). Major foramen = where canal exits root. Apical delta: complex network of small canals at apex (common in lower anterior teeth). CDJ ~ 0.5-1 mm from minor foramen; the biological and recommended obturation terminus." },
+        { "difficulty": "green", "name": "Apical Foramen Location Variations",
+          "terms": ["0-3 mm from radiographic apex", "Lateral wall exit in 17-46% (Green 1955)", "Multiple foramina possible", "CBCT shows true 3D position"],
+          "pearl": "The apical foramen is frequently NOT at the radiographic apex. Green (1955): lateral wall exit in 17-46% depending on tooth type. Multiple accessory foramina (apical delta) more common in mandibular incisors and maxillary premolars. CBCT: identifies the true foramen position for surgical planning." },
+        { "difficulty": "blue", "name": "Apical Preparation Size Controversy",
+          "terms": ["Minimum: 3-4 sizes larger than initial file", "Large apical prep: better debridement", "Small apical prep: less transportation", "Canal diameter determines 'ideal' size"],
+          "pearl": "No single apical preparation size is universally correct. Recommendation: prepare 3-4 sizes larger than the first binding file at WL (Coldero). Canals with smaller initial diameter (e.g., immature premolars): larger relative preparation needed. Master apical file (MAF): should have tactile resistance at WL — not pass freely." },
+        { "difficulty": "purple", "name": "Apical Patency Controversy",
+          "terms": ["Patency file: #10 K-file to WL + 1 mm", "Maintains foramen patency", "Risk: extrude infected debris", "Risk: disrupt apical constriction"],
+          "pearl": "Apical patency (Buchanan): passing small file (≤#10) through the foramen between instrumentation to maintain its patency and prevent debris packing. Proponents: improves irrigation flow and prevents apical blockage. Opponents: risk of extruding infected material and destroying the apical constriction. No definitive RCT evidence on outcomes." }
+      ]
+    }
+  ]
+}

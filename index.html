@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Endo Connections — ABE Board Prep</title>
+<style>
+  :root {
+    color-scheme: light;
+    --yellow: #f9df6d;
+    --green: #a0c35a;
+    --blue: #b0c4ef;
+    --purple: #ba81c5;
+    --tile-bg: #efefe6;
+    --tile-bg-hover: #e3e3d8;
+    --tile-bg-selected: #5a594e;
+    --tile-text: #1a1a1a;
+    --tile-text-selected: #ffffff;
+    --bg: #fdfdfa;
+    --text: #121212;
+    --muted: #6b6b6b;
+    --border: #e6e6e6;
+    --accent: #1a1a1a;
+  }
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  html, body { background: var(--bg); }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    padding: 18px 14px 40px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  header { text-align: center; margin-bottom: 14px; }
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .mode-bar {
+    display: flex; gap: 6px; justify-content: center;
+    margin: 14px 0 10px; flex-wrap: wrap;
+  }
+  .mode-btn {
+    background: white; border: 1px solid #d0d0d0;
+    padding: 6px 12px; border-radius: 18px;
+    cursor: pointer; font-size: 12.5px; color: var(--text);
+    font-weight: 500;
+  }
+  .mode-btn:hover { background: #f4f4f0; }
+  .mode-btn.active {
+    background: var(--accent); color: white; border-color: var(--accent);
+  }
+  .stats {
+    display: flex; justify-content: center; gap: 14px;
+    margin-bottom: 12px; font-size: 12.5px; color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .stat-num { font-weight: 700; color: var(--text); }
+  .puzzle-title {
+    text-align: center; font-size: 13px; color: var(--muted);
+    margin-bottom: 10px; font-style: italic;
+  }
+  .puzzle-title .badge {
+    display: inline-block; background: #fff3b0; color: #6e560a;
+    padding: 1px 7px; border-radius: 10px; font-size: 11px;
+    margin-left: 6px; font-style: normal; font-weight: 600;
+  }
+  .mistakes {
+    display: flex; justify-content: center; align-items: center; gap: 10px;
+    margin-bottom: 14px; font-size: 13px; color: var(--muted);
+  }
+  .dots { display: inline-flex; gap: 7px; }
+  .dot {
+    width: 13px; height: 13px; border-radius: 50%; background: #555;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .dot.gone { background: var(--border); transform: scale(0.8); }
+  .solved-row {
+    padding: 12px 14px; border-radius: 8px; margin-bottom: 7px;
+    text-align: center; animation: slideDown 0.4s ease-out;
+    color: #1a1a1a;
+  }
+  .solved-row.yellow { background: var(--yellow); }
+  .solved-row.green  { background: var(--green); }
+  .solved-row.blue   { background: var(--blue); }
+  .solved-row.purple { background: var(--purple); }
+  .solved-row .cat-name {
+    font-weight: 700; font-size: 13px; letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .solved-row .cat-terms {
+    font-size: 13.5px; margin-bottom: 4px; font-weight: 500;
+  }
+  .solved-row .cat-pearl {
+    font-size: 12px; font-style: italic; opacity: 0.85; line-height: 1.4;
+  }
+  .grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 7px; margin-bottom: 16px;
+  }
+  .tile {
+    background: var(--tile-bg);
+    border: none; border-radius: 8px;
+    padding: 6px 4px; min-height: 80px;
+    font-weight: 700; font-size: 12.5px;
+    text-align: center; cursor: pointer;
+    color: var(--tile-text);
+    transition: background 0.12s, transform 0.12s, color 0.12s;
+    display: flex; align-items: center; justify-content: center;
+    word-break: break-word; hyphens: auto; line-height: 1.18;
+    font-family: inherit;
+    text-transform: uppercase; letter-spacing: 0.01em;
+  }
+  .tile:hover { background: var(--tile-bg-hover); }
+  .tile.selected {
+    background: var(--tile-bg-selected); color: var(--tile-text-selected);
+  }
+  .tile.shake { animation: shake 0.45s; }
+  .tile.bounce { animation: bounce 0.45s; }
+  .tile.fade-out { animation: fadeOut 0.3s forwards; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%,60% { transform: translateX(-7px); }
+    40%,80% { transform: translateX(7px); }
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    30% { transform: translateY(-9px); }
+    60% { transform: translateY(2px); }
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeOut {
+    to { opacity: 0; transform: scale(0.85); }
+  }
+  .controls {
+    display: flex; gap: 8px; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 12px;
+  }
+  .btn {
+    background: white; border: 1px solid #1a1a1a;
+    padding: 8px 18px; border-radius: 20px;
+    font-weight: 600; font-size: 13.5px; cursor: pointer;
+    color: var(--text); font-family: inherit;
+  }
+  .btn:hover:not(:disabled) { background: #f4f4f0; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; border-color: #999; }
+  .btn-primary {
+    background: var(--accent); color: white; border-color: var(--accent);
+  }
+  .btn-primary:hover:not(:disabled) { background: #2d2d2d; }
+  .toast {
+    position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
+    background: #1a1a1a; color: white;
+    padding: 9px 18px; border-radius: 20px; font-size: 13px;
+    z-index: 1000; opacity: 0; pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .toast.show { opacity: 1; }
+  .endgame {
+    text-align: center; padding: 14px 0;
+    border-top: 1px solid var(--border); margin-top: 6px;
+  }
+  .endgame h2 {
+    margin: 6px 0 4px; font-size: 22px;
+    font-family: Georgia, serif;
+  }
+  .endgame .summary {
+    color: var(--muted); margin-bottom: 12px; font-size: 13.5px;
+  }
+  .endgame .review-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px; margin: 6px 0;
+    text-align: left;
+  }
+  .review-card .rc-head {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+  }
+  .review-card .swatch {
+    width: 14px; height: 14px; border-radius: 4px;
+  }
+  .review-card .rc-name { font-weight: 700; font-size: 13px; }
+  .review-card .rc-terms { font-size: 13px; margin: 4px 0; }
+  .review-card .rc-pearl {
+    font-size: 12.5px; font-style: italic;
+    color: #404040; line-height: 1.45;
+  }
+  .gen-form {
+    display: none; margin: 8px 0 14px;
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px; background: #fafaf6;
+  }
+  .gen-form.show { display: block; }
+  .gen-form .row {
+    display: flex; gap: 8px; align-items: center; margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .gen-form label { font-size: 12.5px; color: var(--muted); min-width: 80px; }
+  .gen-form input, .gen-form select {
+    flex: 1; min-width: 120px;
+    padding: 7px 10px; border: 1px solid #ccc;
+    border-radius: 6px; font-size: 13px; font-family: inherit;
+    background: white;
+  }
+  .gen-form .hint {
+    font-size: 11.5px; color: var(--muted);
+    font-style: italic; line-height: 1.4;
+  }
+  .spinner {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid #ccc; border-top-color: var(--accent);
+    border-radius: 50%; animation: spin 0.8s linear infinite;
+    vertical-align: middle; margin-right: 6px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .footer {
+    text-align: center; margin-top: 24px; padding-top: 14px;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 11.5px; line-height: 1.5;
+  }
+  .footer a, .link { color: var(--muted); text-decoration: underline; cursor: pointer; }
+  @media (max-width: 480px) {
+    .tile { font-size: 11px; min-height: 64px; padding: 5px 2px; }
+    h1 { font-size: 24px; }
+    .stats { gap: 10px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Endo Connections</h1>
+  <div class="subtitle">Sort 16 terms into 4 endo-board categories &middot; 4 mistakes allowed</div>
+</header>
+
+<div class="mode-bar">
+  <button class="mode-btn active" data-mode="daily">Daily</button>
+  <button class="mode-btn" data-mode="free">Free Play</button>
+  <button class="mode-btn" data-mode="generate">+ Generate New</button>
+  <button class="mode-btn" id="resetBtn" title="Restart this puzzle">&#8635; Reset</button>
+  <button class="mode-btn" id="statsResetBtn" title="Reset all stats">Clear stats</button>
+</div>
+
+<div class="gen-form" id="genForm">
+  <div class="row">
+    <label for="genSeed">Topic seed</label>
+    <select id="genSeed">
+      <option value="">(Random ABE topic)</option>
+      <option>Pulpal & periapical diagnosis</option>
+      <option>Pulpal pathology &amp; histology</option>
+      <option>Microbiology of endodontic infection</option>
+      <option>Local anesthesia</option>
+      <option>Pharmacology &amp; antibiotic stewardship</option>
+      <option>Access cavity design &amp; anatomy</option>
+      <option>Instrumentation &amp; NiTi metallurgy</option>
+      <option>Irrigation &amp; disinfection</option>
+      <option>Intracanal medicaments</option>
+      <option>Obturation techniques &amp; sealers</option>
+      <option>Bioceramics &amp; MTA</option>
+      <option>Vital pulp therapy</option>
+      <option>Regenerative endodontics</option>
+      <option>Surgical endodontics &amp; microsurgery</option>
+      <option>Traumatic dental injuries</option>
+      <option>Tooth resorption</option>
+      <option>Imaging &amp; CBCT</option>
+      <option>Outcomes, healing &amp; PAI</option>
+      <option>Restoration of endodontically treated teeth</option>
+      <option>Cracked teeth &amp; vertical root fracture</option>
+      <option>Pediatric endodontics</option>
+      <option>Endo-perio lesions</option>
+    </select>
+  </div>
+  <div class="row">
+    <label for="genFocus">Focus</label>
+    <input id="genFocus" type="text" placeholder="Optional: e.g. 'classic 1990s landmark studies' or 'tricky purple wordplay'">
+  </div>
+  <div class="row">
+    <button class="btn btn-primary" id="genGoBtn">Generate Puzzle</button>
+    <span class="hint" id="genHint">Generated puzzles save to your local bank and feed into Daily &amp; Free Play.</span>
+  </div>
+</div>
+
+<div class="stats">
+  <div>Streak: <span class="stat-num" id="statStreak">0</span></div>
+  <div>Played: <span class="stat-num" id="statPlayed">0</span></div>
+  <div>Win rate: <span class="stat-num" id="statWin">&mdash;</span></div>
+  <div>Bank: <span class="stat-num" id="statBank">0</span></div>
+</div>
+
+<div class="puzzle-title" id="puzzleTitle"></div>
+
+<div class="mistakes">
+  Mistakes remaining:
+  <span class="dots" id="dots">
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  </span>
+</div>
+
+<div id="solvedRows"></div>
+<div class="grid" id="grid"></div>
+
+<div class="controls" id="controls">
+  <button class="btn" id="shuffleBtn">Shuffle</button>
+  <button class="btn" id="deselectBtn" disabled>Deselect All</button>
+  <button class="btn btn-primary" id="submitBtn" disabled>Submit</button>
+</div>
+
+<div id="endgame" class="endgame" style="display:none"></div>
+
+<div class="footer">
+  Endo Connections &middot; A daily NYT-style study game for endodontic board prep.<br>
+  12 hand-curated starter puzzles. Use <strong>+ Generate New</strong> to grow your bank with AI-built sets seeded by ABE topics.<br>
+  Stats and generated puzzles persist locally on this device.
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+/* ============================================================
+   PUZZLE BANK — 12 curated ABE-style Connections puzzles
+   Each: 4 categories × 4 terms, with a board pearl per category.
+   ============================================================ */
+let PUZZLE_BANK = [];
+let _puzzlesLoaded = false;
+
+async function loadPuzzles() {
+  if (_puzzlesLoaded) return PUZZLE_BANK;
+  try {
+    const res = await fetch('puzzles.json');
+    const data = await res.json();
+    PUZZLE_BANK = data.puzzles || [];
+    _puzzlesLoaded = true;
+  } catch (e) {
+    console.error('Failed to load puzzles.json', e);
+    PUZZLE_BANK = [];
+  }
+  return PUZZLE_BANK;
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const COLORS = {
+  yellow: "#f9df6d", green: "#a0c35a", blue: "#b0c4ef", purple: "#ba81c5"
+};
+const DIFFS = ["yellow", "green", "blue", "purple"];
+
+const STORAGE = {
+  STATS: "endoConn.stats.v1",
+  HISTORY: "endoConn.history.v1",
+  GENERATED: "endoConn.generated.v1",
+  CURRENT: "endoConn.current.v1"
+};
+
+const state = {
+  mode: "daily",            // daily | free | generate
+  puzzle: null,
+  tiles: [],                // array of { term, catIdx, locked }
+  selected: [],             // indices into tiles
+  solvedCatIdxs: [],
+  mistakesLeft: 4,
+  gameOver: false,
+  won: false
+};
+
+/* ============================================================
+   STORAGE HELPERS
+   ============================================================ */
+function loadJSON(key, fallback) {
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+  catch (e) { return fallback; }
+}
+function saveJSON(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+}
+
+function getStats() {
+  return loadJSON(STORAGE.STATS, { played: 0, wins: 0, streak: 0, bestStreak: 0, lastResult: null, lastDate: null });
+}
+function setStats(s) { saveJSON(STORAGE.STATS, s); renderStats(); }
+
+function getHistory() { return loadJSON(STORAGE.HISTORY, {}); /* {puzzleId: lastPlayedDate} */ }
+function setHistory(h) { saveJSON(STORAGE.HISTORY, h); }
+
+function getGenerated() { return loadJSON(STORAGE.GENERATED, []); }
+function setGenerated(g) { saveJSON(STORAGE.GENERATED, g); renderStats(); }
+
+/* ============================================================
+   PUZZLE POOL
+   ============================================================ */
+function fullPool() {
+  return PUZZLE_BANK.concat(getGenerated());
+}
+
+function daysSinceEpoch() {
+  return Math.floor(Date.now() / 86400000);
+}
+
+function pickDailyPuzzle() {
+  const pool = fullPool();
+  const idx = daysSinceEpoch() % pool.length;
+  return pool[idx];
+}
+
+function pickFreePlayPuzzle() {
+  const pool = fullPool();
+  const history = getHistory();
+  // Prefer unplayed; otherwise least-recently played.
+  const today = new Date().toDateString();
+  const unplayed = pool.filter(p => !history[p.id]);
+  if (unplayed.length) return unplayed[Math.floor(Math.random() * unplayed.length)];
+  // All played — pick least recent (or randomize among older than today).
+  const sorted = pool.slice().sort((a, b) => {
+    return new Date(history[a.id] || 0) - new Date(history[b.id] || 0);
+  });
+  // Don't repeat today's daily.
+  const daily = pickDailyPuzzle();
+  const candidates = sorted.filter(p => p.id !== daily.id);
+  return candidates[0] || sorted[0];
+}
+
+/* ============================================================
+   GAME LOGIC
+   ============================================================ */
+function loadPuzzle(p) {
+  state.puzzle = p;
+  state.tiles = [];
+  state.selected = [];
+  state.solvedCatIdxs = [];
+  state.mistakesLeft = 4;
+  state.gameOver = false;
+  state.won = false;
+
+  p.categories.forEach((cat, ci) => {
+    cat.terms.forEach(term => state.tiles.push({ term, catIdx: ci, locked: false }));
+  });
+  shuffleTiles();
+  renderAll();
+}
+
+function shuffleTiles() {
+  // Fisher-Yates on the unlocked tiles only.
+  const unlocked = state.tiles
+    .map((t, i) => ({ t, i }))
+    .filter(x => !x.t.locked);
+  const arr = unlocked.map(x => x.t);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  unlocked.forEach((x, k) => state.tiles[x.i] = arr[k]);
+  state.selected = [];
+}
+
+function selectTile(idx) {
+  if (state.gameOver) return;
+  if (state.tiles[idx].locked) return;
+  const pos = state.selected.indexOf(idx);
+  if (pos >= 0) {
+    state.selected.splice(pos, 1);
+  } else {
+    if (state.selected.length >= 4) return;
+    state.selected.push(idx);
+  }
+  renderGrid();
+  renderControls();
+}
+
+function submitSelection() {
+  if (state.selected.length !== 4 || state.gameOver) return;
+  const cats = state.selected.map(i => state.tiles[i].catIdx);
+  const allSame = cats.every(c => c === cats[0]);
+
+  if (allSame) {
+    // Correct.
+    state.solvedCatIdxs.push(cats[0]);
+    const selectedIdxs = state.selected.slice();
+    // Bounce animation on selected tiles.
+    selectedIdxs.forEach(i => {
+      const el = document.querySelector('[data-tile-idx="' + i + '"]');
+      if (el) el.classList.add("bounce");
+    });
+    setTimeout(() => {
+      // Lock those tiles, then reorder so unlocked tiles compact.
+      state.tiles.forEach((t, i) => {
+        if (selectedIdxs.indexOf(i) >= 0) t.locked = true;
+      });
+      // Compact: put locked solved tiles out of visible grid (we re-render grid using only unlocked).
+      state.selected = [];
+      if (state.solvedCatIdxs.length === 4) {
+        endGame(true);
+      } else {
+        renderAll();
+      }
+    }, 450);
+    return;
+  }
+
+  // Wrong — check for "one away"
+  const counts = {};
+  cats.forEach(c => counts[c] = (counts[c] || 0) + 1);
+  const max = Math.max.apply(null, Object.values(counts));
+  const msg = (max === 3) ? "One away!" : "Not quite.";
+
+  // Shake selected
+  const selectedIdxs = state.selected.slice();
+  selectedIdxs.forEach(i => {
+    const el = document.querySelector('[data-tile-idx="' + i + '"]');
+    if (el) el.classList.add("shake");
+  });
+  setTimeout(() => {
+    selectedIdxs.forEach(i => {
+      const el = document.querySelector('[data-tile-idx="' + i + '"]');
+      if (el) el.classList.remove("shake");
+    });
+  }, 500);
+
+  state.mistakesLeft -= 1;
+  showToast(msg);
+  renderDots();
+
+  if (state.mistakesLeft <= 0) {
+    setTimeout(() => endGame(false), 600);
+  }
+}
+
+function endGame(won) {
+  state.gameOver = true;
+  state.won = won;
+
+  // Auto-reveal remaining categories in correct order (yellow→purple).
+  const remaining = state.puzzle.categories
+    .map((c, i) => i)
+    .filter(i => state.solvedCatIdxs.indexOf(i) < 0)
+    .sort((a, b) => DIFFS.indexOf(state.puzzle.categories[a].difficulty) - DIFFS.indexOf(state.puzzle.categories[b].difficulty));
+  state.solvedCatIdxs = state.solvedCatIdxs.concat(remaining);
+
+  // Record stats
+  const stats = getStats();
+  const todayStr = new Date().toDateString();
+  stats.played += 1;
+  if (won) {
+    stats.wins += 1;
+    if (stats.lastDate === todayStr) {
+      // already played today, keep streak
+    } else {
+      // increment streak if last play was yesterday OR this is first today; otherwise reset
+      stats.streak = (stats.lastResult === "win" && stats.lastDate) ? stats.streak + 1 : 1;
+    }
+    stats.bestStreak = Math.max(stats.bestStreak, stats.streak);
+    stats.lastResult = "win";
+  } else {
+    stats.streak = 0;
+    stats.lastResult = "loss";
+  }
+  stats.lastDate = todayStr;
+  setStats(stats);
+
+  // Record history
+  const hist = getHistory();
+  hist[state.puzzle.id] = todayStr;
+  setHistory(hist);
+
+  renderAll();
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function renderAll() {
+  renderStats();
+  renderPuzzleTitle();
+  renderDots();
+  renderSolvedRows();
+  renderGrid();
+  renderControls();
+  renderEndgame();
+}
+
+function renderStats() {
+  const s = getStats();
+  document.getElementById("statStreak").textContent = s.streak || 0;
+  document.getElementById("statPlayed").textContent = s.played || 0;
+  document.getElementById("statWin").textContent =
+    s.played ? Math.round(100 * s.wins / s.played) + "%" : "—";
+  document.getElementById("statBank").textContent = fullPool().length;
+}
+
+function renderPuzzleTitle() {
+  if (!state.puzzle) return;
+  const el = document.getElementById("puzzleTitle");
+  const isGenerated = state.puzzle.id.indexOf("gen-") === 0;
+  el.innerHTML = '“' + escapeHTML(state.puzzle.title) + '” · ' +
+    escapeHTML(state.puzzle.topic || "") +
+    (isGenerated ? ' <span class="badge">AI-generated</span>' : '');
+}
+
+function renderDots() {
+  const dots = document.querySelectorAll("#dots .dot");
+  dots.forEach((d, i) => {
+    if (i < state.mistakesLeft) d.classList.remove("gone");
+    else d.classList.add("gone");
+  });
+}
+
+function renderSolvedRows() {
+  const wrap = document.getElementById("solvedRows");
+  wrap.innerHTML = "";
+  // Show solved categories in the order they were solved (during play),
+  // or in difficulty order at game end.
+  state.solvedCatIdxs.forEach(ci => {
+    const c = state.puzzle.categories[ci];
+    const div = document.createElement("div");
+    div.className = "solved-row " + c.difficulty;
+    div.innerHTML =
+      '<div class="cat-name">' + escapeHTML(c.name) + '</div>' +
+      '<div class="cat-terms">' + c.terms.map(escapeHTML).join("  ·  ") + '</div>' +
+      (state.gameOver ? '<div class="cat-pearl">' + escapeHTML(c.pearl) + '</div>' : '');
+    wrap.appendChild(div);
+  });
+}
+
+function renderGrid() {
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+  // Build list of unlocked tiles to show.
+  state.tiles.forEach((t, i) => {
+    if (t.locked) return;
+    const btn = document.createElement("button");
+    btn.className = "tile";
+    if (state.selected.indexOf(i) >= 0) btn.classList.add("selected");
+    btn.dataset.tileIdx = String(i);
+    btn.textContent = t.term;
+    btn.onclick = () => selectTile(i);
+    grid.appendChild(btn);
+  });
+  // Hide grid entirely if all solved
+  grid.style.display = (state.solvedCatIdxs.length === 4) ? "none" : "grid";
+}
+
+function renderControls() {
+  const submit = document.getElementById("submitBtn");
+  const deselect = document.getElementById("deselectBtn");
+  submit.disabled = state.selected.length !== 4 || state.gameOver;
+  deselect.disabled = state.selected.length === 0 || state.gameOver;
+  document.getElementById("controls").style.display = state.gameOver ? "none" : "flex";
+}
+
+function renderEndgame() {
+  const wrap = document.getElementById("endgame");
+  if (!state.gameOver) { wrap.style.display = "none"; return; }
+  wrap.style.display = "block";
+  const s = getStats();
+  const winLine = state.won
+    ? '<h2>Solved!</h2><div class="summary">Mistakes used: ' + (4 - state.mistakesLeft) + ' &middot; Streak: ' + s.streak + '</div>'
+    : '<h2>Out of mistakes</h2><div class="summary">Categories revealed below. Streak reset.</div>';
+
+  const reviewCards = state.puzzle.categories.map(c =>
+    '<div class="review-card">' +
+      '<div class="rc-head">' +
+        '<span class="swatch" style="background:' + COLORS[c.difficulty] + '"></span>' +
+        '<span class="rc-name">' + escapeHTML(c.name) + '</span>' +
+      '</div>' +
+      '<div class="rc-terms">' + c.terms.map(escapeHTML).join(" · ") + '</div>' +
+      '<div class="rc-pearl">' + escapeHTML(c.pearl) + '</div>' +
+    '</div>'
+  ).join("");
+
+  wrap.innerHTML = winLine +
+    '<div style="margin:14px 0 10px;font-weight:600;font-size:14px;">Board pearls</div>' +
+    reviewCards +
+    '<div style="margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">' +
+      '<button class="btn btn-primary" id="nextBtn">Next puzzle &rarr;</button>' +
+      '<button class="btn" id="genFromEnd">Generate a new one</button>' +
+    '</div>';
+
+  document.getElementById("nextBtn").onclick = () => {
+    setMode("free");
+    loadPuzzle(pickFreePlayPuzzle());
+  };
+  document.getElementById("genFromEnd").onclick = () => {
+    setMode("generate");
+  };
+}
+
+/* ============================================================
+   UI HANDLERS
+   ============================================================ */
+function setMode(mode) {
+  state.mode = mode;
+  document.querySelectorAll(".mode-btn[data-mode]").forEach(b => {
+    b.classList.toggle("active", b.dataset.mode === mode);
+  });
+  const genForm = document.getElementById("genForm");
+  if (mode === "generate") {
+    genForm.classList.add("show");
+  } else {
+    genForm.classList.remove("show");
+  }
+  if (mode === "daily") loadPuzzle(pickDailyPuzzle());
+  if (mode === "free") loadPuzzle(pickFreePlayPuzzle());
+}
+
+function showToast(msg, duration) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove("show"), duration || 1700);
+}
+
+function escapeHTML(s) {
+  return String(s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+
+/* ============================================================
+   AI PUZZLE GENERATION (via window.cowork.askClaude)
+   ============================================================ */
+function buildGenPrompt(seed, focus) {
+  return [
+    "You are creating a NYT Connections-style puzzle for an endodontic specialty resident preparing for the American Board of Endodontics (ABE) exam.",
+    "",
+    "Rules:",
+    "- Exactly 4 categories, each with exactly 4 short terms (16 terms total).",
+    "- CRITICAL — MUTUAL EXCLUSIVITY: every term must belong to ONLY ONE of your four categories. Before finalizing, mentally check each term against the OTHER three category definitions and confirm it does not also satisfy them. Example of a BAD purple: 'Words ending in -CAINE' when yellow already contains amide drugs like Lidocaine, Articaine, etc. — those also end in -caine, so terms are ambiguous. A GOOD pair is yellow='Amide LAs' (Lido, Articaine...) and purple='Ester LAs' (Procaine, Tetracaine...) — chemistry distinguishes them cleanly.",
+    "- CRITICAL — NO DUPLICATE TERMS: the same literal string must not appear in two categories.",
+    "- Terms must be short (1-4 words, max ~28 chars) so they fit on a small tile.",
+    "- Difficulty: yellow = approachable for any dental student, green = solid endo resident knowledge, blue = challenging boards-level, purple = trickiest — wordplay, eponyms, hidden patterns, or unusual connections that still pass the mutual-exclusivity test above.",
+    "- Content must be ACCURATE, board-relevant, and free of made-up facts.",
+    "- Each category MUST include a 1-2 sentence 'pearl' that teaches a high-yield board fact.",
+    "",
+    "Topic seed: " + (seed || "(pick any high-yield ABE topic)"),
+    focus ? ("Additional focus / style: " + focus) : "",
+    "",
+    "Avoid repeating these recently used puzzle titles: " + fullPool().map(p => p.title).join(", "),
+    "",
+    "Output ONLY a single valid JSON object, no markdown fences, no commentary. Schema:",
+    '{',
+    '  "title": "short puzzle title (max 6 words)",',
+    '  "topic": "high-level ABE topic",',
+    '  "categories": [',
+    '    {"difficulty":"yellow","name":"category name","terms":["t1","t2","t3","t4"],"pearl":"1-2 sentence board pearl"},',
+    '    {"difficulty":"green",  "name":"...","terms":["..."],"pearl":"..."},',
+    '    {"difficulty":"blue",   "name":"...","terms":["..."],"pearl":"..."},',
+    '    {"difficulty":"purple", "name":"...","terms":["..."],"pearl":"..."}',
+    '  ]',
+    '}'
+  ].filter(Boolean).join("\n");
+}
+
+function extractJSON(text) {
+  if (!text) return null;
+  // Strip code fences if present.
+  let t = String(text).trim();
+  t = t.replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/, "");
+  // Find first { and last }.
+  const i = t.indexOf("{");
+  const j = t.lastIndexOf("}");
+  if (i < 0 || j < 0 || j <= i) return null;
+  const candidate = t.slice(i, j + 1);
+  try { return JSON.parse(candidate); } catch (e) { return null; }
+}
+
+function validatePuzzle(p) {
+  if (!p || typeof p !== "object") return "Not an object";
+  if (!p.title || !p.categories || !Array.isArray(p.categories)) return "Missing title/categories";
+  if (p.categories.length !== 4) return "Need exactly 4 categories";
+  const diffs = p.categories.map(c => c.difficulty);
+  for (const d of ["yellow","green","blue","purple"]) {
+    if (diffs.indexOf(d) < 0) return "Missing " + d + " category";
+  }
+  const allTerms = [];
+  for (const c of p.categories) {
+    if (!c.name || !Array.isArray(c.terms) || c.terms.length !== 4) return "Category malformed";
+    if (!c.pearl) return "Missing pearl";
+    c.terms.forEach(t => allTerms.push(String(t).toLowerCase().trim()));
+  }
+  const setSize = new Set(allTerms).size;
+  if (setSize !== 16) return "Duplicate or empty terms";
+  return null;
+}
+
+async function generateNewPuzzle() {
+  const seed = document.getElementById("genSeed").value;
+  const focus = document.getElementById("genFocus").value;
+  const btn = document.getElementById("genGoBtn");
+  const hint = document.getElementById("genHint");
+
+  if (!window.cowork || !window.cowork.askClaude) {
+    showToast("Generation requires Cowork sidebar runtime.");
+    return;
+  }
+
+  btn.disabled = true;
+  hint.innerHTML = '<span class="spinner"></span>Generating new puzzle…';
+
+  try {
+    const prompt = buildGenPrompt(seed, focus);
+    // window.cowork.askClaude(prompt, data[]) — data is optional structured context.
+    const raw = await window.cowork.askClaude(prompt, []);
+    const parsed = extractJSON(raw);
+    const err = validatePuzzle(parsed);
+    if (err) {
+      console.error("Generation failed:", err, raw);
+      showToast("Generation returned malformed puzzle — try again.");
+      hint.textContent = "That one came back malformed. Tap Generate to retry.";
+      btn.disabled = false;
+      return;
+    }
+    // Stamp ID
+    parsed.id = "gen-" + Date.now();
+    const gen = getGenerated();
+    gen.push(parsed);
+    setGenerated(gen);
+    showToast("New puzzle saved to your bank.");
+    hint.textContent = "Loaded! It's also in your bank for Daily & Free Play.";
+    btn.disabled = false;
+    loadPuzzle(parsed);
+  } catch (e) {
+    console.error(e);
+    showToast("Generation failed: " + (e && e.message ? e.message : "unknown"));
+    hint.textContent = "Network or runtime error. Try again.";
+    btn.disabled = false;
+  }
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+async function init() {
+  // If we're not in the Cowork sidebar runtime, hide the "+ Generate New"
+  // button — askClaude isn't available, so AI-puzzle generation can't work here.
+  const coworkAvailable = !!(window.cowork && window.cowork.askClaude);
+  if (!coworkAvailable) {
+    const genBtn = document.querySelector('.mode-btn[data-mode="generate"]');
+    if (genBtn) genBtn.style.display = "none";
+    const genForm = document.getElementById("genForm");
+    if (genForm) genForm.classList.remove("show");
+  }
+
+  // Mode buttons
+  document.querySelectorAll(".mode-btn[data-mode]").forEach(b => {
+    b.onclick = () => setMode(b.dataset.mode);
+  });
+  document.getElementById("resetBtn").onclick = () => {
+    if (state.puzzle) loadPuzzle(state.puzzle);
+  };
+  document.getElementById("statsResetBtn").onclick = () => {
+    if (!confirm("Reset all stats, history, and AI-generated bank? (Curated puzzles stay.)")) return;
+    localStorage.removeItem(STORAGE.STATS);
+    localStorage.removeItem(STORAGE.HISTORY);
+    localStorage.removeItem(STORAGE.GENERATED);
+    showToast("Stats cleared.");
+    renderStats();
+    setMode("daily");
+  };
+
+  document.getElementById("shuffleBtn").onclick = () => {
+    if (state.gameOver) return;
+    shuffleTiles();
+    renderGrid();
+    renderControls();
+  };
+  document.getElementById("deselectBtn").onclick = () => {
+    state.selected = [];
+    renderGrid();
+    renderControls();
+  };
+  document.getElementById("submitBtn").onclick = submitSelection;
+  document.getElementById("genGoBtn").onclick = generateNewPuzzle;
+
+  await loadPuzzles();
+  setMode("daily");
+  renderStats();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
+</script>
+</body>
+</html>
