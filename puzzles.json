@@ -3477,6 +3477,271 @@
           "pearl": "All can be celebrated as REP 'success' but indicate NON-pulp tissue: positive EPT may reflect neural ingrowth into fibrous PDL-like tissue; apical calcification on CBCT may be bone deposition; canal bridging = osseous bridging of the canal lumen; cementoid formation = a histologic finding in Shimizu 2012 confirming cementum-type, not pulp-type, tissue."
         }
       ]
+    },
+    {
+      "id": "auto-20260514-1",
+      "title": "Crown Fracture Decisions",
+      "topic": "Trauma & IADT Guidelines",
+      "difficulty": "hard",
+      "date_added": "2026-05-14",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Crown Fracture Types (IADT)",
+          "terms": [
+            "Enamel infraction",
+            "Enamel fracture",
+            "Enamel-dentin fracture",
+            "Complicated fracture"
+          ],
+          "pearl": "IADT 2020 classifies crown fractures by depth: enamel infraction (incomplete enamel crack, no tissue loss), enamel fracture, enamel-dentin fracture (no pulp exposure), and complicated crown fracture (pulp exposure)."
+        },
+        {
+          "difficulty": "green",
+          "name": "Cvek Pulpotomy Steps",
+          "terms": [
+            "Anesthesia + dam",
+            "2mm pulp ablation",
+            "NaOCl hemostasis",
+            "MTA cap"
+          ],
+          "pearl": "Cvek partial pulpotomy: rubber-dam isolation, removal of ~2 mm of inflamed coronal pulp with a high-speed diamond and water spray, hemostasis with saline or sodium hypochlorite (≤10 min), MTA/Biodentine over the wound bed, then a sealed composite restoration."
+        },
+        {
+          "difficulty": "blue",
+          "name": "VPT Decision Ladder",
+          "terms": [
+            "Indirect pulp cap",
+            "Direct pulp cap",
+            "Partial pulpotomy",
+            "Full pulpotomy"
+          ],
+          "pearl": "VPT escalates with depth and bacterial exposure: indirect pulp cap (no exposure), direct pulp cap (pinpoint, <24 h, mature apex), partial pulpotomy (Cvek; ≤72 h or superficial inflammation), and full coronal pulpotomy (deeper inflammation, immature apex)."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Fragment Reattachment",
+          "terms": [
+            "Rehydrate 20 minutes",
+            "Saline storage",
+            "Internal groove prep",
+            "Etch + bond"
+          ],
+          "pearl": "Crown fragments should be rehydrated in saline for ≥20 minutes before bonding to restore enamel color match. Internal grooving plus etch-and-bond techniques (Reis & Loguercio) improve retention to approximately 60–70% at 5 years."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260514-2",
+      "title": "Splint by the Clock",
+      "topic": "Trauma & IADT Guidelines",
+      "difficulty": "hard",
+      "date_added": "2026-05-14",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Flexible Splint 2 Weeks",
+          "terms": [
+            "Subluxation",
+            "Extrusive luxation",
+            "Avulsion, closed apex",
+            "Avulsion, open apex"
+          ],
+          "pearl": "IADT 2020 recommends a flexible splint for 2 weeks for subluxation (optional), extrusive luxation, and avulsion injuries regardless of apex maturity or extra-alveolar dry time (closed-apex ≤60 min, >60 min, and open-apex all use 2 weeks)."
+        },
+        {
+          "difficulty": "green",
+          "name": "Flexible Splint 4 Weeks",
+          "terms": [
+            "Lateral luxation",
+            "Intrusion (repositioned)",
+            "Mid-third root fracture",
+            "Alveolar process fracture"
+          ],
+          "pearl": "IADT 2020 recommends a flexible splint for 4 weeks for lateral luxation (requires bony fixation), surgically/orthodontically repositioned intrusion, apical and middle-third root fractures, and alveolar process fractures."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Cervical Root Fracture",
+          "terms": [
+            "Flexible splint 4 mo",
+            "Coronal segment mobile",
+            "Poorest healing zone",
+            "Endo coronal segment only"
+          ],
+          "pearl": "Cervical-third root fractures carry the worst prognosis. IADT permits a longer flexible splint duration (up to 4 months). When pulp necroses, endodontic therapy is typically confined to the coronal segment, leaving the apical fragment to heal in the bone."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Splint Construction (Andreasen)",
+          "terms": [
+            "0.3-0.4 mm wire",
+            "Passive (no force)",
+            "1-2 abutments/side",
+            "No gingival coverage"
+          ],
+          "pearl": "Andreasen's biomechanical principles for a trauma splint: 0.3-0.4 mm stainless-steel wire, passively bonded (no orthodontic force), 1-2 sound abutments on each side of the traumatized tooth, with the gingival margin uncovered to allow oral hygiene."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260514-3",
+      "title": "Avulsion Algorithm",
+      "topic": "Trauma & IADT Guidelines",
+      "difficulty": "hard",
+      "date_added": "2026-05-14",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "First Aid (Lay Public)",
+          "terms": [
+            "Hold by crown only",
+            "Reimplant on scene",
+            "Milk transport",
+            "Seek care <60 min"
+          ],
+          "pearl": "On-scene IADT first aid: hold the avulsed tooth by the crown only (never the root), gently reimplant if possible, otherwise transport in cold milk, and reach a dentist within 60 minutes to preserve PDL vitality."
+        },
+        {
+          "difficulty": "green",
+          "name": "Office Reimplantation Steps",
+          "terms": [
+            "Examine socket/clot",
+            "Rinse root in saline",
+            "Reposition gently",
+            "Flexible splint 2 wks"
+          ],
+          "pearl": "In-office reimplantation (closed apex, EADT <60 min): irrigate the socket, gently rinse the root with sterile saline (do NOT scrape PDL), reposition with digital pressure, verify radiographic position, and apply a flexible splint for 2 weeks."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Adjunctive Pharmacotherapy",
+          "terms": [
+            "Doxycycline 100mg",
+            "7-day course",
+            "Amox if <12 yrs",
+            "Tetanus check"
+          ],
+          "pearl": "Per IADT 2020 avulsion guideline, systemic antibiotic is recommended: doxycycline 100 mg BID for 7 days for patients >12 yrs (or >45 kg). For younger children, amoxicillin/penicillin V avoids tetracycline-induced enamel discoloration. Verify tetanus status if soil contamination."
+        },
+        {
+          "difficulty": "purple",
+          "name": "EADT >60 min, Closed Apex",
+          "terms": [
+            "Remove necrotic PDL",
+            "4-week splint",
+            "RCT at 7-10 d",
+            "Replacement resorption"
+          ],
+          "pearl": "For mature teeth with extra-alveolar dry time >60 minutes, the PDL is non-viable. IADT 2020: gently remove necrotic PDL with gauze, reimplant, apply a flexible splint for 4 weeks, and initiate RCT at 7-10 days. Replacement (ankylotic) resorption is expected; decoronation may be needed in growing patients."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260514-4",
+      "title": "Pediatric Trauma Pathways",
+      "topic": "Trauma & IADT Guidelines",
+      "difficulty": "hard",
+      "date_added": "2026-05-14",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Primary Tooth Trauma Rules",
+          "terms": [
+            "No reimplantation",
+            "Allow spontaneous eruption",
+            "Risk to successor",
+            "Soft diet 1-2 wks"
+          ],
+          "pearl": "IADT pediatric guidelines: avulsed primary teeth are NEVER reimplanted (risk of damaging the developing permanent successor). Most intruded primary incisors re-erupt spontaneously within 6 months; soft diet and parental hygiene support healing."
+        },
+        {
+          "difficulty": "green",
+          "name": "Open-Apex Permanent Options",
+          "terms": [
+            "Apexogenesis (VPT)",
+            "Apexification CaOH",
+            "REP (regenerative)",
+            "MTA apical plug"
+          ],
+          "pearl": "Open-apex permanent teeth have the broadest management menu: apexogenesis (VPT to allow continued root formation), long-term CaOH apexification, single-visit MTA apical plug, and regenerative endodontic procedures (REP) using a blood clot or PRF scaffold."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Successor Tooth Disturbances",
+          "terms": [
+            "Enamel opacity",
+            "Hypoplasia",
+            "Crown dilaceration",
+            "Sequestration of germ"
+          ],
+          "pearl": "Trauma to a primary tooth can damage the underlying permanent successor — classic manifestations (Andreasen) include white/yellow enamel opacities, enamel hypoplasia, crown or root dilaceration, and (rarely) sequestration of the entire tooth germ."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Risk Stats (Andreasen Series)",
+          "terms": [
+            "Intrusion ~50%",
+            "Avulsion 1° ~30%",
+            "<3 yr highest risk",
+            "Andreasen 1971"
+          ],
+          "pearl": "Andreasen's 1971 series found developmental disturbance of the permanent successor in roughly 50% of primary tooth intrusions and 30% of primary tooth avulsions; risk is highest when the injury occurs before age 3, while the successor crown is still mineralizing."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260514-5",
+      "title": "Trauma Researchers and Eponyms",
+      "topic": "Trauma & IADT Guidelines",
+      "difficulty": "hard",
+      "date_added": "2026-05-14",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Andreasen's Body of Work",
+          "terms": [
+            "'Dental Trauma' textbook",
+            "Luxation terminology",
+            "Pulp survival statistics",
+            "IADT founding member"
+          ],
+          "pearl": "Jens O. Andreasen authored 'Textbook and Color Atlas of Traumatic Injuries to the Teeth' (multiple editions), standardized luxation classification (concussion/subluxation/extrusive/lateral/intrusive), reported pulp survival rates stratified by injury and root maturity, and was a founding figure in the IADT."
+        },
+        {
+          "difficulty": "green",
+          "name": "Cvek's Contributions",
+          "terms": [
+            "Partial pulpotomy",
+            "2mm pulp removal",
+            "Apexogenesis advocacy",
+            "CaOH crown fractures"
+          ],
+          "pearl": "Miomir Cvek's 1978 landmark study demonstrated ~96% pulp survival with partial pulpotomy in immature permanent teeth with complicated crown fractures, removing ~2 mm of inflamed coronal pulp and placing calcium hydroxide — preserving radicular pulp for continued apexogenesis."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Dental Eponyms (Root/PDL)",
+          "terms": [
+            "Hertwig's root sheath",
+            "Rests of Malassez",
+            "Sharpey's fibers",
+            "Tomes' granular layer"
+          ],
+          "pearl": "Hertwig's epithelial root sheath induces radicular dentin and root form, leaving behind the epithelial rests of Malassez. Sharpey's fibers anchor PDL collagen into bone and cementum. Tomes' granular layer marks a hypomineralized stippled zone of root dentin near the cementum interface."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Landmark Trauma Papers (Year)",
+          "terms": [
+            "Cvek 1978",
+            "Andreasen 1989",
+            "Malmgren 1984",
+            "Andersson 2012"
+          ],
+          "pearl": "Cvek 1978 — ~96% success of partial pulpotomy. Andreasen 1989 — pulp/root outcomes after root fracture and luxation. Malmgren 1984 — decoronation of ankylosed incisors in growing patients. Andersson 2012 — IADT avulsion guideline update (Dent Traumatol)."
+        }
+      ]
     }
   ]
 }
