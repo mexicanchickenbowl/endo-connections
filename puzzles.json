@@ -3742,6 +3742,271 @@
           "pearl": "Cvek 1978 — ~96% success of partial pulpotomy. Andreasen 1989 — pulp/root outcomes after root fracture and luxation. Malmgren 1984 — decoronation of ankylosed incisors in growing patients. Andersson 2012 — IADT avulsion guideline update (Dent Traumatol)."
         }
       ]
+    },
+    {
+      "id": "auto-20260515-1",
+      "title": "Decoding Resorption",
+      "topic": "Root Resorption Types",
+      "difficulty": "hard",
+      "date_added": "2026-05-15",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "External Resorption Triggers",
+          "terms": [
+            "Avulsion",
+            "Luxation",
+            "Orthodontics",
+            "Bleaching"
+          ],
+          "pearl": "Intracoronal bleaching with 30% H2O2 + heat is a classic external cervical resorption trigger; risk is reduced with a 2 mm cervical barrier sealing the dentinal tubules."
+        },
+        {
+          "difficulty": "green",
+          "name": "Heithersay ECR Classes",
+          "terms": [
+            "Class 1",
+            "Class 2",
+            "Class 3",
+            "Class 4"
+          ],
+          "pearl": "Heithersay 1999 graded external cervical resorption I-IV: I = small cervical lesion, II = into coronal pulp area, III = into coronal third of root, IV = beyond coronal third."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Internal Resorption Signs",
+          "terms": [
+            "Smooth Outline",
+            "Symmetric Lesion",
+            "Pink Tooth",
+            "Halts at Necrosis"
+          ],
+          "pearl": "Internal resorption requires vital pulp apical to the lesion to supply odontoclasts; once the entire pulp becomes necrotic, the lesion self-arrests."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Resorption Researchers",
+          "terms": [
+            "Heithersay",
+            "Mummery",
+            "Andreasen",
+            "Trope"
+          ],
+          "pearl": "Heithersay = ECR classification (1999); Mummery = pink tooth description (1920); Andreasen = post-trauma resorption trilogy; Trope = long-term Ca(OH)2 protocol for inflammatory resorption."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260515-2",
+      "title": "Avulsion Aftermath",
+      "topic": "Root Resorption Types",
+      "difficulty": "hard",
+      "date_added": "2026-05-15",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Inflammatory Resorption Triggers",
+          "terms": [
+            "Bacterial Toxins",
+            "Necrotic Pulp",
+            "PDL Cell Death",
+            "Open Tubules"
+          ],
+          "pearl": "Inflammatory (infection-related) external resorption requires BOTH a necrotic infected pulp (antigen source) AND damaged PDL/cementum exposing dentin tubules as a diffusion path."
+        },
+        {
+          "difficulty": "green",
+          "name": "Replacement Resorption Features",
+          "terms": [
+            "Ankylosis",
+            "Infraocclusion",
+            "Bone Bridging",
+            "Loss of PDL"
+          ],
+          "pearl": "Replacement resorption follows extensive PDL necrosis (>60 min extra-oral dry time); clinically diagnosed by metallic percussion sound, no mobility, and progressive infraocclusion in growing patients."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Inflammatory Resorption Treatment",
+          "terms": [
+            "Pulpectomy",
+            "Ca(OH)2 Dressing",
+            "Apexification",
+            "Ledermix Paste"
+          ],
+          "pearl": "Trope 1995 demonstrated long-term Ca(OH)2 (>=3 months) arrests inflammatory root resorption; Ledermix (demeclocycline + triamcinolone) is an alternative anti-resorptive medicament."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Critical IADT Time Points",
+          "terms": [
+            "5 Minutes",
+            "15 Minutes",
+            "60 Minutes",
+            "14 Days"
+          ],
+          "pearl": "IADT 2020: 5 min = optimal replant window for vital PDL; 15 min = HBSS/milk storage maintains PDL viability up to ~6 hours; 60 min = extra-oral dry threshold for PDL necrosis; 14 days = max flexible splint."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260515-3",
+      "title": "Pink Spot Pathology",
+      "topic": "Root Resorption Types",
+      "difficulty": "hard",
+      "date_added": "2026-05-15",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "ECR Predisposing Factors",
+          "terms": [
+            "Internal Bleaching",
+            "Orthodontic Force",
+            "Trauma History",
+            "Surgical Procedure"
+          ],
+          "pearl": "Heithersay 1999 case series of 222 lesions: orthodontics (24%) was the top predisposing factor, then trauma (15%), surgery (5%), and internal bleaching (5%); 17% idiopathic."
+        },
+        {
+          "difficulty": "green",
+          "name": "ECR Clinical Findings",
+          "terms": [
+            "Pink Spot",
+            "No Symptoms",
+            "Cervical Lesion",
+            "Vital Pulp"
+          ],
+          "pearl": "ECR is typically asymptomatic with a vital pulp response; the pulp is protected by an intact predentin/pericanalar resorption-resistant sheet (PRRS) until very late stages."
+        },
+        {
+          "difficulty": "blue",
+          "name": "ECR Treatment Options",
+          "terms": [
+            "90% TCA",
+            "Curettage",
+            "Glass Ionomer",
+            "Extraction"
+          ],
+          "pearl": "Heithersay protocol: topical 90% trichloroacetic acid coagulates resorptive granulation tissue, followed by curettage and glass ionomer/composite repair; Class 4 lesions typically require extraction."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Resorption Classifications",
+          "terms": [
+            "Heithersay",
+            "Patel",
+            "Tronstad",
+            "Andreasen"
+          ],
+          "pearl": "Heithersay 1999 = clinical-radiographic ECR I-IV; Patel 2018 = 3D CBCT-based (Height, Circumferential, Proximity); Tronstad 1988 = mechanism (surface/inflammatory/replacement); Andreasen = trauma-based."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260515-4",
+      "title": "Resorption on CBCT",
+      "topic": "Root Resorption Types",
+      "difficulty": "hard",
+      "date_added": "2026-05-15",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "CBCT Use in Resorption",
+          "terms": [
+            "Pre-Op Planning",
+            "Confirm Diagnosis",
+            "Map Extent",
+            "Plan Access"
+          ],
+          "pearl": "The 2015 AAE/AAOMR joint position statement lists suspected resorption as a primary indication for limited FOV CBCT; PA radiographs miss buccal-lingual extent."
+        },
+        {
+          "difficulty": "green",
+          "name": "Internal Resorption on CBCT",
+          "terms": [
+            "Centered on Canal",
+            "Smooth Borders",
+            "Symmetric Defect",
+            "Canal Distorted"
+          ],
+          "pearl": "Internal resorption appears as a uniform balloon-like expansion of the canal; the lesion moves with the canal under parallax (SLOB) because the lesion IS the canal."
+        },
+        {
+          "difficulty": "blue",
+          "name": "External Resorption on CBCT",
+          "terms": [
+            "Off-Center Lesion",
+            "Canal Visible Through",
+            "Rough Borders",
+            "Bowl-Shaped"
+          ],
+          "pearl": "External resorption defects allow the intact canal outline to be traced THROUGH the lesion; the lesion shifts independent of canal under SLOB parallax."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Patel ECR Classification",
+          "terms": [
+            "Height",
+            "Circumferential",
+            "Proximity",
+            "Tooth Involved"
+          ],
+          "pearl": "Patel 2018 CBCT classification of ECR: Height (1-4 root levels), Circumferential spread (A-D, <90 to >270 degrees), Proximity to root canal (d/p), and tooth involved."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260515-5",
+      "title": "Tell Them Apart",
+      "topic": "Root Resorption Types",
+      "difficulty": "hard",
+      "date_added": "2026-05-15",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Surface Resorption",
+          "terms": [
+            "Self-Limiting",
+            "Self-Healing",
+            "Cementum Only",
+            "Subclinical"
+          ],
+          "pearl": "Surface resorption (Andreasen) is transient and reversible: small superficial cemental defects after minor trauma repair via new cementum within 2-3 weeks, with no clinical or radiographic sequelae."
+        },
+        {
+          "difficulty": "green",
+          "name": "Replacement Resorption",
+          "terms": [
+            "Ankylosis",
+            "Infraocclusion",
+            "Bone Replaces Root",
+            "No PDL Space"
+          ],
+          "pearl": "Replacement resorption (dentoalveolar ankylosis) occurs when >20% of PDL is necrotic; root dentin is progressively replaced by bone in normal remodeling cycles."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Inflammatory Resorption",
+          "terms": [
+            "Bacterial Driven",
+            "Bowl Defects",
+            "Adjacent Bone Loss",
+            "Needs Necrosis"
+          ],
+          "pearl": "Inflammatory (infection-related) external resorption shows scooped-out lateral root defects with adjacent radiolucent bone, driven by bacteria from a necrotic pulp diffusing through exposed tubules."
+        },
+        {
+          "difficulty": "purple",
+          "name": "More Resorption Authors",
+          "terms": [
+            "Bakland",
+            "Tronstad",
+            "Patel",
+            "Hammarstrom"
+          ],
+          "pearl": "Bakland = trauma/resorption reviews; Tronstad 1988 = mechanism-based resorption classification; Patel 2018 = CBCT ECR classification; Hammarstrom = enamel matrix derivative (Emdogain) for PDL regeneration."
+        }
+      ]
     }
   ]
 }
