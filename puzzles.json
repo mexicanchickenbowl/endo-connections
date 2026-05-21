@@ -4007,6 +4007,271 @@
           "pearl": "Bakland = trauma/resorption reviews; Tronstad 1988 = mechanism-based resorption classification; Patel 2018 = CBCT ECR classification; Hammarstrom = enamel matrix derivative (Emdogain) for PDL regeneration. Heithersay (1999) classified external cervical resorption into four classes still used clinically; replacement-resorption mechanics are from Andreasen (1985)."
         }
       ]
+    },
+    {
+      "id": "auto-20260521-1",
+      "title": "Numbing the Hot Tooth",
+      "topic": "Pharmacology & Pain Management",
+      "difficulty": "hard",
+      "date_added": "2026-05-21",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Mandibular Nerve Block Techniques",
+          "terms": [
+            "Standard IANB",
+            "Gow-Gates block",
+            "Vazirani-Akinosi",
+            "Mental nerve block"
+          ],
+          "pearl": "The Gow-Gates technique anesthetizes the entire mandibular division (V3) at the neck of the condyle and reaches accessory mylohyoid fibers; the closed-mouth Vazirani-Akinosi block is the go-to when trismus prevents a standard IANB."
+        },
+        {
+          "difficulty": "green",
+          "name": "Intraosseous Delivery Systems",
+          "terms": [
+            "Stabident system",
+            "X-Tip device",
+            "IntraFlow HTP",
+            "Quicksleeper 5"
+          ],
+          "pearl": "Intraosseous injection deposits LA into cancellous bone between the mesial and distal roots and produces profound pulpal anesthesia within ~30 seconds. The X-Tip leaves a guide sleeve in the cortex so the clinician can re-dose mid-procedure without re-perforating bone."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Why Pulpitis Defeats Local Anesthesia",
+          "terms": [
+            "TTX-resistant Nav1.8",
+            "TRPV1 upregulation",
+            "Accessory innervation",
+            "Acidic inflamed pH"
+          ],
+          "pearl": "In symptomatic irreversible pulpitis the inflamed pulp upregulates tetrodotoxin-resistant Nav1.8 sodium channels and TRPV1, while local tissue acidosis shifts more LA into its protonated (non-diffusible) form — together explaining why a routine IANB anesthetizes only ~55% of mandibular molars with IP (Nusstein/Reader)."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Landmark Hot-Tooth Findings",
+          "terms": [
+            "IANB 55% IP success",
+            "Buccal articaine boost",
+            "4% articaine paresthesia",
+            "Repeat IANB futile"
+          ],
+          "pearl": "Adding a 4% articaine buccal infiltration after a mandibular IANB raises pulpal anesthesia success in the lower 1st molar from ~55% to ~80-90% (Kanaa & Meechan 2006; Matthews 2009). 4% articaine in an IANB has the highest reported paresthesia signal (Haas & Lennon 1995), and repeating an IANB after initial failure adds little benefit."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260521-2",
+      "title": "NSAID + APAP Wins",
+      "topic": "Analgesics for Endodontic Pain",
+      "difficulty": "hard",
+      "date_added": "2026-05-21",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Common Analgesic Drug Names",
+          "terms": [
+            "Ibuprofen",
+            "Naproxen",
+            "Acetaminophen",
+            "Ketorolac"
+          ],
+          "pearl": "Ibuprofen and naproxen are non-selective COX-1/COX-2 inhibitors; ketorolac is a potent NSAID available PO/IM/IV and limited to 5 days of use; acetaminophen acts centrally (likely COX modulation in CNS) and is the safest first-line analgesic in pregnancy."
+        },
+        {
+          "difficulty": "green",
+          "name": "Adult Monotherapy Endo Doses",
+          "terms": [
+            "Ibuprofen 600 mg",
+            "Naproxen 500 mg",
+            "APAP 1000 mg",
+            "Ketorolac 10 mg"
+          ],
+          "pearl": "Ibuprofen 600 mg PO q6h is the workhorse for endodontic pain (Rx max 3.2 g/day). Naproxen 500 mg PO q12h offers longer dosing intervals. Adult acetaminophen max is 4 g/day (3 g/day in chronic alcohol use or hepatic disease)."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Combination and Pain-Control Strategy",
+          "terms": [
+            "600 IBU + 1000 APAP",
+            "Preemptive 1 h preop",
+            "Opioid-sparing combo",
+            "Around-the-clock dosing"
+          ],
+          "pearl": "The 600 mg ibuprofen + 1000 mg acetaminophen combo outperforms hydrocodone/APAP for acute post-op endodontic pain (Moore JADA 2013). Pre-emptive ibuprofen dosed 1 hour before treatment plus ATC dosing for the first 24–48 hours minimizes rescue opioid use."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Cochrane / Moore NNT Numbers",
+          "terms": [
+            "IBU 400 NNT 2.5",
+            "APAP 1000 NNT 3.6",
+            "IBU 200 NNT 2.7",
+            "Combo NNT ~1.5"
+          ],
+          "pearl": "Cochrane number-needed-to-treat for ≥50% pain relief over 6 h in acute pain: ibuprofen 400 mg ≈ 2.5, ibuprofen 200 mg ≈ 2.7, acetaminophen 1000 mg ≈ 3.6, and ibuprofen + acetaminophen combo ≈ 1.5 — the lower the NNT, the more efficient the drug."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260521-3",
+      "title": "Bugs to Drugs in Endo",
+      "topic": "Antibiotics in Endodontics",
+      "difficulty": "hard",
+      "date_added": "2026-05-21",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Common Endo Antibiotic Names",
+          "terms": [
+            "Amoxicillin",
+            "Clindamycin",
+            "Metronidazole",
+            "Azithromycin"
+          ],
+          "pearl": "Amoxicillin is first-line for spreading odontogenic infection. Clindamycin and azithromycin are AAE-endorsed alternatives in penicillin-allergic patients; metronidazole is added (not used alone) when anaerobic coverage must be intensified."
+        },
+        {
+          "difficulty": "green",
+          "name": "AAE 2017 Antibiotic Indication Calls",
+          "terms": [
+            "Localized swelling: no",
+            "Spreading swelling: yes",
+            "Fever + malaise: yes",
+            "Pulpitis only: no"
+          ],
+          "pearl": "Per the AAE 2017 guidance, antibiotics are NOT indicated for irreversible pulpitis, necrotic pulps without systemic involvement, sinus tracts, localized fluctuant swelling drained intraorally, or routine endo treatment. They ARE indicated for spreading infection, systemic signs (fever, malaise, lymphadenopathy), or in immunocompromised hosts."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Standard Adult Oral Dosing",
+          "terms": [
+            "Amox 500 mg q8h",
+            "Clinda 300 mg q6h",
+            "Metro 500 mg q8h",
+            "Azithro 500 mg day 1"
+          ],
+          "pearl": "Standard endodontic regimen: amoxicillin 1 g load then 500 mg q8h x 3-7 days; PCN-allergy: clindamycin 600 mg load then 300 mg q6h, or azithromycin 500 mg day 1 then 250 mg daily x 4. Reassess at 48-72 h and de-escalate when systemic signs resolve."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Adverse Reaction Pearls",
+          "terms": [
+            "C. diff (clindamycin)",
+            "Disulfiram metro+EtOH",
+            "QT prolong azithro",
+            "Anaphylaxis PCN"
+          ],
+          "pearl": "Clindamycin carries the highest absolute C. difficile colitis risk among dental antibiotics. Metronidazole + alcohol produces a disulfiram-like reaction. Azithromycin prolongs the QT interval — avoid with amiodarone, congenital long QT, or other QT-prolonging drugs. True IgE-mediated PCN anaphylaxis is ~0.001-0.01% of exposures."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260521-4",
+      "title": "Pain Pathway Pearls",
+      "topic": "Pulpal Pain Mechanisms",
+      "difficulty": "hard",
+      "date_added": "2026-05-21",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Inflammatory Mediators in Pulp",
+          "terms": [
+            "Substance P",
+            "CGRP",
+            "Bradykinin",
+            "Histamine"
+          ],
+          "pearl": "Substance P and CGRP are sensory neuropeptides released from C-fiber terminals that drive neurogenic inflammation and vasodilation in the pulp; bradykinin and histamine acutely sensitize peripheral nociceptors and increase vascular permeability."
+        },
+        {
+          "difficulty": "green",
+          "name": "Receptor and Channel Targets",
+          "terms": [
+            "TRPV1 receptor",
+            "Nav1.7 channel",
+            "Nav1.8 channel",
+            "Mu-opioid receptor"
+          ],
+          "pearl": "TRPV1 (the capsaicin receptor) is upregulated in inflamed pulp and responds to heat >43 C and protons. Nav1.7 and Nav1.8 are nociceptor sodium channels — Nav1.8 is TTX-resistant and contributes to LA failure. Mu-opioid receptors exist peripherally in inflamed tissue, which is why intracanal opioid effects have been studied."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Sensitization Concepts",
+          "terms": [
+            "Peripheral sensitization",
+            "Central sensitization",
+            "Wind-up phenomenon",
+            "Allodynia"
+          ],
+          "pearl": "Peripheral sensitization = lowered nociceptor threshold at the inflamed pulp; central sensitization = NMDA-driven facilitation in the trigeminal nucleus producing wind-up, hyperalgesia, and allodynia. Central sensitization explains why some hot teeth keep hurting even after pulp removal."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Fiber / Symptom Pairings",
+          "terms": [
+            "A-delta sharp/cold",
+            "C-fiber dull/throb",
+            "Lingering = inflamed",
+            "Mechanoallodynia = PAP"
+          ],
+          "pearl": "A-delta myelinated fibers carry sharp, well-localized cold and EPT responses (normal vital pulp); unmyelinated C-fibers carry dull, throbbing, poorly localized pain (inflamed pulp). A prolonged lingering response to cold strongly suggests symptomatic irreversible pulpitis, while bite-on-anything pain on a previously treated tooth points to a periradicular/PAP origin."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260521-5",
+      "title": "Opioids and Their Limits",
+      "topic": "Opioid Pharmacology in Endo",
+      "difficulty": "hard",
+      "date_added": "2026-05-21",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Opioid Active Ingredients",
+          "terms": [
+            "Hydrocodone",
+            "Oxycodone",
+            "Codeine",
+            "Tramadol"
+          ],
+          "pearl": "Hydrocodone, oxycodone, and codeine are pure mu-opioid agonists; tramadol is a weak mu-agonist plus serotonin/norepinephrine reuptake inhibitor. Codeine is a prodrug requiring CYP2D6 conversion to morphine, which is why ultra-rapid and poor metabolizers respond unpredictably."
+        },
+        {
+          "difficulty": "green",
+          "name": "Common APAP Combination Products",
+          "terms": [
+            "Vicodin / Norco",
+            "Percocet / Endocet",
+            "Tylenol #3",
+            "Ultracet"
+          ],
+          "pearl": "Hydrocodone/APAP (Vicodin, Norco), oxycodone/APAP (Percocet, Endocet), codeine/APAP (Tylenol #3, #4), and tramadol/APAP (Ultracet) are the most common dental opioid-combo prescriptions; counsel patients to keep total acetaminophen under 4 g/day (3 g/day with chronic alcohol use)."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Why Opioids Underperform in Endo",
+          "terms": [
+            "Higher NNT vs ibuprofen",
+            "Nausea / constipation",
+            "Sedation / dizziness",
+            "Misuse / diversion"
+          ],
+          "pearl": "Moore & Hersh have shown repeatedly that 600 mg ibuprofen + 1000 mg acetaminophen outperforms any common opioid-APAP combo for acute dental pain, with a lower NNT and far fewer side effects. Endo pain rarely needs an opioid — and when one is added, the goal is the lowest dose for the shortest duration."
+        },
+        {
+          "difficulty": "purple",
+          "name": "CDC 2022 / Regulatory Pearls",
+          "terms": [
+            "MME guidance <=50/day",
+            "<=3 day acute supply",
+            "Codeine pediatric BBW",
+            "PDMP query first"
+          ],
+          "pearl": "Per CDC 2022, clinicians should query the state PDMP before prescribing, target the lowest effective MME (often <=50 MME/day) and the shortest duration for acute pain (often <=3 days). FDA's 2017 black-box warning contraindicates codeine and tramadol in children under 12 and restricts use in adolescents 12-18 with risk factors."
+        }
+      ]
     }
   ]
 }
