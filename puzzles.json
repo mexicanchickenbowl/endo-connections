@@ -4272,6 +4272,271 @@
           "pearl": "Per CDC 2022, clinicians should query the state PDMP before prescribing, target the lowest effective MME (often <=50 MME/day) and the shortest duration for acute pain (often <=3 days). FDA's 2017 black-box warning contraindicates codeine and tramadol in children under 12 and restricts use in adolescents 12-18 with risk factors."
         }
       ]
+    },
+    {
+      "id": "auto-20260522-1",
+      "title": "Five Faces of Fracture",
+      "topic": "Cracked Teeth & VRF",
+      "difficulty": "hard",
+      "date_added": "2026-05-22",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Craze Line Features",
+          "terms": [
+            "Enamel Only",
+            "Light Transmits",
+            "Cosmetic Concern",
+            "No Treatment"
+          ],
+          "pearl": "Craze lines are enamel-confined cracks that transmit transillumination light, are asymptomatic, and require no treatment per the AAE 2008 longitudinal fracture classification."
+        },
+        {
+          "difficulty": "green",
+          "name": "Fractured Cusp Features",
+          "terms": [
+            "Cusp Breaks Off",
+            "Wedging Force",
+            "Above CEJ",
+            "Vital Pulp"
+          ],
+          "pearl": "Fractured cusps arise from wedging forces (often adjacent to deep restorations), typically terminate above the CEJ, leave the pulp vital, and are managed by full cuspal coverage."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Cracked Tooth Features",
+          "terms": [
+            "Release Pain",
+            "M-D Direction",
+            "Cuspal Coverage Rx",
+            "Unknown Extent"
+          ],
+          "pearl": "Cracked tooth syndrome: sharp pain on release of biting, mesio-distally oriented crack of unknown apical extent; AAE first-line treatment is cuspal coverage. Krell & Caplan 2018 reported 21% need RCT within 6 months."
+        },
+        {
+          "difficulty": "purple",
+          "name": "VRF Features",
+          "terms": [
+            "J-Shaped Lesion",
+            "Halo Radiolucency",
+            "Narrow Deep Pocket",
+            "Hopeless Prognosis"
+          ],
+          "pearl": "VRF classically presents with J-shaped or halo radiolucency and an isolated narrow deep periodontal pocket (Tamse 2006); prognosis is hopeless in non-strategic teeth and extraction is indicated."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260522-2",
+      "title": "Cracking the Case",
+      "topic": "Cracked Teeth & VRF",
+      "difficulty": "hard",
+      "date_added": "2026-05-22",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Bite-Test Devices",
+          "terms": [
+            "Tooth Slooth",
+            "FracFinder",
+            "Wooden Stick",
+            "Cotton Roll"
+          ],
+          "pearl": "Tooth Slooth and FracFinder are wedge-style bite blocks that elicit pain on release of biting in cracked tooth syndrome; wooden sticks and cotton rolls serve as makeshift alternatives applied to individual cusps."
+        },
+        {
+          "difficulty": "green",
+          "name": "Visual Aids for Cracks",
+          "terms": [
+            "Methylene Blue",
+            "Transillumination",
+            "Surgical Microscope",
+            "Loupes"
+          ],
+          "pearl": "Transillumination distinguishes craze lines (light transmits) from complete cracks (light blocked). Methylene blue stains the crack line after access for direct microscope visualization."
+        },
+        {
+          "difficulty": "blue",
+          "name": "VRF Clinical Signs",
+          "terms": [
+            "Isolated Pocket",
+            "Sinus Tract",
+            "Segment Mobility",
+            "Gingival Inflammation"
+          ],
+          "pearl": "An isolated narrow >5 mm pocket on an endodontically treated tooth combined with a buccal sinus tract is highly predictive of VRF (Tamse 1999; positive predictive value >70% when both present)."
+        },
+        {
+          "difficulty": "purple",
+          "name": "VRF Imaging Signs",
+          "terms": [
+            "J-Shaped Lesion",
+            "Halo Radiolucency",
+            "Buccal Bone Loss",
+            "PDL Widening"
+          ],
+          "pearl": "Classic Tamse radiographic VRF signs include the J-shaped lesion, halo radiolucency, buccal cortical bone loss, and lateral PDL widening. Limited FOV CBCT sensitivity ~88% vs ~36% for PA (Edlund 2011)."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260522-3",
+      "title": "Why Roots Crack",
+      "topic": "Cracked Teeth & VRF",
+      "difficulty": "hard",
+      "date_added": "2026-05-22",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Iatrogenic Risk Factors",
+          "terms": [
+            "Over-Enlargement",
+            "Excessive Taper",
+            "Spreader Wedging",
+            "Plugger Force"
+          ],
+          "pearl": "Tamse identified procedural risks for VRF: excessive canal enlargement and taper, spreader wedging during lateral compaction, and plugger force during warm vertical compaction. Minimize with conservative apical preps and controlled compaction."
+        },
+        {
+          "difficulty": "green",
+          "name": "VRF-Prone Teeth",
+          "terms": [
+            "Mand Premolars",
+            "Mesial Mand Molars",
+            "Max Premolars",
+            "DB Max Molars"
+          ],
+          "pearl": "Teeth with narrow, ribbon-shaped roots and concave proximal surfaces are most susceptible to VRF: mandibular premolars (especially #29), maxillary premolars, mesial roots of mandibular molars, and distobuccal roots of maxillary molars (Tamse 1999)."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Restorative Risk Factors",
+          "terms": [
+            "Cast Metal Post",
+            "Wide Post Space",
+            "Long Post",
+            "Uncrowned Endo"
+          ],
+          "pearl": "Aquilino & Caplan (2002) showed crowned endodontically treated molars survive 6× longer than uncrowned. Cast metal posts concentrate stress at the apical post terminus; wide and long posts further increase VRF risk."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Occlusal & Host Factors",
+          "terms": [
+            "Bruxism",
+            "Clenching",
+            "Tipped Molar",
+            "Lone-Standing Tooth"
+          ],
+          "pearl": "Bruxism, static clenching, tipped molars, and lone-standing posterior teeth subject roots to non-axial loading and torque — consider occlusal adjustment and a night guard for endo-treated posteriors at risk."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260522-4",
+      "title": "Crack the Tx Plan",
+      "topic": "Cracked Teeth & VRF",
+      "difficulty": "hard",
+      "date_added": "2026-05-22",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Pre-Tx Stabilization",
+          "terms": [
+            "Copper Band",
+            "Ortho Band",
+            "Provisional Crown",
+            "Bonded Composite"
+          ],
+          "pearl": "Stabilization with copper or orthodontic bands binds the cracked tooth before definitive restoration; AAE permits a 6-week monitoring period to assess pulp survival before final crown prep (Krell & Caplan 2018)."
+        },
+        {
+          "difficulty": "green",
+          "name": "Cuspal Coverage Options",
+          "terms": [
+            "Onlay",
+            "Overlay",
+            "Full Crown",
+            "Endocrown"
+          ],
+          "pearl": "Definitive cracked tooth treatment is full cuspal coverage — onlay, overlay, full crown, or endocrown. Bonded ceramic overlays can perform comparably to full crowns in posterior cracked teeth (Magne)."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Endodontic Procedures",
+          "terms": [
+            "Direct Pulp Cap",
+            "Partial Pulpotomy",
+            "Full Pulpotomy",
+            "NSRCT"
+          ],
+          "pearl": "Pulp status drives endodontic decision: reversible pulpitis → direct pulp cap or partial pulpotomy; symptomatic irreversible pulpitis → full pulpotomy or NSRCT. AAE 2017 supports pulpotomy even for irreversible pulpitis in mature teeth."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Salvage Options",
+          "terms": [
+            "Extraction",
+            "Hemisection",
+            "Bicuspidization",
+            "Intentional Replant"
+          ],
+          "pearl": "Split teeth and VRF in strategic teeth may be salvaged by hemisection (mandibular molars), bicuspidization, or intentional replantation with extra-oral root repair using a bioceramic (MTA/Biodentine)."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260522-5",
+      "title": "Cracks by the Numbers",
+      "topic": "Cracked Teeth & VRF",
+      "difficulty": "hard",
+      "date_added": "2026-05-22",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Landmark Authors",
+          "terms": [
+            "Cameron",
+            "Krell",
+            "Tamse",
+            "Aquilino"
+          ],
+          "pearl": "Cameron (1964) coined 'cracked tooth syndrome'; Krell & Rivera (2007) reported 9.7% of pulpitis teeth had cracks; Tamse (2006) defined the VRF radiographic signature; Aquilino & Caplan (2002) showed 6× survival benefit of crowning endo molars."
+        },
+        {
+          "difficulty": "green",
+          "name": "Landmark Percentages",
+          "terms": [
+            "9.7%",
+            "20%",
+            "6x Survival",
+            "11% at 5 Years"
+          ],
+          "pearl": "9.7% of pulpitis cases caused by cracks (Krell 2007); 20% of endo-treated tooth extractions due to VRF (Fuss 1999); 6× survival advantage of crowning endo molars (Aquilino 2002); 11% 5-year extraction rate after crack diagnosis (Krell & Caplan 2018)."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Tamse VRF Radiographic Signs",
+          "terms": [
+            "J-Shaped Lesion",
+            "Halo Lesion",
+            "Angular Defect",
+            "Step Defect"
+          ],
+          "pearl": "Tamse's classic VRF radiographic patterns: J-shaped lesion (apex to crestal bone), halo radiolucency, angular bone loss, and step-shaped defect — limited FOV CBCT improves sensitivity over conventional PA radiography."
+        },
+        {
+          "difficulty": "purple",
+          "name": "AAE Crack Classification",
+          "terms": [
+            "Craze Line",
+            "Fractured Cusp",
+            "Split Tooth",
+            "Vertical Root Fracture"
+          ],
+          "pearl": "The AAE 2008 classification of longitudinal tooth fractures recognizes five distinct entities: craze lines, fractured cusp, cracked tooth, split tooth, and vertical root fracture — each with distinct etiology, diagnosis, and treatment."
+        }
+      ]
     }
   ]
 }
