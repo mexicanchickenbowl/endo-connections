@@ -4537,6 +4537,271 @@
           "pearl": "The AAE 2008 classification of longitudinal tooth fractures recognizes five distinct entities: craze lines, fractured cusp, cracked tooth, split tooth, and vertical root fracture — each with distinct etiology, diagnosis, and treatment."
         }
       ]
+    },
+    {
+      "id": "auto-20260526-1",
+      "title": "Heat and Crystal",
+      "topic": "NiTi Metallurgy & File Systems",
+      "difficulty": "hard",
+      "date_added": "2026-05-26",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Heat-Treated NiTi Wires",
+          "terms": [
+            "HyFlex CM",
+            "HyFlex EDM",
+            "Vortex Blue",
+            "ProTaper Gold"
+          ],
+          "pearl": "Modern heat treatments (CM, EDM, Blue, Gold) shift the austenite finish (Af) temperature ABOVE body temperature, so the file is martensitic intraorally — gaining flexibility, shape memory, and reduced cyclic fatigue at the cost of some cutting efficiency."
+        },
+        {
+          "difficulty": "green",
+          "name": "NiTi Crystal Phases & Forms",
+          "terms": [
+            "Austenite (B2)",
+            "Martensite (B19')",
+            "R-phase",
+            "Stress-induced martensite"
+          ],
+          "pearl": "NiTi exists as cubic B2 austenite (parent, stiff, superelastic), rhombohedral R-phase (low-strain intermediate), and monoclinic B19' martensite (soft, deformable). Stress applied to austenite at temperatures above Af can induce martensite without cooling — the basis of superelasticity."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Phase Transformation Temperatures",
+          "terms": [
+            "Af (austenite finish)",
+            "Ms (martensite start)",
+            "Mf (martensite finish)",
+            "As (austenite start)"
+          ],
+          "pearl": "Differential scanning calorimetry (DSC) defines As/Af on heating and Ms/Mf on cooling. Heat-treated files have Af near or above 37°C, keeping them in the soft martensite phase in the canal — Pereira et al. showed Af shifts from ~17°C (conventional NiTi) to >37°C (CM/Gold/Blue)."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Landmark NiTi Authors (Year)",
+          "terms": [
+            "Walia 1988",
+            "Pruett 1997",
+            "Sattapan 2000",
+            "Thompson 2000"
+          ],
+          "pearl": "Walia 1988 introduced NiTi to endodontics (2-3× more flexible than stainless steel). Pruett 1997 proved cyclic fatigue is inversely proportional to canal curvature radius AND angle. Sattapan 2000 found 28% of single-use rotary files showed visible defects. Thompson 2000 wrote the seminal review of NiTi alloys in dentistry."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260526-2",
+      "title": "Files Under Stress",
+      "topic": "NiTi Metallurgy & File Systems",
+      "difficulty": "hard",
+      "date_added": "2026-05-26",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Sattapan Defect Categories",
+          "terms": [
+            "Bright spot",
+            "Unwinding",
+            "Reverse winding",
+            "Flute straightening"
+          ],
+          "pearl": "Sattapan (2000) classified visible NiTi rotary file defects into 5 categories: bright spot, unwinding, reverse winding, flute straightening, and fracture. 28% of files showed at least one defect after a single clinical use — the foundational evidence supporting single-use file protocols."
+        },
+        {
+          "difficulty": "green",
+          "name": "Cyclic Fatigue Risk Factors",
+          "terms": [
+            "Curvature radius",
+            "Curvature angle",
+            "Rotation speed",
+            "File diameter"
+          ],
+          "pearl": "Pruett 1997 established that cyclic fatigue is inversely proportional to canal curvature radius and directly proportional to angle. Larger-diameter files and faster rotation speeds also accelerate fatigue — the file undergoes tension-compression cycles at the apex of the curve."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Torsional Failure Causes",
+          "terms": [
+            "Apical pressure",
+            "Tip binding",
+            "Locked file",
+            "Excessive torque"
+          ],
+          "pearl": "Torsional fracture (Mode II) occurs when the apical few mm of file binds, the operator pushes apically, and applied torque exceeds the file's torsional strength. Prevented with crown-down technique, patent glide path (#10 K-file), torque-limited motors, and never forcing a file."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Critical NiTi Failure Numbers",
+          "terms": [
+            "28% defect rate",
+            "5 defect categories",
+            "2-3× SS flexibility",
+            "250-500 RPM rotary"
+          ],
+          "pearl": "Memorize: Walia 1988 = 2-3× the flexibility of stainless steel. Sattapan 2000 = 28% defect rate across 5 categories after one use. Most modern rotary systems run 250-500 RPM with torque limits of 1-5 N·cm — these are the boards-favorite quantitative facts."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260526-3",
+      "title": "Motion Mechanics",
+      "topic": "NiTi Metallurgy & File Systems",
+      "difficulty": "hard",
+      "date_added": "2026-05-26",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Reciprocating File Systems",
+          "terms": [
+            "Reciproc",
+            "Reciproc Blue",
+            "WaveOne",
+            "WaveOne Gold"
+          ],
+          "pearl": "Reciprocating systems use asymmetric CCW/CW cycles that net counterclockwise per cycle, matching the left-handed flute design. Reciproc uses 150°/30°; WaveOne uses 170°/50°. Net effect: ~3 cycles = 1 full rotation, dramatically extending fatigue life vs continuous rotation."
+        },
+        {
+          "difficulty": "green",
+          "name": "Continuous Rotation Files",
+          "terms": [
+            "ProTaper Next",
+            "TruNatomy",
+            "HyFlex CM",
+            "One Curve"
+          ],
+          "pearl": "Continuous-rotation NiTi files spin a full 360° at 150-500 RPM. Modern designs combine heat-treated alloys (CM, M-Wire, Gold, C-Wire) with novel cross-sections (off-centered, asymmetric) to balance flexibility with cutting efficiency in curved canals."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Non-Standard NiTi Designs",
+          "terms": [
+            "Self-Adjusting File",
+            "XP-endo Shaper",
+            "TRUShape",
+            "TF Adaptive"
+          ],
+          "pearl": "Self-Adjusting File (SAF) is a hollow expanding mesh that conforms to canal shape with continuous irrigation. XP-endo Shaper morphs into a snake-like form via B19' martensitic transformation at body temperature. TRUShape uses a pre-bent S-shape body that swaggers during rotation. TF Adaptive switches between rotation and reciprocation based on real-time torque feedback."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Specific Kinematic Numbers",
+          "terms": [
+            "150° / 30° Reciproc",
+            "170° / 50° WaveOne",
+            "~300 RPM rotary",
+            "~600 cpm reciprocation"
+          ],
+          "pearl": "Reciproc = 150° CCW cutting / 30° CW release. WaveOne = 170° CCW / 50° CW. Standard rotary speed is 250-500 RPM (often ~300 for safety). Reciprocation cycles run ~600 cpm — boards-favorite numbers to memorize cold."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260526-4",
+      "title": "Made By...",
+      "topic": "NiTi Metallurgy & File Systems",
+      "difficulty": "hard",
+      "date_added": "2026-05-26",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Dentsply Sirona / Maillefer",
+          "terms": [
+            "ProTaper Gold",
+            "ProTaper Next",
+            "WaveOne Gold",
+            "ProGlider"
+          ],
+          "pearl": "Dentsply Sirona's flagship endo line: ProTaper Gold (gold heat-treated rotary), ProTaper Next (M-Wire, off-centered rectangular cross-section), WaveOne Gold (gold-treated reciprocating, 170°/50°), and ProGlider (single-file rotary glide path, 16/.02)."
+        },
+        {
+          "difficulty": "green",
+          "name": "VDW Munich",
+          "terms": [
+            "Reciproc Blue",
+            "Mtwo",
+            "VDW.ROTATE",
+            "R-Pilot"
+          ],
+          "pearl": "VDW makes Reciproc Blue (blue-titanium oxide heat treatment, reciprocates at 150°/30°), Mtwo (multi-taper rotary, marketed as 'no glide path needed'), VDW.ROTATE (modern heat-treated rotary), and R-Pilot (single-file reciprocating glide path)."
+        },
+        {
+          "difficulty": "blue",
+          "name": "FKG Dentaire (Switzerland)",
+          "terms": [
+            "iRaCe",
+            "BioRace",
+            "XP-endo Shaper",
+            "XP-endo Finisher"
+          ],
+          "pearl": "FKG Dentaire makes the Race/iRaCe family (alternating cutting edges to reduce screw-in) and the XP-endo line, which uses a Max-Wire B19' martensitic alloy that morphs into a snake-like 3D shape at body temperature. XP-endo Finisher (#25/.00) is for biofilm disruption after shaping."
+        },
+        {
+          "difficulty": "purple",
+          "name": "MicroMega (France)",
+          "terms": [
+            "One Curve",
+            "2Shape",
+            "One G",
+            "Revo-S"
+          ],
+          "pearl": "MicroMega (Besançon, France) produces One Curve (C-Wire heat-treated single-file rotary, 25/.06), 2Shape (two-file shaping system with TSP and TS2 instruments), One G (single-file rotary glide path), and the older Revo-S asymmetric cross-section file."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260526-5",
+      "title": "Inside the Lab",
+      "topic": "NiTi Metallurgy & File Systems",
+      "difficulty": "hard",
+      "date_added": "2026-05-26",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "NiTi Testing Equipment",
+          "terms": [
+            "DSC analyzer",
+            "Vickers indenter",
+            "Three-point bend rig",
+            "Cyclic fatigue jig"
+          ],
+          "pearl": "DSC (differential scanning calorimetry) measures phase transformation temperatures. Vickers microhardness assesses surface hardness. Three-point bend tests flexibility. Standardized cyclic fatigue jigs (with stainless steel artificial canals) measure number of cycles to fracture (NCF)."
+        },
+        {
+          "difficulty": "green",
+          "name": "NiTi Heat Treatment Processes",
+          "terms": [
+            "Annealing",
+            "Aging",
+            "Quenching",
+            "Cold working"
+          ],
+          "pearl": "Heat-treatment processing modifies transformation temperatures and mechanical properties. Annealing relieves stress; aging precipitates Ni4Ti3 in Ni-rich alloys; quenching locks in high-temperature phases; cold working (e.g., wire drawing) introduces dislocations that shift transformation temperatures upward."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Cyclic Fatigue Test Parameters",
+          "terms": [
+            "60° curvature angle",
+            "5 mm radius",
+            "300 RPM speed",
+            "Cycles to fracture"
+          ],
+          "pearl": "Standard cyclic fatigue protocols use a 60° angle and 5 mm radius artificial canal (per Pruett 1997 geometry), rotate the file at 300 RPM until fracture, and report number of cycles to fracture (NCF). Heat-treated files show 2-4× higher NCF than conventional NiTi."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Fracture Surface Features (SEM)",
+          "terms": [
+            "Striations",
+            "Dimples",
+            "Crack origin",
+            "Overload zone"
+          ],
+          "pearl": "SEM fractography distinguishes failure modes: cyclic fatigue shows striations (each ridge = one cycle) emanating from a crack origin, with a final overload zone showing dimples (ductile rupture). Torsional failure shows concentric circular markings and a central abrasion area instead."
+        }
+      ]
     }
   ]
 }
