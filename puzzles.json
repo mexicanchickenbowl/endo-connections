@@ -4802,6 +4802,271 @@
           "pearl": "SEM fractography distinguishes failure modes: cyclic fatigue shows striations (each ridge = one cycle) emanating from a crack origin, with a final overload zone showing dimples (ductile rupture). Torsional failure shows concentric circular markings and a central abrasion area instead."
         }
       ]
+    },
+    {
+      "id": "auto-20260527-1",
+      "title": "Sodium Hypochlorite Spectrum",
+      "topic": "Irrigation Chemistry & Activation",
+      "difficulty": "hard",
+      "date_added": "2026-05-27",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Household NaOCl Concentrations",
+          "terms": [
+            "0.5% Dakin's",
+            "2.5% Milton's",
+            "5.25% Clorox",
+            "8.25% Ultra Clorox"
+          ],
+          "pearl": "Dakin's solution (0.5%) was developed by Carrel-Dakin in WWI to disinfect wounds. Walker (1936) first applied chlorinated soda (~5%) endodontically. Higher concentration = greater tissue dissolution AND greater cytotoxicity if extruded."
+        },
+        {
+          "difficulty": "green",
+          "name": "Ways to Boost NaOCl Activity",
+          "terms": [
+            "Heat to 60°C",
+            "Refresh frequently",
+            "Increase volume",
+            "Mechanical agitation"
+          ],
+          "pearl": "Stojicic et al. (JOE 2010) showed heat, agitation, and surfactants each independently increase tissue-dissolution efficacy. Heating 1% NaOCl to 60°C roughly triples antibacterial action (Sirtes et al.) and approaches the efficacy of room-temperature 5.25%."
+        },
+        {
+          "difficulty": "blue",
+          "name": "NaOCl Accident Findings",
+          "terms": [
+            "Sudden sharp pain",
+            "Rapid ecchymosis",
+            "Facial hematoma",
+            "Mental paresthesia"
+          ],
+          "pearl": "Hypochlorite extrusion produces immediate severe pain (intra-procedure), rapid soft-tissue edema/ecchymosis tracking along fascial planes, hematoma, and neurotoxic paresthesia (typically resolves over 1-6 months). Maxillary cases may track to the eye."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Accident Management Steps",
+          "terms": [
+            "Reassure patient",
+            "Cold pack 24h",
+            "Then warm compress",
+            "Analgesics ± steroids"
+          ],
+          "pearl": "Hülsmann/Hahn protocol: stop procedure, irrigate canal with saline to dilute, cold compress for the first 24h to limit swelling/inflammation, switch to warm compress thereafter to mobilize the hematoma, plus analgesics and short steroid course. Hospitalize if airway-threatening swelling or large extrusion."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260527-2",
+      "title": "Beyond the Bleach",
+      "topic": "Irrigation Chemistry & Activation",
+      "difficulty": "hard",
+      "date_added": "2026-05-27",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Adjunct Endodontic Irrigants",
+          "terms": [
+            "Saline",
+            "Hydrogen peroxide",
+            "MTAD",
+            "QMix 2-in-1"
+          ],
+          "pearl": "Adjuncts beyond NaOCl/EDTA/CHX include saline (gentle flush), H₂O₂ (effervescent debridement; obsolete), MTAD (Torabinejad), and QMix (CHX + EDTA + detergent). None replace NaOCl as the primary antibacterial/proteolytic irrigant."
+        },
+        {
+          "difficulty": "green",
+          "name": "MTAD Components",
+          "terms": [
+            "Doxycycline 3%",
+            "Citric acid 4.25%",
+            "Tween-80",
+            "Smear layer removal"
+          ],
+          "pearl": "Torabinejad's MTAD = Mixture of Tetracycline (doxycycline 3%), Acid (citric 4.25%), and Detergent (Tween-80). It removes smear layer with substantivity but is a weaker antimicrobial than 5.25% NaOCl, especially against E. faecalis biofilm."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Chlorhexidine Properties",
+          "terms": [
+            "Substantivity",
+            "Bis-biguanide structure",
+            "Cationic broad-spectrum",
+            "Bacteriostatic low dose"
+          ],
+          "pearl": "CHX 2% binds cationically to hydroxyapatite/dentin, giving up to 12-week substantivity (Rosenthal, Mohammadi). Bis-biguanide structure; bacteriostatic at low concentrations and bactericidal at higher. Critically, it has NO tissue-dissolution capacity, so it cannot replace NaOCl as the primary irrigant."
+        },
+        {
+          "difficulty": "purple",
+          "name": "HEBP / Etidronate Facts",
+          "terms": [
+            "Mild chelator",
+            "Mixable with NaOCl",
+            "No PCA byproduct",
+            "Continuous chelation"
+          ],
+          "pearl": "HEBP (1-hydroxyethylidene-1,1-bisphosphonate / etidronate) is the only chelator that can be co-mixed with NaOCl without significantly diminishing free available chlorine — enabling continuous chelation (Zehnder, De-Deus). It does NOT form parachloroaniline, unlike CHX + NaOCl."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260527-3",
+      "title": "Activation Devices Demystified",
+      "topic": "Irrigation Chemistry & Activation",
+      "difficulty": "hard",
+      "date_added": "2026-05-27",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Manual Agitation Methods",
+          "terms": [
+            "Manual dynamic",
+            "GP cone agitation",
+            "Push-pull motion",
+            "Hand-file 2mm short"
+          ],
+          "pearl": "Manual dynamic agitation with a well-fitting GP cone (3-4 mm/sec push-pull strokes ~100x) significantly improves irrigant exchange in the apical third compared to syringe alone (McGill et al., JOE 2008)."
+        },
+        {
+          "difficulty": "green",
+          "name": "Sonic / Ultrasonic Activators",
+          "terms": [
+            "EndoActivator (sonic)",
+            "Vibringe sonic",
+            "PUI Irrisafe tip",
+            "Eddy file (VDW)"
+          ],
+          "pearl": "Sonic devices (1-10 kHz: EndoActivator, Vibringe, Eddy) oscillate mechanically. Ultrasonic PUI (25-30 kHz, smooth Irrisafe tip) generates true acoustic streaming + cavitation; van der Sluis meta-analyses show superior debris removal vs. syringe alone."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Multisonic & Laser Systems",
+          "terms": [
+            "GentleWave (Sonendo)",
+            "Er:YAG PIPS",
+            "SWEEPS protocol",
+            "Photon-induced acoustics"
+          ],
+          "pearl": "GentleWave delivers broadband multisonic energy through degassed irrigant. Er:YAG laser PIPS (Photon-Induced Photoacoustic Streaming) and SWEEPS (Shock Wave Enhanced Emission Photoacoustic Streaming, DiVito) create sub-ablative cavitation pulses — superior isthmus and tubule debridement vs. PUI in in-vitro studies."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Negative-Pressure Components",
+          "terms": [
+            "EndoVac MDT",
+            "Microcannula 0.32mm",
+            "Macrocannula 0.55mm",
+            "Suction at the apex"
+          ],
+          "pearl": "EndoVac (Schoeffel) uses apical negative pressure: the Master Delivery Tip (MDT) drips irrigant orifice-side while the macrocannula (0.55 mm) and microcannula (0.32 mm) suction at the apex. Eliminates vapor lock and dramatically reduces apical extrusion risk (Mitchell, Nielsen)."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260527-4",
+      "title": "Chelation Chemistry",
+      "topic": "Irrigation Chemistry & Activation",
+      "difficulty": "hard",
+      "date_added": "2026-05-27",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "EDTA Products & Forms",
+          "terms": [
+            "17% liquid EDTA",
+            "RC-Prep gel",
+            "Glyde File Prep",
+            "EDTAC w/ cetrimide"
+          ],
+          "pearl": "17% disodium EDTA is the standard final flush. RC-Prep (Premier; EDTA + urea peroxide) and Glyde (Dentsply) are gel chelators/lubricants for instrumentation. EDTAC adds cetrimide for lower surface tension and antimicrobial action."
+        },
+        {
+          "difficulty": "green",
+          "name": "EDTA Action on Dentin",
+          "terms": [
+            "Calcium chelation",
+            "Tubule patency",
+            "Inorganic smear removal",
+            "1-minute time limit"
+          ],
+          "pearl": "EDTA chelates Ca²⁺ from peri- and intertubular dentin, removing the inorganic smear and opening tubules to ~40 μm depth. Calt & Serper (JOE 2002) showed >1 minute exposure causes peritubular erosion and weakens dentin — keep the final flush to ~1 minute."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Citric Acid Properties",
+          "terms": [
+            "10% concentration",
+            "Weaker than EDTA",
+            "Rapid smear removal",
+            "Erodes apex faster"
+          ],
+          "pearl": "Citric acid 10% is a faster but more aggressive demineralizer than 17% EDTA. Achieves comparable smear removal in 30-60s but causes greater apical erosion; pH ~1-2. Maleic acid 7% behaves similarly."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Less-Common Chelators",
+          "terms": [
+            "Maleic acid 7%",
+            "Phytic acid (IP6)",
+            "Polyacrylic acid",
+            "Tetracycline-HCl"
+          ],
+          "pearl": "Alternative chelators include maleic acid 7% (Ballal), phytic acid/IP6 (plant-derived, low cytotoxicity, may equal EDTA — Nassar), polyacrylic acid (GIC conditioner that chelates Ca²⁺), and tetracycline-HCl (chelating + substantive antibacterial — basis for MTAD)."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260527-5",
+      "title": "Irrigation Numbers and Names",
+      "topic": "Irrigation Chemistry & Activation",
+      "difficulty": "hard",
+      "date_added": "2026-05-27",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Iconic Irrigation Researchers",
+          "terms": [
+            "Zehnder",
+            "Haapasalo",
+            "Boutsioukis",
+            "Siqueira Jr."
+          ],
+          "pearl": "Matthias Zehnder (2006 JOE review of root canal irrigants), Markus Haapasalo (substantivity, biofilm), Christos Boutsioukis (CFD modeling of irrigant flow), and José Siqueira Jr. (microbial diversity, NaOCl efficacy) are foundational irrigation authors for ABE."
+        },
+        {
+          "difficulty": "green",
+          "name": "Landmark Findings",
+          "terms": [
+            "1% = 5.25% bactericidal",
+            "Heated NaOCl tripled",
+            "Vapor-lock barrier",
+            "EDTA softens dentin"
+          ],
+          "pearl": "Key boards-level findings: 1% NaOCl matches 5.25% if refreshed in adequate volume (Siqueira); 60°C heat triples efficacy (Stojicic/Sirtes); apical vapor lock impairs syringe delivery (Tay & Pashley); EDTA > 1 min softens dentin and reduces microhardness (Calt & Serper)."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Needle Tip Designs",
+          "terms": [
+            "Side-vented opening",
+            "Closed-end vented",
+            "Notched-tip",
+            "Slot-tipped"
+          ],
+          "pearl": "Side-vented (Max-i-Probe) and closed-end vented needles direct flow laterally to reduce apical pressure. Notched and slot-tipped designs (ProRinse, Endo-Eze) similarly disperse flow. Open-ended needles produce the highest apical pressures and extrusion risk."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Apical Hydrodynamics",
+          "terms": [
+            "Dead-water zone",
+            "CFD modeling",
+            "Bubble entrapment",
+            "Stagnant 1 mm zone"
+          ],
+          "pearl": "Boutsioukis' CFD work showed irrigant only refreshes ~1.5 mm beyond the needle tip; a 'dead-water' zone, entrapped gas bubbles, and a stagnant apical 1 mm prevent fluid exchange — the rationale for negative-pressure, sonic, and ultrasonic activation."
+        }
+      ]
     }
   ]
 }
