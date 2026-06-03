@@ -5067,6 +5067,271 @@
           "pearl": "Boutsioukis' CFD work showed irrigant only refreshes ~1.5 mm beyond the needle tip; a 'dead-water' zone, entrapped gas bubbles, and a stagnant apical 1 mm prevent fluid exchange — the rationale for negative-pressure, sonic, and ultrasonic activation."
         }
       ]
+    },
+    {
+      "id": "auto-20260603-1",
+      "title": "Bevel, Burs, and Crypt Class",
+      "topic": "Surgical Endo & Microsurgery",
+      "difficulty": "hard",
+      "date_added": "2026-06-03",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Apical Anatomy Lost to 3 mm Resection",
+          "terms": [
+            "Apical delta",
+            "Lateral canals",
+            "Apical ramifications",
+            "Accessory foramina"
+          ],
+          "pearl": "Resecting 3 mm of root apex eliminates ~98% of apical ramifications and ~93% of lateral canals (Kim & Kratchman 2006), the rationale for the 3-mm standard."
+        },
+        {
+          "difficulty": "green",
+          "name": "Resection Bevel Technique",
+          "terms": [
+            "0-10 degree bevel",
+            "Reduces tubule exposure",
+            "Carbide #557 bur",
+            "Perpendicular cut"
+          ],
+          "pearl": "A near-perpendicular bevel (0-10 deg) minimizes exposed dentinal tubules on the cut surface and reduces apical leakage compared with the traditional 45 deg bevel."
+        },
+        {
+          "difficulty": "blue",
+          "name": "1% Methylene Blue Staining",
+          "terms": [
+            "Stains isthmus",
+            "Reveals microcracks",
+            "Maps canal outline",
+            "Identifies fins"
+          ],
+          "pearl": "Post-resection 1% methylene blue at high magnification highlights PDL margin, isthmuses, fins, and microcracks invisible to loupes."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Kim's Bony Crypt Classification (A-F)",
+          "terms": [
+            "Class A no lesion",
+            "Class C large lesion",
+            "Class D apical pocket",
+            "Class F thru-thru"
+          ],
+          "pearl": "Kim's class A-F stratifies preoperative bony architecture; Song 2013 showed class E and F (perio communication, through-and-through) have the worst surgical prognosis (~33-38%)."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260603-2",
+      "title": "Microsurgery by the Numbers",
+      "topic": "Surgical Endo & Microsurgery",
+      "difficulty": "hard",
+      "date_added": "2026-06-03",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Suture Specifications",
+          "terms": [
+            "5-0 monofilament",
+            "6-0 monofilament",
+            "Remove at 3-5 days",
+            "10-0 microsurgical"
+          ],
+          "pearl": "Microsurgical sutures are typically 5-0 or 6-0 monofilament removed at 3-5 days to minimize plaque adherence; 10-0 is reserved for periosteum or microvascular work."
+        },
+        {
+          "difficulty": "green",
+          "name": "Apical Prep Specs",
+          "terms": [
+            "3 mm resection",
+            "0-10 deg bevel angle",
+            "3 mm retroprep depth",
+            "Parallel to canal"
+          ],
+          "pearl": "Resect 3 mm, bevel 0-10 deg, retro-prep 3 mm parallel and centered along the long axis with a CT-series ultrasonic tip (Kim & Kratchman 2006)."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Local Anesthesia for Surgery",
+          "terms": [
+            "2% lido 1:50k epi",
+            "Pre-op bupivacaine 0.5%",
+            "0.5 mL infiltrate site",
+            "Hemostasis 10 min wait"
+          ],
+          "pearl": "Site infiltration with 2% lidocaine + 1:50,000 epinephrine (0.5 mL/site) provides 5-10x the vasoconstriction of 1:100,000; wait ~10 minutes for peak hemostatic effect."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Pooled Success Rates by Era/Approach",
+          "terms": [
+            "~94% modern EMS",
+            "~59% traditional",
+            "~91% meta-pooled",
+            "~78% retx surgery"
+          ],
+          "pearl": "Setzer 2010 meta-analysis: traditional surgery ~59% vs endodontic microsurgery (EMS) ~94%; Tsesis 2009 pooled modern ~91%; surgical retreatment outcomes pool ~78%."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260603-3",
+      "title": "Retrofill Material Deep Dive",
+      "topic": "Surgical Endo & Microsurgery",
+      "difficulty": "hard",
+      "date_added": "2026-06-03",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Shared Bioceramic Properties",
+          "terms": [
+            "Radiopaque",
+            "Biocompatible",
+            "Hydrophilic set",
+            "Antibacterial"
+          ],
+          "pearl": "Calcium-silicate bioceramic retrofills are radiopaque, biocompatible, hydrophilic (set in the presence of moisture), and mildly antibacterial via high pH during hydration."
+        },
+        {
+          "difficulty": "green",
+          "name": "Initial Set Times",
+          "terms": [
+            "MTA: ~2h 45 min",
+            "Biodentine: ~12 min",
+            "Super-EBA: ~4 min",
+            "IRM: ~6-8 min"
+          ],
+          "pearl": "ProRoot MTA's long initial set (~2h 45 min) limits intra-op handling; Biodentine sets in ~12 min, Super-EBA in ~4 min, and IRM in ~6-8 min."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Primary Composition",
+          "terms": [
+            "Tricalcium silicate",
+            "Bismuth oxide",
+            "Calcium phosphate",
+            "Modified ZOE"
+          ],
+          "pearl": "Bioceramics: tricalcium-silicate base + bismuth oxide radiopacifier + calcium phosphate filler; IRM/Super-EBA are modified zinc oxide-eugenol (PMMA or ortho-ethoxybenzoic acid reinforcement)."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Historical Retrofills (No Longer First-Line)",
+          "terms": [
+            "Amalgam",
+            "Cavit",
+            "Gutta-percha",
+            "Glass ionomer"
+          ],
+          "pearl": "Amalgam was the historical gold standard for retrofill but is obsolete due to corrosion, mercury concerns, and inferior seal vs bioceramics; Cavit, gutta-percha, and glass ionomer are not recommended for definitive root-end fillings."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260603-4",
+      "title": "Recovery Roadmap",
+      "topic": "Surgical Endo & Microsurgery",
+      "difficulty": "hard",
+      "date_added": "2026-06-03",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Standard Post-Op Pharmacology",
+          "terms": [
+            "Ibuprofen 600mg q6h",
+            "APAP 1000mg q6h",
+            "0.12% CHX rinse",
+            "Amox if perio sx"
+          ],
+          "pearl": "Standard post-microsurgical regimen: ibuprofen 600 mg + acetaminophen 1000 mg q6h staggered, 0.12% chlorhexidine BID x 1 week; antibiotics only if periodontal involvement or systemic indication."
+        },
+        {
+          "difficulty": "green",
+          "name": "Recovery Timeline",
+          "terms": [
+            "Epithelium 24-48h",
+            "Edema peaks 48-72h",
+            "Sutures out 3-5d",
+            "Bone fill 3-6 mo"
+          ],
+          "pearl": "Epithelial seal forms in 24-48 h, edema peaks 48-72 h, sutures removed at 3-5 d, and radiographic bone fill is typically evident by 3-6 months; complete healing assessed at 1 year."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Recognized Surgical Complications",
+          "terms": [
+            "Paresthesia",
+            "Sinus perforation",
+            "Hematoma",
+            "Wound dehiscence"
+          ],
+          "pearl": "Common surgical complications include mental/IAN paresthesia (mandibular sites), Schneiderian membrane perforation, hematoma, and wound dehiscence; all minimized with CBCT planning and proper flap design."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Microsurgical Instruments by Use",
+          "terms": [
+            "Castroviejo holder",
+            "Buser elevator",
+            "Periotome",
+            "Lucas 87 curette"
+          ],
+          "pearl": "Castroviejo needle holders enable one-handed knot tying at 16x; Buser periosteal elevators preserve periosteum during reflection; periotomes atraumatically incise PDL fibers; Lucas 87 curettes remove apical granulation tissue."
+        }
+      ]
+    },
+    {
+      "id": "auto-20260603-5",
+      "title": "TEMS and Beyond",
+      "topic": "Surgical Endo & Microsurgery",
+      "difficulty": "hard",
+      "date_added": "2026-06-03",
+      "categories": [
+        {
+          "difficulty": "yellow",
+          "name": "Surgical Magnification Options",
+          "terms": [
+            "Loupes 2.5-4.5x",
+            "Operating microscope",
+            "Endoscope adjunct",
+            "Coaxial headlamp"
+          ],
+          "pearl": "Magnification is the single most-cited predictor of microsurgical success; the operating microscope outperforms loupes for retroprep and retrofill placement, with endoscope as a useful adjunct."
+        },
+        {
+          "difficulty": "green",
+          "name": "Ultrasonic Retroprep Tips",
+          "terms": [
+            "CT-1 anterior tip",
+            "CT-2 posterior tip",
+            "Diamond-coated",
+            "Power under 10W"
+          ],
+          "pearl": "CT-series diamond-coated ultrasonic tips at low power (<10W) create centered, parallel 3-mm retropreps that conserve radicular dentin compared with rotary bur preparation."
+        },
+        {
+          "difficulty": "blue",
+          "name": "Bone Augmentation in Surgical Endo",
+          "terms": [
+            "Bio-Oss xenograft",
+            "FDBA allograft",
+            "PRF membrane",
+            "Collagen plug"
+          ],
+          "pearl": "Bio-Oss xenograft and FDBA allograft preserve the buccal plate after large osteotomies; PRF (platelet-rich fibrin) membranes accelerate soft-tissue healing in through-and-through lesions."
+        },
+        {
+          "difficulty": "purple",
+          "name": "Targeted Endodontic Microsurgery (TEMS)",
+          "terms": [
+            "Giacomino 2018",
+            "3D-printed guide",
+            "CBCT planning",
+            "Trephine bur access"
+          ],
+          "pearl": "Giacomino et al. (J Endod 2018) introduced TEMS using CBCT-planned 3D-printed surgical sleeve guides and trephine burs to access calcified or anatomically challenging apices."
+        }
+      ]
     }
   ]
 }
