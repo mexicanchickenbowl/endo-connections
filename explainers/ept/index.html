@@ -1,0 +1,1298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPT Explained</title>
+<meta name="description" content="Animated explainer: how an electric pulp tester works — the circuit, the ramping pulse train, dentinal tubules, A-delta fibers, and why the number isn't a grade.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0b0d1a; --panel:#141733; --text:#f3f1ea; --muted:#9ea3c7; --accent:#5fe3ff; --border:#262b52; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; background:var(--bg); color:var(--text); font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:1180px; margin:0 auto; padding:20px 16px 48px; }
+  header { display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+  h1 { font-size:clamp(20px, 3vw, 28px); margin:0; letter-spacing:-0.01em; }
+  a { color:var(--accent); }
+  .back { font-size:14px; color:var(--muted); text-decoration:none; }
+  .back:hover { color:var(--text); }
+  .player { position:relative; background:#000; border-radius:14px; overflow:hidden; border:1px solid var(--border); }
+  canvas { display:block; width:100%; height:auto; aspect-ratio:16 / 9; }
+  .big-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(5,6,14,.25); border:0; cursor:pointer; padding:0; }
+  .big-play span { width:88px; height:88px; border-radius:50%; background:rgba(95,227,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 0 40px rgba(95,227,255,.45); }
+  .big-play svg { width:36px; height:36px; margin-left:6px; fill:#0b0d1a; }
+  .big-play[hidden] { display:none; }
+  .controls { display:flex; align-items:center; gap:10px; padding:10px 2px; }
+  .controls button { background:var(--panel); color:var(--text); border:1px solid var(--border); border-radius:8px; padding:6px 12px; font:inherit; font-size:14px; cursor:pointer; min-width:44px; min-height:36px; }
+  .controls button[aria-pressed="false"] { color:var(--muted); }
+  .controls input[type=range] { flex:1; min-width:0; accent-color:var(--accent); }
+  .time { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:13px; color:var(--muted); white-space:nowrap; }
+  .chapters { display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 18px; }
+  .chapters button { background:transparent; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:5px 12px; font:inherit; font-size:13px; cursor:pointer; }
+  .chapters button.on { color:var(--bg); background:var(--accent); border-color:var(--accent); }
+  details { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:12px 16px; margin-top:12px; }
+  summary { cursor:pointer; font-weight:600; }
+  .transcript h3 { font-size:14px; color:var(--accent); margin:16px 0 4px; text-transform:uppercase; letter-spacing:.06em; }
+  .transcript p, .refs li { color:#cfd2e8; font-size:14px; line-height:1.6; margin:4px 0; }
+  .note { color:var(--muted); font-size:13px; margin:0; }
+  body.render { background:#000; overflow:hidden; }
+  body.render .wrap { max-width:none; padding:0; }
+  body.render header, body.render .controls, body.render .chapters, body.render details, body.render .big-play, body.render .note { display:none !important; }
+  body.render .player { border:0; border-radius:0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>How an EPT works — is it dark magic?</h1>
+    <a class="back" href="../../">← Endo Connections</a>
+  </header>
+  <div class="player">
+    <canvas id="c" width="1920" height="1080" aria-label="Animated explainer of how an electric pulp tester works"></canvas>
+    <button class="big-play" id="bigPlay" aria-label="Play"><span><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+  </div>
+  <div class="controls">
+    <button id="play">Play</button>
+    <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek">
+    <span class="time" id="time">0:00 / 0:00</span>
+    <button id="cc" aria-pressed="true" title="Captions">CC</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">Prefer a file? <a href="ept-explainer.mp4" download>Download the MP4</a>.</p>
+  <details><summary>Transcript</summary><div class="transcript" id="transcript"></div></details>
+  <details>
+    <summary>Sources</summary>
+    <ol class="refs">
+      <li>Lin J, Chandler NP. Electric pulp testing: a review. <i>Int Endod J</i> 2008;41:365–74.</li>
+      <li>Bender IB, Landau MA, Fonsecca S, Trowbridge HO. The optimum placement-site of the electrode in electric pulp testing of the 12 anterior teeth. <i>JADA</i> 1989;118:305–10.</li>
+      <li>Lin J, Chandler N, Purton D, Monteith B. Appropriate electrode placement site for electric pulp testing first molar teeth. <i>J Endod</i> 2007;33:1296–8.</li>
+      <li>Virtanen ASJ. Electrical stimulation of pulp nerves — comparison of monopolar and bipolar electrode coupling. <i>Pain</i> 1985;23:279–88. (Human perception threshold ≈ 7.2 µA; cat C fibers ≈ 6× A-fiber threshold.)</li>
+      <li>Närhi MVO. The characteristics of intradental sensory units and their responses to stimulation. <i>J Dent Res</i> 1985;64:564–71; Närhi M et al. <i>Proc Finn Dent Soc</i> 1992 (70–80% of pulpal axons unmyelinated).</li>
+      <li>Seltzer S, Bender IB, Ziontz M. The dynamics of pulp inflammation: correlations between diagnostic data and actual histologic findings in the pulp. <i>Oral Surg Oral Med Oral Pathol</i> 1963;16:846–71, 969–77.</li>
+      <li>Fulling HJ, Andreasen JO. Influence of maturation status and tooth type of permanent teeth upon electrometric and thermal pulp testing. <i>Scand J Dent Res</i> 1976;84:286–90; Johnsen DC et al. <i>Anat Rec</i> 1983.</li>
+      <li>Bastos JV et al. Diagnostic accuracy of pulp vitality tests in pulpally-obliterated permanent teeth / after luxation injuries. <i>Dent Traumatol</i> 2014;30:188–92.</li>
+      <li>Petersson K, Söderström C, Kiani-Anaraki M, Lévy G. Evaluation of the ability of thermal and electrical tests to register pulp vitality. <i>Endod Dent Traumatol</i> 1999;15:127–31.</li>
+      <li>Jespersen JJ, Hellstein J, Williamson A, Johnson WT, Qian F. Evaluation of dental pulp sensibility tests in a clinical setting. <i>J Endod</i> 2014;40:351–4.</li>
+      <li>Wilson BL, Broberg C, Baumgartner JC, Harris C, Kron J. Safety of electronic apex locators and pulp testers in patients with implanted cardiac pacemakers or cardioverter/defibrillators. <i>J Endod</i> 2006;32:847–52.</li>
+      <li>Treasure P. Capacitance effect of rubber gloves on electric pulp testers. <i>Int Endod J</i> 1989;22:236–40.</li>
+      <li>Parkell Digitest 3 Instructions for Use (output: pulsed AC packets, ≤ 500 V p-p / 250 µA peak into a 2 MΩ enamel-simulating load; scale 0–64).</li>
+    </ol>
+  </details>
+</div>
+<audio id="narr" src="narration.mp3" preload="auto"></audio>
+<script src="timeline.js"></script>
+<script>
+(() => {
+'use strict';
+const W = 1920, H = 1080;
+const TL = window.TIMELINE;
+const RENDER = new URLSearchParams(location.search).has('render');
+if (RENDER) document.body.classList.add('render');
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+
+// ---------- palette & type ----------
+const C = {
+  text: '#f3f1ea', muted: '#9ea3c7', dim: '#5d6290', panel: '#151834', panel2: '#1c2144', line: '#2b3163',
+  cyan: '#5fe3ff', amber: '#ffb547', violet: '#b48cff', red: '#ff6b6b', green: '#7be495', blue: '#7aa7ff', pink: '#ff8fa3',
+  enamel: '#f5f1e6', dentin: '#e8cf9b', pulp: '#d9566c', pdl: '#c97f95', bone: '#bba57c', gum: '#df8f9c',
+  skin: '#e7b28f', glove: '#5b8def', lcd: '#8dffb0'
+};
+const SANS = 'Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+const MONO = '"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace';
+
+// ---------- math ----------
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const eio = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const eout = t => 1 - Math.pow(1 - t, 3);
+const P = (t, a, d) => clamp((t - a) / d);
+const E = (t, a, d = 0.6) => eio(P(t, a, d));
+const EO = (t, a, d = 0.6) => eout(P(t, a, d));
+function mulberry(seed) {
+  return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+}
+function keyframes(t, kf) { // [[time, value], ...] piecewise linear, clamped
+  if (t <= kf[0][0]) return kf[0][1];
+  for (let i = 1; i < kf.length; i++) if (t < kf[i][0]) return lerp(kf[i - 1][1], kf[i][1], (t - kf[i - 1][0]) / ((kf[i][0] - kf[i - 1][0]) || 1));
+  return kf[kf.length - 1][1];
+}
+
+// ---------- drawing helpers ----------
+function font(size, w = 600, mono = false) { return `${w} ${size}px ${mono ? MONO : SANS}`; }
+function text(s, x, y, o = {}) {
+  ctx.save();
+  if (o.a !== undefined) ctx.globalAlpha *= clamp(o.a);
+  ctx.font = font(o.size || 32, o.w || 600, o.mono);
+  ctx.fillStyle = o.c || C.text;
+  ctx.textAlign = o.al || 'left';
+  ctx.textBaseline = o.bl || 'alphabetic';
+  if (o.ls) ctx.letterSpacing = o.ls + 'px';
+  if (o.glow) { ctx.shadowColor = o.glow; ctx.shadowBlur = o.gb || 24; }
+  ctx.fillText(s, x, y);
+  ctx.restore();
+}
+function measure(s, size, w = 600, mono = false, ls = 0) {
+  ctx.save(); ctx.font = font(size, w, mono); if (ls) ctx.letterSpacing = ls + 'px';
+  const m = ctx.measureText(s).width; ctx.restore(); return m;
+}
+function wrap(s, maxW, size, w = 600) {
+  const words = s.split(' '), lines = []; let cur = '';
+  ctx.save(); ctx.font = font(size, w);
+  for (const wd of words) {
+    const t = cur ? cur + ' ' + wd : wd;
+    if (ctx.measureText(t).width > maxW && cur) { lines.push(cur); cur = wd; } else cur = t;
+  }
+  if (cur) lines.push(cur);
+  ctx.restore(); return lines;
+}
+function para(s, x, y, maxW, o = {}) {
+  const size = o.size || 28, lines = wrap(s, maxW, size, o.w || 500), lh = o.lh || size * 1.35;
+  lines.forEach((ln, i) => text(ln, x, y + i * lh, Object.assign({ w: 500 }, o, { size })));
+  return lines.length * lh;
+}
+function rrect(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+function panel(x, y, w, h, o = {}) {
+  ctx.save();
+  if (o.a !== undefined) ctx.globalAlpha *= clamp(o.a);
+  rrect(x, y, w, h, o.r ?? 24);
+  ctx.fillStyle = o.fill || 'rgba(21,24,52,0.92)'; ctx.fill();
+  if (o.stroke !== false) { ctx.lineWidth = o.lw || 2; ctx.strokeStyle = o.stroke || C.line; ctx.stroke(); }
+  ctx.restore();
+}
+function line(x1, y1, x2, y2, col, lw = 3, dash) {
+  ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineCap = 'round';
+  if (dash) ctx.setLineDash(dash);
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.restore();
+}
+function arrow(x1, y1, x2, y2, col, lw = 4, head = 16) {
+  const a = Math.atan2(y2 - y1, x2 - x1);
+  line(x1, y1, x2 - Math.cos(a) * head * 0.6, y2 - Math.sin(a) * head * 0.6, col, lw);
+  ctx.save(); ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - head * Math.cos(a - .45), y2 - head * Math.sin(a - .45));
+  ctx.lineTo(x2 - head * Math.cos(a + .45), y2 - head * Math.sin(a + .45));
+  ctx.closePath(); ctx.fill(); ctx.restore();
+}
+function pill(s, x, y, o = {}) {
+  const size = o.size || 26, w = measure(s, size, o.w || 600) + size * 1.3, h = size * 1.85;
+  const x0 = o.al === 'center' ? x - w / 2 : o.al === 'right' ? x - w : x;
+  ctx.save();
+  if (o.a !== undefined) ctx.globalAlpha *= clamp(o.a);
+  rrect(x0, y - h / 2, w, h, h / 2);
+  ctx.fillStyle = o.fill || hexA(o.col || C.cyan, 0.14); ctx.fill();
+  ctx.lineWidth = 2; ctx.strokeStyle = o.col || C.cyan; ctx.stroke();
+  ctx.restore();
+  text(s, x0 + w / 2, y + size * 0.36, { size, w: o.w || 600, c: o.c || C.text, al: 'center', a: o.a });
+  return w;
+}
+function tick(x, y, s, col, a = 1, lw) { // check mark
+  ctx.save(); ctx.globalAlpha *= a; ctx.strokeStyle = col; ctx.lineWidth = lw || s * 0.22; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath(); ctx.moveTo(x - s * 0.45, y + s * 0.02); ctx.lineTo(x - s * 0.12, y + s * 0.35); ctx.lineTo(x + s * 0.5, y - s * 0.38); ctx.stroke(); ctx.restore();
+}
+function cross(x, y, s, col, a = 1, lw) {
+  ctx.save(); ctx.globalAlpha *= a; ctx.strokeStyle = col; ctx.lineWidth = lw || s * 0.22; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(x - s * 0.38, y - s * 0.38); ctx.lineTo(x + s * 0.38, y + s * 0.38);
+  ctx.moveTo(x + s * 0.38, y - s * 0.38); ctx.lineTo(x - s * 0.38, y + s * 0.38); ctx.stroke(); ctx.restore();
+}
+function hexA(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`; }
+const spriteCache = {};
+function sprite(col) {
+  if (spriteCache[col]) return spriteCache[col];
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const g = c.getContext('2d'), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.16, hexA(col, 1)); gr.addColorStop(0.42, hexA(col, 0.32)); gr.addColorStop(1, hexA(col, 0));
+  g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+  return (spriteCache[col] = c);
+}
+function glow(x, y, r, col, a = 1) {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha *= clamp(a); ctx.globalCompositeOperation = 'lighter';
+  ctx.drawImage(sprite(col), x - r, y - r, r * 2, r * 2); ctx.restore();
+}
+
+// ---------- background ----------
+const bg = document.createElement('canvas'); bg.width = W; bg.height = H;
+(() => {
+  const g = bg.getContext('2d'), gr = g.createRadialGradient(W * .5, H * .42, 80, W * .5, H * .5, W * .78);
+  gr.addColorStop(0, '#171b3d'); gr.addColorStop(1, '#07080f');
+  g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  g.fillStyle = 'rgba(160,170,255,0.045)';
+  for (let x = 24; x < W; x += 48) for (let y = 24; y < H; y += 48) g.fillRect(x, y, 2, 2);
+})();
+
+// ---------- paths ----------
+function catmull(pts, seg = 10) {
+  const out = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[Math.max(i - 1, 0)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(i + 2, pts.length - 1)];
+    for (let j = 0; j < seg; j++) {
+      const t = j / seg, t2 = t * t, t3 = t2 * t, f = k => 0.5 * ((2 * p1[k]) + (-p0[k] + p2[k]) * t + (2 * p0[k] - 5 * p1[k] + 4 * p2[k] - p3[k]) * t2 + (-p0[k] + 3 * p1[k] - 3 * p2[k] + p3[k]) * t3);
+      out.push([f(0), f(1)]);
+    }
+  }
+  out.push(pts[pts.length - 1]);
+  return out;
+}
+class Poly {
+  constructor(pts) {
+    this.p = pts; this.c = [0];
+    for (let i = 1; i < pts.length; i++) this.c.push(this.c[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+    this.L = this.c[this.c.length - 1];
+  }
+  at(s) {
+    s = clamp(s, 0, this.L);
+    let lo = 1, hi = this.c.length - 1;
+    while (lo < hi) { const mid = (lo + hi) >> 1; if (this.c[mid] < s) lo = mid + 1; else hi = mid; }
+    const t = (s - this.c[lo - 1]) / ((this.c[lo] - this.c[lo - 1]) || 1), a = this.p[lo - 1], b = this.p[lo];
+    return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+  }
+  near(pt) {
+    let best = 0, bd = 1e9;
+    this.p.forEach((q, i) => { const d = Math.hypot(q[0] - pt[0], q[1] - pt[1]); if (d < bd) { bd = d; best = i; } });
+    return this.c[best];
+  }
+  stroke(col, lw, upTo = Infinity, dash) {
+    ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    if (dash) ctx.setLineDash(dash);
+    ctx.beginPath(); ctx.moveTo(this.p[0][0], this.p[0][1]);
+    for (let i = 1; i < this.p.length; i++) {
+      if (this.c[i] > upTo) { const q = this.at(upTo); ctx.lineTo(q[0], q[1]); break; }
+      ctx.lineTo(this.p[i][0], this.p[i][1]);
+    }
+    ctx.stroke(); ctx.restore();
+  }
+}
+
+// ---------- tooth (longitudinal section of an incisor; 1 unit ≈ 1/1000 tooth length) ----------
+function hermite(pts) {
+  const n = pts.length, m = pts.map((p, i) => {
+    const a = pts[Math.max(i - 1, 0)], b = pts[Math.min(i + 1, n - 1)];
+    return (b[1] - a[1]) / ((b[0] - a[0]) || 1);
+  });
+  return y => {
+    if (y <= pts[0][0]) return pts[0][1];
+    if (y >= pts[n - 1][0]) return pts[n - 1][1];
+    let i = 0; while (y > pts[i + 1][0]) i++;
+    const y0 = pts[i][0], h = pts[i + 1][0] - y0, t = (y - y0) / h, t2 = t * t, t3 = t2 * t;
+    return (2 * t3 - 3 * t2 + 1) * pts[i][1] + (t3 - 2 * t2 + t) * h * m[i] + (-2 * t3 + 3 * t2) * pts[i + 1][1] + (t3 - t2) * h * m[i + 1];
+  };
+}
+const OUT = hermite([[0, 16], [30, 54], [100, 100], [200, 135], [290, 148], [360, 140], [400, 128], [550, 106], [700, 82], [850, 52], [950, 26], [1000, 8]]);
+const DEJ = hermite([[52, 0], [70, 30], [130, 72], [230, 104], [320, 116], [400, 128]]);
+const PULP = hermite([[165, 0], [180, 16], [230, 32], [320, 44], [420, 42], [560, 30], [720, 19], [880, 10], [990, 5], [1000, 5]]);
+const TOOTH = (() => {
+  const out = new Path2D(), enamel = new Path2D(), pulp = new Path2D(), pdl = new Path2D(), root = new Path2D();
+  out.moveTo(-OUT(0), 0);
+  for (let y = 0; y <= 1000; y += 4) out.lineTo(-OUT(y), y);
+  for (let y = 1000; y >= 0; y -= 4) out.lineTo(OUT(y), y);
+  out.closePath();
+  enamel.moveTo(-OUT(400), 400);
+  for (let y = 400; y >= 0; y -= 4) enamel.lineTo(-OUT(y), y);
+  for (let y = 0; y <= 400; y += 4) enamel.lineTo(OUT(y), y);
+  enamel.closePath();
+  enamel.moveTo(-DEJ(400), 400);
+  for (let y = 400; y >= 52; y -= 4) enamel.lineTo(-DEJ(y), y);
+  for (let y = 52; y <= 400; y += 4) enamel.lineTo(DEJ(y), y);
+  enamel.closePath();
+  pulp.moveTo(0, 165);
+  for (let y = 165; y <= 1000; y += 4) pulp.lineTo(-PULP(y), y);
+  for (let y = 1000; y >= 165; y -= 4) pulp.lineTo(PULP(y), y);
+  pulp.closePath();
+  pdl.moveTo(-OUT(430) - 14, 430);
+  for (let y = 430; y <= 1000; y += 4) pdl.lineTo(-OUT(y) - 14, y);
+  pdl.arc(0, 1000, OUT(1000) + 14, Math.PI, 0, true);
+  for (let y = 1000; y >= 430; y -= 4) pdl.lineTo(OUT(y) + 14, y);
+  pdl.closePath();
+  // dentinal tubule hints
+  const tub = [];
+  for (let k = 1; k < 24; k++) {
+    const u = k / 24, side = u < .5 ? -1 : 1, f = u < .5 ? u / .5 : (1 - u) / .5;
+    const yD = 400 - f * (400 - 60), yP = 420 - f * (420 - 175);
+    const a = [side * DEJ(yD) * 0.98, yD], b = [side * PULP(yP) * 1.05, yP];
+    tub.push([a, [lerp(a[0], b[0], .5) + side * 10, lerp(a[1], b[1], .5) - 12], b]);
+  }
+  for (let y = 460; y <= 930; y += 36) for (const side of [-1, 1]) tub.push([[side * (OUT(y) - 6), y - 6], [side * lerp(OUT(y), PULP(y), .5), y], [side * (PULP(y) + 4), y + 4]]);
+  const r = mulberry(7), trab = [];
+  for (let i = 0; i < 170; i++) {
+    const x = (r() * 2 - 1) * 420, y = 480 + r() * 600;
+    if (Math.abs(x) < OUT(Math.min(y, 1000)) + 34 && y < 1040) continue;
+    trab.push([x, y, 6 + r() * 16, 4 + r() * 9, r() * Math.PI]);
+  }
+  return { out, enamel, pulp, pdl, tub, trab, root };
+})();
+function drawTooth(x, y, s, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  if (o.a !== undefined) ctx.globalAlpha *= clamp(o.a);
+  if (o.bone !== false) {
+    const bb = o.boneBottom || 1060;
+    ctx.save(); ctx.globalAlpha *= (o.boneA ?? 1);
+    const bg2 = ctx.createLinearGradient(0, 470, 0, bb); bg2.addColorStop(0, '#c9b48b'); bg2.addColorStop(1, '#a8916a');
+    ctx.fillStyle = bg2; rrect(-440, 470, 880, bb - 470, 46); ctx.fill();
+    ctx.fillStyle = 'rgba(110,88,55,0.32)';
+    for (const p of TOOTH.trab) if (p[1] < bb - 10) { ctx.beginPath(); ctx.ellipse(p[0], p[1], p[2], p[3], p[4], 0, Math.PI * 2); ctx.fill(); }
+    ctx.fillStyle = C.gum;
+    ctx.beginPath(); ctx.moveTo(-440, 425); ctx.quadraticCurveTo(-230, 392, -OUT(352) + 2, 352); ctx.lineTo(OUT(352) - 2, 352);
+    ctx.quadraticCurveTo(230, 392, 440, 425); ctx.lineTo(440, 545); ctx.lineTo(-440, 545); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = C.pdl; ctx.fill(TOOTH.pdl);
+    ctx.restore();
+  }
+  const dg = ctx.createLinearGradient(-150, 0, 150, 0); dg.addColorStop(0, '#dcbf86'); dg.addColorStop(.5, '#efd7a6'); dg.addColorStop(1, '#d8ba80');
+  ctx.fillStyle = dg; ctx.fill(TOOTH.out);
+  ctx.save(); ctx.strokeStyle = 'rgba(150,108,48,0.28)'; ctx.lineWidth = 2.4;
+  for (const [a, m, b] of TOOTH.tub) { ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.quadraticCurveTo(m[0], m[1], b[0], b[1]); ctx.stroke(); }
+  ctx.restore();
+  const eg = ctx.createLinearGradient(0, 0, 0, 400); eg.addColorStop(0, '#fbf9f3'); eg.addColorStop(1, '#ece5d3');
+  ctx.fillStyle = eg; ctx.fill(TOOTH.enamel, 'evenodd');
+  const pg = ctx.createLinearGradient(0, 165, 0, 1000); pg.addColorStop(0, '#e2687c'); pg.addColorStop(1, '#b8435a');
+  ctx.fillStyle = pg; ctx.fill(TOOTH.pulp);
+  if (o.pulpGlow > 0) {
+    ctx.save(); ctx.globalAlpha *= clamp(o.pulpGlow); ctx.shadowColor = C.amber; ctx.shadowBlur = 60;
+    ctx.fillStyle = 'rgba(255,190,90,0.85)'; ctx.fill(TOOTH.pulp); ctx.restore();
+  }
+  ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(70,50,30,0.55)'; ctx.stroke(TOOTH.out);
+  if (o.restoration) {
+    ctx.fillStyle = '#b9bfcc'; ctx.beginPath(); ctx.moveTo(-OUT(120), 120); ctx.lineTo(-30, 90); ctx.lineTo(-20, 220); ctx.lineTo(-OUT(230), 230); ctx.closePath(); ctx.fill();
+  }
+  ctx.restore();
+}
+
+// ---------- EPT wand ----------
+// wand frame: probe tip at origin, body axis along +x at y = -70
+const LAY = { tx: 700, ty: 330, s: 0.52, ang: -0.2 };
+const TIP = [LAY.tx, LAY.ty - 4];
+function wandPt(x, y, tip = TIP, ang = LAY.ang) {
+  return [tip[0] + x * Math.cos(ang) - y * Math.sin(ang), tip[1] + x * Math.sin(ang) + y * Math.cos(ang)];
+}
+function drawWand(tx, ty, ang, o = {}) {
+  ctx.save(); ctx.translate(tx, ty); ctx.rotate(ang);
+  if (o.a !== undefined) ctx.globalAlpha *= clamp(o.a);
+  ctx.strokeStyle = '#dfe3ee'; ctx.lineWidth = 8; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(14, -66, 120, -70); ctx.stroke();
+  ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.beginPath(); ctx.ellipse(0, 1, 11, 7, 0, 0, Math.PI * 2); ctx.fill(); // toothpaste dab
+  ctx.fillStyle = '#3a3f66'; ctx.beginPath(); ctx.moveTo(108, -80); ctx.lineTo(176, -104); ctx.lineTo(176, -36); ctx.lineTo(108, -60); ctx.closePath(); ctx.fill();
+  const g = ctx.createLinearGradient(0, -108, 0, -32); g.addColorStop(0, '#4b5285'); g.addColorStop(.45, '#2e3360'); g.addColorStop(1, '#1b1f40');
+  ctx.fillStyle = g; rrect(170, -106, 600, 72, 36); ctx.fill();
+  ctx.fillStyle = '#0c1912'; rrect(282, -96, 172, 52, 9); ctx.fill();
+  if (o.num !== undefined && o.num !== '') text(String(o.num), 444, -55, { size: 40, mono: true, w: 700, c: C.lcd, al: 'right', glow: 'rgba(141,255,176,.7)', gb: 12, a: o.numA ?? 1 });
+  const mg = ctx.createLinearGradient(0, -106, 0, -34); mg.addColorStop(0, '#f6f7fb'); mg.addColorStop(.5, '#a3a9bd'); mg.addColorStop(1, '#e6e9f0');
+  ctx.fillStyle = mg; ctx.fillRect(600, -106, 100, 72);
+  ctx.strokeStyle = 'rgba(0,0,0,0.25)'; ctx.lineWidth = 2; ctx.strokeRect(600, -106, 100, 72);
+  if (o.bandGlow > 0) glow(650, -70, 90, C.cyan, o.bandGlow * 0.8);
+  if (o.dispGlow > 0) { ctx.save(); ctx.globalAlpha *= o.dispGlow; ctx.strokeStyle = C.cyan; ctx.lineWidth = 4; rrect(276, -102, 184, 64, 12); ctx.stroke(); ctx.restore(); }
+  if (o.glove > 0) drawGlove(o.glove);
+  ctx.restore();
+}
+function drawGlove(k) {
+  ctx.save(); ctx.translate(0, (1 - eout(k)) * 260); ctx.globalAlpha *= clamp(k * 1.5);
+  ctx.fillStyle = C.glove; ctx.strokeStyle = '#2f5fc0'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(470, 20); ctx.lineTo(560, 20); ctx.lineTo(590, 110); ctx.lineTo(500, 120); ctx.closePath(); ctx.fill(); // wrist
+  ctx.beginPath(); ctx.ellipse(520, 6, 92, 50, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  for (let i = 0; i < 4; i++) { rrect(458 + i * 30, -128, 27, 100, 13); ctx.fill(); ctx.stroke(); }
+  rrect(410, -60, 80, 30, 15); ctx.fill(); ctx.stroke(); // thumb
+  ctx.restore();
+}
+function drawFinger(B, T, r = 22, a = 1) {
+  const ang = Math.atan2(T[1] - B[1], T[0] - B[0]), len = Math.hypot(T[0] - B[0], T[1] - B[1]);
+  ctx.save(); ctx.globalAlpha *= a; ctx.translate(B[0], B[1]);
+  ctx.fillStyle = C.skin; ctx.strokeStyle = '#b97f5c'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.arc(30, -30, 78, 0, Math.PI * 2); ctx.fill(); // palm
+  ctx.rotate(ang);
+  rrect(-20, -r, len + r + 20, r * 2, r); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = '#f6d3c0'; rrect(len - 18, -r + 6, 30, r - 4, 8); ctx.fill(); // nail
+  ctx.strokeStyle = 'rgba(150,90,60,0.5)'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(len * 0.45, -r + 4); ctx.lineTo(len * 0.45, r - 4); ctx.stroke();
+  ctx.restore();
+}
+const FINGER_B = [1700, 18], FINGER_T = [1322, 70];
+function patientFinger(arrive, lift) {
+  const off = [(1 - eout(arrive)) * 260 + lift * 70, -(1 - eout(arrive)) * 200 - lift * 62];
+  drawFinger([FINGER_B[0] + off[0], FINGER_B[1] + off[1]], [FINGER_T[0] + off[0], FINGER_T[1] + off[1]], 22, clamp(arrive * 2));
+}
+function lcd(x, y, w, h, val, o = {}) {
+  ctx.save(); if (o.a !== undefined) ctx.globalAlpha *= clamp(o.a);
+  panel(x, y, w, h, { fill: '#232850', stroke: '#3a4080', r: 26 });
+  rrect(x + 26, y + 46, w - 52, h - 72, 14); ctx.fillStyle = '#0a1710'; ctx.fill();
+  text(o.label || 'STIMULUS LEVEL', x + 30, y + 34, { size: 20, w: 700, c: C.muted, ls: 3 });
+  const show = o.blink ? (Math.floor(o.blink * 2.4) % 2 === 0) : true;
+  if (show && val !== '') text(String(val), x + w - 46, y + h - 52, { size: o.size || 150, mono: true, w: 700, c: C.lcd, al: 'right', glow: 'rgba(141,255,176,.65)', gb: 26 });
+  ctx.restore();
+}
+const SPARK = (() => { const r = mulberry(3), a = []; for (let i = 0; i < 90; i++) a.push([r() * W, r() * H, 2 + r() * 6, r() * 6.28, 0.3 + r() * 0.8, r() < .75 ? C.violet : C.amber]); return a; })();
+function sparkles(t, a) {
+  for (const [x, y, r, ph, sp, col] of SPARK) {
+    const tw = 0.5 + 0.5 * Math.sin(t * 2.2 * sp + ph);
+    glow(x + Math.sin(t * 0.3 + ph) * 18, y - ((t * 14 * sp) % 60), r * 3, col, a * tw * 0.55);
+  }
+}
+function tingle(x, y, k, t) {
+  ctx.save(); ctx.globalAlpha *= clamp(k); ctx.strokeStyle = C.amber; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.shadowColor = C.amber; ctx.shadowBlur = 18;
+  for (let i = 0; i < 7; i++) {
+    const a = -Math.PI * 0.95 + i * (Math.PI * 0.9 / 6), r0 = 110 + 30 * (1 - k), r1 = r0 + 70;
+    ctx.beginPath();
+    for (let j = 0; j <= 6; j++) {
+      const r = lerp(r0, r1, j / 6), off = (j % 2 ? 1 : -1) * 9;
+      const px = x + Math.cos(a) * r - Math.sin(a) * off, py = y + Math.sin(a) * r + Math.cos(a) * off;
+      j ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+    }
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ---------- the current loop (shared by scenes 1–2) ----------
+const U = (u, v) => [LAY.tx + u * LAY.s, LAY.ty + v * LAY.s];
+const BODY = [[700, 878], [760, 896], [1100, 904], [1500, 896], [1700, 850], [1790, 700], [1810, 450], [1790, 220], [1765, 92], [1712, 32]];
+const BODY_POLY = new Poly(catmull(BODY, 10));
+const LOOPS = (() => {
+  const top = [[0, -4], [0, 40], [0, 120], [0, 200], [0, 320]];
+  const variants = [
+    [...top, [0, 450], [0, 600], [0, 760], [0, 900], [0, 990], [0, 1032]],
+    [...top, [-10, 450], [-40, 560], [-115, 650], [-190, 760], [-170, 900], [-60, 1010], [0, 1032]],
+    [...top, [10, 450], [40, 580], [110, 690], [180, 800], [150, 930], [50, 1015], [0, 1032]]
+  ];
+  const wand = [wandPt(650, -70), wandPt(470, -70), wandPt(300, -70), wandPt(150, -70), wandPt(70, -64), wandPt(22, -40), wandPt(0, 0)];
+  return variants.map(v => new Poly([...catmull(v.map(p => U(p[0], p[1])), 6), ...catmull(BODY, 8).slice(1), FINGER_T, ...wand]));
+})();
+function flowDots(ft, alpha, nPer = 16, speed = 230) {
+  if (alpha <= 0) return;
+  LOOPS.forEach((L, vi) => {
+    for (let i = 0; i < nPer; i++) {
+      const s = ((ft * speed + i * L.L / nPer + vi * 37) % L.L + L.L) % L.L, p = L.at(s);
+      glow(p[0], p[1], 18, C.cyan, alpha * 0.9);
+      ctx.save(); ctx.globalAlpha *= clamp(alpha); ctx.fillStyle = '#e9fbff'; ctx.strokeStyle = '#1aa9d6'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(p[0], p[1], 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); ctx.restore();
+    }
+  });
+}
+
+// ======================= SCENES =======================
+function sceneCold(S) {
+  const { t, m } = S;
+  sparkles(t, 0.35 + 0.65 * E(t, m.title - 0.4, 0.8));
+  const ga = 1 - E(t, m.title - 0.5, 0.7);
+  const num = t < 1.6 ? '' : Math.floor(keyframes(t, [[m.climb, 0], [m.n20, 20], [m.n30, 30], [m.n42, 42]]));
+  if (ga > 0.002) {
+    ctx.save(); ctx.globalAlpha *= ga;
+    const flash = t >= m.n42 ? Math.max(0, 1 - (t - m.n42) / 1.8) : 0;
+    drawTooth(LAY.tx, LAY.ty, LAY.s, { boneBottom: 1040, pulpGlow: flash });
+    const k = E(t, 0.1, 1.4);
+    drawWand(lerp(1250, TIP[0], k), lerp(60, TIP[1], k), LAY.ang, { num });
+    patientFinger(E(t, 0.5, 1.0), E(t, m.go, 0.5));
+    if (flash > 0) tingle(LAY.tx, LAY.ty + 70, flash, t);
+    lcd(1150, 470, 560, 280, num, { a: E(t, 1.4, 0.6), blink: t > m.go + 0.4 ? t : 0 });
+    if (t > m.go) text('lets go', 1430, 300, { size: 34, w: 700, c: C.amber, al: 'center', a: E(t, m.go, 0.4) * (1 - E(t, m.title - 0.8, 0.4)) });
+    ctx.restore();
+  }
+  const ta = E(t, m.title - 0.15, 0.7);
+  if (ta > 0) {
+    const y = lerp(500, 330, E(t, m.no, 0.8));
+    text('Dark magic?', 960, y, { size: 150, w: 800, al: 'center', c: '#e2d4ff', glow: C.violet, gb: 46, a: ta });
+    if (t > m.no) {
+      const w = measure('Dark magic?', 150, 800), k = E(t, m.no + 0.1, 0.45);
+      line(960 - w / 2 - 20, y - 52, 960 - w / 2 - 20 + (w + 40) * k, y - 52, C.red, 11);
+    }
+    const tags = [['a closed circuit', m.c1, C.cyan, 470], ['a ramping pulse train', m.c2, C.cyan, 960], ['one kind of nerve fiber', m.c3, C.amber, 1450]];
+    for (const [s, tm, col, x] of tags) pill(s, x, 520, { size: 32, col, al: 'center', a: E(t, tm - 0.1, 0.4) });
+    const mt = E(t, m.open - 0.25, 0.8);
+    text('How an electric pulp tester', 960, 700, { size: 70, w: 800, al: 'center', a: mt });
+    text('actually works', 960, 790, { size: 70, w: 800, al: 'center', c: C.cyan, glow: C.cyan, gb: 22, a: mt });
+  }
+}
+
+function sceneCircuit(S) {
+  const { t, m } = S;
+  const lead = new Poly(LOOPS[0].p);
+  const marks = {
+    enamel: lead.near(U(0, 40)), dentin: lead.near(U(0, 120)), pulp: lead.near(U(0, 330)), pdl: lead.near(U(0, 760)),
+    body: lead.near([1100, 904]), hand: lead.near(FINGER_T), device: lead.near(wandPt(300, -70))
+  };
+  const leadKF = [[m.s1, 0], [m.s2, marks.enamel], [m.s3, marks.dentin], [m.s4, marks.pulp], [m.s5, marks.pdl], [m.s6, marks.body],
+    [m.s7, marks.hand], [m.lip, marks.device], [m.lip + 1.4, lead.L]];
+  const released = t >= m.release;
+  // body ribbon
+  const rib = E(t, m.ret, 1.2);
+  if (rib > 0) {
+    BODY_POLY.stroke('rgba(223,143,156,0.10)', 54, BODY_POLY.L * rib);
+    BODY_POLY.stroke('rgba(223,143,156,0.55)', 3, BODY_POLY.L * rib, [10, 12]);
+    text('through the patient’s body', 1320, 872, { size: 24, w: 600, c: '#eaa6b1', al: 'center', a: rib });
+  }
+  drawTooth(LAY.tx, LAY.ty, LAY.s, { boneBottom: 1040, pulpGlow: 0 });
+  // current
+  const ft = Math.min(t, m.release) - m.s1;
+  const leadDone = t > m.lip + 1.4;
+  const dotA = t < m.s1 ? 0 : (leadDone ? 1 : 0.4) * (released ? 1 - P(t, m.release + 0.15, 0.7) : 1) * E(t, m.s1, 0.8);
+  flowDots(Math.max(ft, 0), dotA);
+  const glv = E(t, m.glove - 0.1, 0.7);
+  drawWand(TIP[0], TIP[1], LAY.ang, { num: '', dispGlow: E(t, m.gen, .4) * (1 - E(t, m.s1 - .5, .4)), bandGlow: released ? 0 : E(t, m.ret, .5) * (1 - E(t, m.s1, .5)), glove: glv });
+  patientFinger(1, E(t, m.release, 0.5));
+  // lead pulse
+  if (t >= m.s1 && t <= m.lip + 1.5) {
+    const s = keyframes(t, leadKF);
+    for (let i = 8; i >= 0; i--) { const p = lead.at(s - i * 14); glow(p[0], p[1], 34 - i * 2.5, C.cyan, (1 - i / 9) * 0.9); }
+    const p = lead.at(s); glow(p[0], p[1], 46, '#ffffff', 0.5);
+  }
+  // intro labels
+  const la = 1 - E(t, m.s1 - 0.6, 0.5);
+  if (la > 0) {
+    const gA = E(t, m.gen - 0.1, 0.5) * la, dp = wandPt(365, -110);
+    if (gA > 0) { const lx = 560 + measure('Battery-powered pulse generator', 34, 700); line(lx + 12, 108, dp[0] - 6, dp[1] - 8, hexA(C.cyan, 0.7 * gA), 2, [6, 6]); text('Battery-powered pulse generator', 560, 118, { size: 34, w: 700, a: gA }); }
+    pill('2 electrodes', 560, 178, { size: 28, a: E(t, m.two - 0.1, 0.4) * la, al: 'left' });
+    const tA = E(t, m.tip - 0.1, 0.5) * la;
+    if (tA > 0) { glow(TIP[0], TIP[1], 40, C.cyan, tA); text('① Active electrode', 640, 300, { size: 32, w: 700, c: C.cyan, al: 'right', a: tA }); text('the probe tip', 640, 338, { size: 26, w: 500, c: C.muted, al: 'right', a: tA }); }
+    const rA = E(t, m.ret - 0.1, 0.5) * la;
+    if (rA > 0) { text('② Return electrode', 1740, 470, { size: 32, w: 700, c: C.pink, al: 'right', a: rA }); text('the patient — hand on the metal band', 1740, 510, { size: 26, w: 500, c: C.muted, al: 'right', a: rA }); }
+  }
+  // step list
+  const listA = E(t, m.s1 - 0.4, 0.6);
+  if (listA > 0) {
+    const items = [['Probe tip', 'active electrode'], ['Enamel'], ['Dentin', 'fluid-filled tubules'], ['Pulp'], ['PDL & bone'], ["Patient's body"], ['Hand on handle', 'or a lip clip'], ['Back into the device']];
+    const bounds = [0, marks.enamel, marks.dentin, marks.pulp, marks.pdl, marks.body, marks.hand, marks.device];
+    const s = keyframes(t, leadKF), animating = t >= m.s1 && t <= m.lip + 1.4;
+    let y = 236;
+    items.forEach(([ti, sub], i) => {
+      const active = animating && s >= bounds[i] && (i === 7 || s < bounds[i + 1]);
+      const seen = !animating || s >= bounds[i];
+      const col = active ? C.cyan : seen ? C.text : C.dim;
+      ctx.save(); ctx.globalAlpha *= listA;
+      ctx.beginPath(); ctx.arc(84, y - 10, 20, 0, Math.PI * 2); ctx.fillStyle = active ? C.cyan : seen ? '#2b3163' : '#1a1e3c'; ctx.fill();
+      ctx.restore();
+      text(String(i + 1), 84, y - 1, { size: 22, w: 700, al: 'center', c: active ? '#0b0d1a' : col, a: listA });
+      if (active) glow(84, y - 10, 46, C.cyan, 0.5 * listA);
+      text(ti, 120, y, { size: 29, w: active ? 800 : 600, c: col, a: listA });
+      if (sub) text(sub, 120, y + 30, { size: 21, w: 500, c: i === 6 && t > m.lip ? C.cyan : C.muted, a: listA * (seen ? 1 : 0.5) });
+      y += sub ? 80 : 60;
+    });
+  }
+  // glove
+  if (glv > 0) {
+    const ga = glv * (1 - E(t, m.release - 0.2, 0.4) * 0.6);
+    text('Clinician’s glove ≈ insulator', 1260, 470, { size: 38, w: 800, c: '#9fc0ff', al: 'center', a: ga });
+    text('you can’t reliably complete the loop', 1260, 512, { size: 26, w: 500, c: C.muted, al: 'center', a: ga });
+    const g2 = E(t, m.gl2 - 0.1, 0.5) * ga;
+    if (g2 > 0) pill('gloved, no lip clip → readings creep up, or never come', 1260, 572, { size: 24, col: C.blue, al: 'center', a: g2 });
+  }
+  if (released) {
+    const k = E(t, m.release, 0.4), b = wandPt(650, -112);
+    glow(b[0] + 20, b[1] - 20, 60 * (1 - P(t, m.release, 0.5)) + 1, C.amber, 1 - P(t, m.release, 0.6));
+    text('OPEN CIRCUIT', 1260, 690, { size: 64, w: 800, c: C.amber, al: 'center', glow: C.amber, gb: 26, a: k, ls: 4 });
+    text('current stops instantly', 1260, 736, { size: 28, w: 500, c: C.muted, al: 'center', a: k });
+    const o = E(t, m.off - 0.1, 0.5);
+    if (o > 0) pill('the off switch is in the patient’s hand', 1260, 806, { size: 28, col: C.amber, al: 'center', a: o });
+  }
+}
+
+function sceneStimulus(S) {
+  const { t, m } = S;
+  const A = 1 - E(t, m.ohm - 0.3, 0.6), B = E(t, m.ohm - 0.1, 0.7);
+  const level = tt => tt < m.pulses ? 0 : tt < m.ramp ? 4 : Math.min(80, lerp(4, 80, (tt - m.ramp) / (m.max + 0.3 - m.ramp)));
+  if (A > 0) {
+    ctx.save(); ctx.globalAlpha *= A;
+    panel(80, 130, 1100, 600);
+    text('OUTPUT AT THE PROBE TIP', 120, 182, { size: 22, w: 700, c: C.muted, ls: 3 });
+    text('stylized — not to scale', 1150, 182, { size: 20, w: 500, c: C.dim, al: 'right' });
+    const x0 = 120, x1 = 1140, base = 680;
+    ctx.strokeStyle = 'rgba(120,130,200,0.12)'; ctx.lineWidth = 1;
+    for (let gx = x0; gx <= x1; gx += 60) { ctx.beginPath(); ctx.moveTo(gx, 210); ctx.lineTo(gx, base); ctx.stroke(); }
+    for (let gy = base; gy >= 210; gy -= 60) { ctx.beginPath(); ctx.moveTo(x0, gy); ctx.lineTo(x1, gy); ctx.stroke(); }
+    line(x0, base, x1, base, '#4a5190', 3);
+    // steady DC first
+    const dcA = 1 - E(t, m.pulses - 0.2, 0.5);
+    if (dcA > 0) {
+      const w = (x1 - x0) * E(t, 0.3, 1.2);
+      ctx.save(); ctx.globalAlpha *= dcA; ctx.shadowColor = C.cyan; ctx.shadowBlur = 16;
+      line(x0, base - 150, x0 + w, base - 150, C.cyan, 6); ctx.restore();
+      const ck = E(t, m.dc + 0.1, 0.35) * dcA;
+      if (ck > 0) { cross(630, base - 150, 120, C.red, ck, 16); text('a steady current', 630, base - 240, { size: 34, w: 700, c: C.red, al: 'center', a: ck }); }
+    }
+    // pulses
+    if (t >= m.pulses) {
+      const dtp = 0.115, v = 310, tops = [];
+      const kMax = Math.floor((t - m.pulses) / dtp);
+      for (let k = Math.max(0, kMax - Math.ceil((x1 - x0) / (v * dtp)) - 1); k <= kMax; k++) {
+        const tk = m.pulses + k * dtp, x = x1 - (t - tk) * v;
+        if (x < x0 + 4) continue;
+        const h = 22 + 340 * level(tk) / 80;
+        ctx.fillStyle = hexA(C.cyan, 0.9); ctx.fillRect(x - 4, base - h, 8, h);
+        glow(x, base - h, 16, C.cyan, 0.7);
+        tops.push([x, base - h]);
+      }
+      if (t > m.ramp && tops.length > 1) {
+        ctx.save(); ctx.globalAlpha *= E(t, m.ramp, 0.5); ctx.strokeStyle = C.amber; ctx.lineWidth = 3; ctx.setLineDash([10, 8]);
+        ctx.beginPath(); tops.forEach((p, i) => i ? ctx.lineTo(p[0], p[1] - 10) : ctx.moveTo(p[0], p[1] - 10)); ctx.stroke(); ctx.restore();
+        text('each pulse a little stronger', 150, 250, { size: 30, w: 700, c: C.amber, a: E(t, m.ramp, 0.5) });
+      }
+      text('a train of brief pulses', 150, t > m.ramp ? 292 : 250, { size: t > m.ramp ? 24 : 30, w: 600, c: C.cyan, a: E(t, m.pulses, 0.5) });
+    }
+    // display
+    const lv = level(t), top = t > m.max + 0.3;
+    lcd(1230, 130, 610, 330, t < m.pulses ? '' : (top ? 80 : Math.floor(lv)), { blink: top ? t : 0, size: 170 });
+    const nA = E(t, m.num - 0.1, 0.5);
+    if (nA > 0) {
+      text('= how far along the ramp you are', 1535, 505, { size: 27, w: 600, c: C.text, al: 'center', a: nA });
+      text('arbitrary units — not a biological measure', 1535, 542, { size: 22, w: 500, c: C.muted, al: 'center', a: nA });
+      if (t < m.scale + 0.4) arrow(1150, 260, 1222, 260, hexA(C.amber, nA), 4, 16);
+    }
+    // scales
+    const sc = E(t, m.scale - 0.1, 0.5);
+    const scaleBar = (y, max, label, a, frac) => {
+      if (a <= 0) return;
+      ctx.save(); ctx.globalAlpha *= a;
+      const xa = 1260, xb = 1810;
+      text(label, xa, y - 22, { size: 22, w: 700, c: C.muted, ls: 1 });
+      rrect(xa, y, xb - xa, 16, 8); ctx.fillStyle = '#20254a'; ctx.fill();
+      rrect(xa, y, (xb - xa) * frac, 16, 8); const gg = ctx.createLinearGradient(xa, 0, xb, 0); gg.addColorStop(0, C.cyan); gg.addColorStop(1, C.amber); ctx.fillStyle = gg; ctx.fill();
+      text('0', xa, y + 46, { size: 20, mono: true, c: C.muted, al: 'center' });
+      text(String(max), xb, y + 46, { size: 20, mono: true, c: frac >= 1 ? C.amber : C.muted, al: 'center', w: 700 });
+      ctx.restore();
+    };
+    scaleBar(622, 80, 'VITALITY SCANNER  0–80', sc, lv / 80);
+    scaleBar(742, 64, 'DIGITEST  0–64', E(t, m.d64 - 0.1, 0.5), lv / 80);
+    const mx = E(t, m.max - 0.1, 0.5);
+    if (mx > 0) { pill('top of the scale = max stimulus, no response', 1535, 850, { size: 25, col: C.amber, al: 'center', a: mx }); }
+    ctx.restore();
+  }
+  if (B > 0) {
+    ctx.save(); ctx.globalAlpha *= B;
+    text('OHM’S LAW', 120, 200, { size: 26, w: 700, c: C.muted, ls: 4 });
+    text('V = I × R', 120, 320, { size: 120, w: 800, mono: true, glow: hexA(C.cyan, 0.5), gb: 20 });
+    const rows = [
+      [m.volt, 'Voltage', 'hundreds of volts (Digitest: up to 500 V p-p)', C.cyan],
+      [m.why, 'Resistance', 'enamel ≈ a 2 MΩ resistor', C.violet],
+      [m.tiny, 'Current', 'tiny — microamps (≤ 250 µA peak)', C.amber],
+      [m.thr, 'First sensation', '≈ 7 µA  (human teeth, Virtanen 1985)', C.green]
+    ];
+    rows.forEach(([tm, k, v, col], i) => {
+      const a = E(t, tm - 0.1, 0.5); if (a <= 0) return;
+      const y = 430 + i * 104;
+      ctx.save(); ctx.globalAlpha *= a; rrect(120, y - 48, 720, 84, 16); ctx.fillStyle = hexA(col, 0.10); ctx.fill(); ctx.strokeStyle = hexA(col, 0.6); ctx.lineWidth = 2; ctx.stroke(); ctx.restore();
+      text(k, 148, y - 6, { size: 24, w: 700, c: col, a, ls: 1 });
+      text(v, 148, y + 26, { size: 27, w: 600, a });
+    });
+    // series chain
+    const dry = E(t, m.dry, 0.6) * (1 - E(t, m.paste, 0.6)), paste = E(t, m.paste, 0.6), leak = E(t, m.leak, 0.7) * (1 - E(t, m.iso + 0.6, 0.8));
+    const R = { contact: 1 + 2.4 * dry - 0.7 * paste, enamel: 2 + 0.8 * dry, dentin: 0.5, pulp: 0.3, pdl: 0.4, body: 0.5 };
+    const Rsum = Object.values(R).reduce((a, b) => a + b, 0), I = 2.6 / Rsum, Ipulp = I * (1 - 0.85 * leak);
+    const boxes = [['Probe contact', 'contact'], ['Enamel', 'enamel'], ['Dentin', 'dentin'], ['Pulp', 'pulp'], ['PDL & bone', 'pdl'], ['Body', 'body']];
+    const bx = 1080, bw = 380, by0 = 170, gap = 104;
+    // wires
+    line(bx + bw / 2, 130, bx + bw / 2, by0 + 5 * gap + 120, '#3c4380', 4);
+    line(bx + bw / 2, by0 + 5 * gap + 120, 1560, by0 + 5 * gap + 120, '#3c4380', 4);
+    line(1560, by0 + 5 * gap + 120, 1560, 130, '#3c4380', 4);
+    line(1560, 130, bx + bw / 2, 130, '#3c4380', 4);
+    text('device', 1560 + 14, 124, { size: 20, w: 600, c: C.muted });
+    if (leak > 0) {
+      ctx.save(); ctx.globalAlpha *= leak; ctx.strokeStyle = C.red; ctx.lineWidth = 6; ctx.setLineDash([14, 10]); ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(bx, by0 + 35); ctx.lineTo(1020, by0 + 35); ctx.lineTo(1020, by0 + 4 * gap + 35); ctx.lineTo(bx, by0 + 4 * gap + 35); ctx.stroke(); ctx.restore();
+      ['shortcut', 'gingiva, saliva,', 'metal', 'PDL, not pulp', '→ false positive'].forEach((s, k) =>
+        text(s, 1004, by0 + 2 * gap - 30 + k * 30, { size: k ? 21 : 25, w: k ? (k > 2 ? 700 : 500) : 800, c: k === 0 ? C.red : k > 2 ? C.pink : C.muted, al: 'right', a: leak }));
+    }
+    // current dots down the chain
+    const ft = t - m.ohm;
+    const chain = new Poly([[bx + bw / 2, 130], [bx + bw / 2, by0 + 5 * gap + 120], [1560, by0 + 5 * gap + 120], [1560, 130], [bx + bw / 2, 130]]);
+    const leakPath = new Poly([[bx + bw / 2, 130], [bx + bw / 2, by0 + 35], [1020, by0 + 35], [1020, by0 + 4 * gap + 35], [bx + bw / 2, by0 + 4 * gap + 35], [bx + bw / 2, by0 + 5 * gap + 120], [1560, by0 + 5 * gap + 120], [1560, 130], [bx + bw / 2, 130]]);
+    for (let i = 0; i < 26; i++) {
+      const useLeak = leak > 0.05 && (i % 7 !== 0);
+      const L = useLeak ? leakPath : chain, s = ((ft * 110 * I * 1.4 + i * L.L / 26) % L.L + L.L) % L.L, p = L.at(s);
+      glow(p[0], p[1], 14, useLeak ? C.red : C.cyan, 0.85 * (useLeak ? leak : 1));
+    }
+    boxes.forEach(([lab, key], i) => {
+      const y = by0 + i * gap, r = R[key];
+      const hot = (key === 'contact' || key === 'enamel') && dry > 0.05, good = key === 'contact' && paste > 0.05;
+      const bypassed = (key === 'enamel' || key === 'dentin' || key === 'pulp') && leak > 0.05;
+      const stroke = hot ? C.red : good ? C.green : key === 'pulp' ? C.amber : '#454c8c';
+      ctx.save(); if (bypassed) ctx.globalAlpha *= 1 - 0.45 * leak;
+      rrect(bx, y, bw, 76, 16); ctx.fillStyle = '#1b2045'; ctx.fill(); ctx.strokeStyle = stroke; ctx.lineWidth = 3; ctx.stroke();
+      text(lab, bx + 20, y + 47, { size: 27, w: 700, c: key === 'pulp' ? C.amber : C.text });
+      // resistance bar
+      const bwid = 140 * clamp(r / 3.4, 0.05, 1);
+      rrect(bx + bw - 160, y + 30, 140, 16, 8); ctx.fillStyle = '#272d58'; ctx.fill();
+      rrect(bx + bw - 160, y + 30, bwid, 16, 8); ctx.fillStyle = hot ? C.red : good ? C.green : C.violet; ctx.fill();
+      ctx.restore();
+    });
+    // pulp current gauge
+    const gx = 1640, gy = 240, gh = 420;
+    text('CURRENT', gx + 45, gy - 50, { size: 18, w: 700, c: C.muted, al: 'center', ls: 2 });
+    text('AT PULP', gx + 45, gy - 26, { size: 18, w: 700, c: C.muted, al: 'center', ls: 2 });
+    rrect(gx + 20, gy, 50, gh, 25); ctx.fillStyle = '#1b2045'; ctx.fill(); ctx.strokeStyle = '#454c8c'; ctx.lineWidth = 2; ctx.stroke();
+    const fh = gh * clamp(Ipulp / 0.9);
+    rrect(gx + 20, gy + gh - fh, 50, fh, 25); ctx.fillStyle = Ipulp < 0.3 ? C.red : C.cyan; ctx.fill();
+    glow(gx + 45, gy + gh - fh, 40, Ipulp < 0.3 ? C.red : C.cyan, 0.6);
+    const lab = leak > 0.3 ? 'bypassed' : dry > 0.3 ? 'too low' : paste > 0.3 ? 'good contact' : '';
+    if (lab) text(lab, gx + 45, gy + gh + 44, { size: 24, w: 800, c: leak > 0.3 || dry > 0.3 ? C.red : C.green, al: 'center' });
+    const iso = E(t, m.iso, 0.6);
+    if (iso > 0) pill('isolate  ·  dry  ·  stay off gingiva & metal', 1270, 838, { size: 26, col: C.green, al: 'center', a: iso });
+    const pa = E(t, m.paste, 0.5) * (1 - E(t, m.leak, 0.5));
+    if (pa > 0) pill('toothpaste on the tip → contact R drops', 1270, 838, { size: 26, col: C.green, al: 'center', a: pa });
+    ctx.restore();
+  }
+}
+
+// --- tubules scene geometry ---
+const TUB = (() => {
+  const n = 26, arr = [];
+  for (let i = 0; i < n; i++) {
+    const xt = 170 + i * (1580 / (n - 1)), xb = 380 + i * (1160 / (n - 1));
+    const P0 = [xt, 296], C1 = [xt + 46, 420], C2 = [xb - 46, 570], P3 = [xb, 702];
+    const pts = []; for (let k = 0; k <= 40; k++) { const u = k / 40, a = (1 - u) ** 3, b = 3 * (1 - u) ** 2 * u, c = 3 * (1 - u) * u * u, d = u ** 3; pts.push([a * P0[0] + b * C1[0] + c * C2[0] + d * P3[0], a * P0[1] + b * C1[1] + c * C2[1] + d * P3[1]]); }
+    arr.push({ P0, C1, C2, P3, poly: new Poly(pts) });
+  }
+  const r = mulberry(11), plex = [];
+  const nodes = []; for (let i = 0; i < 48; i++) nodes.push([300 + r() * 1320, 778 + r() * 34]);
+  nodes.sort((a, b) => a[0] - b[0]);
+  for (let i = 0; i < nodes.length - 1; i++) { plex.push([nodes[i], nodes[i + 1]]); if (i < nodes.length - 3 && r() < .5) plex.push([nodes[i], nodes[i + 2 + Math.floor(r() * 2)]]); }
+  const twigs = arr.filter((_, i) => i % 3 === 1).map(tb => [tb.P3[0], 790, tb.P3[0] + (r() - .5) * 20, 650]);
+  return { arr, plex, twigs };
+})();
+function sceneTubules(S) {
+  const { t, m } = S;
+  const micro = 1 - E(t, m.place - 0.3, 0.6);
+  if (micro > 0) {
+    const z = 0.82 + 0.18 * EO(t, 0, 1.1);
+    ctx.save(); ctx.globalAlpha *= micro * E(t, 0, 0.6);
+    ctx.translate(960, 500); ctx.scale(z, z); ctx.translate(-960, -500);
+    ctx.save(); rrect(120, 120, 1680, 770, 30); ctx.clip();
+    // enamel
+    const eg = ctx.createLinearGradient(0, 120, 0, 300); eg.addColorStop(0, '#fbf9f3'); eg.addColorStop(1, '#ece4cf');
+    ctx.fillStyle = eg; ctx.fillRect(120, 120, 1680, 190);
+    ctx.strokeStyle = 'rgba(160,145,115,0.35)'; ctx.lineWidth = 2;
+    for (let row = 0; row < 7; row++) for (let x = 120 + (row % 2) * 18; x < 1800; x += 36) { ctx.beginPath(); ctx.arc(x, 150 + row * 22, 14, Math.PI * 1.05, Math.PI * 1.95); ctx.stroke(); }
+    // dentin
+    const dg = ctx.createLinearGradient(0, 290, 0, 712); dg.addColorStop(0, '#ecd6a6'); dg.addColorStop(1, '#ddbf86');
+    ctx.fillStyle = dg; ctx.beginPath(); ctx.moveTo(120, 300);
+    for (let x = 120; x <= 1800; x += 10) ctx.lineTo(x, 296 + 7 * Math.sin(x / 26));
+    ctx.lineTo(1800, 712); ctx.lineTo(120, 712); ctx.closePath(); ctx.fill();
+    // tubules
+    const flowA = E(t, m.flow, 0.6);
+    for (const tb of TUB.arr) {
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#c3a064'; ctx.lineWidth = 17; ctx.beginPath(); ctx.moveTo(...tb.P0); ctx.bezierCurveTo(...tb.C1, ...tb.C2, ...tb.P3); ctx.stroke();
+      ctx.strokeStyle = 'rgba(205,232,242,0.95)'; ctx.lineWidth = 9; ctx.beginPath(); ctx.moveTo(...tb.P0); ctx.bezierCurveTo(...tb.C1, ...tb.C2, ...tb.P3); ctx.stroke();
+    }
+    // predentin + odontoblasts
+    ctx.fillStyle = '#f1e2bd'; ctx.fillRect(120, 702, 1680, 14);
+    ctx.fillStyle = '#e9a7a4'; ctx.fillRect(120, 716, 1680, 60);
+    for (let x = 140; x < 1800; x += 30) { ctx.fillStyle = '#f2bdb6'; ctx.beginPath(); ctx.ellipse(x, 746, 12, 26, 0, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = '#a6505e'; ctx.beginPath(); ctx.arc(x, 756, 5, 0, Math.PI * 2); ctx.fill(); }
+    // pulp
+    const pg = ctx.createLinearGradient(0, 776, 0, 890); pg.addColorStop(0, '#d9667a'); pg.addColorStop(1, '#b7435a');
+    ctx.fillStyle = pg; ctx.fillRect(120, 776, 1680, 120);
+    // plexus of Raschkow
+    const plexA = 0.55 + 0.45 * E(t, m.plexus, 0.6), pulse = t > m.plexus ? 0.5 + 0.5 * Math.sin((t - m.plexus) * 6) : 0;
+    ctx.save(); ctx.strokeStyle = C.amber; ctx.lineWidth = 3.5; ctx.globalAlpha *= plexA; ctx.lineCap = 'round';
+    if (t > m.plexus) { ctx.shadowColor = C.amber; ctx.shadowBlur = 10 + 16 * pulse; }
+    ctx.beginPath(); for (const [a, b] of TUB.plex) { ctx.moveTo(a[0], a[1]); ctx.quadraticCurveTo((a[0] + b[0]) / 2, (a[1] + b[1]) / 2 + 12, b[0], b[1]); } ctx.stroke();
+    ctx.beginPath(); for (const [x1, y1, x2, y2] of TUB.twigs) { ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); } ctx.stroke();
+    ctx.lineWidth = 7; ctx.beginPath(); ctx.moveTo(700, 812); ctx.quadraticCurveTo(760, 860, 720, 900); ctx.moveTo(1300, 812); ctx.quadraticCurveTo(1240, 860, 1290, 900); ctx.stroke();
+    ctx.restore();
+    // ions
+    const drift = t > m.ions ? (t - m.ions) * 0.11 : 0, ionA = E(t, m.dentin - 0.2, 0.6);
+    if (ionA > 0) TUB.arr.forEach((tb, i) => {
+      for (let j = 0; j < 4; j++) {
+        const pos = j % 2 === 0, u0 = (j * 0.25 + i * 0.137) % 1;
+        const u = ((u0 + (pos ? drift : -drift) + Math.sin(t * 3 + i + j) * 0.012) % 1 + 1) % 1;
+        const p = tb.poly.at(u * tb.poly.L);
+        ctx.save(); ctx.globalAlpha *= ionA; ctx.fillStyle = pos ? '#ff9f43' : '#8f7bff';
+        ctx.beginPath(); ctx.arc(p[0], p[1], 7, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+        text(pos ? '+' : '−', p[0], p[1] + 5, { size: 14, w: 800, c: '#fff', al: 'center', a: ionA });
+      }
+    });
+    // current streaks
+    if (flowA > 0) TUB.arr.forEach((tb, i) => {
+      const s = (((t - m.flow) * 300 + i * 61) % (tb.poly.L + 120)) - 60;
+      if (s > 0 && s < tb.poly.L) { const p = tb.poly.at(s); glow(p[0], p[1], 26, C.cyan, flowA); }
+    });
+    ctx.restore();
+    ctx.strokeStyle = '#3a4080'; ctx.lineWidth = 3; rrect(120, 120, 1680, 770, 30); ctx.stroke();
+    // probe
+    const pr = 1;
+    ctx.save(); ctx.strokeStyle = '#dfe3ee'; ctx.lineWidth = 16; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(960, 20); ctx.lineTo(960, 104); ctx.stroke(); ctx.restore();
+    ctx.fillStyle = 'rgba(255,255,255,0.92)'; ctx.beginPath(); ctx.ellipse(960, 116, 44, 13, 0, 0, Math.PI * 2); ctx.fill();
+    glow(960, 116, 60 + 10 * Math.sin(t * 5), C.cyan, 0.6 * pr);
+    // labels
+    const lab = (s, sub, x, y, col, a) => {
+      if (a <= 0) return;
+      const w = Math.max(measure(s, 30, 800), measure(sub, 22, 500)) + 40;
+      panel(x, y, w, 88, { a: a * 0.92, fill: 'rgba(12,14,30,0.86)', stroke: col, r: 16 });
+      text(s, x + 20, y + 38, { size: 30, w: 800, c: col, a }); text(sub, x + 20, y + 70, { size: 22, w: 500, c: C.text, a });
+    };
+    lab('Enamel', '~96% mineral, very little water → high resistance', 150, 150, C.violet, E(t, m.enamel - 0.1, 0.5));
+    lab('Dentin', 'tubules full of fluid → ions carry current', 150, 420, C.cyan, E(t, m.dentin - 0.1, 0.5));
+    lab('Plexus of Raschkow', 'nerve endings at the pulp–dentin border', 1130, 590, C.amber, E(t, m.plexus - 0.1, 0.5));
+    const ia = E(t, m.ions - 0.1, 0.5);
+    if (ia > 0) { pill('+  cations', 1440, 470, { size: 22, col: '#ff9f43', fill: 'rgba(12,14,30,0.88)', a: ia }); pill('−  anions', 1620, 470, { size: 22, col: '#8f7bff', fill: 'rgba(12,14,30,0.88)', a: ia }); }
+    ctx.restore();
+  }
+  const pl = E(t, m.place - 0.1, 0.7);
+  if (pl > 0) {
+    ctx.save(); ctx.globalAlpha *= pl;
+    text('Where to put the probe', 960, 170, { size: 54, w: 800, al: 'center' });
+    text('lowest response thresholds', 960, 218, { size: 28, w: 500, c: C.muted, al: 'center' });
+    const ia = E(t, m.inc - 0.1, 0.5), ma = E(t, m.mol - 0.1, 0.5);
+    panel(170, 260, 760, 600, { a: 0.4 + 0.6 * ia });
+    panel(990, 260, 760, 600, { a: 0.4 + 0.6 * ma });
+    drawTooth(550, 360, 0.36, { bone: false, a: 0.5 + 0.5 * ia });
+    drawMolar(1370, 440, 0.6, 0.5 + 0.5 * ma);
+    const ring = (x, y, a, col) => { for (let i = 0; i < 3; i++) { const r = 14 + ((t * 40 + i * 22) % 66); ctx.save(); ctx.globalAlpha *= a * (1 - r / 80); ctx.strokeStyle = col; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke(); ctx.restore(); } glow(x, y, 30, col, a); };
+    if (ia > 0) { ring(550, 360, ia, C.cyan); text('Anterior teeth', 220, 330, { size: 36, w: 800, a: ia }); text('incisal edge', 220, 372, { size: 30, w: 700, c: C.cyan, a: ia }); text('Bender et al., JADA 1989', 220, 830, { size: 22, w: 500, c: C.muted, a: ia }); }
+    if (ma > 0) { ring(1370 - 0.6 * 95, 440 - 0.6 * 10, ma, C.cyan); text('Molars', 1040, 330, { size: 36, w: 800, a: ma }); text('mesiobuccal cusp tip', 1040, 372, { size: 30, w: 700, c: C.cyan, a: ma }); text('Lin et al., J Endod 2007', 1040, 830, { size: 22, w: 500, c: C.muted, a: ma }); }
+    ctx.restore();
+  }
+}
+function drawMolar(x, y, s, a) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s); ctx.globalAlpha *= a;
+  const root = new Path2D();
+  root.moveTo(-165, 180); root.bezierCurveTo(-175, 300, -150, 420, -120, 520); root.quadraticCurveTo(-100, 540, -85, 515);
+  root.bezierCurveTo(-60, 420, -40, 320, -10, 250); root.quadraticCurveTo(0, 240, 10, 250);
+  root.bezierCurveTo(50, 320, 75, 420, 95, 500); root.quadraticCurveTo(115, 525, 132, 500);
+  root.bezierCurveTo(150, 400, 165, 300, 158, 180); root.closePath();
+  ctx.fillStyle = '#e3c891'; ctx.fill(root); ctx.strokeStyle = 'rgba(70,50,30,0.55)'; ctx.lineWidth = 4; ctx.stroke(root);
+  const crown = new Path2D();
+  crown.moveTo(-168, 190); crown.bezierCurveTo(-190, 120, -190, 60, -170, 30); crown.quadraticCurveTo(-130, -5, -95, -10);
+  crown.quadraticCurveTo(-50, -4, -20, 26); crown.quadraticCurveTo(0, 40, 20, 24); crown.quadraticCurveTo(55, -2, 90, 0);
+  crown.quadraticCurveTo(140, 8, 170, 40); crown.bezierCurveTo(188, 80, 185, 130, 160, 190); crown.closePath();
+  const eg = ctx.createLinearGradient(0, -10, 0, 190); eg.addColorStop(0, '#fbf9f3'); eg.addColorStop(1, '#e9e1cd');
+  ctx.fillStyle = eg; ctx.fill(crown); ctx.stroke(crown);
+  text('M', -200, 120, { size: 30, w: 800, c: C.muted, al: 'right' }); text('D', 200, 120, { size: 30, w: 800, c: C.muted });
+  text('buccal view', 0, 600, { size: 26, w: 500, c: C.muted, al: 'center' });
+  ctx.restore();
+}
+
+function sceneNerve(S) {
+  const { t, m } = S;
+  const tr = E(t, m.trick - 0.1, 0.4) * (1 - E(t, m.adelta - 0.2, 0.4));
+  if (tr > 0) text('Here’s the real trick…', 960, 540, { size: 84, w: 800, al: 'center', c: C.amber, glow: C.amber, gb: 30, a: tr });
+  const band = E(t, m.adelta - 0.1, 0.7);
+  const nodesX = []; for (let x = 350; x < 1540; x += 120) nodesX.push(x);
+  if (band > 0) {
+    ctx.save(); ctx.globalAlpha *= band;
+    ctx.strokeStyle = C.amber; ctx.lineWidth = 4; ctx.lineCap = 'round';
+    for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.moveTo(340, 210); ctx.quadraticCurveTo(260, 210 + (i - 2.5) * 10, 170 + (i % 2) * 30, 150 + i * 24); ctx.stroke(); }
+    line(340, 210, 1560, 210, C.amber, 6);
+    for (const x of nodesX) { rrect(x + 8, 190, 104, 40, 20); ctx.fillStyle = 'rgba(232,226,255,0.88)'; ctx.fill(); }
+    text('pulp–dentin border', 175, 300, { size: 20, w: 600, c: C.muted, al: 'center' });
+    drawBrain(1720, 205, 1 + (t > m.feel ? 0.06 * Math.sin((t - m.feel) * 8) * (1 - P(t, m.feel, 2)) : 0), t > m.feel ? 1 - P(t, m.feel + 1.5, 1.5) * 0.5 : 0);
+    text('trigeminal (V) → brain', 1600, 300, { size: 20, w: 600, c: C.muted, al: 'center' });
+    const my = E(t, m.myel - 0.1, 0.5);
+    text('A-δ fiber: myelinated · fast (~6–30 m/s) · low threshold', 360, 158, { size: 26, w: 700, c: C.amber, a: my });
+    const cf = E(t, m.cfib - 0.1, 0.6);
+    if (cf > 0) { line(340, 262, 1560, 262, hexA(C.violet, cf), 3); text('C fiber: unmyelinated · slow · high threshold', 360, 254 + 34, { size: 22, w: 600, c: C.violet, a: cf }); }
+    // impulse
+    if (t > m.race && t < m.feel + 0.6) {
+      const k = clamp((t - m.race) / Math.max(0.6, m.feel - m.race - 0.2));
+      const idx = Math.min(nodesX.length, Math.floor(k * (nodesX.length + 1)));
+      const x = idx >= nodesX.length ? 1600 : nodesX[idx] + 2;
+      glow(x, 210, 54, C.amber, 1 - P(t, m.feel, 0.6)); glow(x, 210, 26, '#ffffff', 0.7 * (1 - P(t, m.feel, 0.6)));
+    }
+    ctx.restore();
+  }
+  // membrane potential graph
+  const gA = E(t, m.weak - 0.6, 0.6) * (1 - E(t, m.cfib - 0.3, 0.6));
+  const T0 = m.weak - 0.5, T1 = m.race + 0.4;
+  const ta = m.na - 0.1, tpk = ta + 0.32;                       // threshold crossing → peak
+  const p1 = m.weak + 0.2, p2 = (m.weak + m.settle) / 2 + 0.25, p3 = ta - 0.14;
+  const pulses = [[p1, 6, 40], [p2, 11, 62], [p3, 18, 90]];
+  const Vm = x => {
+    let v = -70;
+    for (const [pt, a] of pulses.slice(0, 2)) { const d = x - pt; if (d > 0) v += a * (d < 0.12 ? d / 0.12 : Math.exp(-(d - 0.12) / 0.45)); }
+    if (x < ta) { const d = x - p3; if (d > 0) v += 15 * clamp(d / 0.14); return v; }
+    if (x < tpk) return lerp(-55, 32, Math.pow((x - ta) / (tpk - ta), 1.6));
+    if (x < tpk + 0.42) return lerp(32, -82, eio((x - tpk) / 0.42));
+    return lerp(-82, -70, eout(clamp((x - tpk - 0.42) / 1.2)));
+  };
+  if (gA > 0) {
+    ctx.save(); ctx.globalAlpha *= gA;
+    panel(120, 340, 1680, 560);
+    const gx0 = 340, gx1 = 1760, X = tt => gx0 + (tt - T0) / (T1 - T0) * (gx1 - gx0), Y = mv => 862 - (mv + 88) * (290 / 120);
+    text('STIMULUS', 150, 400, { size: 20, w: 700, c: C.cyan, ls: 3 });
+    text('PULSES', 150, 426, { size: 20, w: 700, c: C.cyan, ls: 3 });
+    text('MEMBRANE', 150, 696, { size: 20, w: 700, c: C.amber, ls: 3 });
+    text('POTENTIAL', 150, 722, { size: 20, w: 700, c: C.amber, ls: 3 });
+    text('(mV)', 150, 748, { size: 20, w: 600, c: C.muted });
+    line(gx0, 470, gx1, 470, '#3c4380', 2);
+    for (const mv of [30, 0, -55, -70]) text((mv > 0 ? '+' : mv < 0 ? '−' : '') + Math.abs(mv), gx0 - 18, Y(mv) + 7, { size: 20, mono: true, c: C.muted, al: 'right' });
+    line(gx0, Y(0), gx1, Y(0), 'rgba(160,165,210,0.12)', 1);
+    line(gx0, Y(-55), gx1, Y(-55), hexA(C.red, 0.8), 3, [12, 10]);
+    text('threshold', gx1, Y(-55) - 12, { size: 22, w: 700, c: C.red, al: 'right' });
+    line(gx0, Y(-70), gx1, Y(-70), 'rgba(160,165,210,0.25)', 2, [4, 8]);
+    text('resting', gx1, Y(-70) + 30, { size: 20, w: 600, c: C.muted, al: 'right' });
+    for (const [pt, , h] of pulses) if (t > pt) { const x = X(pt); ctx.fillStyle = C.cyan; ctx.fillRect(x - 7, 470 - h, 14, h); glow(x, 470 - h, 22, C.cyan, 0.8); }
+    const now = Math.min(t, T1);
+    if (now > T0) {
+      ctx.save(); ctx.strokeStyle = C.amber; ctx.lineWidth = 5; ctx.lineJoin = 'round'; ctx.shadowColor = C.amber; ctx.shadowBlur = 10;
+      ctx.beginPath(); for (let x = T0; x <= now; x += 1 / 120) { const px = X(x), py = Y(Vm(x)); x === T0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py); } ctx.stroke(); ctx.restore();
+      glow(X(now), Y(Vm(now)), 22, '#ffffff', 0.8);
+    }
+    const st = E(t, m.settle - 0.1, 0.5);
+    if (st > 0) text('subthreshold — settles back', (X(p1) + X(p2)) / 2 + 30, Y(-44), { size: 23, w: 600, c: C.muted, al: 'center', a: st });
+    const na = E(t, m.na - 0.15, 0.5);
+    if (na > 0) { const xu = X(ta + (tpk - ta) * 0.55), yu = Y(Vm(ta + (tpk - ta) * 0.55)); arrow(xu - 210, yu, xu - 14, yu, hexA(C.text, na), 3, 14); text('voltage-gated', xu - 222, yu - 6, { size: 24, w: 700, al: 'right', a: na }); text('Na⁺ channels open', xu - 222, yu + 24, { size: 24, w: 700, al: 'right', a: na }); }
+    const ap = E(t, m.ap - 0.1, 0.5);
+    if (ap > 0) text('ACTION POTENTIAL', X(tpk) + 30, Y(30) + 10, { size: 30, w: 800, c: C.amber, glow: C.amber, gb: 20, a: ap, ls: 2 });
+    text('schematic — time not to scale', gx1, 885, { size: 18, w: 500, c: C.dim, al: 'right' });
+    const fe = E(t, m.feel - 0.1, 0.5);
+    if (fe > 0) { panel(1360, 372, 420, 100, { a: fe, stroke: C.amber, fill: 'rgba(40,30,10,0.95)', r: 20 }); text('“tingle… warmth… fullness”', 1570, 418, { size: 26, w: 700, c: C.amber, al: 'center', a: fe }); text('→ patient lets go', 1570, 452, { size: 22, w: 500, c: C.muted, al: 'center', a: E(t, m.letgo - 0.1, 0.4) * fe }); }
+    ctx.restore();
+  }
+  // A vs C table
+  const tb = E(t, m.cfib + 0.2, 0.7);
+  if (tb > 0) {
+    ctx.save(); ctx.globalAlpha *= tb;
+    panel(120, 340, 1680, 560);
+    const cols = [160, 640, 1220];
+    text('A-δ fibers', cols[1], 398, { size: 34, w: 800, c: C.amber }); text('C fibers', cols[2], 398, { size: 34, w: 800, c: C.violet });
+    const rows = [
+      ['Myelin', 'myelinated', 'unmyelinated'],
+      ['Conduction', '~6–30 m/s', '~0.5–2 m/s'],
+      ['Location', 'pulp–dentin border', 'deeper, pulp core'],
+      ['Pain', 'sharp, well localized', 'dull, aching, diffuse'],
+      ['Threshold', 'low', 'high — several × the current'],
+      ['Share of pulp axons', 'minority', '~70–80%'],
+      ['Usual EPT', 'responds', 'generally silent']
+    ];
+    rows.forEach((r, i) => {
+      const a = E(t, m.cfib + 0.3 + i * 0.28, 0.4); if (a <= 0) return;
+      const y = 462 + i * 62;
+      const hi = (i === 4 && t > m.c6 && t < m.silent + 0.3) || (i === 6 && t > m.silent);
+      if (hi) { ctx.save(); ctx.globalAlpha *= a; rrect(140, y - 40, 1640, 56, 12); ctx.fillStyle = 'rgba(255,181,71,0.12)'; ctx.fill(); ctx.restore(); }
+      text(r[0], cols[0], y, { size: 25, w: 700, c: C.muted, a });
+      text(r[1], cols[1], y, { size: 27, w: 600, a, c: i === 6 ? C.green : C.text });
+      text(r[2], cols[2], y, { size: 27, w: 600, a, c: i === 6 ? C.red : C.text });
+      if (i === 6) { tick(cols[1] - 28, y - 9, 30, C.green, a); cross(cols[2] - 28, y - 9, 28, C.red, a); }
+    });
+    text('Närhi 1985, 1992 · Virtanen 1985', 1760, 885, { size: 18, w: 500, c: C.dim, al: 'right' });
+    ctx.restore();
+  }
+}
+function drawBrain(x, y, s, g) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  if (g > 0) glow(0, 0, 150, C.amber, g);
+  ctx.fillStyle = '#e9a3b5'; ctx.strokeStyle = '#a65d78'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(-80, 20);
+  ctx.bezierCurveTo(-110, -30, -70, -80, -20, -70); ctx.bezierCurveTo(10, -95, 70, -85, 82, -40);
+  ctx.bezierCurveTo(115, -20, 105, 40, 70, 45); ctx.bezierCurveTo(40, 70, -10, 70, -30, 50); ctx.bezierCurveTo(-60, 60, -85, 45, -80, 20); ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  ctx.lineWidth = 3; ctx.beginPath();
+  ctx.moveTo(-50, -40); ctx.quadraticCurveTo(-30, -20, -50, 0); ctx.moveTo(0, -60); ctx.quadraticCurveTo(20, -30, -5, -10); ctx.quadraticCurveTo(-20, 10, 10, 30);
+  ctx.moveTo(50, -50); ctx.quadraticCurveTo(35, -20, 60, 0); ctx.stroke();
+  ctx.restore();
+}
+
+function incisorIcon(x, y, s, col, a = 1) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s); ctx.globalAlpha *= a;
+  ctx.fillStyle = col; ctx.strokeStyle = 'rgba(40,30,20,0.5)'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(-48, 0); ctx.quadraticCurveTo(-50, -10, -40, -12); ctx.lineTo(40, -12); ctx.quadraticCurveTo(50, -10, 48, 0);
+  ctx.bezierCurveTo(52, 50, 44, 90, 34, 110); ctx.bezierCurveTo(26, 170, 12, 240, 0, 262); ctx.bezierCurveTo(-12, 240, -26, 170, -34, 110); ctx.bezierCurveTo(-44, 90, -52, 50, -48, 0);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.strokeStyle = 'rgba(120,90,50,0.35)'; ctx.beginPath(); ctx.moveTo(-36, 104); ctx.quadraticCurveTo(0, 122, 36, 104); ctx.stroke();
+  ctx.restore();
+}
+function sceneMeaning(S) {
+  const { t, m } = S;
+  const qa = E(t, m.q - 0.1, 0.5) * (1 - E(t, m.num - 0.3, 0.5));
+  text('What does an EPT actually measure?', 960, 180, { size: 54, w: 800, al: 'center', a: qa });
+  const ca = 1 - E(t, m.num - 0.3, 0.5);
+  if (ca > 0) {
+    const l = E(t, m.sens - 0.1, 0.6) * ca, r = E(t, m.vit - 0.1, 0.6) * ca;
+    if (l > 0) {
+      panel(190, 250, 720, 520, { a: l, stroke: C.amber });
+      ctx.save(); ctx.globalAlpha *= l; ctx.strokeStyle = C.amber; ctx.lineWidth = 6; ctx.lineCap = 'round'; ctx.shadowColor = C.amber; ctx.shadowBlur = 14;
+      ctx.beginPath(); ctx.moveTo(550, 470); ctx.lineTo(550, 400); ctx.moveTo(550, 400); ctx.quadraticCurveTo(500, 360, 470, 320); ctx.moveTo(550, 400); ctx.quadraticCurveTo(600, 350, 640, 330); ctx.moveTo(510, 360); ctx.lineTo(500, 310); ctx.moveTo(600, 360); ctx.lineTo(620, 300); ctx.stroke(); ctx.restore();
+      text('Nerve response', 550, 545, { size: 46, w: 800, al: 'center', a: l });
+      text('SENSIBILITY', 550, 600, { size: 36, w: 800, c: C.amber, al: 'center', ls: 5, a: l });
+      tick(400, 684, 40, C.green, l); text('what the EPT tests', 430, 696, { size: 30, w: 700, c: C.green, a: l });
+    }
+    if (r > 0) {
+      panel(1010, 250, 720, 520, { a: r, stroke: C.red });
+      ctx.save(); ctx.globalAlpha *= r; rrect(1180, 370, 380, 70, 35); ctx.fillStyle = 'rgba(217,86,108,0.35)'; ctx.fill(); ctx.strokeStyle = C.red; ctx.lineWidth = 4; ctx.stroke();
+      for (let i = 0; i < 5; i++) { const x = 1200 + ((t * 120 + i * 80) % 340); ctx.fillStyle = '#ff5f6d'; ctx.beginPath(); ctx.ellipse(x, 405, 20, 15, 0, 0, Math.PI * 2); ctx.fill(); }
+      ctx.restore();
+      text('Blood supply', 1370, 545, { size: 46, w: 800, al: 'center', a: r });
+      text('VITALITY', 1370, 600, { size: 36, w: 800, c: C.red, al: 'center', ls: 5, a: r });
+      cross(1200, 684, 36, C.red, r); text('not measured by EPT', 1230, 696, { size: 30, w: 700, c: C.red, a: r });
+      text('(that takes pulse oximetry or laser Doppler flowmetry)', 1370, 740, { size: 21, w: 500, c: C.muted, al: 'center', a: r });
+    }
+  }
+  const na = E(t, m.num - 0.1, 0.6) * (1 - E(t, m.binary - 0.3, 0.5));
+  if (na > 0) {
+    ctx.save(); ctx.globalAlpha *= na;
+    lcd(200, 260, 640, 380, 42, { label: 'EPT READING', size: 230 });
+    const st = E(t, m.num + 0.5, 0.35);
+    if (st > 0) {
+      ctx.save(); ctx.translate(520, 700); ctx.rotate(-0.08); ctx.globalAlpha *= st; const sc = 1 + 0.4 * (1 - st); ctx.scale(sc, sc);
+      rrect(-250, -46, 500, 92, 14); ctx.strokeStyle = C.red; ctx.lineWidth = 6; ctx.stroke();
+      text('NOT A GRADE', 0, 18, { size: 50, w: 800, c: C.red, al: 'center', ls: 6 }); ctx.restore();
+    }
+    const sa = E(t, m.seltzer - 0.1, 0.6);
+    if (sa > 0) {
+      panel(960, 280, 780, 440, { a: sa });
+      text('Seltzer, Bender & Ziontz, 1963', 1000, 350, { size: 32, w: 800, c: C.cyan, a: sa });
+      para('Clinical test results — EPT readings included — did not reliably predict the pulp’s histologic status.', 1000, 410, 700, { size: 32, w: 600, a: sa, lh: 44 });
+      text('42 vs 38 tells you nothing about inflammation.', 1000, 650, { size: 26, w: 500, c: C.muted, a: sa });
+    }
+    ctx.restore();
+  }
+  const ba = E(t, m.binary - 0.1, 0.6);
+  if (ba > 0) {
+    ctx.save(); ctx.globalAlpha *= ba;
+    text('The only output that matters', 960, 170, { size: 46, w: 800, al: 'center' });
+    pill('RESPONSE', 760, 260, { size: 40, col: C.green, al: 'center' }); text('vs', 960, 274, { size: 36, w: 600, c: C.muted, al: 'center' }); pill('NO RESPONSE', 1180, 260, { size: 40, col: C.red, al: 'center' });
+    const ca2 = E(t, m.ctrl - 0.1, 0.6);
+    if (ca2 > 0) {
+      ctx.save(); ctx.globalAlpha *= ca2;
+      const teeth = [[600, '#7', 'adjacent control', '31', true], [960, '#8', 'test tooth', '80 ✕', false], [1320, '#9', 'contralateral control', '34', true]];
+      for (const [x, num, lab, rd, ok] of teeth) {
+        incisorIcon(x, 380, 0.95, ok ? '#f2ecdc' : '#cfc6b2');
+        if (!ok) glow(x, 480, 120, C.red, 0.25);
+        text(num, x, 700, { size: 34, w: 800, al: 'center' });
+        text(lab, x, 738, { size: 24, w: 600, c: ok ? C.muted : C.red, al: 'center' });
+        if (ok) { tick(x - 44, 790, 34, C.green); text(rd, x + 6, 802, { size: 32, mono: true, w: 700, c: C.green }); }
+        else { text('no response', x, 802, { size: 30, w: 800, c: C.red, al: 'center' }); }
+      }
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+}
+
+function icon(kind, x, y, col) {
+  ctx.save(); ctx.translate(x, y);
+  rrect(-38, -38, 76, 76, 18); ctx.fillStyle = hexA(col, 0.14); ctx.fill(); ctx.strokeStyle = hexA(col, 0.7); ctx.lineWidth = 2; ctx.stroke();
+  ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath();
+  switch (kind) {
+    case 'bolt': ctx.moveTo(6, -24); ctx.lineTo(-12, 4); ctx.lineTo(2, 4); ctx.lineTo(-6, 26); ctx.lineTo(14, -6); ctx.lineTo(0, -6); ctx.closePath(); ctx.fill(); break;
+    case 'open': ctx.moveTo(-16, -24); ctx.lineTo(-16, 6); ctx.lineTo(-24, 26); ctx.moveTo(16, -24); ctx.lineTo(16, 6); ctx.lineTo(24, 26); ctx.moveTo(-16, -24); ctx.lineTo(16, -24); ctx.stroke(); break;
+    case 'calc': ctx.moveTo(-18, -24); ctx.lineTo(18, -24); ctx.lineTo(10, 24); ctx.lineTo(-10, 24); ctx.closePath(); ctx.stroke(); for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.arc(0, -14 + i * 8, 2.8, 0, 7); ctx.fill(); } break;
+    case 'gap': ctx.moveTo(-26, 0); ctx.lineTo(-6, 0); ctx.moveTo(6, 0); ctx.lineTo(26, 0); ctx.stroke(); ctx.beginPath(); ctx.arc(-6, 0, 4, 0, 7); ctx.arc(6, 0, 4, 0, 7); ctx.fill(); break;
+    case 'leak': ctx.moveTo(-24, -14); ctx.lineTo(0, -14); ctx.quadraticCurveTo(14, -14, 14, 0); ctx.lineTo(14, 18); ctx.stroke(); ctx.beginPath(); ctx.moveTo(6, 10); ctx.lineTo(14, 22); ctx.lineTo(22, 10); ctx.stroke(); break;
+    case 'drop': ctx.moveTo(0, -24); ctx.quadraticCurveTo(20, 2, 16, 12); ctx.arc(0, 10, 16, 0.1, Math.PI - 0.1); ctx.quadraticCurveTo(-20, 2, 0, -24); ctx.fill(); break;
+    case 'molar': ctx.moveTo(-22, -20); ctx.lineTo(22, -20); ctx.lineTo(20, 0); ctx.lineTo(-20, 0); ctx.closePath(); ctx.stroke(); ctx.beginPath(); ctx.moveTo(-14, 0); ctx.lineTo(-16, 24); ctx.stroke(); ctx.strokeStyle = C.green; ctx.beginPath(); ctx.moveTo(14, 0); ctx.lineTo(16, 24); ctx.stroke(); break;
+    case 'alert': ctx.arc(0, 0, 24, 0, 7); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0, -12); ctx.lineTo(0, 4); ctx.stroke(); ctx.beginPath(); ctx.arc(0, 13, 3, 0, 7); ctx.fill(); break;
+  }
+  ctx.restore();
+}
+function sceneLies(S) {
+  const { t, m } = S;
+  const ia = E(t, m.intro - 0.1, 0.5) * (1 - E(t, m.fn - 0.2, 0.5));
+  text('Like any test, it can mislead you', 960, 520, { size: 64, w: 800, al: 'center', a: ia });
+  const col = (x, head, sub, col, a, items) => {
+    if (a <= 0) return;
+    panel(x, 130, 820, 760, { a, stroke: hexA(col, 0.7) });
+    text(head, x + 40, 200, { size: 40, w: 800, c: col, ls: 3, a });
+    text(sub, x + 40, 242, { size: 26, w: 600, c: C.muted, a });
+    items.forEach(([kind, ti, de, tm], i) => {
+      const k = E(t, tm - 0.1, 0.5); if (k <= 0) return;
+      const y = 340 + i * 136;
+      ctx.save(); ctx.globalAlpha *= k; ctx.translate((1 - k) * 30, 0); icon(kind, x + 82, y, col); ctx.restore();
+      text(ti, x + 150, y - 6, { size: 31, w: 800, a: k });
+      para(de, x + 150, y + 30, 630, { size: 22, w: 500, c: C.muted, a: k, lh: 28 });
+    });
+  };
+  col(120, 'FALSE NEGATIVE', 'vital pulp · no response', C.blue, E(t, m.fn - 0.1, 0.6), [
+    ['bolt', 'Recent trauma', 'response can vanish for weeks to months while the blood supply survives', m.fn1],
+    ['open', 'Immature apex', 'fewer myelinated fibers until the root is complete', m.fn2],
+    ['calc', 'Calcified canal · large restoration', 'more insulation between probe and pulp', m.fn3],
+    ['gap', 'Poor contact · gloved, no lip clip', 'the circuit never truly closes', m.fn4]
+  ]);
+  col(980, 'FALSE POSITIVE', 'necrotic pulp · responds', C.pink, E(t, m.fp - 0.1, 0.6), [
+    ['leak', 'Leak: gingiva, saliva, metal', 'current reaches the PDL without the pulp', m.fp1],
+    ['drop', 'Liquefaction necrosis', 'fluid in the canal conducts current toward the PDL', m.fp2],
+    ['molar', 'Multirooted, partly necrotic', 'one canal still holds vital tissue', m.fp3],
+    ['alert', 'Anxious patient', 'reacts in anticipation, before anything is felt', m.fp4]
+  ]);
+}
+
+function sceneEvidence(S) {
+  const { t, m } = S;
+  const qa = E(t, m.q - 0.1, 0.5);
+  text('How good is it?', 960, 160, { size: 60, w: 800, al: 'center', a: qa });
+  const ch = E(t, m.pet - 0.1, 0.6);
+  if (ch > 0) {
+    ctx.save(); ctx.globalAlpha *= ch;
+    panel(120, 220, 1000, 660);
+    text('Petersson et al., Endod Dent Traumatol 1999 · 75 teeth', 160, 274, { size: 24, w: 700, c: C.muted });
+    const x0 = 230, x1 = 1080, y0 = 790, y100 = 380, Y = v => y0 - (y0 - y100) * v / 100;
+    for (const v of [0, 25, 50, 75, 100]) { line(x0, Y(v), x1, Y(v), 'rgba(120,130,200,0.15)', 1); text(v + '%', x0 - 14, Y(v) + 7, { size: 20, mono: true, c: C.muted, al: 'right' }); }
+    const groups = [['EPT', 72, 93, 340, m.sens, m.spec, 1], ['Cold', 83, 93, 760, m.cold, m.cold + 0.2, 0.35 + 0.65 * E(t, m.cold - 0.1, 0.5)]];
+    for (const [name, se, sp, gx, ts, tsp, ga] of groups) {
+      const ks = E(t, ts - 0.1, 0.8), kp = E(t, tsp - 0.1, 0.8);
+      ctx.save(); ctx.globalAlpha *= ga;
+      const bar = (x, v, k, col) => { const h = (y0 - Y(v)) * k; rrect(x, y0 - h, 110, h, 10); ctx.fillStyle = col; ctx.fill(); if (k > 0.05) text(Math.round(v * k) + '%', x + 55, y0 - h - 14, { size: 30, w: 800, al: 'center', mono: true, c: col }); };
+      bar(gx, se, name === 'Cold' ? Math.max(ks, 0.0001) * (ga > 0.36 ? 1 : 1) : ks, C.cyan);
+      bar(gx + 126, sp, kp, C.violet);
+      text(name, gx + 118, y0 + 50, { size: 34, w: 800, al: 'center' });
+      ctx.restore();
+    }
+    // legend
+    rrect(170, 312, 22, 22, 5); ctx.fillStyle = C.cyan; ctx.fill(); text('Sensitivity: necrotic pulps correctly flagged', 204, 331, { size: 22, w: 600 });
+    rrect(700, 312, 22, 22, 5); ctx.fillStyle = C.violet; ctx.fill(); text('Specificity: vital pulps cleared', 734, 331, { size: 22, w: 600 });
+    ctx.restore();
+  }
+  const ja = E(t, m.cold + 0.6, 0.6) * (1 - E(t, m.pace - 0.3, 0.5));
+  if (ja > 0) {
+    panel(1180, 300, 620, 300, { a: ja });
+    text('Larger clinical series', 1220, 360, { size: 26, w: 700, c: C.muted, a: ja });
+    text('accuracy: cold 90% · EPT 75%', 1220, 420, { size: 34, w: 800, a: ja });
+    text('Jespersen et al., J Endod 2014 · 656 patients', 1220, 462, { size: 21, w: 500, c: C.muted, a: ja });
+    const ba = E(t, m.both - 0.1, 0.5) * ja;
+    if (ba > 0) pill('EPT + cold together — never one test alone', 1490, 548, { size: 24, col: C.green, al: 'center', a: ba });
+  }
+  const pa = E(t, m.pace - 0.1, 0.6);
+  if (pa > 0) {
+    panel(1180, 260, 620, 620, { a: pa });
+    ctx.save(); ctx.globalAlpha *= pa;
+    rrect(1250, 320, 150, 120, 50); const g = ctx.createLinearGradient(1250, 320, 1400, 440); g.addColorStop(0, '#d9dde8'); g.addColorStop(1, '#8a90a6'); ctx.fillStyle = g; ctx.fill();
+    ctx.strokeStyle = '#9fa6bf'; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(1325, 320); ctx.bezierCurveTo(1330, 285, 1400, 290, 1470, 305); ctx.bezierCurveTo(1560, 325, 1620, 300, 1700, 300); ctx.stroke();
+    glow(1325, 380, 40, C.green, 0.5 + 0.3 * Math.sin(t * 4));
+    ctx.restore();
+    text('Pacemakers & ICDs', 1440, 400, { size: 32, w: 800, a: pa });
+    const wa = E(t, m.wilson - 0.1, 0.5);
+    if (wa > 0) { para('No interference detected during EPT use in 27 patients with pacemakers or defibrillators.', 1220, 510, 540, { size: 27, w: 600, a: wa, lh: 38 }); text('Wilson et al., J Endod 2006 · later studies agree', 1220, 660, { size: 21, w: 500, c: C.muted, a: wa }); }
+    const ca = E(t, m.caution - 0.1, 0.5);
+    if (ca > 0) pill('not a contraindication on current evidence', 1490, 760, { size: 24, col: C.green, al: 'center', a: ca });
+  }
+}
+
+function sceneVerdict(S) {
+  const { t, m } = S;
+  const last = S.sent[S.sent.length - 1].end;
+  const fin = E(t, last + 0.5, 0.8);
+  const body = 1 - fin;
+  if (body > 0) {
+    ctx.save(); ctx.globalAlpha *= body;
+    sparkles(t, 0.5 * (1 - E(t, m.no, 0.8)));
+    const up = E(t, m.ohm - 0.3, 0.7), y = lerp(420, 190, up), sz = lerp(140, 70, up);
+    text('Dark magic?', 960, y, { size: sz, w: 800, al: 'center', c: '#e2d4ff', glow: C.violet, gb: 36, a: E(t, m.q - 0.1, 0.5) });
+    const na = E(t, m.no - 0.05, 0.4);
+    if (na > 0) { const w = measure('Dark magic?', sz, 800); line(960 - w / 2 - 14, y - sz * 0.34, 960 - w / 2 - 14 + (w + 28) * na, y - sz * 0.34, C.red, sz * 0.07); text('Not even a little.', 960, y + lerp(110, 66, up), { size: lerp(56, 36, up), w: 700, al: 'center', c: C.amber, a: na }); }
+    const cards = [[m.ohm, 'Ohm’s law', 'gets current to the pulp', 'V = I × R', C.cyan], [m.ions, 'Ions in tubules', 'carry it through dentin', '+  −', C.violet], [m.nerve, 'A fibers fire', 'and the patient feels it', '⌁', C.amber]];
+    cards.forEach(([tm, ti, de, glyph, col], i) => {
+      const a = E(t, tm - 0.1, 0.5); if (a <= 0) return;
+      const x = 200 + i * 540;
+      panel(x, 380, 440, 300, { a, stroke: col });
+      if (i === 0) text(glyph, x + 220, 490, { size: 56, w: 800, mono: true, c: col, al: 'center', a, glow: col, gb: 18 });
+      else if (i === 1) { for (const [dx, sgn, c2] of [[-50, '+', '#ff9f43'], [50, '−', '#8f7bff']]) { ctx.save(); ctx.globalAlpha *= a; ctx.fillStyle = c2; ctx.beginPath(); ctx.arc(x + 220 + dx, 470, 30, 0, Math.PI * 2); ctx.fill(); ctx.restore(); text(sgn, x + 220 + dx, 486, { size: 44, w: 800, c: '#fff', al: 'center', a }); } }
+      else { ctx.save(); ctx.globalAlpha *= a; ctx.strokeStyle = col; ctx.lineWidth = 6; ctx.lineJoin = 'round'; ctx.shadowColor = col; ctx.shadowBlur = 14; ctx.beginPath(); ctx.moveTo(x + 120, 500); ctx.lineTo(x + 185, 500); ctx.lineTo(x + 205, 492); ctx.lineTo(x + 222, 420); ctx.lineTo(x + 240, 512); ctx.lineTo(x + 256, 506); ctx.lineTo(x + 320, 500); ctx.stroke(); ctx.restore(); }
+      text(ti, x + 220, 580, { size: 36, w: 800, al: 'center', a });
+      text(de, x + 220, 624, { size: 25, w: 500, c: C.muted, al: 'center', a });
+      if (i < 2) arrow(x + 455, 530, x + 525, 530, hexA(C.text, a * 0.6), 4, 16);
+    });
+    const ua = E(t, m.num - 0.1, 0.5);
+    if (ua > 0) text('The number = the stimulus level at which a nerve said “enough.”', 960, 770, { size: 36, w: 700, al: 'center', a: ua });
+    const ya = E(t, m.yn - 0.1, 0.5);
+    if (ya > 0) text('Read it as YES / NO — always against a control.', 960, 830, { size: 36, w: 800, c: C.amber, al: 'center', a: ya });
+    ctx.restore();
+  }
+  if (fin > 0) {
+    ctx.save(); ctx.globalAlpha *= fin;
+    text('Not magic.', 960, 250, { size: 96, w: 800, al: 'center' });
+    text('Physics + physiology.', 960, 350, { size: 72, w: 800, al: 'center', c: C.cyan, glow: C.cyan, gb: 20 });
+    const refs = [
+      'Lin & Chandler, Int Endod J 2008 — Electric pulp testing: a review',
+      'Virtanen, Pain 1985 · Närhi, J Dent Res 1985 — pulpal nerve thresholds',
+      'Bender et al., JADA 1989 · Lin et al., J Endod 2007 — probe placement',
+      'Seltzer, Bender & Ziontz, OOOP 1963 — tests vs histology',
+      'Petersson et al., Endod Dent Traumatol 1999 · Jespersen et al., J Endod 2014',
+      'Wilson et al., J Endod 2006 — pacemakers/ICDs · Parkell Digitest 3 IFU'
+    ];
+    text('SOURCES', 960, 470, { size: 22, w: 700, c: C.muted, al: 'center', ls: 4 });
+    refs.forEach((r, i) => text(r, 960, 520 + i * 44, { size: 25, w: 500, c: '#cfd2e8', al: 'center' }));
+    text('Endo Connections · ABE board prep', 960, 860, { size: 26, w: 700, c: C.amber, al: 'center' });
+    ctx.restore();
+  }
+}
+
+const SCENES = { cold: sceneCold, circuit: sceneCircuit, stimulus: sceneStimulus, tubules: sceneTubules, nerve: sceneNerve, meaning: sceneMeaning, lies: sceneLies, evidence: sceneEvidence, verdict: sceneVerdict };
+
+// ---------- chrome & captions ----------
+let ccOn = true;
+function chrome(i, sc, t, T) {
+  if (i > 0) {
+    const a = E(t, 0.2, 0.5) * (1 - E(t, sc.dur - 0.6, 0.4));
+    text(String(i).padStart(2, '0'), 60, 72, { size: 24, w: 700, mono: true, c: C.cyan, a });
+    text(sc.title.toUpperCase(), 104, 72, { size: 24, w: 700, c: C.muted, ls: 3, a });
+  }
+  ctx.fillStyle = 'rgba(255,255,255,0.08)'; ctx.fillRect(0, H - 6, W, 6);
+  ctx.fillStyle = hexA(C.cyan, 0.7); ctx.fillRect(0, H - 6, W * T / TL.duration, 6);
+}
+function captions(T) {
+  const cap = TL.captions.find((c, i) => T >= c.start && T < (TL.captions[i + 1] && TL.captions[i + 1].start < c.end + 0.4 ? TL.captions[i + 1].start : c.end + 0.4));
+  if (!cap) return;
+  const a = clamp((T - cap.start) / 0.12) * clamp((cap.end + 0.4 - T) / 0.15);
+  const lines = wrap(cap.text, 1480, 38, 600), lh = 52;
+  const w = Math.max(...lines.map(l => measure(l, 38, 600))) + 64, h = lines.length * lh + 26;
+  ctx.save(); ctx.globalAlpha = a;
+  rrect(W / 2 - w / 2, H - 40 - h, w, h, 14); ctx.fillStyle = 'rgba(6,7,16,0.82)'; ctx.fill();
+  lines.forEach((l, i) => text(l, W / 2, H - 40 - h + 13 + lh * (i + 1) - 14, { size: 38, w: 600, al: 'center', c: '#f6f4ee' }));
+  ctx.restore();
+}
+
+function renderAt(T) {
+  T = clamp(T, 0, TL.duration - 1e-3);
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  ctx.drawImage(bg, 0, 0);
+  let i = TL.scenes.findIndex(s => T >= s.start && T < s.start + s.dur);
+  if (i < 0) i = TL.scenes.length - 1;
+  const sc = TL.scenes[i], t = T - sc.start;
+  ctx.save(); SCENES[sc.id]({ t, d: sc.dur, m: sc.marks, sent: sc.sentences, id: sc.id }); ctx.restore();
+  const fin = i === 0 ? 1 : clamp(t / 0.45), fout = i === TL.scenes.length - 1 ? clamp((sc.dur - t) / 1.0) : clamp((sc.dur - t) / 0.45);
+  const f = Math.min(fin, fout);
+  if (f < 1) { ctx.save(); ctx.globalAlpha = 1 - eio(f); ctx.drawImage(bg, 0, 0); ctx.restore(); }
+  chrome(i, sc, t, T);
+  if (ccOn) captions(T);
+  return i;
+}
+window.renderAt = renderAt;
+window.TIMELINE_DURATION = TL.duration;
+
+// ---------- player ----------
+if (RENDER) { document.fonts.ready.then(() => { window.READY = true; }); return; }
+const audio = document.getElementById('narr'), playBtn = document.getElementById('play'), big = document.getElementById('bigPlay');
+const seek = document.getElementById('seek'), timeEl = document.getElementById('time'), ccBtn = document.getElementById('cc'), chapEl = document.getElementById('chapters');
+let playing = false, useClock = false, clock0 = 0, clockT = 0;
+const fmt = s => Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+const now = () => useClock ? (playing ? clockT + (performance.now() - clock0) / 1000 : clockT) : audio.currentTime;
+const chapters = TL.scenes.map((s, i) => { const b = document.createElement('button'); b.textContent = (i ? i + '. ' : '') + s.title; b.onclick = () => go(s.start + 0.01); chapEl.appendChild(b); return b; });
+let lastScene = -1;
+function frame() {
+  const T = now();
+  if (T >= TL.duration - 0.05 && playing) pause();
+  const i = renderAt(T);
+  seek.value = Math.round(1000 * T / TL.duration);
+  timeEl.textContent = fmt(T) + ' / ' + fmt(TL.duration);
+  if (i !== lastScene) { chapters.forEach((b, j) => b.classList.toggle('on', j === i)); lastScene = i; }
+  if (playing) requestAnimationFrame(frame);
+}
+function play() {
+  if (now() >= TL.duration - 0.1) go(0);
+  playing = true; big.hidden = true; playBtn.textContent = 'Pause';
+  if (!useClock) audio.play().catch(() => { useClock = true; clockT = audio.currentTime || 0; clock0 = performance.now(); });
+  else clock0 = performance.now();
+  requestAnimationFrame(frame);
+}
+function pause() {
+  if (useClock) clockT = now(); else audio.pause();
+  playing = false; playBtn.textContent = 'Play'; frame();
+}
+function go(T) {
+  T = clamp(T, 0, TL.duration);
+  if (useClock) { clockT = T; clock0 = performance.now(); } else audio.currentTime = T;
+  if (!playing) requestAnimationFrame(() => { renderAt(T); seek.value = Math.round(1000 * T / TL.duration); timeEl.textContent = fmt(T) + ' / ' + fmt(TL.duration); chapters.forEach((b, j) => b.classList.toggle('on', TL.scenes[j].start <= T && T < TL.scenes[j].start + TL.scenes[j].dur)); });
+}
+audio.addEventListener('error', () => { useClock = true; clockT = 0; });
+playBtn.onclick = () => playing ? pause() : play();
+big.onclick = play;
+cv.onclick = () => playing ? pause() : play();
+seek.oninput = () => go(seek.value / 1000 * TL.duration);
+ccBtn.onclick = () => { ccOn = !ccOn; ccBtn.setAttribute('aria-pressed', String(ccOn)); if (!playing) renderAt(now()); };
+document.addEventListener('keydown', e => { if (e.code === 'Space' && e.target === document.body) { e.preventDefault(); playing ? pause() : play(); } });
+const tr = document.getElementById('transcript');
+TL.scenes.forEach((s, i) => { const h = document.createElement('h3'); h.textContent = (i ? i + '. ' : '') + s.title; tr.appendChild(h); const p = document.createElement('p'); p.textContent = s.sentences.map(x => x.text).join(' '); tr.appendChild(p); });
+timeEl.textContent = '0:00 / ' + fmt(TL.duration);
+document.fonts.ready.then(() => renderAt(TL.scenes[0].marks.open + 1.5));
+})();
+</script>
+</body>
+</html>

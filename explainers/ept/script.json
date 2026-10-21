@@ -1,0 +1,97 @@
+{
+  "title": "How an Electric Pulp Tester Works — Is It Dark Magic?",
+  "voice": { "engine": "Kokoro-82M (kokoro-onnx, local)", "voice": "af_heart" },
+  "notes": "Narration source. {marker} tokens are stripped before TTS; their character position sets when the matching animation beat fires. 'tts_subs' only changes what the narrator says, never the captions.",
+  "tts_subs": {
+    "Raschkow": "Rashkoh", "mesio-buccal": "meezio-buckle", "A fibers": "Eh fibers",
+    "Ziontz": "Zye-onts", "Petersson": "Pettersson", "Digitest": "Didgy-test",
+    "1963": "nineteen sixty-three", "1999": "nineteen ninety-nine",
+    "pulp–dentin": "pulp-dentin", "“": "", "”": ""
+  },
+  "scenes": [
+    {
+      "id": "cold", "title": "Dark magic?",
+      "sentences": [
+        "A little wand {touch}touches a tooth. {climb}A number starts climbing.",
+        "{n20}Twenty… {n30}thirty… {n42}forty-two, and the patient {go}lets go.",
+        "{title}Is it dark magic?",
+        "{no}Not even close. It's a {c1}closed circuit, a {c2}ramping pulse train, and {c3}one very particular kind of nerve fiber. {open}Let's open it up."
+      ]
+    },
+    {
+      "id": "circuit", "title": "The circuit",
+      "sentences": [
+        "An electric pulp tester is a {gen}battery-powered pulse generator with {two}two electrodes.",
+        "The {tip}probe tip is the active electrode. {ret}The return electrode is the patient.",
+        "{s1}Current leaves the tip, {s2}crosses the enamel, {s3}travels through the dentin {s4}into the pulp, {s5}exits through the periodontal ligament and bone, {s6}runs through the body, and comes back to the device {s7}through the patient's hand on the metal handle, {lip}or through a lip clip.",
+        "{glove}Your gloves are close to insulators, so you can't reliably complete the loop for the patient. {gl2}Gloved, without a lip clip, readings creep up, or never come at all.",
+        "And because the patient completes the circuit, {release}letting go opens it instantly. {off}The off switch is in the patient's hand."
+      ]
+    },
+    {
+      "id": "stimulus", "title": "The stimulus",
+      "sentences": [
+        "What comes out of the tip {dc}isn't a steady current. {pulses}It's a train of brief pulses.",
+        "{ramp}Each pulse is a little stronger than the last, so the stimulus ramps up gradually, and {num}the number on the display simply tracks how far along that ramp you are.",
+        "{scale}On the Vitality Scanner, the scale runs from zero to eighty; {d64}on the Digitest, to sixty-four. {max}Hitting the top means maximum stimulus, and no response.",
+        "{ohm}Now, Ohm's law. {volt}The voltage can reach hundreds of volts, {why}because enamel behaves like a resistor of about two megaohms. {tiny}But the current is tiny: {thr}a human tooth reports its first sensation at roughly seven microamps.",
+        "{dry}Bare enamel and poor contact add resistance, {paste}which is why a dab of toothpaste goes on the tip. {leak}Gingiva and metal restorations, meanwhile, offer a shortcut around the pulp, {iso}so isolate the tooth, dry it, and stay off them."
+      ]
+    },
+    {
+      "id": "tubules", "title": "Into the tooth",
+      "sentences": [
+        "{zoom}Now, zoom in.",
+        "{enamel}Enamel is a poor conductor: it's highly mineralized, with very little water.",
+        "{dentin}Dentin is different. Its tubules are full of fluid, {ions}and the ions in that fluid carry current.",
+        "{flow}So the current is funneled toward the pulp, {plexus}where it meets the plexus of Raschkow: a dense web of nerve endings at the pulp–dentin border.",
+        "{place}Placement matters, too. Thresholds are lowest {inc}at the incisal edge of anterior teeth, {mol}and at the mesio-buccal cusp tip of molars."
+      ]
+    },
+    {
+      "id": "nerve", "title": "The nerve",
+      "sentences": [
+        "{trick}Here's the real trick.",
+        "{adelta}The pulses depolarize the lowest-threshold fibers: {myel}myelinated A fibers, mostly A-delta, concentrated right at that border.",
+        "{weak}Weak pulses nudge the membrane potential up, {settle}and it settles back.",
+        "{strong}But once a pulse pushes it past threshold, {na}voltage-gated sodium channels open, and {ap}the fiber fires an action potential.",
+        "{race}That signal races along the trigeminal nerve to the brain. {feel}The patient feels a tingle, warmth, or fullness, {letgo}and lets go.",
+        "{cfib}Most pulp axons are actually unmyelinated C fibers, {c6}but they need several times more current, {silent}so at usual EPT intensities they generally stay silent."
+      ]
+    },
+    {
+      "id": "meaning", "title": "What it measures",
+      "sentences": [
+        "{q}So what does the test actually measure?",
+        "{sens}Nerve response, or sensibility. {vit}Not blood supply. Strictly speaking, it isn't a vitality test at all.",
+        "{num}And the number isn't a grade. {seltzer}Classic histologic work from Seltzer, Bender, and Ziontz in 1963 showed that clinical test results don't reliably predict what's going on in the pulp.",
+        "{binary}What matters is response versus no response, {ctrl}compared with control teeth, ideally the contralateral."
+      ]
+    },
+    {
+      "id": "lies", "title": "When it misleads",
+      "sentences": [
+        "{intro}Like any test, it can mislead you.",
+        "{fn}False negatives: a vital pulp that doesn't respond. {fn1}A recently traumatized tooth, whose response can vanish for weeks or months while its blood supply survives. {fn2}An immature tooth, with fewer myelinated fibers until the root is complete. {fn3}Calcified canals, or large restorations. {fn4}And poor contact, or a gloved operator with no lip clip.",
+        "{fp}False positives: a response from a necrotic tooth. {fp1}Current leaking through gingiva, saliva, or a metal restoration. {fp2}Liquefaction necrosis conducting current toward the periodontal ligament. {fp3}A multi-rooted tooth with one canal still vital. {fp4}And the anxious patient who reacts before anything is felt."
+      ]
+    },
+    {
+      "id": "evidence", "title": "How accurate?",
+      "sentences": [
+        "{q}How good is it?",
+        "{pet}In Petersson's classic 1999 study, {sens}EPT correctly flagged about seventy-two percent of necrotic pulps, {spec}and correctly cleared about ninety-three percent of vital ones.",
+        "{cold}Cold testing caught more necrosis, and in larger clinical series it's the more accurate test overall, {both}so use the two together, and never rely on a single test.",
+        "{pace}And pacemakers? {wilson}Clinical studies, starting with Wilson in 2006, found no interference with pacemakers or defibrillators, {caution}so modern evidence doesn't support treating a pacemaker as a contraindication."
+      ]
+    },
+    {
+      "id": "verdict", "title": "The verdict",
+      "sentences": [
+        "{q}So: dark magic? {no}Not even a little.",
+        "{ohm}Ohm's law gets current to the pulp, {ions}ions carry it through the tubules, {nerve}and A fibers turn it into a tingle.",
+        "{num}The number is just the stimulus level at which a nerve said “enough.” {yn}Read it as yes or no, always against a control."
+      ]
+    }
+  ]
+}
