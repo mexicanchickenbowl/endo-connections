@@ -3,7 +3,7 @@
 
   pip install kokoro-onnx soundfile
   # model files: github.com/thewh1teagle/kokoro-onnx/releases (model-files-v1.0)
-  python3 tools/narrate.py MODEL.onnx VOICES.bin OUT_DIR [--voice af_heart] [--speed 1.0]
+  python3 tools/narrate.py MODEL.onnx VOICES.bin OUT_DIR [--voice af_heart] [--speed 1.0] [--script script.json]
 
 Each sentence is synthesized separately and joined with a short pause, so OUT_DIR/<scene>.json
 records exact sentence spans for build_timeline.py (no silence detection needed).
@@ -25,8 +25,9 @@ def main():
     ap.add_argument("--voice", default="af_heart")
     ap.add_argument("--speed", type=float, default=1.0)
     ap.add_argument("--only", nargs="*")
+    ap.add_argument("--script", default="script.json")
     a = ap.parse_args()
-    with open(os.path.join(ROOT, "script.json")) as f:
+    with open(os.path.join(ROOT, a.script)) as f:
         script = json.load(f)
     subs = script.get("tts_subs", {})
     k = Kokoro(a.model, a.voices)

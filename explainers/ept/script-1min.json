@@ -1,0 +1,55 @@
+{
+  "title": "How an Electric Pulp Tester Works — the 1-minute cut",
+  "voice": { "engine": "Kokoro-82M (kokoro-onnx, local)", "voice": "af_heart", "speed": 1.05 },
+  "notes": "One-minute cut. Same scene engine as script.json; scene ids pick the animation and {marker} beats drive it. Beats a scene doesn't name simply never fire.",
+  "outputs": { "timeline": "timeline-1min.js", "narration": "narration-1min.mp3" },
+  "timing": { "first_lead": 1.1, "lead": 0.3, "tail": 0.45, "last_tail": 3.6 },
+  "tts_subs": {
+    "Raschkow": "Rashkoh", "A fibers": "Eh fibers", "pulp–dentin": "pulp-dentin", "“": "", "”": ""
+  },
+  "scenes": [
+    {
+      "id": "cold", "title": "Dark magic?",
+      "sentences": [
+        "{climb}The number climbs… {n20}twenty… {n42}forty-two, and the patient {go}lets go.",
+        "{title}Dark magic? {no}No. {open}Here's how it really works."
+      ]
+    },
+    {
+      "id": "circuit", "title": "The circuit",
+      "sentences": [
+        "The {tip}probe tip is one electrode; {ret}the patient is the other.",
+        "{s1}Current flows through {s2}enamel, {s3}dentin, and {s4}pulp, {s5}out through bone {s6}and body, and back {s7}via the patient's hand on the handle.",
+        "{release}Let go, and the circuit opens."
+      ]
+    },
+    {
+      "id": "stimulus", "title": "The stimulus",
+      "sentences": [
+        "{pulses}It fires brief pulses {ramp}that ramp up, {num}and the number just tracks the ramp.",
+        "{ohm}Up to {volt}hundreds of volts {why}drive it through enamel, {tiny}but only microamps {thr}reach the pulp."
+      ]
+    },
+    {
+      "id": "nerve", "title": "The nerve",
+      "sentences": [
+        "{adelta}Ions in the tubules carry it to A-delta fibers {myel}at the pulp–dentin border.",
+        "{weak}Weak pulses {settle}fade; {strong}once one crosses threshold, {na}the fiber {ap}fires, {race}and the patient {feel}feels a tingle.",
+        "{cfib}C fibers {silent}mostly stay silent."
+      ]
+    },
+    {
+      "id": "meaning", "title": "What it means",
+      "sentences": [
+        "{sens}So EPT tests nerve sensibility, {vit}not blood supply.",
+        "{num}The number isn't a grade: {binary}read response versus no response, {ctrl}against a control."
+      ]
+    },
+    {
+      "id": "verdict", "title": "The verdict",
+      "sentences": [
+        "{q}Dark magic? {no}Not even a little. {ohm}Just circuits, {ions}ions, {nerve}and nerves."
+      ]
+    }
+  ]
+}

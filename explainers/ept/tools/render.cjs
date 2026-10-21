@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Render the explainer to MP4 by stepping the canvas frame by frame in headless Chromium.
 //
-//   NODE_PATH=$(npm root -g) node tools/render.cjs video  ept-explainer.mp4 [--fps 30] [--jobs 4]
-//   NODE_PATH=$(npm root -g) node tools/render.cjs snap   OUT_DIR  12.5 40 61.2 ...   (PNG stills)
+//   NODE_PATH=$(npm root -g) node tools/render.cjs video  ept-explainer-1min.mp4 [--cut 1min|full] [--fps 30] [--jobs 4]
+//   NODE_PATH=$(npm root -g) node tools/render.cjs snap   OUT_DIR [--cut 1min|full] 12.5 40 61.2 ...   (PNG stills)
 //
 // Needs Playwright's Chromium and ffmpeg on PATH. Web fonts are blocked so frames use the
 // locally installed Inter / JetBrains Mono.
@@ -12,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const URL_ = 'file://' + path.join(ROOT, 'index.html') + '?render';
+let URL_ = 'file://' + path.join(ROOT, 'index.html') + '?render';
 
 async function openPage(browser) {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
@@ -49,7 +49,7 @@ function ffmpegSegment(file, fps) {
 async function video(out, fps, jobs) {
   const browser = await chromium.launch();
   const probe = await openPage(browser);
-  const duration = await probe.evaluate(() => window.TIMELINE_DURATION);
+  const [duration, narration] = await probe.evaluate(() => [window.TIMELINE_DURATION, window.NARRATION]);
   await probe.close();
   const total = Math.ceil(duration * fps), per = Math.ceil(total / jobs);
   const tmp = fs.mkdtempSync(path.join(require('os').tmpdir(), 'ept-render-'));
@@ -71,7 +71,7 @@ async function video(out, fps, jobs) {
   const list = path.join(tmp, 'list.txt');
   fs.writeFileSync(list, parts.map(p => `file '${p}'`).join('\n'));
   await new Promise((res, rej) => spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', list,
-    '-i', path.join(ROOT, 'narration.mp3'), '-c:v', 'copy', '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart', out],
+    '-i', path.join(ROOT, narration), '-c:v', 'copy', '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart', out],
     { stdio: 'inherit' }).on('close', c => c === 0 ? res() : rej(new Error('mux exit ' + c))));
   fs.rmSync(tmp, { recursive: true, force: true });
   console.log(`wrote ${out}: ${total} frames in ${((Date.now() - t0) / 1000).toFixed(0)}s`);
@@ -79,7 +79,10 @@ async function video(out, fps, jobs) {
 
 (async () => {
   const [mode, target, ...rest] = process.argv.slice(2);
-  const opt = (k, d) => { const i = rest.indexOf(k); return i >= 0 ? Number(rest[i + 1]) : d; };
+  const take = k => { const i = rest.indexOf(k); if (i < 0) return undefined; const v = rest[i + 1]; rest.splice(i, 2); return v; };
+  const cut = take('--cut');
+  if (cut) URL_ += '&cut=' + cut;
+  const opt = (k, d) => { const v = take(k); return v === undefined ? d : Number(v); };
   if (mode === 'snap') await snap(target, rest.map(Number));
   else if (mode === 'video') await video(target, opt('--fps', 30), opt('--jobs', 4));
   else { console.error('usage: render.cjs video OUT.mp4 [--fps 30] [--jobs 4] | snap OUT_DIR t1 t2 ...'); process.exit(1); }

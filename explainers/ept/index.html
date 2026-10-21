@@ -60,7 +60,7 @@
     <button id="cc" aria-pressed="true" title="Captions">CC</button>
   </div>
   <div class="chapters" id="chapters"></div>
-  <p class="note">Prefer a file? <a href="ept-explainer.mp4" download>Download the MP4</a>.</p>
+  <p class="note">Prefer a file? <a id="dl" href="ept-explainer-1min.mp4" download>Download the MP4</a> · <a id="otherCut" href="?cut=full">Watch the full 5-minute version</a></p>
   <details><summary>Transcript</summary><div class="transcript" id="transcript"></div></details>
   <details>
     <summary>Sources</summary>
@@ -81,13 +81,23 @@
     </ol>
   </details>
 </div>
-<audio id="narr" src="narration.mp3" preload="auto"></audio>
-<script src="timeline.js"></script>
+<audio id="narr" preload="auto"></audio>
+<script>
+  // ?cut=full plays the 5-minute version; the default is the 1-minute cut
+  window.CUT = new URLSearchParams(location.search).get('cut') === 'full' ? 'full' : '1min';
+  document.write('<script src="' + (window.CUT === 'full' ? 'timeline.js' : 'timeline-1min.js') + '"><\/script>');
+</script>
 <script>
 (() => {
 'use strict';
 const W = 1920, H = 1080;
 const TL = window.TIMELINE;
+const CUTS = {
+  '1min': { audio: 'narration-1min.mp3', video: 'ept-explainer-1min.mp4', other: '?cut=full', otherLabel: 'Watch the full 5-minute version' },
+  full: { audio: 'narration.mp3', video: 'ept-explainer-full.mp4', other: '?', otherLabel: 'Watch the 1-minute version' }
+};
+const CUT = CUTS[window.CUT] || CUTS['1min'];
+window.NARRATION = CUT.audio;
 const RENDER = new URLSearchParams(location.search).has('render');
 if (RENDER) document.body.classList.add('render');
 const cv = document.getElementById('c');
@@ -114,7 +124,8 @@ const EO = (t, a, d = 0.6) => eout(P(t, a, d));
 function mulberry(seed) {
   return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
 }
-function keyframes(t, kf) { // [[time, value], ...] piecewise linear, clamped
+function keyframes(t, kf) { // [[time, value], ...] piecewise linear, clamped; unused beats (∞) are skipped
+  kf = kf.filter(k => isFinite(k[0]));
   if (t <= kf[0][0]) return kf[0][1];
   for (let i = 1; i < kf.length; i++) if (t < kf[i][0]) return lerp(kf[i - 1][1], kf[i][1], (t - kf[i - 1][0]) / ((kf[i][0] - kf[i - 1][0]) || 1));
   return kf[kf.length - 1][1];
@@ -473,16 +484,17 @@ function sceneCold(S) {
   const { t, m } = S;
   sparkles(t, 0.35 + 0.65 * E(t, m.title - 0.4, 0.8));
   const ga = 1 - E(t, m.title - 0.5, 0.7);
-  const num = t < 1.6 ? '' : Math.floor(keyframes(t, [[m.climb, 0], [m.n20, 20], [m.n30, 30], [m.n42, 42]]));
+  const intro = Math.min(1.4, Math.max(0.5, m.climb - 0.1));
+  const num = t < Math.min(1.6, m.climb) ? '' : Math.floor(keyframes(t, [[m.climb, 0], [m.n20, 20], [m.n30, 30], [m.n42, 42]]));
   if (ga > 0.002) {
     ctx.save(); ctx.globalAlpha *= ga;
     const flash = t >= m.n42 ? Math.max(0, 1 - (t - m.n42) / 1.8) : 0;
     drawTooth(LAY.tx, LAY.ty, LAY.s, { boneBottom: 1040, pulpGlow: flash });
-    const k = E(t, 0.1, 1.4);
+    const k = E(t, 0, intro);
     drawWand(lerp(1250, TIP[0], k), lerp(60, TIP[1], k), LAY.ang, { num });
-    patientFinger(E(t, 0.5, 1.0), E(t, m.go, 0.5));
+    patientFinger(E(t, intro * 0.35, intro * 0.7), E(t, m.go, 0.5));
     if (flash > 0) tingle(LAY.tx, LAY.ty + 70, flash, t);
-    lcd(1150, 470, 560, 280, num, { a: E(t, 1.4, 0.6), blink: t > m.go + 0.4 ? t : 0 });
+    lcd(1150, 470, 560, 280, num, { a: E(t, intro, 0.5), blink: t > m.go + 0.4 ? t : 0 });
     if (t > m.go) text('lets go', 1430, 300, { size: 34, w: 700, c: C.amber, al: 'center', a: E(t, m.go, 0.4) * (1 - E(t, m.title - 0.8, 0.4)) });
     ctx.restore();
   }
@@ -504,13 +516,15 @@ function sceneCold(S) {
 
 function sceneCircuit(S) {
   const { t, m } = S;
+  const lip = isFinite(m.lip) ? m.lip : m.s7 + 0.7;
+  const leadEnd = Math.min(lip + 1.4, m.release - 0.05);
   const lead = new Poly(LOOPS[0].p);
   const marks = {
     enamel: lead.near(U(0, 40)), dentin: lead.near(U(0, 120)), pulp: lead.near(U(0, 330)), pdl: lead.near(U(0, 760)),
     body: lead.near([1100, 904]), hand: lead.near(FINGER_T), device: lead.near(wandPt(300, -70))
   };
   const leadKF = [[m.s1, 0], [m.s2, marks.enamel], [m.s3, marks.dentin], [m.s4, marks.pulp], [m.s5, marks.pdl], [m.s6, marks.body],
-    [m.s7, marks.hand], [m.lip, marks.device], [m.lip + 1.4, lead.L]];
+    [m.s7, marks.hand], [lip, marks.device], [leadEnd, lead.L]];
   const released = t >= m.release;
   // body ribbon
   const rib = E(t, m.ret, 1.2);
@@ -522,14 +536,14 @@ function sceneCircuit(S) {
   drawTooth(LAY.tx, LAY.ty, LAY.s, { boneBottom: 1040, pulpGlow: 0 });
   // current
   const ft = Math.min(t, m.release) - m.s1;
-  const leadDone = t > m.lip + 1.4;
+  const leadDone = t > leadEnd;
   const dotA = t < m.s1 ? 0 : (leadDone ? 1 : 0.4) * (released ? 1 - P(t, m.release + 0.15, 0.7) : 1) * E(t, m.s1, 0.8);
   flowDots(Math.max(ft, 0), dotA);
   const glv = E(t, m.glove - 0.1, 0.7);
   drawWand(TIP[0], TIP[1], LAY.ang, { num: '', dispGlow: E(t, m.gen, .4) * (1 - E(t, m.s1 - .5, .4)), bandGlow: released ? 0 : E(t, m.ret, .5) * (1 - E(t, m.s1, .5)), glove: glv });
   patientFinger(1, E(t, m.release, 0.5));
   // lead pulse
-  if (t >= m.s1 && t <= m.lip + 1.5) {
+  if (t >= m.s1 && t <= leadEnd + 0.1) {
     const s = keyframes(t, leadKF);
     for (let i = 8; i >= 0; i--) { const p = lead.at(s - i * 14); glow(p[0], p[1], 34 - i * 2.5, C.cyan, (1 - i / 9) * 0.9); }
     const p = lead.at(s); glow(p[0], p[1], 46, '#ffffff', 0.5);
@@ -550,7 +564,7 @@ function sceneCircuit(S) {
   if (listA > 0) {
     const items = [['Probe tip', 'active electrode'], ['Enamel'], ['Dentin', 'fluid-filled tubules'], ['Pulp'], ['PDL & bone'], ["Patient's body"], ['Hand on handle', 'or a lip clip'], ['Back into the device']];
     const bounds = [0, marks.enamel, marks.dentin, marks.pulp, marks.pdl, marks.body, marks.hand, marks.device];
-    const s = keyframes(t, leadKF), animating = t >= m.s1 && t <= m.lip + 1.4;
+    const s = keyframes(t, leadKF), animating = t >= m.s1 && t <= leadEnd;
     let y = 236;
     items.forEach(([ti, sub], i) => {
       const active = animating && s >= bounds[i] && (i === 7 || s < bounds[i + 1]);
@@ -587,7 +601,8 @@ function sceneCircuit(S) {
 function sceneStimulus(S) {
   const { t, m } = S;
   const A = 1 - E(t, m.ohm - 0.3, 0.6), B = E(t, m.ohm - 0.1, 0.7);
-  const level = tt => tt < m.pulses ? 0 : tt < m.ramp ? 4 : Math.min(80, lerp(4, 80, (tt - m.ramp) / (m.max + 0.3 - m.ramp)));
+  const rampEnd = isFinite(m.max) ? m.max + 0.3 : m.ramp + (m.ohm - m.ramp) * 1.35;
+  const level = tt => tt < m.pulses ? 0 : tt < m.ramp ? 4 : Math.min(80, lerp(4, 80, (tt - m.ramp) / (rampEnd - m.ramp)));
   if (A > 0) {
     ctx.save(); ctx.globalAlpha *= A;
     panel(80, 130, 1100, 600);
@@ -877,7 +892,12 @@ function sceneNerve(S) {
     const my = E(t, m.myel - 0.1, 0.5);
     text('A-δ fiber: myelinated · fast (~6–30 m/s) · low threshold', 360, 158, { size: 26, w: 700, c: C.amber, a: my });
     const cf = E(t, m.cfib - 0.1, 0.6);
-    if (cf > 0) { line(340, 262, 1560, 262, hexA(C.violet, cf), 3); text('C fiber: unmyelinated · slow · high threshold', 360, 254 + 34, { size: 22, w: 600, c: C.violet, a: cf }); }
+    if (cf > 0) {
+      line(340, 262, 1560, 262, hexA(C.violet, cf), 3);
+      const lab = 'C fiber: unmyelinated · slow · high threshold';
+      text(lab, 360, 288, { size: 22, w: 600, c: C.violet, a: cf });
+      if (!isFinite(m.c6)) text('→ generally silent', 372 + measure(lab, 22, 600), 288, { size: 22, w: 800, c: C.red, a: E(t, m.silent - 0.1, 0.4) });
+    }
     // impulse
     if (t > m.race && t < m.feel + 0.6) {
       const k = clamp((t - m.race) / Math.max(0.6, m.feel - m.race - 0.2));
@@ -888,7 +908,8 @@ function sceneNerve(S) {
     ctx.restore();
   }
   // membrane potential graph
-  const gA = E(t, m.weak - 0.6, 0.6) * (1 - E(t, m.cfib - 0.3, 0.6));
+  const hasTable = isFinite(m.c6);
+  const gA = E(t, hasTable ? m.weak - 0.6 : Math.min(m.weak - 0.6, m.adelta + 0.6), 0.6) * (hasTable ? 1 - E(t, m.cfib - 0.3, 0.6) : 1);
   const T0 = m.weak - 0.5, T1 = m.race + 0.4;
   const ta = m.na - 0.1, tpk = ta + 0.32;                       // threshold crossing → peak
   const p1 = m.weak + 0.2, p2 = (m.weak + m.settle) / 2 + 0.25, p3 = ta - 0.14;
@@ -936,7 +957,7 @@ function sceneNerve(S) {
     ctx.restore();
   }
   // A vs C table
-  const tb = E(t, m.cfib + 0.2, 0.7);
+  const tb = hasTable ? E(t, m.cfib + 0.2, 0.7) : 0;
   if (tb > 0) {
     ctx.save(); ctx.globalAlpha *= tb;
     panel(120, 340, 1680, 560);
@@ -1017,10 +1038,11 @@ function sceneMeaning(S) {
   const na = E(t, m.num - 0.1, 0.6) * (1 - E(t, m.binary - 0.3, 0.5));
   if (na > 0) {
     ctx.save(); ctx.globalAlpha *= na;
-    lcd(200, 260, 640, 380, 42, { label: 'EPT READING', size: 230 });
-    const st = E(t, m.num + 0.5, 0.35);
+    const lx = isFinite(m.seltzer) ? 200 : 640;  // centered when there's no citation card beside it
+    lcd(lx, 260, 640, 380, 42, { label: 'EPT READING', size: 230 });
+    const st = E(t, m.num + 0.25, 0.35);
     if (st > 0) {
-      ctx.save(); ctx.translate(520, 700); ctx.rotate(-0.08); ctx.globalAlpha *= st; const sc = 1 + 0.4 * (1 - st); ctx.scale(sc, sc);
+      ctx.save(); ctx.translate(lx + 320, 700); ctx.rotate(-0.08); ctx.globalAlpha *= st; const sc = 1 + 0.4 * (1 - st); ctx.scale(sc, sc);
       rrect(-250, -46, 500, 92, 14); ctx.strokeStyle = C.red; ctx.lineWidth = 6; ctx.stroke();
       text('NOT A GRADE', 0, 18, { size: 50, w: 800, c: C.red, al: 'center', ls: 6 }); ctx.restore();
     }
@@ -1236,7 +1258,8 @@ function renderAt(T) {
   let i = TL.scenes.findIndex(s => T >= s.start && T < s.start + s.dur);
   if (i < 0) i = TL.scenes.length - 1;
   const sc = TL.scenes[i], t = T - sc.start;
-  ctx.save(); SCENES[sc.id]({ t, d: sc.dur, m: sc.marks, sent: sc.sentences, id: sc.id }); ctx.restore();
+  const m = new Proxy(sc.marks, { get: (o, k) => (k in o ? o[k] : Infinity) }); // a beat the script doesn't name never fires
+  ctx.save(); SCENES[sc.id]({ t, d: sc.dur, m, sent: sc.sentences, id: sc.id }); ctx.restore();
   const fin = i === 0 ? 1 : clamp(t / 0.45), fout = i === TL.scenes.length - 1 ? clamp((sc.dur - t) / 1.0) : clamp((sc.dur - t) / 0.45);
   const f = Math.min(fin, fout);
   if (f < 1) { ctx.save(); ctx.globalAlpha = 1 - eio(f); ctx.drawImage(bg, 0, 0); ctx.restore(); }
@@ -1251,6 +1274,9 @@ window.TIMELINE_DURATION = TL.duration;
 if (RENDER) { document.fonts.ready.then(() => { window.READY = true; }); return; }
 const audio = document.getElementById('narr'), playBtn = document.getElementById('play'), big = document.getElementById('bigPlay');
 const seek = document.getElementById('seek'), timeEl = document.getElementById('time'), ccBtn = document.getElementById('cc'), chapEl = document.getElementById('chapters');
+audio.src = CUT.audio;
+document.getElementById('dl').href = CUT.video;
+const other = document.getElementById('otherCut'); other.href = CUT.other; other.textContent = CUT.otherLabel;
 let playing = false, useClock = false, clock0 = 0, clockT = 0;
 const fmt = s => Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
 const now = () => useClock ? (playing ? clockT + (performance.now() - clock0) / 1000 : clockT) : audio.currentTime;
