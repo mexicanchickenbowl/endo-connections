@@ -578,8 +578,8 @@
     txt('CYAN LINE = 60 °C ISOTHERM', 100, y + 50, 30, COL.cyan, 'left', 3);
     rich([['GP reaches flow temp ', COL.white], ['(≥60 °C)', COL.cyan]], 100, y + 120, 52);
     rich([['only ', COL.white], ['~1 mm', COL.cyan], [' past the tip', COL.white]], 100, y + 184, 52);
-    txt('Bench IR thermography: Yu 2023 JDS · Briseño Marroquín 2015 J Endod', 100, y + 230, 23, COL.fine);
-    txt('Model tip 150 °C: real tips run below the dial (Atmeh 2020 IEJ)', 100, y + 260, 23, COL.faint);
+    txt('Bench IR imaging: Yu 2023 J Dent Sci · Briseño Marroquín 2015 J Endod', 100, y + 230, 23, COL.fine);
+    txt('Model tip 150 °C: real tips often run below the dial (Atmeh 2020 IEJ)', 100, y + 260, 23, COL.faint);
     txt('Model heat held 1.8 s at depth (simplified; no separation burst)', 100, y + 290, 23, COL.faint);
     ctx.restore();
   }

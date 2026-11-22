@@ -28,7 +28,7 @@
     },
     {
       "claim": "Cooling rate picks the crystal: very slow (~0.5 °C/h) → α, normal cooling → β; recrystallisation is slow and product-dependent",
-      "source": "Liao et al., Int Endod J 2021;54:2125-32 (PMID 34420210, citing Bunn 1942); Hsu et al., J Dent Sci 2020;15:28-33 (PMID 32256997)"
+      "source": "Vishwanath & Rao, J Conserv Dent 2019;22:216-22 (PMID 31367101: rapid cooling → β, ~0.5 °C/h → α); Liao et al., Int Endod J 2021;54:2125-32 (PMID 34420210, citing Bunn 1942; no crystallisation exotherm on cooling at 5 °C/min); Hsu et al., J Dent Sci 2020;15:28-33 (PMID 32256997: product-dependent); Lee et al., J Endod 1997;23:579-82 (PMID 9587286: shrinkage continues 45 min–10 h at 37 °C)"
     },
     {
       "claim": "GP shrinks on cooling as it recrystallises (bracket marked 'exaggerated')",
@@ -47,5 +47,5 @@
       "source": "Toy model / schematic: arbitrary volume units with a broken axis, toy chain drawings, canal gap exaggerated ~10×, 22 → 70 → 37 °C anchors illustrative"
     }
   ],
-  "caption": "Why does warm gutta-percha shrink? Follow its phases.\n\nMost cones are β phase as supplied. Heat to ~42–49 °C and β converts to α; at ~53–59 °C it melts (amorphous) and flows under pressure.\nOn cooling it recrystallises (normal cooling gives β; only very slow cooling gives α) and contracts. It can keep shrinking for minutes–hours.\nFor warm techniques: keep plugger pressure on while it cools. Apical GP stays cooler (≲45 °C).\n\nRefs: Schilder 1974/1985, Oral Surg; Lee 1997, J Endod; Lottanti 2014, J Endod; Hsu 2020, J Dent Sci.\nAnimation is schematic and not to scale; ranges vary by brand.\n\n#endodontics #endo #dentistry #guttapercha #obturation #dentalmaterials #rootcanal #dentalstudent"
+  "caption": "Why does warm gutta-percha shrink? Follow its phases.\n\nMost cones are β phase as supplied. Heat to ~42–49 °C and β converts to α; at ~53–59 °C it melts (amorphous) and flows under pressure.\nOn cooling it recrystallises (normal cooling gives β; only very slow cooling gives α) and contracts. It can keep shrinking for minutes–hours.\nFor warm techniques: keep plugger pressure on while it cools. Apical GP stays cooler (≲45 °C).\n\nRefs: Schilder 1974/1985 & Goodman 1981, Oral Surg Oral Med Oral Pathol; Combe 2001 & Liao 2021, Int Endod J; Lee 1997 & Lottanti 2014, J Endod; Hsu 2020, J Dent Sci.\nAnimation is schematic and not to scale; ranges vary by brand.\n\n#endodontics #endo #dentistry #guttapercha #obturation #dentalmaterials #rootcanal #dentalstudent"
 }

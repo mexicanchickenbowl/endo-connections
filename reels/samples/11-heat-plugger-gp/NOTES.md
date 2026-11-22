@@ -48,8 +48,8 @@ right-hand button column.
 1. **"GP reaches flow temp (≥60 °C) only ~1 mm past the tip"** (live 60 °C isotherm; model max-hold 0.8 mm).
    - Yu Y et al. *J Dent Sci* 2023;18:9-16. PMID 36643252. doi:10.1016/j.jds.2022.08.003. IR analysis in a 3D-printed model: GP > 60 °C only within 1 mm beyond the heat-carrier tip; GP a poor thermal conductor.
    - Briseño Marroquín B et al. *J Endod* 2015;41:79-82. PMID 25134732. doi:10.1016/j.joen.2014.07.004. IR camera, carrier preset 200 °C: ≥ 65 °C reached 1.05 ± 0.28 mm into GP; GP "undergoes deformation at temperatures above 65 °C"; carrier temperatures unstable (147–474 °C).
-   - Both are **bench** IR studies (printed model / bisected teeth), not in situ under compaction — the source line says "Bench IR thermography".
-   - 60 °C as "flow temp": the top of the commonly cited α → amorphous range (53–59 °C; Schilder, Goodman & Aldrich, Oral Surg Oral Med Oral Pathol 1974;38:109-14, PMID 4525950, no abstract) and the Yu 2023 threshold. The β → α transition (commonly cited ~42–49 °C; brand-dependent per Liao 2021 Int Endod J, PMID 34420210, doi:10.1111/iej.13615) already makes GP partly plastic, so 60 °C is a *flow* threshold, not the onset of any softening. Neither phase range is shown as a number.
+   - Both are **bench** IR studies (printed model / bisected teeth), not in situ under compaction — the source line says "Bench IR imaging".
+   - 60 °C as "flow temp": the top of the commonly cited α → amorphous range (53–59 °C; Schilder, Goodman & Aldrich, Oral Surg Oral Med Oral Pathol 1974;38:109-14, PMID 4525950, no abstract) and the Yu 2023 threshold. The β → α transition (commonly cited ~42–49 °C; brand-dependent per Liao SC et al. Int Endod J 2021;54:2125-32, PMID 34420210, doi:10.1111/iej.13615) already makes GP partly plastic, so 60 °C is a *flow* threshold, not the onset of any softening. Neither phase range is shown as a number.
 2. **"2 mm past the tip: only ~4 °C warmer"** (Sp1, model +3.8 °C peak).
    - Villegas JC et al. *Int Endod J* 2005;38:218-22. PMID 15810971. doi:10.1111/j.1365-2591.2005.00934.x. Split-tooth model, thermocouples in holes in the canal **wall**: plugger at WL−4 → +4 ± 1 °C at 2 mm from WL (+6 ± 1 °C at 4 mm, i.e. at the tip level), and no replication of the 2 mm depressions. Plugger at WL−2 → +14 ± 3 / +12 ± 2 °C. Source line: "(plugger at WL−4 mm; canal-wall thermocouples, ex vivo)".
 3. **"compacted near body temp"** (takeaway bracket, now only from 2 mm past the tip to WL) and the 1–2 mm band **"warm 41–55 °C (model)"**.
@@ -59,7 +59,7 @@ right-hand button column.
 4. **"Root surface: usually under +10 °C at a 200 °C dial (ex vivo)"**.
    - Under +10 °C: Sweatman TL et al. *J Endod* 2001;27:512-5. PMID 11501588. doi:10.1097/00004770-200108000-00004 (System B 200/250/300 °C never exceeded +10 °C externally); Lee FS et al. *J Endod* 1998;24:617-20. PMID 9922753. doi:10.1016/S0099-2399(98)80123-4.
    - Over +10 °C (shown on screen): Lipski M. *Oral Surg Oral Med Oral Pathol Oral Radiol Endod* 2005;99:505-10. PMID 15772602. doi:10.1016/j.tripleo.2004.07.014 — System B CW raised the root surface by **> 10 °C in mandibular central incisors** (thin dentinal walls; IR camera); Mc Cullagh JJ et al. *Int Endod J* 2000;33:326-32. PMID 11307207. doi:10.1046/j.1365-2591.2000.00302.x — CW downpack in premolars, mean surface rise **13.9 °C (thermocouple) / 28.4 °C (IR)**; the second (separation) activation always caused a secondary rise.
-   - Further caveats (NOTES only): Floren JW et al. J Endod 1999;25:593-5 (PMID 10687534, doi:10.1016/S0099-2399(99)80314-8), ~+10.6 °C at settings ≥ 250 °C; Silver GK et al. Int Endod J 1999;32:287-95 (PMID 10551120), > +10 °C with Touch 'n Heat.
+   - Further caveats (NOTES only): Floren JW et al. J Endod 1999;25:593-5 (PMID 10687534, doi:10.1016/S0099-2399(99)80314-8), ~+10.6 °C at settings ≥ 250 °C; Silver GK et al. Int Endod J 1999;32:287-95 (PMID 10551120, doi:10.1046/j.1365-2591.1999.00215.x), > +10 °C with Touch 'n Heat vertical condensation (System B lower).
 5. **"+10 °C limit (47 °C)"** and **"47 °C for 1 min injures bone (rabbit)"**.
    - Eriksson AR, Albrektsson T. *J Prosthet Dent* 1983;50:101-7. PMID 6576145. doi:10.1016/0022-3913(83)90174-9 (no abstract on PubMed).
    - Eriksson RA, Albrektsson T. *J Oral Maxillofac Surg* 1984;42:705-11. PMID 6593442. doi:10.1016/0278-2391(84)90417-8 — rabbit tibia bone-growth chamber: 47 or 50 °C for 1 min reduced bone formation, 44 °C did not.
@@ -70,10 +70,10 @@ right-hand button column.
    - Zhang C et al. *Int Endod J* 2011;44:1041-6. PMID 21906086. doi:10.1111/j.1365-2591.2011.01919.x — 3 and 5 mm depths similar, both better than 7 mm.
    - Yared GM, Bou Dagher FE. J Endod 1995;21:152-3 (PMID 7561659) compared only 5, 7 and 9 mm short (5 and 7 leaked less than 9); it does not support 3–4 mm, so it was dropped from the screen.
    - Trade-off: **deeper = better adaptation, but more apical heat** (Villegas 2005: +14 °C at 2 mm with the plugger at WL−2) and more extrusion risk. The data lean towards the deeper end; "~3–5 mm" is the commonly taught window.
-7. **"dial 200 °C"** / **"model tip 150 °C: real tips run below the dial (Atmeh 2020 IEJ)"**.
+7. **"dial 200 °C"** / **"Model tip 150 °C: real tips often run below the dial (Atmeh 2020 IEJ)"**.
    - Atmeh AR, Hadis M, Camilleri J. *Int Endod J* 2020;53:698-708. PMID 31955442. doi:10.1111/iej.13269 — none of the carriers reached the set temperature; the 4 s cut-out mode reached 110 °C, continuous mode higher.
    - Hadis M, Camilleri J. *Dent Mater* 2020;36:1183-9. PMID 32505536. doi:10.1016/j.dental.2020.05.008 — none reached the dial.
-   - Briseño Marroquín 2015 recorded 147–474 °C at a 200 °C preset, so real tips are also unstable. 150 °C is inside both ranges; it is a model setting, not a measurement.
+   - Contrary data: Briseño Marroquín 2015 (IR camera) recorded a **mean of ~325 °C** (range 147–474 °C) at a 200 °C preset, i.e. mostly *above* the dial. Real tips are unstable and rarely match the dial in either direction, hence "often" (not "always") below. 150 °C is inside both measured ranges; it is a model setting, not a measurement.
 8. **"Model heat held 1.8 s at depth (simplified; no separation burst)"** — see the model section.
 
 ## What is modelled or schematic
@@ -181,3 +181,26 @@ Design:
 - Not changed (judged acceptable): the in-field plunge tag crosses the thin crown/root outline for ~1.5 s (haloed, readable);
   the "heat plugger (room temp)" label is still fading out for ~0.25 s after HEAT ON (model tip ≤ ~47 °C at that moment).
 - Video re-rendered once; poster stays at 6.95 s (HEAT ON, isotherm + 0.8 mm reading + S2 claim, all inside the 3:4 crop).
+
+## Citation audit (2026-11-22)
+Every citation on screen (`reel.js` source lines), in `meta.json` (claims[].source + caption Refs) and in this file was checked
+against PubMed (`get_article_metadata` by PMID; abstract read for claim support). **All 21 PMIDs resolve to the stated paper**
+(first author, year, journal, volume/pages match): 31955442 Atmeh, 36643252 Yu, 25134732 Briseño Marroquín, 15810971 Villegas,
+11501588 Sweatman, 9922753 Lee, 15772602 Lipski, 11307207 Mc Cullagh, 6593442 Eriksson (JOMS 1984; PubMed indexes the first
+author as "Eriksson RA"), 6576145 Eriksson (J Prosthet Dent 1983; no abstract), 11469298 Smith, 12929697 Guess, 21906086 Zhang,
+12449024 Venturi, 4525950 Schilder (no abstract), 34420210 Liao, 10687534 Floren, 10551120 Silver, 24666911 Viapiana,
+32505536 Hadis, 7561659 Yared. No wrong PMIDs, years, journals or first authors; no textbook cited as a paper.
+Problems found and fixed:
+- **On screen, S2 panel: "real tips run below the dial (Atmeh 2020 IEJ)"** was an overgeneralisation: Atmeh 2020 and Hadis 2020
+  support it, but Briseño Marroquín 2015, cited one line above in the same panel, measured a mean ~325 °C at a 200 °C preset
+  (mostly *above* the dial). Softened to "Model tip 150 °C: real tips **often** run below the dial (Atmeh 2020 IEJ)"; meta claim
+  updated to match and Hadis 2020 (PMID 32505536) added as a second source; contrary data recorded in item 7 above.
+- **On screen, S2 panel: "Yu 2023 JDS"**: non-standard journal abbreviation → "J Dent Sci". To fit the 23 px line inside the panel,
+  "Bench IR thermography:" → "Bench IR imaging:" (same meaning; checked in stills `_stills/audit`, line ends at x ≈ 956).
+- **meta.json caption Refs line** gave no source for two caption claims ("thin roots can exceed it"; "downpack ~3–5 mm short of WL").
+  Added "Lipski 2005 OOOOE; Smith 2000 J Endod; Guess 2003 J Endod".
+- **meta.json topic** said the root surface "barely warms" (contradicted by Lipski 2005 / Mc Cullagh 2000) → "usually stays under
+  +10 °C (ex vivo)", matching the on-screen wording.
+- NOTES: Liao 2021 given volume/pages (54:2125-32); Silver 1999 DOI added; "Bench IR thermography" reference updated.
+Video re-rendered once after the on-screen edits (ffprobe: H.264 1080×1920, 30 fps, 720 frames, 24.0 s + silent AAC; no render
+errors); frame at 6.95 s checked: new S2 source lines inside the panel. Poster unchanged at 6.95 s.

@@ -63,8 +63,11 @@ All checked against PubMed records (abstracts or PMC full text) during this buil
    because some thermoplastic products are α.
 3. **Inset: "GP polymer ~10–20 %", "mostly ZnO filler (+ radiopacifier, wax)".**
    - Friedman CE, Sandrik JL, Heuer MA, Rapp GW. *Composition and physical properties of gutta-percha endodontic
-     filling materials.* J Endod 1977;3(8):304-8. PMID 268405. doi:10.1016/S0099-2399(77)80035-6. Classic values,
-     as summarised by Hsu et al. 2020 (below): 18–22 % GP, 59–76 % ZnO, 1–4 % waxes/resins, 1–18 % metal sulfates.
+     filling materials.* J Endod 1977;3(8):304-8. PMID 268405. doi:10.1016/S0099-2399(77)80035-6. The PubMed
+     abstract is unavailable, so the numbers are taken from secondary sources. These are the classic values (≈18–22 %
+     GP, 59–76 % ZnO, 1–4 % waxes/resins, 1–18 % metal sulfates). Hsu et al. 2020 quotes them, citing its refs 5–8
+     together, and Liao 2021 cites Friedman 1975/1977, Gurgel-Filho 2003 and Maniglia-Ferreira 2013 for 14.5–22.4 %
+     GP. Gurgel-Filho 2003 (below) is primary data for the same range.
    - Gurgel-Filho ED et al. *Chemical and X-ray analyses of five brands of dental gutta-percha cone.* Int Endod J
      2003;36(4):302-7. PMID 12702126. Brands contained 14.5–20.4 % GP and 66.5–84.3 % ZnO, and some had no BaSO₄.
    - Liao et al. 2021: six current brands contained 8.5–17 % GP and 77–86.5 % inorganic matter, 3.5–6 % wax/resin.
@@ -85,8 +88,11 @@ All checked against PubMed records (abstracts or PMC full text) during this buil
    phase is cooled under the rate less than 0.5 °C/h, the α-form will recrystallize (Bunn, 1942; Goodman et al.,
    1974)". Vishwanath & Rao 2019: cooled rapidly → β, extremely slowly (0.5 °C/h) → α. The brief was correct.
    **Nuance (not on screen):** Hsu 2020 saw no crystallisation exotherm on cooling for one regular-type backfill GP
-   at 5 or 20 °C/min, while a soft-type GP recrystallised (to β). Recrystallisation kinetics therefore depend on the
-   product. "Normal → β" is the classic textbook simplification.
+   at 5 or 20 °C/min, while a soft-type GP recrystallised (to β). Liao 2021 likewise saw **no exothermic peaks on
+   cooling at 5 °C/min in any of the six cone brands**. This is the "slow" in the on-screen line "Recrystallisation
+   is slow & product-dependent (Liao 2021; Hsu 2020; Lee 1997)". Hsu 2020 supplies "product-dependent", and Lee 1997
+   supplies the continued shrinkage at 37 °C for 45 min–10 h. Recrystallisation kinetics therefore depend on the
+   product. "Normal → β" is the classic textbook simplification (stated explicitly by Vishwanath & Rao 2019).
 6. **"Shrinkage. It contracts as it cools and recrystallises"**, the *shrinks on cooling* bracket in A and the gaps in C.
    - Schilder H, Goodman A, Aldrich W. *The thermomechanical properties of gutta-percha. Part V. Volume changes in
      bulk gutta-percha as a function of temperature and its relationship to molecular phase transformation.* Oral
@@ -99,27 +105,35 @@ All checked against PubMed records (abstracts or PMC full text) during this buil
    - Lee CQ et al. *Dimensional stability of thermosensitive gutta-percha.* J Endod 1997;23(9):579-82. PMID 9587286.
      Expanded +11.6 to +12.3 % (volume) when heated to 80 °C and shrank on cooling. At 37 °C it kept shrinking for
      45 min to 10 h.
-   - Grassi MD et al. J Endod 1989;15(11):517-21. PMID 2639948. Isothermal volumetric shrinkage during
-     crystallisation: about 2.2–2.6 % for dental GP and 4.6 % for raw GP. This is the "recrystallises" part.
+   - Grassi MD, Plazek DJ, Michanowicz AE, Chay IC. *Changes in the physical properties of the Ultrafil
+     low-temperature (70 °C) thermoplasticized gutta-percha system.* J Endod 1989;15(11):517-21. PMID 2639948.
+     doi:10.1016/S0099-2399(89)80192-X. Isothermal volumetric shrinkage during crystallisation: ≈2.6 % for GP
+     points and Ultrafil Blue, 2.2 % for Ultrafil White, and 4.6 % for raw GP. This is the "recrystallises" part.
    - Tsukada G et al. J Oral Rehabil 2004;31(11):1139-44. PMID 15525394. Marked specific-volume change at the
      first-order transition (42–60 °C). Melted GP shrinks a lot as it sets.
    - No shrinkage percentage is shown on screen, because published values vary widely with product, method
-     (linear vs volumetric) and temperature span (≈1–7 %; Meyer et al. 2006, PMID 16708520, reported 6.5–7.3 %
-     from 90 → 35 °C).
+     (linear vs volumetric) and temperature span (≈1–7 %). Meyer KM et al. (*Analysis of shrinkage of different
+     gutta-percha types using optical measurement methods.* Schweiz Monatsschr Zahnmed 2006;116(4):356-61. PMID
+     16708520) reported 6.5–7.3 % from 90 → 35 °C.
 7. **Takeaway: "Compact while it cools. Hold plugger pressure to offset shrinkage."**
    - Hsu YH et al. *Thermal behavior and viscoelastic properties of gutta-percha used for back-filling the root
      canal.* J Dent Sci 2020;15(1):28-33. PMID 32256997. doi:10.1016/j.jds.2019.10.002. Full text: "Schilder used a
      plugger to compact the gutta-percha during its cooling to overcome the problem of volumetric shrinkage." It
      concludes that soft-type GP "must be compacted more often over time".
    - Lottanti 2014 (above) gives the shrinkage rationale. This is the standard warm-vertical-compaction teaching.
-8. **37 °C "body" marker, 22 °C start, 70 °C peak.** These are illustrative anchors. In the clinic, Goodman,
-   Schilder & Aldrich (Part IV, Oral Surg 1981;51(5):544-51, PMID 6941146) measured about 80 °C in the body of the
-   canal and a peak of 45 °C apically, with thermal effects rarely reaching more than 4–6 mm into the material.
+8. **37 °C "body" marker, 22 °C start, 70 °C peak.** These are illustrative anchors. In natural teeth fitted with
+   thermocouples, Goodman, Schilder & Aldrich (Part IV, Oral Surg Oral Med Oral Pathol 1981;51(5):544-51, PMID
+   6941146) measured about 80 °C in the body of the canal and a peak of 45 °C apically during warm vertical
+   packing. Thermal effects rarely reached more than 4–6 mm into the material. This is the measured basis for
+   "apical GP stays ≲45 °C". Schilder 1985 (Part V) adds why it matters: GP kept at or below 45 °C apically
+   avoids the molecular transformation, so its volume change stays small.
 
 ## What is schematic, toy or not to scale (said on screen: "schematic", "not to scale", "ranges vary by brand")
 - **A:** the y-axis is "Volume (schematic)", with arbitrary units and no numbers. Slopes and step heights are
   illustrative. The recrystallisation on cooling is drawn at ~47 → 39 °C, below the melting range (supercooling).
-  This is consistent with Meyer 2006, where the largest shrinkage was at 45–40 °C, but it is drawn, not measured. The
+  This is consistent with Meyer 2006, where the largest shrinkage per 5 °C came on cooling at the bottom of or
+  below the melting range: 45–40 °C for the Multifill α and β GPs, and 55–40 °C for commercial GP. It is drawn,
+  not measured. The
   loop closes on the β line at 37 °C, which is idealised: Lee 1997 found volume still changing for hours.
 - **B:** toy chain drawings with no atomic positions or real cell parameters. "Two-unit vs one-unit repeat" is shown
   by alternating vs uniform side groups and staggered vs aligned rows. Thermal jiggle is decorative.
@@ -264,3 +278,47 @@ All on-screen PMIDs were re-checked on PubMed (4525950, 11556511, 34420210, 3225
 - Video re-rendered: `reels/out/12-gp-phases.mp4` is 22.000 s, 660 frames, 1080×1920 at 30 fps. The poster stays at
   t = 15.3 s (the full hysteresis loop + shrink bracket, the fork, held pressure with the no-pressure ghost; the title
   is inside the 3:4 crop).
+
+## Change log: Citation audit
+Every literature citation was audited against PubMed: the five on-screen source lines in `reel.js`, every
+`claims[].source` and the caption's Refs line in `meta.json`, and every reference in this file. For each paper,
+first author, year, journal, volume/pages, PMID and DOI were checked against the PubMed record. The abstract (or the
+PMC full text for Liao 2021, Hsu 2020 and Vishwanath & Rao 2019) was read against the claim the paper is attached
+to. Frames from the rendered MP4 were also checked: the fine print in the published video matches the source.
+
+**Verified (PMID → same first author, year and journal; supports its claim):**
+Combe 2001 Int Endod J (11556511) · Friedman 1977 J Endod (268405; no abstract, so the composition figures rest on
+secondary quotes) · Liao 2021 Int Endod J (34420210) · Schilder 1974 Part III, Oral Surg Oral Med Oral Pathol
+(4525950; no abstract, ranges quoted by Liao 2021 and Hsu 2020) · Goodman 1974 Part II (4598930) · Goodman 1981
+Part IV (6941146) · Schilder 1985 Part V (3856822) · Hsu 2020 J Dent Sci (32256997) · Lee 1997 J Endod (9587286) ·
+Lottanti 2014 J Endod (24767571) · Vishwanath & Rao 2019 J Conserv Dent (31367101) · Gurgel-Filho 2003 Int Endod J
+(12702126) · Grassi 1989 J Endod (2639948) · Tsukada 2004 J Oral Rehabil (15525394) · Meyer 2006 Schweiz
+Monatsschr Zahnmed (16708520). Bunn 1942 (Proc R Soc Lond A 180:40) is not in PubMed. It is cited only through
+Liao 2021 and Vishwanath & Rao 2019, and never on screen.
+
+**On screen: no errors found, so the reel was not changed and the video was not re-rendered.** The existing
+`reels/out/12-gp-phases.mp4` is 22.000 s, 660 frames, 1080×1920 at 30 fps.
+
+**Fixed (meta.json / NOTES only):**
+- `meta.json`, claim "Cooling rate picks the crystal". Its sources (Liao 2021, Hsu 2020) state only the slow → α
+  half. Neither states "normal cooling → β" as a general rule: Hsu's regular-type GP did not crystallise at
+  5–20 °C/min. Added Vishwanath & Rao 2019 (PMID 31367101), which states both halves explicitly. Annotated Liao
+  (no cooling exotherm at 5 °C/min) and Lee 1997 (shrinkage continues 45 min–10 h) for "recrystallisation is slow".
+- `meta.json` caption Refs line. It omitted the sources for two caption claims: "Most cones are β phase" (Combe
+  2001) and "Apical GP stays cooler (≲45 °C)" (Goodman 1981). It also omitted Liao 2021, the source for "ranges vary
+  by brand". All three are added, and "Oral Surg" is expanded to the full abbreviation, Oral Surg Oral Med Oral
+  Pathol.
+- NOTES item 3, Friedman 1977. The note said the composition values were "as summarised by Hsu 2020". In fact Hsu
+  quotes them from its refs 5–8 jointly, and the Friedman abstract is not on PubMed. The provenance is now stated
+  honestly, with Liao 2021's discussion and Gurgel-Filho 2003's primary data as support.
+- NOTES item 5. The support for "slow" in the on-screen line "Recrystallisation is slow & product-dependent (Liao
+  2021; …)" was undocumented. It is Liao 2021's finding of no exothermic peaks on cooling at 5 °C/min in all six
+  brands, and that finding is now recorded.
+- NOTES item 6, Grassi 1989. The title and DOI were added. The shrinkage figures are now attributed correctly:
+  ≈2.6 % for points and Ultrafil Blue and 2.2 % for Ultrafil White (previously "2.2–2.6 % for dental GP").
+- NOTES, Meyer 2006. The journal (Schweiz Monatsschr Zahnmed 2006;116:356-61) and title were added. "Largest
+  shrinkage at 45–40 °C" applied only to the Multifill α and β GPs; for commercial GP it was 55–40 °C. Both the
+  claims section and the schematic section are corrected.
+- NOTES item 8, Goodman 1981. "In the clinic" is now "in natural teeth fitted with thermocouples". Goodman 1981 is
+  recorded as the measured basis for "apical GP stays ≲45 °C", and Schilder 1985 as the reason it matters (it gives
+  the rationale and does not measure apical temperature).

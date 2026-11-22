@@ -24,7 +24,7 @@
     },
     {
       "claim": "High pH likely damages membranes, proteins and DNA (proposed mechanisms)",
-      "source": "Siqueira JF Jr, Lopes HP, Int Endod J 1999;32:361–9 (PMID 10551109)"
+      "source": "Siqueira JF Jr, Lopes HP, Int Endod J 1999;32:361–9 (PMID 10551109); Mohammadi Z, Dummer PMH, Int Endod J 2011;44:697–730 (PMID 21535021)"
     },
     {
       "claim": "Dentine buffers OH⁻: the pH front stalls",
@@ -47,5 +47,5 @@
       "source": "Nerwich A et al., J Endod 1993;19:302–6 (PMID 8228751); Evans M et al., Int Endod J 2002;35:221–8 (PMID 11985673); Haapasalo M, Ørstavik D, J Dent Res 1987;66:1375–9 (PMID 3114347)"
     }
   ],
-  "caption": "Who survives a Ca(OH)₂ dressing?\nThe paste sits near pH 12.5, but dentine buffers the OH⁻ that diffuses in: inner root dentine peaked at only pH 9.7–10.8.\nIn vitro, E. faecalis survives pH 11.1 but not 11.5; its proton pump seems key.\nSo killing near the canal wall is partial, and cells deeper in the tubules can persist (in vitro data). The clinical benefit of the dressing is still debated.\nRefs: Nerwich 1993, J Endod · Evans 2002, Int Endod J · Haapasalo & Ørstavik 1987, J Dent Res · Sathorn 2007, Int Endod J\nSimulated, schematic animation (depth and time compressed).\n#endodontics #endo #dentistry #calciumhydroxide #enterococcusfaecalis #rootcanal #endoresident"
+  "caption": "Who survives a Ca(OH)₂ dressing?\nThe paste sits near pH 12.5, but dentine buffers the OH⁻ that diffuses in: inner root dentine peaked at only pH 9.7–10.8.\nIn vitro, E. faecalis survives pH 11.1 but not 11.5; its proton pump seems key.\nSo killing near the canal wall is partial, and cells deeper in the tubules can persist (in vitro data). The clinical benefit of the dressing is still debated.\nRefs: Mohammadi & Dummer 2011, Int Endod J · Nerwich 1993, J Endod · Haapasalo et al. 2000, Int Endod J · Evans 2002, Int Endod J · Haapasalo & Ørstavik 1987, J Dent Res · Sathorn 2007, Int Endod J\nSimulated, schematic animation (depth and time compressed).\n#endodontics #endo #dentistry #calciumhydroxide #enterococcusfaecalis #rootcanal #endoresident"
 }
