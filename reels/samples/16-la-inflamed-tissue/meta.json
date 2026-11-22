@@ -24,11 +24,11 @@
     },
     {
       "claim": "The IANB is deposited far from the inflamed pulp, so acidity alone can't explain IANB failure",
-      "source": "Hargreaves KM & Keiser K, Endod Topics 2002;1:26-39 (not PubMed-indexed); Drum M et al., J Am Dent Assoc 2017;148:267-71 (PMID 28190451); Punnia-Moorthy A, Br J Anaesth 1988;61:154-9 (PMID 3415887)"
+      "source": "Hargreaves KM & Keiser K, Endod Topics 2002;1:26-39 (not PubMed-indexed; DOI 10.1034/j.1601-1546.2002.10103.x, verified on Crossref); Drum M et al., J Am Dent Assoc 2017;148:267-71 (PMID 28190451); Punnia-Moorthy A, Br J Anaesth 1988;61:154-9 (PMID 3415887)"
     },
     {
       "claim": "Proposed: TTX-resistant Na+ channels (Nav1.8 / Nav1.9) increased in painful pulp, less lidocaine-sensitive",
-      "source": "Renton T et al., BMC Oral Health 2005;5:5 (PMID 16001984); Wells JE et al., J Endod 2007;33:1172-6 (PMID 17889684); Roy ML & Narahashi T, J Neurosci 1992;12:2104-11 (PMID 1318956)"
+      "source": "Renton T et al., BMC Oral Health 2005;5:5 (PMID 16001984); Wells JE et al., J Endod 2007;33:1172-6 (PMID 17889684); Warren CA et al., J Endod 2008;34:7-10 (PMID 18155483); Roy ML & Narahashi T, J Neurosci 1992;12:2104-11 (PMID 1318956)"
     },
     {
       "claim": "Proposed: sensitized nerves are harder to block at a distance (cat)",
@@ -43,8 +43,8 @@
       "source": "Fowler S et al., J Endod 2016;42:390-2 (PMID 26831048)"
     },
     {
-      "claim": "Plan B: buccal articaine infiltration, intraosseous, PDL, intrapulpal (supplemental success varies)",
-      "source": "Matthews R et al., J Endod 2009;35:343-6 (PMID 19249592); Nusstein J et al., J Endod 1998;24:487-91 (PMID 9693577); Parirokh M & Abbott PV, Int Endod J 2022;55 Suppl 4:951-94 (PMID 35119117)"
+      "claim": "Plan B: buccal articaine infiltration, intraosseous, PDL, intrapulpal (supplemental success varies: articaine ~42–58%, IO ~88%); pre-op NSAID may also help",
+      "source": "Fowler S et al., J Endod 2016;42:390-2 (PMID 26831048); Matthews R et al., J Endod 2009;35:343-6 (PMID 19249592); Nusstein J et al., J Endod 1998;24:487-91 (PMID 9693577); Parirokh M & Abbott PV, Int Endod J 2022;55 Suppl 4:951-94 (PMID 35119117); pre-op NSAID: Pulikkotil SJ et al., Int Endod J 2018;51:989-1004 (PMID 29480930)"
     }
   ],
   "caption": "Hot tooth won't go numb? It's not just the acid.\n\nIon trapping is real: in acidic tissue, lidocaine (pKa ~7.7–7.9) has less base to cross the nerve membrane. That matters if you inject INTO infected tissue (abscess pus pH 6.0–7.3).\nBut an IANB is deposited far from the inflamed pulp. Proposed culprits: TTX-resistant Na+ channels, sensitized nerves, sprouting (mostly lab/animal data).\nIANB alone: ~25–28% success in hot mandibular molars, even with a numb lip. Have a plan B.\n\nRefs: Nekoofar 2009, IEJ; Roy & Narahashi 1992, J Neurosci; Fowler 2016, J Endod.\nSchematic animation; % base is a toy model.\n\n#endodontics #endo #dentistry #localanesthesia #irreversiblepulpitis #endoresident"

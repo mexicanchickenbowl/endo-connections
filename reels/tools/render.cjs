@@ -70,6 +70,21 @@ async function openPage(sampleDir) {
   }
   const meta = await page.evaluate(() => ({ duration: REEL.duration, fps: REEL.fps || 30, title: REEL.title || '', poster: REEL.poster, hasCanvas: !!REEL.canvas }));
   if (!(meta.duration >= 5 && meta.duration <= 40)) errors.push(`REEL.duration looks wrong: ${meta.duration}`);
+  // Font warm-up: web fonts with unicode-range subsets load lazily the first time a glyph/weight is drawn, so the first
+  // frame that uses it would otherwise be drawn with a fallback font. Render the whole timeline once (coarsely), wait for
+  // every font face to finish loading, then capture. Faces that loaded late are reported (not an error).
+  const late = await page.evaluate(async () => {
+    const key = (f) => `${f.family} ${f.weight} ${f.style}`;
+    const before = new Set([...document.fonts].filter((f) => f.status === 'loaded').map((f) => key(f) + f.unicodeRange));
+    for (let t = 0; t <= REEL.duration; t += 0.25) await REEL.render(t);
+    await REEL.render(REEL.duration - 0.01);
+    await document.fonts.ready;
+    const out = new Set();
+    for (const f of document.fonts) if (f.status === 'loaded' && !before.has(key(f) + f.unicodeRange)) out.add(key(f));
+    await REEL.render(0);
+    return [...out];
+  });
+  if (late.length) process.stderr.write(`  font warm-up loaded: ${late.join(', ')}\n`);
   return { page, browser, srv, errors, meta, rel };
 }
 
