@@ -36,16 +36,16 @@
     },
     {
       "claim": "Mean shear stress to dislodge the filling: adhesion + friction + interlock",
-      "source": "Collares FM et al., Int Endod J 2016;49(9):836-49 (PMID 26331627); Goracci C et al., J Endod 2005;31(8):608-12 (PMID 16044046); Gesi A et al., J Endod 2005;31(11):809-13 (PMID 16249724)"
+      "source": "Collares FM et al., Int Endod J 2016;49(9):836-49 (PMID 26331627); Goracci C et al., J Endod 2005;31(8):608-12 (PMID 16044046); Gesi A et al., J Endod 2005;31(11):809-13 (PMID 16249724); interlock (tubule penetration as micromechanical lock): Deniz Sungur D et al., Restor Dent Endod 2016;41(2):114-20 (PMID 27200279)"
     },
     {
       "claim": "A lab number: compare within a study, not across studies; slice thickness, root third, core, plunger size, load speed, storage and area formula all shift the MPa",
       "source": "Brichko J et al., J Endod 2018;44(8):1237-45 (PMID 29935874); Collares FM et al., Int Endod J 2016;49(9):836-49 (PMID 26331627); Pane ES et al., J Endod 2013;39(5):669-73 (PMID 23611388)"
     },
     {
-      "claim": "Clinical relevance: unproven; no link to seal or outcomes shown",
-      "source": "Moinzadeh AT et al., Int Endod J 2015;48(2):193-8 (PMID 24749656)"
+      "claim": "Clinical relevance: unproven; lab link to seal mixed; none to outcomes",
+      "source": "Lab evidence conflicts: no correlation between push-out and fluid transport, Moinzadeh AT et al., Int Endod J 2015;48(2):193-8 (PMID 24749656, methacrylate sealer); strong correlation, Neelakantan P et al., Int Endod J 2011;44(6):491-8 (PMID 21255047, AH Plus). No clinical outcome study links push-out MPa to treatment outcome (absence of evidence)"
     }
   ],
-  "caption": "What does a push-out MPa actually measure?\n\nA 1 mm slice of filled root is pushed apical → coronal with a plunger narrower than the canal.\nPeak force ÷ canal-wall area = the mean shear stress to dislodge the filling: adhesion + friction + interlock, not pure sealer–dentin bond.\nSlice thickness, root third, core, plunger size and load speed all shift it, so compare within a study, not across studies. No link to seal or outcomes shown.\n\nRefs: Pane 2013, J Endod · Collares 2016, Int Endod J · Brichko 2018, J Endod · Moinzadeh 2015, Int Endod J\nSchematic animation; values illustrative (toy model).\n\n#endodontics #endo #dentistry #rootcanal #dentalmaterials #endoresident #dentalresearch"
+  "caption": "What does a push-out MPa actually measure?\n\nA 1 mm slice of filled root is pushed apical → coronal with a plunger narrower than the canal.\nPeak force ÷ canal-wall area = the mean shear stress to dislodge the filling: adhesion + friction + interlock, not pure sealer–dentin bond.\nSlice thickness, root third, core, plunger size and load speed all shift it, so compare within a study, not across studies. Lab links to seal are mixed, and no link to clinical outcomes has been shown.\n\nRefs: Pane 2013, J Endod · Collares 2016, Int Endod J · Brichko 2018, J Endod · Neelakantan 2011, Int Endod J · Moinzadeh 2015, Int Endod J\nSchematic animation; values illustrative (toy model).\n\n#endodontics #endo #dentistry #rootcanal #dentalmaterials #endoresident #dentalresearch"
 }

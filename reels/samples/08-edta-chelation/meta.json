@@ -1,0 +1,51 @@
+{
+  "id": "08",
+  "slug": "08-edta-chelation",
+  "title": "EDTA: the calcium claw",
+  "style": "Glossy 3-D molecular",
+  "topic": "How EDTA grips one Ca²⁺ with six donor atoms, why ~1 min clears the smear layer, and why longer EDTA then NaOCl erodes dentine.",
+  "duration": 25.7,
+  "claims": [
+    {
+      "claim": "EDTA binds Ca²⁺ as the fully deprotonated EDTA⁴⁻",
+      "source": "Hülsmann M et al., Int Endod J 2003;36:810–30 (PMID 14641420); Martell AE & Smith RM, Critical Stability Constants (reference book, Plenum Press; not a journal article, not in PubMed)"
+    },
+    {
+      "claim": "Six donor atoms (4 carboxylate O⁻ + 2 amine N) grip one apatite Ca²⁺",
+      "source": "Hülsmann M et al., Int Endod J 2003;36:810–30 (PMID 14641420; review of EDTA chemistry); the 4 O⁻ + 2 N hexadentate donor set is standard coordination chemistry (Martell & Smith, reference book)"
+    },
+    {
+      "claim": "Binding order, arm motion, atom sizes and the apatite lattice are schematic; the real complex also binds water",
+      "source": "Toy model / schematic: constraint-relaxed EDTA geometry on a toy apatite lattice (CaEDTA crystal structure: Barnett BL, Uchtman VA, Inorg Chem 1979;18:2674–8, doi:10.1021/ic50200a007; verified via Crossref, not indexed in PubMed)"
+    },
+    {
+      "claim": "The 1:1 complex carries Ca²⁺ away",
+      "source": "Hülsmann M et al., Int Endod J 2003;36:810–30 (PMID 14641420); Martell & Smith, Critical Stability Constants (reference book; log K CaEDTA²⁻ ≈ 10.7)"
+    },
+    {
+      "claim": "Smear layer ≈1–2 µm thick",
+      "source": "Mader CL, Baumgartner JC, Peters DD, J Endod 1984;10:477–83 (PMID 6593410; no PubMed abstract — the 1–2 µm figure is the standard attribution to this paper)"
+    },
+    {
+      "claim": "17% EDTA (neutral pH) for ~1 min removes the smear layer and opens tubules (in vitro)",
+      "source": "Calt S, Serper A, J Endod 2002;28:17–9 (PMID 11806642); Serper A, Calt S, J Endod 2002;28:501–2 (PMID 12126374; neutral pH > pH 9); Crumpton BJ et al., J Endod 2005;31:536–8 (PMID 15980717; 1 mL 17% REDTA × 1 min, then NaOCl)"
+    },
+    {
+      "claim": "Least effective in the apical third",
+      "source": "Teixeira CS et al., Int Endod J 2005;38:285–90 (PMID 15876291)"
+    },
+    {
+      "claim": "10 min EDTA, then NaOCl: peri- & intertubular erosion of dentine",
+      "source": "Calt S, Serper A, J Endod 2002;28:17–9 (PMID 11806642)"
+    },
+    {
+      "claim": "Erosion arises mainly when NaOCl follows EDTA; a final NaOCl after EDTA adds erosion",
+      "source": "Niu W et al., Int Endod J 2002;35:934–9 (PMID 12453023); Qian W et al., J Endod 2011;37:1437–41 (PMID 21924198)"
+    },
+    {
+      "claim": "NaOCl targets organic tissue, EDTA the mineral (Ca²⁺); never mix them",
+      "source": "Zehnder M, J Endod 2006;32:389–98 (PMID 16631834); Grawehr M et al., Int Endod J 2003;36:411–7 (PMID 12801288)"
+    }
+  ],
+  "caption": "How does EDTA actually open dentinal tubules?\nOne EDTA⁴⁻ wraps a single Ca²⁺ with six donor atoms (4 O⁻ + 2 N) and carries it off as a 1:1 complex.\nScaled up: ~1 min of 17% EDTA removes the 1–2 µm smear layer in vitro, least reliably in the apical third.\nGo longer and follow with NaOCl, and peri- and intertubular dentine erodes.\nNaOCl for tissue, EDTA for mineral. Never mix them.\nRefs: Calt & Serper 2002, J Endod; Mader 1984, J Endod; Teixeira 2005, Int Endod J; Niu 2002, Int Endod J; Qian 2011, J Endod; Grawehr 2003, Int Endod J\nAnimation is schematic (toy model, not to scale).\n#endodontics #endo #dentistry #rootcanal #irrigation #EDTA #smearlayer #dentalstudent"
+}

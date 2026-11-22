@@ -52,17 +52,17 @@ All PubMed-indexed. I read the abstracts myself, and the full text where it says
 
 | On-screen text | Source(s) | Notes |
 |---|---|---|
-| **Load case 100 N @ 45°**, palatal surface (chip + console) | Nokar S et al., *J Dent (Tehran)* 2018;15:69-78, PMID 29971124 (full text); Asmussen E et al., *J Prosthet Dent* 2005;94:321-9, PMID 16198168; Yang B et al., *Int Dent J* 2025;75:100918, PMID 40684680 | A common FEA load case for incisors. A model setting, not a finding. |
+| **Load case 100 N @ 45°**, palatal surface (chip + console) | Nokar S et al., *J Dent (Tehran)* 2018;15:69-78, PMID 29971124 (full text); Asmussen E et al., *J Prosthet Dent* 2005;94:321-9, PMID 16198168; Yang B et al., *Int Dent J* 2025;75:100918, PMID 40684680 | A common FEA load case for incisors. A model setting, not a finding. Nokar (full text) loads the lingual surface; Yang 2025 says "palatal surface" explicitly; Asmussen's model is axisymmetric (load on the crown at 45°, no palatal side). |
 | **Dentin E 18–25 GPa** | Kinney JH et al., *Crit Rev Oral Biol Med* 2003;14:13-29, PMID 12764017 (Young's modulus 20–25 GPa); Nokar 2018 Table 1 (FEA input 18.6 GPa) | The brief said "15–20". |
-| **Fiber post 20–40 GPa (axial)** | Nokar 2018 Table 1 (quartz 18.7, carbon 21, glass fiber 40 GPa FEA inputs); Badami V et al., *Cureus* 2022, PMID 36324349; Lassila LV et al., *Dent Mater* 2004, PMID 14698771 | Fiber posts are anisotropic: these values are along the fibre axis; the transverse modulus is much lower and several FEA studies model them as orthotropic (e.g. Coelho 2009, PMID 20019417). The reel's model is isotropic (simplification). |
-| **Gold alloy ~90, titanium ~110, steel/zirconia ~200 GPa** | Nokar 2018 Table 1 (gold 88, Ti 112, steel 200, zirconia 200); Badami 2022 (Ti 115; steel/Ni-Cr/zirconia ~200) | These are bulk material Young's moduli used as FEA inputs (footer "Typical FEA input values: Kinney 2003 · Nokar 2018"). Measured *flexural* moduli of whole posts are lower and geometry-dependent: Plotino G et al., *Dent Mater* 2007, PMID 17116326 measured dentin 17.5, FRC posts from 24.4 and stainless-steel posts 108.6 GPa in 3-point bending (so Plotino is no longer cited on the chart). |
+| **Fiber post 20–40 GPa (axial)** | Nokar 2018 Table 1 (quartz 18.7, carbon 21, glass fiber 40 GPa FEA inputs); Badami V et al., *Cureus* 2022;14:e29753, PMID 36324349 (full text: glass fiber ~40 GPa); Plotino 2007, PMID 17116326 (measured flexural modulus of FRC posts from 24.4 GPa) | Fiber posts are anisotropic: these values are along the fibre axis; the transverse modulus is much lower and several FEA studies model them as orthotropic (e.g. Coelho 2009, PMID 20019417). The reel's model is isotropic (simplification). Lassila 2004 (PMID 14698771) was dropped in the citation audit: its abstract gives no modulus values, so it could not be checked against this range. |
+| **Gold alloy ~90, titanium ~110, steel/zirconia ~200 GPa** | Nokar 2018 Table 1 (gold 88, Ti 112, steel 200, zirconia 200; full text); Badami 2022 (full text: Ti 115; steel/Ni-Cr/zirconia ~200) | These are bulk material Young's moduli used as FEA inputs (footer "Typical FEA input values: Kinney 2003 · Nokar 2018"). Measured *flexural* moduli of whole posts are lower and geometry-dependent: Plotino G et al., *Dent Mater* 2007, PMID 17116326 measured dentin 17.5, FRC posts from 24.4 and stainless-steel posts 108.6 GPa in 3-point bending (so Plotino is no longer cited on the chart). |
 | **"Metal/zirconia ≈ 4–11× dentin"** | Computed from the chart values: 90/25 ≈ 3.6 → 200/18 ≈ 11 | |
 | **RESULTS · von Mises in dentin. METAL: "along the post–dentin interface"** (MX on the palatal post–dentin interface, cervical/middle third, y ≈ 12.7 mm) | Pegoretti A et al., *Biomaterials* 2002, PMID 12059016 (gold cast post: "greatest stress concentration at the post-dentin interface"); Adanir N, Belli S, *Eur J Dent* 2007;1:67-71, PMID 19212479 (labio-lingual incisor section, 45° load: steel post "greatest stress concentration at the post/dentin interface", followed by Ti, gold); Lanza A et al., *Dent Mater* 2005, PMID 16026666 (very stiff post creates tension/shear zones in dentin and at the interfaces) | No apical hotspot any more: Sorrentino R et al., *Dent Mater* 2007, PMID 17070903 found minimum stress at the apical post and root apex; Nokar 2018 found the concentrations at the cervical root and the cervical/middle-third junction. Stiff posts also concentrate stress *in the post itself* (Coelho 2009, PMID 20019417); the post is not plotted here (result scoped to dentin), which avoids the "red post = post soaks it up" misreading. |
 | **FIBER: "cervical dentin, like natural teeth"** (MX at palatal cervical dentin) | Pegoretti 2002 (glass-fibre post: field "quite similar to that of the natural tooth" except force concentration at the cervical margin); Adanir & Belli 2007 (post with modulus closest to dentin: highest stress at the cervical third); Nokar 2018 (fiber posts: higher concentration between the middle and cervical thirds) | Cervical dentin shows a high band in *both* panels (all FEA models do), just the dominant peak differs. |
 | **"Schematic, not a solve · relative scale, contrast exaggerated"**; colour bar "von Mises (schematic, relative)" | — | Real FEA differences in peak dentin stress between post materials are modest and the direction is disputed: Nokar 2018 (peak radicular-dentin stress 18.0–24.5 MPa across all 12 models; cast posts lowest); Asmussen 2005 (stresses decreased from glass fiber to titanium to zirconia). Summary dock: "Real FEA differences are modest; studies disagree." |
 | **Crack tags "below crest" / "above crest"**; footer "illustrative crack"; chip "lab-style overload (illustrative)" | — | A linear static FEA cannot predict crack initiation or paths. The crack lines only illustrate the *location class* of lab failure modes. The metal crack now starts at the palatal cervical tension side (where FEA tensile peaks sit) and exits labially below the crest — it no longer implies an apical stress riser at the post tip. |
 | **✕ ROOT FRACTURE: often non-restorable / ✓ CORE / CERVICAL: often restorable** (header "FAILURE MODE · lab tests") | Akkayan B, Gülmez T, *J Prosthet Dent* 2002, PMID 12011860; Fokkinga WA et al., *Int J Prosthodont* 2004, PMID 15382786 (FRC posts significantly more favourable / reparable failures than prefabricated and cast metal posts) | "often" and "lab tests" on purpose. |
-| **"Cast posts often fail at higher loads, but less favourably."** (fine print) | Fokkinga 2004 (custom-cast post systems: higher failure loads than prefabricated FRC; FRC more favourable failure modes) | Prevents the "fiber is stronger" misreading. Sirimai 1999 reported similar (cast strongest, all failures tooth fractures) — not re-verified here, NOTES only. |
+| **"Cast posts often fail at higher loads, but less favourably."** (fine print) | Fokkinga 2004 (custom-cast post systems: higher failure loads than prefabricated FRC; FRC more favourable failure modes) | Prevents the "fiber is stronger" misreading. Sirimai S et al., *J Prosthet Dent* 1999;81:262-9, PMID 10050112 reported similar (cast posts strongest; all cast-post failures were tooth fractures) — verified in the citation audit; NOTES only. |
 | **"Caveat — clinical studies: root-fracture rates similar"** | Figueiredo FE et al., *J Endod* 2015, PMID 25459568 (7 RCTs + 7 cohort studies: similar root-fracture incidence); Martins MD et al., *J Dent* 2021, PMID 34274439 (RR 0.78, 95% CI 0.41–1.49, NS; GRADE low); Wang X et al., *Quintessence Int* 2019, PMID 30600326 (4 RCTs ≥3 y, teeth with ≤2 walls: no difference in root fracture; fiber higher survival, RR 0.57, high-quality evidence for survival) | "trials" → "studies" (Figueiredo pooled RCTs and cohorts). Post type *within* a class also matters: Figueiredo found prefabricated metal posts had about twice the root-fracture incidence of cast posts, and carbon-fiber about twice that of glass-fiber — hence the panel labels "PREFAB METAL POST" / "GLASS-FIBER POST". |
 | **"A post retains the core. It doesn't reinforce the root."** | Schwartz RS, Robbins JW, *J Endod* 2004, PMID 15107639; Guzy GE, Nicholls JI, *J Prosthet Dent* 1979, PMID 379307; Naumann M et al., *J Endod* 2018, PMID 29229457 | |
 | **"Ferrule + remaining dentin matter most."** (amber collar on both panels + mini tooth) | Naumann 2018 ("Ferrule effect and maintaining cavity walls are the predominant factors"); Juloski J et al., *J Endod* 2012;38:11-9, PMID 22152612 | |
@@ -77,11 +77,13 @@ Nixon C et al., *Todays FDA* 1991, PMID 1931298 (3 mm leaked significantly more 
 ### Real controversy (why the reel shows *where*, not *how much*)
 The FEA literature is **not unanimous on stress magnitude**. Nokar 2018 found cast metal posts gave *lower* peak dentin stress than FRC
 posts; Asmussen 2005 found stresses *decreased* from glass fiber to titanium to zirconia. Others (Pegoretti 2002; Adanir & Belli 2007;
-Barjau-Escribano 2006, PMID 16536193; most of the 22 studies in Badami 2022) favour fiber posts. Results depend on crown and core
+Barjau-Escribano A et al., *Oper Dent* 2006, PMID 16536193; Badami 2022, where glass-fiber posts gave the least stress in 11 of the 15 included FEA studies that tested them) favour fiber posts. Results depend on crown and core
 materials, ferrule, bonding, 2-D vs 3-D modelling and load. So the reel shows the commonly reported **location pattern**, uses an
 unnumbered relative colour bar, says "contrast exaggerated", and states that real differences are modest and studies disagree.
-Von Mises also shows *where* stress concentrates, not whether it is tensile or compressive (tension drives fracture in brittle dentin,
-Nokar 2018 discussion) — kept in NOTES only to limit on-screen text.
+Von Mises also shows *where* stress concentrates, not whether it is tensile or compressive (Nokar 2018: von Mises "shows the location of
+the maximum stress without determining its nature"; in its models tensile stress sat on the palatal side, compressive on the buccal).
+Tension is generally the fracture-relevant component in brittle dentin (general materials knowledge, not a Nokar finding) — kept in
+NOTES only to limit on-screen text.
 
 ## What is schematic / not to scale
 - **The stress fields are not FEA output.** They are analytic fields (`GEO.field()` in `geometry.js`): a cantilever-bending term that peaks
@@ -131,6 +133,18 @@ Nokar 2018 discussion) — kept in NOTES only to limit on-screen text.
   against the abstracts (Figueiredo 2015, Martins 2021, Wang 2019, Fokkinga 2004, Akkayan 2002, Pegoretti 2002, Adanir & Belli 2007,
   Nokar 2018, Kinney 2003, Juloski 2012, Naumann 2018, Schwartz & Robbins 2004): no on-screen claim changed. Video re-rendered (22.0 s,
   660 frames), poster unchanged at t = 14.3 s. Gallery metadata in `meta.json`.
+- Citation audit: every paper on screen, in `meta.json` and in these NOTES was checked on PubMed (first author, year, journal, PMID and
+  what the abstract or PMC full text says). All 25 PMIDs resolve to the right paper; the 8 on-screen source lines (Kinney 2003, Nokar 2018,
+  Pegoretti 2002, Adanir & Belli 2007, Akkayan 2002, Fokkinga 2004, Figueiredo 2015, Martins 2021) are correct, so the reel and video
+  were not changed. Fixes: (1) the summary dock says "Full sources in the caption", but the caption's Refs line listed only 4 papers;
+  it now lists all 12 behind the on-screen claims. The caption line "FEA models:" became "Many FEA models:" to match "studies disagree".
+  (2) Lassila 2004 was cited for the fiber-post modulus range, but its abstract has no modulus values; it was replaced by Plotino 2007
+  (24.4 GPa) and Badami 2022 (full text, glass fiber ~40 GPa). (3) "Most of the 22 studies in Badami 2022" was an overstatement and now
+  reads 11 of the 15 glass-fiber studies. (4) "Tension drives fracture… Nokar 2018 discussion" was not in Nokar; reworded to what Nokar
+  says. (5) Sirimai 1999 is now verified (PMID 10050112). (6) In `meta.json`: Yang 2025 added for the "palatal surface" load, since
+  Asmussen's model is axisymmetric; Badami 2022 added to the modulus claim; Adanir & Belli added to the fiber-pattern claim, with a note
+  that Nokar backs the fiber pattern but not the metal-interface one; Guzy & Nicholls 1979 added to "a post doesn't reinforce the root",
+  because the Schwartz & Robbins abstract doesn't state it. Nokar and Badami values were checked against the PMC full text.
 
 ## Review changes (v4, after independent science + design review)
 Science
@@ -178,9 +192,12 @@ Design
 - Not applied: enlarging the tooth (S 26.5 → 28.5) with a 290 px dock — the dock needs its 340 px for the 32 px chart rows + 36 px caption
   and for the two-column failure band + caveat; at S 28.5 the side tags would no longer fit inside the 432 px panels.
 
-## IG caption source list
+## Full source list (all checked on PubMed in the citation audit)
+The IG caption's Refs line (`meta.json`) lists the 12 papers behind the on-screen claims (Kinney, Nokar, Pegoretti, Adanir & Belli,
+Asmussen, Akkayan & Gülmez, Fokkinga, Figueiredo, Martins, Guzy & Nicholls, Naumann, Juloski). Everything used, with PMIDs:
+
 Kinney 2003 (PMID 12764017) · Nokar 2018 (29971124) · Plotino 2007 (17116326) · Pegoretti 2002 (12059016) · Adanir & Belli 2007 (19212479) ·
 Lanza 2005 (16026666) · Sorrentino 2007 (17070903) · Coelho 2009 (20019417) · Asmussen 2005 (16198168) · Badami 2022 (36324349) ·
 Akkayan & Gülmez 2002 (12011860) · Fokkinga 2004 (15382786) · Figueiredo 2015 (25459568) · Martins 2021 (34274439) · Wang 2019 (30600326) ·
 Schwartz & Robbins 2004 (15107639) · Guzy & Nicholls 1979 (379307) · Naumann 2018 (29229457) · Juloski 2012 (22152612) · Yang 2025 (40684680) ·
-Nixon 1991 (1931298) · Hiltner 1992 (9796515)
+Nixon 1991 (1931298) · Hiltner 1992 (9796515) · Barjau-Escribano 2006 (16536193) · Sirimai 1999 (10050112)

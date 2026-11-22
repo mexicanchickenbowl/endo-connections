@@ -1053,12 +1053,12 @@
     T('not across studies.', cx, y + 602 + 12 * (1 - r2), { font: F(600, 46), color: C.txt, align: 'center', alpha: r2 });
     ln(x + 40, y + 640, x + w - 40, y + 640, C.line2, 1.5, r3);
     T('Clinical relevance: unproven.', cx, y + 696, { font: F(700, 36), color: C.teal, align: 'center', alpha: r3 });
-    T('no link to seal or outcomes shown', cx, y + 734, { font: F(500, 26), color: C.txt2, align: 'center', alpha: r3 });
+    T('lab link to seal mixed; none to outcomes', cx, y + 734, { font: F(500, 26), color: C.txt2, align: 'center', alpha: r3 });
     T('Slice thickness, root third, core material,', cx, y + 794, { font: F(500, 26), color: C.txt2, align: 'center', alpha: r4 });
     T('plunger size, load speed, storage & area', cx, y + 828, { font: F(500, 26), color: C.txt2, align: 'center', alpha: r4 });
     T('formula all shift the MPa.', cx, y + 862, { font: F(500, 26), color: C.txt2, align: 'center', alpha: r4 });
-    T('Collares 2016 IEJ · Gesi 2005 JOE · Pane 2013 JOE', cx, y + 914, { font: F(500, 22), color: C.dim, align: 'center', alpha: r4 });
-    T('Brichko 2018 JOE · Moinzadeh 2015 IEJ', cx, y + 942, { font: F(500, 22), color: C.dim, align: 'center', alpha: r4 });
+    T('Collares 2016 IEJ · Pane 2013 JOE · Brichko 2018 JOE', cx, y + 914, { font: F(500, 22), color: C.dim, align: 'center', alpha: r4 });
+    T('Gesi 2005 JOE · Neelakantan 2011 IEJ · Moinzadeh 2015 IEJ', cx, y + 942, { font: F(500, 22), color: C.dim, align: 'center', alpha: r4 });
     ctx.restore();
   }
 

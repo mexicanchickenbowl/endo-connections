@@ -41,14 +41,14 @@ Handle `@natebrooksendo` bottom-centre, 26 px, 60 %.
 | On-screen claim | Source(s) |
 |---|---|
 | EDTA binds Ca²⁺ through **6 donor atoms: 2 amine N + 4 carboxylate O⁻** (hexadentate); "four carboxylate arms" + two backbone N | Hülsmann M, Heckendorff M, Lennon A. *Chelating agents in root canal treatment: mode of action and indications for their use.* Int Endod J 2003;36:810–30. PMID 14641420, doi:10.1111/j.1365-2591.2003.00754.x; standard coordination chemistry |
-| **"binds as EDTA⁴⁻"**; at pH 7.5 the free ligand is mostly HEDTA³⁻ (pKa₆ ≈ 10.2, proton on an amine N), which releases H⁺ as it binds; hence carboxylates close first, N last, and "binding order schematic" | Martell & Smith, *Critical Stability Constants* (pKa 6.2/10.2; not in PubMed) |
-| Real CaEDTA²⁻ also binds water ("real complex also binds water"; CN 7–8 in crystal structures) | Barnett BL, Uchtman VA. Inorg Chem 1979 (CaEDTA salt crystal structures; not in PubMed) |
+| **"binds as EDTA⁴⁻"**; at pH 7.5 the free ligand is mostly HEDTA³⁻ (pKa₆ ≈ 10.2, proton on an amine N), which releases H⁺ as it binds; hence carboxylates close first, N last, and "binding order schematic" | Martell AE, Smith RM, *Critical Stability Constants* (reference book, Plenum Press — not a journal article, not in PubMed; pKa 6.2/10.2) |
+| Real CaEDTA²⁻ also binds water ("real complex also binds water"; CN 7–8 in crystal structures) | Barnett BL, Uchtman VA. *Structural investigations of calcium-binding molecules. 4. Calcium binding to aminocarboxylates. Crystal structures of Ca(CaEDTA)·7H₂O and Na(CaNTA).* Inorg Chem 1979;18:2674–8, doi:10.1021/ic50200a007 (not indexed in PubMed; bibliographic data verified via Crossref) |
 | **1:1** complex carries Ca²⁺ away (log K CaEDTA²⁻ ≈ 10.7) | Hülsmann 2003; Martell & Smith (not PubMed) |
 | Target = apatite mineral Ca²⁺ (toy lattice) | Hülsmann 2003; Zehnder M. *Root canal irrigants.* J Endod 2006;32:389–98. PMID 16631834, doi:10.1016/j.joen.2005.09.014 |
 | **17% EDTA, neutral pH** | Serper A, Calt S. *The demineralizing effects of EDTA at different concentrations and pH.* J Endod 2002;28:501–2. PMID 12126374, doi:10.1097/00004770-200207000-00002 (17 % > 10 %; pH 7.5 > pH 9; P release rose with time 1 → 15 min) |
 | **Smear layer ≈1–2 µm** | Mader CL, Baumgartner JC, Peters DD. J Endod 1984;10:477–83. PMID 6593410, doi:10.1016/S0099-2399(84)80204-6 (no PubMed abstract; the commonly cited figure, cf. Violich & Chandler 2010) |
 | **Smear layer removed → tubules open** (EDTA dissolves the mineral phase; the rest is loosened and flushed) | Baumgartner JC, Mader CL. J Endod 1987;13:147–57. PMID 3106553; Yamada RS et al. J Endod 1983;9:137–42. PMID 6406635; Violich DR, Chandler NP. *The smear layer in endodontics – a review.* Int Endod J 2010;43:2–15. PMID 20002799, doi:10.1111/j.1365-2591.2009.01627.x |
-| **≈1 min clears the smear layer (in vitro)** | Calt S, Serper A. *Time-dependent effects of EDTA on dentin structures.* J Endod 2002;28:17–9. PMID 11806642, doi:10.1097/00004770-200201000-00004 (n = 6 teeth, SEM; every specimen then got 10 mL 5 % NaOCl); Crumpton BJ et al. J Endod 2005;31:536–8. PMID 15980717, doi:10.1097/01.don.0000148871.72896.1d (1 mL × 1 min sufficient; more volume no benefit; followed by NaOCl) |
+| **≈1 min clears the smear layer (in vitro)** | Calt S, Serper A. *Time-dependent effects of EDTA on dentin structures.* J Endod 2002;28:17–9. PMID 11806642, doi:10.1097/00004770-200201000-00004 (n = 6 teeth, SEM; every specimen then got 10 mL 5 % NaOCl); Crumpton BJ et al. J Endod 2005;31:536–8. PMID 15980717, doi:10.1097/01.don.0000148871.72896.1d (17 % REDTA, i.e. EDTA + cetrimide; 1 mL × 1 min sufficient; more volume no benefit; followed by NaOCl) |
 | **least effective in the apical third** | Teixeira CS et al. Int Endod J 2005;38:285–90. PMID 15876291, doi:10.1111/j.1365-2591.2005.00930.x (1, 3, 5 min equally effective coronally/middle; apical third partly covered); Afshan Z et al. Eur Endod J 2020;5:28–34. PMID 32342035 |
 | **10 min EDTA, then NaOCl: dentine erodes; peri- & intertubular erosion** | Calt & Serper 2002 (10 min 17 % EDTA → 10 mL 5 % NaOCl: excessive peritubular and intertubular erosion) |
 | **erosion mainly when NaOCl follows EDTA; a final NaOCl after EDTA adds erosion** (hence only slight widening during the EDTA time-lapse and the funnels during the NaOCl step) | Niu W et al. Int Endod J 2002;35:934–9. PMID 12453023, doi:10.1046/j.1365-2591.2002.00594.x (15 % EDTA alone 1 or 3 min: smooth, regular orifices; EDTA → 6 % NaOCl: erosion, tubule Ø 3.4–3.9 µm); Qian W, Shen Y, Haapasalo M. J Endod 2011;37:1437–41. PMID 21924198, doi:10.1016/j.joen.2011.06.005 (no erosion with demineralising agent as final rinse after NaOCl; NaOCl after EDTA → marked peri-/intertubular erosion, >100 % larger orifice area) |
@@ -159,3 +159,42 @@ counter caveat 3.22/3.25 · capC 2.32/2.35 · "Ca²⁺ removed" 1.41/1.50 · "×
 - Ending: card eases in over 0.6 s on frosted glass over the slowly orbiting closed complex (keeps moving), single
   centred pill strings, then fades back to the title frame identical to frame 0 (bokeh drift is now periodic) → seamless loop.
 - Duration 22 → 25.7 s (inside the 10–30 s contract; above the 18–22 s brief target because of the added holds/steps).
+
+## Final QA (fresh-eyes pass)
+- Stills re-checked at 16 evenly spaced times plus 0, 3.2, 5.0, 5.4, 9.45, 11.0, 11.5, 11.9, 17.0, 18.5, 19.7, 20.15, 25.3,
+  25.69 s (`_stills/final-qa`). Hook readable at t = 0, takeaway held 5.4 s, last frame = first frame (seamless loop);
+  no tofu/NaN glyphs; all must-read text inside x 64–1016 / y 230–1580 and clear of the button column.
+- **Fixed:** dial read-out "10:00" (38 px, five glyphs) touched the inside of the ring stroke at 18–20 s → the read-out is
+  now auto-fitted to ≤ 94 px wide (`fitSize`), so "10:00" drops to ~33 px and clears the ring; "0:28"…"9:47" unchanged.
+- Science re-verified against PubMed records (Calt & Serper 2002, Serper & Calt 2002, Niu 2002, Qian 2011,
+  Teixeira 2005, Mader 1984, Grawehr 2003, Hülsmann 2003, Zehnder 2006, Crumpton 2005): every on-screen number/claim
+  matches the table above. Nit left as is: the "×10,000 zoom-out" tag is an order-of-magnitude cue (the on-screen 2 Å and
+  5 µm bars imply ≈ ×2 × 10⁴ overall).
+- Poster 8.85 s kept (title + closed cage + "= 6 bonds" inside the 3:4 crop). Video re-rendered once after the fix.
+
+## Citation audit (PubMed re-verification, 2026-11-22)
+Every literature citation on screen (`index.html`: dentine fine print, erosion fine print, takeaway fine print + 7-item
+citation block), in `meta.json` (claims[].source + caption Refs) and in this file was re-checked against its PubMed
+record (first author, year, journal, volume/pages, PMID, DOI) and its abstract read against the attached claim.
+- **Verified, no change needed (16 PubMed records):** Hülsmann 2003 (14641420), Mader 1984 (6593410), Calt & Serper 2002
+  (11806642), Serper & Calt 2002 (12126374), Teixeira 2005 (15876291), Niu 2002 (12453023), Qian 2011 (21924198),
+  Zehnder 2006 (16631834), Grawehr 2003 (12801288), Baumgartner & Mader 1987 (3106553), Yamada 1983 (6406635),
+  Violich & Chandler 2010 (20002799), Crumpton 2005 (15980717), Afshan 2020 (32342035), Zehnder 2005 (16249726),
+  Darda 2014 (24876698, J Int Oral Health — mentioned only as *not* cited). All authors/years/journals/PMIDs match and
+  each abstract supports its claim (Mader 1984 and the 1987/1983 SEM papers have no PubMed abstract; the 1–2 µm smear
+  layer figure is the standard attribution to Mader 1984 and is confirmed by secondary sources).
+- **On-screen citations:** all correct ("Calt & Serper, J Endod 2002 · Serper & Calt, J Endod 2002 / Niu et al., IEJ 2002 ·
+  Qian et al., J Endod 2011 · Zehnder, J Endod 2006 / Grawehr et al., IEJ 2003 · Hülsmann et al., IEJ 2003"; "Mader 1984";
+  "Teixeira 2005"; "Calt & Serper 2002"; "Niu 2002; Qian 2011"). Checked rendered in `_stills/audit` (t = 14.6, 17.2,
+  24.6 s). **Reel unchanged, video not re-rendered.**
+- **Fixed (meta.json / NOTES only):**
+  1. Barnett & Uchtman (Inorg Chem 1979) was cited without volume/pages/DOI and as unverifiable → full reference added
+     (18:2674–8, doi:10.1021/ic50200a007), verified via Crossref (journal not indexed in PubMed).
+  2. Martell & Smith, *Critical Stability Constants* is a reference book → now labelled "reference book (Plenum), not a
+     journal article" in meta.json and here.
+  3. meta.json "six donor atoms" relied only on the Hülsmann 2003 review, whose abstract does not state the donor set →
+     source now also says "standard coordination chemistry (Martell & Smith)".
+  4. Caption Refs line omitted the sources for two caption claims (1–2 µm smear layer; least reliable apically) → added
+     "Mader 1984, J Endod; Teixeira 2005, Int Endod J".
+  5. Crumpton 2005 tested 17 % **REDTA** (EDTA + cetrimide) → noted here and in meta.json (added as supporting source for
+     the ~1 min claim, with Serper & Calt's neutral-pH finding spelled out).

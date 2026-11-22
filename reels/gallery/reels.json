@@ -1,0 +1,1050 @@
+[
+  {
+    "id": "01",
+    "slug": "01-pain-pathway",
+    "title": "Pain pathway: tooth → brain",
+    "style": "Neon neuro",
+    "topic": "Why cold can give a sharp first pain and a dull second pain: Aδ vs C pulpal fibers, their relay to cortex, and convergence.",
+    "duration": 29.6,
+    "video": "videos/01-pain-pathway.mp4",
+    "poster": "posters/01-pain-pathway.jpg",
+    "claims": [
+      {
+        "claim": "Two pulpal fibers, two speeds: Aδ myelinated (~5–30 m/s), C unmyelinated (~0.5–2 m/s)",
+        "source": "Range figures are the textbook fiber-class values (Kandel et al., Principles of Neural Science; textbook, not a paper). Pulpal single-unit data consistent with them: Jyväsjärvi & Kniffki, J Physiol 1987;391:193-207 (PMID 3443945; cat intradental Aδ mean 13.9 m/s, range 3.6–26.0; C mean 1.3 m/s, range 0.5–2.2). Myelinated fast vs unmyelinated slow: Nair, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 1995;80:710-9 (PMID 8680980)"
+      },
+      {
+        "claim": "C fibers fire only if the stimulus reaches the pulp proper",
+        "source": "Närhi et al., Proc Finn Dent Soc 1992;88 Suppl 1:507-16 (PMID 1508908); Närhi et al., Arch Oral Biol 1994;39 Suppl:23S-30S (PMID 7702462)"
+      },
+      {
+        "claim": "10 ms vs 150 ms to brainstem, SLOW-MO ×440 / ~×15",
+        "source": "Toy model / schematic: 15 cm first-order path ÷ 15 and 1 m/s (representative speeds from Jyväsjärvi & Kniffki, J Physiol 1987;391:193-207 (PMID 3443945)); labelled 'toy model' on screen"
+      },
+      {
+        "claim": "Trigeminal ganglion: cell bodies, no synapse; synapse 1 in subnucleus caudalis (main pain relay), then crosses the midline",
+        "source": "Byers & Närhi, Crit Rev Oral Biol Med 1999;10:4-39 (PMID 10759425); Sessle, Crit Rev Oral Biol Med 2000;11:57-91 (PMID 10682901); Sessle et al., Pain 1986;27:219-35 (PMID 3797017)"
+      },
+      {
+        "claim": "Synapse 2 in VPM thalamus → S1 face area; 1st pain is sharp, brief, well-localized",
+        "source": "Park et al., Brain Res 2006;1112:134-45 (PMID 16930568; tooth-pulp-driven nociceptive neurons in contralateral VPM, rat); Nair, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 1995;80:710-9 (PMID 8680980); Ploner et al., PNAS 2002;99:12444-8 (PMID 12209003; first pain particularly related to S1)"
+      },
+      {
+        "claim": "In real teeth the dull pain lags by seconds, mostly the time for cold to reach the pulp",
+        "source": "Jyväsjärvi & Kniffki, J Physiol 1987;391:193-207 (PMID 3443945); Mengel et al., Pain 1993;55:159-69 (PMID 8309707)"
+      },
+      {
+        "claim": "2nd pain is dull, aching, poorly localized; linked to S2 + cingulate",
+        "source": "Nair, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 1995;80:710-9 (PMID 8680980); Ploner et al., PNAS 2002;99:12444-8 (PMID 12209003)"
+      },
+      {
+        "claim": "Partly diffuse because many inputs (teeth, skin, jaw muscle) converge on one caudalis neuron (animal data)",
+        "source": "Sessle et al., Pain 1986;27:219-35 (PMID 3797017)"
+      },
+      {
+        "claim": "Aδ: dentin stimuli (cold, air, probe); C: likely the ache of pulpitis; inflammation also sensitizes A fibers",
+        "source": "Närhi et al., Arch Oral Biol 1994;39 Suppl:23S-30S (PMID 7702462); Närhi et al., Proc Finn Dent Soc 1992;88 Suppl 1:507-16 (PMID 1508908)"
+      },
+      {
+        "claim": "Convergence in caudalis helps explain referred pain",
+        "source": "Sessle et al., Pain 1986;27:219-35 (PMID 3797017; cat caudalis, authors 'suggest a role' in spread and referral of pain); Basbaum et al., Cell 2009;139:267-84 (PMID 19837031; general principle: somatic–visceral convergence onto dorsal-horn WDR neurons 'likely contributes' to referred pain)"
+      }
+    ],
+    "caption": "Sharp or dull? Two pulpal fibers, two speeds.\n\nAδ (myelinated, fast): brief, sharp, better-localized pain from dentin stimuli (cold, air, probe).\nC (unmyelinated, slow): fire only once the stimulus reaches the pulp; likely the dull, diffuse ache of pulpitis. In real teeth the lag is seconds, mostly the time for cold to reach the pulp.\nInflammation sensitizes A fibers too: pain quality is a clue, not a diagnosis.\nConvergence in caudalis helps explain referred pain (animal data).\n\nRefs: Nair 1995, OOOOE · Närhi 1994, Arch Oral Biol · Jyväsjärvi 1987, J Physiol · Mengel 1993, Pain · Sessle 1986, Pain\nSchematic animation; speeds are a toy model.\n\n#endodontics #endo #dentistry #dentalpain #pulpitis #endoresident"
+  },
+  {
+    "id": "02",
+    "slug": "02-ibuprofen-cox",
+    "title": "Ibuprofen & COX: cuts new prostaglandins",
+    "style": "Flat pastel vector",
+    "topic": "How ibuprofen reversibly plugs COX to cut new PGE₂, and why it can't erase prostaglandins already sensitising pulpal nerves.",
+    "duration": 22,
+    "video": "videos/02-ibuprofen-cox.mp4",
+    "poster": "posters/02-ibuprofen-cox.jpg",
+    "claims": [
+      {
+        "claim": "Inflamed pulp frees arachidonic acid (PLA₂ cuts it from membrane phospholipids)",
+        "source": "Funk CD, Science 2001;294:1871-5 (PMID 11729303); pulp anchor (PGE₂ ↑ in inflamed pulp): Nakanishi T et al., J Endod 1995;21:131-6 (PMID 7561655)"
+      },
+      {
+        "claim": "COX-1/COX-2 make PGH₂ (AA → PGG₂ → PGH₂); PGE synthase converts it to PGE₂, which leaves the cell",
+        "source": "Smith WL et al., Annu Rev Biochem 2000;69:145-82 (PMID 10966456); Park JY et al., Clin Immunol 2006;119:229-40 (PMID 16540375)"
+      },
+      {
+        "claim": "COX-2 ↑ in inflamed pulp",
+        "source": "Nakanishi T et al., J Endod 2001;27:385-8 (PMID 11487130)"
+      },
+      {
+        "claim": "PGE₂ on nociceptor EP receptors lowers the firing threshold",
+        "source": "Kawabata A, Biol Pharm Bull 2011;34:1170-3 (PMID 21804201)"
+      },
+      {
+        "claim": "Ibuprofen reversibly (competitively) plugs the COX channel; one AA can slip through when it unbinds",
+        "source": "Selinsky BS et al., Biochemistry 2001;40:5172-80 (PMID 11318639); Orlando BJ et al., J Struct Biol 2015;189:62-6 (PMID 25463020)"
+      },
+      {
+        "claim": "Less new PGE₂ → nerve calms, but only partly (threshold recovers partway)",
+        "source": "Kawabata A, Biol Pharm Bull 2011;34:1170-3 (PMID 21804201); Nguyen V et al., J Endod 2020;46:1210-6 (PMID 32565333); Bowles WR et al., J Endod 2003;29:265-7 (PMID 12701777)"
+      },
+      {
+        "claim": "Other mediators (e.g. substance P) still act",
+        "source": "Bowles WR et al., J Endod 2003;29:265-7 (PMID 12701777)"
+      },
+      {
+        "claim": "Ibuprofen cuts NEW prostaglandins; it can't erase the ones already made",
+        "source": "Vane JR, Nat New Biol 1971;231:232-5 (PMID 5284360); Smith WL et al., Annu Rev Biochem 2000;69:145-82 (PMID 10966456); Selinsky BS et al., Biochemistry 2001;40:5172-80 (PMID 11318639); Nguyen V et al., J Endod 2020;46:1210-6 (PMID 32565333)"
+      },
+      {
+        "claim": "One rationale for dosing before treatment: pre-op NSAIDs aid IANB success; post-op pain benefit unclear",
+        "source": "Shirvani A et al., Clin Oral Investig 2017;21:43-52 (PMID 27837343); Nagendrababu V et al., J Endod 2018;44:914-922.e2 (PMID 29709297); de Geus JL et al., Eur Endod J 2018;3:123-33 (PMID 32161868)"
+      },
+      {
+        "claim": "PGE₂ counter, firing meter, threshold values and timing",
+        "source": "Toy model / schematic: toy counts, seeded stimulus bumps, time and size not to scale (labelled on screen)"
+      }
+    ],
+    "caption": "What ibuprofen can't undo.\n\nIn inflamed pulp, COX (COX-2 up) turns arachidonic acid into PGE₂, which lowers the nerve's firing threshold.\nIbuprofen reversibly plugs the COX channel: less NEW PGE₂, not zero.\nIt can't erase what's already made, and other mediators (e.g. substance P) still act.\nOne rationale for dosing before treatment: pre-op NSAIDs aid IANB success in irreversible pulpitis; post-op pain benefit is unclear.\n\nRefs: Vane 1971, Nat New Biol; Selinsky 2001, Biochemistry; Nakanishi 2001, J Endod; Kawabata 2011, Biol Pharm Bull; Bowles 2003, J Endod; Shirvani 2017, Clin Oral Investig; Nagendrababu 2018, J Endod; de Geus 2018, Eur Endod J; Nguyen 2020, J Endod\nAnimation is schematic (toy counts, time compressed).\n\n#endodontics #endo #dentistry #pharmacology #ibuprofen #NSAIDs #pulpitis #dentalpain"
+  },
+  {
+    "id": "03",
+    "slug": "03-dexamethasone",
+    "title": "How dexamethasone turns down inflammation",
+    "style": "Antique atlas plate",
+    "topic": "How dexamethasone binds GR, turns anti-inflammatory genes up and inflammatory genes down, acting upstream of NSAIDs.",
+    "duration": 29.5,
+    "video": "videos/03-dexamethasone.mp4",
+    "poster": "posters/03-dexamethasone.jpg",
+    "claims": [
+      {
+        "claim": "Lipophilic dexamethasone slips through the cell membrane to reach cytosolic GR",
+        "source": "Cain & Cidlowski, Nat Rev Immunol 2017;17:233-47 (PMID 28192415)"
+      },
+      {
+        "claim": "Dex binds and activates GR; HSP90 chaperone escorts GR to the nuclear pore (newer model)",
+        "source": "Pratt & Toft, Endocr Rev 1997;18:306-60 (PMID 9183567) [binding/activation; describes the classic hsp90-dissociation model]; Echeverría et al., Mol Cell Biol 2009;29:4788-97 (PMID 19581287) and Vandevyver et al., Traffic 2012;13:364-74 (PMID 21951602) [HSP90 escort to the pore, newer model]"
+      },
+      {
+        "claim": "The drug–receptor complex enters the nucleus",
+        "source": "Vandevyver et al., Endocrinology 2013;154:993-1007 (PMID 23384835)"
+      },
+      {
+        "claim": "GR dimer on GREs turns anti-inflammatory genes up (annexin A1, MKP-1)",
+        "source": "Cain & Cidlowski, Nat Rev Immunol 2017;17:233-47 (PMID 28192415); Abraham et al., J Exp Med 2006;203:1883-9 (PMID 16880258)"
+      },
+      {
+        "claim": "Tethering NF-κB/AP-1 (plus MKP-1) turns COX-2, IL-1β, TNF-α and IL-6 down",
+        "source": "Ray & Prefontaine, PNAS 1994;91:752-6 (PMID 8290595) [GR–NF-κB p65, IL-6]; Scheinman et al., Mol Cell Biol 1995;15:943-53 (PMID 7823959) [NF-κB transrepression; same GR domain needed for AP-1 repression]; Cain & Cidlowski, Nat Rev Immunol 2017;17:233-47 (PMID 28192415) [tethering to NF-κB and AP-1; GILZ; tristetraprolin mRNA decay]; Abraham et al., J Exp Med 2006;203:1883-9 (PMID 16880258) [MKP-1/DUSP1: TNF, COX-2, IL-1β]"
+      },
+      {
+        "claim": "Mediator output falls over hours, not minutes (watch sweep illustrative)",
+        "source": "Lösel & Wehling, Nat Rev Mol Cell Biol 2003;4:46-56 (PMID 12511868); timings on screen are schematic"
+      },
+      {
+        "claim": "Steroid blocks cPLA₂ step, partly via annexin A1",
+        "source": "Croxtall et al., Biochem Pharmacol 1996;52:351-6 (PMID 8694860)"
+      },
+      {
+        "claim": "Steroid: less COX-2 made (COX-1 unaffected); NSAID blocks COX-1 & COX-2 enzyme activity",
+        "source": "Masferrer et al., J Pharmacol Exp Ther 1994;270:1340-4 (PMID 7932188) [dex suppresses COX-2; COX-1 mRNA/protein unaffected]; Masferrer et al., PNAS 1994;91:3228-32 (PMID 8159730) [dex inhibits COX-2 expression; indomethacin = non-selective COX-1/COX-2 inhibitor]; Vane, Nat New Biol 1971;231:232-5 (PMID 5284360) [aspirin-like drugs inhibit prostaglandin synthesis; predates the COX-1/COX-2 distinction]"
+      },
+      {
+        "claim": "Takeaway: acts upstream of NSAIDs, a gene-level brake on inflammation (on-screen sources line)",
+        "source": "Cain & Cidlowski, Nat Rev Immunol 2017;17:233-47 (PMID 28192415); Barnes, Br J Pharmacol 2006;148:245-54 (PMID 16604091); Abraham et al., J Exp Med 2006;203:1883-9 (PMID 16880258)"
+      },
+      {
+        "claim": "In endodontics, oral/injected steroids reduced post-op pain vs control at 6–24 h (29 RCTs, moderate certainty)",
+        "source": "Alajlan et al., J Endod 2024;50:724-34 (PMID 38490301)"
+      },
+      {
+        "claim": "Not a clinical ranking: steroids given only after treatment did not beat placebo for post-op pain",
+        "source": "Zanjir et al., J Endod 2020;46:1387-402 (PMID 32668310)"
+      }
+    ],
+    "caption": "Why does dexamethasone's anti-inflammatory effect build over hours? It works on gene expression.\n\nDex enters the cell, binds the glucocorticoid receptor and enters the nucleus.\nIt turns anti-inflammatory genes up (annexin A1, MKP-1) and NF-κB/AP-1-driven genes down (COX-2, IL-1β, TNF-α, IL-6).\nSo it acts upstream of where NSAIDs block COX (mechanism, not a clinical ranking).\nIn endo RCTs, systemic steroids cut post-op pain at 6–24 h (moderate certainty); post-op-only dosing didn't beat placebo.\n\nRefs: Cain 2017, Nat Rev Immunol · Alajlan 2024, J Endod · Zanjir 2020, J Endod\nSchematic animation; timings illustrative.\n\n#endodontics #endo #dentistry #dexamethasone #corticosteroids #endoresident"
+  },
+  {
+    "id": "04",
+    "slug": "04-bisphosphonate-mronj",
+    "title": "Bisphosphonates & MRONJ: extract or endo?",
+    "style": "Swiss Bauhaus poster",
+    "topic": "How bisphosphonates bind bone and disable osteoclasts, why extraction sockets risk MRONJ, and why non-surgical RCT is preferred.",
+    "duration": 30,
+    "video": "videos/04-bisphosphonate-mronj.mp4",
+    "poster": "posters/04-bisphosphonate-mronj.jpg",
+    "claims": [
+      {
+        "claim": "P–C–P bisphosphonates hook onto bone mineral (phosphonates grip Ca²⁺ on hydroxyapatite), most where bone remodels",
+        "source": "Russell et al., Osteoporos Int 2008;19:733–59 (PMID 18214569); Drake et al., Mayo Clin Proc 2008;83:1032–45 (PMID 18775204)"
+      },
+      {
+        "claim": "N side chain → potent nitrogen-containing BP (N-BP)",
+        "source": "Rogers et al., Bone 2011;49:34–41 (PMID 21111853)"
+      },
+      {
+        "claim": "Osteoclast resorbs and swallows the released drug; N-BPs block FPP synthase in the mevalonate pathway",
+        "source": "Rogers et al., Bone 2011;49:34–41 (PMID 21111853); Russell et al., Osteoporos Int 2008;19:733–59 (PMID 18214569)"
+      },
+      {
+        "claim": "Collapse → loss of function, then apoptosis",
+        "source": "Rogers et al., Bone 2011;49:34–41 (PMID 21111853); Halasy-Nagy et al., Bone 2001;29:553–9 (PMID 11728926)"
+      },
+      {
+        "claim": "Turnover slows: remodelling suppressed ~60–90%, not stopped (bar is a toy model)",
+        "source": "Toy model / schematic bar; range from Recker et al., J Bone Miner Res 2008;23:6–16 (PMID 17892374; zoledronate, activation frequency −63% median) and Chavassieux et al., J Clin Invest 1997;100:1475–80 (PMID 9294113; alendronate 10 mg, −87%)"
+      },
+      {
+        "claim": "10+ years retained in bone (estimated half-life, alendronate; retention ≠ lasting effect)",
+        "source": "Khan et al., J Bone Miner Res 1997;12:1700–7 (PMID 9333131)"
+      },
+      {
+        "claim": "MRONJ after extraction: 1.6–14.8% in cancer patients on BPs (most estimates 1–5%)",
+        "source": "Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956); 'most estimates 1–5%' = AAOMS 'cluster between 1 percent and 5 percent' (incl. Gaudin et al., J Clin Periodontol 2015;42:922–32, PMID 26362756: 3.2%)"
+      },
+      {
+        "claim": "MRONJ after extraction: 0–0.15% in osteoporosis patients on BPs",
+        "source": "Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956)"
+      },
+      {
+        "claim": "Non-surgical RCT: no socket, treats the infection; MRONJ risk unknown, likely low, rare case reports",
+        "source": "Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956); Sarathy et al., J Endod 2005;31:759–63 (PMID 16186759); Moinzadeh et al., Int Endod J 2013;46:391–8 (PMID 23137312); Mauceri et al., BMC Oral Health 2025;25:1362 (PMID 40849463)"
+      },
+      {
+        "claim": "Restorable tooth → ENDO: cancer-dose IV BP or denosumab, strongly prefer non-surgical RCT; osteoporosis on BPs, risk very low; avoid apical surgery and over-instrumentation, careful clamp",
+        "source": "AAE Position Statement, Endodontic Implications of Bisphosphonate-Associated Osteonecrosis of the Jaws, 2010 (aae.org; not in PubMed); AAE Guideline, Endodontic Implications of Medication-Related Osteonecrosis of the Jaw, 2018 (aae.org; not in PubMed); Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956); Moinzadeh et al., Int Endod J 2013;46:391–8 (PMID 23137312); clamp: Gallego et al., J Oral Maxillofac Surg 2011;69:e93–5 (PMID 21211886); over-instrumentation: Mauceri et al., BMC Oral Health 2025;25:1362 (PMID 40849463)"
+      }
+    ],
+    "caption": "Patient on a bisphosphonate: extract or endo?\n\nBPs bind bone mineral, get swallowed by resorbing osteoclasts and switch them off. Remodelling slows (not stops) and the drug stays in bone for years.\nAAOMS 2022, MRONJ after extraction: 1.6–14.8% in cancer pts on BPs vs 0–0.15% in osteoporosis pts on BPs.\nRestorable tooth + cancer-dose IV BP or denosumab: strongly prefer non-surgical RCT and minimise bone trauma. Never pause the drug without the prescriber.\n\nRefs: Ruggiero 2022, J Oral Maxillofac Surg; Rogers 2011, Bone; AAE Position Statement 2010.\nAnimation is schematic; the rate bar is a toy model.\n\n#endodontics #endo #dentistry #MRONJ #bisphosphonates #rootcanal #dentalresident"
+  },
+  {
+    "id": "05",
+    "slug": "05-fiber-post-stress",
+    "title": "Metal vs fiber post: where the stress goes",
+    "style": "FEA software UI",
+    "topic": "Stiff metal posts load the post–dentin interface, fiber posts load cervical dentin; ferrule and remaining dentin matter most.",
+    "duration": 22,
+    "video": "videos/05-fiber-post-stress.mp4",
+    "poster": "posters/05-fiber-post-stress.jpg",
+    "claims": [
+      {
+        "claim": "Load case 1: 100 N at 45° on the palatal surface (model setting)",
+        "source": "Nokar S et al., J Dent (Tehran) 2018;15:69-78 (PMID 29971124; full text: 100 N at 45° on the lingual surface); Yang B et al., Int Dent J 2025;75:100918 (PMID 40684680; 100 N at 45° on the palatal surface); Asmussen E et al., J Prosthet Dent 2005;94:321-9 (PMID 16198168; 100 N at 45°, axisymmetric model)"
+      },
+      {
+        "claim": "Elastic modulus (GPa, approx.): dentin 18–25, fiber post 20–40 (axial), gold ~90, titanium ~110, steel/zirconia ~200; metal/zirconia ≈ 4–11× dentin",
+        "source": "Kinney JH et al., Crit Rev Oral Biol Med 2003;14:13-29 (PMID 12764017; dentin 20–25 GPa); Nokar S et al., J Dent (Tehran) 2018;15:69-78 (PMID 29971124; Table 1: dentin 18.6, quartz/carbon/glass fiber 18.7/21/40, gold 88, Ti 112, steel/zirconia 200 GPa); Badami V et al., Cureus 2022;14:e29753 (PMID 36324349; glass fiber ~40, Ti 115, steel/Ni-Cr/zirconia ~200 GPa)"
+      },
+      {
+        "claim": "Metal post: peak dentin von Mises stress along the post–dentin interface",
+        "source": "Pegoretti A et al., Biomaterials 2002;23:2667-82 (PMID 12059016); Adanir N, Belli S, Eur J Dent 2007;1:67-71 (PMID 19212479)"
+      },
+      {
+        "claim": "Fiber post: peak in cervical dentin, like natural teeth",
+        "source": "Pegoretti A et al., Biomaterials 2002;23:2667-82 (PMID 12059016); Adanir N, Belli S, Eur J Dent 2007;1:67-71 (PMID 19212479); Nokar S et al., J Dent (Tehran) 2018;15:69-78 (PMID 29971124; fiber-post peak at the cervical root). Note: Nokar does not support the metal-interface pattern (its metal peaks were also cervical, and cast posts gave the lowest stress)"
+      },
+      {
+        "claim": "Stress maps are schematic (not a solve), relative scale, contrast exaggerated; real FEA differences are modest and studies disagree",
+        "source": "Toy model / schematic: analytic fields shaped after Pegoretti 2002, Adanir & Belli 2007 and Nokar 2018; disagreement: Asmussen E et al., J Prosthet Dent 2005;94:321-9 (PMID 16198168), Nokar 2018 (PMID 29971124)"
+      },
+      {
+        "claim": "Lab overload: metal post → root fracture below the crest, often non-restorable; fiber post → core/cervical failure above the crest, often restorable (crack paths illustrative)",
+        "source": "Akkayan B, Gülmez T, J Prosthet Dent 2002;87:431-7 (PMID 12011860); Fokkinga WA et al., Int J Prosthodont 2004;17:476-82 (PMID 15382786)"
+      },
+      {
+        "claim": "Cast posts often fail at higher loads, but less favourably",
+        "source": "Fokkinga WA et al., Int J Prosthodont 2004;17:476-82 (PMID 15382786)"
+      },
+      {
+        "claim": "Caveat: clinical studies show similar root-fracture rates for metal and fiber posts",
+        "source": "Figueiredo FE et al., J Endod 2015;41:309-16 (PMID 25459568); Martins MD et al., J Dent 2021;112:103750 (PMID 34274439)"
+      },
+      {
+        "claim": "A post retains the core; it doesn't reinforce the root",
+        "source": "Guzy GE, Nicholls JI, J Prosthet Dent 1979;42:39-44 (PMID 379307; no significant reinforcement from a post in vitro); Naumann M et al., J Endod 2018;44:212-219 (PMID 29229457; 7 of 8 clinical studies show no post effect); Schwartz RS, Robbins JW, J Endod 2004;30:289-301 (PMID 15107639; narrative review)"
+      },
+      {
+        "claim": "Ferrule + remaining dentin matter most; with a 1.5–2 mm ferrule, post type matters less; clinical evidence limited",
+        "source": "Juloski J et al., J Endod 2012;38:11-9 (PMID 22152612); Naumann M et al., J Endod 2018;44:212-219 (PMID 29229457); Martins MD et al., J Dent 2021;112:103750 (PMID 34274439)"
+      }
+    ],
+    "caption": "Metal vs fiber post: where does the stress go?\n\nMany FEA models: stiff metal posts (≈4–11× dentin's modulus) concentrate dentin stress along the post–dentin interface; fiber posts load cervical dentin, like a natural tooth.\nLab overload: metal → more root fractures; fiber → more restorable failures. Clinically, root-fracture rates are similar.\nA post retains the core; it doesn't reinforce the root. Ferrule + remaining dentin matter most.\n\nRefs: Kinney 2003, Crit Rev Oral Biol Med; Nokar 2018, J Dent (Tehran); Pegoretti 2002, Biomaterials; Adanir & Belli 2007, Eur J Dent; Asmussen 2005, J Prosthet Dent; Akkayan & Gülmez 2002, J Prosthet Dent; Fokkinga 2004, Int J Prosthodont; Figueiredo 2015, J Endod; Martins 2021, J Dent; Guzy & Nicholls 1979, J Prosthet Dent; Naumann 2018, J Endod; Juloski 2012, J Endod\nAnimation is schematic, not an FEA solve.\n\n#endodontics #endo #dentistry #fiberpost #ferrule #prosthodontics #restorativedentistry"
+  },
+  {
+    "id": "06",
+    "slug": "06-cuspal-coverage",
+    "title": "Why cover the cusps? Cusp flexure after RCT",
+    "style": "Blueprint engineering drawing",
+    "topic": "Losing the marginal ridges, not the endo access, is what lets cusps flex; covering the cusps splints them.",
+    "duration": 25.6,
+    "video": "videos/06-cuspal-coverage.mp4",
+    "poster": "posters/06-cuspal-coverage.jpg",
+    "claims": [
+      {
+        "claim": "Intact tooth: marginal ridges brace the cusps (100% stiffness reference)",
+        "source": "Reeh ES, Messer HH, Douglas WH. J Endod 1989;15(11):512-6 (PMID 2639947)"
+      },
+      {
+        "claim": "Test load F = 111 N (37 N/s for 3 s), maxillary premolars, cervical strain gauges, in vitro",
+        "source": "Reeh ES, Messer HH, Douglas WH. J Endod 1989;15(11):512-6 (PMID 2639947); 111 N derived from 37 N/s × 3 s"
+      },
+      {
+        "claim": "Endo access + RCT with ridges intact: only −5% stiffness (bar B 95%)",
+        "source": "Reeh ES, Messer HH, Douglas WH. J Endod 1989;15(11):512-6 (PMID 2639947)"
+      },
+      {
+        "claim": "MOD cavity, both marginal ridges cut: −63% stiffness (bar C 37%)",
+        "source": "Reeh ES, Messer HH, Douglas WH. J Endod 1989;15(11):512-6 (PMID 2639947)"
+      },
+      {
+        "claim": "Cusps splay more as stiffness falls; delta drawn proportional to 1/stiffness, exaggerated",
+        "source": "Toy model / schematic: deflection not to scale; direction supported by Panitvisai P, Messer HH. J Endod 1995;21(2):57-61 (PMID 7714437)"
+      },
+      {
+        "claim": "Cuspal-coverage cast-gold onlay: stiffness restored, 211% of intact (separate in-vitro series)",
+        "source": "Reeh ES, Douglas WH, Messer HH. J Dent Res 1989;68(11):1540-4 (PMID 2584522)"
+      },
+      {
+        "claim": "Onlay splints the cusps (full occlusal coverage strengthens all cusps)",
+        "source": "Linn J, Messer HH. J Endod 1994;20(10):479-85 (PMID 7714419); in vitro, 36 mandibular molars, gold/amalgam overlays"
+      },
+      {
+        "claim": "6× tooth-loss rate when not crowned after RCT (adjusted HR 6.0, 95% CI 3.2-11.3; 203 teeth; retrospective, any cause, association only)",
+        "source": "Aquilino SA, Caplan DJ. J Prosthet Dent 2002;87(3):256-63 (PMID 11941351)"
+      },
+      {
+        "claim": "Posterior endo tooth with a ridge lost: cover the cusps (onlay or crown)",
+        "source": "Mannocci F et al. ESE position statement. Int Endod J 2021;54(11):1974-81 (PMID 34378217)"
+      }
+    ],
+    "caption": "Why cover the cusps after RCT? Blame the marginal ridges, not the access.\n\nIn vitro (maxillary premolars): access + RCT in an otherwise intact tooth cut cusp stiffness by only ~5%. An MOD prep cut it by ~63%.\nA cast-gold onlay took stiffness above intact (2.11×, separate series).\nClinically, teeth not crowned after RCT were lost at 6× the rate (retrospective, association only).\nPosterior tooth, ridge lost? Cover the cusps: onlay or crown.\n\nRefs: Reeh 1989 (J Endod; J Dent Res) · Linn & Messer 1994 (J Endod) · Aquilino 2002 (J Prosthet Dent) · ESE position statement (Int Endod J 2021)\nAnimation schematic; cusp deflection exaggerated.\n\n#endodontics #endo #dentistry #restorativedentistry #rootcanal #onlay #dentalstudent"
+  },
+  {
+    "id": "07",
+    "slug": "07-pushout-sealer",
+    "title": "Push-out test: what the MPa measures",
+    "style": "Lab instrument HUD",
+    "topic": "How a push-out test turns peak force into MPa, and why that number is a lab-specific dislodgement stress, not a clinical bond.",
+    "duration": 22,
+    "video": "videos/07-pushout-sealer.mp4",
+    "poster": "posters/07-pushout-sealer.jpg",
+    "claims": [
+      {
+        "claim": "1 mm slice of filled root (dentin, sealer, GP core)",
+        "source": "Pane ES et al., J Endod 2013;39(5):669-73 (PMID 23611388); Sagsen B et al., Int Endod J 2011;44(12):1088-91 (PMID 21895700)"
+      },
+      {
+        "claim": "Push apical → coronal (toward wider end), plunger Ø < canal Ø",
+        "source": "Deniz Sungur D et al., Restor Dent Endod 2016;41(2):114-20 (PMID 27200279); Pane ES et al., J Endod 2013;39(5):669-73 (PMID 23611388); Chen WP et al., J Endod 2013;39(2):283-7 (PMID 23321247)"
+      },
+      {
+        "claim": "Crosshead 0.50 mm/min, shown time-lapsed (SIM ×10)",
+        "source": "Al-Haddad AY et al., Int J Biomater 2018:1731857 (PMID 30154852); load velocity affects MPa: Collares FM et al., Int Endod J 2016;49(9):836-49 (PMID 26331627)"
+      },
+      {
+        "claim": "Force climbs, then drops at debond; failure load = peak (F max 8.03 N)",
+        "source": "Failure load at the sudden drop: Al-Haddad AY et al., Int J Biomater 2018:1731857 (PMID 30154852). Curve shape and 8.03 N: Toy model / schematic, labelled 'toy model · values illustrative'"
+      },
+      {
+        "claim": "Failure modes: adhesive (sealer–dentin or sealer–GP), cohesive (within sealer, core or dentin), mixed; this specimen mixed",
+        "source": "Al-Haddad AY et al., Int J Biomater 2018:1731857 (PMID 30154852); Gesi A et al., J Endod 2005;31(11):809-13 (PMID 16249724); Ungor M et al., Int Endod J 2006;39(8):643-7 (PMID 16872459). Tiles are schematic"
+      },
+      {
+        "claim": "τ = F / A, A = canal-wall (frustum) area π(R+r)√((R−r)²+h²), nominal",
+        "source": "Geometry (lateral area of a conical frustum); simpler area approximations in use: Deniz Sungur D et al., Restor Dent Endod 2016;41(2):114-20 (PMID 27200279); Al-Haddad AY et al., Int J Biomater 2018:1731857 (PMID 30154852)"
+      },
+      {
+        "claim": "r 0.42 · R 0.45 mm, h 1.00 mm → A 2.73 mm², τ = 2.94 MPa (illustrative)",
+        "source": "Toy model / schematic: illustrative values, within reported GP + sealer ranges (Ungor M et al., Int Endod J 2006;39(8):643-7, PMID 16872459; Jainaen A et al., Int Endod J 2007;40(11):882-90, PMID 17877721; Al-Haddad AY et al., Int J Biomater 2018:1731857, PMID 30154852)"
+      },
+      {
+        "claim": "Mean shear stress to dislodge the filling: adhesion + friction + interlock",
+        "source": "Collares FM et al., Int Endod J 2016;49(9):836-49 (PMID 26331627); Goracci C et al., J Endod 2005;31(8):608-12 (PMID 16044046); Gesi A et al., J Endod 2005;31(11):809-13 (PMID 16249724); interlock (tubule penetration as micromechanical lock): Deniz Sungur D et al., Restor Dent Endod 2016;41(2):114-20 (PMID 27200279)"
+      },
+      {
+        "claim": "A lab number: compare within a study, not across studies; slice thickness, root third, core, plunger size, load speed, storage and area formula all shift the MPa",
+        "source": "Brichko J et al., J Endod 2018;44(8):1237-45 (PMID 29935874); Collares FM et al., Int Endod J 2016;49(9):836-49 (PMID 26331627); Pane ES et al., J Endod 2013;39(5):669-73 (PMID 23611388)"
+      },
+      {
+        "claim": "Clinical relevance: unproven; lab link to seal mixed; none to outcomes",
+        "source": "Lab evidence conflicts: no correlation between push-out and fluid transport, Moinzadeh AT et al., Int Endod J 2015;48(2):193-8 (PMID 24749656, methacrylate sealer); strong correlation, Neelakantan P et al., Int Endod J 2011;44(6):491-8 (PMID 21255047, AH Plus). No clinical outcome study links push-out MPa to treatment outcome (absence of evidence)"
+      }
+    ],
+    "caption": "What does a push-out MPa actually measure?\n\nA 1 mm slice of filled root is pushed apical → coronal with a plunger narrower than the canal.\nPeak force ÷ canal-wall area = the mean shear stress to dislodge the filling: adhesion + friction + interlock, not pure sealer–dentin bond.\nSlice thickness, root third, core, plunger size and load speed all shift it, so compare within a study, not across studies. Lab links to seal are mixed, and no link to clinical outcomes has been shown.\n\nRefs: Pane 2013, J Endod · Collares 2016, Int Endod J · Brichko 2018, J Endod · Neelakantan 2011, Int Endod J · Moinzadeh 2015, Int Endod J\nSchematic animation; values illustrative (toy model).\n\n#endodontics #endo #dentistry #rootcanal #dentalmaterials #endoresident #dentalresearch"
+  },
+  {
+    "id": "08",
+    "slug": "08-edta-chelation",
+    "title": "EDTA: the calcium claw",
+    "style": "Glossy 3-D molecular",
+    "topic": "How EDTA grips one Ca²⁺ with six donor atoms, why ~1 min clears the smear layer, and why longer EDTA then NaOCl erodes dentine.",
+    "duration": 25.7,
+    "video": "videos/08-edta-chelation.mp4",
+    "poster": "posters/08-edta-chelation.jpg",
+    "claims": [
+      {
+        "claim": "EDTA binds Ca²⁺ as the fully deprotonated EDTA⁴⁻",
+        "source": "Hülsmann M et al., Int Endod J 2003;36:810–30 (PMID 14641420); Martell AE & Smith RM, Critical Stability Constants (reference book, Plenum Press; not a journal article, not in PubMed)"
+      },
+      {
+        "claim": "Six donor atoms (4 carboxylate O⁻ + 2 amine N) grip one apatite Ca²⁺",
+        "source": "Hülsmann M et al., Int Endod J 2003;36:810–30 (PMID 14641420; review of EDTA chemistry); the 4 O⁻ + 2 N hexadentate donor set is standard coordination chemistry (Martell & Smith, reference book)"
+      },
+      {
+        "claim": "Binding order, arm motion, atom sizes and the apatite lattice are schematic; the real complex also binds water",
+        "source": "Toy model / schematic: constraint-relaxed EDTA geometry on a toy apatite lattice (CaEDTA crystal structure: Barnett BL, Uchtman VA, Inorg Chem 1979;18:2674–8, doi:10.1021/ic50200a007; verified via Crossref, not indexed in PubMed)"
+      },
+      {
+        "claim": "The 1:1 complex carries Ca²⁺ away",
+        "source": "Hülsmann M et al., Int Endod J 2003;36:810–30 (PMID 14641420); Martell & Smith, Critical Stability Constants (reference book; log K CaEDTA²⁻ ≈ 10.7)"
+      },
+      {
+        "claim": "Smear layer ≈1–2 µm thick",
+        "source": "Mader CL, Baumgartner JC, Peters DD, J Endod 1984;10:477–83 (PMID 6593410; no PubMed abstract — the 1–2 µm figure is the standard attribution to this paper)"
+      },
+      {
+        "claim": "17% EDTA (neutral pH) for ~1 min removes the smear layer and opens tubules (in vitro)",
+        "source": "Calt S, Serper A, J Endod 2002;28:17–9 (PMID 11806642); Serper A, Calt S, J Endod 2002;28:501–2 (PMID 12126374; neutral pH > pH 9); Crumpton BJ et al., J Endod 2005;31:536–8 (PMID 15980717; 1 mL 17% REDTA × 1 min, then NaOCl)"
+      },
+      {
+        "claim": "Least effective in the apical third",
+        "source": "Teixeira CS et al., Int Endod J 2005;38:285–90 (PMID 15876291)"
+      },
+      {
+        "claim": "10 min EDTA, then NaOCl: peri- & intertubular erosion of dentine",
+        "source": "Calt S, Serper A, J Endod 2002;28:17–9 (PMID 11806642)"
+      },
+      {
+        "claim": "Erosion arises mainly when NaOCl follows EDTA; a final NaOCl after EDTA adds erosion",
+        "source": "Niu W et al., Int Endod J 2002;35:934–9 (PMID 12453023); Qian W et al., J Endod 2011;37:1437–41 (PMID 21924198)"
+      },
+      {
+        "claim": "NaOCl targets organic tissue, EDTA the mineral (Ca²⁺); never mix them",
+        "source": "Zehnder M, J Endod 2006;32:389–98 (PMID 16631834); Grawehr M et al., Int Endod J 2003;36:411–7 (PMID 12801288)"
+      }
+    ],
+    "caption": "How does EDTA actually open dentinal tubules?\nOne EDTA⁴⁻ wraps a single Ca²⁺ with six donor atoms (4 O⁻ + 2 N) and carries it off as a 1:1 complex.\nScaled up: ~1 min of 17% EDTA removes the 1–2 µm smear layer in vitro, least reliably in the apical third.\nGo longer and follow with NaOCl, and peri- and intertubular dentine erodes.\nNaOCl for tissue, EDTA for mineral. Never mix them.\nRefs: Calt & Serper 2002, J Endod; Mader 1984, J Endod; Teixeira 2005, Int Endod J; Niu 2002, Int Endod J; Qian 2011, J Endod; Grawehr 2003, Int Endod J\nAnimation is schematic (toy model, not to scale).\n#endodontics #endo #dentistry #rootcanal #irrigation #EDTA #smearlayer #dentalstudent"
+  },
+  {
+    "id": "09",
+    "slug": "09-caoh2-bacteria",
+    "title": "Ca(OH)₂ vs bacteria: who survives the tubules?",
+    "style": "Simulated confocal time-lapse",
+    "topic": "Ca(OH)₂ is pH 12.5 at the canal, but dentine buffers OH⁻, so E. faecalis deeper in the tubules can survive (in vitro).",
+    "duration": 28.2,
+    "video": "videos/09-caoh2-bacteria.mp4",
+    "poster": "posters/09-caoh2-bacteria.jpg",
+    "claims": [
+      {
+        "claim": "Ca(OH)₂ paste is about pH 12.5",
+        "source": "Mohammadi Z, Dummer PMH, Int Endod J 2011;44:697–730 (PMID 21535021)"
+      },
+      {
+        "claim": "Ca(OH)₂ ⇌ Ca²⁺ + 2OH⁻: the solid slowly releases ions (lattice drawing is schematic)",
+        "source": "Mohammadi Z, Dummer PMH, Int Endod J 2011;44:697–730 (PMID 21535021)"
+      },
+      {
+        "claim": "pH 11.5 line: kills E. faecalis (in vitro)",
+        "source": "Evans M et al., Int Endod J 2002;35:221–8 (PMID 11985673); McHugh CP et al., J Endod 2004;30:218–9 (PMID 15085049)"
+      },
+      {
+        "claim": "OH⁻ diffuses into the tubules; some nearby cells turn red (PI uptake = membrane breached)",
+        "source": "Nerwich A et al., J Endod 1993;19:302–6 (PMID 8228751); Parmar D et al., Int Endod J 2011;44:644–51 (PMID 21352240)"
+      },
+      {
+        "claim": "High pH likely damages membranes, proteins and DNA (proposed mechanisms)",
+        "source": "Siqueira JF Jr, Lopes HP, Int Endod J 1999;32:361–9 (PMID 10551109); Mohammadi Z, Dummer PMH, Int Endod J 2011;44:697–730 (PMID 21535021)"
+      },
+      {
+        "claim": "Dentine buffers OH⁻: the pH front stalls",
+        "source": "Haapasalo HK et al., Int Endod J 2000;33:126–31 (PMID 11307453); Nerwich A et al., J Endod 1993;19:302–6 (PMID 8228751)"
+      },
+      {
+        "claim": "pH model: ≥ 11.5 only at the canal wall, inner dentine about 10.8, outer dentine slow to rise (7.2 → 8.1 by day 7)",
+        "source": "Toy model / schematic: anchored to Nerwich A et al., J Endod 1993;19:302–6 (PMID 8228751); clock and depth compressed"
+      },
+      {
+        "claim": "E. faecalis survives pH 11.1; proton pumping (H⁺ in) appears critical",
+        "source": "Evans M et al., Int Endod J 2002;35:221–8 (PMID 11985673)"
+      },
+      {
+        "claim": "Killing near the canal is partial; E. faecalis survives below the 11.5 line",
+        "source": "Haapasalo M, Ørstavik D, J Dent Res 1987;66:1375–9 (PMID 3114347); kill pattern hand-placed (schematic)"
+      },
+      {
+        "claim": "Takeaway: pH is the weapon, dentine is the shield; past the canal wall, E. faecalis can survive (in vitro)",
+        "source": "Nerwich A et al., J Endod 1993;19:302–6 (PMID 8228751); Evans M et al., Int Endod J 2002;35:221–8 (PMID 11985673); Haapasalo M, Ørstavik D, J Dent Res 1987;66:1375–9 (PMID 3114347)"
+      }
+    ],
+    "caption": "Who survives a Ca(OH)₂ dressing?\nThe paste sits near pH 12.5, but dentine buffers the OH⁻ that diffuses in: inner root dentine peaked at only pH 9.7–10.8.\nIn vitro, E. faecalis survives pH 11.1 but not 11.5; its proton pump seems key.\nSo killing near the canal wall is partial, and cells deeper in the tubules can persist (in vitro data). The clinical benefit of the dressing is still debated.\nRefs: Mohammadi & Dummer 2011, Int Endod J · Nerwich 1993, J Endod · Haapasalo et al. 2000, Int Endod J · Evans 2002, Int Endod J · Haapasalo & Ørstavik 1987, J Dent Res · Sathorn 2007, Int Endod J\nSimulated, schematic animation (depth and time compressed).\n#endodontics #endo #dentistry #calciumhydroxide #enterococcusfaecalis #rootcanal #endoresident"
+  },
+  {
+    "id": "10",
+    "slug": "10-biofilm-succession",
+    "title": "Root canal takeover: anaerobes win over time",
+    "style": "8-bit pixel game",
+    "topic": "How a sealed, infected canal shifts from facultative to obligate-anaerobe dominance over ~3 years (Fabricius 1982 monkey model).",
+    "duration": 26,
+    "video": "videos/10-biofilm-succession.mp4",
+    "poster": "posters/10-biofilm-succession.jpg",
+    "claims": [
+      {
+        "claim": "Study model: pulps mechanically devitalized, open to the mouth ~1 week, then sealed; initial samples at day 7 after sealing (16 canals, 2 monkeys) and final samples at day 90, 180 and 1060 (one monkey per time point); 3 monkeys, 24 canals, quantitative culture",
+        "source": "Fabricius L et al., Scand J Dent Res 1982;90:134-144 (PMID 6951255)"
+      },
+      {
+        "claim": "Facultatives lead early",
+        "source": "Sundqvist G, J Endod 1992;18:427-430 (PMID 9796509); Fabricius L et al., Scand J Dent Res 1982;90:134-144 (PMID 6951255; lower facultative proportion in final samples); Möller AJ et al., Scand J Dent Res 1981;89:475-484 (PMID 6951246). Inferred from the shift toward anaerobes over time; no abstract reports the day-7 composition, so the early bar share is illustrative"
+      },
+      {
+        "claim": "O₂ gets used up / runs out, then obligate anaerobes rise (apical flora the most anaerobic)",
+        "source": "Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-S51 (PMID 17546861); Narayanan LL & Vaishnavi C, J Conserv Dent 2010;13:233-239 (PMID 21217951); Sundqvist G, J Endod 1992;18:427-430 (PMID 9796509); Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (PMID 21523208, doi:10.3402/jom.v1i0.2009). Canal O₂ not measured: O₂ meter is a toy model"
+      },
+      {
+        "claim": "Peptides from broken-down tissue feed the canal flora",
+        "source": "Sundqvist G, Oral Surg Oral Med Oral Pathol 1994;78:522-530 (PMID 7800383)"
+      },
+      {
+        "claim": "Bacteria form biofilm on the canal walls (descriptive tag)",
+        "source": "Siqueira JF Jr & Rôças IN, Int Endod J 2022;55 Suppl 3:512-530 (PMID 34958494); Ricucci D & Siqueira JF Jr, J Endod 2010;36:1277-1288 (PMID 20647081); Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-S51 (PMID 17546861)"
+      },
+      {
+        "claim": "Obligate anaerobes 85-98% of cells in apical samples, day 90-1060 (shown as a range)",
+        "source": "Fabricius L et al., Scand J Dent Res 1982;90:134-144 (PMID 6951255)"
+      },
+      {
+        "claim": "Periapical exudate enters through the foramen as a nutrient source",
+        "source": "Sundqvist G, J Endod 1992;18:427-430 (PMID 9796509; 'nutritional supply'); Sundqvist G & Figdor D, Life as an endodontic pathogen, Endod Topics 2003;6:3-28, doi:10.1111/j.1601-1546.2003.00054.x (not PubMed-indexed; bibliographic record verified via Crossref, full text not checked)"
+      },
+      {
+        "claim": "Over time, obligate anaerobes take over in sealed, untreated canals",
+        "source": "Fabricius L et al., Scand J Dent Res 1982;90:134-144 (PMID 6951255); Sundqvist G, J Endod 1992;18:427-430 (PMID 9796509); Ferreira FB et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2006;102:564-570 (PMID 16997126); Siqueira JF Jr & Rôças IN, Int Endod J 2022;55 Suppl 3:512-530 (PMID 34958494)"
+      },
+      {
+        "claim": "Why: O₂ used up, peptide food, species interactions",
+        "source": "Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-S51 (PMID 17546861; 'anaerobiosis, nutrition and competition with other species'); Sundqvist G, Oral Surg Oral Med Oral Pathol 1994;78:522-530 (PMID 7800383); Sundqvist G, Oral Microbiol Immunol 1992;7:257-262 (PMID 1494447); Fabricius L et al., Scand J Dent Res 1982;90:200-206 (PMID 7051261)"
+      },
+      {
+        "claim": "Share-of-cells bar before Day 90, sprite counts, O₂ meter and 9:1 unit chart",
+        "source": "Toy model / schematic: labelled on screen 'SHARE OF CELLS · ILLUSTRATIVE', 'NOT TO SCALE · TIME COMPRESSED', 'SCHEMATIC BAR', 'ILLUSTRATIVE 9:1'"
+      }
+    ],
+    "caption": "Who wins as a root canal infection ages?\n\nClassic monkey model: pulps devitalized, left open ~1 week, then sealed. Facultatives lead early; as O₂ is used up, obligate anaerobes take over.\nFinal apical samples (day 90-1060): 85-98% of cultured cells were obligate anaerobes.\nDrivers: low O₂, peptide food, species interactions. Scope: sealed, untreated canals (3 monkeys, 24 canals, culture).\n\nRefs: Fabricius 1982, Scand J Dent Res; Sundqvist 1992, J Endod; Siqueira & Rôças 2022, Int Endod J\nAnimation is schematic: counts, early bar shares and the O₂ meter are illustrative; time compressed.\n\n#endodontics #endo #dentistry #rootcanal #microbiology #biofilm #endoresident"
+  },
+  {
+    "id": "11",
+    "slug": "11-heat-plugger-gp",
+    "title": "Heat plugger: how far does GP soften?",
+    "style": "Simulated thermal camera",
+    "topic": "GP hits flow temp (≥60 °C) only ~1 mm past a hot plugger tip; apical GP barely warms and the root surface usually stays under +10 °C (ex vivo). Downpack ~3–5 mm short of WL.",
+    "duration": 24,
+    "video": "videos/11-heat-plugger-gp.mp4",
+    "poster": "posters/11-heat-plugger-gp.jpg",
+    "claims": [
+      {
+        "claim": "Dial 200 °C, model tip 150 °C: real heat-carrier tips often run below the dial",
+        "source": "Atmeh AR et al., Int Endod J 2020;53:698-708 (PMID 31955442); Hadis M, Camilleri J, Dent Mater 2020;36:1183-9 (PMID 32505536)"
+      },
+      {
+        "claim": "GP reaches flow temp (≥60 °C) only ~1 mm past the plugger tip (model: 0.8 mm)",
+        "source": "Yu Y et al., J Dent Sci 2023;18:9-16 (PMID 36643252); Briseño Marroquín B et al., J Endod 2015;41:79-82 (PMID 25134732)"
+      },
+      {
+        "claim": "Model heat held 1.8 s at depth (simplified; no separation burst)",
+        "source": "Toy model / schematic: axisymmetric heat-diffusion model tuned at 3 ex vivo anchor points (see NOTES.md)"
+      },
+      {
+        "claim": "2 mm past the tip (plugger at WL−4 mm): only ~4 °C warmer",
+        "source": "Villegas JC et al., Int Endod J 2005;38:218-22 (PMID 15810971)"
+      },
+      {
+        "claim": "Root surface usually under +10 °C at a 200 °C dial (ex vivo)",
+        "source": "Sweatman TL et al., J Endod 2001;27:512-5 (PMID 11501588); Lee FS et al., J Endod 1998;24:617-20 (PMID 9922753)"
+      },
+      {
+        "claim": "Over +10 °C reported in thin roots and in a thermocouple/IR premolar study",
+        "source": "Lipski M, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2005;99:505-10 (PMID 15772602); Mc Cullagh JJ et al., Int Endod J 2000;33:326-32 (PMID 11307207)"
+      },
+      {
+        "claim": "+10 °C limit (47 °C): 47 °C for 1 min impairs bone formation (rabbit)",
+        "source": "Eriksson RA, Albrektsson T, J Oral Maxillofac Surg 1984;42:705-11 (PMID 6593442); Eriksson AR, Albrektsson T, J Prosthet Dent 1983;50:101-7 (PMID 6576145)"
+      },
+      {
+        "claim": "Below the tip: softened ~1 mm, warm 41–55 °C at 1–2 mm (model), compacted near body temp beyond 2 mm",
+        "source": "Toy model / schematic peaks, anchored to Yu 2023 (PMID 36643252) and Villegas 2005 (PMID 15810971)"
+      },
+      {
+        "claim": "Downpack to ~3–5 mm short of WL (ex vivo adaptation data)",
+        "source": "Smith RS et al., J Endod 2000;26:668-72 (PMID 11469298); Guess GM et al., J Endod 2003;29:509-12 (PMID 12929697); Zhang C et al., Int Endod J 2011;44:1041-6 (PMID 21906086)"
+      }
+    ],
+    "caption": "How far past the plugger tip does gutta-percha actually soften?\n\nSimulated IR view of a continuous-wave downpack (plugger at WL−4 mm):\n• GP reaches flow temp (≥60 °C) only ~1 mm past the tip.\n• 2 mm past the tip: only ~4 °C warmer (ex vivo canal-wall data).\n• Root surface usually stays under +10 °C at a 200 °C dial ex vivo, but thin roots can exceed it.\n• Ex vivo adaptation data favour a downpack ~3–5 mm short of WL.\n\nRefs: Yu 2023 J Dent Sci; Briseño Marroquín 2015 J Endod; Villegas 2005 Int Endod J; Sweatman 2001 J Endod; Lipski 2005 OOOOE; Smith 2000 J Endod; Guess 2003 J Endod\nSchematic toy heat model, not real thermal footage.\n\n#endodontics #endo #dentistry #rootcanal #obturation #guttapercha #warmvertical #dentalstudent"
+  },
+  {
+    "id": "12",
+    "slug": "12-gp-phases",
+    "title": "Why warm GP shrinks: β → α → melt → β",
+    "style": "Clean journal figure",
+    "topic": "How gutta-percha's β→α→amorphous phase changes on heating, and recrystallisation on cooling, make warm GP shrink.",
+    "duration": 22,
+    "video": "videos/12-gp-phases.mp4",
+    "poster": "posters/12-gp-phases.jpg",
+    "claims": [
+      {
+        "claim": "As supplied, most GP cones are β phase",
+        "source": "Combe et al., Int Endod J 2001;34:447-51 (PMID 11556511)"
+      },
+      {
+        "claim": "Cones ≈ 8–22 % GP polymer, mostly ZnO filler",
+        "source": "Friedman et al., J Endod 1977;3:304-8 (PMID 268405); Liao et al., Int Endod J 2021;54:2125-32 (PMID 34420210)"
+      },
+      {
+        "claim": "~42–49 °C: β converts to α",
+        "source": "Schilder, Goodman & Aldrich, Oral Surg Oral Med Oral Pathol 1974;38:109-14 (PMID 4525950); ranges vary by brand (Liao et al., Int Endod J 2021;54:2125-32, PMID 34420210)"
+      },
+      {
+        "claim": "~53–59 °C: amorphous melt that flows under pressure (melt peak ≈60 °C by DSC)",
+        "source": "Schilder et al., Oral Surg Oral Med Oral Pathol 1974;38:109-14 (PMID 4525950); Liao et al., Int Endod J 2021;54:2125-32 (PMID 34420210)"
+      },
+      {
+        "claim": "Heating in the canal is local; apical GP stays ≲45 °C",
+        "source": "Goodman et al., Oral Surg Oral Med Oral Pathol 1981;51:544-51 (PMID 6941146); Schilder et al., Oral Surg Oral Med Oral Pathol 1985;59:285-96 (PMID 3856822)"
+      },
+      {
+        "claim": "Cooling rate picks the crystal: very slow (~0.5 °C/h) → α, normal cooling → β; recrystallisation is slow and product-dependent",
+        "source": "Vishwanath & Rao, J Conserv Dent 2019;22:216-22 (PMID 31367101: rapid cooling → β, ~0.5 °C/h → α); Liao et al., Int Endod J 2021;54:2125-32 (PMID 34420210, citing Bunn 1942; no crystallisation exotherm on cooling at 5 °C/min); Hsu et al., J Dent Sci 2020;15:28-33 (PMID 32256997: product-dependent); Lee et al., J Endod 1997;23:579-82 (PMID 9587286: shrinkage continues 45 min–10 h at 37 °C)"
+      },
+      {
+        "claim": "GP shrinks on cooling as it recrystallises (bracket marked 'exaggerated')",
+        "source": "Schilder et al., Oral Surg Oral Med Oral Pathol 1985;59:285-96 (PMID 3856822); Lottanti et al., J Endod 2014;40:721-4 (PMID 24767571)"
+      },
+      {
+        "claim": "At body temperature it keeps shrinking for minutes–hours",
+        "source": "Lee et al., J Endod 1997;23:579-82 (PMID 9587286)"
+      },
+      {
+        "claim": "Compact while it cools: in warm techniques, held plugger pressure helps compensate for shrinkage",
+        "source": "Hsu et al., J Dent Sci 2020;15:28-33 (PMID 32256997); Lottanti et al., J Endod 2014;40:721-4 (PMID 24767571)"
+      },
+      {
+        "claim": "Volume curve, chain packing and canal view are schematic, not to scale, time compressed",
+        "source": "Toy model / schematic: arbitrary volume units with a broken axis, toy chain drawings, canal gap exaggerated ~10×, 22 → 70 → 37 °C anchors illustrative"
+      }
+    ],
+    "caption": "Why does warm gutta-percha shrink? Follow its phases.\n\nMost cones are β phase as supplied. Heat to ~42–49 °C and β converts to α; at ~53–59 °C it melts (amorphous) and flows under pressure.\nOn cooling it recrystallises (normal cooling gives β; only very slow cooling gives α) and contracts. It can keep shrinking for minutes–hours.\nFor warm techniques: keep plugger pressure on while it cools. Apical GP stays cooler (≲45 °C).\n\nRefs: Schilder 1974/1985 & Goodman 1981, Oral Surg Oral Med Oral Pathol; Combe 2001 & Liao 2021, Int Endod J; Lee 1997 & Lottanti 2014, J Endod; Hsu 2020, J Dent Sci.\nAnimation is schematic and not to scale; ranges vary by brand.\n\n#endodontics #endo #dentistry #guttapercha #obturation #dentalmaterials #rootcanal #dentalstudent"
+  },
+  {
+    "id": "13",
+    "slug": "13-naocl-chemistry",
+    "title": "NaOCl in the canal: why refresh it?",
+    "style": "Blackboard chemistry explainer",
+    "topic": "How tissue reactions use up NaOCl's hydroxide and free chlorine (saponification, neutralization, chloramination), so it must be refreshed.",
+    "duration": 27.5,
+    "video": "videos/13-naocl-chemistry.mp4",
+    "poster": "posters/13-naocl-chemistry.jpg",
+    "claims": [
+      {
+        "claim": "Assumed: unbuffered NaOCl, 2.5–6%, pH ~11–12, pulp remnants, no agitation",
+        "source": "pH ~11–12: Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652); van der Waal et al., Quintessence Int 2014;45:467-74 (PMID 24701613; mean pH 11.5 in practice solutions). 2.5–6% is a stated assumption within the 0.5–8.25% range of proposed concentrations (Boutsioukis & Arias-Moliz 2022)"
+      },
+      {
+        "claim": "NaOCl + H₂O ⇌ NaOH + HOCl",
+        "source": "Estrela et al., Braz Dent J 2002;13(2):113-7 (PMID 12238801)"
+      },
+      {
+        "claim": "At pH 11–12 this lies far left: free chlorine is mostly OCl⁻",
+        "source": "Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652); HOCl pKa ~7.5 (standard chemistry)"
+      },
+      {
+        "claim": "Saponification: fat + NaOH → soap + glycerol (uses OH⁻)",
+        "source": "Estrela et al., Braz Dent J 2002;13(2):113-7 (PMID 12238801); reaction drawing is schematic"
+      },
+      {
+        "claim": "Neutralization: amino acid + NaOH → salt + H₂O (uses OH⁻, so pH falls)",
+        "source": "Estrela et al., Braz Dent J 2002;13(2):113-7 (PMID 12238801); reaction drawing is schematic"
+      },
+      {
+        "claim": "Chloramination: R–NH₂ + HOCl → R–NHCl + H₂O (uses free chlorine); HOCl/OCl⁻ also oxidize and break down proteins",
+        "source": "Estrela et al., Braz Dent J 2002;13(2):113-7 (PMID 12238801)"
+      },
+      {
+        "claim": "Free chlorine near tissue gets used up when left alone; refreshing puts it back (sawtooth graph)",
+        "source": "Toy model / schematic: unit-free, time & amounts illustrative, two separate runs; the ~90% partial reset is a modelling choice. Consumption: Moorer & Wesselink, Int Endod J 1982;15:187-96 (PMID 6964523); Tejada et al., Int Endod J 2019;52:114-122 (PMID 30019752); frequent exchange: Boutsioukis & Arias-Moliz 2022 (PMID 35338652)"
+      },
+      {
+        "claim": "Tissue & dentin use it up → refresh often",
+        "source": "Macedo et al., Int Endod J 2010;43:1108-15 (PMID 20812947); Tejada et al., Int Endod J 2019;52:114-122 (PMID 30019752); Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652); Cullen et al., J Endod 2015;41:920-4 (PMID 25791075)"
+      },
+      {
+        "claim": "Agitation & concentration matter too",
+        "source": "Stojicic et al., J Endod 2010;36:1558-62 (PMID 20728727)"
+      }
+    ],
+    "caption": "Why does NaOCl in a canal need to be refreshed?\nUnbuffered NaOCl (pH ~11–12) dissolves pulp tissue by reacting with it, and those reactions use it up.\nSaponification and amino-acid neutralization consume hydroxide; chloramination and oxidation consume free chlorine (HOCl + OCl⁻).\nTissue and dentin deplete free chlorine at the interface, so exchange it often. Agitation and concentration matter too.\nRefs: Estrela 2002, Braz Dent J; Moorer & Wesselink 1982, Int Endod J; Tejada 2019, Int Endod J; Boutsioukis & Arias-Moliz 2022, Int Endod J; Stojicic 2010, J Endod\nAnimation is schematic; graph is a toy model.\n#endodontics #endo #rootcanal #dentistry #irrigation #sodiumhypochlorite #endoresident"
+  },
+  {
+    "id": "14",
+    "slug": "14-cavitation-pui",
+    "title": "Ultrasonic activation: streaming vs cavitation",
+    "style": "Simulated high-speed shadowgraph",
+    "topic": "How an ultrasonic file moves irrigant: steady acoustic streaming is always on; transient cavitation adds bubbles, but only in patches.",
+    "duration": 19.5,
+    "video": "videos/14-cavitation-pui.mp4",
+    "poster": "posters/14-cavitation-pui.jpg",
+    "claims": [
+      {
+        "claim": "Ultrasonic files used for irrigant activation oscillate at ~30 kHz",
+        "source": "Boutsioukis et al., Int Endod J 2022;55:938-949 (PMID 35762040); Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652)"
+      },
+      {
+        "claim": "Low power (tip amplitude ≈ 25 µm, illustrative): acoustic streaming, tracers loop in steady eddies (mean-flow pattern schematic)",
+        "source": "Boutsioukis et al., Int Endod J 2022;55:938-949 (PMID 35762040); Malki et al., J Endod 2012;38:657-661 (PMID 22515896)"
+      },
+      {
+        "claim": "Cavitation is detectable even at low power settings",
+        "source": "Macedo et al., Ultrason Sonochem 2014;21:324-335 (PMID 23735893)"
+      },
+      {
+        "claim": "High power (≈ 75 µm, illustrative): streaming speeds up; bubbles grow, then implode (soft tip cloud, crisp antinode collapses)",
+        "source": "Macedo et al., Ultrason Sonochem 2014;21:324-335 (PMID 23735893); steady jet speed ∝ A² per Boutsioukis et al., Int Endod J 2022;55:938-949 (PMID 35762040)"
+      },
+      {
+        "claim": "ROI ×3: near-wall bubble collapses with a re-entrant micro-jet toward the wall (schematic; not imaged in root canals)",
+        "source": "Ohl et al., Biophys J 2006;91:4285-4295 (PMID 16950843)"
+      },
+      {
+        "claim": "v = 2π·f·A ≈ 14 m/s (f = 30 kHz, A = 75 µm)",
+        "source": "Toy model / schematic: order-of-magnitude calculation, 2π × 30,000 s⁻¹ × 75 × 10⁻⁶ m = 14.1 m/s"
+      },
+      {
+        "claim": "Δp ≈ ½ρv² ≈ 100 kPa ≈ 1 atm, about the size of the pressure swing near the tip; inertial term as large or larger",
+        "source": "Toy model / schematic: Bernoulli estimate ½ × 1000 × 14.1² ≈ 100 kPa; the unsteady (inertial) term ρω²AR ≈ 100–200 kPa for R ≈ A = 75 µm is the author's own order-of-magnitude estimate. Supporting context only: Verhaagen et al., J Acoust Soc Am 2014;135:1717-1730 (PMID 25234972) show the oscillatory flow component dominates wall pressure and shear stress (2–3 orders of magnitude above the steady-streaming component)"
+      },
+      {
+        "claim": "Local pressure near the tip can reach water's vapour pressure (2–6 kPa at 20–37 °C), so bubbles form",
+        "source": "Toy model / schematic: order of magnitude only; steam-table vapour pressure 2.34 kPa (20 °C) and 6.28 kPa (37 °C)"
+      },
+      {
+        "claim": "Takeaway: streaming is always on",
+        "source": "Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652); Verhaagen et al., J Acoust Soc Am 2014;135:1717-1730 (PMID 25234972)"
+      },
+      {
+        "claim": "Takeaway: cavitation is real, but patchy (tip · antinodes · walls · ↑ with amplitude)",
+        "source": "Macedo et al., J Endod 2014;40:580-583 (PMID 24666916); Macedo et al., Ultrason Sonochem 2014;21:324-335 (PMID 23735893); Boutsioukis et al., Int Endod J 2013;46:1046-1055 (PMID 23521118); Vyas et al., PLoS One 2016;11:e0149804 (PMID 26934340, scaler tips)"
+      }
+    ],
+    "caption": "Streaming or cavitation? A simulated 1,000,000 fps look at ultrasonically activated irrigation (UAI).\nAcoustic streaming is always on, and it speeds up as tip amplitude rises.\nCavitation is real but patchy: tip cloud, antinodes, near the walls, more with amplitude.\nThe wall micro-jet is general bubble physics, not yet imaged inside a root canal. And UAI has not been shown to improve healing vs syringe irrigation (Căpută 2019).\nRefs: Macedo 2014, Ultrason Sonochem; Boutsioukis 2022, Int Endod J; Ohl 2006, Biophys J; Căpută 2019, J Endod\nSchematic animation, values illustrative.\n#endodontics #endo #dentistry #rootcanal #irrigation #ultrasonicactivation #endoresident"
+  },
+  {
+    "id": "15",
+    "slug": "15-needle-cfd",
+    "title": "Needle tips: where the irrigant really goes",
+    "style": "CFD software viewport",
+    "topic": "Open-ended needles jet irrigant to near WL with higher apical pressure; side-vented jets swirl only 1–1.5 mm, so place them ~1 mm short.",
+    "duration": 22.5,
+    "video": "videos/15-needle-cfd.mp4",
+    "poster": "posters/15-needle-cfd.jpg",
+    "claims": [
+      {
+        "claim": "Flow fields are a schematic 2-D toy model (width ×2.2), patterns after 3-D CFD; real 3-D wall speeds ≈ 0–0.7 m/s",
+        "source": "Toy model / schematic: 2-D lattice-Boltzmann run for this reel (Re 900, time-averaged), patterns after Boutsioukis et al., J Endod 2010;36(5):875-9 (PMID 20416437); wall speeds: Shen et al., J Endod 2010;36(5):884-9 (PMID 20416439)"
+      },
+      {
+        "claim": "Open-ended needle 3 mm short: the jet drives toward WL; replacement almost to WL",
+        "source": "Boutsioukis et al., J Endod 2010;36(5):875-9 (PMID 20416437); Boutsioukis et al., Int Endod J 2010;43(10):874-81 (PMID 20618879)"
+      },
+      {
+        "claim": "Side-vented needle: jet hits the wall, then a series of vortices",
+        "source": "Boutsioukis et al., J Endod 2010;36(5):875-9 (PMID 20416437)"
+      },
+      {
+        "claim": "Wall-shear peak where the side-vent jet hits the wall (relative scale; studies differ on the peak)",
+        "source": "Chen et al., Aust Endod J 2014;40(2):54-60 (PMID 25244218); Singh et al., Odontology 2024;112(4):1248-56 (PMID 38703256)"
+      },
+      {
+        "claim": "Side-vented reach ≈ 1–1.5 mm beyond the tip at 0.15–0.2 mL/s; little exchange beyond",
+        "source": "Boutsioukis et al., Int Endod J 2009;42(2):144-55 (PMID 19134043); flow-rate dependence: Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652), citing Boutsioukis & Gutierrez Nova, J Endod 2021;47(9):1487-95 (PMID 34118256)"
+      },
+      {
+        "claim": "Open-ended: higher apical pressure (bars = 3-D CFD ratio ≈ 2–2.5× at 3 mm)",
+        "source": "Singh et al., Odontology 2024;112(4):1248-56 (PMID 38703256), Table 2; Boutsioukis et al., J Endod 2010;36(5):875-9 (PMID 20416437)"
+      },
+      {
+        "claim": "Open-ended needles extrude more irrigant ex vivo (ex vivo set-ups without simulated tissue resistance may overstate it)",
+        "source": "Psimma et al., Int Endod J 2013;46(7):619-31 (PMID 23240919); Psimma et al., J Endod 2013;39(4):521-4 (PMID 23522549)"
+      },
+      {
+        "claim": "Tip design guides depth: open-ended 2–3 mm short, side-vented 1 mm short of WL, in canals enlarged to ≥ size 30–35",
+        "source": "Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652); Boutsioukis & Gutierrez Nova, J Endod 2021;47(9):1487-95 (PMID 34118256)"
+      },
+      {
+        "claim": "Side-vented at 1 mm short reaches WL (schematic of 3-D CFD; Singh 2024 disagrees: no needle reached the apex, even 1 mm short)",
+        "source": "Boutsioukis et al., J Endod 2010;36(10):1664-8 (PMID 20850673); Singh et al., Odontology 2024;112(4):1248-56 (PMID 38703256)"
+      },
+      {
+        "claim": "Never let the needle bind; deeper insertion = more apical pressure",
+        "source": "Psimma et al., J Endod 2013;39(4):521-4 (PMID 23522549); Boutsioukis et al., J Endod 2010;36(10):1664-8 (PMID 20850673)"
+      }
+    ],
+    "caption": "Where does the irrigant really go? It depends on the tip.\n\nOpen-ended 30 G, 3 mm short: the jet drives almost to WL, but apical pressure is higher (more extrusion ex vivo).\nSide-vented: the jet hits the wall, then vortices; replacement reaches only ~1–1.5 mm past the tip.\nSo: open-ended 2–3 mm short, side-vented ~1 mm short of WL, never binding, in canals enlarged to ≥ size 30–35. CFD/ex vivo data; studies disagree on reach (a 2024 CFD study found shorter reach for all tips).\n\nRefs: Boutsioukis 2010, J Endod & Int Endod J; Boutsioukis 2009, Int Endod J; Boutsioukis & Arias-Moliz 2022, Int Endod J; Psimma 2013, Int Endod J & J Endod; Singh 2024, Odontology\nFlow = schematic 2-D toy model, not to scale.\n\n#endodontics #endo #dentistry #rootcanal #irrigation #CFD #endoresident"
+  },
+  {
+    "id": "16",
+    "slug": "16-la-inflamed-tissue",
+    "title": "Why lidocaine struggles in a hot tooth",
+    "style": "Kinetic typography",
+    "topic": "Ion trapping weakens LA injected into infected tissue, but can't explain IANB failure in hot molars: have a Plan B.",
+    "duration": 30,
+    "video": "videos/16-la-inflamed-tissue.mp4",
+    "poster": "posters/16-la-inflamed-tissue.jpg",
+    "claims": [
+      {
+        "claim": "Lidocaine pKa 7.9 (texts 7.7–7.9); at pH = pKa it is 50 : 50 charged : base",
+        "source": "Sanchez V et al., Anesth Analg 1987;66:159-65 (PMID 3813059); Becker DE & Reed KL, Anesth Prog 2006;53:98-108 (PMID 17175824)"
+      },
+      {
+        "claim": "Only the base form crosses the membrane (the cation barely does); inside the axon the cation re-forms and blocks the Na+ channel",
+        "source": "Sanchez V et al., Anesth Analg 1987;66:159-65 (PMID 3813059); Becker DE & Reed KL, Anesth Prog 2006;53:98-108 (PMID 17175824)"
+      },
+      {
+        "claim": "Base fraction 50% at pH 7.9 -> 24% at pH 7.4 -> 4% at pH 6.5: ~5–6x less base in acidic tissue, weaker/slower block",
+        "source": "Toy model / schematic: Henderson–Hasselbalch with pKa 7.9 (pKa 7.7 gives 33% vs 6%); labelled 'ION TRAPPING · TOY MODEL' on screen"
+      },
+      {
+        "claim": "Abscess pus pH 6.0–7.3, relevant if you inject INTO infected tissue",
+        "source": "Nekoofar MH et al., Int Endod J 2009;42:534-8 (PMID 19460003)"
+      },
+      {
+        "claim": "The IANB is deposited far from the inflamed pulp, so acidity alone can't explain IANB failure",
+        "source": "Hargreaves KM & Keiser K, Endod Topics 2002;1:26-39 (not PubMed-indexed; DOI 10.1034/j.1601-1546.2002.10103.x, verified on Crossref); Drum M et al., J Am Dent Assoc 2017;148:267-71 (PMID 28190451); Punnia-Moorthy A, Br J Anaesth 1988;61:154-9 (PMID 3415887)"
+      },
+      {
+        "claim": "Proposed: TTX-resistant Na+ channels (Nav1.8 / Nav1.9) increased in painful pulp, less lidocaine-sensitive",
+        "source": "Renton T et al., BMC Oral Health 2005;5:5 (PMID 16001984); Wells JE et al., J Endod 2007;33:1172-6 (PMID 17889684); Warren CA et al., J Endod 2008;34:7-10 (PMID 18155483); Roy ML & Narahashi T, J Neurosci 1992;12:2104-11 (PMID 1318956)"
+      },
+      {
+        "claim": "Proposed: sensitized nerves are harder to block at a distance (cat)",
+        "source": "Modaresi J et al., J Endod 2008;34:438-41 (PMID 18358891); Wallace JA et al., Oral Surg Oral Med Oral Pathol 1985;59:517-21 (PMID 3859810)"
+      },
+      {
+        "claim": "Proposed: nerve sprouting",
+        "source": "Byers MR et al., J Endod 1990;16:78-84 (PMID 2388022); Rodd HD & Boissonade FM, J Dent Res 2001;80:389-93 (PMID 11269734)"
+      },
+      {
+        "claim": "Lip numb ≠ pulp numb: IANB alone ~25–28% success in hot mandibular molars",
+        "source": "Fowler S et al., J Endod 2016;42:390-2 (PMID 26831048)"
+      },
+      {
+        "claim": "Plan B: buccal articaine infiltration, intraosseous, PDL, intrapulpal (supplemental success varies: articaine ~42–58%, IO ~88%); pre-op NSAID may also help",
+        "source": "Fowler S et al., J Endod 2016;42:390-2 (PMID 26831048); Matthews R et al., J Endod 2009;35:343-6 (PMID 19249592); Nusstein J et al., J Endod 1998;24:487-91 (PMID 9693577); Parirokh M & Abbott PV, Int Endod J 2022;55 Suppl 4:951-94 (PMID 35119117); pre-op NSAID: Pulikkotil SJ et al., Int Endod J 2018;51:989-1004 (PMID 29480930)"
+      }
+    ],
+    "caption": "Hot tooth won't go numb? It's not just the acid.\n\nIon trapping is real: in acidic tissue, lidocaine (pKa ~7.7–7.9) has less base to cross the nerve membrane. That matters if you inject INTO infected tissue (abscess pus pH 6.0–7.3).\nBut an IANB is deposited far from the inflamed pulp. Proposed culprits: TTX-resistant Na+ channels, sensitized nerves, sprouting (mostly lab/animal data).\nIANB alone: ~25–28% success in hot mandibular molars, even with a numb lip. Have a plan B.\n\nRefs: Nekoofar 2009, IEJ; Roy & Narahashi 1992, J Neurosci; Fowler 2016, J Endod.\nSchematic animation; % base is a toy model.\n\n#endodontics #endo #dentistry #localanesthesia #irreversiblepulpitis #endoresident"
+  },
+  {
+    "id": "17",
+    "slug": "17-niti-cyclic-fatigue",
+    "title": "NiTi cyclic fatigue: why files snap in curves",
+    "style": "CRT oscilloscope phosphor",
+    "topic": "A file spinning in a curve flips its surface between tension and compression; strain ≈ d/(2R), so fatigue cracks grow until it snaps.",
+    "duration": 22,
+    "video": "videos/17-niti-cyclic-fatigue.mp4",
+    "poster": "posters/17-niti-cyclic-fatigue.jpg",
+    "claims": [
+      {
+        "claim": "Why NiTi files snap in curves: cyclic fatigue is mechanism 1 of 2 (the other: torsion)",
+        "source": "Sattapan et al., J Endod 2000;26(3):161-5 (PMID 11199711); Parashos et al., J Endod 2004;30(10):722-5 (PMID 15448468)"
+      },
+      {
+        "claim": "Every turn in a curve = one tension–compression cycle at the file surface (rotating-bending)",
+        "source": "Li et al., J Endod 2002;28(6):448-51 (PMID 12067126); Pruett et al., J Endod 1997;23(2):77-85 (PMID 9220735); Cheung & Darvell, Int Endod J 2007;40(8):612-8 (PMID 17532775)"
+      },
+      {
+        "claim": "Peak surface strain ε ≈ d/(2R): tighter curve or thicker file → more strain",
+        "source": "Simple beam bending (outer-fibre strain), as used by Cheung & Darvell, Int Endod J 2007;40(8):612-8 (PMID 17532775); Pruett et al., J Endod 1997;23(2):77-85 (PMID 9220735); Haïkel et al., J Endod 1999;25(6):434-40 (PMID 10530246)"
+      },
+      {
+        "claim": "Example values: d 0.30 mm, R 5.0 mm → 3.0 %; R 3.0 mm → 5.0 %; d 0.36 mm → 6.0 %",
+        "source": "Toy model / schematic: arithmetic of ε = d/(2R) with example values (labelled 'example values' on screen)"
+      },
+      {
+        "claim": "Surface flaw → microcrack that grows every cycle; origin, striations, then overload dimples on the fracture face",
+        "source": "Anderson et al., J Endod 2007;33(10):1212-6 (PMID 17889692); Cheung & Darvell, Int Endod J 2007;40(8):619-25 (PMID 17511786)"
+      },
+      {
+        "claim": "The fatigue crack is microscopic, not visible clinically",
+        "source": "Cheung et al., Int Endod J 2005;38(11):802-9 (PMID 16218972); Cheung & Darvell, Int Endod J 2007;40(8):619-25 (PMID 17511786); Shen et al., J Endod 2006;32(1):61-5 (PMID 16410072)"
+      },
+      {
+        "claim": "Fatigue life used meter and fracture at N = 741 cycles",
+        "source": "Toy model / schematic: Miner's-rule damage sum with N_f ∝ ε^-2 (exponent from Cheung & Darvell 2007, PMID 17532775); labelled 'toy model · values illustrative' on screen"
+      },
+      {
+        "claim": "Then sudden fracture, often without warning; no unwinding first, unlike many torsional failures",
+        "source": "Sattapan et al., J Endod 2000;26(3):161-5 (PMID 11199711); Shen et al., J Endod 2006;32(1):61-5 (PMID 16410072)"
+      },
+      {
+        "claim": "Every turn in a curve spends fatigue life (above the ~0.7 % strain fatigue limit)",
+        "source": "Cheung & Darvell, Int Endod J 2007;40(8):612-8 (PMID 17532775)"
+      }
+    ],
+    "caption": "Why do NiTi rotary files snap in curved canals? One big reason: cyclic fatigue.\n\nEvery turn in a curve flips the file's outer surface between tension and compression.\nSurface strain ≈ d/(2R): a tighter curve or a thicker file means more strain per turn and fewer cycles to failure.\nA microcrack starts at a surface flaw, grows each cycle, and the file can separate with no visible unwinding first. Torsion is the other mechanism, and clinically the two often combine.\n\nRefs: Pruett 1997, J Endod; Cheung & Darvell 2007, Int Endod J (Parts 1-2); Shen 2006, J Endod; Sattapan 2000, J Endod\nAnimation is schematic; numbers are illustrative (toy model).\n\n#endodontics #endo #dentistry #rootcanal #NiTi #endoresident #dentalstudent"
+  },
+  {
+    "id": "18",
+    "slug": "18-apical-periodontitis",
+    "title": "Apical periodontitis: can the X-ray see it?",
+    "style": "Radiograph time-lapse",
+    "topic": "Periapical bone loss from canal bacteria can be under way while a 2-D PA still looks normal; CBCT and histology find more lesions.",
+    "duration": 28,
+    "video": "videos/18-apical-periodontitis.mp4",
+    "poster": "posters/18-apical-periodontitis.jpg",
+    "claims": [
+      {
+        "claim": "No bacteria, no lesion (germ-free rats): exposed pulps without bacteria did not form periapical lesions",
+        "source": "Kakehashi et al., Oral Surg Oral Med Oral Pathol 1965;20:340-9 (PMID 14342926)"
+      },
+      {
+        "claim": "The immune response drives bone resorption: macrophages and T cells, then IL-1β, TNF-α and PGE₂",
+        "source": "Stashenko et al., J Endod 1992;18:422-6 (PMID 9796508); Stashenko et al., Crit Rev Oral Biol Med 1998;9:498-521 (PMID 9825224); Nair, Crit Rev Oral Biol Med 2004;15:348-81 (PMID 15574679)"
+      },
+      {
+        "claim": "RANKL : OPG ratio rises and osteoclasts resorb periapical bone",
+        "source": "Kawashima et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2007;103:707-11 (PMID 17336108)"
+      },
+      {
+        "claim": "Bone is being lost, but the PA can still look normal (small lesion confined to cancellous bone)",
+        "source": "Gao et al., J Endod 2010;36:1404-9 (PMID 20647106); Kanagasingam et al., Int Endod J 2017;50:417-26 (PMID 27063209)"
+      },
+      {
+        "claim": "Early, subtle sign on the PA: apical PDL widening / broken lamina dura (graded as PAI 2-3, small changes in bone structure, before a well-defined radiolucency at PAI 4)",
+        "source": "Ørstavik et al., Endod Dent Traumatol 1986;2:20-34 (PMID 3457698)"
+      },
+      {
+        "claim": "Much clearer once the cortex is involved (classic cadaver study, bur-made defects)",
+        "source": "Bender & Seltzer, JADA 1961;62:152-60, reprinted J Endod 2003;29:702-6 (PMID 14651274)"
+      },
+      {
+        "claim": "Digital PAs: lesion size predicts detection better than cortical involvement",
+        "source": "Chang et al., J Endod 2020;46:496-501 (PMID 32057449)"
+      },
+      {
+        "claim": "83 dog roots, histology as reference: AP diagnosed in 93% by histology, 84% by CBCT, 71% by PA; the gap is AP missed on PA",
+        "source": "de Paula-Silva et al., J Endod 2009;35:1009-12 (PMID 19567324)"
+      },
+      {
+        "claim": "PA stays first-line; limited-FOV CBCT if signs are contradictory",
+        "source": "AAE & AAOMR Joint Position Statement, Oral Surg Oral Med Oral Pathol Oral Radiol 2015;120:508-12 (PMID 26346911)"
+      },
+      {
+        "claim": "Healing also shows late on radiographs: review at ≥ 1 yr, up to 4 yrs",
+        "source": "Ørstavik, Int Endod J 1996;29:150-5 (PMID 9206419)"
+      }
+    ],
+    "caption": "A normal PA doesn't mean no lesion.\n\nCanal bacteria trigger the host response: immune cells, IL-1β/TNF-α/PGE₂ and a rising RANKL:OPG ratio drive osteoclastic bone loss.\nA small lesion in cancellous bone can stay quiet on a 2-D film. PDL widening may be the first hint; the radiolucency gets much clearer as it grows and reaches the cortex.\n83 dog roots vs histology: PA 71%, CBCT 84%, histology 93%.\nPA stays first-line; consider limited-FOV CBCT when signs don't add up.\n\nRefs: de Paula-Silva 2009, J Endod; Chang 2020, J Endod; AAE/AAOMR 2015 position statement\nAnimation is schematic, not to scale.\n\n#endodontics #endo #dentistry #apicalperiodontitis #CBCT #dentalradiology #rootcanal"
+  },
+  {
+    "id": "19",
+    "slug": "19-hydrodynamic-theory",
+    "title": "Hydrodynamic theory: why cold zaps dentine",
+    "style": "Watercolour powers-of-ten",
+    "topic": "How cold pulls fluid outward through open dentinal tubules to fire pulpal A-fibres, and why occluding tubules (flow ∝ r⁴) quiets it.",
+    "duration": 24,
+    "video": "videos/19-hydrodynamic-theory.mp4",
+    "poster": "posters/19-hydrodynamic-theory.jpg",
+    "claims": [
+      {
+        "claim": "Cold drinks hurt dentine exposed by gingival recession (dentine hypersensitivity)",
+        "source": "Liu X-X et al., BMC Oral Health 2020;20:220 (PMID 32762733)"
+      },
+      {
+        "claim": "Dentine is riddled with fluid-filled tubules",
+        "source": "Brännström M, Oral Surg Oral Med Oral Pathol 1966;21:517-26 (PMID 5218158); Pashley DH, J Endod 1986;12:465-74 (PMID 3465852)"
+      },
+      {
+        "claim": "Cold, air & sugar pull dentinal fluid outward",
+        "source": "Brännström M, Åström A, Int Dent J 1972;22:219-27 (PMID 4505631); Liu X-X et al., BMC Oral Health 2020;20:220 (PMID 32762733)"
+      },
+      {
+        "claim": "Heat drives inward flow, which intradental nerves respond to less",
+        "source": "Andrew D, Matthews B, J Physiol 2000;529:791-802 (PMID 11118506: all units more sensitive to outward than inward flow, cat); Lin M et al., PLoS One 2011;6:e18068 (PMID 21448459: hot → inward, cold → outward flow, citing Andrew & Matthews' in-vitro measurements)"
+      },
+      {
+        "claim": "Cold acts at the exposed surface ~2 mm away; fluid moves before the pulp cools (distance = drawn premolar's cervical dentine)",
+        "source": "Linsuwanont P et al., Arch Oral Biol 2007;52:218-27 (PMID 17109811: fluid moved before the pulp-wall temperature changed; extracted intact teeth, stimuli on enamel); 2 mm is model-specific (schematic)"
+      },
+      {
+        "claim": "Flow tugs the A-fibre ending at the pulp-dentine border → sharp pain; in root dentine, endings stay at the border",
+        "source": "Andrew D, Matthews B, J Physiol 2000;529:791-802 (PMID 11118506); Lilja J, Acta Odontol Scand 1979;37:339-46 (PMID 297429)"
+      },
+      {
+        "claim": "Poiseuille: flow ∝ r⁴, so ½ radius along the whole tubule → 1/16 the flow (radius 50 %, flow 6 %)",
+        "source": "Toy model / schematic: Hagen-Poiseuille at same pressure, laminar flow; applied to dentine by Pashley DH, J Endod 1986;12:465-74 (PMID 3465852) and Prati C, J Dent 1994;22:83-8 (PMID 8195480: small changes in functional tubule diameter greatly modify permeability, per Poiseuille-Hagen)"
+      },
+      {
+        "claim": "Sensitive dentine has ~8× more and ~2× wider open tubules",
+        "source": "Absi EG et al., J Clin Periodontol 1987;14:280-4 (PMID 3475295)"
+      },
+      {
+        "claim": "Seal the tubules, still the fluid: the logic behind tubule-occluding desensitisers",
+        "source": "Pashley DH, J Endod 1986;12:465-74 (PMID 3465852); Liu X-X et al., BMC Oral Health 2020;20:220 (PMID 32762733)"
+      },
+      {
+        "claim": "Leading model; odontoblasts may also sense cold directly via TRPC5",
+        "source": "Liu X-X et al., BMC Oral Health 2020;20:220 (PMID 32762733: hydrodynamic theory widely accepted, mechanisms still unclear); Bernal L et al., Sci Adv 2021;7:eabf5567 (PMID 33771873)"
+      }
+    ],
+    "caption": "Why does an iced drink zap a sensitive tooth?\n\nCold, air and sugar pull fluid outward through open tubules; the flow tugs A-fibre endings at the pulp–dentine border → sharp pain (hydrodynamic theory).\nPoiseuille: flow ∝ r⁴, so narrowed tubules still the fluid: the logic behind occluding desensitisers.\nLeading model, not the whole story (odontoblast TRPC5 may sense cold directly). DH is a diagnosis of exclusion: rule out caries, cracks, pulpitis.\n\nRefs: Brännström 1966, Oral Surg; Pashley 1986, J Endod; Absi 1987, J Clin Periodontol; Andrew & Matthews 2000, J Physiol; Liu 2020, BMC Oral Health; Bernal 2021, Sci Adv\nAnimation schematic, not to scale.\n\n#endodontics #endo #dentistry #dentinhypersensitivity #dentalstudent #dentaleducation"
+  },
+  {
+    "id": "20",
+    "slug": "20-bioceramic-setting",
+    "title": "How a bioceramic sealer sets",
+    "style": "Isometric pastel diorama",
+    "topic": "Premixed calcium-silicate sealers set with water drawn from dentin, leach Ca²⁺/OH⁻, and in vitro grow apatite-like mineral at the wall.",
+    "duration": 24,
+    "video": "videos/20-bioceramic-setting.mp4",
+    "poster": "posters/20-bioceramic-setting.jpg",
+    "claims": [
+      {
+        "claim": "Premixed sealer: water from the dentin soaks in; a very dry canal may stay unset",
+        "source": "Xuereb et al., J Endod 2015;41:111–124 (PMID 25442723); Antunes et al., Aust Endod J 2026;52:168–177 (PMID 41364608)"
+      },
+      {
+        "claim": "Silicate grains hydrate: C₃S/C₂S + H₂O → C–S–H gel + Ca(OH)₂ (simplified)",
+        "source": "Camilleri, Dent Mater 2011;27:836–844 (PMID 21600643)"
+      },
+      {
+        "claim": "Hydration takes hours–days; premixed sealer final set ≥168 h (Gilmore)",
+        "source": "Loushine et al., J Endod 2011;37:673–677 (PMID 21496669)"
+      },
+      {
+        "claim": "Ca²⁺ and OH⁻ leach out; pH ~10–12 in lab tests (water)",
+        "source": "Lee et al., Bioinorg Chem Appl 2017;2017:2582849 (PMID 28210204) for pH (Table 5, distilled water); Ca²⁺ release: Candeiro et al., J Endod 2012;38:842–845 (PMID 22595123); Xuereb et al., J Endod 2015;41:111–124 (PMID 25442723)"
+      },
+      {
+        "claim": "Steps overlap: pH rises within minutes, before setting",
+        "source": "Lee et al., Bioinorg Chem Appl 2017;2017:2582849 (PMID 28210204), Table 5: pH 11.64 at 3 min"
+      },
+      {
+        "claim": "Phosphate from tissue fluid reaches the sealer up the tubules (lab: PBS bath)",
+        "source": "Toy model / schematic: route is illustrative; in the cited studies specimens were immersed in PBS (Han & Okiji 2013)"
+      },
+      {
+        "claim": "Phosphate + Ca²⁺ → apatite-like layer and tag-like Ca–P deposits in tubules (days–months, lab)",
+        "source": "Han & Okiji, Int Endod J 2013;46:808–814 (PMID 23402321); Xuereb et al., J Endod 2015;41:111–124 (PMID 25442723); MTA: Sarkar et al., J Endod 2005;31:97–100 (PMID 15671817)"
+      },
+      {
+        "claim": "Water sets it. In vitro, calcium + phosphate form apatite-like mineral",
+        "source": "Donnermeyer et al., Odontology 2019;107:421–436 (PMID 30554288); apatite-like (acicular Ca–P precipitates, Ca/P 1.6–2.0, in PBS): Han & Okiji, Int Endod J 2013;46:808–814 (PMID 23402321)"
+      },
+      {
+        "claim": "Premixed sealers can take days to set and need dentin moisture",
+        "source": "Loushine et al., J Endod 2011;37:673–677 (PMID 21496669); Xuereb et al., J Endod 2015;41:111–124 (PMID 25442723). End-card source lines: Loushine 2011 J Endod · Xuereb 2015 J Endod / Han & Okiji 2013 IEJ · Donnermeyer 2019 Odontology"
+      },
+      {
+        "claim": "Ion release = some solubility; long-term seal effect debated",
+        "source": "Donnermeyer et al., Odontology 2019;107:421–436 (PMID 30554288)"
+      }
+    ],
+    "caption": "How does a premixed bioceramic sealer set?\nPremixed calcium-silicate sealers carry no water: they hydrate with dentin moisture, so a very dry canal can delay the set.\nHydration forms C–S–H gel + Ca(OH)₂; Ca²⁺ and OH⁻ leach out and pH reaches ~10–12 in lab tests.\nIn PBS, calcium + phosphate form apatite-like deposits at the wall and in tubules. In vitro only: clinical bioactivity is unproven, and ion release means some solubility.\nRefs: Xuereb 2015, J Endod; Antunes 2026, Aust Endod J; Camilleri 2011, Dent Mater; Loushine 2011, J Endod; Lee 2017, Bioinorg Chem Appl; Han & Okiji 2013, IEJ; Sarkar 2005, J Endod (MTA); Donnermeyer 2019, Odontology.\nSchematic animation: not to scale, time compressed.\n#endodontics #endo #dentistry #rootcanal #bioceramics #dentalmaterials #endodontist"
+  }
+]

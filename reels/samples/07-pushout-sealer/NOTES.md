@@ -46,7 +46,7 @@ Compare within a study, not across studies.** and **Clinical relevance: unproven
 | 8.96–11.05 | | Plug moves with the crosshead (slip ×4, "slip exaggerated") and protrudes past the coronal face. Crosshead stops at 9.92 (STOP). Plunger retracts. Plug stays, held by friction. **sealer left on wall** leader (9.41–11.05) |
 | 11.24–13.50 | **▸ Where did it break?** | Three STEREO 40× tiles (schematic). Cracks open in turn (11.5–12.6). ADHESIVE split: sealer–dentin / "or" / sealer–GP. COHESIVE "within sealer, core or dentin". MIXED "both patterns", highlighted, with a **THIS TEST** chip on its border (12.5) |
 | 13.86–16.86 | **▸ Peak force ÷ canal-wall area** | Frustum (apical r on top, coronal R on the bottom, h; "A = canal-wall area (nominal)"; "illustrative values · taper exaggerated"). τ = F / A, then the frustum area formula. 8.03 N flies from the plot peak and lands as the F value (15.0). r 0.42 · R 0.45 mm (radii) · h 1.00 mm · Ø 0.84→0.90. A = 2.73 mm² and **τ = 2.94 MPa** appear as final values with no count-up. "1 N/mm² = 1 MPa". Settled by 16.25 |
-| 17.00–22.00 | Report card: **2.94 MPa** · *illustrative* · τ = F / A · one slice, one lab → Mean shear stress to dislodge the filling: adhesion + friction + interlock → **A LAB NUMBER.** → **Compare within a study, / not across studies.** → **Clinical relevance: unproven.** / no link to seal or outcomes shown → fine print + sources | Calc fades out (17.0–17.12) while the τ box morphs into the card number (17.0–17.4). HUD dims under the card. Fully revealed by 18.3 and held to 21.8. 21.8–22.0: card, overlay and panels ease back to the frame-0 look (header only), so the loop is seamless |
+| 17.00–22.00 | Report card: **2.94 MPa** · *illustrative* · τ = F / A · one slice, one lab → Mean shear stress to dislodge the filling: adhesion + friction + interlock → **A LAB NUMBER.** → **Compare within a study, / not across studies.** → **Clinical relevance: unproven.** / lab link to seal mixed; none to outcomes → fine print + sources | Calc fades out (17.0–17.12) while the τ box morphs into the card number (17.0–17.4). HUD dims under the card. Fully revealed by 18.3 and held to 21.8. 21.8–22.0: card, overlay and panels ease back to the frame-0 look (header only), so the loop is seamless |
 
 **Reading-time check (`Kit.readSecs`):** captions are fully visible for 2.64 / 2.94 / 2.96 / 2.34 / 3.20 s against
 2.62 / 2.92 / 2.62 / 2.01 / 2.32 s needed. Card: "A LAB NUMBER. Compare within a study, not across studies." is fully
@@ -92,8 +92,9 @@ sequentially and never overlap.
    Pane 2013 notes that the soft GP core deforms plastically under load (the GP indents under the plunger on screen)
    and that load profiles vary with orientation.
 5. **Failure modes.** Al-Haddad 2018 (full text) defines adhesive failure (at the sealer/dentin or sealer/core
-   interface), cohesive failure (within the filling material) and mixed. Some authors also count cohesive failure
-   within dentin or core. On screen, ADHESIVE is a split tile reading "sealer–dentin or sealer–GP", and COHESIVE reads
+   interface), cohesive failure (within the filling material) and mixed. Fracture of the root dentin itself is also
+   possible: Al-Haddad 2018 sized the plunger to touch the filling only "to avoid misreading by fracture the root
+   dentin", which is why the COHESIVE tile includes dentin. On screen, ADHESIVE is a split tile reading "sealer–dentin or sealer–GP", and COHESIVE reads
    "within sealer, core or dentin". With conventional GP, the sealer–core interface is often the weak link:
    - Gesi A et al. *Interfacial strength of Resilon and gutta-percha to intraradicular dentin.* J Endod
      2005;31(11):809-13. PMID 16249724. doi:10.1097/01.don.0000158230.15853.b7 (GP/AH Plus slices "failed exclusively
@@ -126,18 +127,26 @@ sequentially and never overlap.
    diameters.
 8. **"A LAB NUMBER. Compare within a study, not across studies."**
    - Brichko J, Burrow MF, Parashos P. *Design variability of the push-out bond test in endodontic research: a
-     systematic review.* J Endod 2018;44(8):1237-45. PMID 29935874. doi:10.1016/j.joen.2018.05.003 ("considerable
-     variation… resulting in a large range of reported values". No pooled comparison was possible)
+     systematic review.* J Endod 2018;44(8):1237-45. PMID 29935874. doi:10.1016/j.joen.2018.05.003 ("significant
+     variation in all of the assessed variables, resulting in a large range of reported values"; "considerable
+     variation in the POBT design". No pooled comparison was possible)
    - Collares FM et al. *The influence of methodological variables on the push-out resistance to dislodgement of root
      filling materials: a meta-regression analysis.* Int Endod J 2016;49(9):836-49. PMID 26331627.
      doi:10.1111/iej.12539 (sealer, core, technique, slice thickness, storage time, load velocity and tooth portion
      all significantly influence MPa)
    - Pane 2013: "despite limitations, the push-out test may still be suitable for **ranking**" (i.e. within a study)
-9. **"Clinical relevance: unproven." / "no link to seal or outcomes shown".** No clinical study links push-out MPa
-   to seal or treatment outcome, and the direct lab evidence found none:
+9. **"Clinical relevance: unproven." / "lab link to seal mixed; none to outcomes".** No clinical study links
+   push-out MPa to treatment outcome (absence of evidence). In the lab, studies that measured both push-out and seal
+   (fluid transport) disagree:
    - Moinzadeh AT et al. *The correlation between fluid transport and push-out strength in root canals filled with a
      methacrylate-based filling material.* Int Endod J 2015;48(2):193-8. PMID 24749656. doi:10.1111/iej.12300 (no
-     significant correlation between dislocation resistance and fluid transport)
+     significant correlation between dislocation resistance and fluid transport; RealSeal SE, methacrylate)
+   - Neelakantan P et al. *The impact of root dentine conditioning on sealing ability and push-out bond strength of an
+     epoxy resin root canal sealer.* Int Endod J 2011;44(6):491-8. PMID 21255047. doi:10.1111/j.1365-2591.2010.01848.x
+     (AH Plus: fluid transport and push-out "correlated strongly (ρ = −0.83)")
+   - Ertas H, Sagsen B. *Comparison of the effect of MTAD and conventional irrigation agents on apical leakage and
+     push-out bond strength of root canal filling.* Scanning 2015;37(6):393-8. PMID 26477884. doi:10.1002/sca.21208
+     (AH Plus/GP: MTAD lowered push-out strength while irrigants had no effect on apical leakage)
    - Background: Tay FR, Pashley DH. *Monoblocks in root canals: a hypothetical or a tangible goal.* J Endod
      2007;33(4):391-8. PMID 17368325. doi:10.1016/j.joen.2006.10.009 (monoblock controversy)
    "Unproven" replaces v1's "debated", which implied evidence on both sides.
@@ -154,9 +163,14 @@ sequentially and never overlap.
       dislocation resistance "contributed largely by sliding friction")
     - Gesi 2005 (failure along the GP/sealer interface, not the dentin)
     - Pane 2013 (value depends on core stiffness and plastic deformation)
-    - Chen 2013 and Soares CJ et al., Dent Mater 2008;24(10):1405-11, PMID 18420265, doi:10.1016/j.dental.2008.03.004
-      (FEA: interfacial stress is not uniform, so F/A is a nominal mean). The shear glow is drawn brighter at the
-      loaded and supported edges for this reason.
+    - F/A is a nominal mean by definition. FEA shows the real interfacial stress field depends on the setup: Chen 2013
+      (stress distribution changes with pin/specimen and thickness/diameter ratios; correction factors proposed) and
+      Zanatta RF et al. *Effect of punch and orifice base sizes in different push-out test setups: stress distribution
+      analysis.* J Adhes Dent 2015;17(1):45-50. PMID 25625138. doi:10.3290/j.jad.a33516 (punch and support-orifice
+      sizes changed the stress at the dentin/cement interface; fiber-post model). For contrast, Soares CJ et al., Dent
+      Mater 2008;24(10):1405-11, PMID 18420265, doi:10.1016/j.dental.2008.03.004, found push-out stress *more
+      homogeneous* than microtensile, which is why push-out is preferred for luted posts. The edge-weighted shear
+      glow is schematic.
     - "Interlock" = micromechanical retention (sealer tags, wall irregularities). The line lists contributions the test
       cannot separate; it does not rank them. Nuance: tubule-tag depth has not correlated with push-out values in
       several studies (De-Deus G et al., Eur Endod J 2017;2(1):1-5, PMID 33403329, doi:10.5152/eej.2017.16059, AH Plus;
@@ -279,3 +293,30 @@ Design:
   faintly through the 0.88 overlay. The 24 px "apical/coronal" frustum labels are secondary: the section view and
   "(radii)" line carry the meaning.
 - Video re-rendered once at the end. Poster stays at t = 9.3 s (DEBOND frame, title inside the 3:4 crop).
+
+## Citation audit
+- Checked every distinct paper cited on screen, in meta.json and in this file (19 papers, plus the 3 added below)
+  against PubMed: first author, year, journal, volume/pages, PMID and DOI match for every one (get_article_metadata). Abstracts were
+  read for all of them; full text was read for Al-Haddad 2018 and Deniz Sungur 2016 (PMC). The quoted details (0.8 mm
+  and 0.76 mm plungers, apical face to the plunger, 0.5 mm/min, "sudden sharp drop", Sly et al. area formula, 56×,
+  4.65 MPa BC + conventional GP, AH 26/GP 1.41 MPa, 2πrh, "apical to coronal direction because of the convergence")
+  are all in those papers.
+- **Fixed (on screen + meta.json + caption): "no link to seal or outcomes shown" was overstated.** Moinzadeh 2015
+  found no correlation between push-out and fluid transport, but only for a methacrylate sealer. Neelakantan 2011
+  (AH Plus, Int Endod J, PMID 21255047) found a strong correlation (ρ = −0.83). The card line now reads "lab link to
+  seal mixed; none to outcomes" (same 26 px, 8 words vs 7, still under "Clinical relevance: unproven."). The card
+  source line adds Neelakantan 2011 IEJ and is rebalanced over two 22 px lines (Collares · Pane · Brichko / Gesi ·
+  Neelakantan · Moinzadeh), checked in stills (`_stills/audit`): it sits inside the card and the safe area, clear of
+  the button column. meta.json claim 10 and the caption sentence and Refs line were updated to match. Item 9 rewritten
+  (adds Ertas & Sagsen 2015, Scanning, PMID 26477884).
+- Fixed (NOTES only): Soares 2008 was cited for "interfacial stress is not uniform", but its abstract reports that
+  push-out gives a *more homogeneous* stress distribution than microtensile. Item 12 now describes Soares accurately and
+  cites Chen 2013 plus Zanatta 2015 (J Adhes Dent, PMID 25625138) for setup-dependent stress. The edge-weighted glow is
+  called schematic.
+- Fixed (NOTES only): the Brichko 2018 quote spliced the Conclusions ("considerable variation") onto a Results phrase
+  with an ellipsis. It is now quoted verbatim from each section.
+- Fixed (NOTES only): "Some authors also count cohesive failure within dentin" had no source. It now cites Al-Haddad
+  2018's note that the plunger touched only the filling "to avoid misreading by fracture the root dentin".
+- Added to meta.json claim 8: Deniz Sungur 2016 for "interlock" (its introduction says tubule penetration "creates a
+  micromechanical lock").
+- No wrong PMIDs, years, journals or first authors were found. Video re-rendered once after the card change.
