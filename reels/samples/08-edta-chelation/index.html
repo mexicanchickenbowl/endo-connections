@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>08 · EDTA — the calcium claw</title>
+<link rel="stylesheet" href="../../vendor/fonts/fonts.css">
+<script src="../../lib/kit.js"></script>
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.min.js","three/addons/":"../../vendor/three-addons/"}}</script>
+</head>
+<body>
+<div id="stage"></div>
+<script type="module">
+/*
+ * Sample 08 — "3-D molecular render": EDTA wraps a Ca²⁺ ion pulled from a toy apatite surface
+ * (ball-and-stick, glossy CPK spheres, studio light, fog), an in-camera ×10⁴ zoom-out to a schematic canal wall
+ * where the smear layer is removed and tubules open, a time-lapse (10 min EDTA, then NaOCl) shows erosion,
+ * and a takeaway card over the slowly orbiting Ca–EDTA complex that loops back into the title.
+ * Output: one 2-D canvas (REEL.canvas). Each frame: 2-D backdrop -> three.js render(s) blitted -> 2-D type.
+ */
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { buildComplex } from './chem.js';
+
+const { clamp, lerp, seg, env, ease, W, H } = Kit;
+const TAU = Math.PI * 2;
+const { canvas: out, ctx } = Kit.createCanvas();
+const CXX = 512;   // caption centre: keeps text clear of the Reels button column (x > 960)
+
+/* ============================== palette & type ============================== */
+const UI = {
+  ink: '#f2f6fb', dim: '#a9b8ca', faint: '#7d8ea3', ca: '#3fe6b8', n: '#8aa2ff', o: '#ff7a6b',
+  warn: '#ffad5c', organic: '#ff8fbd', glass: 'rgba(9,13,20,0.74)',
+};
+const SANS = 'Inter, "DejaVu Sans", sans-serif';
+const CPK = { C: 0x3d4148, H: 0xf4f4f2, N: 0x3b62f2, O: 0xe3342a, Ca: 0x2bd9a6, P: 0xff9020 };
+const RAD = { C: 0.40, H: 0.24, N: 0.43, O: 0.41, Ca: 0.70, P: 0.50 };
+const BOND_R = 0.15;
+
+/* ============================== timeline (s) ============================== */
+const T = {
+  dur: 25.7,
+  hook: [0, 3.15],
+  target: [3.1, 5.3], capA: [3.15, 5.4],
+  dock: [5.3, 5.95], claw: [5.9, 8.3], capB: [5.45, 9.15],
+  hold: [8.3, 9.35],                                   // climax hold: cage closed, title, poster
+  drift: [9.3, 11.5], capC: [9.1, 11.95],
+  xfade: [11.55, 12.35],                               // in-camera zoom-out Å -> µm
+  smear: [12.35, 15.6], capD: [12.4, 15.55], clock: [12.45, 14.95],
+  erode: [15.6, 17.4],                                 // time-lapse: EDTA 1 -> 10 min
+  naocl: [17.4, 18.45], capE: [15.75, 19.85],          // then NaOCl: erosion
+  card: [19.8, 25.7],
+};
+const FADE = 0.25;   // caption fade; every caption is fully visible >= Kit.readSecs(text) (audit in NOTES.md)
+const ARM_ORDER = [0, 2, 1, 3];              // carboxylate arm closing order (alternating sides)
+const armWin = (k) => { const i = ARM_ORDER.indexOf(k); const a = T.claw[0] + 0.1 + i * 0.42; return [a, a + 0.9]; };
+const oBondT = (k) => armWin(k)[0] + 0.75;   // carboxylate O→Ca bond forms near end of swing
+const N_BOND_T = [8.1, 8.22];                // amine N bind last (at pH 7.5 an N carries the proton; order illustrative)
+const LOCK = 8.3;                            // sixth bond: "lock" accent
+
+/* ============================== renderer ============================== */
+const glc = document.createElement('canvas'); glc.width = W; glc.height = H;
+const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: true, alpha: true, preserveDrawingBuffer: true, premultipliedAlpha: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
+renderer.setClearColor(0x000000, 0);
+const pmrem = new THREE.PMREMGenerator(renderer);
+const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+/* ---------- shared helpers ---------- */
+const UP = new THREE.Vector3(0, 1, 0);
+const _m = new THREE.Matrix4(), _q = new THREE.Quaternion(), _p = new THREE.Vector3(), _s = new THREE.Vector3(), _c = new THREE.Color();
+const V = (a) => new THREE.Vector3(a[0], a[1], a[2]);
+function glowTexture(inner = 'rgba(255,255,255,1)', mid = 'rgba(255,255,255,0.35)') {
+  const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d');
+  const gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  gr.addColorStop(0, inner); gr.addColorStop(0.25, mid); gr.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const GLOW = glowTexture();
+function glowSprite(color, size) {
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: GLOW, color, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: true, opacity: 0 }));
+  s.scale.set(size, size, 1); return s;
+}
+function glossy(extra = {}) {
+  return new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.2, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.07, envMapIntensity: 0.85, ...extra });
+}
+function setBondHalf(mesh, idx, a, b, r) { // half-cylinder from point a to point b
+  _p.set((a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2);
+  const d = new THREE.Vector3().subVectors(b, a); const L = d.length();
+  _q.setFromUnitVectors(UP, d.multiplyScalar(1 / (L || 1)));
+  _s.set(r, L, r); _m.compose(_p, _q, _s); mesh.setMatrixAt(idx, _m);
+}
+function setAtom(mesh, idx, p, r) { _q.identity(); _s.set(r, r, r); _m.compose(p, _q, _s); mesh.setMatrixAt(idx, _m); }
+function lights(scene, keyI = 2.5, rimI = 2.3) {
+  const key = new THREE.DirectionalLight(0xfff1e2, keyI); key.position.set(-9, 15, 11); scene.add(key);
+  const rim = new THREE.DirectionalLight(0x86c8ff, rimI); rim.position.set(8, 5, -13); scene.add(rim);
+  const fill = new THREE.HemisphereLight(0xbcd6ff, 0x1c140e, 0.55); scene.add(fill);
+  scene.environment = envTex;
+}
+const sph = (tgt, dist, el, az) => new THREE.Vector3(tgt.x + dist * Math.cos(el) * Math.sin(az), tgt.y + dist * Math.sin(el), tgt.z + dist * Math.cos(el) * Math.cos(az));
+
+/* ============================== molecular scene (Å) ============================== */
+const sceneM = new THREE.Scene();
+sceneM.fog = new THREE.Fog(0x0b121b, 34, 84);
+lights(sceneM);
+const camM = new THREE.PerspectiveCamera(34, W / H, 0.5, 1500);
+
+const CX = buildComplex();
+const EL = CX.atoms.map((a) => a.el);
+const NA = EL.length;
+const heavyCentroid = (P) => { const c = new THREE.Vector3(); let n = 0; P.forEach((p, i) => { if (i && EL[i] !== 'H') { c.x += p[0]; c.y += p[1]; c.z += p[2]; n++; } }); return c.multiplyScalar(1 / n); };
+const CEN_OPEN = heavyCentroid(CX.open), CEN_CLOSED = heavyCentroid(CX.closed);
+const CLOSED_POSE = CX.pose([0, 0, 0, 0]);
+const sphereHi = new THREE.SphereGeometry(1, 40, 28);
+const sphereLo = new THREE.SphereGeometry(1, 18, 12);
+const cylHi = new THREE.CylinderGeometry(1, 1, 1, 22, 1, true);
+const cylLo = new THREE.CylinderGeometry(1, 1, 1, 10, 1, true);
+
+// ---- the hero EDTA molecule (dynamic; Ca drawn separately) ----
+const mol = new THREE.Group(); sceneM.add(mol);
+const molMat = glossy();
+const atomsM = new THREE.InstancedMesh(sphereHi, molMat, NA);
+const bondsM = new THREE.InstancedMesh(cylHi, molMat, CX.bonds.length * 2);
+for (let i = 0; i < NA; i++) atomsM.setColorAt(i, _c.setHex(CPK[EL[i]]));
+CX.bonds.forEach(([i, j], k) => { bondsM.setColorAt(2 * k, _c.setHex(CPK[EL[i]])); bondsM.setColorAt(2 * k + 1, _c.setHex(CPK[EL[j]])); });
+mol.add(atomsM, bondsM);
+// coordination "dashes": 6 bonds x 5 dashes, unlit glow
+const DASH_N = 5;
+const dashMat = new THREE.MeshBasicMaterial({ color: 0xa8fff0, toneMapped: false, transparent: true, opacity: 0.95, depthWrite: false });
+const dashes = new THREE.InstancedMesh(new THREE.CylinderGeometry(1, 1, 1, 10, 1, false), dashMat, 6 * DASH_N);
+dashes.renderOrder = 2; mol.add(dashes);
+const donorGlow = CX.coord.map(() => { const s = glowSprite(0x8ffff0, 2.6); mol.add(s); return s; });
+// the target Ca2+ (world space; belongs to the surface, then to the complex)
+const caMat = glossy({ emissive: new THREE.Color(0x0a4a39), emissiveIntensity: 0.0 });
+const caIon = new THREE.Mesh(sphereHi, caMat); caIon.scale.setScalar(RAD.Ca * 1.05); sceneM.add(caIon);
+caMat.color.setHex(CPK.Ca);
+const caGlow = glowSprite(0x3fffc8, 7); sceneM.add(caGlow);
+const vacGlow = glowSprite(0x3fffc8, 5.5); sceneM.add(vacGlow);
+
+// ---- toy apatite slab: Ca2+ + PO4(3-) tetrahedra, 1.5 layers (schematic, no OH-) ----
+const LAT_A = 4.3, R3 = Math.sqrt(3);
+const latPt = (i, j) => [i * LAT_A + j * LAT_A / 2, j * LAT_A * R3 / 2];
+const SITE = new THREE.Vector3(0, 1.25, 0);   // target Ca2+ (hollow site above the top layer)
+const latGroup = new THREE.Group(); sceneM.add(latGroup);
+const LATTICE_MAT = glossy({ roughness: 0.32, clearcoat: 0.45, envMapIntensity: 0.55 });
+(function buildApatite() {
+  const ca = [], P = [], O = [], bonds = [];
+  const off = [-LAT_A, -LAT_A * R3 / 3];       // puts a down-triangle centroid at the origin
+  const RMAX = 25;
+  const inView = (x, z) => Math.hypot(x, z) < RMAX;
+  const fall = (p) => { const r = Math.hypot(p[0], p[2]); const f = clamp((RMAX - r) / (RMAX - 7)); return 0.16 + 0.84 * f * f * (3 - 2 * f); };
+  const rnd = Kit.rng(808);
+  for (let i = -14; i <= 14; i++) for (let j = -16; j <= 12; j++) {
+    const [lx, lz] = latPt(i, j); const x = lx + off[0], z = lz + off[1];
+    if (inView(x, z)) ca.push([x, 0, z]);
+    const ux = x + LAT_A / 2, uz = z + LAT_A * R3 / 6;            // up-triangle centroid -> phosphate
+    if (inView(ux, uz)) {
+      const p = [ux, -0.3, uz]; P.push(p);
+      const phi = rnd() * TAU, b = 1.54;
+      const ap = [p[0], p[1] + b, p[2]]; O.push(ap); bonds.push([p, ap]);
+      for (let k = 0; k < 3; k++) {
+        const a = phi + k * TAU / 3;
+        const o = [p[0] + b * 0.943 * Math.cos(a), p[1] - b * 0.333, p[2] + b * 0.943 * Math.sin(a)];
+        O.push(o); bonds.push([p, o]);
+      }
+    }
+    const dx = x + LAT_A, dz = z + LAT_A * R3 / 3;                // down-triangle centroid -> lower Ca
+    if (inView(dx, dz)) ca.push([dx, -2.9, dz]);
+  }
+  const mat = LATTICE_MAT;
+  const dimC = (hex, p, k = 0.72) => _c.setHex(hex).multiplyScalar(k * fall(p));
+  const make = (list, el) => {
+    const m = new THREE.InstancedMesh(sphereLo, mat, list.length);
+    list.forEach((p, i) => { setAtom(m, i, V(p), RAD[el] * (el === 'Ca' ? 0.82 : el === 'O' ? 0.78 : 0.85)); m.setColorAt(i, dimC(CPK[el], p, el === 'Ca' ? 0.62 : 0.72)); });
+    latGroup.add(m);
+  };
+  make(ca, 'Ca'); make(P, 'P'); make(O, 'O');
+  const bm = new THREE.InstancedMesh(cylLo, mat, bonds.length * 2);
+  bonds.forEach(([a, b], k) => {
+    const A = V(a), B = V(b), M = A.clone().add(B).multiplyScalar(0.5);
+    setBondHalf(bm, 2 * k, A, M, 0.1); setBondHalf(bm, 2 * k + 1, M, B, 0.1);
+    bm.setColorAt(2 * k, dimC(CPK.P, a)); bm.setColorAt(2 * k + 1, dimC(CPK.O, a));
+  });
+  latGroup.add(bm);
+})();
+// soft contact shadow under the hero molecule
+const shadowTex = glowTexture('rgba(0,0,0,0.9)', 'rgba(0,0,0,0.45)');
+const shadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false, opacity: 0, fog: true }));
+shadow.rotation.x = -Math.PI / 2; shadow.position.y = 1.36; shadow.renderOrder = 1; latGroup.add(shadow);
+
+/* ---------- molecular choreography ---------- */
+// arm openness: one "claw flex" in the hook (promise), then the four carboxylate arms close one by one
+const armU = (t) => {
+  const flex = 1 - 0.45 * Math.sin(Math.PI * ease.inOut(seg(t, 0.15, 1.1)));
+  return [0, 1, 2, 3].map((k) => { const [a, b] = armWin(k); return Math.min(flex, 1 - ease.inOut(seg(t, a, b))); });
+};
+const liftT = (t) => ease.inOut(seg(t, T.dock[1] - 0.05, T.claw[1] + 0.25));   // Ca pulled out of the lattice
+function molPlacement(t) {
+  // complex origin (= Ca site) and orientation
+  const hoverY = 9.6 + 0.25 * Math.sin(t * 1.6);
+  const descend = ease.inOut(seg(t, T.target[0], T.dock[0] + 0.1));
+  const dock = ease.inOut(seg(t, T.dock[0], T.dock[1]));
+  let y = lerp(hoverY, SITE.y + 3.2, descend);
+  y = lerp(y, SITE.y, dock);
+  y += 2.3 * liftT(t);
+  const pos = new THREE.Vector3(0, y, 0);
+  const dr = ease.inOut(seg(t, T.drift[0], T.drift[1] + 0.6));
+  pos.x += -2.2 * dr; pos.y += 5.2 * dr; pos.z += 1.6 * dr;
+  const spin = lerp(-1.25, 0.42, ease.inOut(seg(t, 0, T.dock[0] + 0.2))) + 0.55 * dr + 0.18 * seg(t, T.dock[1], T.drift[0]);
+  const tilt = 0.32 * (1 - ease.inOut(seg(t, 1.9, T.dock[0]))) + 0.35 * dr;
+  const q = new THREE.Quaternion().setFromEuler(new THREE.Euler(tilt, spin, 0.22 * dr, 'YXZ'));
+  return { pos, q };
+}
+function camMState(t) {
+  // spherical camera: target, distance, elevation, azimuth
+  const { pos: mp, q } = molPlacement(t);
+  const k0 = ease.outQuint(seg(t, 0, 1.0));                                   // hook push-in
+  const k1 = ease.inOut(seg(t, T.target[0] - 0.2, T.target[0] + 1.3));       // tilt down to the crystal
+  const k2 = ease.inOut(seg(t, T.dock[0] - 0.8, T.claw[0] + 0.05));          // close-up: finished before the arms move
+  const kH = ease.inOut(seg(t, T.hold[0] - 0.05, T.hold[1] + 0.15));         // reveal orbit around the closed cage
+  const k3 = ease.inOut(seg(t, T.drift[0] - 0.1, T.drift[1]));               // pull back as the complex leaves
+  const kz = ease.inOut(seg(t, T.xfade[0], T.xfade[1]));                     // in-camera x10^4 zoom-out
+  const tgt = CEN_OPEN.clone().applyQuaternion(q).add(mp).add(new THREE.Vector3(0, -0.9, 0));  // molecule at y≈880
+  tgt.lerp(new THREE.Vector3(0, 3.1 + 0.45 * Math.max(0, mp.y - SITE.y - 3.2), 0), k1);   // tilt down, but keep the descending molecule clear of the header
+  tgt.lerp(new THREE.Vector3(mp.x, mp.y - 0.9, mp.z), k2 * (1 - k3));
+  tgt.lerp(new THREE.Vector3(-0.9, 6.5, 0.5), k3);
+  tgt.lerp(mp, kz);
+  let dist = lerp(60, 37, k0); dist = lerp(dist, 46, k1); dist = lerp(dist, 30, k2); dist = lerp(dist, 52, k3);
+  dist *= Math.pow(400 / 52, kz);
+  let el = lerp(0.10, 0.36, k1); el = lerp(el, 0.17, k2); el = lerp(el, 0.30, k3);
+  const az = 0.32 + 0.05 * t + 0.55 * k2 + 0.6 * kH + 0.3 * k3;
+  return { tgt, dist, el, az };
+}
+
+// ---- background complexes leaving other sites (opaque, darker, smaller, deeper in the fog) ----
+const staticMat = glossy(); staticMat.color.setScalar(0.5);
+function makeStaticComplex() {
+  const g = new THREE.Group();
+  const P = CX.closed.map(V);
+  const am = new THREE.InstancedMesh(sphereLo, staticMat, NA);
+  const bm = new THREE.InstancedMesh(cylLo, staticMat, CX.bonds.length * 2);
+  for (let i = 0; i < NA; i++) { am.setColorAt(i, _c.setHex(CPK[EL[i]])); setAtom(am, i, P[i], RAD[EL[i]]); }
+  CX.bonds.forEach(([i, j], k) => {
+    const m = P[i].clone().add(P[j]).multiplyScalar(0.5);
+    setBondHalf(bm, 2 * k, P[i], m, BOND_R); setBondHalf(bm, 2 * k + 1, m, P[j], BOND_R);
+    bm.setColorAt(2 * k, _c.setHex(CPK[EL[i]])); bm.setColorAt(2 * k + 1, _c.setHex(CPK[EL[j]]));
+  });
+  g.add(am, bm); return g;
+}
+const AWAY = (() => { const az = camMState(10.3).az; return new THREE.Vector3(-Math.sin(az), 0, -Math.cos(az)); })();
+const others = [[-5, 2, 1.3, 0.3], [-4, 4, -0.8, 0.0], [-4, 0, 2.4, -0.25]].map(([i, j, rot, tilt], k) => {
+  const g = makeStaticComplex(); const [x, z] = latPt(i, j);
+  g.userData = { base: new THREE.Vector3(x, 1.25, z).addScaledVector(AWAY, 6), rot, tilt, k };
+  sceneM.add(g); return g;
+});
+const otherVac = others.map(() => { const s = glowSprite(0x3fffc8, 4.5); sceneM.add(s); return s; });
+
+const tmpPos = Array.from({ length: NA }, () => new THREE.Vector3());
+const worldOf = (local) => local.clone().applyQuaternion(mol.quaternion).add(mol.position);
+let MOLSTATE = null;
+function setPose(P) {
+  for (let i = 0; i < NA; i++) tmpPos[i].set(P[i][0], P[i][1], P[i][2]);
+  for (let i = 0; i < NA; i++) { if (i === 0) { _m.makeScale(0, 0, 0); atomsM.setMatrixAt(0, _m); } else setAtom(atomsM, i, tmpPos[i], RAD[EL[i]]); }
+  CX.bonds.forEach(([i, j], k) => {
+    const m = tmpPos[i].clone().add(tmpPos[j]).multiplyScalar(0.5);
+    setBondHalf(bondsM, 2 * k, tmpPos[i], m, BOND_R); setBondHalf(bondsM, 2 * k + 1, m, tmpPos[j], BOND_R);
+  });
+  atomsM.instanceMatrix.needsUpdate = true; bondsM.instanceMatrix.needsUpdate = true;
+}
+function setDashes(vis) {
+  CX.coord.forEach(([ci, di], b) => {
+    const a = tmpPos[ci], d = tmpPos[di], dir = d.clone().sub(a); const L = dir.length(); dir.normalize();
+    const s0 = RAD.Ca + 0.12, s1 = L - RAD[EL[di]] - 0.08, span = Math.max(0.01, s1 - s0);
+    for (let k = 0; k < DASH_N; k++) {
+      const seg0 = s0 + span * (k / DASH_N), seg1 = s0 + span * ((k + 0.55) / DASH_N);
+      const grow = clamp(vis[b] * DASH_N - (DASH_N - 1 - k)); // grows from donor toward Ca
+      const r = 0.075 * grow;
+      const A = a.clone().addScaledVector(dir, seg0), B = a.clone().addScaledVector(dir, seg1);
+      if (r < 0.004) { _m.makeScale(0, 0, 0); dashes.setMatrixAt(b * DASH_N + k, _m); }
+      else setBondHalf(dashes, b * DASH_N + k, A, B, r);
+    }
+  });
+  dashes.instanceMatrix.needsUpdate = true;
+}
+function placeCam(c) {
+  camM.position.copy(sph(c.tgt, c.dist, c.el, c.az));
+  camM.lookAt(c.tgt); camM.updateMatrixWorld(true);
+  sceneM.fog.near = c.dist - 4; sceneM.fog.far = c.dist + 34;
+}
+function updateMol(t) {
+  latGroup.visible = true;
+  setPose(CX.pose(armU(t)));
+  const { pos, q } = molPlacement(t);
+  mol.position.copy(pos); mol.quaternion.copy(q);
+  mol.updateMatrixWorld(true);
+  // Ca ion: on the surface until docking, then rides in the complex
+  const docked = t >= T.dock[1] - 0.02;
+  const caW = docked ? pos.clone() : SITE.clone();
+  caIon.position.copy(caW);
+  const pulse = 0.5 + 0.5 * Math.sin((t - T.target[0]) * 5.2);
+  const tg = env(t, T.target[0] + 0.3, T.claw[1], 0.4, 0.6);
+  const lock = Math.sin(Math.PI * seg(t, LOCK - 0.1, LOCK + 0.4));            // 0 -> 1 -> 0 accent on the 6th bond
+  caGlow.position.copy(caW);
+  caGlow.material.opacity = 0.6 * (tg * (0.35 + 0.35 * pulse) + 0.25 * env(t, T.claw[1] - 0.2, T.drift[1] + 1, 0.3, 0.5)) + 0.3 * lock;
+  caGlow.scale.setScalar(6 + 1.5 * pulse * tg + 3 * lock);
+  caMat.emissiveIntensity = Math.min(0.6, 0.15 + 0.45 * tg * pulse + 0.3 * lock);
+  // coordination bonds: the four carboxylate O first, the two amine N last
+  const formT = [N_BOND_T[0], N_BOND_T[1], ...[0, 1, 2, 3].map(oBondT)];
+  const vis = formT.map((ft) => ease.out(seg(t, ft - 0.18, ft + 0.12)));
+  setDashes(vis);
+  CX.coord.forEach(([, di], b) => {
+    const flash = env(t, formT[b] - 0.05, formT[b] + 0.55, 0.08, 0.45);
+    donorGlow[b].position.copy(tmpPos[di]); donorGlow[b].material.opacity = 0.75 * flash;
+    donorGlow[b].scale.setScalar(2.2 + 1.6 * flash);
+  });
+  // vacancy left behind
+  vacGlow.position.copy(SITE); vacGlow.material.opacity = 0.55 * ease.out(seg(t, T.drift[0] + 0.2, T.drift[0] + 1.0)) * (0.8 + 0.2 * Math.sin(t * 4));
+  // contact shadow under the approaching molecule
+  const sh = clamp(1 - (pos.y - SITE.y) / 12);
+  shadow.visible = true;
+  shadow.position.set(pos.x, 1.36, pos.z); shadow.scale.setScalar(lerp(8, 13, 1 - sh)); shadow.material.opacity = 0.55 * sh * sh * (1 - seg(t, T.drift[0], T.drift[0] + 1.5));
+  // background complexes emerge (scale 0 -> 0.8, opaque) from far-side sites after the hero leaves
+  others.forEach((g, k) => {
+    const { base, rot, tilt } = g.userData;
+    const a = T.drift[0] + 0.15 + 0.35 * k, r = ease.inOut(seg(t, a, a + 2.6));
+    const sc = 0.8 * ease.outBack(seg(t, a, a + 0.6));
+    g.visible = sc > 0.002;
+    g.scale.setScalar(Math.max(sc, 1e-3));
+    g.position.set(base.x - 1.2 * r, base.y + 0.4 + 6 * r, base.z + 0.8 * r);
+    g.rotation.set(tilt + 0.5 * r, rot + 0.9 * r, 0.3 * r);
+    otherVac[k].position.copy(base); otherVac[k].material.opacity = 0.3 * ease.out(seg(t, a + 0.3, a + 1.2));
+  });
+  // focus pull: the crystal dims while we look at the molecule
+  const dimL = 1 - 0.6 * ease.inOut(seg(t, T.dock[0] - 0.2, T.claw[0] + 0.9)) + 0.2 * ease.inOut(seg(t, T.drift[0] + 0.4, T.drift[1]));
+  LATTICE_MAT.color.setScalar(dimL); LATTICE_MAT.envMapIntensity = 0.55 * dimL;
+  placeCam(camMState(t));
+  MOLSTATE = { P: tmpPos, vis, formT, caW };
+}
+/* card phase: the closed Ca–EDTA complex alone, slowly orbiting behind the takeaway */
+function updateMolCard(t) {
+  const tc = t - T.card[0];
+  latGroup.visible = false; others.forEach((g) => (g.visible = false));
+  vacGlow.material.opacity = 0; otherVac.forEach((s) => (s.material.opacity = 0)); donorGlow.forEach((s) => (s.material.opacity = 0));
+  setPose(CLOSED_POSE); setDashes([1, 1, 1, 1, 1, 1]);
+  mol.position.set(0, 40, 0);
+  mol.quaternion.setFromEuler(new THREE.Euler(0.42, 0.6 + 0.05 * tc, 0.15, 'YXZ'));
+  mol.updateMatrixWorld(true);
+  caIon.position.copy(mol.position); caGlow.position.copy(mol.position);
+  caGlow.material.opacity = 0.18; caGlow.scale.setScalar(6); caMat.emissiveIntensity = 0.25;
+  const cen = CEN_CLOSED.clone().applyQuaternion(mol.quaternion).add(mol.position);
+  placeCam({ tgt: cen.add(new THREE.Vector3(0, -0.6, 0)), dist: 23, el: 0.22, az: 0.9 + 0.08 * tc });
+  MOLSTATE = null;
+}
+
+/* ============================== dentine scene (µm) ============================== */
+const sceneD = new THREE.Scene();
+sceneD.fog = new THREE.Fog(0x0a1019, 60, 135);   // fog colour = navy backdrop, so the far wall melts into it
+lights(sceneD, 1.9, 2.0);
+const camD = new THREE.PerspectiveCamera(36, W / H, 0.5, 400);
+const TUB = { r: 1.1, R: 2.15, depth: 6.5 };
+const tubules = [];   // [x, z, scale]
+(function buildDentine() {
+  const rnd = Kit.rng(2024);
+  const sp = 6.5;     // ~27 000 tubules / mm² (mid-root dentine range)
+  for (let j = -12; j <= 5; j++) for (let i = -6; i <= 6; i++) {
+    const x = i * sp + (j & 1 ? sp / 2 : 0) + (rnd() - 0.5) * 2.5, z = j * sp * 0.87 + (rnd() - 0.5) * 2.5, s = 0.85 + rnd() * 0.25;
+    if (Math.abs(x) < 31 && z > -68 && z < 27 && tubules.every(([a, b]) => Math.hypot(a - x, b - z) > 4.9)) tubules.push([x, z, s]);
+  }
+  // surface (intertubular dentine) with holes at each orifice
+  const shape = new THREE.Shape();
+  shape.moveTo(-90, -40); shape.lineTo(90, -40); shape.lineTo(90, 230); shape.lineTo(-90, 230); shape.lineTo(-90, -40);
+  for (const [x, z, s] of tubules) { const h = new THREE.Path(); h.absarc(x, -z, TUB.R * s, 0, TAU, true); shape.holes.push(h); }
+  const sg = new THREE.ShapeGeometry(shape, 18);
+  sg.rotateX(-Math.PI / 2);
+  // procedural bump texture
+  const nc = document.createElement('canvas'); nc.width = nc.height = 256; const g = nc.getContext('2d'); const id = g.createImageData(256, 256);
+  for (let y = 0; y < 256; y++) for (let x = 0; x < 256; x++) {
+    const f = (sx, sy, s) => Kit.noise2((x / 256) * s + sx, (y / 256) * s + sy, 7);
+    const v = 0.55 * f(0, 0, 8) + 0.3 * f(3, 1, 16) + 0.15 * f(5, 7, 32);
+    const c = Math.round(128 + 110 * v); const o = (y * 256 + x) * 4; id.data[o] = id.data[o + 1] = id.data[o + 2] = c; id.data[o + 3] = 255;
+  }
+  g.putImageData(id, 0, 0);
+  const bump = new THREE.CanvasTexture(nc); bump.wrapS = bump.wrapT = THREE.RepeatWrapping; bump.repeat.set(1 / 9, 1 / 9);
+  // SEM-like blue-grey dentine with a soft clear-coat sheen (same studio rig as the molecules)
+  const surfMat = new THREE.MeshPhysicalMaterial({ color: 0x8a9098, roughness: 0.62, metalness: 0, clearcoat: 0.3, clearcoatRoughness: 0.35, bumpMap: bump, bumpScale: 1.2, envMapIntensity: 0.5 });
+  sceneD.add(new THREE.Mesh(sg, surfMat));
+  // tubules: lathe profile with an "eroded" funnel morph target
+  const prof0 = [[2.15, 0], [1.9, 0], [1.62, 0.01], [1.4, 0.015], [1.2, 0.0], [1.1, -0.12], [1.1, -0.5], [1.1, -1.1], [1.1, -1.9], [1.1, -2.9], [1.1, -4.3], [1.1, -6.5], [0.0, -6.5]];
+  const prof1 = [[2.15, 0], [2.06, -0.12], [1.93, -0.36], [1.77, -0.68], [1.6, -1.02], [1.45, -1.38], [1.32, -1.78], [1.22, -2.22], [1.15, -2.75], [1.11, -3.3], [1.1, -4.5], [1.1, -6.5], [0.0, -6.5]];
+  const cols = ['#8a9098', '#8a9098', '#a3a9b1', '#a8aeb6', '#9aa0a8', '#8f959d', '#7d838b', '#70767e', '#666c74', '#60666e', '#5b6169', '#575d65', '#555b63'];
+  const SEG = 36;
+  const g0 = new THREE.LatheGeometry(prof0.map(([r, y]) => new THREE.Vector2(r, y)), SEG);
+  const g1 = new THREE.LatheGeometry(prof1.map(([r, y]) => new THREE.Vector2(r, y)), SEG);
+  const n = g0.attributes.position.count, colArr = new Float32Array(n * 3);
+  const np = prof0.length;
+  for (let v = 0; v < n; v++) { const pi = v % np; _c.set(cols[pi]).convertSRGBToLinear(); colArr[v * 3] = _c.r; colArr[v * 3 + 1] = _c.g; colArr[v * 3 + 2] = _c.b; }
+  g0.setAttribute('color', new THREE.BufferAttribute(colArr, 3));
+  g0.morphAttributes.position = [g1.attributes.position];
+  g0.morphAttributes.normal = [g1.attributes.normal];
+  const tubeMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.55, side: THREE.DoubleSide, envMapIntensity: 0.45, emissive: new THREE.Color(0, 0, 0) });
+  const meshes = [];
+  for (const [x, z, s] of tubules) {
+    const m = new THREE.Mesh(g0, tubeMat); m.position.set(x, 0, z); m.scale.set(s, 1, s); m.morphTargetInfluences = [0];
+    sceneD.add(m); meshes.push(m);
+  }
+  sceneD.userData.tubeMat = tubeMat;
+  sceneD.userData.tubeMeshes = meshes;
+})();
+// dissolution schedule shared by the smear grains and the paste film: front spreads from the view centre
+const SM_C = [0, -8];
+const dissolveT = (x, z) => {
+  const d = Math.hypot(x - SM_C[0], (z - SM_C[1]) * 0.8) / 42;
+  const nz = Kit.noise2(x * 0.12, z * 0.12, 3);
+  return T.smear[0] + 1.9 * clamp(Math.pow(d, 0.85) + 0.22 * nz, 0, 1.2);
+};
+// smear layer = translucent amorphous "paste" film + smooth debris grains + plugs in the orifices, + released Ca motes
+const SMEAR = (function buildSmear() {
+  const rnd = Kit.rng(77);
+  const grains = [];
+  const add = (x, y, z, s, plug) => grains.push({ x, y, z, s, sx: 0.9 + rnd() * 0.7, sy: 0.45 + rnd() * 0.35, sz: 0.9 + rnd() * 0.7, rx: (rnd() - 0.5) * 0.7, ry: rnd() * TAU, rz: (rnd() - 0.5) * 0.7, tone: rnd(), plug });
+  const X0 = -30, X1 = 30, Z0 = -64, Z1 = 24;
+  for (const [n, y0, y1, s0, s1] of [[3000, 0.2, 0.65, 0.45, 0.7], [1900, 0.6, 1.2, 0.36, 0.6], [700, 1.15, 1.6, 0.22, 0.42]]) {
+    for (let i = 0; i < n; i++) {
+      const x = lerp(X0, X1, rnd()), z = lerp(Z0, Z1, rnd());
+      if (z < -40 && rnd() < 0.45) continue;
+      add(x, lerp(y0, y1, rnd()), z, lerp(s0, s1, rnd()), false);
+    }
+  }
+  for (const [tx, tz, ts] of tubules) for (let k = 0; k < 6; k++) {   // smear plugs packed into the orifices
+    const a = rnd() * TAU, r = Math.sqrt(rnd()) * (TUB.r * ts - 0.3);
+    add(tx + r * Math.cos(a), lerp(-1.4, 0.1, rnd()), tz + r * Math.sin(a), lerp(0.3, 0.45, rnd()), true);
+  }
+  const N = grains.length;
+  const mat = new THREE.MeshStandardMaterial({ roughness: 0.6, metalness: 0, envMapIntensity: 0.55 });
+  const mesh = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1, 1), mat, N);   // smooth-shaded
+  const c0 = new THREE.Color('#8c9199'), c1 = new THREE.Color('#6c7179'), c2 = new THREE.Color('#aab0b7');
+  grains.forEach((gr, i) => {
+    _c.copy(c0).lerp(gr.tone < 0.5 ? c1 : c2, Math.abs(gr.tone - 0.5) * 1.6); mesh.setColorAt(i, _c);
+    gr.tau = dissolveT(gr.x, gr.z) + (1.7 - gr.y) * 0.12 + (gr.plug ? 0.35 : 0);
+  });
+  sceneD.add(mesh);
+  // paste film: a DataTexture whose alpha dissolves along the same front (noise-threshold dissolve)
+  const FN = 256, FX0 = -32, FW = 64, FZ1 = 28, FD = 96;
+  const tauF = new Float32Array(FN * FN), A0 = new Float32Array(FN * FN), data = new Uint8Array(FN * FN * 4);
+  for (let j = 0; j < FN; j++) for (let i = 0; i < FN; i++) {
+    const x = FX0 + FW * (i + 0.5) / FN, z = FZ1 - FD * (j + 0.5) / FN, k = j * FN + i;
+    const fine = Kit.noise2(x * 0.9, z * 0.9, 11), mid = Kit.noise2(x * 0.35, z * 0.35, 12);
+    tauF[k] = dissolveT(x, z) + 0.12 + 0.18 * fine;
+    A0[k] = clamp(0.7 + 0.16 * mid + 0.1 * fine, 0, 1);
+    const g = clamp(0.56 + 0.06 * mid + 0.05 * fine);
+    data[k * 4] = Math.round(255 * g * 0.97); data[k * 4 + 1] = Math.round(255 * g * 0.99); data[k * 4 + 2] = Math.round(255 * g * 1.04);
+  }
+  const filmTex = new THREE.DataTexture(data, FN, FN, THREE.RGBAFormat);
+  filmTex.colorSpace = THREE.SRGBColorSpace; filmTex.magFilter = THREE.LinearFilter; filmTex.minFilter = THREE.LinearFilter; filmTex.needsUpdate = true;
+  const film = new THREE.Mesh(new THREE.PlaneGeometry(FW, FD), new THREE.MeshStandardMaterial({ map: filmTex, transparent: true, depthWrite: false, roughness: 0.55, envMapIntensity: 0.5 }));
+  film.rotation.x = -Math.PI / 2; film.position.set(FX0 + FW / 2, 0.5, FZ1 - FD / 2); film.renderOrder = 1; sceneD.add(film);
+  let lastFilmT = null;
+  const updateFilm = (t) => {
+    const tt = clamp(t, T.smear[0] - 0.6, T.smear[0] + 4.2);
+    if (lastFilmT === tt) return; lastFilmT = tt;
+    for (let k = 0; k < FN * FN; k++) data[k * 4 + 3] = Math.round(255 * A0[k] * clamp((tauF[k] + 0.45 - tt) / 0.45));
+    filmTex.needsUpdate = true;
+  };
+  // motes: every 6th grain releases a Ca–EDTA "bead" (symbolic; real complexes are ~1 nm) with an additive glow
+  const motes = grains.filter((g, i) => i % 6 === 0 && g.z > -45);
+  const mm = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1, 2), new THREE.MeshStandardMaterial({ color: 0x1fbf8f, emissive: 0x0d6e52, emissiveIntensity: 0.9, roughness: 0.25, metalness: 0 }), motes.length);
+  mm.renderOrder = 3; sceneD.add(mm);
+  const gPos = new Float32Array(motes.length * 3), gCol = new Float32Array(motes.length * 3);
+  const gg = new THREE.BufferGeometry();
+  gg.setAttribute('position', new THREE.BufferAttribute(gPos, 3)); gg.setAttribute('color', new THREE.BufferAttribute(gCol, 3));
+  const glowPts = new THREE.Points(gg, new THREE.PointsMaterial({ map: GLOW, size: 1.5, sizeAttenuation: true, vertexColors: true, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+  glowPts.renderOrder = 4; glowPts.frustumCulled = false; sceneD.add(glowPts);
+  return { grains, mesh, motes, mm, glowPts, gPos, gCol, updateFilm };
+})();
+function camDState(t) {
+  const arrive = ease.out(seg(t, T.xfade[0], T.xfade[1] + 0.5));   // continues the zoom-out: dolly back from close
+  const push = ease.inOut(seg(t, T.xfade[1], T.card[0] + 0.5));
+  let dist = lerp(26, 80, arrive); dist = lerp(dist, 66, push);
+  const az = lerp(-0.16, 0.2, ease.inOut(seg(t, T.xfade[0], T.card[0] + 0.6)));
+  const el = lerp(lerp(0.9, 0.74, arrive), 0.86, push);
+  const tgt = new THREE.Vector3(0, 0, lerp(-6, -7, push));
+  return { tgt, dist, el, az };
+}
+const BEAD = new THREE.Color(0x3fffc8);
+function updateDent(t) {
+  const { grains, mesh, motes, mm, gPos, gCol, glowPts, updateFilm } = SMEAR;
+  grains.forEach((gr, i) => {
+    const k = seg(t, gr.tau, gr.tau + 0.55);
+    const s = gr.s * (1 - ease.out(k));
+    _p.set(gr.x, gr.y - 0.25 * k, gr.z);
+    _q.setFromEuler(new THREE.Euler(gr.rx + 0.8 * k, gr.ry, gr.rz));
+    _s.set(Math.max(1e-4, s * gr.sx), Math.max(1e-4, s * gr.sy), Math.max(1e-4, s * gr.sz));
+    _m.compose(_p, _q, _s); mesh.setMatrixAt(i, _m);
+  });
+  mesh.instanceMatrix.needsUpdate = true;
+  updateFilm(t);
+  motes.forEach((gr, i) => {
+    const k = seg(t, gr.tau + 0.1, gr.tau + 1.7);
+    const live = k > 0 && k < 1;
+    const s = live ? 0.2 * Math.sin(Math.PI * Math.min(1, k * 1.25)) * (1 - k * 0.4) : 1e-4;
+    _p.set(gr.x + 0.8 * Kit.noise1(i * 1.7 + k * 2, 5), gr.y + 0.6 + 6 * ease.out(k), gr.z + 0.8 * Kit.noise1(i * 2.3 + k * 2, 9));
+    _q.identity(); _s.setScalar(Math.max(1e-4, s)); _m.compose(_p, _q, _s); mm.setMatrixAt(i, _m);
+    const gI = live ? 0.55 * s / 0.2 : 0;
+    gPos[i * 3] = _p.x; gPos[i * 3 + 1] = live ? _p.y : -50; gPos[i * 3 + 2] = _p.z;
+    gCol[i * 3] = BEAD.r * gI; gCol[i * 3 + 1] = BEAD.g * gI; gCol[i * 3 + 2] = BEAD.b * gI;
+  });
+  mm.instanceMatrix.needsUpdate = true;
+  glowPts.geometry.attributes.position.needsUpdate = true; glowPts.geometry.attributes.color.needsUpdate = true;
+  // EDTA alone: slight widening; NaOCl after EDTA: the marked funnel erosion (Niu 2002; Qian 2011)
+  const e = 0.2 * ease.inOut(seg(t, T.erode[0] + 0.1, T.erode[1])) + 0.8 * ease.inOut(seg(t, T.naocl[0] + 0.05, T.naocl[1] - 0.1));
+  for (const m of sceneD.userData.tubeMeshes) m.morphTargetInfluences[0] = e;
+  sceneD.userData.tubeMat.emissive.setRGB(0.07 * e, 0.035 * e, 0.02 * e);
+  const c = camDState(t);
+  camD.position.copy(sph(c.tgt, c.dist, c.el, c.az));
+  camD.lookAt(c.tgt); camD.updateMatrixWorld(true);
+  sceneD.fog.near = c.dist - 18; sceneD.fog.far = c.dist + 57;
+}
+
+/* ============================== 2-D drawing ============================== */
+const project = (v, cam) => { const p = v.clone().project(cam); return { x: (p.x + 1) / 2 * W, y: (1 - p.y) / 2 * H, z: p.z }; };
+const BOKEH = (() => { const r = Kit.rng(5); return Array.from({ length: 22 }, () => ({ x: r() * W, y: r() * H, r: 8 + r() * 46, a: 0.02 + r() * 0.06, ph: r() * TAU, ph2: r() * TAU })); })();
+function background(t) {
+  const g = ctx.createRadialGradient(W / 2, 820, 60, W / 2, 900, 1250);
+  g.addColorStop(0, '#1b2a3b'); g.addColorStop(0.55, '#0d1520'); g.addColorStop(1, '#04060a');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  const ph = TAU * t / T.dur;   // periodic over the reel, so the loop is seamless
+  for (const b of BOKEH) {
+    const y = b.y + 60 * Math.sin(ph + b.ph), x = b.x + 18 * Math.sin(2 * ph + b.ph2);
+    const gr = ctx.createRadialGradient(x, y, 0, x, y, b.r);
+    gr.addColorStop(0, `rgba(150,215,255,${b.a})`); gr.addColorStop(1, 'rgba(150,215,255,0)');
+    ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(x, y, b.r, 0, TAU); ctx.fill();
+  }
+}
+/** rich text: "<ca>Ca^{2+}</>" colour tags + ^{sup}. returns width. */
+const TAGS = { ca: UI.ca, n: UI.n, o: UI.o, w: UI.warn, d: UI.dim, org: UI.organic, ink: UI.ink };
+function parseRich(str) {
+  const segs = []; let col = null, i = 0, buf = '';
+  const flush = (sup) => { if (buf) segs.push({ t: buf, c: col, sup: !!sup }); buf = ''; };
+  while (i < str.length) {
+    if (str[i] === '<') { const j = str.indexOf('>', i); const tag = str.slice(i + 1, j); flush(); col = tag === '/' ? null : TAGS[tag]; i = j + 1; continue; }
+    if (str[i] === '^' && str[i + 1] === '{') { flush(); const j = str.indexOf('}', i); buf = str.slice(i + 2, j); flush(true); i = j + 1; continue; }
+    buf += str[i++];
+  }
+  flush(); return segs;
+}
+function rich(str, x, y, o = {}) {
+  const size = o.size || 48, weight = o.weight || 700, base = o.color || UI.ink, align = o.align || 'center', lh = o.lh || size * 1.22;
+  const lines = String(str).split('\n');
+  ctx.save(); ctx.globalAlpha *= o.alpha == null ? 1 : o.alpha; ctx.textBaseline = 'alphabetic';
+  if (o.shadow !== false) { ctx.shadowColor = 'rgba(0,0,0,0.65)'; ctx.shadowBlur = o.blur || 18; ctx.shadowOffsetY = 2; }
+  if (o.ls) ctx.letterSpacing = o.ls + 'px';
+  let maxW = 0;
+  const fontFor = (s) => `${weight} ${s.sup ? Math.round(size * 0.62) : size}px ${SANS}`;
+  const L = lines.map((line) => {
+    const segs = parseRich(line);
+    let w = 0; for (const s of segs) { ctx.font = fontFor(s); s.w = ctx.measureText(s.t).width + (s.sup ? size * 0.03 : 0); w += s.w; }
+    maxW = Math.max(maxW, w); return { segs, w };
+  });
+  if (o.bg) {
+    const px = size * 0.42, x0 = align === 'center' ? x - maxW / 2 : align === 'right' ? x - maxW : x;
+    ctx.save(); ctx.shadowColor = 'rgba(0,0,0,0.35)'; ctx.shadowBlur = 14; ctx.fillStyle = o.bg;
+    ctx.beginPath(); ctx.roundRect(x0 - px, y - size * 0.98, maxW + 2 * px, size * 1.36 + (lines.length - 1) * lh, size * 0.5); ctx.fill(); ctx.restore();
+    ctx.shadowColor = 'transparent';
+  }
+  L.forEach(({ segs, w }, li) => {
+    let cx = align === 'center' ? x - w / 2 : align === 'right' ? x - w : x;
+    for (const s of segs) {
+      ctx.font = fontFor(s); ctx.fillStyle = s.c || base; ctx.textAlign = 'left';
+      const tx = cx + (s.sup ? size * 0.02 : 0), ty = y + li * lh - (s.sup ? size * 0.36 : 0);
+      if (o.stroke) { ctx.save(); ctx.shadowColor = 'transparent'; ctx.lineJoin = 'round'; ctx.lineWidth = o.stroke; ctx.strokeStyle = 'rgba(6,9,14,0.85)'; ctx.strokeText(s.t, tx, ty); ctx.restore(); }
+      ctx.fillText(s.t, tx, ty);
+      cx += s.w;
+    }
+  });
+  ctx.restore();
+  return maxW;
+}
+function richWidth(str, size, weight = 700) {
+  let w = 0; for (const s of parseRich(str)) { ctx.font = `${weight} ${s.sup ? Math.round(size * 0.62) : size}px ${SANS}`; w += ctx.measureText(s.t).width + (s.sup ? size * 0.03 : 0); } return w;
+}
+const fitSize = (str, size, maxW, weight = 700, min = 18) => { const w = Math.max(...String(str).split('\n').map((l) => richWidth(l, size, weight))); return w > maxW ? Math.max(min, Math.floor(size * maxW / w)) : size; };
+function roundRect(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+/** soft dark ellipse behind a caption (molecular scenes: bright, saturated spheres behind the text) */
+function scrim(y, a, rx = 470, ry = 84) {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha = a; ctx.translate(CXX, y); ctx.scale(1, ry / rx);
+  const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
+  g.addColorStop(0, 'rgba(3,5,9,0.62)'); g.addColorStop(0.6, 'rgba(3,5,9,0.5)'); g.addColorStop(1, 'rgba(3,5,9,0)');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, rx, 0, TAU); ctx.fill(); ctx.restore();
+}
+/** bottom caption with soft rise; lines separated by \n; width capped at 800 px, centred at x = 512 */
+function caption(t, win, text, o = {}) {
+  const a = env(t, win[0], win[1], FADE, FADE); if (a <= 0) return;
+  const rise = 14 * (1 - ease.out(seg(t, win[0], win[0] + 0.4)));
+  const size = fitSize(text, o.size || 54, 800, 700, 44);
+  const n = text.split('\n').length, y = (o.y || 1336) + rise;
+  if (o.scrim) scrim(y - 18 + (n - 1) * 34, a * o.scrim, 470, 84 + (n - 1) * 34);
+  rich(text, CXX, y, { size, weight: 700, alpha: a, lh: 68 });
+}
+function bottomShade(molW, topA) {
+  const g = ctx.createLinearGradient(0, 1000, 0, H);
+  g.addColorStop(0, 'rgba(3,5,9,0)'); g.addColorStop(0.3, `rgba(3,5,9,${lerp(0.6, 0.75, molW)})`); g.addColorStop(0.62, `rgba(3,5,9,${lerp(0.86, 0.9, molW)})`); g.addColorStop(1, 'rgba(3,5,9,0.95)');
+  ctx.fillStyle = g; ctx.fillRect(0, 1000, W, H - 1000);
+  const g2 = ctx.createLinearGradient(0, 0, 0, 600);
+  g2.addColorStop(0, `rgba(3,5,9,${0.9 * topA + 0.1})`); g2.addColorStop(0.45, `rgba(3,5,9,${0.75 * topA})`); g2.addColorStop(1, 'rgba(3,5,9,0)');
+  ctx.fillStyle = g2; ctx.fillRect(0, 0, W, 600);
+}
+/** a label pinned to a projected 3-D point with a short leader. o.dark: dark leader with light outline (bright dentine) */
+function pin(p, text, dx, dy, o = {}) {
+  const a = o.alpha == null ? 1 : o.alpha; if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha *= a;
+  const ex = p.x + dx, ey = p.y + dy, L = Math.hypot(dx, dy), gap = o.gap || 22;
+  const sx = p.x + gap * dx / L, sy = p.y + gap * dy / L;
+  const stroke = (w, col) => { ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(ex, ey); ctx.stroke(); };
+  if (o.dark) {
+    stroke(5, 'rgba(235,245,255,0.55)'); stroke(3, o.line || 'rgba(8,11,16,0.9)');
+    for (const [x, y, r] of [[ex, ey, 5], [p.x, p.y, 7]]) {
+      ctx.fillStyle = 'rgba(235,245,255,0.6)'; ctx.beginPath(); ctx.arc(x, y, r + 1.5, 0, TAU); ctx.fill();
+      ctx.fillStyle = o.line || 'rgba(8,11,16,0.9)'; ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill();
+    }
+  } else {
+    stroke(2.5, o.line || 'rgba(235,245,255,0.7)');
+    ctx.fillStyle = o.line || 'rgba(235,245,255,0.85)'; ctx.beginPath(); ctx.arc(ex, ey, 4, 0, TAU); ctx.fill();
+  }
+  ctx.restore();
+  const pad = o.bg ? 30 : 14;
+  rich(text, ex + (dx >= 0 ? pad : -pad), ey + (o.size || 36) * 0.36, { size: o.size || 36, weight: o.weight || 650, align: dx >= 0 ? 'left' : 'right', alpha: a, color: o.color, bg: o.bg, shadow: !o.bg });
+}
+function legend(t, a) {
+  if (a <= 0) return;
+  const items = [['C', CPK.C, 'C'], ['H', CPK.H, 'H'], ['N', CPK.N, 'N'], ['O', CPK.O, 'O'], ['Ca', CPK.Ca, 'Ca^{2+}'], ['P', CPK.P, 'P']];
+  let x = 84; const y = 1500;
+  ctx.save(); ctx.globalAlpha *= a;
+  for (const [, hex, lab] of items) {
+    const c = '#' + hex.toString(16).padStart(6, '0');
+    const g = ctx.createRadialGradient(x + 11 - 5, y - 11 - 5, 1, x + 11, y - 11, 14);
+    g.addColorStop(0, '#ffffff'); g.addColorStop(0.35, c); g.addColorStop(1, Kit.rgba(Kit.mix(c, '#000000', 0.55)));
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x + 11, y - 11, 13, 0, TAU); ctx.fill();
+    const w = rich(lab, x + 32, y, { size: 30, weight: 600, align: 'left', color: UI.dim, blur: 8 });
+    x += 32 + w + 30;
+  }
+  ctx.restore();
+}
+function scaleBar(a, px, label, x1, y) {
+  if (a <= 0 || !isFinite(px)) return;
+  const x0 = x1 - px;
+  ctx.save(); ctx.globalAlpha *= a; ctx.strokeStyle = UI.dim; ctx.lineWidth = 3; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.moveTo(x0, y - 9); ctx.lineTo(x0, y + 9); ctx.moveTo(x1, y - 9); ctx.lineTo(x1, y + 9); ctx.stroke();
+  ctx.restore();
+  rich(label, (x0 + x1) / 2, y - 18, { size: 28, weight: 600, color: UI.dim, alpha: a, blur: 8 });
+}
+function headerSmall(text, a, sub, sub2, a2 = 0) {
+  if (a <= 0) return;
+  rich(text, 84, 312, { size: 40, weight: 700, align: 'left', alpha: a, color: UI.ink });
+  if (sub) rich(sub, 84, 360, { size: 30, weight: 500, align: 'left', alpha: a * 0.95, color: UI.dim });
+  if (sub2 && a2 > 0) rich(sub2, 84, 402, { size: 30, weight: 500, align: 'left', alpha: a2 * 0.95, color: UI.dim });
+}
+function bondCounter(t, a) {
+  if (a <= 0 || !MOLSTATE) return;
+  const order = [0, 1, 2, 3, 4, 5].sort((i, j) => MOLSTATE.formT[i] - MOLSTATE.formT[j]);   // chips in binding order
+  const R = 30, gap = 16, total = 6 * 2 * R + 5 * gap, x0 = CXX - total / 2 - 110, y = 1436;
+  ctx.save(); ctx.globalAlpha *= a;
+  order.forEach((b, i) => {
+    const isN = b < 2, col = isN ? UI.n : UI.o, lab = isN ? 'N' : 'O^{−}';
+    const v = MOLSTATE.vis[b]; const cx = x0 + R + i * (2 * R + gap);
+    ctx.lineWidth = 3; ctx.strokeStyle = Kit.rgba(col, 0.55 + 0.45 * v);
+    ctx.fillStyle = Kit.rgba(col, 0.12 + 0.78 * v);
+    ctx.beginPath(); ctx.arc(cx, y, R * (1 + 0.18 * env(t, MOLSTATE.formT[b] - 0.05, MOLSTATE.formT[b] + 0.4, 0.08, 0.3)), 0, TAU); ctx.fill(); ctx.stroke();
+    rich(lab, cx, y + 11, { size: 30, weight: 800, color: v > 0.5 ? '#0b0f16' : UI.ink, shadow: false });
+  });
+  const n = MOLSTATE.vis.filter((v) => v > 0.5).length;
+  const pop = 1 + 0.15 * Math.sin(Math.PI * seg(t, LOCK - 0.1, LOCK + 0.4));
+  const tx = x0 + total + 26;
+  ctx.translate(tx, y); ctx.scale(pop, pop);
+  rich(`= ${n} bond${n === 1 ? '' : 's'}`, 0, 12, { size: 36, weight: 700, align: 'left', color: n === 6 ? UI.ca : UI.ink });
+  ctx.restore();
+}
+/* ---------- timer dial for the dentine scenes ---------- */
+const TP95 = T.erode[0] + 0.05 + 0.768 * (T.erode[1] - 0.15 - T.erode[0]);   // time-lapse reaches ~10 min
+function dial(t, a) {
+  if (a <= 0) return;
+  const cx = 884, cy = 336, R = 66;
+  const p1 = seg(t, T.clock[0], T.clock[1]);                                   // 0..60 s
+  const p2 = ease.inOut(seg(t, T.erode[0] + 0.05, T.erode[1] - 0.1));         // 1 -> 10 min
+  const pN = ease.inOut(seg(t, T.naocl[0], T.naocl[0] + 0.35));               // then NaOCl
+  const secs = p2 > 0 ? 60 + p2 * 540 : p1 * 60;
+  const mm = Math.floor(secs / 60), ss = Math.floor(secs % 60);
+  const col = Kit.rgba(Kit.mix(Kit.mix(UI.ca, UI.warn, clamp(p2 * 3)), UI.organic, pN));
+  const sweet = env(t, T.clock[1] - 0.02, T.erode[0] + 0.05, 0.12, 0.2);     // 1-min sweet spot
+  ctx.save(); ctx.globalAlpha *= a;
+  ctx.fillStyle = 'rgba(8,12,18,0.78)'; ctx.beginPath(); ctx.arc(cx, cy, R + 14, 0, TAU); ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.14)'; ctx.lineWidth = 10; ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.stroke();
+  ctx.strokeStyle = col; ctx.lineCap = 'round';
+  if (sweet > 0) { ctx.shadowColor = 'rgba(63,230,184,0.9)'; ctx.shadowBlur = 24 * sweet; }
+  const frac = p2 > 0 ? (p2 >= 1 ? 1 : (secs / 60) % 1) : p1;
+  ctx.beginPath(); ctx.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + TAU * Math.max(0.001, frac)); ctx.stroke();
+  ctx.restore();
+  rich(`${mm}:${String(ss).padStart(2, '0')}`, cx, cy + 13, { size: 38, weight: 800, alpha: a, color: p2 > 0 ? col : UI.ink });
+  const ty = cy + R + 58, bg = 'rgba(8,11,16,0.85)';
+  const tag = (txt, color, aa, y = ty, sc = 1) => {
+    if (aa <= 0) return;
+    ctx.save(); ctx.translate(cx, y); ctx.scale(sc, sc);
+    rich(txt, 0, 0, { size: 32, weight: 700, alpha: a * aa, color, bg, shadow: false }); ctx.restore();
+  };
+  tag('EDTA rinse', UI.ca, env(t, T.smear[0] - 0.4, T.clock[1], 0.4, 0.15));
+  tag('1 min ✓', UI.ca, env(t, T.clock[1], T.erode[0] + 0.05, 0.15, 0.15), ty, 1 + 0.12 * Math.sin(Math.PI * seg(t, T.clock[1], T.clock[1] + 0.35)));
+  tag('time-lapse ▸▸', UI.warn, env(t, T.erode[0] + 0.05, TP95, 0.15, 0.15));
+  tag('10 min EDTA', UI.warn, env(t, TP95, T.card[0] + 0.2, 0.15, 0.3));
+  tag('then NaOCl', UI.organic, env(t, T.naocl[0], T.card[0] + 0.2, 0.25, 0.3), ty + 56);
+}
+/** NaOCl rinse: a soft pink wash sweeping over the wall */
+function naoclSweep(t) {
+  const a = env(t, T.naocl[0], T.naocl[1] + 0.25, 0.25, 0.5); if (a <= 0) return;
+  const yc = lerp(200, 1800, ease.inOut(seg(t, T.naocl[0], T.naocl[1])));
+  ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = a;
+  ctx.fillStyle = 'rgba(255,120,170,0.05)'; ctx.fillRect(0, 0, W, H);
+  const g = ctx.createLinearGradient(0, yc - 420, 0, yc + 420);
+  g.addColorStop(0, 'rgba(255,120,170,0)'); g.addColorStop(0.5, 'rgba(255,120,170,0.2)'); g.addColorStop(1, 'rgba(255,120,170,0)');
+  ctx.fillStyle = g; ctx.fillRect(0, yc - 420, W, 840);
+  ctx.restore();
+}
+/** "EDTA / binds as EDTA⁴⁻" plate at the top-right of the molecule's projected bounding box */
+function edtaLabel(a) {
+  if (a <= 0 || !MOLSTATE) return;
+  let maxX = -1e9, minY = 1e9;
+  for (let i = 1; i < NA; i++) { if (EL[i] === 'H') continue; const p = project(worldOf(MOLSTATE.P[i]), camM); maxX = Math.max(maxX, p.x); minY = Math.min(minY, p.y); }
+  ctx.font = `800 46px ${SANS}`;
+  const pw = Math.max(ctx.measureText('EDTA').width, richWidth('binds as EDTA^{4−}', 28, 600)) + 48, ph = 108;
+  const px = clamp(maxX + 30 - pw, 70, 1006 - pw), py = clamp(minY - 40 - ph, 440, 1300);
+  ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = 'rgba(8,12,18,0.8)'; ctx.shadowColor = 'rgba(0,0,0,0.35)'; ctx.shadowBlur = 14;
+  roundRect(px, py, pw, ph, 22); ctx.fill(); ctx.restore();
+  rich('EDTA', px + 24, py + 56, { size: 46, weight: 800, align: 'left', alpha: a, shadow: false });
+  rich('binds as EDTA^{4−}', px + 24, py + 92, { size: 28, weight: 600, align: 'left', alpha: a, color: UI.dim, shadow: false });
+}
+
+/* ============================== takeaway card ============================== */
+function card(t, a) {
+  if (a <= 0) return;
+  const c0 = T.card[0];
+  ctx.save(); ctx.globalAlpha = a * 0.38; ctx.fillStyle = '#03050a'; ctx.fillRect(0, 0, W, H); ctx.restore();
+  const x0 = 96, w = 848, h = 910, y0 = 420 + 26 * (1 - a), cx = x0 + w / 2;
+  ctx.save(); ctx.globalAlpha = a;
+  ctx.shadowColor = 'rgba(0,0,0,0.6)'; ctx.shadowBlur = 50; ctx.fillStyle = '#080c13'; roundRect(x0, y0, w, h, 40); ctx.fill();
+  ctx.shadowBlur = 0; roundRect(x0, y0, w, h, 40); ctx.clip();
+  ctx.globalAlpha = a * 0.55; ctx.filter = 'blur(12px)'; ctx.drawImage(glc, 0, 0); ctx.filter = 'none';   // frosted glass: the complex keeps turning behind
+  ctx.globalAlpha = a; ctx.fillStyle = 'rgba(9,13,20,0.5)'; ctx.fillRect(x0, y0, w, h);
+  ctx.restore();
+  ctx.save(); ctx.globalAlpha = a; ctx.strokeStyle = 'rgba(160,230,215,0.26)'; ctx.lineWidth = 2; roundRect(x0, y0, w, h, 40); ctx.stroke(); ctx.restore();
+  const k = (s0, s1) => a * ease.inOut(seg(t, c0 + s0, c0 + s1));
+  const a1 = k(0.15, 0.65), a2 = k(0.55, 1.05), a3 = k(0.95, 1.45);
+  rich('TAKEAWAY', cx, y0 + 84, { size: 30, weight: 700, color: UI.ca, ls: 6, alpha: a1, shadow: false });
+  const hl = '17% EDTA · ~1 min';
+  rich(hl, cx, y0 + 186, { size: fitSize(hl, 92, 740, 800), weight: 800, alpha: a1, shadow: false });
+  rich('<w>longer adds erosion risk</>', cx, y0 + 256, { size: 42, weight: 650, alpha: a1, shadow: false });
+  // numbered pills = the order of use
+  const pill = (y, col, num, text) => {
+    const px = x0 + 44, pw = w - 88;
+    ctx.save(); ctx.globalAlpha = a2; ctx.fillStyle = Kit.rgba(col, 0.13); ctx.strokeStyle = Kit.rgba(col, 0.6); ctx.lineWidth = 2.5;
+    roundRect(px, y - 48, pw, 92, 46); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = Kit.rgba(col, 0.9); ctx.beginPath(); ctx.arc(px + 48, y - 2, 27, 0, TAU); ctx.fill(); ctx.restore();
+    rich(num, px + 48, y + 9, { size: 30, weight: 800, color: '#0b0f16', alpha: a2, shadow: false });
+    rich(text, cx + 28, y + 14, { size: fitSize(text, 42, pw - 150, 700), weight: 700, alpha: a2, shadow: false });
+  };
+  pill(y0 + 372, UI.organic, '1', '<org>NaOCl</> → organic tissue');
+  pill(y0 + 484, UI.ca, '2', '<ca>EDTA</> → mineral (Ca^{2+})');
+  rich('Never mix them.', cx, y0 + 618, { size: 46, weight: 700, alpha: a3, shadow: false });
+  const fp = '≈1 min clears the smear layer in vitro (least apically);\na final NaOCl after EDTA adds erosion (Niu 2002; Qian 2011)';
+  rich(fp, cx, y0 + 690, { size: fitSize(fp, 25, 760, 500), weight: 500, color: UI.dim, alpha: a3, shadow: false, lh: 33 });
+  const cites = 'Calt & Serper, J Endod 2002 · Serper & Calt, J Endod 2002\nNiu et al., IEJ 2002 · Qian et al., J Endod 2011 · Zehnder, J Endod 2006\nGrawehr et al., IEJ 2003 · Hülsmann et al., IEJ 2003';
+  rich(cites, cx, y0 + 792, { size: fitSize(cites, 22, 760, 500), weight: 500, color: UI.faint, alpha: a3, shadow: false, lh: 30 });
+}
+
+/* ============================== frame ============================== */
+function blit(alpha) { if (alpha <= 0) return; ctx.save(); ctx.globalAlpha = alpha; ctx.drawImage(glc, 0, 0); ctx.restore(); }
+function render(t) {
+  t = clamp(t, 0, T.dur - 1e-4);
+  background(t);
+  const x0 = T.xfade[0], c0 = T.card[0];
+  const intro = ease.inOut(seg(t, 0, 0.25));                                     // loop seam: molecule fades in
+  const endA = ease.inOut(seg(t, T.dur - 0.5, T.dur - 0.05));                    // ... and the card fades back to the title
+  const zx = ease.inOut(seg(t, x0, x0 + 0.8));                                   // overlapping cross-fade (never black)
+  const mA = intro * (1 - zx);
+  const cIn = ease.inOut(seg(t, c0, c0 + 0.6));
+  const dA = zx * (1 - cIn);
+  const kA = cIn * (1 - endA);
+  if (mA > 0) {
+    updateMol(t);
+    renderer.toneMappingExposure = 1.08;
+    renderer.render(sceneM, camM); blit(mA);
+  }
+  if (dA > 0) {
+    updateDent(t);
+    renderer.toneMappingExposure = 0.43;
+    renderer.render(sceneD, camD); blit(dA);
+  }
+  if (kA > 0) {
+    updateMolCard(t);
+    renderer.toneMappingExposure = 1.08;
+    renderer.render(sceneM, camM); blit(kA);
+  }
+  naoclSweep(t);
+  bottomShade(1 - dA, lerp(0.5, 0.85, dA));
+  overlays(t, mA, dA, endA);
+  card(t, kA);
+  // zoom tag across the cut
+  const zA = env(t, x0 + 0.3, T.xfade[1] + 1.4, 0.2, 0.25);
+  if (zA > 0) rich('×10,000 zoom-out', W / 2, 640, { size: 40, weight: 700, color: UI.ink, alpha: zA, bg: 'rgba(8,12,18,0.8)', shadow: false, ls: 1 });
+  Kit.handle(ctx, W / 2, 1563, { align: 'center', color: '#c9d6e6', alpha: 0.6, font: `500 26px ${SANS}` });
+}
+function overlays(t, mA, dA, endA) {
+  // ---------- hook title (re-appears at the very end, so the loop is seamless) ----------
+  const hA = Math.max(env(t, -1, T.hook[1] + 0.1, 0.01, 0.3), endA);
+  if (hA > 0) {
+    const r = t > T.hook[1] + 1 ? 14 : 14 * (1 - ease.out(seg(t, 0, 0.7)));
+    rich('The calcium claw', W / 2, 330 + r, { size: 100, weight: 800, alpha: hA, blur: 24 });
+    rich('How <ca>EDTA</> opens tubules', W / 2, 410 + r * 0.6, { size: 50, weight: 600, color: UI.dim, alpha: hA });
+  }
+  // ---------- molecular scenes ----------
+  if (mA > 0 && MOLSTATE) {
+    edtaLabel(env(t, 0.5, T.hook[1] + 0.15, 0.4, 0.35) * mA);
+    const hdr = (env(t, T.hook[1] + 0.1, T.hold[0] - 0.05, 0.35, 0.25) + env(t, T.hold[1] + 0.15, x0Of() + 0.25, 0.25, 0.3)) * mA;
+    headerSmall('Chelation', hdr, 'schematic 3-D model · atom sizes not to scale', 'toy apatite lattice', env(t, T.hook[1] + 0.1, T.dock[1], 0.35, 0.3) * mA);
+    // climax hold: the hook title returns (poster frame)
+    const bA = env(t, T.hold[0], T.hold[1] + 0.15, 0.25, 0.25) * mA;
+    if (bA > 0) {
+      rich('The calcium claw', W / 2, 330, { size: 84, weight: 800, alpha: bA, blur: 24 });
+      rich('schematic 3-D model · atom sizes not to scale', W / 2, 384, { size: 28, weight: 500, color: UI.dim, alpha: bA });
+    }
+    legend(t, env(t, 0.6, T.dock[0], 0.5, 0.4) * mA);
+    // scale bar at the Ca depth (top-right, under the header line)
+    const cw = MOLSTATE.caW.clone(); const right = new THREE.Vector3().setFromMatrixColumn(camM.matrixWorld, 0);
+    const pa = project(cw, camM), pb = project(cw.clone().addScaledVector(right, 1), camM);
+    const ppa = Math.hypot(pb.x - pa.x, pb.y - pa.y), Lb = [10, 5, 2, 1].find((L) => L * ppa <= 220) || 1;
+    scaleBar(hdr, Lb * ppa, `${Lb} Å`, 940, 300);
+    // target Ca: ring + pin
+    const ca = project(MOLSTATE.caW, camM);
+    const ringA = env(t, T.target[0] + 0.85, T.dock[1] + 0.1, 0.25, 0.3) * mA;
+    if (ringA > 0) {
+      const edge = project(MOLSTATE.caW.clone().addScaledVector(right, RAD.Ca), camM);
+      const rr = Math.hypot(edge.x - ca.x, edge.y - ca.y) * 1.75 + 6 * Math.sin(t * 5.2);
+      ctx.save(); ctx.globalAlpha = ringA; ctx.strokeStyle = UI.ca; ctx.lineWidth = 4; ctx.setLineDash([12, 9]); ctx.lineDashOffset = -t * 40;
+      ctx.shadowColor = 'rgba(63,230,184,0.8)'; ctx.shadowBlur = 16;
+      ctx.beginPath(); ctx.arc(ca.x, ca.y, rr, 0, TAU); ctx.stroke(); ctx.restore();
+    }
+    pin(ca, '<ca>Ca^{2+}</>', 190, -40, { alpha: env(t, T.target[0] + 0.85, T.dock[0] + 0.25, FADE, FADE) * mA, size: 44, weight: 800, gap: 62, bg: 'rgba(8,12,18,0.8)' });
+    bondCounter(t, env(t, T.claw[0] - 0.15, T.hold[1], 0.3, 0.3) * mA);
+    rich('binding order schematic; real complex also binds water', CXX, 1494, { size: 24, weight: 500, color: UI.dim, alpha: env(t, T.claw[0] - 0.4, T.hold[1], 0.3, 0.3) * mA });
+    const vA = env(t, T.drift[0] + 0.4, x0Of() + 0.15, FADE, FADE) * mA;
+    if (vA > 0) pin(project(SITE, camM), '<ca>Ca^{2+}</> removed', 120, -110, { alpha: vA, size: 36, weight: 700, gap: 26, bg: 'rgba(8,12,18,0.8)' });
+  }
+  const sc = mA;   // caption scrims only over the saturated molecular scenes
+  caption(t, T.capA, 'Target: apatite <ca>Ca^{2+}</>', { scrim: sc });
+  caption(t, T.capB, 'Six donor atoms grip one <ca>Ca^{2+}</>', { scrim: sc });
+  caption(t, T.capC, '1:1 complex carries <ca>Ca^{2+}</> away', { scrim: sc });
+  // ---------- dentine scenes ----------
+  if (dA > 0) {
+    const ca2 = dA;
+    headerSmall('Root canal wall', env(t, T.xfade[1] - 0.3, T.card[0] + 0.1, 0.4, 0.3) * ca2, 'after NaOCl · 17% EDTA, neutral pH · schematic');
+    dial(t, env(t, T.smear[0] - 0.4, T.card[0] + 0.1, 0.4, 0.3) * ca2);
+    scaleBar(env(t, T.xfade[1] - 0.2, T.card[0] + 0.05, 0.4, 0.3) * ca2, dentScalePx(), '5 µm', 940, 1532);
+    const sA = env(t, T.xfade[1] - 0.2, T.smear[0] + 2.4, FADE, FADE) * ca2;
+    if (sA > 0) pin(project(ANCH.smear, camD), 'smear layer ≈1–2 µm', 60, -170, { alpha: sA, size: 38, weight: 700, bg: 'rgba(8,11,16,0.84)', dark: true });
+    const oA = env(t, T.smear[0] + 2.4, T.erode[0] + 1.1, FADE, FADE) * ca2;
+    if (oA > 0) pin(project(ANCH.tubA, camD), 'open tubule', 150, -170, { alpha: oA, size: 40, weight: 700, gap: 34, bg: 'rgba(8,11,16,0.84)', dark: true });
+    const pA = env(t, T.naocl[0], T.card[0] + 0.15, FADE, FADE) * ca2;
+    if (pA > 0) pin(project(ANCH.tubB, camD), '<w>peri- & intertubular erosion</>', 40, -220, { alpha: pA, size: 36, weight: 700, gap: 50, bg: 'rgba(8,11,16,0.86)', dark: true, line: 'rgba(120,64,10,0.95)' });
+  }
+  caption(t, T.capD, 'Smear layer removed → tubules open');
+  caption(t, T.capE, '<w>10 min EDTA, then NaOCl:</>\ndentine erodes', { y: 1300 });
+  rich('Mader 1984 · in vitro: least effective in the apical third (Teixeira 2005)', CXX, 1432, { size: 24, weight: 500, color: UI.dim, alpha: env(t, T.capD[0], T.capD[1], FADE, FADE) });
+  rich('17% EDTA 10 min → 5% NaOCl (Calt & Serper 2002)\nerosion mainly when NaOCl follows EDTA (Niu 2002; Qian 2011)', CXX, 1442, { size: 24, weight: 500, color: UI.dim, lh: 30, alpha: env(t, T.capE[0], T.capE[1], FADE, FADE) });
+}
+const x0Of = () => T.xfade[0];
+/* label anchors chosen once, by screen position at a reference time */
+const ANCH = (() => {
+  const cam = camD.clone();
+  const setCam = (tRef) => { const c = camDState(tRef); cam.position.copy(sph(c.tgt, c.dist, c.el, c.az)); cam.lookAt(c.tgt); cam.updateMatrixWorld(true); };
+  const nearestTub = (sx, sy, tRef) => { setCam(tRef); let best = null, bd = 1e9; for (const [x, z] of tubules) { const p = project(new THREE.Vector3(x, 0, z), cam); const d = Math.hypot(p.x - sx, p.y - sy); if (d < bd) { bd = d; best = new THREE.Vector3(x, 0, z); } } return best; };
+  const onPlane = (sx, sy, y, tRef) => { setCam(tRef); const ray = new THREE.Raycaster(); ray.setFromCamera(new THREE.Vector2(sx / W * 2 - 1, 1 - sy / H * 2), cam); const pt = new THREE.Vector3(); ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 1, 0), -y), pt); return pt; };
+  const lastToClear = (tRef) => { let best = null, bt = -1; for (let sy = 1020; sy <= 1220; sy += 20) for (let sx = 170; sx <= 470; sx += 20) { const pt = onPlane(sx, sy, 1.0, tRef); const d = dissolveT(pt.x, pt.z); if (d > bt) { bt = d; best = pt; } } return best; };
+  return { smear: lastToClear(13.2), tubA: nearestTub(440, 970, 15.4), tubB: nearestTub(330, 1030, 18.9) };
+})();
+function dentScalePx() {
+  const a = new THREE.Vector3(0, 0, -6), b = a.clone().add(new THREE.Vector3().setFromMatrixColumn(camD.matrixWorld, 0).multiplyScalar(5));
+  const pa = project(a, camD), pb = project(b, camD); return Math.hypot(pb.x - pa.x, pb.y - pa.y);
+}
+
+window.REEL = {
+  title: 'EDTA — the calcium claw',
+  duration: T.dur,
+  poster: 8.85,
+  canvas: out,
+  fonts: ['800 100px Inter', '700 54px Inter', '600 46px Inter', '500 30px Inter'],
+  render,
+};
+Kit.boot(window.REEL);
+</script>
+</body>
+</html>
