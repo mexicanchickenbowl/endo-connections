@@ -8,7 +8,7 @@
   "claims": [
     {
       "claim": "Inflamed pulp frees arachidonic acid (PLA₂ cuts it from membrane phospholipids)",
-      "source": "Funk CD, Science 2001;294:1871-5 (PMID 11729303)"
+      "source": "Funk CD, Science 2001;294:1871-5 (PMID 11729303); pulp anchor (PGE₂ ↑ in inflamed pulp): Nakanishi T et al., J Endod 1995;21:131-6 (PMID 7561655)"
     },
     {
       "claim": "COX-1/COX-2 make PGH₂ (AA → PGG₂ → PGH₂); PGE synthase converts it to PGE₂, which leaves the cell",
@@ -24,11 +24,11 @@
     },
     {
       "claim": "Ibuprofen reversibly (competitively) plugs the COX channel; one AA can slip through when it unbinds",
-      "source": "Selinsky BS et al., Biochemistry 2001;40:5172-80 (PMID 11318639)"
+      "source": "Selinsky BS et al., Biochemistry 2001;40:5172-80 (PMID 11318639); Orlando BJ et al., J Struct Biol 2015;189:62-6 (PMID 25463020)"
     },
     {
       "claim": "Less new PGE₂ → nerve calms, but only partly (threshold recovers partway)",
-      "source": "Nguyen V et al., J Endod 2020;46:1210-6 (PMID 32565333)"
+      "source": "Kawabata A, Biol Pharm Bull 2011;34:1170-3 (PMID 21804201); Nguyen V et al., J Endod 2020;46:1210-6 (PMID 32565333); Bowles WR et al., J Endod 2003;29:265-7 (PMID 12701777)"
     },
     {
       "claim": "Other mediators (e.g. substance P) still act",
@@ -36,16 +36,16 @@
     },
     {
       "claim": "Ibuprofen cuts NEW prostaglandins; it can't erase the ones already made",
-      "source": "Vane JR, Nat New Biol 1971;231:232-5 (PMID 5284360); Nguyen V et al., J Endod 2020;46:1210-6 (PMID 32565333)"
+      "source": "Vane JR, Nat New Biol 1971;231:232-5 (PMID 5284360); Smith WL et al., Annu Rev Biochem 2000;69:145-82 (PMID 10966456); Selinsky BS et al., Biochemistry 2001;40:5172-80 (PMID 11318639); Nguyen V et al., J Endod 2020;46:1210-6 (PMID 32565333)"
     },
     {
       "claim": "One rationale for dosing before treatment: pre-op NSAIDs aid IANB success; post-op pain benefit unclear",
-      "source": "Shirvani A et al., Clin Oral Investig 2017;21:43-52 (PMID 27837343); de Geus JL et al., Eur Endod J 2018;3:123-33 (PMID 32161868)"
+      "source": "Shirvani A et al., Clin Oral Investig 2017;21:43-52 (PMID 27837343); Nagendrababu V et al., J Endod 2018;44:914-922.e2 (PMID 29709297); de Geus JL et al., Eur Endod J 2018;3:123-33 (PMID 32161868)"
     },
     {
       "claim": "PGE₂ counter, firing meter, threshold values and timing",
       "source": "Toy model / schematic: toy counts, seeded stimulus bumps, time and size not to scale (labelled on screen)"
     }
   ],
-  "caption": "What ibuprofen can't undo.\n\nIn inflamed pulp, COX (COX-2 up) turns arachidonic acid into PGE₂, which lowers the nerve's firing threshold.\nIbuprofen reversibly plugs the COX channel: less NEW PGE₂, not zero.\nIt can't erase what's already made, and other mediators (e.g. substance P) still act.\nOne rationale for dosing before treatment: pre-op NSAIDs aid IANB success in irreversible pulpitis; post-op pain benefit is unclear.\n\nRefs: Vane 1971, Nat New Biol; Selinsky 2001, Biochemistry; Shirvani 2017, Clin Oral Investig; Nguyen 2020, J Endod\nAnimation is schematic (toy counts, time compressed).\n\n#endodontics #endo #dentistry #pharmacology #ibuprofen #NSAIDs #pulpitis #dentalpain"
+  "caption": "What ibuprofen can't undo.\n\nIn inflamed pulp, COX (COX-2 up) turns arachidonic acid into PGE₂, which lowers the nerve's firing threshold.\nIbuprofen reversibly plugs the COX channel: less NEW PGE₂, not zero.\nIt can't erase what's already made, and other mediators (e.g. substance P) still act.\nOne rationale for dosing before treatment: pre-op NSAIDs aid IANB success in irreversible pulpitis; post-op pain benefit is unclear.\n\nRefs: Vane 1971, Nat New Biol; Selinsky 2001, Biochemistry; Nakanishi 2001, J Endod; Kawabata 2011, Biol Pharm Bull; Bowles 2003, J Endod; Shirvani 2017, Clin Oral Investig; Nagendrababu 2018, J Endod; de Geus 2018, Eur Endod J; Nguyen 2020, J Endod\nAnimation is schematic (toy counts, time compressed).\n\n#endodontics #endo #dentistry #pharmacology #ibuprofen #NSAIDs #pulpitis #dentalpain"
 }

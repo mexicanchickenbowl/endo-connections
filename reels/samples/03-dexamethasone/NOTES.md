@@ -78,7 +78,7 @@ All were retrieved via PubMed and checked against abstracts. Quotes from Cain & 
    - Cain & Cidlowski 2017 describe "tethering" to NF-κB and AP-1.
    - Barnes PJ. Br J Pharmacol 2006;148:245-54. PMID 16604091, doi:10.1038/sj.bjp.0706736. GR suppresses multiple inflammatory genes driven by NF-κB/AP-1.
    - The genes shown are documented dex/GR targets:
-     - **COX-2:** Masferrer JL, et al. J Pharmacol Exp Ther 1994;270:1340-4 (PMID 7932188), and Masferrer et al. PNAS 1994;91:3228-32 (PMID 8159730, doi:10.1073/pnas.91.8.3228). Dex suppresses COX-2 but not COX-1.
+     - **COX-2:** Masferrer JL, et al. J Pharmacol Exp Ther 1994;270:1340-4 (PMID 7932188) is the direct evidence: in mouse peritoneal macrophages, dexamethasone suppressed COX-2 mRNA and protein, while "COX-1 message and COX-1 protein levels were unaffected". Masferrer et al. PNAS 1994;91:3228-32 (PMID 8159730, doi:10.1073/pnas.91.8.3228) adds that dex inhibited COX-2 expression and inflammatory PG synthesis in the rat air pouch but not gastric (constitutive) PG synthesis.
      - **TNF, IL-1β, COX-2:** Abraham et al. 2006.
      - **IL-6:** Ray & Prefontaine 1994.
 6. **"Mediator output falls / over hours, not minutes"** (genomic effects lag by hours):
@@ -92,7 +92,8 @@ All were retrieved via PubMed and checked against abstracts. Quotes from Cain & 
    - Worded *"partly"* because annexin A1 is only one route; MKP-1 and other routes also contribute.
 8. **"STEROID: less COX-2 made" / "NSAID: blocks COX activity"; "Acts upstream of NSAIDs"**:
    - COX-2 expression is suppressed by dex: Masferrer 1994 (above). Cain & Cidlowski 2017: "Glucocorticoids further curb prostaglandin generation by inhibiting cyclooxygenase 2".
-   - NSAIDs inhibit COX enzyme activity: Vane JR. *Inhibition of prostaglandin synthesis as a mechanism of action for aspirin-like drugs.* Nat New Biol 1971;231:232-5. PMID 5284360.
+   - NSAIDs inhibit COX enzyme activity: Vane JR. *Inhibition of prostaglandin synthesis as a mechanism of action for aspirin-like drugs.* Nat New Biol 1971;231:232-5. PMID 5284360, doi:10.1038/newbio231232a0. Vane 1971 predates the COX-1/COX-2 distinction (COX-2 was identified in the early 1990s), so it supports only "NSAIDs block prostaglandin synthesis".
+   - The on-screen "blocks COX-1 & COX-2" comes from Masferrer et al. PNAS 1994 (PMID 8159730), which used indomethacin as "a nonselective COX-1/COX-2 inhibitor". It describes conventional non-selective NSAIDs (ibuprofen, naproxen, indomethacin). COX-2-selective coxibs are the exception.
    - "Upstream" means upstream *on this pathway* (PLA₂ step and COX-2 expression vs COX activity). It is not a claim of clinical superiority.
 9. **"A gene-level brake on inflammation"** summarises claims 4–6 (Barnes 2006; Cain & Cidlowski 2017).
 10. **"In endodontics: systemic corticosteroids reduced post-op pain at 6–24 h in a meta-analysis of 29 RCTs · moderate-certainty evidence"**:
@@ -100,8 +101,8 @@ All were retrieved via PubMed and checked against abstracts. Quotes from Cain & 
     - Their findings: 29 trials, 2303 participants; less likely to report pain and lower intensity at 6, 12 and 24 h. Conclusion: "Moderate certainty evidence indicates that the use of systemic corticosteroids likely results in a moderate to large reduction in postoperative endodontic pain".
     - Supporting:
       - Shamszadeh S, et al. J Endod 2018;44:1057-65. PMID 29709296, doi:10.1016/j.joen.2018.03.010. 18 RCTs.
-      - Nath R, et al. J Dent Anesth Pain Med 2018;18:205-21. PMID 30186968, doi:10.17245/jdapm.2018.18.4.205. Effect clear at 4–8 h, not significant at 24 h; low/moderate quality.
-    - Nuance kept off screen: Zanjir M, et al. J Endod 2020;46:1387-402 (PMID 32668310, doi:10.1016/j.joen.2020.07.002) found corticosteroids given *after* treatment did not significantly reduce pain in their network meta-analysis. Most positive trials gave the steroid before or during treatment. The on-screen line therefore states only the pooled finding and its certainty, and gives no dosing advice.
+      - Nath R, et al. J Dent Anesth Pain Med 2018;18:205-21. PMID 30186968, doi:10.17245/jdapm.2018.18.4.205. 14 RCTs of corticosteroid *premedication*. VAS pain was 21/100 points lower at 4–6 h; the 24 h VAS difference was not significant (P = 0.116), although patients were still modestly more likely to have no/mild pain at 24 h (P = 0.013). Evidence low/moderate quality. *(Wording corrected in the citation audit.)*
+    - Zanjir M, et al. J Endod 2020;46:1387-402 (PMID 32668310, doi:10.1016/j.joen.2020.07.002): in their network meta-analysis of medications given *after* nonsurgical treatment (11 trials), corticosteroids did not significantly reduce pain vs placebo. The trials pooled by Nath 2018 gave the steroid *before* treatment, so dosing timing may explain part of the difference. That is an inference, not a tested comparison. This caveat is now shown on screen as fine print (see Review changes, item 7). The evidence line states only the pooled finding and its certainty, and gives no dosing advice.
 
 ## What is schematic / exaggerated
 - **Sizes are not to scale.** Molecules are huge relative to the cell. GR complexes shrink as they pass a pore so the dimer fits the enlarged view. Pores are drawn as simple cream rings.
@@ -149,6 +150,8 @@ All 17 must/should issues were applied, plus every nit. New timeline: **DUR 29.5
    - Fine print 5.5–12.3 s (extended in Final QA): "Newer model: HSP90 escorts GR to the nuclear pore (Echeverría 2009)".
    - Sources:
      - Echeverría PC et al. Mol Cell Biol 2009;29:4788-97, PMID 19581287, doi:10.1128/MCB.00649-09. The hsp90 heterocomplex interacts with Nup62/importin β, and hsp90-cross-linked GR still translocates, "suggesting that GR could pass through the pore in its untransformed state".
+       - *Audit note:* this supports the on-screen words "escorts GR to the nuclear pore". The animation releases HSP90 at the pore mouth, which is a schematic simplification: these data suggest the complex may cross the pore intact, with the chaperones released inside the nucleus.
+     - Pratt & Toft 1997 (PMID 9183567) still supports "binds and activates GR": hsp90 keeps GR able to bind hormone, and hormone binding converts GR to its DNA-binding state. Its abstract describes the *classic* dissociation model, so it is not cited for the escort.
      - Vandevyver S et al. Traffic 2012;13:364-74, PMID 21951602, doi:10.1111/j.1600-0854.2011.01288.x. "Originally, it was believed that nuclear import of GR is initiated by dissociation of the chaperone complex in the cytoplasm. However, several studies show that the chaperone machinery is required".
      - Cain & Cidlowski 2017, PMID 28192415.
 3. **MKP-1 linked to the repressed genes** (should).
@@ -256,3 +259,34 @@ All 17 must/should issues were applied, plus every nit. New timeline: **DUR 29.5
   - The default line ends at 18.9 s. From then on a caveat, or the panel's own "(simplified)" caption and the sources line, covers it.
   - The HSP90 caveat now runs to 12.3 s, matching the end of caption ③, so the default no longer flashes in the 11.2–12.4 s gap.
 - Video re-rendered once after the fix and checked with ffprobe.
+
+## Citation audit (2026-11-22)
+Every literature citation was checked on PubMed: the 6 on screen, the 13 in `meta.json` (claims and the caption's Refs line) and all 26 distinct papers in this file. For each, the first author, year, journal, volume/pages and PMID were confirmed to belong to the same paper, and the abstract was read against the claim it supports. The quotes from Cain & Cidlowski 2017 were checked word for word against the PMC full text (PMC9761406). No hallucinated, garbled or textbook references were found.
+
+**On screen: all correct, so the reel source, stills and video are unchanged.**
+- Echeverría 2009 (Mol Cell Biol, PMID 19581287): "Newer model: HSP90 escorts GR to the nuclear pore".
+- Cain & Cidlowski, Nat Rev Immunol 2017 (PMID 28192415); Barnes, Br J Pharmacol 2006 (PMID 16604091); Abraham, J Exp Med 2006 (PMID 16880258): the sources line.
+- Alajlan et al., J Endod 2024 (PMID 38490301): 29 RCTs, 2303 participants, oral or locally injected steroids, less pain at 6, 12 and 24 h, moderate certainty.
+- Zanjir et al., J Endod 2020 (PMID 32668310): post-treatment corticosteroids did not significantly reduce pain vs placebo.
+
+**Problems found and fixed**
+1. `meta.json`, HSP90 claim: Pratt & Toft 1997 was cited for "HSP90 escorts GR to the nuclear pore (newer model)", but its abstract describes the opposite, classic model, in which hormone binding releases hsp90.
+   - It is now marked as supporting only binding and activation.
+   - The escort is attributed to Echeverría 2009 plus Vandevyver et al., Traffic 2012 (PMID 21951602).
+2. `meta.json`, transrepression claim: the AP-1 half of "Tethering NF-κB/AP-1" had no supporting source. Ray & Prefontaine covers NF-κB p65 only, and Abraham covers MKP-1.
+   - Added Scheinman et al., Mol Cell Biol 1995 (PMID 7823959): the GR domain needed for NF-κB inhibition is also needed for AP-1 repression.
+   - Added Cain & Cidlowski 2017: tethering to NF-κB and AP-1, GILZ, and tristetraprolin mRNA decay. This also covers the step-5 fine print.
+3. `meta.json`, Fig. 3 COX claim: "COX-1 unaffected" was supported only indirectly by Masferrer, PNAS 1994 (gastric PG synthesis spared). Added the direct source, Masferrer et al., J Pharmacol Exp Ther 1994;270:1340-4 (PMID 7932188), in which COX-1 mRNA and protein were unaffected by dex.
+4. `meta.json` and the NOTES Fig. 3 item: Vane 1971 predates the COX-1/COX-2 distinction, so it cannot support "blocks COX-1 & COX-2" on its own.
+   - Each source's role is now stated. Vane supports "NSAIDs block PG synthesis", and Masferrer, PNAS 1994 supports "non-selective COX-1/COX-2" (indomethacin).
+   - Added a note that coxibs are the COX-2-selective exception.
+5. `meta.json` did not list Barnes 2006, although it appears in the on-screen sources line. Added a "Takeaway" claim entry with Cain 2017, Barnes 2006 and Abraham 2006.
+6. NOTES, Nath 2018: the summary said "not significant at 24 h". That was only half right: the VAS difference was not significant (P = 0.116), but no/mild pain was still significantly more likely at 24 h (P = 0.013). Corrected, and noted that these were premedication trials.
+7. NOTES, Zanjir item:
+   - The unsourced generalisation "Most positive trials gave the steroid before or during treatment" is now worded as an inference and tied to Nath 2018's premedication trials.
+   - The stale "kept off screen" was corrected: the Zanjir caveat has been on screen since pass 4.
+8. NOTES, HSP90: the animation releases HSP90 at the pore mouth, but Echeverría 2009 suggests the complex may cross the pore intact.
+   - The on-screen words ("escorts GR to the nuclear pore") are accurate, so the reel is unchanged.
+   - The release point is recorded above as a schematic simplification.
+
+`meta.json` is still valid JSON. The caption's Refs line (Cain 2017, Nat Rev Immunol · Alajlan 2024, J Endod · Zanjir 2020, J Endod) was verified and left unchanged. No re-render was needed because no on-screen text changed.

@@ -138,3 +138,16 @@ Design
 - Render: `reels/out/16-la-inflamed-tissue.mp4`. ffprobe: 30.000 s, H.264 1080×1920 @ 30 fps (900 frames) plus a
   silent AAC track, 12.0 MB; no console errors. Poster `reels/out/16-la-inflamed-tissue.jpg` (t = 1.9 s). Frames decoded
   from the MP4 at 2.65 / 9.75 / 14.0 / 18.8 / 27.5 s match the stills.
+
+## Final QA (fresh-eyes pass)
+- Stills at 38 times (`_stills/final-qa`, `_stills/final-qa-b`: hook 0–1.9 s, every transition, the end hold, 29.95 s
+  loop frame) with `--safe`. No clipped, overlapping or tofu text, no NaN. Must-read text stays inside x 64–1016 /
+  y 230–1580, and stops at x ≤ 960 below y 1100. Only decoration (pan rim, lipid row, ruler dot) reaches the button
+  column. Hook readable by ~0.4 s. The takeaway is held ~2.9 s, and the 0.25 s fade loops cleanly into the black opening.
+- Science: re-checked on PubMed the numbers behind every on-screen claim: Fowler 2016 (28% / 25%, n = 375), Roy &
+  Narahashi 1992 (Kd 50 vs 200 µM), Nekoofar 2009 (6.0–7.3, mean 6.68), Matthews 2009 (58%), Nusstein 1998 (88%),
+  Sanchez 1987, Punnia-Moorthy 1987/88, Modaresi 2008, Wallace 1985, Renton 2005, Wells 2007, Warren 2008, Byers 1990,
+  Rodd & Boissonade 2001, Pulikkotil 2018, Drum 2017 and Parirokh & Abbott 2022. All match. No overstatement found.
+- MP4 unchanged: ffprobe 30.000 s (= REEL.duration), 900 frames. It was rendered after the last source edit, and
+  frames decoded at 11.2 / 21.4 / 28.0 s match the stills. Poster (1.9 s hook) reads fully inside the 3:4 crop.
+- No reel changes were needed. Added `meta.json` (gallery metadata, claims in on-screen order, caption).

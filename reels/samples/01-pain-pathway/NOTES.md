@@ -75,6 +75,7 @@ On-screen source block (final card, 22 px, two lines, kept clear of the Reels bu
 - v1: first build. Fixed tag/pill collisions (pill moved above the cards), replaced the boxy S1 highlight with a gyrus-shaped glow, rebuilt the convergence inset (clipped labels), added the convergence line to the takeaway, retimed captions/tags to satisfy `readSecs`, switched the δ fallback to Inter, preloaded all weights (fixes a fallback serif on first use), turned the hook preview into a cyan-vs-magenta teaser, set poster = hook frame, bumped HUD/card labels to 26 px.
 - v2: independent science + design review applied (see below).
 - Final QA: IAN tag shortened to "inf. alveolar n. (V3)" (Aδ racer pill hid "(V3)" at 5.8–6.0 s); PMIDs re-verified; video re-rendered; meta.json added (see "Final QA" below).
+- Citation audit: every paper cited on screen, in meta.json and in these notes checked against PubMed; on-screen citations unchanged, meta.json caption/sources corrected (see "Citation audit" below).
 
 ## Review changes (v2)
 **Science**
@@ -119,4 +120,18 @@ On-screen source block (final card, 22 px, two lines, kept clear of the Reels bu
 - Re-checked all PMIDs cited on screen against PubMed (Nair 1995, Närhi 1992/1994, Jyväsjärvi 1987, Mengel 1993, Sessle 1986, Ploner 2002, Basbaum 2009): titles, years and the quoted findings match.
 - Video re-rendered; ffprobe duration 29.6 s = REEL.duration. Poster kept at t = 2.2 s (hook + full route teaser, all inside the 3:4 grid crop).
 - Added `meta.json` (gallery metadata, claims in on-screen order, ready-to-paste caption).
+
+## Citation audit
+**Scope:** on-screen source lines (`reel.js`: "Jyväsjärvi 1987 · Mengel 1993", "Närhi 1994", the two-line final source block), every `claims[].source` and the caption Refs line in `meta.json`, and every reference in this file.
+
+**Checked against PubMed:** for each of the 20 PMIDs, the PubMed record's first author, year, journal, volume and pages, plus the abstract against the claim the paper is attached to. **All 20 match the paper they are cited as:** 3443945 Jyväsjärvi & Kniffki, J Physiol 1987 · 8680980 Nair, OOOOE 1995 · 1508908 Närhi et al., Proc Finn Dent Soc 1992;88 S1:507-16 · 1508870 Närhi et al., Proc Finn Dent Soc 1992;88 S1:15-22 · 7702462 Närhi et al., Arch Oral Biol 1994 · 10759425 Byers & Närhi, Crit Rev Oral Biol Med 1999 · 10682901 Sessle, Crit Rev Oral Biol Med 2000 · 3797017 Sessle et al., Pain 1986 · 12209003 Ploner et al., PNAS 2002 · 8309707 Mengel et al., Pain 1993 · 19837031 Basbaum et al., Cell 2009 · 11199715 Bender, J Endod 2000 · 6666619 Närhi & Haegerstam, Acta Physiol Scand 1983 · 12406376 Michaelson & Holland, Int Endod J 2002 · 6301627 Cadden et al., Brain Res 1983 · 2282488 Dong et al., Brain Res 1990 · 2609250 Matthews et al., Synapse 1989 · 12237184 Chattipakorn et al., Pain 2002 (ferrets) · 16930568 Park et al., Brain Res 2006 (rats) · 9161228 Falace et al., J Orofac Pain 1996. The Basbaum 2009 full text (PMC2852643) was also read. It states that Aδ fibers mediate "well-localized 'first'" pain and C fibers "poorly localized 'second'" pain, and that somatic–visceral convergence onto dorsal-horn WDR neurons "likely contributes to the phenomenon of referred pain". That supports the general principle, while Sessle 1986 supplies the caudalis/tooth-pulp evidence. Kandel's *Principles of Neural Science* is cited only as a textbook (fiber-class speed ranges), never as a paper.
+
+**On screen:** no errors. Every author/year shown matches a verified paper that supports the claim beside it. "Närhi 1992" in the final block covers both 1992 Proc Finn Dent Soc papers (PMIDs 1508908 and 1508870). Stills at t = 17.2 s and 27.5 s (`_stills/audit`) confirm the source lines render correctly ("ä" glyphs fine, nothing clipped). The reel was not changed, so the video was not re-rendered.
+
+**Fixed in meta.json:**
+1. Caption said the real-teeth lag is "mostly heat reaching the pulp". Both cited studies (Jyväsjärvi 1987; Mengel 1993) used **cold** stimuli, and the on-screen line and claim say "cold". Caption now reads "mostly the time for cold to reach the pulp".
+2. The caption Refs line left out Närhi, although the caption makes two Närhi-sourced statements ("fire only once the stimulus reaches the pulp", "inflammation sensitizes A fibers too"). Added "Närhi 1994, Arch Oral Biol".
+3. Claim 1 ("~5–30 m/s", "~0.5–2 m/s") was sourced only to Jyväsjärvi & Kniffki 1987 (measured 3.6–26.0 and 0.5–2.2 m/s) and Nair 1995 (no numbers). The ranges are the textbook fiber-class values, and the source now says so (Kandel, textbook), with the pulpal single-unit numbers given as supporting data.
+4. Claim 5 ("Synapse 2 in VPM thalamus") cited Nair 1995 and Ploner 2002, and neither addresses VPM. Added Park et al., Brain Res 2006 (PMID 16930568: tooth-pulp-driven nociceptive neurons in contralateral VPM), which this file already cited for that point.
+5. Claim 10: the source now says what each paper shows: Sessle 1986 = cat caudalis, where the authors "suggest a role" in referral; Basbaum 2009 = general dorsal-horn principle. The claim wording was already hedged ("helps explain").
 

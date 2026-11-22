@@ -8,7 +8,7 @@
   "claims": [
     {
       "claim": "Two pulpal fibers, two speeds: Aδ myelinated (~5–30 m/s), C unmyelinated (~0.5–2 m/s)",
-      "source": "Jyväsjärvi & Kniffki, J Physiol 1987;391:193-207 (PMID 3443945); Nair, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 1995;80:710-9 (PMID 8680980)"
+      "source": "Range figures are the textbook fiber-class values (Kandel et al., Principles of Neural Science; textbook, not a paper). Pulpal single-unit data consistent with them: Jyväsjärvi & Kniffki, J Physiol 1987;391:193-207 (PMID 3443945; cat intradental Aδ mean 13.9 m/s, range 3.6–26.0; C mean 1.3 m/s, range 0.5–2.2). Myelinated fast vs unmyelinated slow: Nair, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 1995;80:710-9 (PMID 8680980)"
     },
     {
       "claim": "C fibers fire only if the stimulus reaches the pulp proper",
@@ -24,7 +24,7 @@
     },
     {
       "claim": "Synapse 2 in VPM thalamus → S1 face area; 1st pain is sharp, brief, well-localized",
-      "source": "Nair, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 1995;80:710-9 (PMID 8680980); Ploner et al., PNAS 2002;99:12444-8 (PMID 12209003)"
+      "source": "Park et al., Brain Res 2006;1112:134-45 (PMID 16930568; tooth-pulp-driven nociceptive neurons in contralateral VPM, rat); Nair, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 1995;80:710-9 (PMID 8680980); Ploner et al., PNAS 2002;99:12444-8 (PMID 12209003; first pain particularly related to S1)"
     },
     {
       "claim": "In real teeth the dull pain lags by seconds, mostly the time for cold to reach the pulp",
@@ -44,8 +44,8 @@
     },
     {
       "claim": "Convergence in caudalis helps explain referred pain",
-      "source": "Sessle et al., Pain 1986;27:219-35 (PMID 3797017); Basbaum et al., Cell 2009;139:267-84 (PMID 19837031)"
+      "source": "Sessle et al., Pain 1986;27:219-35 (PMID 3797017; cat caudalis, authors 'suggest a role' in spread and referral of pain); Basbaum et al., Cell 2009;139:267-84 (PMID 19837031; general principle: somatic–visceral convergence onto dorsal-horn WDR neurons 'likely contributes' to referred pain)"
     }
   ],
-  "caption": "Sharp or dull? Two pulpal fibers, two speeds.\n\nAδ (myelinated, fast): brief, sharp, better-localized pain from dentin stimuli (cold, air, probe).\nC (unmyelinated, slow): fire only once the stimulus reaches the pulp; likely the dull, diffuse ache of pulpitis. In real teeth the lag is seconds, mostly heat reaching the pulp.\nInflammation sensitizes A fibers too: pain quality is a clue, not a diagnosis.\nConvergence in caudalis helps explain referred pain (animal data).\n\nRefs: Nair 1995, OOOOE · Jyväsjärvi 1987, J Physiol · Mengel 1993, Pain · Sessle 1986, Pain\nSchematic animation; speeds are a toy model.\n\n#endodontics #endo #dentistry #dentalpain #pulpitis #endoresident"
+  "caption": "Sharp or dull? Two pulpal fibers, two speeds.\n\nAδ (myelinated, fast): brief, sharp, better-localized pain from dentin stimuli (cold, air, probe).\nC (unmyelinated, slow): fire only once the stimulus reaches the pulp; likely the dull, diffuse ache of pulpitis. In real teeth the lag is seconds, mostly the time for cold to reach the pulp.\nInflammation sensitizes A fibers too: pain quality is a clue, not a diagnosis.\nConvergence in caudalis helps explain referred pain (animal data).\n\nRefs: Nair 1995, OOOOE · Närhi 1994, Arch Oral Biol · Jyväsjärvi 1987, J Physiol · Mengel 1993, Pain · Sessle 1986, Pain\nSchematic animation; speeds are a toy model.\n\n#endodontics #endo #dentistry #dentalpain #pulpitis #endoresident"
 }

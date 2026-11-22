@@ -32,7 +32,7 @@
     },
     {
       "claim": "Δp ≈ ½ρv² ≈ 100 kPa ≈ 1 atm, about the size of the pressure swing near the tip; inertial term as large or larger",
-      "source": "Toy model / schematic: Bernoulli estimate ½ × 1000 × 14.1² ≈ 100 kPa; oscillatory pressure dominates (Verhaagen et al., J Acoust Soc Am 2014;135:1717-1730, PMID 25234972)"
+      "source": "Toy model / schematic: Bernoulli estimate ½ × 1000 × 14.1² ≈ 100 kPa; the unsteady (inertial) term ρω²AR ≈ 100–200 kPa for R ≈ A = 75 µm is the author's own order-of-magnitude estimate. Supporting context only: Verhaagen et al., J Acoust Soc Am 2014;135:1717-1730 (PMID 25234972) show the oscillatory flow component dominates wall pressure and shear stress (2–3 orders of magnitude above the steady-streaming component)"
     },
     {
       "claim": "Local pressure near the tip can reach water's vapour pressure (2–6 kPa at 20–37 °C), so bubbles form",

@@ -8,7 +8,7 @@
   "claims": [
     {
       "claim": "Assumed: unbuffered NaOCl, 2.5–6%, pH ~11–12, pulp remnants, no agitation",
-      "source": "Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652); van der Waal et al., Quintessence Int 2014;45:467-74 (PMID 24701613)"
+      "source": "pH ~11–12: Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652); van der Waal et al., Quintessence Int 2014;45:467-74 (PMID 24701613; mean pH 11.5 in practice solutions). 2.5–6% is a stated assumption within the 0.5–8.25% range of proposed concentrations (Boutsioukis & Arias-Moliz 2022)"
     },
     {
       "claim": "NaOCl + H₂O ⇌ NaOH + HOCl",
@@ -32,16 +32,16 @@
     },
     {
       "claim": "Free chlorine near tissue gets used up when left alone; refreshing puts it back (sawtooth graph)",
-      "source": "Toy model / schematic: unit-free, time & amounts illustrative, two separate runs. Consumption: Moorer & Wesselink, Int Endod J 1982;15:187-96 (PMID 6964523); Tejada et al., Int Endod J 2019;52:114-122 (PMID 30019752); frequent exchange: Boutsioukis & Arias-Moliz 2022 (PMID 35338652)"
+      "source": "Toy model / schematic: unit-free, time & amounts illustrative, two separate runs; the ~90% partial reset is a modelling choice. Consumption: Moorer & Wesselink, Int Endod J 1982;15:187-96 (PMID 6964523); Tejada et al., Int Endod J 2019;52:114-122 (PMID 30019752); frequent exchange: Boutsioukis & Arias-Moliz 2022 (PMID 35338652)"
     },
     {
       "claim": "Tissue & dentin use it up → refresh often",
-      "source": "Macedo et al., Int Endod J 2010;43:1108-15 (PMID 20812947); Tejada et al., Int Endod J 2019;52:114-122 (PMID 30019752); Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652)"
+      "source": "Macedo et al., Int Endod J 2010;43:1108-15 (PMID 20812947); Tejada et al., Int Endod J 2019;52:114-122 (PMID 30019752); Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652); Cullen et al., J Endod 2015;41:920-4 (PMID 25791075)"
     },
     {
       "claim": "Agitation & concentration matter too",
       "source": "Stojicic et al., J Endod 2010;36:1558-62 (PMID 20728727)"
     }
   ],
-  "caption": "Why does NaOCl in a canal need to be refreshed?\nUnbuffered NaOCl (pH ~11–12) dissolves pulp tissue by reacting with it, and those reactions use it up.\nSaponification and amino-acid neutralization consume hydroxide; chloramination and oxidation consume free chlorine (HOCl + OCl⁻).\nTissue and dentin deplete free chlorine at the interface, so exchange it often. Agitation and concentration matter too.\nRefs: Estrela 2002, Braz Dent J; Tejada 2019, Int Endod J; Boutsioukis & Arias-Moliz 2022, Int Endod J; Stojicic 2010, J Endod\nAnimation is schematic; graph is a toy model.\n#endodontics #endo #rootcanal #dentistry #irrigation #sodiumhypochlorite #endoresident"
+  "caption": "Why does NaOCl in a canal need to be refreshed?\nUnbuffered NaOCl (pH ~11–12) dissolves pulp tissue by reacting with it, and those reactions use it up.\nSaponification and amino-acid neutralization consume hydroxide; chloramination and oxidation consume free chlorine (HOCl + OCl⁻).\nTissue and dentin deplete free chlorine at the interface, so exchange it often. Agitation and concentration matter too.\nRefs: Estrela 2002, Braz Dent J; Moorer & Wesselink 1982, Int Endod J; Tejada 2019, Int Endod J; Boutsioukis & Arias-Moliz 2022, Int Endod J; Stojicic 2010, J Endod\nAnimation is schematic; graph is a toy model.\n#endodontics #endo #rootcanal #dentistry #irrigation #sodiumhypochlorite #endoresident"
 }

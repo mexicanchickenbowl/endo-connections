@@ -897,7 +897,7 @@
     // P4
     const p4 = env(t, T.P4, T.P5, 0.3, 0.3);
     ln('Bars: 3-D CFD ratio ≈ 2–2.5× at 3 mm (Singh 2024); the 2-D toy field exaggerates it', 1540, p4);
-    ln('Boutsioukis et al. 2010 · extrusion: Psimma et al. 2013 (ex vivo overestimates it)', 1566, p4);
+    ln('Boutsioukis et al. 2010 · extrusion: Psimma et al. 2013 (ex vivo may overstate it)', 1566, p4);
     // P5
     const p5 = seg(t, T.P5, T.P5 + 0.3) * outO;
     ln('Boutsioukis & Arias-Moliz, IEJ 2022 · Boutsioukis & Gutierrez Nova, J Endod 2021', 1540, p5);

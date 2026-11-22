@@ -1,0 +1,51 @@
+{
+  "id": "16",
+  "slug": "16-la-inflamed-tissue",
+  "title": "Why lidocaine struggles in a hot tooth",
+  "style": "Kinetic typography",
+  "topic": "Ion trapping weakens LA injected into infected tissue, but can't explain IANB failure in hot molars: have a Plan B.",
+  "duration": 30.0,
+  "claims": [
+    {
+      "claim": "Lidocaine pKa 7.9 (texts 7.7–7.9); at pH = pKa it is 50 : 50 charged : base",
+      "source": "Sanchez V et al., Anesth Analg 1987;66:159-65 (PMID 3813059); Becker DE & Reed KL, Anesth Prog 2006;53:98-108 (PMID 17175824)"
+    },
+    {
+      "claim": "Only the base form crosses the membrane (the cation barely does); inside the axon the cation re-forms and blocks the Na+ channel",
+      "source": "Sanchez V et al., Anesth Analg 1987;66:159-65 (PMID 3813059); Becker DE & Reed KL, Anesth Prog 2006;53:98-108 (PMID 17175824)"
+    },
+    {
+      "claim": "Base fraction 50% at pH 7.9 -> 24% at pH 7.4 -> 4% at pH 6.5: ~5–6x less base in acidic tissue, weaker/slower block",
+      "source": "Toy model / schematic: Henderson–Hasselbalch with pKa 7.9 (pKa 7.7 gives 33% vs 6%); labelled 'ION TRAPPING · TOY MODEL' on screen"
+    },
+    {
+      "claim": "Abscess pus pH 6.0–7.3, relevant if you inject INTO infected tissue",
+      "source": "Nekoofar MH et al., Int Endod J 2009;42:534-8 (PMID 19460003)"
+    },
+    {
+      "claim": "The IANB is deposited far from the inflamed pulp, so acidity alone can't explain IANB failure",
+      "source": "Hargreaves KM & Keiser K, Endod Topics 2002;1:26-39 (not PubMed-indexed); Drum M et al., J Am Dent Assoc 2017;148:267-71 (PMID 28190451); Punnia-Moorthy A, Br J Anaesth 1988;61:154-9 (PMID 3415887)"
+    },
+    {
+      "claim": "Proposed: TTX-resistant Na+ channels (Nav1.8 / Nav1.9) increased in painful pulp, less lidocaine-sensitive",
+      "source": "Renton T et al., BMC Oral Health 2005;5:5 (PMID 16001984); Wells JE et al., J Endod 2007;33:1172-6 (PMID 17889684); Roy ML & Narahashi T, J Neurosci 1992;12:2104-11 (PMID 1318956)"
+    },
+    {
+      "claim": "Proposed: sensitized nerves are harder to block at a distance (cat)",
+      "source": "Modaresi J et al., J Endod 2008;34:438-41 (PMID 18358891); Wallace JA et al., Oral Surg Oral Med Oral Pathol 1985;59:517-21 (PMID 3859810)"
+    },
+    {
+      "claim": "Proposed: nerve sprouting",
+      "source": "Byers MR et al., J Endod 1990;16:78-84 (PMID 2388022); Rodd HD & Boissonade FM, J Dent Res 2001;80:389-93 (PMID 11269734)"
+    },
+    {
+      "claim": "Lip numb ≠ pulp numb: IANB alone ~25–28% success in hot mandibular molars",
+      "source": "Fowler S et al., J Endod 2016;42:390-2 (PMID 26831048)"
+    },
+    {
+      "claim": "Plan B: buccal articaine infiltration, intraosseous, PDL, intrapulpal (supplemental success varies)",
+      "source": "Matthews R et al., J Endod 2009;35:343-6 (PMID 19249592); Nusstein J et al., J Endod 1998;24:487-91 (PMID 9693577); Parirokh M & Abbott PV, Int Endod J 2022;55 Suppl 4:951-94 (PMID 35119117)"
+    }
+  ],
+  "caption": "Hot tooth won't go numb? It's not just the acid.\n\nIon trapping is real: in acidic tissue, lidocaine (pKa ~7.7–7.9) has less base to cross the nerve membrane. That matters if you inject INTO infected tissue (abscess pus pH 6.0–7.3).\nBut an IANB is deposited far from the inflamed pulp. Proposed culprits: TTX-resistant Na+ channels, sensitized nerves, sprouting (mostly lab/animal data).\nIANB alone: ~25–28% success in hot mandibular molars, even with a numb lip. Have a plan B.\n\nRefs: Nekoofar 2009, IEJ; Roy & Narahashi 1992, J Neurosci; Fowler 2016, J Endod.\nSchematic animation; % base is a toy model.\n\n#endodontics #endo #dentistry #localanesthesia #irreversiblepulpitis #endoresident"
+}

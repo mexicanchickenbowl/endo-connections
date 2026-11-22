@@ -42,7 +42,8 @@ Takeaway: **tip design guides needle depth** (in canals enlarged to ≥ size 30�
   produced a 2-D gap jet artefact). The final beat shows the needle move + re-mesh, then a cyan *schematic*
   (dashed flow arrows, shaded replacement zone, reach bar to WL) labelled "schematic of 3-D CFD result", with the
   footnote "Side-vented 1 mm: 3-D CFD schematic (Boutsioukis 2010); Singh 2024 disagrees".
-- Reference flow rate: the Boutsioukis 3-D models were run at 0.26 mL/s (≈ 8.6 m/s inlet, as reported in Singh 2024);
+- Reference flow rate: the Boutsioukis 3-D models were run at 0.26 mL/s (≈ 8.6 m/s inlet in a 30 G lumen; Singh 2024
+  uses the same 0.26 mL/s ↔ 8.6 m/s mapping and the Boutsioukis needle geometry, citing those flow rates as clinically realistic);
   the reel runs at 0.15 mL/s. The patterns are qualitatively similar; the footnote says "patterns after".
 - Vent geometry (schematic simplification): the toy side vent spans 0.05–0.55 mm above the closed tip; the
   reference single side-vented model (KerrHawe probe, Singh 2024 Table 1, after Boutsioukis) has a 0.96 mm vent
@@ -66,15 +67,17 @@ Takeaway: **tip design guides needle depth** (in canals enlarged to ≥ size 30�
 2. **Side-vented: series of vortices, less replacement** — Boutsioukis et al. *J Endod* 2010, PMID 20416437.
 3. **Side-vented reach ≈ 1–1.5 mm beyond the tip (0.15–0.2 mL/s in the footnote)** — Boutsioukis C, Lambrianidis T, Kastrinakis E.
    *Int Endod J* 2009;42(2):144–55, PMID 19134043 ("irrigant replacement was limited to 1–1.5 mm apical to the needle
-   tip"); flow-rate dependence: Boutsioukis C, Arias-Moliz MT. *Int Endod J* 2022;55 Suppl 3:588–612, PMID 35338652
-   (<0.05 mL/s hardly reaches the tip; 1–1.5 mm at 0.15–0.20 mL/s).
+   tip"; note the 2009 abstract says this held "for all flow rates tested", 0.02–0.79 mL/s); flow-rate dependence:
+   Boutsioukis C, Arias-Moliz MT. *Int Endod J* 2022;55 Suppl 3:588–612, PMID 35338652 (<0.05 mL/s hardly reaches the
+   tip; 1–1.5 mm at 0.15–0.20 mL/s, citing Boutsioukis & Gutierrez Nova 2021, Boutsioukis 2009 and Verhaagen 2012).
 4. **Wall shear stress concentrated where the side-vent jet hits the wall ("shear hot spot")** — Chen JE et al.
    *Aust Endod J* 2014;40(2):54–60, PMID 25244218 (side-vented WSS "localised to a small region of the canal wall");
    Singh S et al. *Odontology* 2024;112(4):1248–56, PMID 38703256 (closed-ended: stress on the walls facing the
    vent; open-ended: apical to the outlet). Shown in relative units only.
 5. **Open-ended → higher apical pressure; more extrusion ex vivo** — Boutsioukis et al. 2010 (PMID 20416437,
    20850673, 20618879); Psimma Z et al. *Int Endod J* 2013;46(7):619–31, PMID 23240919 (open-ended extruded
-   significantly more irrigant than closed-ended).
+   significantly more irrigant than closed-ended; caveat: "Not simulating tissue resistance in ex vivo experiments may
+   lead to significant overestimation of irrigant extrusion" → on-screen "(ex vivo may overstate it)").
 6. **Placement: open-ended 2–3 mm short of WL; side-vented 1 mm short of WL; never let it bind** (review wording:
    closed-ended "within 1 mm from WL"; shown as "1 mm short" = the CFD position that reached WL) —
    Boutsioukis & Arias-Moliz 2022, PMID 35338652; side-vented reached WL only at 1 mm: Boutsioukis C et al.
@@ -111,7 +114,9 @@ Takeaway: **tip design guides needle depth** (in canals enlarged to ≥ size 30�
    velocities on canal walls were very low (0-0.7 m/s) compared with that within the needle lumen (approximately 7 m/s)").
 12. **"Singh 2024 disagrees" (side-vented at 1 mm)** — Singh 2024: SSVN penetration "limited to less than 0.5 mm apical
    to the tip"; "none of the needles tested ... could effectively deliver the irrigant up to the apex", explicitly
-   contradicting earlier studies. **Shear scale note** — Chen 2014 (side-vented WSS higher but localised) vs Singh 2024
+   contradicting earlier studies ("even when the tip is 1 mm from the apical constriction"). Singh also found open-ended
+   penetration "limited to less than 1 mm from the needle exit" (size 30 canal), so the disagreement is about reach for
+   both tips; the caption says so. **Shear scale note** — Chen 2014 (side-vented WSS higher but localised) vs Singh 2024
    (open-ended highest).
 
 ## Design rationale
@@ -194,3 +199,41 @@ Design
   sequence; loop: last 0.4 s fades to the faint frame-0 field, needle slides back, hook fades in; footnotes kept within
   x 120–940; pulse ring on the labelled shear peak (opposite-wall spot desaturated).
 
+
+## Final QA (fresh-eyes review)
+- Stills at 0, 0.5, 1.0, 2.1, 3.5, 4.8, 6.5, 8.5, 10, 12, 13.5, 15, 16.5, 18, 19.5, 21, 22.1, 22.3, 22.45 s plus beat
+  transitions (7.5, 9.4, 12.5, 15.7, 16.0, 17.2 s) with `--safe` (`_stills/final-qa/`). No clipped/overlapping text, no
+  tofu/NaN, no readable text in the no-go zones (top-bar/status-bar chrome is decoration; "reference: 3-D CFD" is repeated
+  in-frame as "schematic of 3-D CFD result"), no console warnings. Hook readable from t = 0, takeaway fully visible
+  ≈ 17.7–22.1 s (≥ readSecs), loop fades cleanly to the frame-0 state.
+- Sources re-checked on PubMed (20416437, 20850673, 20618879, 19134043, 20416439, 25244218, 23240919, 23522549, 34118256,
+  35338652 full text, 38703256 full text). Review wording confirmed: "optimum position for the open-ended needles is at
+  2–3 mm short of WL, whereas closed-ended needles need to be placed within 1 mm from WL ... always without binding";
+  "1–1.5 mm apically to the tip when the flow rate is increased to 0.15–0.20 mL/s"; "minimum apical size 30–35".
+  Singh 2024 Table 2 confirmed (6 %, 3 mm: 103.63 vs 42.36 kPa at 0.26 mL/s; 17.48 vs 8.22 at 0.083 mL/s). Note: Singh's
+  canal is apical size 30 (not 45 as in the header); the bars encode only the needle-type ratio, footnoted to Singh.
+- Video: `reels/out/15-needle-cfd.mp4` 22.5 s (= REEL.duration), 675 frames, 1080×1920; poster (2.1 s, hook over the full
+  field) reads inside the 3:4 crop. No reel changes needed, so no re-render. Gallery metadata written to `meta.json`.
+
+## Citation audit
+- Every literature citation on screen (reel.js footnotes), in `meta.json` (claims[].source + caption Refs) and in this file
+  was re-checked against PubMed metadata (first author, year, journal, volume/pages, PMID): 20416437, 20416439, 20618879,
+  19134043, 20850673, 25244218, 23240919, 23522549, 34118256, 35338652, 38703256, 17645515. All 12 PMIDs resolve to the
+  paper named (no wrong PMID, year, journal or first author). Abstracts read for each; full text read for Singh 2024
+  (PMC11415444: Table 1 vent 0.96 mm / 0.5 mm from tip; Table 2 6 %, 3 mm: 103.63 vs 42.36 kPa at 0.26 mL/s, 17.48 vs
+  8.22 at 0.083 mL/s; Shen "2.5–3 times lower"; shear on the wall opposite/facing the vent) and for the 2022 IEJ review
+  (PMC9321999: "2–3 mm short of WL ... within 1 mm from WL ... always without binding"; "0.15–0.20 mL/s"; "minimum
+  apical size 30–35"; "size 25 or smaller").
+- Fixed (on screen): extrusion footnote "(ex vivo overestimates it)" → "(ex vivo may overstate it)". Psimma 2013 (IEJ)
+  says ex vivo set-ups that do not simulate tissue resistance *may* overestimate extrusion; the old wording generalised
+  it. Checked with stills (`_stills/audit/`, t = 13.5/15.0 s: line fits, x ≈ 135–925), video re-rendered once
+  (ffprobe: h264 1080×1920, 30 fps, 675 frames, 22.5 s + silent AAC; frame at 14.0 s shows the new wording).
+- Fixed (meta.json): extrusion claim reworded to match Psimma and given the J Endod 2013 paper as a second source;
+  side-vented reach source now names Boutsioukis & Gutierrez Nova 2021 (the review's source for the flow-rate
+  dependence); Singh disagreement spelled out. Caption: "studies disagree on side-vented reach" → "studies disagree on
+  reach (a 2024 CFD study found shorter reach for all tips)", because Singh 2024 also found shorter open-ended reach;
+  Refs line completed (Boutsioukis 2010 J Endod & Int Endod J; Psimma 2013 Int Endod J & J Endod; Singh 2024,
+  Odontology), since the caption's claims rest on those papers too.
+- Fixed (NOTES): 0.26 mL/s reference flow-rate sentence no longer implies Singh reported the Boutsioukis flow rate; added
+  the 2009 "for all flow rates tested" nuance, the Psimma tissue-resistance caveat, and Singh's open-ended result.
+- Not changed: on-screen author/year/journal strings (all correct); "Chen 2014" is the issue year (e-pub 2013).

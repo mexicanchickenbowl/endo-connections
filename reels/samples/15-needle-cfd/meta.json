@@ -1,0 +1,51 @@
+{
+  "id": "15",
+  "slug": "15-needle-cfd",
+  "title": "Needle tips: where the irrigant really goes",
+  "style": "CFD software viewport",
+  "topic": "Open-ended needles jet irrigant to near WL with higher apical pressure; side-vented jets swirl only 1–1.5 mm, so place them ~1 mm short.",
+  "duration": 22.5,
+  "claims": [
+    {
+      "claim": "Flow fields are a schematic 2-D toy model (width ×2.2), patterns after 3-D CFD; real 3-D wall speeds ≈ 0–0.7 m/s",
+      "source": "Toy model / schematic: 2-D lattice-Boltzmann run for this reel (Re 900, time-averaged), patterns after Boutsioukis et al., J Endod 2010;36(5):875-9 (PMID 20416437); wall speeds: Shen et al., J Endod 2010;36(5):884-9 (PMID 20416439)"
+    },
+    {
+      "claim": "Open-ended needle 3 mm short: the jet drives toward WL; replacement almost to WL",
+      "source": "Boutsioukis et al., J Endod 2010;36(5):875-9 (PMID 20416437); Boutsioukis et al., Int Endod J 2010;43(10):874-81 (PMID 20618879)"
+    },
+    {
+      "claim": "Side-vented needle: jet hits the wall, then a series of vortices",
+      "source": "Boutsioukis et al., J Endod 2010;36(5):875-9 (PMID 20416437)"
+    },
+    {
+      "claim": "Wall-shear peak where the side-vent jet hits the wall (relative scale; studies differ on the peak)",
+      "source": "Chen et al., Aust Endod J 2014;40(2):54-60 (PMID 25244218); Singh et al., Odontology 2024;112(4):1248-56 (PMID 38703256)"
+    },
+    {
+      "claim": "Side-vented reach ≈ 1–1.5 mm beyond the tip at 0.15–0.2 mL/s; little exchange beyond",
+      "source": "Boutsioukis et al., Int Endod J 2009;42(2):144-55 (PMID 19134043); flow-rate dependence: Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652), citing Boutsioukis & Gutierrez Nova, J Endod 2021;47(9):1487-95 (PMID 34118256)"
+    },
+    {
+      "claim": "Open-ended: higher apical pressure (bars = 3-D CFD ratio ≈ 2–2.5× at 3 mm)",
+      "source": "Singh et al., Odontology 2024;112(4):1248-56 (PMID 38703256), Table 2; Boutsioukis et al., J Endod 2010;36(5):875-9 (PMID 20416437)"
+    },
+    {
+      "claim": "Open-ended needles extrude more irrigant ex vivo (ex vivo set-ups without simulated tissue resistance may overstate it)",
+      "source": "Psimma et al., Int Endod J 2013;46(7):619-31 (PMID 23240919); Psimma et al., J Endod 2013;39(4):521-4 (PMID 23522549)"
+    },
+    {
+      "claim": "Tip design guides depth: open-ended 2–3 mm short, side-vented 1 mm short of WL, in canals enlarged to ≥ size 30–35",
+      "source": "Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652); Boutsioukis & Gutierrez Nova, J Endod 2021;47(9):1487-95 (PMID 34118256)"
+    },
+    {
+      "claim": "Side-vented at 1 mm short reaches WL (schematic of 3-D CFD; Singh 2024 disagrees: no needle reached the apex, even 1 mm short)",
+      "source": "Boutsioukis et al., J Endod 2010;36(10):1664-8 (PMID 20850673); Singh et al., Odontology 2024;112(4):1248-56 (PMID 38703256)"
+    },
+    {
+      "claim": "Never let the needle bind; deeper insertion = more apical pressure",
+      "source": "Psimma et al., J Endod 2013;39(4):521-4 (PMID 23522549); Boutsioukis et al., J Endod 2010;36(10):1664-8 (PMID 20850673)"
+    }
+  ],
+  "caption": "Where does the irrigant really go? It depends on the tip.\n\nOpen-ended 30 G, 3 mm short: the jet drives almost to WL, but apical pressure is higher (more extrusion ex vivo).\nSide-vented: the jet hits the wall, then vortices; replacement reaches only ~1–1.5 mm past the tip.\nSo: open-ended 2–3 mm short, side-vented ~1 mm short of WL, never binding, in canals enlarged to ≥ size 30–35. CFD/ex vivo data; studies disagree on reach (a 2024 CFD study found shorter reach for all tips).\n\nRefs: Boutsioukis 2010, J Endod & Int Endod J; Boutsioukis 2009, Int Endod J; Boutsioukis & Arias-Moliz 2022, Int Endod J; Psimma 2013, Int Endod J & J Endod; Singh 2024, Odontology\nFlow = schematic 2-D toy model, not to scale.\n\n#endodontics #endo #dentistry #rootcanal #irrigation #CFD #endoresident"
+}

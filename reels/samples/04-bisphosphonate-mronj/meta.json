@@ -24,7 +24,7 @@
     },
     {
       "claim": "Turnover slows: remodelling suppressed ~60–90%, not stopped (bar is a toy model)",
-      "source": "Toy model / schematic bar; range from Recker et al., J Bone Miner Res 2008;23:6–16 (PMID 17892374) and Chavassieux et al., J Clin Invest 1997;100:1475–80 (PMID 9294113)"
+      "source": "Toy model / schematic bar; range from Recker et al., J Bone Miner Res 2008;23:6–16 (PMID 17892374; zoledronate, activation frequency −63% median) and Chavassieux et al., J Clin Invest 1997;100:1475–80 (PMID 9294113; alendronate 10 mg, −87%)"
     },
     {
       "claim": "10+ years retained in bone (estimated half-life, alendronate; retention ≠ lasting effect)",
@@ -32,7 +32,7 @@
     },
     {
       "claim": "MRONJ after extraction: 1.6–14.8% in cancer patients on BPs (most estimates 1–5%)",
-      "source": "Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956)"
+      "source": "Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956); 'most estimates 1–5%' = AAOMS 'cluster between 1 percent and 5 percent' (incl. Gaudin et al., J Clin Periodontol 2015;42:922–32, PMID 26362756: 3.2%)"
     },
     {
       "claim": "MRONJ after extraction: 0–0.15% in osteoporosis patients on BPs",
@@ -40,12 +40,12 @@
     },
     {
       "claim": "Non-surgical RCT: no socket, treats the infection; MRONJ risk unknown, likely low, rare case reports",
-      "source": "Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956); Sarathy et al., J Endod 2005;31:759–63 (PMID 16186759); Moinzadeh et al., Int Endod J 2013;46:391–8 (PMID 23137312)"
+      "source": "Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956); Sarathy et al., J Endod 2005;31:759–63 (PMID 16186759); Moinzadeh et al., Int Endod J 2013;46:391–8 (PMID 23137312); Mauceri et al., BMC Oral Health 2025;25:1362 (PMID 40849463)"
     },
     {
       "claim": "Restorable tooth → ENDO: cancer-dose IV BP or denosumab, strongly prefer non-surgical RCT; osteoporosis on BPs, risk very low; avoid apical surgery and over-instrumentation, careful clamp",
-      "source": "AAE Position Statement, Endodontic Implications of Bisphosphonate-Associated Osteonecrosis of the Jaws, 2010 (not in PubMed); Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956); Moinzadeh et al., Int Endod J 2013;46:391–8 (PMID 23137312)"
+      "source": "AAE Position Statement, Endodontic Implications of Bisphosphonate-Associated Osteonecrosis of the Jaws, 2010 (aae.org; not in PubMed); AAE Guideline, Endodontic Implications of Medication-Related Osteonecrosis of the Jaw, 2018 (aae.org; not in PubMed); Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956); Moinzadeh et al., Int Endod J 2013;46:391–8 (PMID 23137312); clamp: Gallego et al., J Oral Maxillofac Surg 2011;69:e93–5 (PMID 21211886); over-instrumentation: Mauceri et al., BMC Oral Health 2025;25:1362 (PMID 40849463)"
     }
   ],
-  "caption": "Patient on a bisphosphonate: extract or endo?\n\nBPs bind bone mineral, get swallowed by resorbing osteoclasts and switch them off. Remodelling slows (not stops) and the drug stays in bone for years.\nAAOMS 2022, MRONJ after extraction: 1.6–14.8% in cancer pts on BPs vs 0–0.15% in osteoporosis pts.\nRestorable tooth + cancer-dose IV BP or denosumab: strongly prefer non-surgical RCT and minimise bone trauma. Never pause the drug without the prescriber.\n\nRefs: Ruggiero 2022, J Oral Maxillofac Surg; Rogers 2011, Bone; AAE Position Statement 2010.\nAnimation is schematic; the rate bar is a toy model.\n\n#endodontics #endo #dentistry #MRONJ #bisphosphonates #rootcanal #dentalresident"
+  "caption": "Patient on a bisphosphonate: extract or endo?\n\nBPs bind bone mineral, get swallowed by resorbing osteoclasts and switch them off. Remodelling slows (not stops) and the drug stays in bone for years.\nAAOMS 2022, MRONJ after extraction: 1.6–14.8% in cancer pts on BPs vs 0–0.15% in osteoporosis pts on BPs.\nRestorable tooth + cancer-dose IV BP or denosumab: strongly prefer non-surgical RCT and minimise bone trauma. Never pause the drug without the prescriber.\n\nRefs: Ruggiero 2022, J Oral Maxillofac Surg; Rogers 2011, Bone; AAE Position Statement 2010.\nAnimation is schematic; the rate bar is a toy model.\n\n#endodontics #endo #dentistry #MRONJ #bisphosphonates #rootcanal #dentalresident"
 }
