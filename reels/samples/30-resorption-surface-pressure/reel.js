@@ -10,7 +10,7 @@
   const { T, P, SB, sheetBuf, TAU, ink, ko, circ, rr, poly, txt, tw, arrow } = Riso;
   const ctx = Riso.main.ctx;
 
-  const DUR = 22, SL = 0.55, S1E = 8.5, S2E = 17.1, S3E = DUR - 0.45;
+  const DUR = 22, SL = 0.55, S1E = 7.7, S2E = 16.3, S3E = DUR - 0.45;
   const FT = (px) => `400 ${px}px "Archivo Black"`;
   const FG = (w, px) => `${w} ${px}px "Space Grotesk"`;
   const TAG = 'RESORPTION 2/5 · SURFACE + PRESSURE';
@@ -40,9 +40,9 @@
       c.beginPath(); c.moveTo(x - 26, y); c.lineTo(x + 26, y); c.moveTo(x, y - 26); c.lineTo(x, y + 26); c.stroke();
     }
   }
-  function furniture() {
-    // halftone "sun" behind the header
-    P.fillStyle = PAT.Pdecor; circ(P, 918, 446, 150);
+  function furniture(n) {
+    // halftone "sun": clear of the header type on sheets 1-2, bottom-left counterweight on the summary card
+    P.fillStyle = PAT.Pdecor; if (n === 3) circ(P, 250, 1396, 124); else circ(P, 960, 420, 130);
     // corner tag (reversed out of a teal label) + handle
     const fTag = FG(700, 30), w = tw(TAG, fTag, '1px');
     ink(T); rr(T, 64, 238, w + 40, 52, 9); T.fill();
@@ -114,7 +114,7 @@
         const y = ys[i];
         if (it.arw) { if (c === P) { ink(P); arrow(P, X + it.x, y - px * 0.34, X + it.x + it.w, y - px * 0.34, 16, 46, 30); } }
         else if (c === T) txt(T, it.s, X + it.x, y, it.font);
-        else if (it.hl) { ink(P); rr(P, X + it.x - 8, y - px * 0.32, it.w + 16, px * 0.5, 8); P.fill(); }
+        else if (it.hl) { ink(P); rr(P, X + it.x - 9, y - px * 0.80, it.w + 18, px * 1.02, 9); P.fill(); }
       }));
       c.restore();
     }
@@ -140,7 +140,7 @@
     T.restore(); P.restore();
   }
   function chipLabel(s, x, y, align) {
-    const f = FG(700, 30), w = tw(s, f, '1px'), x0 = align === 'right' ? x - w : x;
+    const f = FG(700, 30), w = tw(s, f, '1px'), x0 = align === 'right' ? x - w : align === 'center' ? x - w / 2 : x;
     for (const c of [T, P]) ko(c, (k) => { rr(k, x0 - 12, y - 34, w + 24, 48, 9); k.fill(); });
     txt(T, s, x0, y, f, { ls: '1px' });
   }
@@ -148,7 +148,7 @@
   /* ================= SHEET 1 · surface resorption (micro close-up of the root surface) ================= */
   const M = { Y0: 598, Y1: 1215, yB: 728, yS: 915, yC: 995 };
   const CL = [{ x: 392, w: 80, d: 46 }, { x: 560, w: 90, d: 60 }, { x: 728, w: 78, d: 50 }];
-  const KN = { x: 560, y: 880 };
+  const KN = { x: 560, y: 880 }, FMAX = [0.92, 0.7, 0.9];
   const lacD = (k, x) => { const u = (x - CL[k].x) / CL[k].w; return Math.abs(u) >= 1 ? 0 : CL[k].d * Math.pow(1 - u * u, 0.7); };
   const waveB = (x) => M.yB + 3 * Math.sin(x / 61) + 2 * Math.sin(x / 23);
   const cdj = (x) => M.yC + 4 * Math.sin(x / 85) + 2.5 * Math.sin(x / 31 + 1);
@@ -160,12 +160,12 @@
 
   function s1(t) {
     const st = {
-      e: CL.map((c, k) => seg(t, 3.4 + k * 0.12, 5.0 + k * 0.06, ease.inOut)),
-      f: CL.map((c, k) => 0.9 * seg(t, 6.3 + k * 0.12, 8.0 + k * 0.06, ease.inOut)),
-      app: CL.map((c, k) => seg(t, 2.85 + k * 0.12, 3.4 + k * 0.12, ease.outBack)),
-      leave: CL.map((c, k) => seg(t, 5.25 + k * 0.12, 6.0 + k * 0.12, ease.inOut)),
-      tear: seg(t, 2.08, 2.5, ease.out) * (1 - seg(t, 7.0, 8.3, ease.inOut)),
-      knock: seg(t, 2.0, 2.22, ease.outBack) * (1 - seg(t, 2.62, 2.92, ease.in)),
+      e: CL.map((c, k) => seg(t, 2.45 + k * 0.1, 3.55 + k * 0.05, ease.inOut)),
+      f: CL.map((c, k) => FMAX[k] * seg(t, 5.6 + k * 0.12, 7.25 + k * 0.06, ease.inOut)),   // the deepest lacuna is only partly refilled
+      app: CL.map((c, k) => seg(t, 1.95 + k * 0.1, 2.45 + k * 0.1, ease.outBack)),
+      leave: CL.map((c, k) => seg(t, 3.5 + k * 0.08, 3.95 + k * 0.08, ease.inOut)),
+      tear: seg(t, 1.28, 1.7, ease.out) * (1 - seg(t, 6.2, 7.4, ease.inOut)),
+      knock: seg(t, 1.2, 1.42, ease.outBack) * (1 - seg(t, 1.8, 2.1, ease.in)),
     };
     st.surf = (x) => { let y = M.yS; for (let k = 0; k < 3; k++) y += st.e[k] * lacD(k, x) * (1 - st.f[k]); return y; };
     return st;
@@ -240,7 +240,7 @@
     /* cementoblasts lining the root surface */
     for (const cb of CB) {
       const dist = Math.abs(cb.x - KN.x); let p = 1;
-      if (dist < 258) { const gone = seg(t, 2.08 + dist / 1100, 2.34 + dist / 1100, ease.in), back = seg(t, 5.95 + cb.h * 0.5, 6.4 + cb.h * 0.5, ease.outBack); p = Math.max(1 - gone, back); }
+      if (dist < 258) { const gone = seg(t, 1.28 + dist / 1100, 1.54 + dist / 1100, ease.in), back = seg(t, 5.2 + cb.h * 0.5, 5.65 + cb.h * 0.5, ease.outBack); p = Math.max(1 - gone, back); }
       if (p <= 0.02) continue;
       const y = st.surf(cb.x) - 9, sl = Math.atan2(st.surf(cb.x + 6) - st.surf(cb.x - 6), 12);
       ink(T); T.beginPath(); T.ellipse(cb.x, y, 14.5 * p, 8.5 * p, sl, 0, TAU); T.fill();
@@ -249,7 +249,7 @@
 
     /* clast precursors leave the vessel and gather on the denuded patch */
     for (let k = 0; k < 3; k++) for (let j = 0; j < 2; j++) {
-      const u = seg(t, 2.42 + k * 0.1 + j * 0.14, 3.0 + k * 0.1 + j * 0.14, ease.inOut); if (u <= 0 || u >= 1) continue;
+      const u = seg(t, 1.58 + k * 0.1 + j * 0.12, 2.12 + k * 0.1 + j * 0.12, ease.inOut); if (u <= 0 || u >= 1) continue;
       const a = [VES[0][0] + 30, VES[0][1]], b = [CL[k].x + (j ? 22 : -22), yS - 22], m = [(a[0] + b[0]) / 2, 772 - j * 14];
       const x = (1 - u) * (1 - u) * a[0] + 2 * u * (1 - u) * m[0] + u * u * b[0], y = (1 - u) * (1 - u) * a[1] + 2 * u * (1 - u) * m[1] + u * u * b[1];
       const r = 10 * Math.min(1, u * 5);
@@ -286,23 +286,23 @@
   }
 
   function clock(t) {
-    const a = seg(t, 5.3, 5.65, ease.outBack); if (a <= 0.004) return;
-    const cx = 884, cy = 432, R = 92 * a;
+    const a = seg(t, 5.25, 5.6, ease.outBack); if (a <= 0.004) return;
+    const cx = 906, cy = 426, R = 88 * a;
     for (const c of [T, P]) ko(c, (k) => circ(k, cx, cy, R + 9));
-    const th = seg(t, 5.65, 8.3, ease.inOut) * TAU * 0.9;
+    const th = seg(t, 5.6, 7.4, ease.inOut) * TAU * 0.3;   // under a third of a turn: "a few weeks", no numerals
     P.fillStyle = PAT.Pclock; P.beginPath(); P.moveTo(cx, cy); P.arc(cx, cy, R * 0.74, -Math.PI / 2, -Math.PI / 2 + th); P.closePath(); P.fill();
     ink(T); T.lineWidth = 9; T.beginPath(); T.arc(cx, cy, R, 0, TAU); T.stroke();
-    T.lineCap = 'butt';
-    for (let k = 0; k < 12; k++) { const an = k * TAU / 12, big = k % 3 === 0; T.lineWidth = big ? 8 : 4.5; T.beginPath(); T.moveTo(cx + Math.cos(an) * R * (big ? 0.72 : 0.78), cy + Math.sin(an) * R * (big ? 0.72 : 0.78)); T.lineTo(cx + Math.cos(an) * R * 0.9, cy + Math.sin(an) * R * 0.9); T.stroke(); }
+    T.lineCap = 'butt'; T.lineWidth = 8;
+    for (let k = 0; k < 4; k++) { const an = k * TAU / 4; T.beginPath(); T.moveTo(cx + Math.cos(an) * R * 0.72, cy + Math.sin(an) * R * 0.72); T.lineTo(cx + Math.cos(an) * R * 0.9, cy + Math.sin(an) * R * 0.9); T.stroke(); }
     T.lineCap = 'round';
     const ha = -Math.PI / 2 + th, ux = Math.cos(ha), uy = Math.sin(ha);
     ink(P); poly(P, [[cx - uy * 9, cy + ux * 9], [cx + ux * R * 0.7, cy + uy * R * 0.7], [cx + uy * 9, cy - ux * 9], [cx - ux * 16, cy - uy * 16]]); P.closePath(); P.fill();
     ink(T); circ(T, cx, cy, 10 * a);
-    T.save(); T.globalAlpha = clamp(a); txt(T, 'WEEKS', cx, cy + 92 + 44, FG(700, 30), { align: 'center', ls: '3px' }); T.restore();
+    labelWipe(t, 5.4, 99, cx - 84, 572, 168, () => chipLabel('WEEKS', cx, 572, 'center'));   // on a knocked-out chip: clean paper
   }
 
   function title(t) {
-    const out = seg(t, 2.9, 3.15, ease.in); if (out >= 1) return;
+    const out = seg(t, 2.45, 2.7, ease.in); if (out >= 1) return;
     const px = 86, lh = 90, x = 64, y0 = 386, f = FT(px);
     const b = seg(t, 0.12, 0.62, ease.out), w0 = tw('stops', f), wC = tw('cause ', f);
     for (const c of [T, P]) { c.save(); c.beginPath(); c.rect(40 + 1010 * out, 290, 1010 * (1 - out), 304); c.clip(); }
@@ -315,26 +315,28 @@
 
   function sheet1(t) {
     title(t);
-    header('1', 'SURFACE', seg(t, 3.15, 3.55, ease.out));
+    header('1', 'SURFACE', seg(t, 2.7, 3.1, ease.out));
     micro(t);
     clock(t);
-    caption(t, 2.5, 5.45, [['Small injury', ARW], [{ s: 'shallow lacunae', hl: 1 }]]);
-    caption(t, 5.45, 99, [['No infection', ARW], ['new cementum in ', { s: 'weeks', hl: 1 }]]);
-    const cause = seg(t, 2.02, 2.16, ease.out) * (1 - seg(t, 2.78, 2.96, ease.inOut));
-    const up = seg(t, 2.9, 3.6, ease.out), dn = seg(t, 5.25, 6.7, ease.inOut);
+    caption(t, 2.1, 4.9, [['Small injury', ARW], [{ s: 'shallow lacunae', hl: 1 }]]);
+    caption(t, 4.9, 99, [['No infection', ARW], ['new cementum in ', { s: 'weeks', hl: 1 }]]);
+    const cause = seg(t, 1.22, 1.36, ease.out) * (1 - seg(t, 1.95, 2.13, ease.inOut));
+    const up = seg(t, 2.05, 2.7, ease.out), dn = seg(t, 3.5, 4.3, ease.inOut);
     const act = 0.74 * up * (1 - dn) + 0.03 * Math.sin(t * 9) * up * (1 - dn);
-    gauge(cause, act, t < 2.95 ? '' : (t < 6.2 ? 'working' : 'stopped'), t < 6.2 ? seg(t, 2.95, 3.2, ease.out) : seg(t, 6.2, 6.45, ease.out));
-    sourceLine(t, 2.6, 99, 'Abbott & Lin, Dent Traumatol 2022');
+    // no state word while the needle is falling
+    if (t < 3.5) gauge(cause, act, t < 2.1 ? '' : 'working', seg(t, 2.1, 2.35, ease.out));
+    else gauge(cause, act, t < 4.0 ? '' : 'stopped', seg(t, 4.0, 4.25, ease.out));
+    sourceLine(t, 1.7, 99, 'Lin; Abbott & Lin, Dent Traumatol 2022');
     schematic();
   }
 
   /* ================= SHEET 2 · pressure resorption (whole tooth) ================= */
   const TO = { cx: 492, cy: 992 }, TOOTH_L = 340;
-  const UV = (() => { const a = -38 * Math.PI / 180; return [Math.cos(a), Math.sin(a)]; })();
+  const UV = (() => { const a = -16 * Math.PI / 180; return [Math.cos(a), Math.sin(a)]; })();   // long axis of the impacted tooth (lying almost horizontally)
 
   /** tooth outline from a half-width profile. v = distance from the cervix toward the apex. Crown points down. */
   function toothGeom(cx, cy, s, blunt, scoop) {
-    const L0 = TOOTH_L * s, rw = 82 * s, cw = 114 * s, ch = 210 * s;
+    const L0 = TOOTH_L * s, rw = 82 * s, cw = 100 * s, ch = 190 * s;
     const wall = (v) => rw * (1 - 0.76 * Math.pow(clamp(v / L0), 1.7));
     const vEnd = L0 * (1 - 0.19 * blunt), r = lerp(24, 20, blunt) * s, vb = vEnd - r, A = wall(vb);
     const vq = 0.5 * L0, hq = 70 * s * (0.55 + 0.45 * scoop), dq = 30 * s * scoop;
@@ -366,20 +368,23 @@
     const scoopPts = []; for (let i = 0; i <= 24; i++) { const v = vq - hq + 2 * hq * i / 24; scoopPts.push([cx + hwR(v), cy - v]); }
     return { all, root, canal, cap, scoopPts, hwR, wall, vq, hq, vb, r, A, vEnd, L0, rw, cw, ch, cx, cy, s };
   }
+  /** impacted canine seen from the side: cusp, enamel cap, dentin core, pulp, root. a = distance from the cusp tip along its axis */
+  const CK = 0.9;
   function canineGeom(tip) {
-    const sm = ease.smooth;
-    const hwc = (a) => (a < 78 ? 68 * Math.pow(a / 78, 0.82) : a < 150 ? lerp(68, 84, sm((a - 78) / 72)) : a < 232 ? lerp(84, 58, sm((a - 150) / 82)) : lerp(58, 30, clamp((a - 232) / 340)));
-    const K = 0.82, loc = (a, b) => [tip[0] + (UV[0] * a - UV[1] * b) * K, tip[1] + (UV[1] * a + UV[0] * b) * K];
-    const A1 = [], A2 = [];
-    for (let a = 0; a <= 700; a += 4) { const w = hwc(a); A1.push(loc(a, w)); A2.push(loc(a, -w)); }
-    const body = new Path2D(); [...A1, ...A2.reverse()].forEach((p, i) => (i ? body.lineTo(p[0], p[1]) : body.moveTo(p[0], p[1]))); body.closePath();
-    // dentin core of the crown (inside the enamel cap)
-    const dw = (a) => Math.max(0, hwc(a) - 19) * Math.min(1, (a - 30) / 40);
-    const D1 = [], D2 = [];
-    for (let a = 30; a <= 236; a += 4) { D1.push(loc(a, dw(a))); D2.push(loc(a, -dw(a))); }
-    const dej = new Path2D(); [...D1, ...D2.reverse()].forEach((p, i) => (i ? dej.lineTo(p[0], p[1]) : dej.moveTo(p[0], p[1])));
-    const crown = new Path2D(); [loc(-60, -220), loc(236, -220), loc(236, 220), loc(-60, 220)].forEach((p, i) => (i ? crown.lineTo(p[0], p[1]) : crown.moveTo(p[0], p[1]))); crown.closePath();
-    return { body, dej, crown, loc };
+    const sm = ease.smooth, smin = (x, y, k) => -k * Math.log(Math.exp(-x / k) + Math.exp(-y / k));
+    const body = (a) => (a < 95 ? 88 : a < 215 ? lerp(88, 50, sm((a - 95) / 120)) : lerp(50, 22, Math.pow(clamp((a - 215) / 400), 0.9)));
+    const hwc = (a) => Math.max(0, smin(1.12 * Math.sqrt(a * a + 8 * a), body(a), 8));   // two cusp slopes, rounded shoulders, cervix, root
+    const loc = (a, b) => [tip[0] + (UV[0] * a - UV[1] * b) * CK, tip[1] + (UV[1] * a + UV[0] * b) * CK];
+    const ring = (f, a0, a1, st, open) => { const A = [], B = []; for (let a = a0; a <= a1 + 0.01; a += st) { const w = f(a); A.push(loc(a, w)); B.push(loc(a, -w)); } const p = new Path2D(); [...A.reverse(), ...B].forEach((q, i) => (i ? p.lineTo(q[0], q[1]) : p.moveTo(q[0], q[1]))); if (!open) p.closePath(); return p; };
+    const outline = ring(hwc, 0, 700, 3);
+    const CEJ = 215;
+    // enamel: thick over the cusp, thinning to nothing at the cervix; dentin core inside it
+    const en = (a) => 21 * (1 - sm(clamp((a - 110) / (CEJ - 110))));
+    const dej = ring((a) => Math.max(0, hwc(a) - en(a)) * Math.pow(clamp((a - 26) / 36), 0.6), 26, CEJ, 3, true);
+    const crown = new Path2D(); [loc(-60, -220), loc(CEJ, -220), loc(CEJ, 220), loc(-60, 220)].forEach((q, i) => (i ? crown.lineTo(q[0], q[1]) : crown.moveTo(q[0], q[1]))); crown.closePath();
+    const pw = (a) => (a < 150 ? 21 * Math.pow(clamp((a - 82) / 68), 0.55) : a < 280 ? lerp(21, 10, sm((a - 150) / 130)) : lerp(10, 5, clamp((a - 280) / 300)));
+    const pulp = ring(pw, 82, 700, 4);
+    return { body: outline, dej, crown, pulp, loc };
   }
   function miniClast(x, y, ang, sc, ph) {
     if (sc <= 0.03) return;
@@ -392,18 +397,18 @@
   }
 
   function s2(t) {
-    const on1 = seg(t, 9.25, 9.6, ease.out), off = seg(t, 13.1, 13.5, ease.inOut), pressing = on1 * (1 - off);
-    const pulse = pressing * (0.5 + 0.5 * Math.sin((t - 9.25) * TAU * 1.2 - Math.PI / 2));
+    const on1 = seg(t, 8.45, 8.8, ease.out), off = seg(t, 12.2, 12.6, ease.inOut), pressing = on1 * (1 - off);
+    const pulse = pressing * (0.5 + 0.5 * Math.sin((t - 8.45) * TAU * 1.2 - Math.PI / 2));
     return {
       on1, off, pressing, pulse,
       push: 5 * pressing + 3 * pulse,
-      blunt: seg(t, 9.9, 12.9, ease.smooth), scoop: seg(t, 11.3, 13.0, ease.smooth),
-      cin: seg(t, 10.0, 10.9, ease.out), cout: seg(t, 13.25, 14.3, ease.inOut),
-      on2: seg(t, 10.8, 11.12, ease.outBack) * (1 - off),
-      apexCl: (k) => seg(t, 9.6 + k * 0.15, 10.1 + k * 0.15, ease.outBack) * (1 - seg(t, 13.7 + k * 0.2, 14.5 + k * 0.2, ease.inOut)),
-      conCl: (k) => seg(t, 10.95 + k * 0.2, 11.4 + k * 0.2, ease.outBack) * (1 - seg(t, 13.8 + k * 0.25, 14.7 + k * 0.25, ease.inOut)),
-      lining: seg(t, 14.6, 16.1, ease.inOut),
-      wire: seg(t, 13.3, 13.9, ease.inOut), bracket: 1 - seg(t, 13.5, 13.85, ease.in),
+      blunt: seg(t, 9.1, 12.1, ease.smooth), scoop: seg(t, 10.5, 12.2, ease.smooth),
+      cin: seg(t, 9.2, 10.1, ease.out), cout: seg(t, 12.35, 13.5, ease.inOut),
+      on2: seg(t, 10.0, 10.32, ease.outBack) * (1 - off),
+      apexCl: (k) => seg(t, 8.8 + k * 0.15, 9.3 + k * 0.15, ease.outBack) * (1 - seg(t, 12.6 + k * 0.08, 13.15 + k * 0.08, ease.inOut)),
+      conCl: (k) => seg(t, 10.15 + k * 0.2, 10.6 + k * 0.2, ease.outBack) * (1 - seg(t, 12.65 + k * 0.1, 13.2 + k * 0.1, ease.inOut)),
+      lining: seg(t, 13.5, 15.0, ease.inOut),
+      wire: seg(t, 12.4, 13.0, ease.inOut), bracket: 1 - seg(t, 12.6, 12.95, ease.in),
     };
   }
 
@@ -417,7 +422,7 @@
     /* bone */
     T.save(); T.beginPath(); T.rect(0, Y0, W, crest - Y0); T.clip();
     T.fillStyle = PAT.Tbone; T.fillRect(0, Y0, W, crest - Y0);
-    for (const m of [[120, 700, 74, 30, 0.2], [262, 868, 62, 26, -0.3], [96, 910, 50, 24, 0.1], [300, 668, 46, 22, -0.1], [884, 878, 72, 24, 0.12], [1010, 760, 44, 30, 0.5]]) {
+    for (const m of [[120, 700, 74, 30, 0.2], [262, 868, 62, 26, -0.3], [96, 910, 50, 24, 0.1], [300, 668, 46, 22, -0.1], [1000, 900, 50, 20, 0.08], [1000, 668, 0, 0, 0]]) {
       if (!m[2]) continue;
       ko(T, (c) => { c.beginPath(); c.ellipse(m[0], m[1], m[2], m[3], m[4], 0, TAU); c.fill(); });
       ink(T); T.lineWidth = 5; T.beginPath(); T.ellipse(m[0], m[1], m[2], m[3], m[4], 0, TAU); T.stroke();
@@ -430,7 +435,7 @@
 
     /* impacted canine: position (slides in along its axis, presses, later moves away) */
     const wq = [cx + g.hwR(g.vq), cy - g.vq];
-    const gap = 9 + 205 * (1 - st.cin) + 76 * st.cout - 2 * st.pulse * st.cin;
+    const gap = 9 + 205 * (1 - st.cin) + 640 * st.cout - 2 * st.pulse * st.cin;
     const tip = [wq[0] + UV[0] * gap, wq[1] + UV[1] * gap], can = canineGeom(tip);
     ko(T, (c) => { c.lineWidth = 24; c.stroke(can.body); c.fill(can.body); });   // crypt
 
@@ -473,18 +478,19 @@
       ink(T); rr(T, cx - bw / 2, by - bh / 2, bw, bh, 9 * k); T.fill();
       ko(T, (c) => { c.fillRect(cx - bw / 2 - 1, by - 8 * k, bw + 2, 16 * k); c.fillRect(cx - 4 * k, by - bh / 2 - 1, 8 * k, bh + 2); });
     }
-    if (st.wire < 0.99) { const x0 = cx - 176, x1 = x0 + 352 * (1 - st.wire); ink(T); T.lineWidth = 8; T.lineCap = 'round'; T.beginPath(); T.moveTo(x0, by); T.lineTo(x1, by); T.stroke(); }
+    if (st.wire < 0.99) { const x0 = cx - 160, x1 = x0 + 320 * (1 - st.wire); ink(T); T.lineWidth = 8; T.lineCap = 'round'; T.beginPath(); T.moveTo(x0, by); T.lineTo(x1, by); T.stroke(); }
 
     /* canine drawn */
     P.fillStyle = PAT.Pdent; P.fill(can.body);
     ko(P, (c) => { c.save(); c.clip(can.body); c.fill(can.crown); c.restore(); });        // enamel cap = bare paper
     P.save(); P.clip(can.body); P.fillStyle = PAT.Pdent; P.fill(can.dej); P.restore();
+    ko(P, (c) => { c.lineWidth = 7; c.stroke(can.pulp); }); ink(P); P.fill(can.pulp);      // pulp: same living pink as the incisor
     ink(T); T.lineWidth = 3; T.stroke(can.dej);
     T.lineWidth = 6; T.stroke(can.body);
 
     /* force arrows (pink), teal knocked out beneath */
     if (st.pressing > 0.02) {
-      const k = st.pressing, ax = cx - 236, y0 = cy + 214 - 10 * st.pulse, y1 = y0 - 136 * k;
+      const k = st.pressing, ax = cx - 222, y0 = cy + 212 - 10 * st.pulse, y1 = y0 - 136 * k;
       ko(T, (c) => arrow(c, ax, y0 + 3, ax, y1 - 4, 44, 96, 62 * k));
       ink(P); arrow(P, ax, y0, ax, y1, 36, 86, 56 * k);
       // squeeze marks over the apex
@@ -494,7 +500,7 @@
       P.globalAlpha = 1;
     }
     if (st.on2 > 0.02) {
-      const k = st.on2, a0 = can.loc(226 - 8 * st.pulse, 0), a1 = can.loc(226 - 8 * st.pulse - 150 * k, 0);
+      const k = st.on2, a0 = can.loc(424 - 8 * st.pulse, -102), a1 = can.loc(424 - 8 * st.pulse - 150 * k, -102);   // beside the tooth, like the orthodontic arrow
       ko(T, (c) => arrow(c, a0[0], a0[1], a1[0], a1[1], 36, 80, 50 * k));
       ink(P); arrow(P, a0[0], a0[1], a1[0], a1[1], 30, 72, 46 * k);
     }
@@ -507,26 +513,28 @@
     T.restore(); P.restore();
   }
 
-  function labelWipe(t, tin, tout, x, y, w, fn) {
+  function labelWipe(t, tin, tout, x, y, w, fn, h = 66) {
     const b = seg(t, tin, tin + 0.3, ease.out), a = seg(t, tout - 0.25, tout, ease.in);
     if (b <= 0 || a >= 1) return;
-    for (const c of [T, P]) { c.save(); c.beginPath(); c.rect(x + w * a, y - 44, w * (b - a), 66); c.clip(); }
+    for (const c of [T, P]) { c.save(); c.beginPath(); c.rect(x + w * a, y - 44, w * (b - a), h); c.clip(); }
     fn(); T.restore(); P.restore();
   }
 
   function sheet2(t) {
     header('2', 'PRESSURE', 1);
     macro(t);
-    labelWipe(t, 9.45, 13.3, 40, 1166, 230, () => txt(T, 'ortho force', 228, 1166, FG(700, 32), { align: 'right', ls: '1px' }));
-    labelWipe(t, 10.9, 13.3, 660, 944, 320, () => chipLabel('impacted tooth', 690, 944));
-    caption(t, 9.2, 13.15, [[{ s: 'Pressure', hl: 1 }, ' keeps'], ['them working']]);
-    caption(t, 13.3, 99, [['Pressure off', ARW, { s: 'it stops.', hl: 1 }], [{ s: 'A shortened root stays short.', font: FG(700, 46) }]], 56);
-    const cause = seg(t, 9.28, 9.44, ease.out) * (1 - seg(t, 13.12, 13.3, ease.inOut));
-    const up = seg(t, 9.55, 10.3, ease.out), dn = seg(t, 13.7, 15.0, ease.inOut);
+    labelWipe(t, 8.65, 12.4, 100, 1150, 140, () => { const f = FG(700, 32); txt(T, 'ortho', 224, 1152, f, { align: 'right', ls: '1px' }); txt(T, 'force', 224, 1189, f, { align: 'right', ls: '1px' }); }, 100);
+    labelWipe(t, 10.15, 12.4, 636, 930, 300, () => chipLabel('impacted tooth', 662, 930));
+    caption(t, 8.4, 12.3, [[{ s: 'Pressure', hl: 1 }, ' keeps'], ['clasts working']]);
+    caption(t, 12.4, 99, [['Pressure off', ARW, { s: 'it stops.', hl: 1 }], [{ s: 'A shortened root stays short.', font: FG(700, 46) }]], 56);
+    const cause = seg(t, 8.48, 8.64, ease.out) * (1 - seg(t, 12.22, 12.4, ease.inOut));
+    const up = seg(t, 8.75, 9.5, ease.out), dn = seg(t, 12.5, 13.3, ease.inOut);
     const act = 0.86 * up * (1 - dn) + 0.03 * Math.sin(t * 9) * up * (1 - dn);
-    gauge(cause, act, t < 9.6 ? '' : (t < 14.5 ? 'working' : 'stopped'), t < 14.5 ? seg(t, 9.6, 9.85, ease.out) : seg(t, 14.5, 14.75, ease.out));
-    sourceLine(t, 9.3, 13.2, 'Fuss et al., Dent Traumatol 2003');
-    sourceLine(t, 13.4, 99, 'Patel et al., Int Endod J 2022');
+    // the state word disappears as soon as the cause is switched off and returns as "stopped" while the needle lands
+    if (t < 12.4) gauge(cause, act, t < 8.8 ? '' : 'working', seg(t, 8.8, 9.05, ease.out) * (1 - seg(t, 12.25, 12.4, ease.in)));
+    else gauge(cause, act, t < 13.0 ? '' : 'stopped', seg(t, 13.0, 13.25, ease.out));
+    sourceLine(t, 8.5, 12.3, 'Fuss et al., Dent Traumatol 2003');
+    sourceLine(t, 12.5, 99, 'Patel et al., Int Endod J 2022');
     schematic();
   }
 
@@ -570,35 +578,29 @@
     const f = FT(100);
     ink(P); rr(P, 52, 395 - 84, tw('No', f) + 24, 104, 10); P.fill();
     txt(T, 'No root canal', 64, 395, f); txt(T, 'treatment.', 64, 497, f);
-    // pulp line with a "normal" tick
+    // pulp line with a tick
     ink(P); circ(P, 90, 553, 25);
     ink(T); T.lineWidth = 8; T.beginPath(); T.moveTo(78, 554); T.lineTo(87, 564); T.lineTo(104, 542); T.stroke();
-    txt(T, 'Pulp tests normal.', 128, 571, FG(700, 50));
-    // two radiograph icons
-    const fy = 606, fh = 536, fw = 426;
+    txt(T, 'Pulp is not the cause.', 128, 571, FG(700, 50));
+    // two radiograph icons, each with its finding; the action sits under PRESSURE only (surface: nothing to remove)
+    const fy = 612, fh = 540, fw = 426, x2 = 526;
     film(64, fy, fw, fh, { num: '1', title: 'SURFACE', blunt: 0, ring: 0 });
-    film(526, fy, fw, fh, { num: '2', title: 'PRESSURE', sub: '· ortho', blunt: 1, bracket: 1, ring: seg(t, 18.45, 18.9, ease.inOut) });
-    const fc = FG(700, 36);
-    labelWipe(t, 17.8, 99, 64, 1198, fw, () => txt(T, 'X-ray: usually nothing', 64 + fw / 2, 1198, fc, { align: 'center' }));
-    labelWipe(t, 18.0, 99, 526, 1198, fw, () => txt(T, 'X-ray: blunted apex', 526 + fw / 2, 1198, fc, { align: 'center' }));
-    // call to action
-    const fa = FT(54), wa = tw('Remove the cause.', fa), r = seg(t, 18.25, 18.6, ease.out);
-    if (r > 0) {
-      for (const c of [T, P]) { c.save(); c.beginPath(); c.rect(50, 1236, (wa + 80) * r, 110); c.clip(); }
-      ink(P); rr(P, 64, 1242, wa + 48, 92, 14); P.fill();
-      txt(T, 'Remove the cause.', 88, 1307, fa);
-      T.restore(); P.restore();
-    }
-    gauge(0, 0, 'stopped', 1);
-    sourceLine(t, 0, 99, 'Abbott & Lin, Dent Traumatol 2022; Patel et al., Int Endod J 2022');
-    schematic(950, 1396);
+    film(x2, fy, fw, fh, { num: '2', title: 'PRESSURE', sub: '· ortho', blunt: 1, bracket: 1, ring: seg(t, 17.6, 18.1, ease.inOut) });
+    const fc = FG(700, 40);
+    txt(T, 'usually nothing', 64 + fw / 2, 1210, fc, { align: 'center' });
+    txt(T, 'blunted apex', x2 + fw / 2, 1210, fc, { align: 'center' });
+    const fa = FT(56);
+    ink(P); rr(P, x2, 1244, fw, 158, 14); P.fill();
+    txt(T, 'Remove', x2 + 28, 1312, fa); txt(T, 'the cause.', x2 + 28, 1376, fa);
+    sourceLine(t, 0, 99, 'Abbott & Lin 2022 · Patel et al. 2022');
+    schematic();
   }
 
   /* ================= sheets, stack and loop ================= */
   const REG = { 1: [3.2, -2.4, 0.0011], 2: [-3.0, 2.6, -0.001], 3: [2.6, 2.8, 0.0009] };
   const reg = (n, t) => ({ dx: REG[n][0] + 0.9 * noise1(t * 0.35, n), dy: REG[n][1] + 0.9 * noise1(t * 0.35 + 40, n), rot: REG[n][2] });
   function drawSheet(n, t) {
-    Riso.begin(); furniture();
+    Riso.begin(); furniture(n);
     if (n === 1) sheet1(t); else if (n === 2) sheet2(t); else sheet3(t);
   }
 
@@ -628,7 +630,7 @@
   window.REEL = {
     title: 'Resorption 2/5 · Surface + pressure',
     duration: DUR,
-    poster: 20.6,
+    poster: 20.4,
     canvas: Riso.main.canvas,
     fonts: ['400 86px "Archivo Black"', '700 32px "Space Grotesk"', '600 52px "Space Grotesk"', '500 25px "Space Grotesk"'],
     setup() { Riso.setup(); buildPatterns(); },

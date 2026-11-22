@@ -107,8 +107,10 @@ is correct; "only six studies exist" would not be.
 | X11 | Independent torsional-resistance test of X7; clinical fracture incidence of X7; healing outcome with X7 | — | **None found on PubMed** (searches: "EdgeFile X7", EdgeFile + torsional / fatigue / transportation / shaping, EdgeEndo + X7) | NOT VERIFIED | say "no independent data" rather than imply any. **Fact-check:** search re-run (`(EdgeFile OR "Edge File" OR EdgeEndo) AND (torsional OR torque OR fracture OR separation OR outcome)`, 17 records, all abstracts read): torsional data exist for EdgeTaper, EdgeTaper Platinum, EdgeOne Fire and EdgeGlidePath, none for the X7; no clinical fracture-incidence or outcome study of any EdgeEndo file. The absence claim holds for PubMed only |
 
 Checked and **excluded as not X7**: Drukteinis 2020 (Materials 13:5823, PMID 33371244 — full text: X5 series); Yılmaz 2020
-(J Endod 46:662, PMID 32151482 — X3); Falakaloğlu 2023 (X3); Pandey 2021 (X1); Valliappan 2023 (J Conserv Dent 26:170 —
-"EdgeFile", described as reciprocating; unclear model).
+(J Endod 46:662, PMID 32151482 — X3); Falakaloğlu S, et al. Aust Endod J 2023;49(2):256–61, PMID 35770610 (abstract:
+EdgeFile X3); Pandey SH, et al. Minerva Dent Oral Sci 2021;70(6):257–62, PMID 34264044 (abstract: Edge File X1);
+Valliappan CT, et al. J Conserv Dent 2023;26(2):170–5, PMID 37205884 (abstract: "EdgeFile", described as a
+"reciprocating multiple-file system"; model not named). Identifiers for the last three added at the citation audit.
 
 ### P. General principles (any NiTi rotary sequence)
 
@@ -116,7 +118,7 @@ Checked and **excluded as not X7**: Drukteinis 2020 (Materials 13:5823, PMID 333
 
 | # | Fact as it could appear on screen | Exact source | What the source literally reports | Verified from | Confidence |
 |---|---|---|---|---|---|
-| P1 | After manual preflaring (glide path), ProTaper S1 shaped a mean of 59 resin blocks before breaking vs 10 without (in vitro) | Berutti E, Negro AR, Lendini M, Pasqualini D. J Endod 2004;30(4):228–30. PMID 15085052, doi:10.1097/00004770-200404000-00011 | Endo-Training-Blocks; S1 without preflaring 10 blocks vs manually preflared 59 (P<.01). "Manual preflaring creates a glide path for the instrument tip and is a major determinant in reducing the failure rate". Also: "All instruments worked better at high torque." | abstract | high (resin blocks, ProTaper, not X7). **Fact-check:** the abstract reports the "*mean* number of Endo-Training-Blocks shaped before file breakage" — 59 and 10 are means, and the outcome is file lifespan, not a count of separations. The number of instruments per group and the size to which the blocks were hand-preflared are not in the abstract (full text not in PMC, not read), so the paper cannot be cited for "a #10 K glide path is enough" |
+| P1 | After manual preflaring (glide path), ProTaper S1 shaped a mean of 59 resin blocks before breaking vs 10 without (in vitro) | Berutti E, Negro AR, Lendini M, Pasqualini D. J Endod 2004;30(4):228–30. PMID 15085052, doi:10.1097/00004770-200404000-00011 | Endo-Training-Blocks; S1 without preflaring 10 blocks vs manually preflared 59 (P<.01). "Manual preflaring creates a glide path for the instrument tip and is a major determinant in reducing the failure rate". Also: "All instruments worked better at high torque." | abstract | high (resin blocks, ProTaper, not X7). **Fact-check:** the abstract reports the "*mean* number of Endo-Training-Blocks shaped before file breakage" — 59 and 10 are means, and the outcome is file lifespan, not a count of separations. The number of instruments per group and the size to which the blocks were hand-preflared are not in the abstract (full text not in PMC, not read), so the paper cannot be cited for "a #10 K glide path is enough". **Citation audit:** the word "resin" is not in the abstract ("Endo-Training-Blocks", "simulators"); Endo-Training-Blocks (Dentsply Maillefer) are simulated-canal resin blocks, described as such in Ha JH, Park SS. Restor Dent Endod 2012;37(4):215–9, PMID 23429968 (abstract) |
 | P2 | Curved canals, extracted molars: 12% breakage after a hand-file glide path vs 26% in the same group's earlier studies without | Patiño PV, Biedma BM, Liébana CR, Cantatore G, Bahillo JG. J Endod 2005;31(2):114–6. PMID 15671822, doi:10.1097/01.don.0000136209.28647.13 | 208 canals; K3, ProFile, ProTaper after #10–20 K-files; "25/205 = 12% versus 16/61 = 26%, p = 0.007" (comparison with **historical** data, curvature >30°, 350 rpm); breakage associated with the angle of curvature (OR 1.078, 95% CI 1.032–1.12) and with >8 uses vs 1–2 uses (OR 22.7, 95% CI 2.6–191.3) | abstract | medium-high: historical control; denominator unit not stated in the abstract (208 canals in the methods, 205 in the fraction). **Fact-check:** citation confirmed as PubMed indexes it ("Patiño PV, Biedma BM, Liébana CR, Cantatore G, Bahillo JG"); these are Spanish double surnames split by the indexer (the same group appears as "Martín B … Varela P" in P21), so cite exactly in the PubMed form. The hand files went to size #20, not #10 |
 | P3 | Hand preflaring first allowed more uses before separation than the manufacturer's crown-down alone | Roland DD, Andelin WE, Browning DF, Hsu GH, Torabinejad M. J Endod 2002;28(7):543–5. PMID 12126387, doi:10.1097/00004770-200207000-00015 | ProFile Series 29 .04, extracted molars 20–30° curvature, up to 20 uses; combination technique > crown-down, P<.0001 | abstract | high |
 | P4 | No instrument fractured when a patent glide path was present (ProTaper, 15 maxillary molars, in vitro) | Peters OA, Peters CI, Schönenberger K, Barbakow F. Int Endod J 2003;36(2):93–9. PMID 12657152, doi:10.1046/j.1365-2591.2003.00628.x | Mean torque 0.8–2.2 N·cm, force 4.6–6.2 N; torque, force and rotations all higher in "constricted" than "wide" canals (P<.001) | abstract | high |
@@ -174,7 +176,7 @@ Checked and **excluded as not X7**: Drukteinis 2020 (Materials 13:5823, PMID 333
 | P36 | Patency file (#10 K, 1 mm past length) put more irrigant in the apical third in vivo | Vera J, Arias A, Romero M. J Endod 2011;37(9):1276–8. PMID 21846547. Vera J, Hernández EM, Romero M, Arias A, van der Sluis LWM. J Endod 2012;38(10):1340–3. PMID 22980174 | 40 canals (P=.02, with passive ultrasonic irrigation) and 43 large canals (P=.04); radiopaque irrigant seen radiographically | abstract | high (surrogate outcome) |
 | P37 | Patency at the canal terminus was a significant factor for periapical healing; maintaining patency does not increase postoperative pain | Ng Y-L, Mann V, Gulabivala K. Int Endod J 2011;44(7):583–609. PMID 21366626. Yaylali IE, et al. J Endod 2018;44(8):1228–36. PMID 29935875. Abdulrab S, et al. J Endod 2018;44(10):1467–73. PMID 30170845 | Ng: prospective, 1170 + 1314 roots, "achievement of patency at the canal terminus (P = 0.001)"; also "abstaining from using 2% chlorhexidine as an adjunct irrigant" favored healing (P=.01). Yaylali: 5 RCTs, 848 patients, low–moderate quality. Abdulrab: 4 studies pooled, NS | abstract | high |
 | P38 | Ultrasonic activation cleans better but has not been shown to improve healing | Căpută PE, Retsas A, Kuijk L, Chávez de Paz LE, Boutsioukis C. J Endod 2019;45(1):31–44.e13. PMID 30558797. Liang YH, et al. J Endod 2013;39(10):1218–25. PMID 24041381. Meire MA, Bronzato JD, Bomfim RA, Gomes BPFA. Int Endod J 2023;56 Suppl 3:455–74. PMID 36156804 | Căpută: 3 clinical + 45 in vitro studies; no better healing in single-canal teeth; better removal of pulp remnants and hard-tissue debris; evidence level low. Liang RCT (84 teeth, 10–19 months): absence + reduction of lesion 95.1% vs 88.4%, P=.470. Meire (ESE S3 review): meta-analysis of 2 studies, no significant difference at 12 months | abstract | high |
-| P39 | Cone and file sizes do not always match — verify cone fit | Keith AM, Hinman SE, Dickens NE, Kim JJ, Scott RV, Osborne NH. J Endod 2024;50(12):1766–71. PMID 39393517, doi:10.1016/j.joen.2024.10.002 | Variable-taper F2 files and cones of ProTaper Gold, EdgeTaper Platinum, ExactTaper H (n=20 per system): files from all manufacturers smaller than nominal; EdgeEndo cones smaller than nominal; taper non-standardized | abstract | high (EdgeTaper Platinum, not X7; supports the IFU's "may need to drop down in cone tip size") |
+| P39 | Cone and file sizes do not always match — verify cone fit | Keith AM, Hinman SE, Dickens NE, Kim JJ, Scott RV, Osborne NH. J Endod 2024;50(12):1766–71. PMID 39393517, doi:10.1016/j.joen.2024.10.002 | Variable-taper F2 files and cones of ProTaper Gold, EdgeTaper Platinum, ExactTaper H (n=20 per system): files from all manufacturers smaller than nominal; EdgeEndo cones smaller than nominal; taper non-standardized. **Citation audit:** the finding that bears on cone fit is "ProTaper and EdgeEndo mean file diameters were significantly smaller than corresponding GP cone diameters (P < .01, P < .01)" in the apical third (D1–D4), with SS White the other way round (P = .02); conclusion "clinicians should be prepared to make intraoperative adjustments when obturating" | abstract | high (variable-taper EdgeTaper Platinum, not the constant-taper X7; supports the IFU's "may need to drop down in cone tip size") |
 | P40 | Classic technique papers a board examiner expects | Schilder H. Dent Clin North Am 1974;18(2):269–96 (PMID 4522570). Goerig AC, Michelich RJ, Schultz HH. J Endod 1982;8(12):550–4 (PMID 6962274). Morgan LF, Montgomery S. J Endod 1984;10(10):491–8 (PMID 6593413). Roane JB, Sabala CL, Duncanson MG Jr. J Endod 1985;11(5):203–11 (PMID 3858415). Chow TW. J Endod 1983;9(11):475–9 (PMID 6586975) | Shaping objectives; step-down; crown-down pressureless; balanced force; irrigant effectiveness depends on needle depth. None has a usable PubMed abstract | citation only | medium — name in the caption/NOTES at most; state no number from them |
 
 ---
@@ -210,6 +212,8 @@ the researcher's first draft.**
    torque further.
 6. **Glide path first (evidence):** "Hand glide path: S1 file lasted 59 vs 10 resin blocks (mean) — in vitro, Berutti
    2004, J Endod". [P1] Short form: "Glide path first — file lasted about 6× longer in resin blocks (Berutti 2004)".
+   **Superseded** (see "Corrections after independent review"): the outcome is blocks shaped, not time; the reel says
+   "Hand preflaring first: shaped about 6× more blocks".
    - *Fact-check:* the earlier wordings "59 vs 10 **canals**" and "**fewer separations**" were withdrawn. The outcome was
      the mean number of resin training blocks one ProTaper S1 shaped before it broke, not a separation count, and the
      abstract does not give the number of files or the size of the hand preflaring.
@@ -544,7 +548,8 @@ irrigate/activate station tagged `IFU`; "≤ 4 canals" without the document name
   non-PMC papers were not read by either pass; every statement from them is abstract-level.
 - Schneider 1971, Schilder 1974, Goerig 1982, Morgan & Montgomery 1984, Roane 1985 and Chow 1983 have no PubMed
   abstract (citations confirmed only).
-- Falakaloğlu 2023, Pandey 2021 and Valliappan 2023 (exclusion list, no PMID given) were not re-checked.
+- Falakaloğlu 2023, Pandey 2021 and Valliappan 2023 (exclusion list) were not re-checked by the fact-checker; they
+  were identified and their abstracts read at the citation audit (PMIDs 35770610, 34264044, 37205884).
 - Which of the two live manufacturer documents is packed with product sold in the USA is unknown; the account owner
   should check the leaflet in his own box before posting.
 - Sponsorship / relationship with the manufacturer: to be stated by the account owner.
@@ -566,3 +571,33 @@ irrigate/activate station tagged `IFU`; "≤ 4 canals" without the document name
   outcome is the mean number of resin blocks shaped before breakage (59 vs 10), not time. The reel now says "Hand
   preflaring first: shaped about 6× more blocks" and the hand-file label is "#10 K, then #15 K" (US DFU minimum).
 - **Speed/torque** are "recommended" in the IFU and optional in the US DFU ("Or if you wish, you can use…").
+
+---
+
+## Citation audit (22 Nov 2026, independent, PubMed)
+- **Scope.** The one on-screen literature citation (Berutti 2004), every literature citation in meta.json and
+  NOTES.md, and all 74 PMIDs that were in this file before the audit (four more were added by it: 23429968,
+  35770610, 34264044, 37205884, each fetched with its abstract).
+- **Identity of the papers.** Eleven records were fetched in full (metadata + abstract): PMIDs 15085052, 39393517,
+  15273636, 7714445, 10687543, 12067124, 12067134, 19720236, 16631839, 33410578, 17320714. The other 63 were matched
+  with the PubMed citation matcher on journal + year + volume + first page + first author; every one returns the PMID
+  given here. **No wrong PMID, first author, year, journal, volume or page range was found.** (Lin 2021 is indexed
+  with the surname "Han-Hsing Lin"; the journal/volume/page match gives PMID 33854727.)
+- **Support for the reel's claims.** P1 (Berutti 2004), P26 (Peters 2004), P39 (Keith 2024), P9 (Stabholz 1995), P10
+  (Ibarrola 1999; de Camargo 2009), P11 (Davis 2002; Schroeder 2002), P15 (Gomes 2021), P27 (Boessler 2007) and P30
+  (Khademi 2006): every number and quotation in those rows is in the PubMed abstract as stated. None of these papers
+  is in PMC; no full text was read.
+- **Search re-run.** `"EdgeFile X7" OR "Edge File X7" OR "EdgeFile X-7"`: 6 records (PMIDs 33854727, 31891973,
+  36908740, 39743755, 40705445, 33415159), unchanged; none compares shaping sequences.
+- **Corrections made here.** P39: the directional finding (files smaller than their matching cones) and the
+  variable-taper caveat added. P1: basis for the word "resin" added. Exclusion list: citations and PMIDs added for
+  Falakaloğlu 2023, Pandey 2021 and Valliappan 2023. (b)6: superseded short form marked.
+- **Superseded wording still printed above — do not copy.** The short forms "file lasted about 6× longer" in (b)6 and
+  in the (f) storyboard, and the line "Manufacturer IFU + evidence-informed habits" in the headline finding, (b) and
+  (f), were replaced at review by "Hand preflaring first: shaped about 6× more blocks" and "manufacturer IFU / US DFU
+  + one in vitro study". The reel, NOTES.md and meta.json carry the current wording.
+- **Attribution note.** "Re-confirm working length after coronal flaring" (item (c)8) is a recommendation drawn from
+  several papers, not a result of Stabholz 1995 or Ibarrola 1999 alone: those two show that length is found more
+  reliably in preflared canals; Davis 2002 is the paper that measured the change in length with early vs late flaring
+  (0.12–0.14 mm vs 0.22–0.48 mm), and Schroeder 2002 calls its 0.17 mm change "clinically unimportant". meta.json
+  `caption_extras` was reworded accordingly.

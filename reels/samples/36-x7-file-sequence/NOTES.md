@@ -73,7 +73,7 @@ re-fetched, manufacturer PDFs re-downloaded). No new fact was added at build tim
 | 2 | ACCESS | IFU simplified technique step 1: "Create straight line access to canal orifices." | manufacturer (IFU) |
 | 3 | SCOUT | Step 2: "Locate canals and explore using stainless steel hand instruments." No file size is given | manufacturer (IFU) |
 | 4 | WORKING LENGTH · #10 K, then #15 K · apex-locator and radiograph pictograms · = GLIDE PATH | IFU step 4: "Using a #10 K file or larger file to determine the working length with an apex locator and radiographs in each canal. This will also form a glide path in each canal." US DFU: "Establish patency by taking a #10 K-File 1mm past the canal terminus, and at least a #15 K-File to the terminus." The label meets both; the "1 mm past" patency detail is in the caption | manufacturer (both) |
-| 5 | EVIDENCE · IN VITRO — "Hand preflaring first: shaped about 6× more blocks"; fine print "ProTaper S1, resin blocks: mean 59 vs 10 before breaking · Berutti 2004, J Endod" | Berutti E, Negro AR, Lendini M, Pasqualini D. J Endod 2004;30(4):228-30. **PMID 15085052**, doi:10.1097/00004770-200404000-00011. Abstract: mean number of Endo-Training-Blocks one ProTaper S1 shaped before breaking, 59 with manual preflaring vs 10 without (P<.01). 59/10 = 5.9, written "about 6×". Abstract only; the preflaring size is **not in the abstract** (secondary sources suggest up to about #20; unverified), so the flag does not show that a #10 K alone is enough. Conventional NiTi, resin blocks, not the X7. The outcome is blocks shaped, not time | evidence (in vitro, other system) |
+| 5 | EVIDENCE · IN VITRO — "Hand preflaring first: shaped about 6× more blocks"; fine print "ProTaper S1, resin blocks: mean 59 vs 10 before breaking · Berutti 2004, J Endod" | Berutti E, Negro AR, Lendini M, Pasqualini D. J Endod 2004;30(4):228-30. **PMID 15085052**, doi:10.1097/00004770-200404000-00011. Abstract: mean number of Endo-Training-Blocks one ProTaper S1 shaped before breaking, 59 with manual preflaring vs 10 without (P<.01). 59/10 = 5.9, written "about 6×". "Resin blocks" is a description of the product, not abstract wording: the abstract says "Endo-Training-Blocks" and "simulators" (Endo-Training-Blocks, Dentsply Maillefer, are simulated-canal resin blocks; described as such in Ha & Park, Restor Dent Endod 2012;37(4):215-9, PMID 23429968, abstract). Abstract only; the preflaring size is **not in the abstract** (secondary sources suggest up to about #20; unverified), so the flag does not show that a #10 K alone is enough. Conventional NiTi, resin blocks, not the X7. The outcome is blocks shaped, not time | evidence (in vitro, other system) |
 | 6 | 17/.04 | Step 5: "Use #17/04 file in one or more passes, alternating with small-sized hand files if necessary, until working length is reached." | manufacturer (IFU) |
 | 7 | 25/.04; loop 20/.04 ⇄ "only after 25 stops short" | Step 6: "Next use #25/04 to working length passively; if instrument has not reached working length use smaller additional shaping instrument #20/04 to working length alternating between #20/04 and #25/04." | manufacturer (IFU) |
 | 8 | EVERY FILE: irrigate | Step 3: "Irrigate before each hand or rotary file with liquid NaOCI [sic] or 17% EDTA." US DFU: "Irrigate and lubricate the canal frequently" | manufacturer (both) |
@@ -81,15 +81,20 @@ re-fetched, manufacturer PDFs re-downloaded). No new fact was added at build tim
 | 10 | EVERY FILE: clean flutes · inspect | IFU §5: "Regularly clean flutes and inspect instrument during use, and discard if it shows any signs of distortion or wear." US DFU: "Clean the flutes frequently and at least after removing the files from the canal." The documents **conflict** on what follows inspection: the US DFU, "Safe Unwinding (Heat Treat only)": "As a safety feature the files are designed to unwind. They may be used until the files unwind backwards." Conservative rule: discard. Not on screen | manufacturer (both) |
 | 11 | IF WANTED → LARGER .04 / all canals · LARGER .06 / straight to mildly curved | Step 7: "After #25/04 reaches working length if clinician desires a larger apical or canal shape, take a #25/06 or other additional larger 04 or 06 instruments (#30, #35, #40, etc...)." The taper rule is the pair of crown-down section headings in both documents. No angle is given | manufacturer (step 7 = IFU; taper rule = both) |
 | 12 | IRRIGATE (solid station, no tag) | US DFU "Disinfecting": "After each canal is fully shaped, rinse the canals for 1 minute with 17% Liquid EDTA to remove the canal Smear Layer. Rinse the canals for 5 minutes with 5% NaOCl to remove debris and bacteria." (further rinses follow). Not a step of the IFU simplified technique. Recipe not shown, no "activate" claim | manufacturer (US DFU) |
-| 13 | OBTURATE / check cone fit | Both documents: "…sometimes you may need to drop down in cone tip size if the corresponding gutta percha to your final rotary file does not go to length." Supporting literature (not on screen): Keith AM, et al. J Endod 2024;50(12):1766-71, **PMID 39393517** (abstract; EdgeTaper Platinum, not X7) | manufacturer (both) |
+| 13 | OBTURATE / check cone fit | Both documents: "…sometimes you may need to drop down in cone tip size if the corresponding gutta percha to your final rotary file does not go to length." Supporting literature (not on screen): Keith AM, Hinman SE, Dickens NE, Kim JJ, Scott RV, Osborne NH. J Endod 2024;50(12):1766-71, **PMID 39393517**, doi:10.1016/j.joen.2024.10.002. Abstract only: F2 files and matching cones, n = 20 per system; ProTaper Gold and EdgeEndo (EdgeTaper Platinum) files were significantly smaller than their cones in the apical 4 mm (P<.01); "clinicians should be prepared to make intraoperative adjustments when obturating". Variable-taper EdgeTaper Platinum, not the constant-taper X7 | manufacturer (both) |
 | 14 | One patient · one procedure · then discard | IFU §5: "Each instrument may be used to treat up to four (4) canals during a single procedure. Discard after use." US DFU: "Endodontic files are single use only…", "Once file is used do not reuse." True under both; the 4-canal cap (IFU only) was removed from the screen at review | manufacturer (both) |
 | 15 | FOLLOW THE CURRENT DFU | The brief's mandatory line; the two live documents differ | — |
-| 16 | Fine print: "Schematic · manufacturer IFU / US DFU + one in vitro study · no sequence is proven 'most efficient'" | No study comparing EdgeFile X7 sequences on PubMed (searches of 22 Nov 2026 in RESEARCH.md). Peters OA. J Endod 2004;30(8):559-67, **PMID 15273636** (abstract) | absence of evidence + review |
+| 16 | Fine print: "Schematic · manufacturer IFU / US DFU + one in vitro study · no sequence is proven 'most efficient'" | No study comparing EdgeFile X7 sequences on PubMed (searches of 22 Nov 2026 in RESEARCH.md). Peters OA. J Endod 2004;30(8):559-67, **PMID 15273636**, doi:10.1097/01.don.0000129039.59003.9d (abstract: "Other, less significant factors include operator experience, rotational speed, and specific instrument sequence"; a narrative review that predates the X7). Search re-run at the citation audit: `"EdgeFile X7" OR "Edge File X7" OR "EdgeFile X-7"` still returns 6 records, none comparing sequences | absence of evidence + review |
 
 **In the caption / meta.json only (`caption`, `caption_extras`):** crown-down 25 → 20 → (17), which is in both
 documents and is the only X7 sequence in the US DFU; the US DFU patency wording; the inspect/unwinding conflict; speed
 and torque being optional in the US DFU and "minimal apical pressure" being US DFU wording; "re-confirm working length
-after coronal flaring" (Stabholz 1995, PMID 7714445; Ibarrola 1999, PMID 10687543); US DFU precaution 7 ("Take each
+after coronal flaring". This is a recommendation, not a finding of any one paper: Stabholz, Rotstein, Torabinejad,
+J Endod 1995;21(2):92-4, PMID 7714445 (in patients, by feel: file tip within 1 mm of the radiographic apex in 75.0% of
+preflared vs 32.3% of nonflared canals) and Ibarrola et al., J Endod 1999;25(9):625-6, PMID 10687543 (in vitro, 32
+canals, Root ZX) show that length is found more reliably in a preflared canal; Davis, Marshall, Baumgartner, J Endod
+2002;28(6):438-42, PMID 12067124 (in vitro, curved canals, n = 15 per group) shows that length changed less when it was
+taken after flaring (0.12-0.14 mm vs 0.22-0.48 mm). All three read as abstracts; US DFU precaution 7 ("Take each
 file to length only one time and for no more than one second").
 
 Station notation: the IFU prints "17/04"; the map uses the conventional "17/.04".
@@ -110,9 +115,10 @@ Station notation: the IFU prints "17/04"; the map uses the conventional "17/.04"
 The crown-down sequence and the 4-canal cap (caption / notes only since the review), "minimal apical pressure"
 (US DFU wording), pecking amplitude or stroke count (not in any X7 document), any fatigue number or brand comparison, the cross-section
 (manufacturer page and papers disagree), curvature in degrees, a required apical size (Khademi 2006 was the first item
-to cut), the pooled fracture incidence of Gomes 2021 (no denominator in the abstract), the manufacturer's final-rinse
+to cut; J Endod 2006;32(5):417-20, PMID 16631839), the pooled fracture incidence of Gomes 2021 (no denominator in the
+abstract; Aust Endod J 2021;47(2):372-85, PMID 33410578), the manufacturer's final-rinse
 recipe, the "unwinding is a safety feature" sentence of the older DFUs, EdgeX7 Utopia settings, and "wet canal = lower
-torque" (Boessler 2007; cut for the word budget). See RESEARCH.md section (e).
+torque" (Boessler 2007, J Endod 2007;33(3):280-3, PMID 17320714; cut for the word budget). See RESEARCH.md section (e).
 
 ## Design rationale
 - **Layout.** Lines 1 and 2 run down the left with labels to the right; the route then turns through a 45° bend and
@@ -191,3 +197,30 @@ Design
   meta.json: topic cut to <= 140 characters, caption cut from 873 to under 700 characters (document-status, patency
   and Berutti details moved to `caption_extras`). Left as is: "about 6× more blocks" (59 vs 10 is 5.9× as many; the
   raw means are printed directly under it); the Disclosure placeholder still blocks posting.
+- **Citation audit (22 Nov 2026, independent, PubMed).** Checked: the one on-screen citation (Berutti 2004), every
+  literature citation in meta.json and in this file, and all 74 PMIDs that were in RESEARCH.md before the audit.
+  - *Identity.* Berutti 2004 (PMID 15085052), Keith 2024 (39393517), Peters 2004 (15273636), Stabholz 1995 (7714445),
+    Ibarrola 1999 (10687543), Davis 2002 (12067124), Schroeder 2002 (12067134), de Camargo 2009 (19720236), Khademi 2006
+    (16631839), Gomes 2021 (33410578) and Boessler 2007 (17320714) were fetched (metadata + abstract): first author,
+    year, journal, volume, pages, DOI and PMID all belong to the same paper, and every number quoted from them is in the
+    abstract. The other 63 PMIDs in RESEARCH.md were matched by journal + year + volume + first page + first author
+    with the PubMed citation matcher: all 63 return the stated PMID. No wrong PMID, author, year or journal was found.
+  - *On screen: no change.* "Hand preflaring first: shaped about 6× more blocks · ProTaper S1, resin blocks: mean 59 vs
+    10 before breaking · Berutti 2004, J Endod" matches the abstract (group A, S1 without preflaring, 10 blocks; group
+    B, S1 on manually preflared simulators, 59 blocks; P<.01; "mean number of Endo-Training-Blocks shaped before file
+    breakage"). Two stills (t = 5.2 and 21.0 s, `_stills/audit/`) confirm the rendered text. Reel source untouched, so
+    the video was not re-rendered (22.4 s, h264 1080×1920, ffprobe).
+  - *Fixed, meta.json `caption_extras`.* "Re-confirm working length after coronal flaring (Stabholz 1995; Ibarrola
+    1999)" attached a recommendation to two papers that do not test it. Reworded to what each paper reports and Davis
+    2002 added (the paper that measured length change with early vs late flaring). Same correction in "In the caption /
+    meta.json only" above.
+  - *Fixed, documentation.* "Resin blocks" is not abstract wording (the abstract says "Endo-Training-Blocks" /
+    "simulators"); the basis is now stated in row 5 and in meta.json claim 3. Keith 2024: the finding that supports
+    "check cone fit" (files smaller than their matching cones) and the variable-taper caveat were added to row 13,
+    meta.json claim 7 and RESEARCH.md P39. Peters 2004: quotation and DOI added to row 16. PMIDs added for Khademi 2006,
+    Gomes 2021 and Boessler 2007 in "Left off the screen".
+  - *Fixed, RESEARCH.md.* The three excluded papers that had no identifier now have one (Falakaloğlu 2023, PMID
+    35770610; Pandey 2021, PMID 34264044; Valliappan 2023, PMID 37205884); the superseded short forms "file lasted
+    about 6× longer" are marked; an audit section was appended.
+  - *Still abstract-level.* Berutti 2004, Peters 2004, Keith 2024, Stabholz 1995, Ibarrola 1999 and Davis 2002 are not
+    in PMC; no full text was read. The size of the hand preflaring in Berutti 2004 remains unverified and is not shown.

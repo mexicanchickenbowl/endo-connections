@@ -26,13 +26,16 @@
 
   // ------------------------------------------------------------------ timeline
   const DUR = 21.9, WD = 0.56;
-  const S = { eq: 1.9, cut: 5.9, fix: 12.4, end: 17.3 };
-  const LIT = [6.8, 8.2, 9.6];           // timer rows light up
-  const T_STRIP = 10.7;                  // IADT quote strip
-  const T_GEND = 12.1;                   // crater growth ends
-  const T_SWEEP = [12.6, 13.4];          // canal dressing front, coronal -> apical
-  const T_TAG = 13.2;                    // "stimulus cut" lock-out tag
-  const T_FLIP = [13.8, 14.15];          // timer plate -> stat plate
+  const S = { eq: 1.9, cut: 5.4, fix: 11.5, end: 17.3 };
+  const LIT = [6.3, 7.6, 9.1];           // timer rows light up
+  const T_RB = 8.35;                     // "root + bone resorb" callout (lands between row 2 and row 3)
+  const T_STRIP = 10.05;                 // IADT quote strip
+  const T_GEND = 11.2;                   // crater growth ends
+  const T_SWEEP = [11.7, 12.5];          // canal dressing front, coronal -> apical
+  const T_TAG = 12.1;                    // "stimulus cut" lock-out tag
+  const T_LEAVE = 12.6;                  // clastic cells start to leave
+  const T_FLIP = [12.9, 13.3];           // timer plate -> stat plate (contents fade, blank plate flips, contents fade in)
+  const T_REPAIR = [13.1, 14.9];         // lining + PDL/bone re-contour; the scene is still after this
   const WIPES = [
     { t0: S.eq - WD / 2, a: 'hook', b: 'eq' },
     { t0: S.cut - WD / 2, a: 'eq', b: 'cut' },
@@ -164,17 +167,23 @@
     ctx.fillStyle = g; ctx.fillRect(0, y, W, h);
     ctx.restore();
   }
-  function gutter(off) {
+  // right-hand gutter: full march speed in hook / equation / end card, a quarter of it (and dimmer) beside the dense scenes
+  const rampInt = (t, a, b) => (t <= a ? 0 : t >= b ? t - (a + b) / 2 : ((t - a) * (t - a)) / (2 * (b - a)));
+  const gSlow = (t) => seg(t, S.cut - 0.3, S.cut + 0.3) - seg(t, S.end - 0.3, S.end + 0.3);
+  const gEff = (t) => t - 0.75 * (rampInt(t, S.cut - 0.3, S.cut + 0.3) - rampInt(t, S.end - 0.3, S.end + 0.3));
+  const G_V = 144 / gEff(DUR);           // px/s; 144 = 2 chevron pitches, so the loop closes exactly
+  function gutter(off, dim = 0) {
     const x0 = 994, x1 = W, y0 = FACE.y, y1 = FACE.y + FACE.h, mid = (x0 + x1) / 2, P = 72, th = 28, rise = 34;
     ctx.save(); rrect(ctx, x0, y0, x1 - x0 + 30, y1 - y0, 10); ctx.clip();
     ctx.fillStyle = '#0B0B0B'; ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
     const o = ((off % P) + P) % P;
-    ctx.fillStyle = C.Y;
+    ctx.fillStyle = C.Y; ctx.globalAlpha = 1 - 0.34 * dim;
     for (let y = y0 - P - o; y < y1 + P; y += P) {
       ctx.beginPath();
       ctx.moveTo(x0 + 10, y + rise); ctx.lineTo(mid, y); ctx.lineTo(x1 - 10, y + rise); ctx.lineTo(x1 - 10, y + rise + th); ctx.lineTo(mid, y + th); ctx.lineTo(x0 + 10, y + rise + th);
       ctx.closePath(); ctx.fill();
     }
+    ctx.globalAlpha = 1;
     const g = ctx.createLinearGradient(x0, 0, x1, 0);
     g.addColorStop(0, 'rgba(0,0,0,0.45)'); g.addColorStop(0.3, 'rgba(0,0,0,0.12)'); g.addColorStop(1, 'rgba(0,0,0,0.42)');
     ctx.fillStyle = g; ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
@@ -229,7 +238,7 @@
     ctx.beginPath(); ctx.moveTo(x + 18.5 * s, y + 82 * s); ctx.quadraticCurveTo(x + 50 * s, y + 100 * s, x + 81.5 * s, y + 82 * s); ctx.stroke(); ctx.restore();
   }
   /** tooth in its (hatched) bony socket; bowl-shaped lacunae eat root AND bone; red clastic cells (hook / result pictogram) */
-  function pictoResorbed(cx, cy, hpx, t, bg, grow = 1) {
+  function pictoResorbed(cx, cy, hpx, t, bg, grow = 1, gfn = null) {
     const s = hpx / 220, x = cx - 50 * s, y = cy - 110 * s, X = (a) => x + a * s, Y = (b) => y + b * s;
     const bx0 = -42, bx1 = 142, by0 = 104, by1 = 233;
     // alveolar bone: hazard-hatched block with the socket (PDL space) cut out
@@ -243,10 +252,11 @@
     toothPath(ctx, x, y, s); ctx.fillStyle = C.K; ctx.fill();
     cejLine(x, y, s, bg);
     const bites = [[80.5, 131, 18, 0], [73.5, 172, 14, 0.3], [20.5, 150, 16.5, 0.15], [29.5, 189, 11.5, 0.45]];
-    const gs = bites.map((b) => clamp((grow - b[3] * 0.55) / (1 - b[3] * 0.55)));
-    bites.forEach(([bx, by, br], i) => { ctx.fillStyle = bg; circle(ctx, X(bx), Y(by), br * s * (0.3 + 0.7 * gs[i])); ctx.fill(); });
+    const gs = bites.map((b, i) => (gfn ? gfn(i) : clamp((grow - b[3] * 0.55) / (1 - b[3] * 0.55))));
+    bites.forEach(([bx, by, br], i) => { if (gs[i] <= 0.01) return; ctx.fillStyle = bg; circle(ctx, X(bx), Y(by), br * s * (gfn ? gs[i] : 0.3 + 0.7 * gs[i])); ctx.fill(); });
     bites.forEach(([bx, by, br], i) => {
-      const pul = 1 + 0.07 * Math.sin(t * 5.2 + i * 1.9), cr = br * s * 0.56 * pul * (0.55 + 0.45 * gs[i]), px = X(bx), py = Y(by);
+      if (gs[i] <= 0.01) return;
+      const pul = 1 + 0.07 * Math.sin(t * 5.2 + i * 1.9), cr = br * s * 0.56 * pul * (gfn ? gs[i] : 0.55 + 0.45 * gs[i]), px = X(bx), py = Y(by);
       circle(ctx, px, py, cr); ctx.fillStyle = C.R; ctx.fill();
       ctx.lineWidth = Math.max(1.5, s * 1.3); ctx.strokeStyle = C.K; ctx.stroke();
       ctx.fillStyle = '#3A0A0E';
@@ -345,8 +355,9 @@
   function sceneHook(th) {
     const cx = COL.cx, top = 318, side = 770, h = side * 0.8660254;
     triSign(cx, top, side, { edge: C.WH });
-    const grow = 0.7 + 0.3 * seg(th, 0.1, 1.3, ease.out);
-    pictoResorbed(cx, top + h * 0.615, 332, th, C.Y, grow);
+    // lacunae + clastic cells pop in one after another (0.2-1.4 s), each with a slight overshoot
+    const B0 = [0.2, 0.62, 0.4, 0.84];
+    pictoResorbed(cx, top + h * 0.615, 332, th, C.Y, 1, (i) => { const u = clamp((th - B0[i]) / 0.56); return u <= 0 ? 0 : ease.outBack(u); });
     const by = top + h + 34, barH = 92;
     plate(COL.x0, by, COL.w, barH, { r: 10 });
     txt('EXTERNAL', COL.x0 + 30, by + 71, anton(70), C.Y, 'left', 9);
@@ -363,13 +374,17 @@
     const p2 = fit('RESORPTION', anton, COL.w - 4, 230), c2 = capH(anton(p2));
     const y1 = by + barH + 26 + c1, y2 = y1 + 24 + c2;
     txt('INFLAMMATORY', cx, y1, anton(p1), C.K, 'center');
+    // "RESORPTION" is on the sign from frame 0 and gets one stamp-style punch at 0.25 s
+    const k = th - 0.25, punch = k <= 0 ? 0 : k < 0.08 ? ease.out(k / 0.08) : 1 - ease.out(clamp((k - 0.08) / 0.42));
+    ctx.save(); ctx.translate(cx, y2); ctx.scale(1 + 0.016 * punch, 1 + 0.075 * punch); ctx.translate(-cx, -y2);   // anchored on the baseline, mostly vertical
     txt('RESORPTION', cx, y2, anton(p2), C.K, 'center');
+    ctx.restore();
   }
 
   // ================================================================== SCENE 1 — equation as signage
   function sceneEq(t) {
     const cx = COL.cx, r = 194, dy = 524, d1x = COL.x0 + r + 4, d2x = COL.x1 - r - 4;
-    const u1 = pu(t, 1.98), uP = pu(t, 2.35, 0.3), u2 = pu(t, 2.5), uE = pu(t, 3.0, 0.3), uR = pu(t, 3.15, 0.46), aS = seg(t, 3.6, 4.0);
+    const u1 = pu(t, 1.98), uP = pu(t, 2.2, 0.3), u2 = pu(t, 2.28), uE = pu(t, 2.48, 0.3), uR = pu(t, 2.56, 0.4), aS = seg(t, 3.05, 3.45);
     stamp(u1, d1x, dy, () => { diamondSign(d1x, dy, r); pictoDamaged(d1x - 8, dy + 2, 214, t, C.WH, ease.out(pu(t, 2.1, 0.5))); });
     stamp(u2, d2x, dy, () => { diamondSign(d2x, dy, r); pictoInfected(d2x, dy + 2, 214, t, C.WH); });
     // labels
@@ -396,7 +411,7 @@
       plate(COL.x0, py, COL.w, ph, { r: 18, rivets: true, line: 'rgba(255,204,0,0.9)' });
       const side = 318, tcx = COL.x0 + 208, ttop = py + 62;
       triSign(tcx, ttop, side, { edge: C.Y, shadow: false, edgeW: 5 });
-      pictoResorbed(tcx, ttop + side * 0.866 * 0.61, 138, t, C.Y, 0.35 + 0.65 * seg(t, 3.3, 5.2, ease.out));
+      pictoResorbed(tcx, ttop + side * 0.866 * 0.61, 138, t, C.Y, 0.35 + 0.65 * seg(t, 2.8, 4.7, ease.out));
       const tx = COL.x0 + 404, wmax = COL.x1 - 44 - tx;
       const p1 = fit('INFLAMMATORY', anton, wmax, 130), p2 = fit('RESORPTION', anton, wmax, 150);
       const c1 = capH(anton(p1)), c2 = capH(anton(p2)), gap = 24, y0 = py + (ph - (c1 + c2 + gap)) / 2;
@@ -448,8 +463,8 @@
   const MARROW = []; for (let i = 0; i < 22; i++) MARROW.push({ x: 694 + rnd(i, 41) * 250, y: DA.y0 + rnd(i, 42) * (DA.y1 - DA.y0), rx: 16 + 22 * rnd(i, 43), ry: 10 + 16 * rnd(i, 44), a: (rnd(i, 45) - 0.5) * 1.6 });
   const LDOT = []; for (let i = 0; i < 150; i++) LDOT.push({ x: 330 + rnd(i, 51) * 560, y: 500 + rnd(i, 52) * 440, r: 2.2 + 2 * rnd(i, 53) });
   // clastic cells: lobe index, position along the bowl (u = offset / half-height), arrival time
-  const RCELL = [{ L: 0, u: -0.04, t0: 6.0 }, { L: 1, u: 0.02, t0: 6.3 }, { L: 0, u: 0.46, t0: 9.0 }, { L: 0, u: -0.54, t0: 9.8 }, { L: 1, u: 0.55, t0: 10.3 }];
-  const BCELL = [{ L: 0, u: 0.0, t0: 6.4 }, { L: 1, u: 0.06, t0: 6.9 }, { L: 1, u: 0.56, t0: 8.9 }, { L: 0, u: -0.52, t0: 9.9 }];
+  const RCELL = [{ L: 0, u: -0.04, t0: 5.5 }, { L: 1, u: 0.02, t0: 5.8 }, { L: 0, u: 0.46, t0: 8.5 }, { L: 0, u: -0.54, t0: 9.3 }, { L: 1, u: 0.55, t0: 9.8 }];
+  const BCELL = [{ L: 0, u: 0.0, t0: 5.9 }, { L: 1, u: 0.06, t0: 6.4 }, { L: 1, u: 0.56, t0: 8.45 }, { L: 0, u: -0.52, t0: 9.4 }];
   const lobeH = (L, G) => lerp(L.h0, L.h1, Math.pow(clamp((G - L.lag) / (1 - L.lag)), 0.8));
 
   /** multinucleated clastic cell: dome sitting on the front `arr` at height y, ruffled border toward the tissue */
@@ -501,12 +516,12 @@
   }
 
   function sceneCut(t) {
-    const G = Math.pow(clamp((t - 5.85) / (T_GEND - 5.85)), 1.2);
+    const G = Math.pow(clamp((t - (S.cut - 0.05)) / (T_GEND - (S.cut - 0.05))), 1.2);
     const sweepU = seg(t, T_SWEEP[0], T_SWEEP[1]);
     const yf = lerp(DA.y0 - 8, DA.y1 + 8, sweepU);
-    const lining = seg(t, 14.1, 15.1, ease.inOut);
-    const rp = seg(t, 14.2, 15.9, ease.inOut);
-    const la = seg(G, 0, 0.1) * (1 - seg(t, 14.2, 15.5, ease.inOut));
+    const lining = seg(t, T_REPAIR[0], T_REPAIR[0] + 0.9, ease.inOut);
+    const rp = seg(t, T_REPAIR[0] + 0.1, T_REPAIR[1], ease.inOut);
+    const la = seg(G, 0, 0.1) * (1 - seg(t, T_REPAIR[0] + 0.05, T_REPAIR[0] + 1.3, ease.inOut));
     for (let i = 0; i < NY; i++) { D[i] = Dfn(YS[i], G); E[i] = Efn(YS[i], G); }
     // repair target for the bone front: offset curve of the (lined) root surface, so the re-formed PDL space
     // has a uniform width and follows the crater contour (the defect is lined, not refilled)
@@ -609,7 +624,7 @@
     ctx.restore();
     ctx.strokeStyle = C.K; ctx.lineWidth = 3.5; ctx.beginPath(); for (let i = 0; i < NY; i++) ctx.lineTo(XC[i], YS[i]); ctx.stroke();
     // brief highlight of the denuded patch (links back to "damaged root surface")
-    const hl = Math.min(seg(t, 5.95, 6.25), 1 - seg(t, 7.0, 7.6));
+    const hl = Math.min(seg(t, S.cut + 0.05, S.cut + 0.35), 1 - seg(t, S.cut + 1.1, S.cut + 1.7));
     if (hl > 0.01) {
       ctx.save(); ctx.globalAlpha = hl; ctx.strokeStyle = C.R; ctx.lineWidth = 5; ctx.setLineDash([14, 9]); ctx.lineDashOffset = -t * 30;
       rrect(ctx, atY(XS, 716) - 22, PATCH[0] - 16, CEMW + 44, PATCH[1] - PATCH[0] + 32, 12); ctx.stroke(); ctx.restore();
@@ -633,13 +648,13 @@
     ctx.globalAlpha = 1;
     // clastic cells
     RCELL.forEach((c, i) => {
-      const u = pu(t, c.t0, 0.5), lv = seg(t, 13.45 + i * 0.07, 14.15 + i * 0.07, ease.inOut);
+      const u = pu(t, c.t0, 0.5), lv = seg(t, T_LEAVE + i * 0.07, T_LEAVE + 0.7 + i * 0.07, ease.inOut);
       if (u <= 0 || lv >= 1) return;
       const L = RLOBE[c.L], y = L.yc + c.u * lobeH(L, G);
       clast(XR, y, 1, 0.92 * (1 + 0.04 * Math.sin(t * 3 + i)) * ease.outBack(u) * (1 - 0.4 * lv), clamp(u * 2) * (1 - lv), i * 2.1, t, 36 * lv);
     });
     BCELL.forEach((c, i) => {
-      const u = pu(t, c.t0, 0.5), lv = seg(t, 13.5 + i * 0.07, 14.2 + i * 0.07, ease.inOut);
+      const u = pu(t, c.t0, 0.5), lv = seg(t, T_LEAVE + 0.05 + i * 0.07, T_LEAVE + 0.75 + i * 0.07, ease.inOut);
       if (u <= 0 || lv >= 1) return;
       const L = BLOBE[c.L], y = L.yc + c.u * lobeH(L, G);
       clast(XB, y, -1, 0.92 * (1 + 0.04 * Math.sin(t * 3 + i + 2)) * ease.outBack(u) * (1 - 0.4 * lv), clamp(u * 2) * (1 - lv), i * 1.3 + 4, t, 36 * lv);
@@ -658,50 +673,55 @@
       ctx.beginPath(); ctx.moveTo(ax - 9, ay - 18); ctx.lineTo(ax + 9, ay - 18); ctx.lineTo(ax + 9, ay); ctx.lineTo(ax + 22, ay); ctx.lineTo(ax, ay + 21); ctx.lineTo(ax - 22, ay); ctx.lineTo(ax - 9, ay); ctx.closePath(); ctx.fill();
       txt('DISINFECT THE CANAL', 250, hy + 47, bc(700, 42), C.WH, 'left', 1.4);
     }
-    const aCa = seg(t, 12.95, 13.25);
+    const aCa = seg(t, S.fix + 0.55, S.fix + 0.85);
     if (aCa > 0) { ctx.save(); ctx.globalAlpha = aCa; caoh(153, 470 + 10 * (1 - ease.out(aCa)), 38, C.K, 'center'); ctx.restore(); }
     ctx.restore();   // end drawing-area clip
 
     // ---- callouts
-    const aTox = seg(t, 6.2, 6.55) * (1 - seg(t, S.fix + 0.05, S.fix + 0.35));
+    const aTox = seg(t, S.cut + 0.3, S.cut + 0.65) * (1 - seg(t, S.fix + 0.05, S.fix + 0.35));
     if (aTox > 0) {
       ctx.save(); ctx.globalAlpha = aTox; const ly = 396 - 12 * (1 - ease.out(aTox));
       leader(402, ly + 50, 402, 612); callout('TOXINS VIA TUBULES', 252, ly); ctx.restore();
     }
-    const aRB = seg(t, 8.8, 9.15) * (1 - seg(t, 13.3, 13.7));
+    const aRB = seg(t, T_RB, T_RB + 0.35) * (1 - seg(t, T_TAG + 0.1, T_TAG + 0.5));
     if (aRB > 0) {
       ctx.save(); ctx.globalAlpha = aRB; const ly = 962 + 12 * (1 - ease.out(aRB)), f = bc(700, 36), w = tw('ROOT + BONE RESORB', f, 0.8) + 32, lx = 648 - w / 2;
       leader(lx + 44, ly + 6, atY(XR, 842) + 6, 842); leader(lx + w - 44, ly + 6, atY(XB, 852) - 6, 852);
       callout('ROOT + BONE RESORB', lx, ly); ctx.restore();
     }
     // lock-out tag
-    const uT = pu(t, T_TAG, 0.4);
-    if (uT > 0) stamp(uT, 292, 752, () => {
-      ctx.save(); ctx.translate(292, 752); ctx.rotate(4 * RAD);
-      const f = anton(44), w = tw('STIMULUS CUT', f, 1) + 100, h = 88;
+    const uT = pu(t, T_TAG, 0.36), TGX = 238, TGY = 700;
+    if (uT > 0) stamp(uT, TGX, TGY, () => {
+      ctx.save(); ctx.translate(TGX, TGY); ctx.rotate(3 * RAD);
+      const f = anton(40), w = tw('STIMULUS CUT', f, 0.6) + 88, h = 82;
       ctx.save(); ctx.shadowColor = 'rgba(0,0,0,0.4)'; ctx.shadowBlur = 14; ctx.shadowOffsetY = 6;
       ctx.fillStyle = C.R; rrect(ctx, -w / 2, -h / 2, w, h, 10); ctx.fill(); ctx.restore();
       ctx.strokeStyle = C.WH; ctx.lineWidth = 3; rrect(ctx, -w / 2 + 7, -h / 2 + 7, w - 14, h - 14, 6); ctx.stroke();
-      ctx.fillStyle = C.WH; circle(ctx, -w / 2 + 40, 0, 15); ctx.fill(); ctx.fillStyle = C.K; circle(ctx, -w / 2 + 40, 0, 8); ctx.fill();
-      ctx.strokeStyle = C.K; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-w / 2 + 40, 0); ctx.quadraticCurveTo(-w / 2 + 34, -74, -w / 2 + 6, -92); ctx.stroke();
-      txt('STIMULUS CUT', -w / 2 + 70, 17, f, C.WH, 'left', 1);
+      ctx.fillStyle = C.WH; circle(ctx, -w / 2 + 36, 0, 14); ctx.fill(); ctx.fillStyle = C.K; circle(ctx, -w / 2 + 36, 0, 7.5); ctx.fill();
+      ctx.strokeStyle = C.K; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-w / 2 + 36, 0); ctx.quadraticCurveTo(-w / 2 + 34, -70, -w / 2 + 12, -88); ctx.stroke();
+      txt('STIMULUS CUT', -w / 2 + 62, 15.5, f, C.WH, 'left', 0.6);
       ctx.restore();
     }, 1.5);
 
     // ---- lower plate: timer, then the outcome plate
     const fu = seg(t, T_FLIP[0], T_FLIP[1]), pcy = TP.y + TP.h / 2;
     const flip = (sy, fn) => { ctx.save(); ctx.translate(0, pcy); ctx.scale(1, Math.max(0.002, sy)); ctx.translate(0, -pcy); fn(); ctx.restore(); };
-    if (fu < 0.5) flip(1 - ease.in(fu * 2), () => timerPlate(t)); else flip(ease.out((fu - 0.5) * 2), () => statPlate(t));
+    const blank = (a) => { if (a <= 0.003) return; ctx.save(); ctx.globalAlpha = a; plate(TP.x, TP.y, TP.w, TP.h, { r: 16, shadow: false }); ctx.restore(); };
+    // once the fix starts the (still red) timer is dimmed so the cutaway is the only live area
+    const dim = 0.66 * seg(t, S.fix, S.fix + 0.3);
+    if (fu < 0.25) { timerPlate(t); blank(lerp(dim, 1, fu / 0.25)); }                                   // contents fade out
+    else if (fu < 0.75) flip(Math.max(0.05, fu < 0.5 ? 1 - ease.in((fu - 0.25) / 0.25) : ease.out((fu - 0.5) / 0.25)), () => plate(TP.x, TP.y, TP.w, TP.h, { r: 16 }));   // blank plate flips
+    else { statPlate(t); blank(1 - seg(fu, 0.75, 1)); }                                                  // outcome fades in
     // source line (one per beat)
-    const aS1 = seg(t, 6.3, 6.7) * (1 - seg(t, T_FLIP[0] - 0.1, T_FLIP[0] + 0.15)), aS2 = seg(t, T_FLIP[1], T_FLIP[1] + 0.35);
-    const srcLine = (s, a) => { if (a <= 0) return; const px = fit(s, (p) => bc(500, p), COL.w - 8, 26, 0.2); ctx.save(); ctx.globalAlpha = a; txt(s, COL.x0 + 4, 1540, bc(500, px), 'rgba(19,19,19,0.86)', 'left', 0.2); ctx.restore(); };
-    srcLine('Tubule pathway: Andreasen 1981 J Endod — a theory from monkey histology', aS1);
-    srcLine('Cvek 1992 Endod Dent Traumatol · luxated non-vital incisors · calcium hydroxide, then GP · radiographic', aS2);
+    const aS1 = seg(t, S.cut + 0.4, S.cut + 0.8) * (1 - seg(t, T_FLIP[0] - 0.05, T_FLIP[0] + 0.1)) * (1 - 0.45 * seg(t, S.fix, S.fix + 0.3)), aS2 = seg(t, T_FLIP[1] - 0.1, T_FLIP[1] + 0.2);
+    const srcLine = (s, a, maxPx) => { if (a <= 0) return; const px = fit(s, (p) => bc(500, p), COL.w - 8, maxPx, 0.2); ctx.save(); ctx.globalAlpha = a; txt(s, COL.x0 + 4, 1540, bc(500, px), 'rgba(19,19,19,0.86)', 'left', 0.2); ctx.restore(); };
+    srcLine('Timeline: Andreasen 1980 · Andreasen et al. 1995 · Patel 2022 (review) · Tubule theory: Andreasen 1981', aS1, 24);
+    srcLine('Cvek 1992 Endod Dent Traumatol · luxated non-vital incisors · calcium hydroxide, then GP · radiographic', aS2, 26);
   }
 
   // ---- timer plate
   const TP = { x: 64, y: 1124, w: 886, h: 376 };
-  const HAND = [[5.9, 0], [6.8, 46], [8.2, 138], [9.6, 246], [T_GEND, 330]];
+  const HAND = [[S.cut, 0], [LIT[0], 46], [LIT[1], 138], [LIT[2], 246], [T_GEND, 330]];
   function handAng(t) { if (t <= HAND[0][0]) return 0; for (let i = 1; i < HAND.length; i++) if (t <= HAND[i][0]) return lerp(HAND[i - 1][1], HAND[i][1], (t - HAND[i - 1][0]) / (HAND[i][0] - HAND[i - 1][0])); return HAND[HAND.length - 1][1]; }
   function timerPlate(t) {
     plate(TP.x, TP.y, TP.w, TP.h, { r: 16 });
@@ -729,29 +749,25 @@
     ctx.lineCap = 'round'; ctx.strokeStyle = C.WH; ctx.lineWidth = 7;
     ctx.beginPath(); ctx.moveTo(cx - Math.cos(ha) * 16, cy - Math.sin(ha) * 16); ctx.lineTo(cx + Math.cos(ha) * (R - 16), cy + Math.sin(ha) * (R - 16)); ctx.stroke();
     ctx.fillStyle = C.Y; circle(ctx, cx, cy, 13); ctx.fill(); ctx.fillStyle = C.K; circle(ctx, cx, cy, 5); ctx.fill();
-    txt('AFTER REPLANTATION', cx, TP.y + 266, bc(600, 23), 'rgba(255,204,0,0.92)', 'center', 1.2);
+    txt('AFTER TRAUMA', cx, TP.y + 266, bc(600, 23), 'rgba(255,204,0,0.92)', 'center', 1.2);
     txt('TIMELINE SCHEMATIC', cx, TP.y + 292, bc(600, 23), 'rgba(255,255,255,0.72)', 'center', 1.2);
     // rows
-    const rows = [['BY WEEK 1', 'histology (monkey)', 'Andreasen 1980', 'Swed Dent J'], ['~1 MONTH', 'usually on X-ray', 'Andreasen et al. 1995', 'Endod Dent Traumatol'], ['MONTHS', 'untreated: root can be lost', 'Patel et al. 2022', 'Int Endod J (review)']];
-    const rx = TP.x + 306;
-    rows.forEach(([lab, cap, c1, c2], k) => {
+    // one line per anchor: time (sign lettering) | what was seen. Citations live in the single source line under the plate.
+    const rows = [['BY WEEK 1', 'histology · monkey'], ['~1 MONTH', 'on X-ray'], ['MONTHS', 'root can be lost']];
+    const rx = TP.x + 306, lf = anton(54), capX = rx + 36 + Math.max(...rows.map((r) => tw(r[0], lf, 1))) + 30;
+    const capPx = fit('histology · monkey', (p) => bc(600, p), TP.x + TP.w - 24 - capX, 40, 0.4);
+    rows.forEach(([lab, cap], k) => {
       const y0 = TP.y + 18 + k * 91, u = seg(t, LIT[k], LIT[k] + 0.35, ease.out), glow = seg(t, LIT[k], LIT[k] + 0.12) * (1 - seg(t, LIT[k] + 0.12, LIT[k] + 0.7));
       if (glow > 0) { ctx.fillStyle = `rgba(255,204,0,${(0.2 * glow).toFixed(3)})`; rrect(ctx, rx - 12, y0, TP.x + TP.w - 14 - (rx - 12), 86, 8); ctx.fill(); }
       // lamp
       const lcol = k === 2 ? C.RB : C.Y;
-      ctx.fillStyle = u > 0 ? lcol : '#3a3a3a'; circle(ctx, rx + 10, y0 + 27, 10); ctx.fill();
-      if (u > 0) { ctx.strokeStyle = k === 2 ? 'rgba(236,53,64,0.35)' : 'rgba(255,204,0,0.35)'; ctx.lineWidth = 5; circle(ctx, rx + 10, y0 + 27, 15); ctx.stroke(); }
-      const lf = anton(46);
+      ctx.fillStyle = u > 0 ? lcol : '#3a3a3a'; circle(ctx, rx + 10, y0 + 43, 10); ctx.fill();
+      if (u > 0) { ctx.strokeStyle = k === 2 ? 'rgba(236,53,64,0.35)' : 'rgba(255,204,0,0.35)'; ctx.lineWidth = 5; circle(ctx, rx + 10, y0 + 43, 15); ctx.stroke(); }
       if (k === 2 && u > 0) {
-        const w = tw(lab, lf, 1) + 26; ctx.fillStyle = C.R; ctx.globalAlpha = u; rrect(ctx, rx + 34, y0 + 2, w, 50, 6); ctx.fill(); ctx.globalAlpha = 1;
-        txt(lab, rx + 47, y0 + 44, lf, C.WH, 'left', 1);
-      } else txt(lab, rx + 36, y0 + 44, lf, u > 0 ? C.Y : '#565656', 'left', 1);
-      if (u > 0) {
-        ctx.save(); ctx.globalAlpha = u; txt(cap, rx + 36 + 10 * (1 - u), y0 + 80, bc(600, 33), '#F3F1EA', 'left', 0.4);
-        const cxr = TP.x + TP.w - 26, cf = bc(500, 23);
-        txt(c1, cxr, y0 + 32, cf, 'rgba(255,255,255,0.64)', 'right', 0.3); txt(c2, cxr, y0 + 58, cf, 'rgba(255,255,255,0.64)', 'right', 0.3);
-        ctx.restore();
-      }
+        const w = tw(lab, lf, 1) + 24; ctx.fillStyle = C.R; ctx.globalAlpha = u; rrect(ctx, rx + 30, y0 + 13, w, 60, 6); ctx.fill(); ctx.globalAlpha = 1;
+        txt(lab, rx + 42, y0 + 63, lf, C.WH, 'left', 1);
+      } else txt(lab, rx + 36, y0 + 63, lf, u > 0 ? C.Y : '#565656', 'left', 1);
+      if (u > 0) { ctx.save(); ctx.globalAlpha = u; txt(cap, capX + 10 * (1 - u), y0 + 59, bc(600, capPx), '#F3F1EA', 'left', 0.4); ctx.restore(); }
     });
     // IADT quote strip (slot is hatched until it arrives)
     const su = seg(t, T_STRIP, T_STRIP + 0.4, ease.out);
@@ -786,45 +802,52 @@
     txt('192 of 197 resorbing teeth', bx, by - 2, bc(600, 43), '#F3F1EA', 'left', 0.3);
     // 197-lamp matrix
     const cols = 50, mx0 = TP.x + 40, mx1 = TP.x + TP.w - 40, pitch = (mx1 - mx0) / (cols - 1), my0 = by + 40;
-    const lit = Math.round(192 * seg(t, T_FLIP[1], T_FLIP[1] + 1.1, ease.out));
+    const lit = Math.round(192 * seg(t, T_FLIP[1] - 0.1, T_FLIP[1] + 0.5, ease.out));
     for (let i = 0; i < 197; i++) {
       const cxp = mx0 + (i % cols) * pitch, cyp = my0 + Math.floor(i / cols) * pitch;
       if (i < 192) { ctx.fillStyle = i < lit ? C.Y : '#3a3a3a'; circle(ctx, cxp, cyp, 5.6); ctx.fill(); }
       else { ctx.strokeStyle = '#B9B4A8'; ctx.lineWidth = 2.4; circle(ctx, cxp, cyp, 4.6); ctx.stroke(); }
     }
-    const ly = my0 + 3 * pitch + 44;
-    ctx.fillStyle = C.Y; circle(ctx, mx0, ly - 8, 5.6); ctx.fill();
-    txt('healed', mx0 + 14, ly, bc(500, 25), 'rgba(255,255,255,0.8)', 'left', 0.4);
-    const w1 = tw('healed', bc(500, 25), 0.4);
-    ctx.strokeStyle = '#B9B4A8'; ctx.lineWidth = 2.4; circle(ctx, mx0 + w1 + 50, ly - 8, 4.6); ctx.stroke();
-    txt('5 went on to ankylosis', mx0 + w1 + 64, ly, bc(500, 25), 'rgba(255,255,255,0.8)', 'left', 0.4);
+    // legend (must-read: it explains the five hollow lamps)
+    const ly = my0 + 3 * pitch + 46;
+    ctx.strokeStyle = '#D6D1C4'; ctx.lineWidth = 2.8; circle(ctx, mx0 + 3, ly - 10, 6.4); ctx.stroke();
+    txt('5 went on to ankylosis', mx0 + 22, ly, bc(600, 30), 'rgba(255,255,255,0.92)', 'left', 0.4);
   }
 
   // ================================================================== SCENE 4 — end card
   function sceneEnd(t) {
-    const cx = COL.cx, t0 = S.end + WD / 2 - 0.12;
-    // mini equation recap (pictograms only): no infected canal -> no inflammatory resorption
-    const my = 390, r = 64, xs_ = [cx - 240, cx - 52, cx + 164], uS = seg(t, t0 + 0.55, t0 + 0.95, ease.inOut), uS2 = seg(t, t0 + 0.8, t0 + 1.2, ease.inOut);
-    diamondSign(xs_[0], my, r, { shadow: false }); pictoDamaged(xs_[0] - 3, my + 1, 70, t, C.WH, 1);
-    diamondSign(xs_[1], my, r, { shadow: false }); pictoInfected(xs_[1], my + 1, 70, t, C.WH);
-    ctx.fillStyle = C.K; ctx.fillRect(cx - 146 - 18, my - 5.5, 36, 11); ctx.fillRect(cx - 146 - 5.5, my - 18, 11, 36);
-    ctx.fillRect(cx + 38, my - 14, 36, 10); ctx.fillRect(cx + 38, my + 4, 36, 10);
-    triSign(xs_[2], my - 66, 140, { edge: C.WH, shadow: false, edgeW: 3 }); pictoResorbed(xs_[2], my + 9, 60, t, C.Y, 1);
+    const cx = COL.cx;
+    // equation recap, named so the saved poster spells out the two causes: no infected canal -> no inflammatory resorption
+    const my = 392, r = 80, xs_ = [cx - 252, cx - 32, cx + 232];
+    const uS = seg(t, 17.9, 18.25, ease.inOut), uS2 = seg(t, 18.3, 18.65, ease.inOut);
+    diamondSign(xs_[0], my, r, { shadow: false }); pictoDamaged(xs_[0] - 4, my + 1, 88, t, C.WH, 1);
+    diamondSign(xs_[1], my, r, { shadow: false }); pictoInfected(xs_[1], my + 1, 88, t, C.WH);
+    ctx.fillStyle = C.K;
+    const px_ = (xs_[0] + xs_[1]) / 2, qx = (xs_[1] + r + xs_[2] - 88) / 2;
+    ctx.fillRect(px_ - 20, my - 6, 40, 12); ctx.fillRect(px_ - 6, my - 20, 12, 40);
+    ctx.fillRect(qx - 20, my - 16, 40, 11); ctx.fillRect(qx - 20, my + 5, 40, 11);
+    triSign(xs_[2], my - 84, 176, { edge: C.WH, shadow: false, edgeW: 3.5 }); pictoResorbed(xs_[2], my + 10, 76, t, C.Y, 1);
+    const chip = (label, x) => {
+      const f = bc(700, 30), w = tw(label, f, 1.2) + 26, y = my + r + 10;
+      ctx.fillStyle = C.K; rrect(ctx, x - w / 2, y, w, 42, 6); ctx.fill();
+      txt(label, x, y + 31.5, f, C.Y, 'center', 1.2);
+    };
+    chip('DAMAGE', xs_[0]); chip('INFECTION', xs_[1]);
     const slash = (x, u, len) => {
       if (u <= 0) return; ctx.save(); ctx.lineCap = 'round';
       const x0 = x + len, y0 = my - len, x1 = lerp(x0, x - len, u), y1 = lerp(y0, my + len, u);
-      ctx.strokeStyle = C.WH; ctx.lineWidth = 19; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
-      ctx.strokeStyle = C.B; ctx.lineWidth = 11; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke(); ctx.restore();
+      ctx.strokeStyle = C.WH; ctx.lineWidth = 23; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+      ctx.strokeStyle = C.B; ctx.lineWidth = 14; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke(); ctx.restore();
     };
-    slash(xs_[1], uS, 53); slash(xs_[2], uS2, 49);
+    slash(xs_[1], uS, 66); slash(xs_[2], uS2, 62);
     // mandatory sign
-    const sy = 712, R = 226;
+    const sy = 764, R = 204;
     mandSign(cx, sy, R, t);
     // title
-    const p1 = fit('TREAT THE CANAL', anton, COL.w - 6, 150), c1 = capH(anton(p1)), b1 = sy + R + 38 + c1;
+    const p1 = fit('TREAT THE CANAL', anton, COL.w - 6, 150), c1 = capH(anton(p1)), b1 = sy + R + 34 + c1;
     txt('TREAT THE CANAL', cx, b1, anton(p1), C.K, 'center');
     // EARLY block with dial
-    const ey = b1 + 26, eh = 138, ef = anton(118), ew = tw('EARLY', ef, 4), bw = ew + 190, ex = cx - bw / 2;
+    const ey = b1 + 24, eh = 132, ef = anton(112), ew = tw('EARLY', ef, 4), bw = ew + 190, ex = cx - bw / 2;
     ctx.save(); ctx.shadowColor = 'rgba(40,24,0,0.35)'; ctx.shadowBlur = 16; ctx.shadowOffsetY = 6;
     ctx.fillStyle = C.R; rrect(ctx, ex, ey, bw, eh, 12); ctx.fill(); ctx.restore();
     ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.lineWidth = 3; rrect(ctx, ex + 8, ey + 8, bw - 16, eh - 16, 7); ctx.stroke();
@@ -837,16 +860,16 @@
     ctx.fillStyle = C.K; circle(ctx, dcx, dcy, 5); ctx.fill(); ctx.fillRect(dcx - 6, dcy - dR - 9, 12, 9);
     txt('EARLY', ex + 138, ey + (eh + capH(ef)) / 2, ef, C.WH, 'left', 4);
     // guideline plate
-    const gy = ey + eh + 28, gh = 158;
+    const gy = ey + eh + 26, gh = 158;
     plate(COL.x0, gy, COL.w, gh, { r: 14, rivets: false });
     txt('REPLANTED MATURE TOOTH', COL.x0 + 30, gy + 52, bc(700, 38), C.Y, 'left', 1.6);
-    const p2 = fit('START RCT WITHIN 2 WEEKS', anton, COL.w - 60, 72, 1);
-    txt('START RCT WITHIN 2 WEEKS', COL.x0 + 30, gy + 134, anton(p2), C.WH, 'left', 1);
+    const p2 = fit('START ROOT CANAL WITHIN 2 WEEKS', anton, COL.w - 60, 72, 1);
+    txt('START ROOT CANAL WITHIN 2 WEEKS', COL.x0 + 30, gy + 132, anton(p2), C.WH, 'left', 1);
     const cf = bc(700, 30), cw = tw('IADT 2020', cf, 1) + 28;
     ctx.fillStyle = C.Y; rrect(ctx, COL.x1 - 22 - cw, gy + 16, cw, 44, 6); ctx.fill();
     txt('IADT 2020', COL.x1 - 22 - cw + 14, gy + 49, cf, C.K, 'left', 1);
-    const src = 'Fouad et al. 2020 Dent Traumatol (IADT avulsion guideline) · mature = closed apex';
-    txt(src, COL.x0 + 4, gy + gh + 38, bc(500, fit(src, (p) => bc(500, p), COL.w - 8, 26, 0.2)), 'rgba(19,19,19,0.86)', 'left', 0.2);
+    const src = 'Fouad et al. 2020 Dent Traumatol · mature = closed apex';
+    txt(src, COL.x0 + 4, gy + gh + 36, bc(500, fit(src, (p) => bc(500, p), COL.w - 8, 26, 0.2)), 'rgba(19,19,19,0.86)', 'left', 0.2);
   }
 
   // ------------------------------------------------------------------ scene plumbing + hazard-tape wipe
@@ -881,7 +904,7 @@
     ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
     ctx.drawImage(base, 0, 0);
     const k = t / DUR;
-    tapeH(150, 52, k * 192, 1); tapeH(1608, 52, -k * 192, -1); gutter(k * 216);
+    tapeH(150, 52, k * 192, 1); tapeH(1608, 52, -k * 192, -1); gutter(gEff(t) * G_V, gSlow(t));
     drawTagRow();
     const wp = WIPES.find((w) => t >= w.t0 && t < w.t0 + WD);
     if (wp) drawWipe(t, wp);

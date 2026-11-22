@@ -86,10 +86,11 @@
     if (o.c.width !== bw || o.c.height !== bh) { o.c.width = bw; o.c.height = bh; o.img = o.x.createImageData(bw, bh); o.key = ''; }
     return o;
   }
-  function blit(o, r, RS, alpha) {
+  function blit(o, r, RS, alpha, soft) {
     ctx.save(); ctx.beginPath(); ctx.rect(r.x, r.y, r.w, r.h); ctx.clip();
     ctx.fillStyle = '#000'; ctx.fillRect(r.x, r.y, r.w, r.h);
     ctx.globalAlpha = alpha; ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+    if (soft) ctx.filter = 'blur(' + soft + 'px)';
     ctx.drawImage(o.c, 0, 0, o.c.width, o.c.height, r.x + (r.w - o.c.width * RS) / 2, r.y + (r.h - o.c.height * RS) / 2, o.c.width * RS, o.c.height * RS);
     ctx.restore();
   }
@@ -207,7 +208,7 @@
       const az = (-115 - 360 * t / DUR) * Math.PI / 180;
       const key = [az.toFixed(5), v3.cz.toFixed(3), v3.ppm.toFixed(3), p.toFixed(4), q.toFixed(4)].join('|');
       if (o.key !== key) { V.render3D(o.img.data, bw, bh, az, 0.17, 0, 0, v3.cz, RS / v3.ppm, p, q); o.x.putImageData(o.img, 0, 0); o.key = key; }
-      blit(o, r3, RS, boot(3));
+      blit(o, r3, RS, boot(3), 0.9);      // slight blur hides the voxel stair-steps of the glass silhouette
       paneFrame(r3, '3-D', C.sub, null, 1);
     }
 
@@ -242,7 +243,7 @@
     {
       const g = Math.min(0.42 * Math.min(rAx.w, rAx.h), 4.6 * vAx.ppm);
       cross(rAx, PX(rAx, vAx, 0), PY(rAx, vAx, 0), C.magenta, C.yellow, g, g, boot(0));
-      orient(rAx, 'M', 'D', 'B', 'L', boot(0), false, 1 - seg(t, TC2, TC2 + 0.4));
+      orient(rAx, 'M', 'D', t < TE2 + 0.3 ? 'B' : null, 'L', boot(0), false, 1 - seg(t, TC2, TC2 + 0.4));
       drawAxAnnotations(t, rAx, vAx, zs, p);
     }
     ctx.restore();
@@ -254,7 +255,7 @@
       for (const r of [rCor, r3, rSag, rPa, rAx]) ctx.fillRect(r.x, r.y, r.w, r.h);
       ctx.restore();
       paneFrame(rCor, 'CORONAL', C.magenta, null, 1); paneFrame(r3, '3-D', C.sub, null, 1); paneFrame(rSag, 'SAGITTAL', C.yellow, null, 1);
-      paneFrame(rPa, 'PERIAPICAL 2-D', C.text, null, 1); paneFrame(rAx, 'AXIAL', C.cyan, sliceNo(zs), 1);
+      paneFrame(rPa, 'PERIAPICAL 2-D', C.text, null, 1); paneFrame(rAx, 'AXIAL', C.cyan, sliceNo(t >= DUR - 0.14 ? sliceZ(0) : zs), 1);   // back on the opening grid: opening slice number
     }
     drawCaptions(t);
     drawDock(t, p, q);
@@ -489,7 +490,7 @@
       ctx.save(); ctx.strokeStyle = C.blue; ctx.lineWidth = 3; ctx.setLineDash([9, 7]); ctx.shadowColor = '#000'; ctx.shadowBlur = 5;
       for (const sgn of [-1, 1]) {
         ctx.beginPath();
-        const z0 = -3.2, z1 = lerp(z0, 6.6, tr);
+        const z0 = -3.2, z1 = lerp(z0, 4.15, tr);
         for (let i = 0; i <= 30; i++) { const z = lerp(z0, z1, i / 30); const x = PX(r, v, sgn * (V.canalA(z) + 0.1)), y = PY(r, v, z); if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); }
         ctx.stroke();
       }
@@ -498,9 +499,9 @@
     const cc = seg(t, TE2 + 1.9, TE2 + 2.3, ease.out);
     if (cc > 0) {
       const box = chip(r.x + 16, r.y + r.h - 78, [{ t: 'canal outline', f: `600 30px ${SANS}`, c: C.blue }, { t: 'often still traceable', f: `400 30px ${SANS}`, c: C.text }], { bottom: true, alpha: cc, stroke: Kit.rgba(C.blue, 0.5) });
-      const tx = PX(r, v, -(V.canalA(4.9) + 0.1)), ty = PY(r, v, 4.9);
+      const tx = PX(r, v, -(V.canalA(3.2) + 0.1)), ty = PY(r, v, 3.2);
       ctx.save(); ctx.globalAlpha = cc; ctx.strokeStyle = C.blue; ctx.lineWidth = 2.5; ctx.shadowColor = '#000'; ctx.shadowBlur = 5;
-      ctx.beginPath(); ctx.moveTo(box.x + box.w, box.y + box.h / 2); ctx.lineTo(tx, ty); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(tx - 44, box.y); ctx.lineTo(tx, ty); ctx.stroke();
       ctx.fillStyle = C.blue; ctx.beginPath(); ctx.arc(tx, ty, 5, 0, 7); ctx.fill();
       ctx.restore();
     }
@@ -586,7 +587,9 @@
     const src = [
       [TB, TE1, 'Mavridou et al., J Endod 2016'],
       [TE1, TE2, 'Patel et al., Int Endod J 2018;51:206'],
-      [TE2, TEND, 'Patel K et al., J Endod 2016'],
+      // Citation audit: scoped to the headline claim, because this paper says nothing about the canal-outline chip
+      // or the (dimmed) Patel 3-D strip that share the frame
+      [TE2, TEND, 'Underestimation: Patel K et al., J Endod 2016'],
     ];
     const SF = `400 25px ${SANS}`;
     for (const [a, b, s] of src) { const al = fade(t, a, b, 0.2, 0.2); if (al > 0) txt(s, 64, 1516, SF, C.dim, 'left', al); }
@@ -596,30 +599,36 @@
 
   // ---------- end card ----------
   function drawEnd(t) {
+    // Loop seam: only the card's TEXT fades out (with the upper panes, 23.65-23.85 s). The cover and the opaque panel
+    // stay solid until the layout snaps back to the opening grid (DUR - 0.14 s, panes black by then), so the lower
+    // panes and their labels never ghost through the take-home text.
     const out = 1 - seg(t, DUR - 0.35, DUR - 0.15, ease.inOut);
+    const hold = t < DUR - 0.14 ? 1 : 0;
     // 1) the lower panes (and their labels) clear first, so the card never fades in over other text
-    const cov = seg(t, TEND - 0.2, TEND) * out;
+    const cov = seg(t, TEND - 0.2, TEND) * hold;
     if (cov > 0) { ctx.save(); ctx.globalAlpha = cov; ctx.fillStyle = C.panel; ctx.fillRect(50, 1046, 980, 278); ctx.restore(); }
     // 2) opaque panel, 3) then its text
-    const a = seg(t, TEND + 0.2, TEND + 0.35, ease.out) * out;
+    const a = seg(t, TEND + 0.2, TEND + 0.35, ease.out) * hold;
     if (a <= 0) return;
     const x = 48, y = 1050, w = 984, h = 444;
     ctx.save(); ctx.globalAlpha = a;
     rr(x, y, w, h, 4); ctx.fillStyle = '#080b0f'; ctx.fill(); ctx.strokeStyle = C.line2; ctx.lineWidth = 2; ctx.stroke();
     ctx.fillStyle = C.cyan; ctx.fillRect(x, y, w, 3);
-    const ta = seg(t, TEND + 0.35, TEND + 0.5);
+    const ta = seg(t, TEND + 0.35, TEND + 0.5) * out;
     txt('TAKE-HOME', x + 36, y + 52, `500 30px ${MONO}`, C.cyan, 'left', ta, 1.5);
     const lines = ['Recognize it early', 'Consider CBCT before you treat', 'Treatment depends on extent'];
     lines.forEach((s, i) => {
       const li = seg(t, TEND + 0.4 + i * 0.2, TEND + 0.7 + i * 0.2, ease.out);
       const yy = y + 134 + i * 100, dx = (1 - li) * 26;
-      ctx.save(); ctx.globalAlpha = a * li;
+      ctx.save(); ctx.globalAlpha = a * li * out;
       rr(x + 36 + dx, yy - 44, 52, 56, 9); ctx.strokeStyle = C.orange; ctx.lineWidth = 3; ctx.stroke();
       txt(String(i + 1), x + 62 + dx, yy - 3, `600 36px ${MONO}`, C.orange, 'center');
       txt(s, x + 112 + dx, yy, `600 50px ${SANS}`, C.text);
       ctx.restore();
     });
-    txt('Patel et al., Int Endod J 2018;51:1224', x + 36, y + h - 26, `400 25px ${SANS}`, C.dim, 'left', ta);
+    // Citation audit: the open-access review read in full text states take-homes 2 and 3 in so many words and
+    // also covers the canal-outline chip that stays lit above this card (was: Int Endod J 2018;51:1224, abstract only)
+    txt('Patel et al., Int Endod J 2022;55 Suppl 4:892', x + 36, y + h - 26, `400 25px ${SANS}`, C.dim, 'left', ta);
     ctx.restore();
   }
 

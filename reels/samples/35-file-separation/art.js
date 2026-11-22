@@ -28,7 +28,11 @@
       if (ch !== ' ') {
         g.globalAlpha = al * (0.82 + 0.18 * hash(i, seed, 3));
         const dy = (hash(i, seed, 7) - 0.5) * px * 0.05;
-        if (ch === GE) { g.fillText('>', cx, y + dy - px * 0.1); g.fillRect(cx + w * 0.1, y + dy + px * 0.0, w * 0.78, px * 0.075); }
+        if (ch === GE) {
+          const x0 = cx + w * 0.06, x1 = cx + w * 0.98, yy = y + dy;
+          g.save(); g.strokeStyle = g.fillStyle; g.lineWidth = px * 0.085; g.lineCap = 'round'; g.lineJoin = 'round';
+          g.beginPath(); g.moveTo(x0, yy - px * 0.64); g.lineTo(x1, yy - px * 0.43); g.lineTo(x0, yy - px * 0.22); g.moveTo(x0, yy - px * 0.05); g.lineTo(x1, yy - px * 0.05); g.stroke(); g.restore();
+        }
         else g.fillText(ch, cx, y + dy);
       }
       cx += w; i++;
@@ -113,7 +117,7 @@
     g.restore();
     const end = A.stroke(g, pts, u, { color: o.color || C.string, w: 3.7, alpha: 1 });
     g.save(); g.setLineDash([2.4, 4.4]); g.lineDashOffset = 1;
-    A.stroke(g, pts, u, { color: '#e87b6e', w: 1.5, alpha: 0.85 });
+    A.stroke(g, pts, u, { color: o.hi || '#e87b6e', w: 1.5, alpha: 0.85 });
     g.restore();
     return end;
   };
@@ -158,7 +162,7 @@
     { const p = ax(s1); P.push({ s: s1, x: p.x, y: p.y, nx: p.nx, ny: p.ny, hw: hw(s1), ph: ph(s1) }); }
     if (P.length < 2) return;
     const flEnd = o.flEnd == null ? 1e9 : o.flEnd, amp = o.amp == null ? 0.17 : o.amp;
-    const edge = (p, side) => { const fl = clamp((flEnd - p.s) / 8); const w = p.hw * (1 + side * amp * fl * Math.cos(p.ph * TAU)); return [p.x + side * p.nx * w, p.y + side * p.ny * w]; };
+    const edge = (p, side) => { const fl = clamp((flEnd - p.s) / 8); const w = p.hw * (1 - side * amp * fl * Math.cos(p.ph * TAU)); return [p.x + side * p.nx * w, p.y + side * p.ny * w]; };
     const Lp = P.map((p) => edge(p, 1)), Rp = P.map((p) => edge(p, -1));
     const body = () => { g.beginPath(); g.moveTo(Lp[0][0], Lp[0][1]); for (let i = 1; i < Lp.length; i++) g.lineTo(Lp[i][0], Lp[i][1]); for (let i = Rp.length - 1; i >= 0; i--) g.lineTo(Rp[i][0], Rp[i][1]); g.closePath(); };
     const strip = (a, b, col) => {
@@ -174,14 +178,14 @@
     strip(0.16, 0.6, 'rgba(255,255,255,0.6)');
     strip(0.92, 1.4, 'rgba(70,80,92,0.22)');
     if (o.tint) { body(); g.fillStyle = o.tint; g.fill(); }
-    // flute edges across the visible face
+    // flute edges across the visible face: from the -n side at phase k to the +n side at phase k + 0.5 (right-handed helix)
     const phA = Math.min(P[0].ph, P[P.length - 1].ph), phB = Math.max(P[0].ph, P[P.length - 1].ph);
     for (let k = Math.ceil(phA - 0.5); k <= Math.floor(phB); k++) {
       const a = atPhase(P, k), b = atPhase(P, k + 0.5);
       if (!a && !b) continue;
       const aa = a || P[P[0].ph < P[P.length - 1].ph ? 0 : P.length - 1], bb = b || P[P[0].ph < P[P.length - 1].ph ? P.length - 1 : 0];
       if (Math.min(aa.s, bb.s) > flEnd) continue;
-      const x0 = aa.x + aa.nx * aa.hw * 1.2, y0 = aa.y + aa.ny * aa.hw * 1.2, x1 = bb.x - bb.nx * bb.hw * 1.2, y1 = bb.y - bb.ny * bb.hw * 1.2;
+      const x0 = aa.x - aa.nx * aa.hw * 1.2, y0 = aa.y - aa.ny * aa.hw * 1.2, x1 = bb.x + bb.nx * bb.hw * 1.2, y1 = bb.y + bb.ny * bb.hw * 1.2;
       const lw = clamp((aa.hw + bb.hw) * 0.085, 0.8, 1.9);
       g.strokeStyle = 'rgba(52,62,74,0.85)'; g.lineWidth = lw; g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.stroke();
       const tx = (y1 - y0), ty = -(x1 - x0), tl = Math.hypot(tx, ty) || 1, off = lw * 1.1;
@@ -270,7 +274,7 @@
     radio: { w: 340, h: 328, film: { x: 12, y: 12, w: 316, h: 258 } },
     ex: { w: 284, h: 552, photo: { x: 12, y: 16 }, stamp: [150, 342], cap: [412, 448], note: 492, pinTop: [14, 12], pinBot: [16, 540], tent: [36, 322] },
     sus: { h: 130 },
-    prev: { w: 346, h: 218, rows: [96, 138, 180], box: 16, tx: 68, stamp: [238, 42] },
+    prev: { w: 346, h: 218, rows: [90, 152, 191], fine: 116, box: 16, tx: 68, stamp: [238, 38] },
     bag: { w: 334, h: 126 },
     prog: { w: 528, h: 180, x0: 18, W100: 396, bars: [60, 106], bh: 40, stamp: [112, 34], head: [230, 45] },
     dec: { w: 528, h: 172, tabs: [[10, 119], [141, 135], [288, 231]], tabH: 46, bodyY: 42, strip: [12, 53, 504, 113] },
@@ -387,7 +391,7 @@
       TX.paper(g, 0, 0, w, h, C.paper, { r: 3 });
       g.save(); g.translate(E.photo.x, E.photo.y); g.beginPath(); g.rect(0, 0, PH.w, PH.h); g.clip(); photoBG(g, which); g.restore();
       g.strokeStyle = 'rgba(0,0,0,0.6)'; g.lineWidth = 1; g.strokeRect(E.photo.x, E.photo.y, PH.w, PH.h);
-      if (which === 'B') { const t = 'Sattapan 2000, J Endod', tw = A.typedW(g, t, 22); A.typed(g, t, w - 10 - tw, h - 30, 22, null, { alpha: 0.75, seed: 33 }); }
+      if (which === 'A') { const t = 'Sattapan 2000, J Endod', tw = A.typedW(g, t, 22); A.typed(g, t, w - 12 - tw, h - 17, 22, null, { alpha: 0.75, seed: 33 }); }
     });
   };
 
@@ -473,8 +477,9 @@
     return TX.sprite(spec.w, G.sus.h, (g, w, h) => {
       indexCard(g, w, h);
       g.save(); g.translate(spec.ix == null ? 20 : spec.ix, spec.fine ? 19 : 25); g.scale(0.88, 0.88); ICON[spec.icon](g); g.restore();
-      const ys = spec.lines.length === 1 ? [spec.fine ? 74 : 80] : (spec.fine ? [55, 89] : [62, 98]);
-      spec.lines.forEach((t, i) => A.typed(g, t, spec.lx, ys[i], 31, null, { seed: 40 + i + spec.w }));
+      const one = spec.lines.length === 1, px = one ? 37 : 31;
+      const ys = one ? [spec.fine ? 78 : 84] : (spec.fine ? [55, 89] : [62, 98]);
+      spec.lines.forEach((t, i) => A.typed(g, t, spec.lx, ys[i], px, null, { seed: 40 + i + spec.w }));
       if (spec.fine) A.typed(g, spec.fine, 16, h - 8, 22, null, { alpha: 0.75, seed: 47 });
     });
   };
@@ -488,14 +493,13 @@
     return TX.sprite(P.w, P.h, (g, w, h) => {
       TX.paper(g, 0, 0, w, h, C.legal, { r: 2 });
       g.strokeStyle = 'rgba(60,110,170,0.33)'; g.lineWidth = 1;
-      for (const y of [62, ...P.rows.map((b) => b + 9)]) { g.beginPath(); g.moveTo(0, y); g.lineTo(w, y); g.stroke(); }
+      for (const y of [62, P.fine + 8, P.rows[1] + 9, P.rows[2] + 9]) { g.beginPath(); g.moveTo(0, y); g.lineTo(w, y); g.stroke(); }
       g.strokeStyle = 'rgba(190,60,50,0.5)'; g.lineWidth = 1.1; for (const x of [54, 57.5]) { g.beginPath(); g.moveTo(x, 18); g.lineTo(x, h); g.stroke(); }
       // gummed binding at the top
       const bg = g.createLinearGradient(0, 0, 0, 18); bg.addColorStop(0, '#7a2a1d'); bg.addColorStop(1, '#5a1c12'); g.fillStyle = bg; g.fillRect(0, 0, w, 18);
       g.fillStyle = 'rgba(255,255,255,0.12)'; g.fillRect(0, 2, w, 2);
       ink(g, 2.2);
       for (const b of P.rows) { g.strokeRect(P.box + (hash(b, 3) - 0.5) * 2, b - 25, 27, 27); }
-      A.typed(g, 'Berutti 2004, J Endod', 64, h - 8, 22, null, { alpha: 0.75, seed: 63 });
     });
   };
 
@@ -515,11 +519,11 @@
       A.typed(g, '@natebrooksendo', 20, 70, 25, null, { seed: 71 });
       // the two pieces
       g.save(); g.translate(14, 103); g.rotate(-0.018);
-      A.file(g, (s) => ({ x: 236 - s, y: 0, nx: 0, ny: 1 }), 0, 236, (s) => (s < 170 ? 2.6 + 0.03 * s : 6.6), (s) => s / 10, { fill: '#c9d0d6', lw: 1.1, amp: 0.15, flEnd: 170 });
+      A.file(g, (s) => ({ x: 236 - s, y: 0, nx: 0, ny: -1 }), 0, 236, (s) => (s < 170 ? 2.6 + 0.03 * s : 6.6), (s) => s / 10, { fill: '#c9d0d6', lw: 1.1, amp: 0.15, flEnd: 170 });
       rr(g, -4, -8.5, 30, 17, 3); g.fillStyle = '#9aa1a8'; g.fill(); g.strokeStyle = 'rgba(34,42,52,0.9)'; g.lineWidth = 1.1; g.stroke();
       g.restore();
       g.save(); g.translate(266, 100); g.rotate(0.2);
-      A.file(g, (s) => ({ x: 36 - s, y: 0, nx: 0, ny: 1 }), 0, 36, (s) => 1.5 + 0.03 * s, (s) => s / 10, { fill: '#c9d0d6', lw: 1.1, amp: 0.15 });
+      A.file(g, (s) => ({ x: 36 - s, y: 0, nx: 0, ny: -1 }), 0, 36, (s) => 1.5 + 0.03 * s, (s) => s / 10, { fill: '#c9d0d6', lw: 1.1, amp: 0.15 });
       g.restore();
       // plastic sheen
       const sh = g.createLinearGradient(0, 0, w, h); sh.addColorStop(0, 'rgba(255,255,255,0)'); sh.addColorStop(0.42, 'rgba(255,255,255,0)'); sh.addColorStop(0.5, 'rgba(255,255,255,0.35)'); sh.addColorStop(0.56, 'rgba(255,255,255,0.05)'); sh.addColorStop(0.7, 'rgba(255,255,255,0.22)'); sh.addColorStop(0.76, 'rgba(255,255,255,0)');
@@ -534,14 +538,22 @@
     const P = G.prog;
     return TX.sprite(P.w, P.h, (g, w, h) => {
       TX.paper(g, 0, 0, w, h, '#f6f2e8', { r: 2 });
-      for (const y of P.bars) {
-        g.fillStyle = 'rgba(60,48,36,0.07)'; g.fillRect(P.x0, y, P.W100, P.bh);
-        g.strokeStyle = 'rgba(43,37,32,0.35)'; g.lineWidth = 1; g.strokeRect(P.x0, y, P.W100, P.bh);
-      }
-      g.strokeStyle = 'rgba(43,37,32,0.6)'; g.lineWidth = 1.2;
-      for (const f of [0, 0.5, 1]) { const x = P.x0 + P.W100 * f; g.beginPath(); g.moveTo(x, P.bars[1] + P.bh); g.lineTo(x, P.bars[1] + P.bh + 5); g.stroke(); }
-      A.typed(g, 'Spili 2005, J Endod · 146 matched pairs', P.x0, h - 9, 22, null, { alpha: 0.75, seed: 81 });
     });
+  };
+
+  /** empty 0-100 % bar tracks + the source line of the prognosis card (fade in with the scene) */
+  A.progForm = function (g, a) {
+    if (a <= 0) return;
+    const P = G.prog;
+    g.save(); g.globalAlpha = a;
+    for (const y of P.bars) {
+      g.fillStyle = 'rgba(60,48,36,0.07)'; g.fillRect(P.x0, y, P.W100, P.bh);
+      g.strokeStyle = 'rgba(43,37,32,0.35)'; g.lineWidth = 1; g.strokeRect(P.x0, y, P.W100, P.bh);
+    }
+    g.strokeStyle = 'rgba(43,37,32,0.6)'; g.lineWidth = 1.2;
+    for (const f of [0, 0.5, 1]) { const x = P.x0 + P.W100 * f; g.beginPath(); g.moveTo(x, P.bars[1] + P.bh); g.lineTo(x, P.bars[1] + P.bh + 5); g.stroke(); }
+    g.restore();
+    A.typed(g, 'Spili 2005, J Endod · 146 matched pairs', P.x0, P.h - 9, 22, null, { alpha: 0.75 * a, seed: 81 });
   };
 
   function tabPath(g, x, w, h, top) { const s = 9; g.beginPath(); g.moveTo(x - s, top + h); g.lineTo(x + 2, top + 5); g.quadraticCurveTo(x + 4, top, x + 10, top); g.lineTo(x + w - 10, top); g.quadraticCurveTo(x + w - 4, top, x + w - 2, top + 5); g.lineTo(x + w + s, top + h); g.closePath(); }
@@ -560,12 +572,7 @@
       g.strokeStyle = 'rgba(120,86,40,0.35)'; g.lineWidth = 1; g.beginPath(); g.moveTo(0, D.bodyY + 6); g.lineTo(w, D.bodyY + 6); g.stroke();
       g.save(); g.translate(sx + sw / 2, sy + sh / 2); g.rotate(0.004); g.translate(-sw / 2, -sh / 2);
       TX.paper(g, 0, 0, sw, sh, '#f6f2e8', { r: 1, blur: 4, dx: 1.5, dy: 2.5, sh: 0.4, edge: 0.6 });
-      A.typed(g, 'Shen 2004, OOOOE · 72 teeth', 14, sh - 7, 22, null, { alpha: 0.75, seed: 83 });
       g.restore();
-      // paper clip
-      g.save(); g.translate(sx + sw - 34, sy - 9); g.strokeStyle = '#8f979f'; g.lineWidth = 2.2; g.lineCap = 'round';
-      g.beginPath(); g.moveTo(4, 26); g.lineTo(4, 5); g.arc(9, 5, 5, Math.PI, 0); g.lineTo(14, 30); g.arc(10.5, 30, 3.5, 0, Math.PI); g.lineTo(7, 12); g.stroke();
-      g.strokeStyle = 'rgba(255,255,255,0.6)'; g.lineWidth = 0.7; g.beginPath(); g.moveTo(3.4, 24); g.lineTo(3.4, 6); g.stroke(); g.restore();
     });
   };
   /** tiny canal-with-a-bend pictogram; pos = 'before' | 'beyond' (where the fragment sits relative to the curve) */

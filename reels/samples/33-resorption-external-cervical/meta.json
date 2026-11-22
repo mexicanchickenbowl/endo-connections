@@ -8,40 +8,40 @@
   "claims": [
     {
       "claim": "Initiation: entry at the cervical root surface, just below the epithelial attachment",
-      "source": "Mavridou et al., J Endod 2016;42:1737-1751 (PMID 27776885) - abstract"
+      "source": "Mavridou et al., J Endod 2016;42:1737-1751 (PMID 27776885) - abstract ('initiated at the cementum below the gingival epithelial attachment'); 'just below': Patel et al., Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text ('immediately below the epithelial attachment')"
     },
     {
       "claim": "Resorption spreads around the canal (circumferentially and apico-coronally)",
-      "source": "Patel et al., Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text; Mavridou et al., J Endod 2016;42:1737-1751 (PMID 27776885)"
+      "source": "Patel et al., Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text ('spreading circumferentially and apico-coronally', credited there to the 3-stage model of Mavridou 2016); Chen et al., J Endod 2021;47:883-894 (PMID 33745945) - abstract ('extends apicocoronally and circumferentially inside the dentin'); histology base and on-screen source line: Mavridou et al., J Endod 2016;42:1737-1751 (PMID 27776885) - abstract (3-D invasion toward the pulp space, stopped by the pericanalar sheet; the abstract itself does not use the word circumferential)"
     },
     {
-      "claim": "Pulp walled off - until late - by a pericanalar resorption-resistant sheet; avg ~0.2 mm, ex vivo",
-      "source": "Mavridou et al., J Endod 2016;42:1737-1751 (PMID 27776885): sheet, 'averaging 210 um'; 'until late': Heithersay, Quintessence Int 1999;30:27-37 (PMID 10323156)"
+      "claim": "Pulp walled off - until late - by a resorption-resistant sheet; chip 'avg ~0.2 mm, ex vivo' is shown only while the Mavridou source line is on screen (8.3-13.2 s)",
+      "source": "Mavridou et al., J Endod 2016;42:1737-1751 (PMID 27776885) - abstract: pericanalar resorption-resistant sheet of predentin, dentin and occasionally bone-like tissue, 'fluctuating thickness averaging 210 um' (study of 27 extracted vital teeth; number of teeth measured not stated); 'until late': Heithersay, Quintessence Int 1999;30:27-37 (PMID 10323156) - abstract ('protected by a thin layer of predentin until late in the process'); Patel et al., Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text ('Only in advanced cases does the ECR lesion perforate into the root canal')"
     },
     {
       "claim": "Repair: bone-like tissue grows in while resorption continues elsewhere (proposed 3-stage model: initiation, resorption, repair)",
       "source": "Mavridou et al., J Endod 2016;42:1737-1751 (PMID 27776885) - abstract"
     },
     {
-      "claim": "Patel 3-D classification: height 1-4; spread A <=90, B <=180, C <=270, D >270 degrees; proximity d (dentin only) / p (probable pulp involvement)",
+      "claim": "Patel 3-D classification: height 1-4; spread A <=90, B <=180, C <=270, D >270 degrees; proximity d (dentin only) / p (probable pulp; in full: probable pulpal involvement, a CBCT judgment, not proof of perforation)",
       "source": "Patel et al., Int Endod J 2018;51:206-214 (PMID 28746776) - abstract"
     },
     {
       "claim": "The periapical underestimates the lesion",
-      "source": "Patel K et al., J Endod 2016;42:1435-1440 (PMID 27507628) - abstract"
+      "source": "Patel K et al., J Endod 2016;42:1435-1440 (PMID 27507628) - abstract ('PRs also underestimated the size of the ECR lesion'; 115 consecutively diagnosed teeth in 98 patients, CBCT as comparator); on-screen source line 'Underestimation: Patel K et al., J Endod 2016'"
     },
     {
       "claim": "Canal outline often still traceable on the periapical",
-      "source": "Heithersay, Quintessence Int 1999;30:27-37 (PMID 10323156); Patel et al., Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320); 'often': Luso & Luder, Schweiz Monatsschr Zahnmed 2012;122:914-930 (PMID 23097140)"
+      "source": "Heithersay, Quintessence Int 1999;30:27-37 (PMID 10323156) - abstract ('generally'); Patel et al., Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text ('root canal outline is visible as long as there is no perforation'; this is the source line on the end card, where the chip is still lit); 'often' rather than 'always' because Luso & Luder, Schweiz Monatsschr Zahnmed 2012;122:914-930 (PMID 23097140) - abstract: frequently not recognizable on conventional films. Not from Patel K 2016"
     },
     {
       "claim": "Take-home: recognize it early; consider CBCT before you treat; treatment depends on extent",
-      "source": "Patel K et al., J Endod 2016;42:1435-1440 (PMID 27507628); Patel et al., Int Endod J 2018;51:1224-1238 (PMID 29737544); Heithersay, Quintessence Int 1999;30:96-110 (PMID 10356561)"
+      "source": "Patel et al., Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text (on-screen source line): 'CBCT should be considered prior to managing ECR'; 'Management of ECR depends on the nature and accessibility of the lesion'; Patel K et al., J Endod 2016;42:1435-1440 (PMID 27507628) - abstract ('A CBCT scan should be considered before the management of a potentially restorable ECR lesion'); Patel et al., Int Endod J 2018;51:1224-1238 (PMID 29737544) - abstract (management chosen by extent and access); 'early': Heithersay, Quintessence Int 1999;30:96-110 (PMID 10356561) - abstract ('Diagnosis of lesions at an early stage is ... highly desirable')"
     },
     {
-      "claim": "Toy model / schematic: procedural CBCT volume of a single-rooted tooth; lesion shape, timing, the ~245 degree reading and the 'Patel 2Cp' label describe the drawn model, not a patient; the sheet is drawn thicker than 0.2 mm",
-      "source": "Original schematic (labeled 'SCHEMATIC - not a patient scan - not to scale' on screen)"
+      "claim": "Toy model / schematic: procedural CBCT volume of a single-rooted tooth; lesion shape and timing, the ~233 degree reading, height zone 2 and the class '2Cp' describe the drawn model, not a patient; the sheet is drawn as a uniform band thicker than 0.2 mm; the orange 'extent on CBCT' outline is the model's projected lesion, larger than the visible radiolucency by an invented detection threshold (no size ratio implied)",
+      "source": "Original schematic (labeled 'SCHEMATIC - not a patient scan - not to scale' on screen for the whole reel)"
     }
   ],
-  "caption": "External cervical resorption, the way CBCT shows it.\nIt enters just below the epithelial attachment, then spreads AROUND the canal. A thin resorption-resistant sheet (avg ~0.2 mm, ex vivo) walls off the pulp until late; later, bone-like repair tissue grows in while resorption continues elsewhere.\nPeriapicals underestimate lesion size and show circumferential spread poorly, so consider CBCT before you treat. Patel's \"p\" = probable pulp involvement on the scan.\nSchematic animation, not a patient scan.\nRefs: Mavridou 2016, J Endod; Heithersay 1999, Quintessence Int; Patel 2018 & 2022, Int Endod J; Patel K 2016, J Endod.\n#endodontics #rootresorption #ECR #CBCT #endoresident"
+  "caption": "External cervical resorption, as CBCT shows it.\nEnters just below the epithelial attachment, spreads AROUND the canal: a thin resistant sheet (avg ~0.2 mm, ex vivo) walls off the pulp until late.\nOn CBCT a lesion against the canal is coded \"p\" (probable pulp involvement, Patel 2018): a scan judgment, not proof of perforation; a thin sheet often still separates the two.\nPeriapicals underestimate it: consider CBCT before you treat.\nSchematic animation, not a patient scan.\nRefs: Mavridou 2016, J Endod 42:1737; Heithersay 1999, Quintessence Int 30:27; Patel 2018, Int Endod J 51:206; Patel 2022, Int Endod J 55(S4):892; Patel K 2016, J Endod 42:1435.\n#endodontics #rootresorption #ECR #CBCT #endo"
 }

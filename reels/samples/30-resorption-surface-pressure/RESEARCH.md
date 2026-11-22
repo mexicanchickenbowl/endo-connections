@@ -508,3 +508,21 @@ D8, D9, E4, E5, E10, E13–E16; corrections (c)1, 3–5 and 7–10; controversie
 Linge & Linge 1983, Henry & Weinmann 1951 (no abstracts); Massler & Malone 1954 (not in PubMed); the AAE Glossary PDF; the full
 texts of Fuss 2003, Weltman 2010, Ericson & Kurol 2000, Hermann 2012, Lund 2012 and the other abstract-only papers (every
 number quoted from them here is in the abstract).
+
+
+---
+
+## (j) Review round 2 — additions (builder, PubMed abstracts read on 2026-11-22)
+
+Caption-only facts added after the independent review. Nothing here is shown on screen.
+
+| # | Statement | Source | What the abstract says | Verified |
+|---|---|---|---|---|
+| J1 | During active orthodontic treatment the EPT threshold rises and negative responses become more frequent, peaking at about 2 months; thermal testing may be more reliable | Alomari FA, Al-Habahbeh R, Alsakarna BK. Int Endod J 2011;44:635-43 (PMID 21366625). https://doi.org/10.1111/j.1365-2591.2011.01865.x | 47 orthodontic subjects, 23 controls, maxillary incisors and canines. "application of force immediately increased the response threshold to EPT (Time 1), which peaked after 2 months (Time 3) and then gradually reduced. At the end of the active treatment, response thresholds remained elevated, but they returned to pre-treatment values towards the end of the retention phase." Negative responses to both tests peaked after 2 months. "thermal testing may be more reliable." | Abstract |
+| J2 | Same finding at systematic-review level, low certainty | Nangia D, Duggal I, Logani A, Sharma S, Duggal R. Int Orthod 2025;23:100952 (PMID 39536681). https://doi.org/10.1016/j.ortho.2024.100952 | 13 observational studies, 2956 participants. "Pulp response threshold increased after application of orthodontic force, with number of negative responses peaking at about 2-3 months. Most of the studies presented with a high ROB. The certainty of evidence was considered low." "TPT was considered more reliable than EPT". | Abstract |
+| J3 | E4, E9 re-read (Samandara 2019 PMID 29771300; Cheng 2009 PMID 19732664; Winter 2009 PMID 19465737): wording in section E confirmed | - | - | Abstracts |
+
+Consequence for the reel: the end card now reads "Pulp is not the cause." instead of "Pulp tests normal."; the caption says the pulp
+"usually responds normally" (Patel 2022) and adds the orthodontic testing caveat (J1, J2).
+Not used: the reviewer's suggestion that the AAE Glossary places pressure resorption under "external surface resorption" — the
+Glossary entry (A2, quoted via Lin 2022) does not say this, so the caption attributes that grouping to Patel 2022 only.

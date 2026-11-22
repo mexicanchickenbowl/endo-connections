@@ -23,7 +23,7 @@
       "source": "Seibert JA. J Nucl Med Technol 2004;32(3):139-47 (PMID 15347692) - full text: electron kinetic energy (keV) = tube voltage; maximum X-ray energy (keV) set by the peak voltage (kVp)"
     },
     {
-      "claim": "kVp -> + how many: more photons too; output ~ kVp squared (electron count unchanged)",
+      "claim": "kVp -> + how many: more photons; output ~ kVp squared (electron count unchanged)",
       "source": "McCollough CH. Radiographics 1997;17(4):967-84 (PMID 9225393) - abstract; Nickoloff EL, Berman HL. Radiographics 1993;13(6):1337-48 (PMID 8290728) - abstract: output increases by approximately the square of the tube potential"
     },
     {

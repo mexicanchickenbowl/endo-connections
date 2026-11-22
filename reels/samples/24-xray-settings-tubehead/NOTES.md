@@ -27,11 +27,11 @@ time -> how long**.
 |---|---|---|---|
 | 0.0–2.8 | Hook | Console at rest (4 mA, 60 kVp, 0.10 s). EXPOSE lights at 0.35: electron stream, photons, heat needle swings up, anode glows. The three knob lamps blink in turn (0.95–2.2). | `3 KNOBS` · `What does each do inside the tube?` · tube labels `FILAMENT`, `TUNGSTEN TARGET`, `ALUMINUM FILTER`, `COLLIMATOR`, legend `ELECTRONS`, `X-RAY PHOTONS` · gauge `~99% HEAT` (all persistent) |
 | 2.8–7.0 | mA | Knob 4 -> 8 (3.5–5.0). Filament and space-charge cloud brighten, electrons per second double, photons double, heat needle doubles. Scope: curve doubles, stored dashed trace shows the old one, `MAX 60 keV` marker does not move. Tag `8 mA ->` along the stream. | `mA -> HOW MANY` · `more electrons, more photons · same energies` |
-| 7.0–13.9 | kVp | Knob 60 -> 70 (7.8–9.4). Electron count unchanged; longer tails, bigger impact flashes; photons shorter-wavelength and more of them; heat needle +1/6. Tag `(-) 70 kVp (+)` across the gap. Scope end point slides to `MAX 70 keV`. Swatch flattens. At 10.3 the headline gains `+ HOW MANY`, the sub line swaps, and the area gained over the stored 60 kVp trace is tinted. | `kVp -> HOW HARD` · `each electron hits harder · max keV = kVp`, then `+ HOW MANY` · `more photons too · output ~ kVp²` · swatch `kVp ↑ LESS CONTRAST` `exaggerated` |
-| 13.9–18.2 | TIME | Beam off (13.5). Exposure 1 at 0.10 s: lamp on 14.3–15.1, counter 0 -> 0.80 mAs, 5 of 10 LED segments. Knob 0.10 -> 0.20 s (15.2–15.9). Exposure 2: lamp on 16.05–17.65 (twice as long), counter 0 -> 1.60 mAs, 10 segments. Tube, scope and heat rate identical in both. | `TIME -> HOW LONG` · `same beam, on longer · mAs = mA × s` |
-| 18.2–24.0 | End card (all rows fully visible 19.95–22.95) | Window glass darkens; three rows light one by one with the matching knob lamp; title returns in the dial glass. 22.95–23.8: rows fade, knobs turn back, displays go dark, so the last frame equals the first. | `mA -> HOW MANY` `same energies` / `kVp -> HOW HARD` `+ how many` `max keV = kVp` `output ~ kVp²` / `TIME -> HOW LONG` `mAs = mA × s` |
+| 7.0–14.2 | kVp | Knob 60 -> 70 (7.8–9.4). Electron count unchanged; longer tails, bigger impact flashes; photons shorter-wavelength and more of them; heat needle +1/6. Tag `(-) 70 kVp (+)` across the gap. Scope end point slides to `MAX 70 keV`. Swatch flattens. At 10.4 the headline gains `+ HOW MANY`, the sub line swaps, and the area gained over the stored 60 kVp trace is tinted. | `kVp -> HOW HARD` · `each electron hits harder · max keV = kVp`, then `+ HOW MANY` · `more photons · output ~ kVp²` · swatch `kVp ↑ LESS CONTRAST` `exaggerated` |
+| 14.2–18.5 | TIME | Beam off (13.8). Exposure 1 at 0.10 s: lamp on 14.6–15.4, counter 0 -> 0.80 mAs, 5 of 10 LED segments. Knob 0.10 -> 0.20 s (15.5–16.2). Exposure 2: lamp on 16.35–17.95 (twice as long), counter 0 -> 1.60 mAs, 10 segments. Tube, scope and heat rate identical in both. | `TIME -> HOW LONG` · `same beam, on longer · mAs = mA × s` |
+| 18.5–24.0 | End card (all rows fully visible 19.9–22.95, 3.05 s) | Window glass goes dark first (18.5–18.85), then three rows light one by one (18.8, 19.15, 19.5) with the matching knob lamp; title returns in the dial glass. 22.95–23.2 rows fade, 23.2–23.55 the glass clears, 23.1–23.8 knobs turn back and displays go dark, so the last frame equals the first. | `mA -> HOW MANY` `same energies` / `kVp -> HOW HARD` `+ how many` `max keV = kVp` `output ~ kVp²` / `TIME -> HOW LONG` `mAs = mA × s` |
 
-Must-read words: about 63 distinct (hook 9, mA 9, kVp 17, time 10, swatch 4, gauge 2, tube labels and legend 9,
+Must-read words: about 63 distinct (hook 9, mA 9, kVp 16, time 11, swatch 4, gauge 2, tube labels and legend 9,
 scope marker 3). The end card repeats the three headlines and formulas and adds no new words.
 Not counted: instrument name plates (`EXPOSE`, `mAs`, `IMAGE`, the engraved scope ring `X-RAY SPECTRUM · PHOTONS ·
 ENERGY · keV · SCHEMATIC`, knob names and scale numbers), the `8 mA` / `70 kVp` tags (they repeat the readouts), the
@@ -46,7 +46,7 @@ Single engraved source line (22–24 px, on screen for the whole reel):
 |---|---|---|---|
 | 1 | `mA -> HOW MANY` · `more electrons, more photons · same energies`; filament glows brighter with mA | Seibert JA. J Nucl Med Technol 2004;32(3):139-47. PMID 15347692: "A larger filament current produces more heat and releases a greater number of electrons"; tube current = "the number of electrons traveling between the electrodes". McCollough CH. Radiographics 1997;17(4):967-84. PMID 9225393: "The quantity of x-rays produced varies proportionally to the tube potential squared, tube current, exposure time..." | Seibert: full text (research stage, re-read by the fact-check); McCollough: abstract (re-pulled at build) |
 | 2 | `kVp -> HOW HARD` · `each electron hits harder · max keV = kVp`; tag `70 kVp` across the gap; scope marker `MAX 60/70 keV` | Seibert 2004 (PMID 15347692): "Each electron attains a kinetic energy (in keV) equal to the applied tube voltage"; "maximum x-ray energy (in keV) determined by the peak potential difference (in kVp)". | full text |
-| 3 | `+ HOW MANY` · `more photons too · output ~ kVp²` | McCollough 1997 (PMID 9225393), sentence above; Nickoloff EL, Berman HL. Radiographics 1993;13(6):1337-48. PMID 8290728: "radiation output increases by approximately the square of the tube potential". "Output" = exposure / air kerma at the port, hence the "~". | abstracts (both re-pulled at build) |
+| 3 | `+ HOW MANY` · `more photons · output ~ kVp²` | McCollough 1997 (PMID 9225393), sentence above; Nickoloff EL, Berman HL. Radiographics 1993;13(6):1337-48. PMID 8290728: "radiation output increases by approximately the square of the tube potential". "Output" = exposure / air kerma at the port, hence the "~". | abstracts (both re-pulled at build) |
 | 4 | `TIME -> HOW LONG` · `same beam, on longer · mAs = mA × s`; counter 0.80 -> 1.60 mAs | McCollough 1997 (PMID 9225393): proportional to exposure time; Seibert 2004 (PMID 15347692): "the combination of tube current and exposure time in milliampere-seconds (mAs)". 8 mA x 0.10 s = 0.8 mAs; x 0.20 s = 1.6 mAs. | abstract; full text; arithmetic |
 | 5 | `~99% HEAT`; needle follows `kV × mA` | Zink FE. Radiographics 1997;17(5):1259-68. PMID 9308113: "only 1% of the electric energy converted to x-ray photons and the remaining 99% converted to heat" (diagnostic tubes in general; the X-ray share is energy dependent, so only "~99% heat" is written). Heat unit = mA x kVp x s: Seibert 2004 (heat-loading section). | abstract (re-pulled at build); full text |
 | 6 | `kVp ↑ LESS CONTRAST` + `exaggerated` (step wedge and mini radiograph flatten only in the kVp scene) | European Commission. Radiation Protection 136: European guidelines on radiation protection in dental radiology. 2004, sect. 4.1: "'Low' kilovoltages produce images of higher contrast than do higher kilovoltages." Caveat (caption): 60 vs 70 kVp had "minimal impact" on contrast with three CMOS sensors in one phantom study — Pita de Melo D et al. Dentomaxillofac Radiol 2026. PMID 42538829. | guideline full text (extract re-read); abstract |
@@ -71,9 +71,9 @@ darkens with mA or time; the caption does not say the operator can "only" change
 - **Photon wave packets.** Rate follows mA x the unfiltered Kramers integral; each packet's energy is sampled from
   the Kramers shape (15 keV to kVp), shown as wavelength; a packet stops in the filter with probability
   1 - transmission(2 mm Al), or at the collimator if it leaves outside +/-12 degrees. Proportions are the toy model's.
-- **Heat.** Needle = kV x mA normalised (70 x 8 = 0.8 of the scale; 60 x 4 = 0.34), spring-damped; anode glow is a
+- **Heat.** Needle = kV x mA normalised (70 x 8 = 0.74 of the scale; 60 x 4 = 0.32), spring-damped; anode glow is a
   lagged copy. No watts, joules or temperatures.
-- **Time scene** is slow motion: 0.10 s of exposure is drawn over 0.8 s. The LED bar is 0.02 s per segment.
+- **Time scene** is slow motion: 0.10 s of exposure is drawn over 0.8 s, 0.20 s over 1.6 s. The LED bar is 0.02 s per segment.
 - **Image swatch.** A drawn mini periapical + step wedge; tone curve compressed to 50% contrast at 70 kVp. Far larger
   than the real 60-vs-70 kVp effect, hence `exaggerated`.
 - Console values are illustrative (`values illustrative` in the source line). Real wall units often fix kV and mA
@@ -104,3 +104,19 @@ darkens with mA or time; the caption does not say the operator can "only" change
   EC RP136 added to the source line for the contrast claim; knob-column shading; seven-segment decimal point fixed.
 - v4: electron stream pre-filled so EXPOSE lamp, stream, photons and mAs counter switch together (the counter used
   to run before the first photon appeared); hook lengthened to 2.8 s; gained-photon area tint in the kVp scene.
+- v5 (resumed session): caption reading time rebalanced (kVp scene +0.3 s, second beat at 10.4 s, TIME scene and end
+  card shifted by 0.3 s, cheat-sheet rows 0.35 s apart; total still 24.0 s); `more photons too` -> `more photons`;
+  heat needle full scale 0.8 -> 0.74 and the `kV × mA` face legend made smaller (the needle crossed it at 70 kVp /
+  8 mA); cheat sheet now closes its dark glass before the rows appear and fades the rows before the glass clears
+  (tube labels used to ghost through the text during both crossfades). Video and poster re-rendered after these edits.
+
+## Caption timing check (fully visible vs Kit.readSecs)
+| Caption | Fully visible | Words | readSecs |
+|---|---|---|---|
+| Hook title | 0–2.6 s (and 19.15–24 s before the loop) | 9 | 3.5 s (continuous across the loop; first view 2.6 s) |
+| mA headline + sub | 3.22–6.7 s (3.5 s) | 9 | 3.5 s |
+| kVp headline + first sub | 7.35–10.25 s (2.9 s; headline stays to 13.9) | 3 + 7 | 2.9 s for the sub |
+| `+ HOW MANY` + second sub | 10.85–13.9 s (3.05 s) | 2 + 5 | 2.9 s |
+| TIME headline + sub | 14.55–18.2 s (3.65 s) | 3 + 4 + formula | 3.5–4.1 s depending on how the formula is counted |
+| Cheat sheet (all three rows) | 19.9–22.95 s (3.05 s) | repeats only | payoff hold >= 2.5 s |
+

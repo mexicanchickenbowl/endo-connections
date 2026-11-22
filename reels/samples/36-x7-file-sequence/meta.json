@@ -16,7 +16,7 @@
     },
     {
       "claim": "Evidence · in vitro: hand preflaring first, shaped about 6× more blocks (ProTaper S1, resin blocks: mean 59 vs 10 before breaking)",
-      "source": "Berutti E, Negro AR, Lendini M, Pasqualini D. J Endod 2004;30(4):228-30 (PMID 15085052, doi:10.1097/00004770-200404000-00011); abstract only; conventional NiTi, not EdgeFile X7; the size of the manual preflaring is not given in the abstract"
+      "source": "Berutti E, Negro AR, Lendini M, Pasqualini D. J Endod 2004;30(4):228-30 (PMID 15085052, doi:10.1097/00004770-200404000-00011); abstract only (PubMed, re-read at citation audit 22 Nov 2026): 'mean number of Endo-Training-Blocks shaped before file breakage', S1 without preflaring 10 vs manually preflared 59, P<.01. 'Resin' describes the Endo-Training-Block (a simulated-canal resin block); the abstract itself says 'Endo-Training-Blocks' / 'simulators'. Conventional NiTi, not EdgeFile X7; the size of the manual preflaring is not given in the abstract"
     },
     {
       "claim": "17/.04, then 25/.04; 20/.04 only after the 25 stops short (alternate 20 and 25)",
@@ -32,7 +32,7 @@
     },
     {
       "claim": "IRRIGATE → OBTURATE: check cone fit",
-      "source": "Final irrigation: DFU-RF-US Rev D 06/23, 'Disinfecting' (after each canal is fully shaped: 17% EDTA 1 min, then 5% NaOCl 5 min, then further rinses); not a step of the IFU simplified technique. Recipe not shown. Cone fit: IFU and DFU-RF-US Rev D 06/23 ('may need to drop down in cone tip size'); Keith et al., J Endod 2024;50(12):1766-71 (PMID 39393517; abstract, EdgeTaper Platinum not X7)"
+      "source": "Final irrigation: DFU-RF-US Rev D 06/23, 'Disinfecting' (after each canal is fully shaped: 17% EDTA 1 min, then 5% NaOCl 5 min, then further rinses); not a step of the IFU simplified technique. Recipe not shown. Cone fit: IFU and DFU-RF-US Rev D 06/23 ('may need to drop down in cone tip size'); supporting literature, not on screen: Keith AM et al., J Endod 2024;50(12):1766-71 (PMID 39393517, doi:10.1016/j.joen.2024.10.002; abstract only): F2 files vs matching cones, n = 20 per system; EdgeEndo (EdgeTaper Platinum) and ProTaper Gold files were significantly smaller than their cones in the apical 4 mm, so 'clinicians should be prepared to make intraoperative adjustments when obturating'. Variable-taper EdgeTaper Platinum, not the constant-taper X7"
     },
     {
       "claim": "One patient · one procedure · then discard; follow the current DFU",
@@ -51,7 +51,7 @@
     "Berutti 2004 (J Endod): mean 59 vs 10 resin blocks shaped before S1 breakage; the preflaring size is not in the abstract.",
     "Inspect: the IFU says discard at any distortion; the US DFU (Rev D) says heat-treated files may be used until they unwind backwards. The conservative rule is to discard.",
     "Speed and torque limit as recommended in the IFU; the US DFU offers the same values as an option. \"Minimal apical pressure\" is US DFU wording.",
-    "IFU order shown. Re-confirm working length after coronal flaring (Stabholz 1995, J Endod; Ibarrola 1999, J Endod).",
+    "IFU order shown (length first, then rotary files). Length was found more reliably in preflared canals (Stabholz 1995, J Endod: by feel, in patients; Ibarrola 1999, J Endod: Root ZX, in vitro), and it changed less when taken after flaring (Davis 2002, J Endod: in vitro, curved canals, about 0.1 vs 0.2-0.5 mm). So re-confirm working length after coronal flaring.",
     "US DFU: take each file to length once, for no more than one second.",
     "US DFU final rinse ('Disinfecting') is printed in the leaflet; the recipe is not shown in the reel."
   ]

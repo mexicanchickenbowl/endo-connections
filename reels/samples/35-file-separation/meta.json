@@ -1,19 +1,47 @@
 {
-  "id": "35", "slug": "35-file-separation",
-  "title": "The separated file: case notes",
-  "style": "Forensic evidence board",
-  "topic": "Why NiTi files separate (torsion vs fatigue), the risk factors, prevention, and what a retained fragment means.",
-  "duration": 23.0,
-  "claims": [
-    { "claim": "Two mechanisms: TORSION (tip binds, shaft turns; may unwind) and FATIGUE (flexing in a curve; often no warning)", "source": "Sattapan et al., J Endod 2000;26:161-5 (PMID 11199711); Ohri et al., Materials 2024;17:6147 (PMID 39769746); Spanaki-Voreadi et al., Int Endod J 2006;39:171-8 (PMID 16507069)" },
-    { "claim": "Toy model / schematic: both mechanism animations and the radiograph (labelled 'schematic')", "source": "Schematic; fracture at mid-curve after Pruett et al., J Endod 1997;23:77-85 (PMID 9220735)" },
-    { "claim": "Risk factors: tight curve, big file (in vitro)", "source": "Pruett et al., J Endod 1997;23:77-85 (PMID 9220735)" },
-    { "claim": "Risk factors: no glide path, forced, reuse", "source": "Berutti et al., J Endod 2004;30:228-30 (PMID 15085052); Sattapan et al., J Endod 2000;26:161-5 (PMID 11199711, authors' inference); Gomes et al., Aust Endod J 2021;47:372-85 (PMID 33410578)" },
-    { "claim": "Operator ringed #1 (most important influence on defect rates)", "source": "Parashos et al., J Endod 2004;30:722-5 (PMID 15448468)" },
-    { "claim": "Prevention: glide path first, light touch, discard early", "source": "Berutti et al., J Endod 2004;30:228-30 (PMID 15085052); Shen et al., J Endod 2009;35:193-6 (PMID 19166771); light touch = expert opinion (Fan et al., Int J Oral Sci 2025;17:46, PMID 40484859)" },
-    { "claim": "Healed, >= 1 yr: fragment 91.8% vs matched control 94.5%, n.s. (146 matched pairs)", "source": "Spili et al., J Endod 2005;31:845-50 (PMID 16306815)" },
-    { "claim": "Removed or bypassed: before the curve 100%, beyond 31% (72 teeth)", "source": "Shen et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2004;98:605-10 (PMID 15529134)" },
-    { "claim": "Bypass / retrieve / leave + monitor; infection drives the outcome", "source": "Madarati et al., J Endod 2013;39:569-81 (PMID 23611371); Lin et al., J Am Dent Assoc 2005;136:187-93 (PMID 15782522, expert statement)" }
-  ],
-  "caption": "Case notes: the separated file.\nTorsion or fatigue, usually some of both, and often no visible warning. The operator was the biggest influence on file defects (unwinding or fracture). Curve and glide-path data are in vitro.\nRetained fragment: healed 91.8% vs 94.5% matched controls, n.s. (146 pairs, 1 yr or more, specialist practice). Removed or bypassed: 100% before the curve, 31% beyond (72 teeth, 2004). The fragment blocks cleaning; infection drives the outcome.\nSchematic animation.\nRefs: Sattapan 2000, Parashos 2004, Pruett 1997, Berutti 2004, Spili 2005 (J Endod); Shen 2004 (OOOOE); Lin 2005 (JADA).\n#endodontics #endo #rootcanal #niti #dentalresident #dentistry"
+ "id": "35",
+ "slug": "35-file-separation",
+ "title": "The separated file: case notes",
+ "style": "Forensic evidence board",
+ "topic": "Why NiTi files separate (torsion vs fatigue), the risk factors, prevention, and what a retained fragment means.",
+ "duration": 24.0,
+ "claims": [
+  {
+   "claim": "Two mechanisms: TORSION (tip binds, shaft turns; may unwind) and FATIGUE (flexing in a curve; often no warning)",
+   "source": "Sattapan et al., J Endod 2000;26:161-5 (PMID 11199711); Ohri et al., Materials 2024;17:6147 (PMID 39769746); Spanaki-Voreadi et al., Int Endod J 2006;39:171-8 (PMID 16507069)"
+  },
+  {
+   "claim": "Toy model / schematic: both mechanism animations and the radiograph (labelled 'schematic')",
+   "source": "Schematic; fracture at mid-curve after Pruett et al., J Endod 1997;23:77-85 (PMID 9220735)"
+  },
+  {
+   "claim": "Risk factors: tight curve, big file (both = cyclic fatigue in a curve, in vitro; source line on both cards)",
+   "source": "Pruett et al., J Endod 1997;23:77-85 (PMID 9220735)"
+  },
+  {
+   "claim": "Risk factors: no glide path, forced, reuse",
+   "source": "Berutti et al., J Endod 2004;30:228-30 (PMID 15085052, in vitro); Sattapan et al., J Endod 2000;26:161-5 (PMID 11199711, authors' inference); Gomes et al., Aust Endod J 2021;47:372-85 (PMID 33410578)"
+  },
+  {
+   "claim": "Operator ringed: most important influence on defect rates (unwinding or fracture) among the factors studied, 14 endodontists",
+   "source": "Parashos et al., J Endod 2004;30:722-5 (PMID 15448468)"
+  },
+  {
+   "claim": "Prevention: glide path (Berutti 2004, in vitro), light touch, discard early",
+   "source": "Glide path: Berutti et al., J Endod 2004;30:228-30 (PMID 15085052). Light touch: expert opinion (Fan et al., Int J Oral Sci 2025;17:46, PMID 40484859). Discard early: Shen et al., J Endod 2009;35:193-6 (PMID 19166771); Gomes et al., Aust Endod J 2021;47:372-85 (PMID 33410578)"
+  },
+  {
+   "claim": "Healed, >= 1 yr: fragment 91.8% vs control 94.5%, n.s. (146 matched pairs)",
+   "source": "Spili et al., J Endod 2005;31:845-50 (PMID 16306815)"
+  },
+  {
+   "claim": "Removed or bypassed, by curve: before 100%, beyond 31% (at the curve 60%; 72 teeth in total, subgroup sizes not in the abstract)",
+   "source": "Shen et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2004;98:605-10 (PMID 15529134)"
+  },
+  {
+   "claim": "Bypass / retrieve / leave + monitor (three options, no guideline, case-based); infection drives the outcome",
+   "source": "Madarati et al., J Endod 2013;39:569-81 (PMID 23611371); Lin et al., J Am Dent Assoc 2005;136:187-93 (PMID 15782522, expert statement)"
+  }
+ ],
+ "caption": "Case notes: the separated file.\nTorsion, fatigue or both; often no visible warning. Operator: biggest influence on file defects (unwinding or fracture; 14 endodontists). Curve, size and glide-path data: in vitro.\nRetained fragment: healed 91.8% vs 94.5% matched controls, n.s. (146 pairs, ≥1 yr, specialist practice). Removed or bypassed: all before the curve, 60% at it, 31% beyond (72 teeth, mixed techniques, 2004). A fragment can block cleaning; infection drives the outcome.\nSchematic animation.\nRefs: Sattapan 2000, Parashos 2004, Pruett 1997, Berutti 2004, Spili 2005 (J Endod); Shen 2004 (OOOOE); Lin 2005 (JADA); Ohri 2024 (Materials).\n#endodontics #endo #rootcanal #niti #dentalresident"
 }

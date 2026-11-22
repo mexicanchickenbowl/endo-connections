@@ -72,6 +72,11 @@
     lg.putImageData(li, 0, 0);
     g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';
     g.drawImage(l, 0, 0, W, H);
+    // lighter grain over the fine-print row (24 px source lines) so it survives video compression
+    const fp = g.createLinearGradient(0, 1530, 0, 1592);
+    fp.addColorStop(0, 'rgba(0,0,0,0)'); fp.addColorStop(0.25, 'rgba(0,0,0,0.55)'); fp.addColorStop(0.75, 'rgba(0,0,0,0.55)'); fp.addColorStop(1, 'rgba(0,0,0,0)');
+    g.globalCompositeOperation = 'destination-out'; g.fillStyle = fp; g.fillRect(0, 1530, W, 62);
+    g.globalCompositeOperation = 'source-over';
     return c;
   }
 

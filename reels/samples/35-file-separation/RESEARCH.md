@@ -463,3 +463,20 @@ Terauchi 2021 (128 of 128); Fan 2025 full-text quotes (0.25–6%, 1.3–10%; "Wh
 **Still unverified (unchanged status):** Crump & Natkin 1970 numbers (textbook only); Souter & Messer percentages; Parashos &
 Messer 2006 incidence ranges; Grossman 1968/1969, Fox 1972 and Strindberg 1956 content; the size of Ungerechts 2014's
 follow-up subgroup; the full-text definitions of "healing" (Spili 2005) and of the denominators in Wolcott 2006 and Patiño 2005.
+
+## Review re-check (2026-11-22, after the independent science review)
+No fact in this brief changed. Abstracts re-read on PubMed for the points the review raised:
+- Shen, Coil & Haapasalo, J Endod 2009;35:193-6 (PMID 19166771): "The majority of instrument defects occurred in
+  size 20 (34/48)"; 10 of 12 separations by shear; "Small size files should be considered as single-use". So
+  "big file" on the board is a fatigue-in-a-curve statement only (Pruett 1997, in vitro).
+- Parashos, Gordon & Messer, J Endod 2004;30:722-5 (PMID 15448468): 7,159 instruments, 14 endodontists, four
+  countries; operator = most important influence on DEFECT rates, compared with instrument design; mean uses 3.3
+  (with defects) vs 4.5 (without). Not a ranking against curvature, glide path, force or reuse.
+- Berutti et al., J Endod 2004;30:228-30 (PMID 15085052): supports the glide path only; "All instruments worked
+  better at high torque".
+- Shen, Peng & Cheung, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2004;98:605-10 (PMID 15529134): 72 teeth,
+  "a variety of techniques and armamentarium"; before the curve complete removal, at 60%, beyond 31%; no subgroup n.
+- Madarati, Hunter & Dummer, J Endod 2013;39:569-81 (PMID 23611371): "may hinder cleaning and shaping";
+  "Guidelines for management of intracanal separated instruments have not been formulated".
+- Gomes et al., Aust Endod J 2021;47:372-85 (PMID 33410578): use "in more than four teeth and less proficient
+  operators were associated with a higher incidence of file fracture".

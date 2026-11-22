@@ -2,14 +2,15 @@
  * 25 · Endo outcome numbers — SPLIT-FLAP DEPARTURE BOARD
  * One full-frame canvas. Everything is a pure function of t (see render()).
  * Every number on the board is listed with its source in NOTES.md / RESEARCH.md. No illustrative numbers:
- * spinning flaps only ever show letters or blanks, never digits.
+ * spinning flaps only ever show letters or blanks, never digits. The surgery SURVIVAL cell holds a dim "– – %"
+ * placeholder (no verified pooled figure), never a number.
  */
 (function () {
   const { canvas, ctx } = Kit.createCanvas();
   const { seg, ease, clamp, lerp, hash, W, H } = Kit;
 
-  const D = 25;            // loop length (s)
-  const T_CLEAR = 24.3;    // every flap flips back to blank from here, so the last frame equals the first
+  const D = 24;            // loop length (s)
+  const T_CLEAR = 23.4;    // every flap flips back to blank from here, so the last frame equals the first
 
   // ---------------------------------------------------------------- palette
   const COL = {
@@ -27,7 +28,7 @@
     mid:  { w: 58, h: 76,  gap: 4, px: 78,  font: BC(700, 78),  r: 5, hinge: 2, pin: [4, 10] },
     sm:   { w: 50, h: 70,  gap: 4, px: 70,  font: BC(700, 70),  r: 5, hinge: 2, pin: [3, 9] },
     name: { w: 38, h: 52,  gap: 4, px: 46,  font: BC(600, 46),  r: 4, hinge: 2, pin: [3, 7] },
-    chip: { h: 46, px: 31, font: BC(600, 31), r: 4, hinge: 1, ha: 0.62, pin: [3, 7], padX: 10, ls: 0.8, soft: 1 },
+    chip: { h: 48, px: 34, font: BC(600, 34), r: 4, hinge: 1, ha: 0.62, pin: [3, 7], padX: 9, ls: 0.8, soft: 1 },
     tag:  { h: 76, px: 46, font: BC(600, 46), r: 5, hinge: 2, pin: [4, 10], padX: 13, ls: 1 },
     src:  { h: 32, px: 24, font: BC(500, 24), r: 3, hinge: 1, ha: 0.5, pin: [2, 5], padX: 9, ls: 0.7, soft: 1 },
   };
@@ -133,9 +134,9 @@
   }
   const wordFlap = (cls, x, y, w) => addUnit({ cls, char: false, x, y, w, h: CLS[cls].h });
   /** schedule a run of n flips ending on `final`; intermediate leaves are letters (char flaps) or blanks (word flaps) */
-  function flip(u, t, final, n, step) {
+  function flip(u, t, final, n, step, plain) {
     const idx = u.events.length, seq = [];
-    if (u.char) {
+    if (u.char && !plain) {
       const picks = [];
       for (let k = 0; k < n - 1; k++) picks.push(Math.floor(hash(u.id, idx, k) * SCR.length));
       picks.sort((a, b) => a - b);                       // a real module runs through its alphabet in order
@@ -145,8 +146,8 @@
     u.events.push({ t, seq, step });
   }
   function setChars(row, t0, text, o = {}) {
-    const { stagger = 0.05, n = 4, grow = 1, step = 0.085, color = COL.ink } = o;
-    [...text].forEach((ch, i) => { if (ch !== ' ') flip(row[i], t0 + i * stagger, { text: ch, color }, n + Math.round(i * grow), step); });
+    const { stagger = 0.05, n = 4, grow = 1, step = 0.085, color = COL.ink, plain = false } = o;
+    [...text].forEach((ch, i) => { if (ch !== ' ') flip(row[i], t0 + i * stagger, { text: ch, color }, n + Math.round(i * grow), step, plain); });
   }
   const setWord = (u, t0, text, o = {}) => flip(u, t0, { text, color: o.color || COL.soft }, o.n || 2, o.step || 0.1);
   function chips(x, y, list, t0, color) {
@@ -157,85 +158,86 @@
   function source(x, y, txt, t0) { const u = wordFlap('src', x, y, wordW('src', txt)); setWord(u, t0, txt, { color: COL.src }); return u; }
 
   // ---------------------------------------------------------------- layout
-  const SX = 64, VX = 576;                 // SUCCESS column, SURVIVAL column
-  const NAME_X = 128, NAME_N = 19;
+  const SX = 64, VX = 556;                 // SUCCESS column, SURVIVAL column
+  const NAME_X = 128, NAME_N = 14;       // 14 = 'APICAL SURGERY', the longest row name
   const Y = { head: 236, colh: 392, s1: 410, m1: 708, s2: 872, s3: 1172, foot: 1526 };
   const warn = [];
+  const DX = 374;                          // small dim slot that keeps the traditional figure
 
   function nameRow(y, text, icon, tOn, tSteady, stagger) {
     tiles.push({ x: SX, y, s: 52, icon, on: tOn });
-    setChars(charRow('name', NAME_X, y, NAME_N), tOn + 0.12, text, { stagger, n: 4, grow: 0.25, step: 0.08, color: COL.amber });
+    setChars(charRow('name', NAME_X, y, NAME_N), tOn + 0.12, text, { stagger, n: 3, grow: 0.2, step: 0.08, color: COL.amber });
     lamps.push({ x: 974, y: y + 26, r: 9, on: tOn, steady: tSteady, ph: 0 }, { x: 1001, y: y + 26, r: 9, on: tOn, steady: tSteady, ph: 0.5 });
   }
-  const NUM = { stagger: 0.1, n: 6, grow: 2, step: 0.085 };
+  const NUM = { stagger: 0.1, n: 4, grow: 1, step: 0.085 };   // 4, 5, 6 leaves: a figure settles in about 0.7 s
 
   function build() {
     // ---- 1 · PRIMARY NSRCT ("RCT" alone can be misread as randomized controlled trial) -------------------------------------------------
     let y0 = Y.s1;
-    nameRow(y0, 'PRIMARY NSRCT', 'rct', 0.3, 5.0, 0.045);
-    setChars(charRow('big', SX, y0 + 62, 4), 1.5, '82%', NUM);
-    chips(SX, y0 + 202, ['STRICT', 'POOLED', '1 YR+'], 2.5);
-    source(SX, y0 + 254, 'BURNS 2022 · INT ENDOD J', 2.95);
-    setChars(charRow('big', VX, y0 + 62, 4), 3.3, '97%', NUM);
-    chips(VX, y0 + 202, ['RETAINED', '8 YR', '1.46M TEETH'], 4.3);
-    source(VX, y0 + 254, 'SALEHRABI 2004 · J ENDOD', 4.75);
+    nameRow(y0, 'PRIMARY NSRCT', 'rct', 0.3, 4.0, 0.035);
+    setChars(charRow('big', SX, y0 + 62, 3), 0.5, '82%', NUM);          // the first figure spins inside the first second
+    chips(SX, y0 + 202, ['STRICT', 'POOLED', '1 YR+'], 1.3);
+    source(SX, y0 + 254, 'BURNS 2022 · INT ENDOD J', 1.7);
+    setChars(charRow('big', VX, y0 + 62, 3), 2.3, '97%', NUM);
+    chips(VX, y0 + 202, ['RETAINED', '8 YR', '1.46M TEETH'], 3.1);
+    source(VX, y0 + 254, 'SALEHRABI 2004 · J ENDOD', 3.5);
 
     // ---- modifier 1 · apical lesion at the start --------------------------
     const my = Y.m1, la = my + 12, lb = my + 66;
-    tiles.push({ x: 82, y: la, s: 46, icon: 'lesion', on: 5.5 });
+    tiles.push({ x: 82, y: la, s: 48, icon: 'lesion', on: 4.3 });
     const qt = 'APICAL LESION AT START?';
-    const q = wordFlap('chip', 140, la, wordW('chip', qt)); setWord(q, 5.6, qt, { color: COL.amber });
+    const q = wordFlap('chip', 140, la, wordW('chip', qt)); setWord(q, 4.4, qt, { color: COL.amber });
     let x = 140;
-    const no = wordFlap('tag', x, lb, wordW('tag', 'NO')); setWord(no, 6.65, 'NO', { color: COL.amber }); x += no.w + 10;
-    setChars(charRow('mid', x, lb, 4), 6.75, '>96%', { stagger: 0.1, n: 5, grow: 1, step: 0.085 }); x += 4 * 62 - 4 + 36;
-    const yes = wordFlap('tag', x, lb, wordW('tag', 'YES')); setWord(yes, 7.7, 'YES', { color: COL.amber }); x += yes.w + 10;
-    setChars(charRow('mid', x, lb, 3), 7.8, '86%', { stagger: 0.1, n: 5, grow: 1.5, step: 0.085 });
-    const cEnd = chips(q.x + q.w + 10, la, ['SUCCESS', '8–10 YR'], 5.95);
+    const no = wordFlap('tag', x, lb, wordW('tag', 'NO')); setWord(no, 5.45, 'NO', { color: COL.amber }); x += no.w + 10;
+    setChars(charRow('mid', x, lb, 4), 5.55, '>96%', { stagger: 0.1, n: 4, grow: 1, step: 0.085 }); x += 4 * 62 - 4 + 36;
+    const yes = wordFlap('tag', x, lb, wordW('tag', 'YES')); setWord(yes, 6.45, 'YES', { color: COL.amber }); x += yes.w + 10;
+    setChars(charRow('mid', x, lb, 3), 6.55, '86%', { stagger: 0.1, n: 4, grow: 1, step: 0.085 });
+    const cEnd = chips(q.x + q.w + 10, la, ['SUCCESS', '8–10 YR'], 4.75);
     const st = 'SJÖGREN 1990 · J ENDOD', sw = wordW('src', st);
-    source(1008 - sw, la + 7, st, 6.3);
+    source(1008 - sw, la + 8, st, 5.1);
     if (cEnd > 1008 - sw - 10) warn.push('M1: chips collide with the source');
-    lamps.push({ x: 1001, y: lb + 38, r: 9, on: 5.5, steady: 9.0, ph: 0 });
+    lamps.push({ x: 1001, y: lb + 38, r: 9, on: 4.3, steady: 7.7, ph: 0 });
 
     // ---- 2 · RETREATMENT --------------------------------------------------
     y0 = Y.s2;
-    nameRow(y0, 'RETREATMENT', 'retx', 9.3, 13.9, 0.05);
-    setChars(charRow('big', SX, y0 + 62, 4), 10.4, '77%', NUM);
-    chips(SX, y0 + 202, ['STRICT', 'POOLED', '6 MO+'], 11.4);
-    source(SX, y0 + 254, 'NG 2008 · INT ENDOD J', 11.85);
-    setChars(charRow('big', VX, y0 + 62, 4), 12.1, '89%', NUM);
-    chips(VX, y0 + 202, ['RETAINED', '5 YR', '4,744 TEETH'], 13.1);
-    source(VX, y0 + 254, 'SALEHRABI 2010 · J ENDOD', 13.55);
+    nameRow(y0, 'RETREATMENT', 'retx', 8.0, 12.0, 0.04);
+    setChars(charRow('big', SX, y0 + 62, 3), 8.4, '77%', NUM);
+    chips(SX, y0 + 202, ['STRICT', 'POOLED', '6 MO+'], 9.2);
+    source(SX, y0 + 254, 'NG 2008 · INT ENDOD J', 9.6);
+    setChars(charRow('big', VX, y0 + 62, 3), 10.2, '89%', NUM);
+    chips(VX, y0 + 202, ['RETAINED', '5 YR', '4,744 TEETH'], 11.0);
+    source(VX, y0 + 254, 'SALEHRABI 2010 · J ENDOD', 11.4);
 
     // ---- 3 · APICAL SURGERY (traditional, then modifier 2: microsurgery) ---
     y0 = Y.s3;
-    nameRow(y0, 'APICAL SURGERY', 'surg', 14.0, 18.9, 0.04);
-    tiles.push({ x: SX, y: y0 + 62, s: 46, icon: 'micro', on: 17.0 });
-    const bigLab = wordFlap('chip', SX + 52, y0 + 62, wordW('chip', 'TRADITIONAL', 'MICROSURGERY'));
-    setWord(bigLab, 14.5, 'TRADITIONAL', { color: COL.amber });
-    setWord(bigLab, 17.05, 'MICROSURGERY', { color: COL.amber, n: 3 });
+    nameRow(y0, 'APICAL SURGERY', 'surg', 12.2, 17.5, 0.04);
+    tiles.push({ x: SX, y: y0 + 62, s: 48, icon: 'micro', on: 15.9 });
+    const bigLab = wordFlap('chip', SX + 54, y0 + 62, wordW('chip', 'TRADITIONAL', 'MICROSURGERY'));
+    setWord(bigLab, 12.55, 'TRADITIONAL', { color: COL.amber });
+    setWord(bigLab, 16.0, 'MICROSURGERY', { color: COL.amber, n: 3 });
     const big = charRow('big', SX, y0 + 116, 3);
-    setChars(big, 14.6, '59%', NUM);
-    setChars(big, 17.15, '94%', NUM);
-    const DX = 388;
-    setWord(wordFlap('chip', DX, y0 + 62, wordW('chip', 'TRADITIONAL')), 17.3, 'TRADITIONAL', { color: COL.dimAmber });
-    setChars(charRow('sm', DX, y0 + 116, 3), 17.42, '59%', { stagger: 0.08, n: 3, grow: 1, step: 0.08, color: COL.dim });
-    // SURVIVAL cell of this row: no verified pooled figure -> the flaps turn over once and stay blank
-    charRow('big', VX, y0 + 116, 4).forEach((u, i) => flip(u, 18.3 + i * 0.07, BLANK, 2, 0.1));
-    chips(SX, y0 + 256, ['SUCCESS', 'POOLED', '6 MO+'], 15.55);
-    source(SX, y0 + 308, 'SETZER 2010 · J ENDOD', 16.0);
+    setChars(big, 12.65, '59%', NUM);                                   // settled 13.4 to 16.05
+    setChars(big, 16.05, '94%', NUM);
+    // the traditional figure moves aside: its small dim slot starts turning just before the big flaps leave
+    setWord(wordFlap('chip', DX, y0 + 62, wordW('chip', 'TRADITIONAL')), 15.85, 'TRADITIONAL', { color: COL.dimAmber });
+    setChars(charRow('sm', DX, y0 + 116, 3), 15.85, '59%', { stagger: 0.08, n: 2, grow: 1, step: 0.08, color: COL.dim });
+    // SURVIVAL cell of this row: no verified pooled figure -> a dim "not posted" placeholder (dashes, no digits, no words)
+    setChars(charRow('big', VX, y0 + 116, 3), 16.9, '––%', { stagger: 0.08, n: 2, grow: 0, step: 0.1, color: COL.dim, plain: true });
+    chips(SX, y0 + 256, ['SUCCESS', 'POOLED', '6 MO+'], 13.4);
+    source(SX, y0 + 308, 'SETZER 2010 · J ENDOD', 13.8);
 
     // ---- footer ------------------------------------------------------------
     const ft = 'SUCCESS ' + NEQ + ' SURVIVAL · NOT HEAD-TO-HEAD';
-    setWord(wordFlap('chip', SX, Y.foot, wordW('chip', ft)), 18.55, ft, { color: COL.soft });
+    setWord(wordFlap('chip', SX, Y.foot, wordW('chip', ft)), 17.1, ft, { color: COL.soft });
 
     // ---- loop: everything turns back to blank ------------------------------
     for (const u of units) {
       const last = u.events.length ? u.events[u.events.length - 1].seq.slice(-1)[0] : BLANK;
       if (!last.text) continue;
       u.live = true;
-      // number groups leave together ('%' a beat earlier), so no frame of the wipe can show a figure that is not on the board
+      // the digits and the '%' of a figure leave in the same frame, so no frame of the wipe can show a figure that is not on the board
       const num = u.char && u.cls !== 'name';
-      const tc = T_CLEAR + clamp((u.y - 400) / 1200) * 0.3 + (num ? (last.text === '%' ? 0 : 0.05) : hash(u.id, 99) * 0.04);
+      const tc = T_CLEAR + clamp((u.y - 400) / 1200) * 0.15 + (num ? 0.03 : hash(u.id, 99) * 0.04);
       flip(u, tc, BLANK, num ? 2 : 1, 0.09);
     }
     // ---- layout guard (prints as a console warning in the render tool) -----
@@ -505,9 +507,9 @@
     }
   }
   // house lights: the section being filled stays lit, the rest of the board sits slightly in shadow until the end
-  const FOCUS = [[0.3, Y.s1 - 10, Y.s1 + 296], [5.5, Y.m1 - 2, Y.m1 + 156], [9.3, Y.s2 - 10, Y.s2 + 296], [14.0, Y.s3 - 10, Y.s3 + 350]];
+  const FOCUS = [[0.3, Y.s1 - 10, Y.s1 + 296], [4.3, Y.m1 - 2, Y.m1 + 156], [8.0, Y.s2 - 10, Y.s2 + 296], [12.2, Y.s3 - 10, Y.s3 + 350]];
   function drawFocus(t) {
-    const k = seg(t, 0.3, 1.1, ease.smooth) * (1 - seg(t, 18.5, 19.4, ease.smooth));
+    const k = seg(t, 0.3, 1.1, ease.smooth) * (1 - seg(t, 17.1, 18.0, ease.smooth));
     if (k < 0.003) return;
     let y0 = FOCUS[0][1], y1 = FOCUS[0][2];
     for (let i = 1; i < FOCUS.length; i++) {
@@ -522,7 +524,7 @@
   }
   // one slow pass of light across the glass once the board is complete
   function drawSheen(t) {
-    const u = seg(t, 19.5, 21.7);
+    const u = seg(t, 18.2, 20.4);
     if (u <= 0 || u >= 1) return;
     const cx = lerp(-260, 1340, ease.inOut(u)), a = 0.075 * Math.sin(Math.PI * u);
     ctx.save(); rr(ctx, 34, 202, 1012, 1394, 9); ctx.clip();
@@ -548,11 +550,11 @@
   window.REEL = {
     title: 'Endo outcome numbers — split-flap board',
     duration: D,
-    poster: 22.6,
+    poster: 21.4,
     canvas,
     fonts: ['700 82px Oswald', '700 132px "Barlow Condensed"', '600 46px "Barlow Condensed"', '500 24px "Barlow Condensed"'],
     async setup() {
-      const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%>+·–,.?@ö-';
+      const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%>+·–,.?@ö-=';
       await Promise.all(REEL.fonts.map((f) => document.fonts.load(f, glyphs).catch(() => {})));
       await document.fonts.ready;
       build(); buildBg(); buildFg();

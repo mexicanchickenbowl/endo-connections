@@ -49,16 +49,19 @@ the abstracts of PMIDs 2084204, 12847449, 21366626, 16631839, 34118256, 22980168
 below. "Abstract" = the PubMed abstract contains it; "full text" = read in the paper by the fact-checker.
 
 1. **Apex sketch: radiographic apex, major foramen opening on the side of the root, minor constriction inside it, CDJ.**
-   Schematic textbook anatomy (Hargreaves & Berman, *Cohen's Pathways of the Pulp*; cited as a textbook, not re-read).
-   No anatomy number is printed. The off-tip foramen is consistent with Martos J et al., Int Endod J 2009;42(4):329–34,
+   Schematic textbook anatomy (*Cohen's Pathways of the Pulp*, 11th ed., Hargreaves & Berman, eds., Elsevier 2016;
+   cited as a textbook, not re-read; nothing but the standard terms is taken from it). No anatomy number is printed. The off-tip foramen is consistent with Martos J et al., Int Endod J 2009;42(4):329–34,
    PMID 19220517, doi:10.1111/j.1365-2591.2008.01513.x (abstract: foramen at the tip of the root in 40%).
 2. **Green zone "0–2 mm short" of the radiographic apex; slips 94% (0–2 mm short), 76% (long), 68% (>2 mm short);
    "healed · necrotic + lesion · 8–10 yr".**
    Sjögren U, Hägglund B, Sundqvist G, Wing K. J Endod 1990;16(10):498–504, PMID 2084204,
    doi:10.1016/S0099-2399(07)80180-4. The abstract confirms the design (356 patients, 8–10 yr), 86% healing with
    necrosis + radiolucency, and that the level of root filling significantly affected outcome. **The 94 / 76 / 68
-   breakdown is not in the abstract; it was confirmed only through open-access papers that quote it (PMC3574741); the
-   primary full text was not read.** The unit is roots, so the screen says "necrotic + lesion", never "teeth".
+   breakdown is not in the abstract; it was confirmed only through open-access papers that quote it (Tarim Ertas et
+   al., ScientificWorldJournal 2013;2013:514841, PMID 23431255, PMC3574741: "healing of apical periodontitis (94%) and
+   the roots filled ideally close (0–2 mm) to apex … short filled teeth were 68% … 76% with the overfilled teeth"); the
+   primary full text was not read.** A review abstract agrees in size and direction (Wu, Wesselink & Walton 2000,
+   PMID 10630950: infected canals about 20% lower success when >2 mm short or past the apex than at 0–2 mm). The unit is roots, so the screen says "necrotic + lesion", never "teeth".
    "Long" = overfilled. Primary-verified fallback if this is challenged: Ng 2011 full text, primary treatment per root,
    2–4 yr: flush 86%, short 74%, long 67% (not shown).
 3. **"per mm short ~12–14% lower odds" (summary adds "(2 cohorts)").**
@@ -66,9 +69,10 @@ below. "Abstract" = the PubMed abstract contains it; "full text" = read in the p
    PMID 12847449, doi:10.1016/s1079-2104(02)91703-8 (abstract: "In teeth/roots with apical periodontitis, a millimeter
    loss in working length increased the chance of treatment failure by 14%").
    Ng Y-L, Mann V, Gulabivala K. Int Endod J 2011;44(7):583–609, PMID 21366626, doi:10.1111/j.1365-2591.2011.01872.x
-   (abstract: extension of canal cleaning as close as possible to the terminus, P = 0.001; full text read by the
-   fact-checker: odds of success reduced by 12%, OR 0.88, 95% CI 0.79–0.97, per mm un-instrumented short of the
-   apex-locator zero). Worded as odds, never as percentage points of success.
+   (abstract: extension of canal cleaning as close as possible to the terminus, P = 0.001; primary full text read by
+   the fact-checker and again in the citation audit: "the odds of success was reduced by 12% (OR = 0.88, 95% CI 0.79,
+   0.97) for every 1 mm of the canal short of the terminus remaining 'un-instrumented'", terminus = apex-locator zero;
+   the final-model table and the discussion print OR 0.87; primary and retreatment roots pooled). Worded as odds, never as percentage points of success.
 4. **"<#30" vs "≥#30": "irrigant reaches apical third (in vitro)"; "debris" in the smaller preparation.**
    Khademi A, Yazdizadeh M, Feizianfard M. J Endod 2006;32(5):417–20, PMID 16631839, doi:10.1016/j.joen.2005.11.008
    (abstract: SEM of debris and smear layer in the apical third of extracted mandibular molar mesiobuccal canals,
@@ -85,8 +89,9 @@ below. "Abstract" = the PubMed abstract contains it; "full text" = read in the p
 6. **Summary line 1 "Infected canals: stop 0–2 mm short".** Restates items 2–3 (wording approved by the fact-check;
    "infected" because Chugal 2003 found the opposite trend in teeth with a normal pulp and periapex).
 7. **Summary line 2 "Binding file +3 sizes beat +2"** and **"≥#30: irrigant reaches apical third (in vitro)".**
-   Descriptive restatement of items 5 and 4. The +2 group was also the worst in Fatima S et al., J Endod
-   2021;47(9):1345–51, PMID 34058250 (abstract), and a 2026 systematic review found +3 better than +2 (Shao W et al.,
+   Descriptive restatement of items 5 and 4. In the second RCT (Fatima S et al., J Endod 2021;47(9):1345–51,
+   PMID 34058250; abstract) +2 sizes with a 4% taper had the lowest success (57.1%) and differed significantly from
+   the other three groups (+2 with 6% taper, +3 with 4% or 6%), and a 2026 systematic review found +3 better than +2 (Shao W et al.,
    J Endod 2026, online ahead of print, PMID 42946041, doi:10.1016/j.joen.2026.10.008; in NOTES only).
 8. **Sticky "Certainty: LOW · cohorts · in vitro · small RCTs".**
    Sabeti MA, Saqib Ihsan M, Aminoshariae A. J Endod 2024;50(3):292–8, PMID 38135112,
@@ -159,7 +164,8 @@ Science
   than the canal's short diameter), schematic note on the constriction, Boutsioukis 2021 and Wu 2002 in Refs.
 - Sticky now reads "Evidence: LOW" (not the GRADE word "Certainty"); the caption says which part has a published
   rating (Sabeti 2024, apical size only).
-- Fatima 2021 source note corrected: only +2 with 4% taper was lowest (57.1%); +2 with 6% taper did not differ from +3.
+- Fatima 2021 source note corrected: only +2 with 4% taper was lowest (57.1%) and significantly different from the
+  other three groups, which include +2 with 6% taper (abstract).
 - Still open before posting: check 94 / 76 / 68 against the results table of Sjögren 1990 (J Endod 16:498-504).
 
 Design
@@ -191,8 +197,33 @@ Design
   "long" = filling material radiographically beyond the apex; Chugal 2003 = 14% higher chance of failure per mm from the
   radiographic apex (apical periodontitis, 4 yr), Ng 2011 = 12% lower odds of healing per un-instrumented mm from the
   apex-locator zero (2-4 yr); normal pulp/periapex in Chugal 2003: successes 1.23 mm, failures 0.20 mm short; #30 is from
-  extracted mesiobuccal canals with syringe irrigation and depends on taper and needle (Boutsioukis & Gutierrez Nova
+  extracted mesiobuccal canals (irrigation protocol not in the abstract) and depends on taper and needle (Boutsioukis & Gutierrez Nova
   2021); the first binding file under-reads the canal (Wu 2002); the published "low" rating covers apical size only
   (Sabeti 2024).
 - Left as is: the label "constriction" starts at x = 59, 5 px outside the 64 px side margin (no Instagram UI there).
 - Still open before posting: check 94 / 76 / 68 against the results table of Sjögren 1990 (primary full text not read).
+
+## Citation audit (2026-11-22)
+Every paper named on screen, in meta.json and in this file was looked up again on PubMed (first author, year, journal,
+volume, pages, PMID) and its abstract compared with the claim attached to it: PMIDs 2084204, 12847449, 21366626,
+16631839, 34118256, 22980168, 38135112, 19220517, 10630950, 11985678, 34058250, 42946041, 23077417, 27656054, 20618879,
+23431255. The 31 further citations in RESEARCH.md were matched to their PMIDs by journal, year, volume and first page.
+No wrong PMID, author, year, journal, volume or page was found. **No on-screen citation or number changed: no reel
+source edit and no re-render.**
+- Ng 2011: the 12% (OR 0.88, 95% CI 0.79–0.97) per un-instrumented mm was re-read in the primary full text (the
+  published article as hosted by the AAE), together with the flush / short / long figures for primary treatment
+  (85.8% of 954, 74.3% of 70, 67.1% of 146 roots). The paper prints OR 0.87 in its final-model table and discussion
+  and 0.88 in its conclusions; "~12–14%" covers both. It also quotes Chugal 2003 as OR 0.86 per mm, so "worse odds"
+  is correct for both cohorts.
+- Sjögren 1990, 94 / 76 / 68: still not read in the primary paper (not in PMC, publisher wall). The quotation in
+  PMC3574741 was re-read and is now cited with its own reference (Tarim Ertas 2013, PMID 23431255); Wu 2000's abstract
+  is added as agreeing evidence. On-screen attribution ("Sjögren 1990, J Endod") is correct. **Still open before
+  posting: compare with the results table of the paper.**
+- Khademi 2006: "syringe irrigation" was attributed to the abstract in meta.json and in the Final QA note; the
+  abstract does not describe the irrigation protocol. Removed.
+- Fatima 2021: "+2 with a 6% taper did not differ from +3" was an inference; replaced by what the abstract states
+  (+2 with 4% taper lowest, 57.1%, significantly different from the other three groups).
+- Textbook: now cited with edition and editors (Cohen's Pathways of the Pulp, 11th ed., Hargreaves & Berman, 2016),
+  still marked as not re-read; it supports only the label terms.
+- Caption: "Vital teeth showed the reverse trend" → "Normal pulp/periapex: trend reversed." (Chugal's abstract says
+  "normal preoperative pulp and periapex"); 698 characters.

@@ -4,7 +4,7 @@
 in a dark concourse, pre-rendered flap cards with a hinge line and axle pins, character flaps for names and
 numbers, word flaps for criteria and sources, amber lamps, amber signage pictograms, a station clock whose amber
 hand makes one turn per loop. Oswald 700 (printed header), Barlow Condensed 500/600/700 (everything on a flap).
-**Duration:** 25 s · 1080×1920 · silent · poster at 22.6 s (the complete board). American spelling.
+**Duration:** 24 s · 1080×1920 · silent · poster at 21.4 s (the complete board). American spelling.
 **Files:** `index.html` (page contract), `board.js` (layout, flip scripts, all drawing, `render(t)`).
 
 ## Concept
@@ -13,8 +13,9 @@ RETREATMENT, APICAL SURGERY). Rows arrive one at a time; in each, the flaps casc
 the word flaps turn over to say exactly what that number is (criteria, follow-up, denominator) and a slim flap
 gives the source. Two modifiers flip in between: the effect of an apical lesion at the start (inset strip hanging
 off row 1) and traditional root-end surgery versus microsurgery (the surgery cell itself flips 59% to 94%, and the
-59% is kept as a smaller, dimmer flap group labeled TRADITIONAL). The surgery SURVIVAL cell turns over once and
-stays blank. The finished board is held, fully lit and motionless, for about 5 s so it can be screenshotted.
+59% is kept as a smaller, dimmer flap group labeled TRADITIONAL). The surgery SURVIVAL cell lands on a dim
+"– – %" placeholder (no digits, no words). The finished board is held, fully lit and motionless, for about 5.4 s
+so it can be screenshotted.
 
 The one rule of the reel: every number is a different kind of number, so no number appears without its tag.
 
@@ -22,21 +23,22 @@ The one rule of the reel: every number is a different kind of number, so no numb
 | t | Beat | On screen |
 |---|------|-----------|
 | 0.0–0.3 | **Hook.** Printed header is legible on frame 0; the board is a skeleton of blank flaps, lamps off. | ENDO OUTCOMES · NUMBERS TO KNOW · column heads SUCCESS / SURVIVAL |
-| 0.3–5.2 | **Row 1.** Pictogram tile lights, lamp pair pulses. Name 0.4–1.5; 82% 1.5–2.55; tags 2.5–2.95; source 2.95; 97% 3.3–4.35; tags 4.3–4.75; source 4.75. | PRIMARY NSRCT · **82%** STRICT · POOLED · 1 YR+ · *Burns 2022 · Int Endod J* · **97%** RETAINED · 8 YR · 1.46M TEETH · *Salehrabi 2004 · J Endod* |
-| 5.3–9.2 | **Modifier 1.** House light slides down to the inset strip. Question 5.6; tags 5.95; source 6.3; NO 6.65, >96% 6.75–7.7; YES 7.7, 86% 7.8–8.7. | APICAL LESION AT START? · SUCCESS · 8–10 YR · NO **>96%** · YES **86%** · *Sjögren 1990 · J Endod* |
-| 9.3–13.8 | **Row 2.** Name 9.4–10.45; 77% 10.4–11.45; tags 11.4–11.85; source 11.85; 89% 12.1–13.15; tags 13.1–13.55; source 13.55. | RETREATMENT · **77%** STRICT · POOLED · 6 MO+ · *Ng 2008 · Int Endod J* · **89%** RETAINED · 5 YR · 4,744 TEETH · *Salehrabi 2010 · J Endod* |
-| 14.0–17.0 | **Row 3, traditional technique.** Name 14.1–15.1; label 14.5; 59% 14.6–15.65; tags 15.55–16.0; source 16.0; held to 17.0. | APICAL SURGERY · TRADITIONAL **59%** · SUCCESS · POOLED · 6 MO+ · *Setzer 2010 · J Endod* |
-| 17.0–18.3 | **Modifier 2.** Microscope tile lights; the label flap turns to MICROSURGERY (17.05) and the big flaps to 94% (17.15–18.2); the neighboring small slot turns up TRADITIONAL 59% in dim type (17.3–18.0). | MICROSURGERY **94%** · TRADITIONAL 59% (dim) |
-| 18.3–19.4 | Surgery SURVIVAL flaps turn over once and stay blank (18.3–18.75); footer flap 18.55; house lights come up on the whole board. | SUCCESS ≠ SURVIVAL · NOT HEAD-TO-HEAD · @natebrooksendo |
-| 19.4–24.3 | **Payoff: the complete cheat sheet**, nothing moving but the clock hand and one slow pass of light over the glass (19.5–21.7). Poster at 22.6. | whole board |
-| 24.3–25.0 | Every flap turns back to blank, top to bottom, lamps fade: the last frame equals frame 0. | — |
+| 0.3–3.7 | **Row 1.** Pictogram tile lights, lamp pair pulses. Name 0.42–1.25; the 132 px flaps of 82% spin from 0.5 and settle at 1.2; tags 1.3–1.75; source 1.7; 97% 2.3–3.0; tags 3.1–3.55; source 3.5. | PRIMARY NSRCT · **82%** STRICT · POOLED · 1 YR+ · *Burns 2022 · Int Endod J* · **97%** RETAINED · 8 YR · 1.46M TEETH · *Salehrabi 2004 · J Endod* |
+| 4.3–7.3 | **Modifier 1.** House light slides down to the inset strip. Question 4.4; tags 4.75; source 5.1; NO 5.45, >96% 5.55–6.45; YES 6.45, 86% 6.55–7.25. | APICAL LESION AT START? · SUCCESS · 8–10 YR · NO **>96%** · YES **86%** · *Sjögren 1990 · J Endod* |
+| 8.0–11.6 | **Row 2.** Name 8.1–8.9; 77% 8.4–9.1; tags 9.2–9.65; source 9.6; 89% 10.2–10.9; tags 11.0–11.45; source 11.4. | RETREATMENT · **77%** STRICT · POOLED · 6 MO+ · *Ng 2008 · Int Endod J* · **89%** RETAINED · 5 YR · 4,744 TEETH · *Salehrabi 2010 · J Endod* |
+| 12.2–16.0 | **Row 3, traditional technique.** Name 12.3–13.3; label 12.55; 59% 12.65–13.35; tags 13.4–13.85; source 13.8; the settled 59% is held from 13.35 to 16.05 (2.7 s, 2.0 s of it with nothing else moving). | APICAL SURGERY · TRADITIONAL **59%** · SUCCESS · POOLED · 6 MO+ · *Setzer 2010 · J Endod* |
+| 15.85–16.8 | **Modifier 2.** The small dim slot starts turning to TRADITIONAL 59% at 15.85, just before the big flaps leave, so the figure is seen to move aside; microscope tile lights 15.9; label flap turns to MICROSURGERY (16.0) and the big flaps to 94% (16.05–16.75). | MICROSURGERY **94%** · TRADITIONAL 59% (dim) |
+| 16.9–18.0 | Surgery SURVIVAL flaps turn to a dim "– – %" (16.9–17.25); footer flap 17.1; house lights come up on the whole board. | – – % · SUCCESS ≠ SURVIVAL · NOT HEAD-TO-HEAD · @natebrooksendo |
+| 18.0–23.4 | **Payoff: the complete cheat sheet**, nothing moving but the clock hand and one slow pass of light over the glass (18.2–20.4). Poster at 21.4. | whole board |
+| 23.4–24.0 | Every flap turns back to blank, top to bottom within 0.15 s, lamps fade: the last frame equals frame 0. | — |
 
 Reading: everything stays on the board once it has landed, so each tag is visible for at least 5.5 s (most for
-far longer); the complete board is static for 4.9 s after the lights are fully up.
+far longer); the complete board is static for 5.4 s after the lights are fully up.
 
 Must-read words on the final board: 58 (header 5, column heads 2, row 1 13, modifier 1 11, row 2 12, row 3 10,
-footer 5). The six source flaps (24 px) and the handle (28 px) are fine print. Smallest must-read type: 31 px
-(tag flaps); row names 46 px; modifier figures 78 px; headline figures 132 px.
+footer 5); the review round added none. The six source flaps (24 px) and the handle (28 px) are fine print.
+Smallest must-read type: 34 px (tag flaps, was 31 px); row names 46 px; modifier figures 78 px; headline figures
+132 px.
 
 Key to the tags (also in the caption): **"1 YR+" and "6 MO+" are the minimum follow-up a study needed to be
 pooled**, not the typical follow-up (Burns' studies ran from 12 months to 19 years).
@@ -52,7 +54,9 @@ what was actually read.
 2. **PRIMARY NSRCT · SURVIVAL 97% · RETAINED · 8 YR · 1.46M TEETH.** Salehrabi R, Rotstein I. J Endod
    2004;30(12):846-850. PMID 15564861, doi:10.1097/01.don.0000145031.04236.ca. 1,462,936 teeth in 1,126,288
    patients (US insurance claims); "97% of teeth were retained in the oral cavity 8 yr after initial nonsurgical
-   endodontic treatment". Retention, not healing. Verified from: abstract.
+   endodontic treatment"; outcomes "assessed over a period of 8 yr"; treatments by general practitioners and
+   endodontists. Retention in claims data, no radiographs, not healing. The abstract does not say that every tooth
+   was followed for 8 years, so the caption says "retained over 8 yr". Verified from: abstract.
 3. **APICAL LESION AT START? NO >96% · YES 86% · SUCCESS · 8–10 YR.** Sjögren U, Hägglund B, Sundqvist G, Wing K.
    J Endod 1990;16(10):498-504. PMID 2084204, doi:10.1016/S0099-2399(07)80180-4. 356 patients, 8–10 yr; success
    "exceeded 96%" with no periapical radiolucency (vital or nonvital pulps); 86% of cases with pulp necrosis and a
@@ -64,18 +68,23 @@ what was actually read.
    review. Verified from: abstract.
 5. **RETREATMENT · SURVIVAL 89% · RETAINED · 5 YR · 4,744 TEETH.** Salehrabi R, Rotstein I. J Endod
    2010;36(5):790-792. PMID 20416420, doi:10.1016/j.joen.2010.02.009. "89% of teeth were retained in the oral
-   cavity 5 years after the endodontic retreatment"; retreatments by endodontists (US insurance claims); 4% had
-   apical surgery, 11% were extracted. Verified from: abstract.
+   cavity 5 years after the endodontic retreatment"; retreatments by endodontists only (US insurance claims, no
+   radiographs); 4% had apical surgery, 11% were extracted. Not like-for-like with the 97% of claim 2 (different
+   provider mix and window); the caption says so. Verified from: abstract.
 6. **APICAL SURGERY · SUCCESS · TRADITIONAL 59% · MICROSURGERY 94% · POOLED · 6 MO+.** Setzer FC, Shah SB, Kohli
    MR, Karabucak B, Kim S. J Endod 2010;36(11):1757-1765. PMID 20951283, doi:10.1016/j.joen.2010.08.007. 12
    studies of traditional root-end surgery (n = 925): 59% positive outcome; 9 studies of endodontic microsurgery
    (n = 699): 94%; RR 1.58. Separate single-arm study groups from different eras, not a trial. Verified from:
    abstract (numbers). The "6 MO+" tag is the inclusion minimum **as reported by a secondary source**: Pinto D et
-   al., Medicina (Kaunas) 2020;56(9):447, PMID 32899437, PMC7558840 (full text). The column head over this cell
-   reads SUCCESS, and the cell carries no STRICT tag: surgical success scales (Rud/Molven) count scar healing.
-7. **APICAL SURGERY · SURVIVAL: blank.** Not a claim. No pooled survival figure for apical surgery could be
-   verified from an abstract or full text, so the four flaps turn over once and stay empty. The board does not say
-   that no such figure exists (Torabinejad M et al., J Endod 2015;41:1-10, PMID 25306305 calculated a weighted
+   al., Medicina (Kaunas) 2020;56(9):447, PMID 32899437, PMC7558840 (full text). In the review round the Setzer
+   full text was requested again and is paywalled (not in PMC; publisher page returns 403), so this is still not
+   verified at the primary source. The column head over this cell reads SUCCESS, and the cell carries no STRICT
+   tag: the abstract reports "positive outcome" and states no strict criterion; surgical success scales
+   (Rud/Molven) normally count incomplete (scar) healing, which was not confirmed in the Setzer full text, so
+   "SCAR" is not printed anywhere. The caption says "surgical criteria, not strict".
+7. **APICAL SURGERY · SURVIVAL: dim "– – %".** Not a claim. No pooled survival figure for apical surgery could be
+   verified from an abstract or full text, so the three flaps land on a dim dash placeholder (the fact-check
+   allowed "blank or a dash, with no words"). The board does not say that no such figure exists (Torabinejad M et al., J Endod 2015;41:1-10, PMID 25306305 calculated a weighted
    survival rate; its abstract prints no number).
 8. **SUCCESS ≠ SURVIVAL · NOT HEAD-TO-HEAD.** Follows from the definitions in sources 1–6: strict success = no
    radiolucency and no signs/symptoms; retained = tooth still present in claims data; the surgery figures are
@@ -96,15 +105,17 @@ what was actually read.
   on screen and in the caption.
 
 ## Deliberately not on screen (see RESEARCH.md "Do not claim")
-No "75% to 82%" update flip; no figure in the surgery SURVIVAL cell and no "NO POOLED DATA"; no STRICT on the
+No "75% to 82%" update flip; no figure in the surgery SURVIVAL cell and no "NO POOLED DATA" / "NO POOLED FIGURE"
+wording (an unverified negative: Torabinejad 2015 calculated one); no STRICT on the
 Sjögren or Setzer numbers; no Toronto "functional" rates; no implant comparison; no confidence intervals; no CBCT
 claims; no statement that surgery beats retreatment or the reverse.
 
 ## What is schematic
 - Nothing on the board is modeled, simulated or illustrative: all eight figures are published results.
 - **Spin frames never show digits.** On its way to a number a flap passes only letters from
-  `ACEFHJKLMNPRTUVWXY` (none that read as digits), the "%" leaf lands last, and when the board clears each number
-  group leaves together, so no frame can show a percentage that is not on the final board. During the 59% to 94%
+  `ACEFHJKLMNPRTUVWXY` (none that read as digits), the "%" leaf lands last, and when the board clears the digits
+  and the "%" of each figure leave in the same frame, so no frame can show a percentage that is not on the final
+  board. The surgery SURVIVAL placeholder reaches its dashes through blank leaves only. During the 59% to 94%
   change the three flaps are staggered so that the two digits visible at any instant are never a third number.
 - Pictograms (tooth, canals, redo arrow, resected root tip, apex with a ring, microscope) are original signage
   drawings, not anatomy. The clock is a loop indicator, not a time scale.
@@ -120,12 +131,13 @@ claims; no statement that surgery beats retreatment or the reverse.
   lamps, pictograms); gray = sources; dim gray = the superseded traditional figure (dimmed, not struck through:
   59% is a valid pooled result for that technique).
 - **Hinges:** full-strength hinge and pins on the character flaps; a hairline hinge on the small word flaps so
-  the 31 px tags stay clean.
-- **Safe areas:** all text sits in x 64–1008, y 243–1572; nothing readable is right of x 958 below y 1095 (the
-  layout code warns in the console if a unit breaks this). The lamp pair of row 3 sits under the button column
+  the 34 px tags stay clean.
+- **Safe areas:** all text sits in x 64–1008, y 243–1574; nothing readable is right of x 958 below y 1095 (the
+  SURVIVAL column starts at x 556 so that "RETAINED · 5 YR · 4,744 TEETH" at 34 px ends at x 956;
+  the layout code warns in the console if a unit breaks this). The lamp pair of row 3 sits under the button column
   and is decorative. Header and full board are inside the 3:4 grid crop.
-- **Loop:** every flap turns back to blank in the last 0.7 s, lamps fade, and the clock hand returns to 12, so
-  frame 750 matches frame 0 with no ghosted text.
+- **Loop:** every flap turns back to blank in the last 0.6 s, lamps fade, and the clock hand returns to 12, so
+  frame 720 matches frame 0 with no ghosted text.
 
 ## QA log
 1. First stills: hinge line cut through the 31 px tags (thinned to a hairline); modifier-1 source collided with
@@ -140,3 +152,44 @@ claims; no statement that surgery beats retreatment or the reverse.
 4. Row 1 renamed from "PRIMARY RCT" to "PRIMARY NSRCT" (see design rationale); video re-rendered and frames
    pulled back out of the MP4 (7.4 s, 16.6 s, first and last frame: mean luma difference 0.5/255) to confirm the
    encode and the loop.
+
+## Review changes (independent science + design review)
+Applied:
+1. **Setzer 2010 "6 MO+" (science, should).** Tried to read the Methods of the primary paper: it is not in PMC and
+   the publisher full text is paywalled (HTTP 403), so the check could not be done. As the review allowed, the tag
+   stays (Pinto 2020 full text supports it), Pinto 2020 stays in the caption Refs, and meta.json now says plainly
+   that the Setzer full text was not read.
+2. **Surgery "SUCCESS" is a looser scale than "STRICT" (science, should).** No on-screen change; caption now reads
+   "Apical surgery, pooled (6 mo+, surgical criteria, not strict)".
+3. **Retention figures are claims data (science, should).** Caption: "97% retained over 8 yr (US claims)" and "89%
+   retained at 5 yr (claims, endodontists)"; meta.json sources say general practitioners + endodontists vs
+   endodontists only, no radiographs.
+4. **"78–91%" was not a range (science, nit).** Caption now gives two pooled rates: "at 2–13 yr: 78% cohorts, 91%
+   trials" (Pinto 2020: prospective cohorts 78.4%, trials 91.3%).
+5. **Modifier pairing (science, nit).** Sjögren 1990 stays on screen (the classic quote). For the record, the
+   same-source contrast is Burns 2022, Table 3 (strict, pooled, 1 yr+): 90.3% without vs 80.3% with a
+   pre-operative periapical radiolucency (8 studies each); doi:10.1111/iej.13736.
+6. **"8 YR" (science, nit).** Screen unchanged ("RETAINED · 8 YR" matches the abstract); caption says "retained
+   over 8 yr".
+7. **Sjögren groups (science, nit).** No change on screen; "teeth" and "strict" are still not attached to that row
+   anywhere. NO = vital or nonvital pulp without radiolucency; YES = pulp necrosis with radiolucency.
+8. **Blank surgery SURVIVAL cell (design, should).** The cell now lands on a dim (#a39d8f) "– – %" at 16.9 s, which
+   reads as "not posted" and not as a figure that failed to load. The reviewer's alternative wording "NO POOLED
+   FIGURE" was not used: the fact-check in RESEARCH.md rules it out as an unverified negative.
+9. **Hook (design, should).** 82% now starts spinning at 0.5 s (was 1.5 s) and is settled at 1.2 s; row-1 tags and
+   source moved about 1.2 s earlier.
+10. **59% hold (design, should).** Settled 59% is held 2.7 s (13.35–16.05; was about 1.5 s), 2.0 s of it after the
+    tags and source have stopped. The dim TRADITIONAL 59% slot starts turning 0.2 s before the big flaps leave.
+11. **Number spin (design, nit).** NUM is now 4/5/6 leaves (was 6/8/10): a figure settles in about 0.7 s. The
+    saved time went to the 59% hold and a 1 s shorter reel (24 s).
+12. **Fourth big flap (design, nit).** All number cells are three flaps; no permanently blank flap after "%".
+13. **Tag size (design, nit).** Criteria flaps are 34 px (was 31 px). "TEETH" was kept as the unit (not "N=") by
+    moving the SURVIVAL column 20 px left (x 556) and trimming the tag padding by 1 px.
+14. **Row-name strip (design, nit).** 14 flaps (was 19): the strip ends at x 712 and no longer runs under the
+    whole SURVIVAL head.
+15. **Loop wipe (design, nit).** Digits and "%" of a figure clear in the same frame; top-to-bottom offset is 0.15 s
+    (was 0.3 s).
+
+Checked after the changes: 10 stills with safe-area overlay (`_stills/fix`), 16 transition stills
+(`_stills/fix-t`: 0–2.6 s, 13.6 s, 15.95–17.0 s, 23.45–23.7 s), no layout warnings; video re-rendered (720 frames,
+24.0 s, H.264 1080×1920 30 fps); frames pulled back out of the MP4 (first vs last: mean luma difference 1.0/255).

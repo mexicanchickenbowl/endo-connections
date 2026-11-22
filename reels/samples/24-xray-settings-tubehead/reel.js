@@ -13,18 +13,21 @@ const TAU = Math.PI * 2, D2R = Math.PI / 180;
 const T = 24;
 
 /* ------------------------------------------------------------------ timeline */
-const SC_MA = [2.8, 7.0], SC_KV = [7.0, 13.9], SC_TS = [13.9, 18.2], END0 = 18.2;
-const TURN_MA = [3.5, 5.0], TURN_KV = [7.8, 9.4], TURN_TS = [15.2, 15.9], RESET = [23.1, 23.8];
-const BEAM = [[0.35, 13.5], [14.3, 15.1], [16.05, 17.65]];        // EXPOSE held, then two timed pulses
-const KVB = 10.3;
-const TURNS = [TURN_MA, TURN_KV, TURN_TS];                                               // kVp caption: second line swaps in
+const SC_MA = [2.8, 7.0], SC_KV = [7.0, 14.2], SC_TS = [14.2, 18.5], END0 = 18.5;
+const TURN_MA = [3.5, 5.0], TURN_KV = [7.8, 9.4], TURN_TS = [15.5, 16.2], RESET = [23.1, 23.8];
+const BEAM = [[0.35, 13.8], [14.6, 15.4], [16.35, 17.95]];        // EXPOSE held, then two timed pulses
+const KVB = 10.4;                                                   // kVp caption: second line swaps in
+const ROW0 = 0.3, ROWD = 0.35;                                      // cheat-sheet rows: first at END0 + ROW0, then every ROWD
+const TURNS = [TURN_MA, TURN_KV, TURN_TS];
 const eio = ease.inOut;
 const back = (t) => seg(t, RESET[0], RESET[1], eio);
 const setMA = (t) => 4 + 4 * (seg(t, TURN_MA[0], TURN_MA[1], eio) - back(t));
 const setKV = (t) => 60 + 10 * (seg(t, TURN_KV[0], TURN_KV[1], eio) - back(t));
 const setTS = (t) => 0.10 + 0.10 * (seg(t, TURN_TS[0], TURN_TS[1], eio) - back(t));
 const beamOn = (t) => BEAM.some(([a, b]) => t >= a && t < b);
-const cheatA = (t) => Math.min(seg(t, END0 + 0.05, END0 + 0.55, ease.smooth), 1 - seg(t, 22.95, 23.35, ease.smooth));
+// cheat sheet: the dark backdrop closes before the rows appear and opens only after they have faded (no ghosting)
+const cheatA = (t) => Math.min(seg(t, END0, END0 + 0.35, ease.smooth), 1 - seg(t, 23.2, 23.55, ease.smooth));
+const cheatTxt = (t) => 1 - seg(t, 22.95, 23.2, ease.smooth);
 
 /* ------------------------------------------------------------------ toy spectrum (schematic) */
 const E_PTS = [10, 15, 20, 30, 40, 50, 60, 80, 100];
@@ -51,7 +54,7 @@ function buildSims() {
   for (let i = 0; i < NS; i++) {
     const t = i * DT, on = beamOn(t) ? 1 : 0, kv = setKV(t), ma = setMA(t);
     const target = on * kv * ma / 560;                                       // kV x mA, 1 = 70 x 8
-    const w = 12, z = 0.7; v += (w * w * (target * 0.8 - x) - 2 * z * w * v) * DT; x += v * DT; simNeedle[i] = x;
+    const w = 12, z = 0.7; v += (w * w * (target * 0.74 - x) - 2 * z * w * v) * DT; x += v * DT; simNeedle[i] = x;
     h += (target - h) * DT / 0.5; simHeat[i] = h;
     b += (on - b) * DT / 0.10; simOn[i] = b;
     // electrons per second follow mA only. The stream is pre-filled (emission starts one transit time early and is
@@ -375,7 +378,7 @@ function vuStatic(c) {
     c.strokeStyle = f > 0.86 ? '#c8321c' : '#2a1b10'; c.lineWidth = major ? 3 : 1.6;
     c.beginPath(); c.moveTo(px + R * Math.sin(a), py - R * Math.cos(a)); c.lineTo(px + r1 * Math.sin(a), py - r1 * Math.cos(a)); c.stroke();
   }
-  txt(c, 'kV × mA', fx + fw - 12, fy + 99, '600 24px "Barlow Condensed"', '#6e4b2a', 'right', '1.5px');
+  txt(c, 'kV × mA', fx + fw - 10, fy + 100, '600 22px "Barlow Condensed"', '#6e4b2a', 'right', '0.5px');
   g = c.createLinearGradient(0, fy, 0, fy + 26); g.addColorStop(0, 'rgba(0,0,0,0.28)'); g.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = g; c.fillRect(fx, fy, fw, 26);
   c.restore();
   // lower legend plate
@@ -569,14 +572,14 @@ function drawCaption(t) {
   };
   const sub = (a, parts) => { if (a <= 0.003) return; ctx.save(); ctx.globalAlpha = a; ctx.shadowColor = `rgba(255,150,40,${0.55 * a})`; ctx.shadowBlur = 10; rich(ctx, parts, cxm, GL.y + 122, F.sub); ctx.restore(); };
   const C = COL.cream, dotc = 'rgba(243,232,205,0.55)';
-  const aMA = env(t, SC_MA[0] + 0.2, SC_MA[1], 0.3, 0.3);
+  const aMA = env(t, SC_MA[0] + 0.12, SC_MA[1], 0.3, 0.3);
   if (aMA > 0.003) { head(aMA, 'mA', 'HOW MANY'); sub(aMA, [{ t: 'more ', c: C }, { t: 'electrons', c: COL.blue }, { t: ', more ', c: C }, { t: 'photons', c: COL.green }, { t: '  ·  ', c: dotc }, { t: 'same energies', c: C }]); }
   const aKV = env(t, SC_KV[0] + 0.05, SC_KV[1], 0.3, 0.3);
   if (aKV > 0.003) {
     const sh = seg(t, KVB, KVB + 0.45, ease.smooth);
     head(aKV, 'kVp', 'HOW HARD', '+ HOW MANY', sh);
     sub(aKV * (1 - seg(t, KVB - 0.15, KVB + 0.1)), [{ t: 'each ', c: C }, { t: 'electron', c: COL.blue }, { t: ' hits harder', c: C }, { t: '  ·  ', c: dotc }, { t: 'max keV = kVp', c: COL.green }]);
-    sub(aKV * seg(t, KVB + 0.15, KVB + 0.45), [{ t: 'more ', c: C }, { t: 'photons', c: COL.green }, { t: ' too', c: C }, { t: '  ·  ', c: dotc }, { t: 'output ~ kVp', c: C }, { t: '2', c: C, sup: true }]);
+    sub(aKV * seg(t, KVB + 0.15, KVB + 0.45), [{ t: 'more ', c: C }, { t: 'photons', c: COL.green }, { t: '  ·  ', c: dotc }, { t: 'output ~ kVp', c: C }, { t: '2', c: C, sup: true }]);
   }
   const aTS = env(t, SC_TS[0] + 0.05, SC_TS[1], 0.3, 0.3);
   if (aTS > 0.003) { head(aTS, 'TIME', 'HOW LONG'); sub(aTS, [{ t: 'same beam, on longer', c: C }, { t: '  ·  ', c: dotc }, { t: 'mAs = mA × s', c: COL.amberHot }]); }
@@ -687,10 +690,10 @@ function drawCheat(t) {
     { name: 'kVp', how: 'HOW HARD', yb: y + 182, plus: '+ how many', right: [[{ t: 'max keV = kVp', c: COL.green }], [{ t: 'output ~ kVp', c: COL.cream }, { t: '2', c: COL.cream, sup: true }]] },
     { name: 'TIME', how: 'HOW LONG', yb: y + 320, right: [[{ t: 'mAs = mA × s', c: COL.amberHot }]] },
   ];
-  ctx.fillStyle = `rgba(255,182,72,${0.22 * a})`; ctx.fillRect(x + 36, y + 112, w - 72, 2); ctx.fillRect(x + 36, y + 250, w - 72, 2);
+  ctx.fillStyle = `rgba(255,182,72,${0.22 * a * cheatTxt(t)})`; ctx.fillRect(x + 36, y + 112, w - 72, 2); ctx.fillRect(x + 36, y + 250, w - 72, 2);
   rows.forEach((R, i) => {
-    const ra = a * seg(t, END0 + 0.35 + i * 0.5, END0 + 0.75 + i * 0.5, ease.out); if (ra <= 0.003) return;
-    const dx = -24 * (1 - seg(t, END0 + 0.35 + i * 0.5, END0 + 0.85 + i * 0.5, ease.out));
+    const r0 = END0 + ROW0 + i * ROWD, ra = a * cheatTxt(t) * seg(t, r0, r0 + 0.4, ease.out); if (ra <= 0.003) return;
+    const dx = -24 * (1 - seg(t, r0, r0 + 0.5, ease.out));
     ctx.save(); ctx.globalAlpha = ra; ctx.translate(dx, 0); capGlow(ra);
     txt(ctx, R.name, x + 52, R.yb, F.head, COL.amber, 'left', '1px');
     arrowR(ctx, x + 216, R.yb - 22, 40, COL.amber);
@@ -830,7 +833,7 @@ function drawScope(t) {
 function lampLevel(k, t) {
   const sc = [SC_MA, SC_KV, SC_TS][k];
   return Math.max(env(t, 0.95 + 0.32 * k, 1.55 + 0.32 * k, 0.1, 0.25), env(t, sc[0], sc[1], 0.2, 0.3),
-    Math.min(seg(t, END0 + 0.35 + 0.5 * k, END0 + 0.6 + 0.5 * k), 1 - seg(t, 22.95, 23.35)));
+    Math.min(seg(t, END0 + ROW0 + ROWD * k, END0 + ROW0 + 0.25 + ROWD * k), 1 - seg(t, 22.95, 23.35)));
 }
 function drawKnobs(t) {
   const vals = [setMA(t), setKV(t), setTS(t)], base = [4, 60, 0.10];

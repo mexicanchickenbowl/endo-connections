@@ -11,7 +11,7 @@
   const { canvas, ctx } = Kit.createCanvas();
   const { seg, ease, clamp, lerp, hash, mix, W, H } = Kit;
   const { C } = TX, A = ART, G = A.G, TAU = Math.PI * 2, RAD = Math.PI / 180;
-  const DUR = 23.0;
+  const DUR = 24.0;
 
   // ------------------------------------------------------------------ layout (world px == final frame px)
   const mkCard = (x, y, w, h, rot) => ({ x, y, w, h, cx: x + w / 2, cy: y + h / 2, r: rot * RAD });
@@ -34,31 +34,32 @@
   // ------------------------------------------------------------------ timeline (seconds)
   const T = {
     stampCase: 0.3, circle: [0.5, 1.1], tent1: 1.15, th1: [1.55, 2.5],
-    A: 2.15, tauA: 2.75, tent2: 2.7, capA1: [2.85, 3.25], capA2: [3.3, 3.75], noteA: [3.75, 4.15], stampA: 4.42, th2: [4.4, 4.75], th3: [4.65, 5.3],
-    B: 4.9, tauB: 5.45, tent3: 5.4, capB1: [5.55, 5.95], capB2: [6.0, 6.3], noteB: [6.85, 7.2], stampB: 7.08, th4: [7.25, 7.6],
-    curve: 8.05, th5: [8.0, 8.2], big: 8.45, th6: [8.5, 8.75], noglide: 8.9, th7: [8.85, 9.05], tent4: 9.15, force: 9.3, th8: [9.35, 9.6], th9: [9.2, 9.75],
-    reuse: 10.35, operator: 10.6, th10: [10.5, 10.8], th11: [10.75, 11.0], ring: [11.0, 11.35], no1: [11.3, 11.5],
-    stampP: 12.3, tent5: 12.35, rows: [[12.4, 12.75, 12.8], [13.0, 13.25, 13.3], [13.55, 13.85, 13.9]],
-    stampG: 15.1, tent6: 15.15, head: [15.2, 15.6], bar1: [15.5, 16.2], bar2: [15.8, 16.5], ns: [16.55, 16.95],
-    tabs: [17.1, 17.22, 17.34], rem: [17.5, 17.9], brk: [17.9, 18.15], u1: 18.0, u2: 18.4, arrow: [18.65, 18.95],
-    pay: 19.5, payText: [19.85, 20.35], payLine: [20.35, 20.6],
+    // exhibits: the stamp names the mechanism as the card lands, the captions follow at once, then the diagram plays
+    A: 2.15, tauA: 2.75, tent2: 2.7, stampA: 2.95, capA1: [3.0, 3.3], capA2: [3.3, 3.6], noteA: [3.7, 4.0], th2: [4.6, 4.95], th3: [4.85, 5.5],
+    B: 5.15, tauB: 5.7, tent3: 5.65, stampB: 5.9, capB1: [5.95, 6.25], capB2: [6.25, 6.5], noteB: [7.1, 7.4], th4: [7.5, 7.85],
+    curve: 8.3, th5: [8.25, 8.45], big: 8.7, th6: [8.75, 9.0], noglide: 9.15, th7: [9.1, 9.3], tent4: 9.4, force: 9.55, th8: [9.6, 9.85], th9: [9.45, 10.0],
+    reuse: 10.6, operator: 10.85, th10: [10.75, 11.05], th11: [11.0, 11.25], ring: [11.25, 11.6],
+    stampP: 12.5, tent5: 12.55, rows: [[12.6, 12.85, 12.9], [13.0, 13.25, 13.3], [13.4, 13.65, 13.7]],
+    stampG: 15.4, tent6: 15.45, head: [15.5, 15.9], bar1: [15.8, 16.5], bar2: [16.1, 16.8], ns: [16.85, 17.25],
+    tabs: [17.1, 17.2, 17.3], rem: [17.4, 17.8], brk: [17.8, 18.0], u1: 17.9, u2: 18.3,
+    pay: 20.4, payText: [20.75, 21.25], payLine: [21.25, 21.5],
   };
   // camera: [t, cx, cy, zoom, roll°]; segments alternate hold (slow linear drift) / move (eased)
   const CAM = [
     [0.0, 250, 560, 2.10, -0.5], [2.0, 247, 551, 2.20, -0.3],          // the case opens: title + radiograph
-    [2.7, 570, 550, 2.20, 0.3], [4.75, 570, 556, 2.25, 0.4],           // exhibit: torsion
-    [5.4, 834, 550, 2.20, -0.3], [7.6, 832, 558, 2.24, -0.4],          // exhibit: fatigue
-    [8.25, 732, 888, 1.55, 0.2], [10.0, 728, 894, 1.57, 0.25],         // suspects under both exhibits
-    [10.6, 392, 896, 1.55, -0.3], [11.7, 390, 902, 1.57, -0.35],       // ... ending on the operator
-    [12.3, 240, 1210, 2.30, 0.3], [14.4, 240, 1216, 2.34, 0.35],       // prevention checklist
-    [15.1, 706, 1212, 1.72, -0.2], [19.1, 706, 1280, 1.70, -0.1],      // prognosis, tilting down to the decision
-    [19.9, 540, 960, 1.0, 0], [DUR, 540, 960, 1.0, 0],                 // the whole board
+    [2.7, 570, 550, 2.20, 0.3], [5.0, 570, 556, 2.25, 0.4],            // exhibit: torsion
+    [5.65, 834, 550, 2.20, -0.3], [7.85, 832, 558, 2.24, -0.4],        // exhibit: fatigue
+    [8.5, 732, 888, 1.55, 0.2], [10.25, 728, 894, 1.57, 0.25],         // suspects under both exhibits
+    [10.85, 322, 990, 1.95, -0.3], [11.85, 320, 996, 1.98, -0.35],     // ... pushing in on reuse + operator
+    [12.5, 240, 1210, 2.30, 0.3], [14.7, 240, 1216, 2.34, 0.35],       // prevention checklist
+    [15.4, 706, 1330, 1.72, -0.2], [20.0, 706, 1345, 1.70, -0.1],      // prognosis + decision, held until the strip has been read
+    [20.8, 540, 960, 1.0, 0], [DUR, 540, 960, 1.0, 0],                 // the whole board
   ];
   function camera(t) {
     let i = 0; while (i < CAM.length - 2 && t >= CAM[i + 1][0]) i++;
     const a = CAM[i], b = CAM[i + 1];
     let u = clamp((t - a[0]) / (b[0] - a[0]));
-    if (i % 2 === 1) u = ease.inOut(u);
+    if (i % 2 === 1) u = ease.smooth(u);          // smoothstep: peak speed 1.5x the mean (cubic in-out strobed on card edges)
     const z = Math.exp(lerp(Math.log(a[3]), Math.log(b[3]), u));
     return { x: lerp(a[1], b[1], u), y: lerp(a[2], b[2], u), z, roll: lerp(a[4], b[4], u) };
   }
@@ -69,19 +70,20 @@
   let bg, film, SP = {}, ST = {};
   const SUS = {
     reuse: { w: 346, icon: 'reuse', lines: ['reuse'], lx: 162, ix: 22 },
-    operator: { w: 346, icon: 'operator', lines: ['operator'], lx: 124, ix: 18, fine: 'Parashos 2004, J Endod' },
+    operator: { w: 346, icon: 'operator', lines: ['operator'], lx: 132, ix: 18, fine: 'Parashos 2004, J Endod' },
     noglide: { w: 284, icon: 'noglide', lines: ['no glide', 'path'], lx: 126 },
     force: { w: 284, icon: 'force', lines: ['forced'], lx: 126 },
     curve: { w: 284, icon: 'curve', lines: ['tight', 'curve'], lx: 130, fine: 'Pruett 1997, in vitro' },
-    big: { w: 284, icon: 'big', lines: ['big file'], lx: 130 },
+    big: { w: 284, icon: 'big', lines: ['big file'], lx: 114, fine: 'Pruett 1997, in vitro' },   // same in vitro fatigue source as 'tight curve'
   };
   function decor(g) {                                  // things already lying about on the board (no reading needed)
     for (const [x, y, c] of [[905, 92, 'yellow'], [948, 118, 'blue'], [992, 84, 'white'], [96, 1668, 'green'], [140, 1700, 'red'], [186, 1662, 'white'], [560, 1690, 'yellow']]) A.pin(g, x, y, c);
-    // a spare length of red thread hanging in the empty right-hand strip
+    // a spare length of plain white string hanging in the empty right-hand strip (not the narrative red thread)
     const pts = []; for (let i = 0; i <= 60; i++) { const u = i / 60; pts.push([992 + Math.sin(u * 5.2) * 13 * u, 1150 + u * 400]); }
-    A.thread(g, pts, 1); A.pin(g, 992, 1150, 'red');
+    const WS = { color: '#d9d2c0', hi: '#ffffff' };
+    A.thread(g, pts, 1, WS); A.pin(g, 992, 1150, 'white');
     const loop = []; for (let i = 0; i <= 50; i++) { const a = i / 50 * TAU * 2.2; loop.push([990 + Math.cos(a) * (10 + i * 0.22), 1562 + Math.sin(a) * (7 + i * 0.16)]); }
-    A.thread(g, loop, 1);
+    A.thread(g, loop, 1, WS);
     // magnifying glass resting on the bottom ledge
     {
       const x = 800, y = 1752, r = 72;
@@ -264,11 +266,10 @@
     else A.marker(g, 'often no warning', 13, E.note, 30, seg(t, nt[0], nt[1]), { rot: -1.5 });
     stamp(g, isA ? ST.torsion : ST.fatigue, E.stamp[0] + (isA ? 2 : -4), E.stamp[1], isA ? -6 : 5, t, isA ? T.stampA : T.stampB);
   }
-  function operatorOverlay(g, t) {
-    A.stroke(g, A.ring(194, 64, 82, 27, { a0: -2.6, turns: 1.1, seed: 5, wob: 0.04 }), seg(t, T.ring[0], T.ring[1], ease.inOut), { color: C.red, w: 5 });
-    A.marker(g, '#1', 286, 80, 40, seg(t, T.no1[0], T.no1[1]), { color: C.red, rot: -6 });
+  function operatorOverlay(g, t) {                     // ringed, not ranked: Parashos 2004 compared the operator with instrument design only
+    A.stroke(g, A.ring(216, 66, 97, 30, { a0: -2.6, turns: 1.1, seed: 5, wob: 0.04 }), seg(t, T.ring[0], T.ring[1], ease.inOut), { color: C.red, w: 5 });
   }
-  const PREV_ITEMS = ['glide path first', 'light touch', 'discard early'];
+  const PREV_ITEMS = ['glide path', 'light touch', 'discard early'];
   function prevOverlay(g, t) {
     const P = G.prev;
     stamp(g, ST.prevention, P.stamp[0], P.stamp[1], -4, t, T.stampP);
@@ -277,13 +278,17 @@
       A.typed(g, txt, P.tx, y, 31, nType(t, a, b, txt), { seed: 120 + i });
       A.stroke(g, [[P.box + 3, y - 15], [P.box + 12, y - 3], [P.box + 35, y - 35]], seg(t, c, c + 0.2, ease.out), { color: C.green, w: 6 });
     });
+    // the source belongs to the first row only (resin blocks, ProTaper): it appears with that row, directly under it
+    const fa = seg(t, T.rows[0][0], T.rows[0][0] + 0.3);
+    if (fa > 0) A.typed(g, 'Berutti 2004, in vitro', P.tx, P.fine, 22, null, { alpha: 0.75 * fa, seed: 63 });
   }
   function progOverlay(g, t) {
     const P = G.prog;
+    A.progForm(g, seg(t, T.stampG, T.stampG + 0.3));                   // empty tracks + source line arrive with the scene
     stamp(g, ST.prognosis, P.stamp[0], P.stamp[1], -3.5, t, T.stampG);
     const hd = 'healed, ≥ 1 yr';
     A.typed(g, hd, P.head[0], P.head[1], 31, nType(t, T.head[0], T.head[1], hd), { seed: 131 });
-    [['fragment', 91.8, C.red, T.bar1], ['matched control', 94.5, C.navy, T.bar2]].forEach(([lab, val, col, tt], i) => {
+    [['fragment', 91.8, C.red, T.bar1], ['control', 94.5, C.navy, T.bar2]].forEach(([lab, val, col, tt], i) => {
       const u = seg(t, tt[0], tt[1], ease.inOut); if (u <= 0) return;
       const y = P.bars[i], wFull = P.W100 * val / 100;                 // bars are drawn to the true values (0-100 % scale)
       g.save(); g.beginPath(); g.rect(P.x0, y, wFull * u, P.bh); g.clip();
@@ -304,8 +309,10 @@
     const D = G.dec, [sx, sy] = D.strip;
     A.stroke(g, [[13, 40], [14, 49], [150, 50], [276, 49], [277, 40]], seg(t, T.brk[0], T.brk[1], ease.inOut), { color: C.red, w: 4.5 });
     g.save(); g.translate(sx, sy);
-    const r = 'removed or bypassed:';
-    A.typed(g, r, 16, 33, 31, nType(t, T.rem[0], T.rem[1], r), { seed: 161 });
+    const r = 'removed or bypassed, by curve:';
+    A.typed(g, r, 9, 33, 31, nType(t, T.rem[0], T.rem[1], r), { seed: 161 });
+    const sa = seg(t, T.rem[0], T.rem[0] + 0.3);
+    if (sa > 0) A.typed(g, 'Shen 2004, Oral Surg · 72 teeth in all', 14, D.strip[3] - 7, 22, null, { alpha: 0.75 * sa, seed: 83 });
     for (const [x, lab, num, t0] of [[12, 'before', '100%', T.u1], [262, 'beyond', '31%', T.u2]]) {
       A.posIcon(g, x, 40, lab, ease.outBack(seg(t, t0, t0 + 0.2)));
       A.typed(g, lab, x + 50, 75, 31, nType(t, t0 + 0.05, t0 + 0.25, lab), { seed: 170 + x });
@@ -322,8 +329,8 @@
 
   // ------------------------------------------------------------------ pins, threads, markers (world coordinates)
   const P = {
-    radio: toW(K.radio, 326, 14), aTop: toW(K.exA, 14, 12), aBot: toW(K.exA, 16, 534), bTop: toW(K.exB, 14, 12), bBot: toW(K.exB, 16, 534),
-    curve: toW(K.curve, 11, 11), big: toW(K.big, 11, 11), noglide: toW(K.noglide, 11, 11), force: toW(K.force, 11, 11),
+    radio: toW(K.radio, 326, 14), aTop: toW(K.exA, -5, 12), aBot: toW(K.exA, -5, 536), bTop: toW(K.exB, -5, 12), bBot: toW(K.exB, -5, 536),
+    curve: toW(K.curve, -5, 11), big: toW(K.big, -5, 11), noglide: toW(K.noglide, -5, 11), force: toW(K.force, -5, 11),
     reuse: toW(K.reuse, 334, 11), operator: toW(K.operator, 334, 11),
   };
   const THREADS = [
@@ -394,26 +401,13 @@
     for (const [p, t0] of KNOTS) A.knot(ctx, p[0], p[1], seg(t, t0, t0 + 0.12));
     for (const [p, col, t0] of PINS) A.pin(ctx, p[0], p[1], col, t0 < 0 ? 1 : ease.outBack(seg(t, t0, t0 + 0.18)));
     for (const [p, lab, t0] of TENTS) { const u = seg(t, t0, t0 + 0.3); if (u > 0) A.tent(ctx, p[0], p[1] - (1 - ease.out(u)) * 26, lab, ease.outBack(u)); }
-    // marker arrow: "n.s." -> LEAVE + MONITOR
-    {
-      const u = seg(t, T.arrow[0], T.arrow[1], ease.inOut);
-      if (u > 0) {
-        const a = toW(K.prog, 474, 134), b = toW(K.dec, 436, 4), pts = A.quad(a, [a[0] + 26, (a[1] + b[1]) / 2 - 4], b, 16);
-        A.stroke(ctx, pts, u / 0.88, { color: C.red, w: 4.6 });
-        if (u > 0.88) {
-          const k = (u - 0.88) / 0.12, q = pts[pts.length - 4], dx = b[0] - q[0], dy = b[1] - q[1], l = Math.hypot(dx, dy) || 1, ux = dx / l, uy = dy / l;
-          const wing = (an) => [b[0] - (ux * Math.cos(an) - uy * Math.sin(an)) * 16, b[1] - (uy * Math.cos(an) + ux * Math.sin(an)) * 16];
-          A.stroke(ctx, [wing(0.6), b, wing(-0.6)], k, { color: C.red, w: 4.6 });
-        }
-      }
-    }
     light(cam.z);
   }
 
   window.REEL = {
     title: 'The separated file — case notes',
     duration: DUR,
-    poster: 22.2,
+    poster: 1.5,
     canvas,
     fonts: ['60px "Special Elite"', '50px "Permanent Marker"', '42px Anton', '31px "Archivo Black"', '700 24px "Courier Prime"', 'italic 700 24px "Courier Prime"'],
     setup,

@@ -3,7 +3,7 @@
   "slug": "30-resorption-surface-pressure",
   "title": "Surface + pressure resorption",
   "style": "Risograph duotone print",
-  "topic": "External surface and pressure resorption stop when the cause stops: pulp tests normal, no root canal treatment, remove the cause.",
+  "topic": "External surface and pressure resorption stop when the cause stops: the pulp is not the cause, no root canal treatment; for pressure, remove the cause.",
   "duration": 22.0,
   "claims": [
     {
@@ -11,33 +11,37 @@
       "source": "Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, section 6.1"
     },
     {
-      "claim": "No infection -> new cementum in weeks (no numbers: narrative-review time frame)",
-      "source": "Abbott & Lin 2022 (PMID 35605161); Lin S et al. Dent Traumatol 2022;38:253-266 (PMID 35559593) - full text"
+      "claim": "No infection -> new cementum in weeks (clock has no numerals and sweeps under a third of a turn; narrative-review time frame)",
+      "source": "Lin S et al. Dent Traumatol 2022;38:253-266 (PMID 35559593) - full text ('cementoid-like tissue ... about 4 weeks'); Abbott & Lin 2022 (PMID 35605161), section 6.1 ('will not persist', 'a few weeks')"
     },
     {
-      "claim": "Pressure keeps the clastic cells working (ortho force, impacted tooth)",
+      "claim": "Pressure keeps clasts working (labels: ortho force, impacted tooth)",
       "source": "Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract"
     },
     {
-      "claim": "Pressure off -> it stops; a shortened root stays short",
+      "claim": "Pressure off -> it stops. A shortened root stays short.",
       "source": "Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text (relevant sections) and abstract"
     },
     {
-      "claim": "Pulp tests normal. No root canal treatment - remove the cause",
-      "source": "Patel et al. Int Endod J 2022 (PMID 35229320) - Table 1 and text"
+      "claim": "No root canal treatment. Pulp is not the cause.",
+      "source": "Patel et al. Int Endod J 2022 (PMID 35229320) - Table 1 and text (no signs of endodontic disease; managed by eliminating the etiological factor); Abbott & Lin 2022 (PMID 35605161) - full text ('Orthodontic resorption itself does not cause pulp pathosis')"
     },
     {
-      "claim": "X-ray, surface: usually nothing",
+      "claim": "Radiograph icon, surface: usually nothing",
       "source": "Abbott & Lin. Dent Traumatol 2022 (PMID 35605161) - full text, section 6.1"
     },
     {
-      "claim": "X-ray, orthodontic: blunted apex",
+      "claim": "Radiograph icon, pressure (orthodontic): blunted apex",
       "source": "Abbott & Lin 2022 (PMID 35605161), section 6.6; Patel et al. 2022 (PMID 35229320)"
     },
     {
-      "claim": "Toy model / schematic: cell size, amount of root loss and timing are exaggerated, not to scale",
+      "claim": "Remove the cause. (printed under the PRESSURE panel only; surface resorption needs no management)",
+      "source": "Fuss et al. 2003 (PMID 12848710) - abstract (removal of the pressure is the treatment of choice); Patel et al. 2022 (PMID 35229320); Abbott & Lin 2022, section 6.1 (surface: no management indicated)"
+    },
+    {
+      "claim": "Toy model / schematic: cell size, amount of root loss and timing are exaggerated, not to scale (labelled on every sheet)",
       "source": "Illustration only"
     }
   ],
-  "caption": "Two resorptions that stop when the cause stops.\n\nSurface: small injury to cementum/PDL, shallow lacunae, new cementum within weeks if no infection (review-level time frame). Usually invisible on a radiograph.\nPressure (ortho force, impacted tooth, cyst/tumor): active while the pressure lasts. Remove it and it arrests, not instantly and not always. Lost root length does not return.\nThe pulp is not the cause and tests normal: no root canal treatment.\n\nRefs: Abbott & Lin 2022, Dent Traumatol; Fuss 2003, Dent Traumatol; Patel 2022, Int Endod J; Falahat 2008, Angle Orthod.\nSchematic animation.\n#endodontics #rootresorption #orthodontics #dentaltrauma #endoresident"
+  "caption": "Two root resorptions that stop when the cause stops.\n\nSURFACE: a one-off injury to cementum/PDL, shallow lacunae, new cementum within weeks if there is no infection (review-level time frame). Usually invisible on a radiograph. No treatment.\nPRESSURE (ortho force, impacted tooth, cyst/tumor): active while the pressure lasts. Remove the pressure and it arrests, though not instantly (lacunae can stay active about 10 days to 4 weeks after orthodontic force stops: Winter 2009; Cheng 2009, premolars) and not always (7 of 32 canine-related lesions progressed in 27 followed patients: Falahat 2008). Lost root length does not return. Blunted apex is the typical periapical sign of orthodontic resorption, not the only form.\nPULP: not the cause, and it usually responds normally. Root canal treatment does not treat the resorption; it is needed only if the pulp becomes diseased. Advanced pressure defects can reach the canal (60% of resorbed lateral incisors beside ectopic canines, CT, referred children: Ericson & Kurol 2000), so keep monitoring. During active orthodontics the EPT threshold rises and negative responses peak at about 2-3 months (Alomari 2011; Nangia 2025, low-certainty evidence); thermal testing appears more reliable. A non-response in braces is not by itself necrosis.\nNAMES vary: Fuss 2003 groups orthodontic and impacted-tooth/tumor resorption as pressure resorption (used here); Abbott & Lin 2022 list pressure and orthodontic resorption as separate types; Patel 2022 calls all of these external surface resorption.\n\nRefs: Lin 2022 (Part 1) and Abbott & Lin 2022 (Part 2), Dent Traumatol; Fuss 2003, Dent Traumatol; Patel 2022, Int Endod J; Ericson & Kurol 2000, Angle Orthod; Falahat 2008, Angle Orthod; Winter 2009, Eur J Orthod; Cheng 2009, AJODO; Alomari 2011, Int Endod J; Nangia 2025, Int Orthod; Samandara 2019, Eur J Orthod.\nSchematic animation: root loss exaggerated; typical orthodontic shortening averages under 1 mm on CBCT (Samandara 2019).\n#endodontics #rootresorption #orthodontics #dentaltrauma #endoresident"
 }

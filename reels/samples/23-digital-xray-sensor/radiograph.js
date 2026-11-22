@@ -72,7 +72,7 @@ function canalPoly(cn, xf) {   // tapered ribbon around a centre line
 
 /* the four teeth in the film: half a premolar, second premolar, first molar (the one modelled in 3-D), second molar */
 const ID = (x, y) => [x, y];
-const TEETH = [
+export const TEETH = [
   { out: PREMOLAR, en: PREMOLAR_ENAMEL, pulp: [PREMOLAR_PULP], canals: [], xf: (x, y) => [x - 123, y + (y > 188 ? (y - 188) * 0.04 : 0)] },
   { out: PREMOLAR, en: PREMOLAR_ENAMEL, pulp: [PREMOLAR_PULP], canals: [], xf: ID },
   { out: MOLAR, en: MOLAR_ENAMEL, pulp: [MOLAR_CHAMBER], canals: MOLAR_CANALS, xf: ID },

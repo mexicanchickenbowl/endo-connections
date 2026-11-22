@@ -132,6 +132,8 @@
       g.fillStyle = r() < 0.72 ? '#5b3d20' : '#ecd3a6'; g.globalAlpha = 0.25 + r() * 0.5;
       g.beginPath(); g.ellipse(x, y, 0.5 + r() * 1.5, 0.4 + r() * 0.9, r() * 3, 0, 7); g.fill();
     }
+    // calm the speckle (about one third less contrast): it costs bitrate and competes with the cards
+    g.globalAlpha = 0.32; g.fillStyle = '#b58653'; g.fillRect(x0, y0, W, H);
     g.globalAlpha = 1;
     // broad tonal drift
     for (let i = 0; i < 26; i++) {
@@ -140,7 +142,7 @@
       gr.addColorStop(0, dark ? 'rgba(70,40,12,0.13)' : 'rgba(255,226,170,0.10)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
       g.fillStyle = gr; g.fillRect(x - rad, y - rad, rad * 2, rad * 2);
     }
-    g.globalCompositeOperation = 'multiply'; g.fillStyle = TX.grainPat(g, 1 / S); g.fillRect(x0, y0, W, H);
+    g.globalCompositeOperation = 'multiply'; g.fillStyle = TX.grainPat(g, 1 / S, true); g.fillRect(x0, y0, W, H);
     g.globalCompositeOperation = 'source-over';
     // old pin holes
     for (let i = 0; i < 70; i++) {

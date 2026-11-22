@@ -494,7 +494,8 @@
     }
   }
   let PA_T0 = 0.9, PA_T1 = 2.6;      // mm of lesion along the beam: below T0 invisible, full contrast above T1
-  function setPAT(a, b) { PA_T0 = a; PA_T1 = b; }
+  let PA_C0 = 0.25;                  // outline threshold: mm of lesion along the beam (2 voxels)
+  function setPAT(a, b, c) { PA_T0 = a; PA_T1 = b; if (c != null) PA_C0 = c; }
   function bil(arr, fx, fz) {
     let ix = Math.floor(fx), iz = Math.floor(fz);
     if (ix < 0) { ix = 0; fx = 0; } else if (ix > NX - 2) { ix = NX - 2; fx = NX - 1; }
@@ -507,6 +508,7 @@
   function renderPA(data, bw, bh, cu, cv, mpp, ov, seed) {
     let o = 0;
     const xMin = X0 + 0.3, xMax = X0 + NX * VS - 0.3, zMin = Z0 + 0.2, zMax = Z0 + NZ * VS - 0.2;
+    const oxa = X0 + LB.x0 * VS - 0.4, oxb = X0 + (LB.x1 + 1) * VS + 0.4, oza = Z0 + LB.z0 * VS - 0.4, ozb = Z0 + (LB.z1 + 1) * VS + 0.4;
     for (let j = 0; j < bh; j++) {
       const z = cv + (j + 0.5 - bh / 2) * mpp;
       for (let i = 0; i < bw; i++, o += 4) {
@@ -526,14 +528,13 @@
         const ex = Math.min(x - xMin, xMax - x, z - zMin, zMax - z);
         if (ex < 0.5) g *= ex / 0.5;
         let r = g * 0.99, gg = g, b = g * 1.03;
-        if (ov > 0.001) {
-          const c = cL;
-          if (c > 0.01) {
-            const mk = sstep(0.02, 0.26, c);
-            const edge = mk * (1 - mk) * 4;
-            const k2 = Math.min(1, ov * 1.3 * edge);        // outline only: the radiolucency inside stays gray
-            r += (255 - r) * k2; gg += (138 - gg) * k2; b += (40 - b) * k2;
-          }
+        if (ov > 0.001 && x > oxa && x < oxb && z > oza && z < ozb) {
+          // contour of the projected lesion (path length through the lesion = PA_C0 mm), drawn as a line of constant
+          // width: distance to the contour = (c - C0) / |grad c|. Outline only: the radiolucency inside stays gray.
+          const gx = (bil(cnt, fx + 1, fz) - bil(cnt, fx - 1, fz)) * (0.5 * INV), gz = (bil(cnt, fx, fz + 1) - bil(cnt, fx, fz - 1)) * (0.5 * INV);
+          const d = Math.abs(cL - PA_C0) / Math.max(Math.sqrt(gx * gx + gz * gz), 0.45);
+          const k2 = ov * (1 - sstep(0.7 * mpp, 1.8 * mpp, d));
+          if (k2 > 0.003) { r += (255 - r) * k2; gg += (138 - gg) * k2; b += (40 - b) * k2; }
         }
         data[o] = r; data[o + 1] = gg; data[o + 2] = b; data[o + 3] = 255;
       }
