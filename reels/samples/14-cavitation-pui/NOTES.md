@@ -1,0 +1,116 @@
+# 14 · Ultrasonic activation: streaming vs cavitation (simulated high-speed footage)
+
+**Files:** `index.html` (page shell), `reel.js` (all drawing; pure `render(t)`), output `reels/out/14-cavitation-pui.mp4` + `.jpg`
+**Duration:** 19.5 s · 1080×1920 · 30 fps · silent · poster t = 10.05 s (ROI inset showing the micro-jet, "+ Cavitation" caption) · MP4 10.5 MB
+
+## Concept
+The reel looks like footage from a research high-speed camera: a backlit **shadowgraph** (bright field, dark
+silhouettes) of an ultrasonic K-file oscillating in a transparent canal model. It has fixed-pattern sensor grain, frame-to-frame illumination flicker, a burned-in
+IBM Plex Mono HUD (REC / power bars / `FRAME 0084` / `t = 084 µs` / `1,000,000 fps (simulated)`), viewfinder
+corner brackets, a `100 µm (lateral)` scale bar, a "STEP · 1 µs/frame" ROI zoom and a "PAUSED · ANALYSIS" mode. The footage is quantised to whole camera
+frames: **1 camera frame = 1 µs, played at 30 fps**, so the 30 kHz file swings through one cycle every 33.3
+video frames (~1.1 s). It is real slow motion, internally consistent with the frame counter.
+
+Story: at low power, tracers circle in steady eddies (acoustic streaming). Power goes up and streaming speeds up. Bubbles also appear at
+the tip (a soft cloud) and at the antinode (crisp, violent collapses) as the file moves away from a region, and collapse as it comes back. A camera-software
+**ROI ×3** inset steps through one wall-bubble collapse at 1 µs/frame, showing the re-entrant **micro-jet toward the wall**. The frame then freezes for an
+order-of-magnitude Bernoulli estimate and a pressure gauge. Takeaway: **streaming is always on; cavitation is real, but patchy.**
+
+## Storyboard (s)
+| time | footage | overlay |
+|---|---|---|
+| 0.00–2.42 | REC A, low power, tip A ≈ 25 µm | Hook card (y 352): "ULTRASONIC ACTIVATION · 30 kHz" / **Streaming or cavitation?** / "simulated slow motion · schematic" / "free-swinging file · straight model canal". Time-averaged dashed streamlines with chevrons run below the card from 0.5 s and fill the whole canal as the hook leaves. |
+| 2.30–5.75 | REC A continues | Caption: LOW POWER · TIP AMPLITUDE ≈ 25 µm / **Acoustic streaming** / "Tracers loop in steady eddies" / fine print "schematic, values illustrative · Boutsioukis 2022; Malki 2012" + "cavitation detectable even at low power (Macedo 2014)". PTV boxes and 60-frame trails on 3 tracers, with the labelled one drawn at 1.4×, "10 µm tracer". Legend chip "‐‐‐▸ mean flow · pattern schematic". |
+| 5.62–7.60 | 60 % dip at 6.0–6.45; cut to REC B at 6.22 (counter resets) | **POWER ↑ · 25 → 75 µm** card at y 400 (under the HUD), clear of the tip where the first bubbles appear |
+| 6.40–11.33 | REC B, high power, tip A ≈ 75 µm: soft long-lived tip cloud, crisp antinode collapses with rebound and a faint one-frame ring, wall-attached bubbles that collapse with a re-entrant jet into the wall (one-frame shock ring) | Caption (7.35–11.33): HIGH POWER · TIP AMPLITUDE ≈ 75 µm / **+ Cavitation** / "Streaming speeds up; bubbles grow, then implode" / "schematic, values illustrative · Macedo 2014; Ohl 2006". Labels: "tip cloud" (fixed box; the leader tracks the area-weighted centroid of the active cloud) and "antinode · max swing" (the leader follows the file edge at the antinode). Both dim during the ROI. |
+| 8.85–11.05 | **ROI ×3** inset (x 600–930, y 560–890) with a dashed source box and connectors. Camera frames 84–93 are stepped at 7.5 fps (9.20–10.53 s), with HUD "▶ STEP · 1 µs/frame" | Inset label "micro-jet → wall". The collapse, jet (bright column with arrowhead inside the bubble), impact and wall-jet are seen at 3× |
+| 11.33–15.93 | Freeze on frame 118 (file at its extreme, bubbles at max), HUD "PAUSED · ANALYSIS" | Ghost of the opposite extreme + cursors "2A = 150 µm". Top card: chip "ORDER-OF-MAGNITUDE ESTIMATE · Bernoulli". **v = 2π·f·A ≈ 14 m/s** (fine: f = 30 kHz · A = 75 µm · ρ ≈ 1000 kg/m³). **Δp ≈ ½ρv² ≈ 100 kPa ≈ 1 atm** (fine: ≈ size of the pressure swing near the tip). When the gauge arrives the card's text recedes to 55 % (one focal point). Gauge "LOCAL PRESSURE NEAR TIP · kPa": ticks 0 / 101, "ambient", vapour band "2–6 kPa (20–37 °C)". The bar drops 101 → ~6 with a live value; the dropped segment is hatched. Punchline "● reaches vapour p. → bubbles". Fine print: "order of magnitude only · inertial term is as large or larger" / "cavitation is detectable even at low power (Macedo 2014)". |
+| 15.93–19.50 | REC A pre-trigger frames −107…−1 (light 30 % wash, live eddies with 3 PTV boxes in the lower canal) → loops into frame 0 | Takeaway card at y 352 (fully visible 16.18–19.15): **Streaming — always on** / **Cavitation — real, but patchy** / "tip · antinodes · walls · ↑ with amplitude" (30 px) / sources line. At 19.15–19.5 the card shrinks into the hook card in place while the wash, streamlines and boxes fade to their t = 0 state. |
+
+Reading times (Kit.readSecs) for fully visible text: hook 2.2 s (needs 1.7), streaming caption 2.95 s (2.92), POWER 1.55 s on a 60 % dip (the card itself never dims), cavitation caption 3.5 s (3.53), ROI label 1.7 s (1.7), gauge punchline 2.3 s (2.3), takeaway 2.97 s.
+
+## On-screen claims and sources
+(Found through PubMed. DOIs are given for verification.)
+
+| On-screen claim | Source / basis |
+|---|---|
+| Ultrasonic files oscillate at **~30 kHz** | Boutsioukis & Arias-Moliz, *Int Endod J* 2022;55 Suppl 3:588–612 (PMID 35338652, doi:10.1111/iej.13739). Boutsioukis et al., *Int Endod J* 2022;55:938–949 (PMID 35762040, doi:10.1111/iej.13791): f = 30.5 kHz; devices scan ~28–32 kHz. Lea et al., *Phys Med Biol* 2004 (PMID 15214544): fundamental 27.5 kHz. |
+| Tip amplitude **≈ 25 µm (low) / ≈ 75 µm (high)**, labelled "values illustrative" | Boutsioukis & Arias-Moliz 2022 (PMID 35338652): average oscillation amplitude ~50–80 µm. Lea et al., *J Endod* 2010;36:880–3 (PMID 20416438, doi:10.1016/j.joen.2009.12.027): 17–22 µm max for a #10 file in water. Both values are illustrative points within the reported tens-of-µm range. **Power → amplitude evidence is mixed** (see "Contrary evidence" below), so the robust variable on screen is amplitude ("↑ with amplitude"), not power. |
+| Low power: **acoustic streaming**, tracers loop in **steady eddies**; dashed = **mean (time-averaged) flow, pattern schematic** | Boutsioukis et al. 2022 (PMID 35762040; full text PMC9545492): steady jets along the oscillation direction, quadrupolar flow with four steady vortices in cross-section. Side view: "the flow is inherently three-dimensional, with irrigant flowing **from the antinodes to the nodes along the file**, thereby generating a **preferred direction towards the apex**". PIV with 10 µm hollow glass spheres; "lack of visible cavitation bubbles" at Green 5/Yellow 5. Malki et al., *J Endod* 2012;38:657–61 (PMID 22515896, doi:10.1016/j.joen.2012.02.001): flow and cleaning extend ~3 mm beyond the file tip. Verhaagen et al., *J Acoust Soc Am* 2014 (PMID 25234972) is the 2-D cross-section model, so it is no longer cited for the side-view pattern. |
+| "cavitation detectable even at low power (Macedo 2014)" | Macedo et al., *Ultrason Sonochem* 2014;21:324–35 (PMID 23735893, doi:10.1016/j.ultsonch.2013.03.001): SL/SCL "showing that cavitation occurs even at very low power settings". |
+| **POWER ↑ · 25 → 75 µm**; **"+ Cavitation"**; "Streaming speeds up" | Steady jet velocity scales with A²: u_s = −¾·ωA²/R (Boutsioukis 2022, Eq. 1 and Fig. 8), so streaming at 75 µm is ~9× that at 25 µm. In the reel the tracer speed is capped for legibility (≈ 2.8×). Cavitation is added to streaming; it does not replace it. |
+| "Bubbles grow, then implode": tip cloud (soft) and antinode bubbles (crisp) | Macedo, Ultrason Sonochem 2014 (PMID 23735893): a large bubble cloud at the tip **did not contribute to SCL**, while smaller individual bubbles at antinodes did. In the reel the cloud is therefore softer and longer-lived (alpha 0.72, slow collapse) and the antinode bubbles collapse fast with a rebound. Macedo et al., *J Endod* 2014;40:580–3 (PMID 24666916, doi:10.1016/j.joen.2013.09.018). Vyas et al., *Ultrasonics* 2017;81:66–72 (PMID 28595164): growth as the tip recedes, collapse as it approaches. The caption avoids "vapour bubbles": bubbles grow from gas nuclei and hold vapour + gas, dissolved gas and NaOCl change the amount (Robinson et al. 2018, PMID 28654211), and stable non-imploding bubbles also form by air entrainment (Macedo 2014; Roy 1994). The reel depicts transient (inertial) cavitation only. |
+| **micro-jet → wall** (ROI inset) | General bubble dynamics: non-spherical collapse near a rigid boundary drives a re-entrant jet toward it and a wall flow (Ohl et al., *Biophys J* 2006;91:4285–95, PMID 16950843). **Not directly imaged in root canals during ultrasonic activation.** This is an extrapolation and is labelled schematic. The jet is drawn inside the bubble pointing at the wall, then spreads along the wall after impact. |
+| v = 2π·f·A ≈ 14 m/s | Peak speed of sinusoidal motion: 2π × 30 000 s⁻¹ × 75 × 10⁻⁶ m = 14.1 m/s. |
+| Δp ≈ ½ρv² ≈ 100 kPa ≈ 1 atm, "≈ size of the pressure swing near the tip", "order of magnitude only · inertial term is as large or larger" | ½ × 1000 × 14.1² = 99.9 kPa. The unsteady (inertial) term around an oscillating body, ρω²AR, is the larger one. For A = R = 75 µm it is ≈ 200 kPa for a 2-D cylinder (≈ 100 kPa for a sphere-like tip), and the ratio to ½ρv² is ≈ 2R/A. Verhaagen 2014 (PMID 25234972, doi:10.1121/1.4868397): the oscillatory component's contribution to pressure and shear stress "is two to three orders of magnitude higher than the steady component", and confinement increases it. Only the order of magnitude (~1 atm swing) is claimed. |
+| Gauge: local pressure falls from 101 kPa (ambient) to **2–6 kPa (20–37 °C)** → "reaches vapour p. → bubbles" | Water saturation vapour pressure: 2.34 kPa at 20 °C, 6.28 kPa at 37 °C (steam tables). Irrigant in the canal is usually below 37 °C, so a range is given. The 25 µm row was deleted: it implied a cavitation threshold that the literature does not support (Macedo 2014; Roy 1994), and its 90 kPa value ignored the larger inertial term (~35–70 kPa local minimum). |
+| Takeaway "Streaming: always on" | Boutsioukis 2022; Verhaagen 2014; Boutsioukis & Arias-Moliz 2022 (files "act primarily by agitating the surrounding irrigant"). |
+| Takeaway "Cavitation: real, but patchy · tip · antinodes · walls · ↑ with amplitude" | Macedo J Endod 2014 (PMID 24666916): sonochemiluminescence distributed between the file and the wall, extending beyond the file and into lateral canals/isthmuses, hence "patchy" rather than "local". Macedo Ultrason Sonochem 2014 (tip, antinodes). Boutsioukis et al., *Int Endod J* 2013;46:1046–55 (PMID 23521118, doi:10.1111/iej.12097): hydrodynamic cavitation detected during file-to-wall contact. Vyas et al., *PLoS One* 2016 (PMID 26934340): larger tip displacement gives more cavitation, which supports "↑ with amplitude". Sources line: "Verhaagen 2014 · Macedo 2014a,b · Boutsioukis 2013/2022 · Ohl 2006" (Robinson 2018 dropped for width; it is cited here). |
+| "free-swinging file · straight model canal" (hook fine print) | The reel idealises a centred, freely oscillating file. In real canals contact occurred in all cases for a considerable part of activation, and oscillation was affected 94 % of the time (Boutsioukis 2013, PMID 23521118). |
+| "1,000,000 fps (simulated)" | Style only. Boutsioukis 2022 used an HPV-1 at up to 10⁶ fps (100 frames per recording), and Vyas 2017 imaged up to 10⁶ fps. Every frame is synthetic, and the label says so. |
+
+### Contrary evidence and open disagreements (kept off screen, reflected in the wording)
+- **Power vs amplitude.** Lea et al. 2010 (PMID 20416438): "Increasing generator power had no significant effect on this maximum amplitude (p > 0.20)" in water. Lea et al. 2004 (PMID 15214544): amplitude does not rise linearly with power. Jiang et al. 2011 (PMID 21496672) and Boutsioukis 2022 (in-canal vibrometry) found amplitude rising with power. Hence "values illustrative" on screen and "↑ with amplitude" (not "power") in the takeaway.
+- **Power vs transient cavitation.** Roy, Ahmad & Crum, *Int Endod J* 1994;27:197–207 (PMID 7814129, doi:10.1111/j.1365-2591.1994.tb00254.x): "Measurements failed to indicate any strong correlation between registered driving power and the propensity to produce transient cavitation". Pitted or salient-edged files cavitated readily. Macedo J Endod 2014 says only that power "influenced" cavitation.
+- **Wall contact.** Roy 1994: file–wall contact *inhibited* transient cavitation. Boutsioukis 2013: hydrodynamic cavitation *was detected* during contact. The reel keeps the file just off the wall and the takeaway says "walls" (near-wall bubbles) without a causal claim about contact.
+
+## Corrections and nuances relative to the brief
+- **"At 25 µm there's streaming but no cavitation" was not used.** Macedo 2014 detected cavitation even at very low power, so the reel shows only that no bubbles are *visible* at low power, as in Boutsioukis 2022's imaging. It now says on screen that cavitation is detectable even at low power.
+- The Bernoulli number is presented as an order-of-magnitude pressure *swing*, not a "pressure drop at the tip", because the inertial term is as large or larger.
+- The brief's "Verhaagen et al. 2014" is a 2-D acoustic-streaming model. Cavitation localisation comes from Macedo et al. 2014a,b.
+- Not shown on screen: no outcome benefit of ultrasonic activation over syringe irrigation has been shown (see the post caption).
+
+## What is schematic, modelled or exaggerated
+- **Everything is a synthetic rendering**, not real footage. The HUD says "(simulated)", the hook says "schematic", captions say "schematic, values illustrative" and the scale bar says "(lateral) · axial compressed ~3× · schematic".
+- Lateral scale is about 1 px = 1 µm: file tip Ø150 µm (size 15, .02 taper), amplitudes 25 / 75 µm, 10 µm tracers. **Axial direction compressed ~3.4×.** A real file's first node is ~1 mm and the next antinode ~2.3 mm from the tip. The reel places them at 300 / ~680 µm. Canal taper is exaggerated ~3×. Above the node the mode shape is scaled down (× 0.55) so the shank reads as stiff steel rather than a noodle. The second antinode swings ~20 µm, the tip 75 µm.
+- Streaming field: a hand-built cellular stream function in side view. Near-file flow runs antinode → node (Boutsioukis 2022) and returns along the wall. Beyond the tip the flow runs apically along the axis. Cells carrying apical flow are 1.2× stronger and coronal ones 0.85× (slight apical preference). The real flow is 3-D and asymmetric, and at a cross-section near an antinode it jets outward along the oscillation direction, which a 2-D side-view cell cannot also show. The legend therefore says "pattern schematic". Tracer speeds are capped (theory u ∝ A²).
+- Bubble timing is physically motivated. Sizes and counts are illustrative. The shock front appears in a single camera frame. Collapse and jet shapes are stylised. The right-wall bubble recurs at one nucleation site (y ≈ 1040) so the ROI frames one site.
+
+## Design rationale
+- **Style:** greyscale shadowgraph lighting: radial falloff and vignette, mottled block, refraction-dark canal walls with a bright inner fringe, diffraction halo around the steel, bubbles as dark rings with bright focal spots, and out-of-focus tracers as soft discs. Fixed dust motes and a fibre sit on the "optics", with fixed-pattern sensor grain and ±1.4 % per-frame illumination flicker. The only colour is the red REC dot. The ROI inset and STEP mode extend the "camera software" language.
+- **Type:** IBM Plex Mono for instrument text, IBM Plex Sans Bold for human headlines. All must-read text is ≥ 30 px. Fine print and citations are 22–24 px.
+- **One focal point at a time:** hook → caption + PTV → POWER card (top, away from the tip) → caption + labels → ROI (labels dim) → estimate card → gauge (card text recedes) → takeaway.
+- **Safe areas:** all readable text is inside x 64–944 below y 1100 (clear of the Reels button column) and inside y 236–1572. The tip-cloud box ends at x 954.
+- **Loop:** pre-trigger frames run into frame 0. The takeaway card shrinks into the hook card in place, and the wash, streamlines and PTV boxes fade to their t = 0 state. The scale bar stays on throughout.
+
+## Suggested post caption (not on screen)
+> Ultrasonic activation (UAI), simulated at 1,000,000 fps. Streaming is always on and speeds up with tip amplitude. Cavitation is real but patchy: a tip cloud, antinodes, near walls. The micro-jet shown is general bubble physics (Ohl 2006) and has not been imaged inside root canals. Mechanism shown in lab models: ultrasonic activation has not been shown to improve healing of apical periodontitis vs syringe irrigation (Căpută et al., J Endod 2019;45:31-44; Boutsioukis & Arias-Moliz, Int Endod J 2022). Schematic, values illustrative.
+> #endodontics #UAI #ultrasonicactivation #irrigation #rootcanal #endoresident
+
+(Use "UAI", ultrasonically activated irrigation, rather than "PUI", per Boutsioukis 2013.) Căpută et al., *J Endod* 2019;45:31–44.e13 (PMID 30558797, doi:10.1016/j.joen.2018.09.010): "Ultrasonic activation did not improve the healing rate of apical periodontitis compared with syringe irrigation", and the level of evidence was low.
+
+## Change log
+- v1: first build (canvas 2D, single-canvas fast path).
+- QA pass 1: fixed ghost-file alpha (absolute → multiplied) and draw order (measurement under HUD). Enlarged bubbles, denser tip cloud with haze, thinned tracers in REC B. Raised scale bar, bigger hook title, shorter captions.
+- QA pass 2: fixed HUD bar stroke state. Re-timed the timeline so every caption meets readSecs (cut moved to 6.17 s, REC B phase re-tuned so the freeze frame 118 is at the file's extreme). Shortened the Bernoulli reveal so it holds about 1.2 s. Crossfade into the takeaway now runs under a wash.
+- QA pass 3: moved the takeaway panel out of the right-hand UI column. Shock ring only for the main wall bubbles. Stronger micro-jet. Centred the bubble focal spot (less "glossy sphere").
+
+## Review changes
+Applied after independent science + design review. Duration 18.0 → 19.5 s to fund the ROI step-through. MP4 17.5 → 10.5 MB.
+
+**Science**
+- (must) Deleted the gauge's "A = 25 µm / Δp ≈ 11 kPa" row. Gauge fine print is now "order of magnitude only · inertial term is as large or larger" / "cavitation is detectable even at low power (Macedo 2014)". The low-power caption also carries "cavitation detectable even at low power (Macedo 2014)". Verified in the Macedo 2014 abstract and Roy 1994.
+- Bernoulli chip is now "ORDER-OF-MAGNITUDE ESTIMATE · Bernoulli". The Δp sub-line is now "≈ size of the pressure swing near the tip".
+- Takeaway "↑ with power" → "↑ with amplitude". Captions say "values illustrative". Lea 2010, Lea 2004 and Roy 1994 recorded as contrary evidence.
+- High-power title "Cavitation" → "+ Cavitation". Sub is now "Streaming speeds up; bubbles grow, then implode", which also drops "vapour bubbles … flash".
+- Tip-cloud label leader now tracks the moving cloud (area-weighted centroid, ±3-frame smoothing, fades when no cloud).
+- Free-floating micro-jet label removed. The micro-jet is now shown and labelled only in the ROI inset during the slowed collapse. Fine print is now "Macedo 2014; Ohl 2006". NOTES say the jet has not been imaged in root canals.
+- Streamline circulation reversed so near-file flow runs antinode → node, with apical flow beyond the tip and a slight apical bias. This was verified in the Boutsioukis 2022 full text. Legend is now "mean flow · pattern schematic" and fine print "Boutsioukis 2022; Malki 2012".
+- Scale bar is now "100 µm (lateral) · axial compressed · ~3× · schematic" with a 232 px box.
+- (nits) "real, but local" → "real, but patchy". Tip cloud softer and longer-lived; antinode collapses crisp with rebound and a faint ring. Jet drawn inside the bubble with an arrowhead toward the wall, then a wall-jet spreads along the wall (no outward "stalk"). Vapour pressure is now "2–6 kPa (20–37 °C)". Hook fine print adds "free-swinging file · straight model canal". Post caption with Căpută 2019 and "UAI" added. Sources line is now "Verhaagen 2014 · Macedo 2014a,b · Boutsioukis 2013/2022 · Ohl 2006". The HUD frame-count nit was not applied; the counter is labelled simulated.
+
+**Design**
+- (must) Bernoulli card cut and resequenced: the two 30 px sub-lines became 22 px fine lines and the punchline is "reaches vapour p. → bubbles". Lines are revealed at 0.10 and 0.50 s, the gauge at 1.05 s (card text recedes to 55 % and cursors to 65 %), the bar drops at 1.3–1.8 s and the punchline appears at 1.8–2.0 s and holds 2.3 s. Freeze lengthened to 4.6 s.
+- (must) Data-driven labels: the tip-cloud centroid as above. The antinode leader now ends on the file edge at the antinode, moving with the file (no dot inside the black), and the label is renamed "antinode · max swing". Micro-jet labelling moved into the ROI.
+- ROI ×3 inset (x 600–930, y 560–890) with source box and connectors. Footage is re-rendered at 3× (vector-crisp bubbles, native-scale grain). Camera frames 84–93 are time-remapped to 7.5 fps with HUD "▶ STEP · 1 µs/frame".
+- All must-read text ≥ 30 px: the legend chip, gauge ticks "0" / "101" / "ambient" / "2–6 kPa (20–37 °C)" / live value / punchline, and the takeaway qualifier on its own 30 px line (panel h 640).
+- Gauge encoding: the bar shows absolute local pressure, the dropped segment is hatched, ticks sit at the bar ends, and a live value shows during the drop.
+- POWER card: subline "25 → 75 µm" (40 px), moved to y 400, timed 5.62–7.60. Dip at 60 % instead of 93 %.
+- Takeaway card at y 352 (same as the hook). Wash 0.55 → 0.30, with live streamlines and 3 PTV boxes in the lower canal ("always on" is shown).
+- Bottom panels (captions, gauge) are 880 px wide (x 64–944), clear of the Reels button column.
+- Hook: streamlines and chevrons run below the hook card from 0.5 s, and the rest fades in as the hook leaves.
+- Loop seam: wash, streamlines and PTV fade out over the last 0.6 s. The takeaway card shrinks into the hook card in place. The scale bar stays on (no pop).
+- Shank stiffened: phi × lerp(1, 0.55, clamp((ξ − 300)/250)).
+- (nits) PTV boxes s = 26 / 3 px, trails 3 px over 60 frames, labelled tracer 1.4×. Poster moved to 10.05 s (ROI micro-jet frame; side labels dimmed).
+- Grain: the review asked for soft-light 0.32 re-seeded every 2 frames. Soft-light is as invisible as overlay on a ~0.93 base, so the grain is now a speck tile (dark and light grains, alpha ∝ |n|) drawn source-over, which is visible on the bright field. Measured MP4 sizes: no grain 7.2 MB; static fixed-pattern grain 10.8 MB; plus temporal grain 0.045 every 2 frames 23 MB (0.2-strength version 37 MB); 0.016 every 4 frames 14 MB. Temporal grain at a few grey levels would also be erased by Instagram's re-encode, so the final version uses static fixed-pattern sensor grain (alpha 0.10, scale 2.2) plus the per-frame illumination flicker: 10.5 MB.
+- Fixed a latent alpha bug: roundBubble() reset globalAlpha to 1, so bubble icons in fading panels popped to full opacity.

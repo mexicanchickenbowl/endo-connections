@@ -1,0 +1,1022 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 · NaOCl in the canal</title>
+<link rel="stylesheet" href="../../vendor/fonts/fonts.css">
+<script src="../../lib/kit.js"></script>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+/*
+ * Sample 13 — "Blackboard physics" explainer: why NaOCl in a canal must be refreshed.
+ * Pure black page, serif question, grey italic assumptions, light cutaway tooth with tinted irrigant,
+ * white circular magnifier with leader lines, small graph panel, colour-coded worked equation.
+ * Everything is drawn on one 2D canvas as a pure function of t.
+ */
+const { canvas, ctx } = Kit.createCanvas();
+const { clamp, lerp, seg, env, ease, W, H } = Kit;
+const TAU = Math.PI * 2;
+
+/* ---------------- palette & type ---------------- */
+const COL = {
+  ink: '#f4f2ec', grey: '#9b9b9b', faint: '#5c5c5c',
+  cl: '#d8f45f',      // NaOCl / HOCl / free available chlorine (chartreuse)
+  oh: '#5cc8ff',      // NaOH / OH- (alkali)
+  tis: '#ff8a76',     // tissue (fat, amino acids, protein)
+  na: '#b9a7ff',      // Na+ / salt
+};
+const SERIF = '"Source Serif 4", "DejaVu Serif", serif';
+const GARA = '"EB Garamond", "DejaVu Serif", serif';
+
+/* ---------------- timeline (seconds) ---------------- */
+const T = {
+  dur: 27.5,
+  assumed: [0.1, 1.0],
+  draw: [0.0, 1.1],           // tooth line-draw (a 20% ghost of the outline is always there)
+  tex: [0.6, 1.6],            // dentin/enamel/bone texture
+  tissue: [0.8, 1.4],
+  labels: [1.2, 2.2],
+  needle: [1.2, 1.6],
+  fill: [1.5, 2.5],
+  eq: [2.3, 3.1],             // worked equation in the bottom band (stays to the end)
+  eqNote: [3.1, 3.6],
+  mag: [2.8, 3.55],           // magnifier opens
+  gAx: 3.9,                   // graph frame appears at 30% (waits for data)
+  rx0: 4.0, rxLen: 4.1,       // three reaction slots -> ends 16.3
+  ga0: 16.4, ga1: 18.4,       // trace 1: 'left alone' (then hold at zero until gr0)
+  gr0: 18.8, gr1: 22.1,       // trace 2: 'refreshed often'
+  br: [22.15, 22.65],         // bracket under the 'used up' chips
+  ans: [22.9, 23.35],
+  out: [27.0, 27.5],
+};
+const RX_END = T.rx0 + 3 * T.rxLen;
+
+/* ---------------- toy model: free chlorine C and tissue S ----------------
+   dC/dt = -k1*C*S - k0*C ;  dS/dt = -k2*C*S   (arbitrary units; x-axis carries no unit on screen)
+   "refreshed": partial exchange at tau = 1,2,3,4: C <- C + f*(1 - C), f = 0.85. Purely illustrative. */
+const MODEL = (() => {
+  const k1 = 1.6, k0 = 0.08, k2 = 0.55, f = 0.85, dt = 0.001;
+  const run = (refresh) => {
+    let C = 1, S = 1; const pts = [];
+    for (let i = 0; i <= 5000; i++) {
+      const tau = i * dt;
+      if (refresh && i > 0 && i % 1000 === 0 && i < 5000) { pts.push({ tau, C, S }); C = C + f * (1 - C); }
+      if (i % 10 === 0 || (refresh && i % 1000 === 0)) pts.push({ tau, C, S });
+      C += (-k1 * C * S - k0 * C) * dt; S += (-k2 * C * S) * dt;
+    }
+    return pts;
+  };
+  return { alone: run(false), ref: run(true) };
+})();
+function modelAt(pts, tau) { // value just after tau (last point with p.tau <= tau)
+  let lo = 0, hi = pts.length - 1;
+  while (lo < hi) { const m = (lo + hi + 1) >> 1; if (pts[m].tau <= tau) lo = m; else hi = m - 1; }
+  return pts[lo];
+}
+
+/* ---------------- geometry helpers ---------------- */
+function catmull(pts, n = 10) {
+  const out = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
+    for (let j = 0; j < n; j++) {
+      const t = j / n, t2 = t * t, t3 = t2 * t;
+      const f = (a, b, c, d) => 0.5 * (2 * b + (-a + c) * t + (2 * a - 5 * b + 4 * c - d) * t2 + (-a + 3 * b - 3 * c + d) * t3);
+      out.push([f(p0[0], p1[0], p2[0], p3[0]), f(p0[1], p1[1], p2[1], p3[1])]);
+    }
+  }
+  out.push(pts[pts.length - 1].slice());
+  return out;
+}
+function cum(poly) { const c = [0]; for (let i = 1; i < poly.length; i++) c.push(c[i - 1] + Math.hypot(poly[i][0] - poly[i - 1][0], poly[i][1] - poly[i - 1][1])); return c; }
+function strokePartial(poly, p, c = cum(poly)) {
+  if (p <= 0) return;
+  const L = c[c.length - 1] * Math.min(1, p);
+  ctx.beginPath(); ctx.moveTo(poly[0][0], poly[0][1]);
+  for (let i = 1; i < poly.length; i++) {
+    if (c[i] <= L) ctx.lineTo(poly[i][0], poly[i][1]);
+    else { const u = (L - c[i - 1]) / (c[i] - c[i - 1]); ctx.lineTo(lerp(poly[i - 1][0], poly[i][0], u), lerp(poly[i - 1][1], poly[i][1], u)); break; }
+  }
+  ctx.stroke();
+}
+function tracePoly(poly, move = true) { poly.forEach((p, i) => (i === 0 && move ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]))); }
+function xAtY(poly, y) { // x of a mostly-vertical polyline at height y
+  for (let i = 1; i < poly.length; i++) {
+    const a = poly[i - 1], b = poly[i];
+    if ((a[1] - y) * (b[1] - y) <= 0 && a[1] !== b[1]) return lerp(a[0], b[0], (y - a[1]) / (b[1] - a[1]));
+  }
+  return poly[poly.length - 1][0];
+}
+function offsetPoly(poly, d) { // offset along the left-hand normal of the path direction
+  return poly.map((p, i) => {
+    const a = poly[Math.max(0, i - 1)], b = poly[Math.min(poly.length - 1, i + 1)];
+    const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1;
+    return [p[0] - (dy / L) * d, p[1] + (dx / L) * d];
+  });
+}
+
+/* ---------------- tooth (single-rooted, longitudinal cutaway, access open) ----------------
+   Canal: open access -> slight chamber -> orifice -> tapered canal prepared to a finite apical size,
+   exiting ~0.5 mm short of the root tip and off-centre (foramen between the two wall end points). */
+const TOOTH = {
+  outerL: catmull([[326, 1082], [319, 1089], [311, 1086], [305, 1072], [300, 1046], [292, 1010], [283, 970], [269, 890], [258, 810], [249, 740], [241, 700], [227, 668], [214, 630], [208, 594], [212, 560], [225, 533], [243, 515], [258, 510], [272, 515], [281, 527], [284, 538]]),
+  outerR: catmull([[358, 538], [361, 527], [370, 519], [387, 515], [403, 524], [417, 544], [428, 574], [431, 608], [425, 642], [414, 674], [401, 700], [394, 740], [385, 810], [374, 890], [360, 970], [351, 1010], [343, 1040], [338, 1060], [334, 1077]]),
+  wallL: catmull([[284, 538], [283, 580], [283, 625], [286, 665], [294, 700], [301, 735], [304, 780], [307, 860], [311, 940], [314, 1000], [317, 1040], [321, 1066], [326, 1082]]),
+  wallR: catmull([[358, 538], [359, 580], [359, 625], [356, 665], [349, 700], [342, 735], [339, 780], [335, 860], [332, 940], [330, 1000], [329, 1040], [330, 1062], [334, 1077]]),
+  dejL: catmull([[241, 700], [233, 668], [226, 630], [226, 596], [231, 566], [244, 546], [259, 536], [272, 541], [282, 552]]),
+  dejR: catmull([[401, 700], [408, 668], [413, 636], [413, 604], [406, 574], [393, 553], [378, 545], [367, 546], [359, 553]]),
+};
+TOOTH.canal = TOOTH.wallL.concat(TOOTH.wallR.slice().reverse());
+TOOTH.body = TOOTH.outerL.concat(TOOTH.wallL, TOOTH.wallR.slice().reverse(), TOOTH.outerR);
+TOOTH.wallLr = TOOTH.wallL.slice().reverse(); TOOTH.wallRr = TOOTH.wallR.slice().reverse(); TOOTH.outerRr = TOOTH.outerR.slice().reverse();
+for (const k of ['outerL', 'outerRr', 'wallLr', 'wallRr', 'dejL', 'dejR']) TOOTH[k + 'C'] = cum(TOOTH[k]);
+
+// 30-G side-vented needle, tip ~1 mm short of the canal terminus at this drawing scale (Boutsioukis et al. 2010)
+const NEEDLE = { x: 324, hw: 3, top: 474, tip: 1048 };
+// pulp remnants on the canal walls (side -1 = left wall)
+const BLOBS = [
+  { side: -1, y: 618, rx: 13, ry: 28, seed: 1 },
+  { side: 1, y: 708, rx: 11, ry: 22, seed: 2 },
+  { side: -1, y: 800, rx: 9, ry: 19, seed: 3 },
+  { side: 1, y: 880, rx: 10, ry: 21, seed: 4 },   // the magnified one
+  { side: -1, y: 968, rx: 5, ry: 15, seed: 5 },
+].map((b) => { const ax = xAtY(b.side < 0 ? TOOTH.wallL : TOOTH.wallR, b.y); return Object.assign(b, { ax, ay: b.y, cx: ax - b.side * b.rx * 0.95, cy: b.y }); });
+const MAG = { sx: 329, sy: 880, sr: 27, cx: 768, cy: 708, R: 200 };
+
+/* ---------------- static texture layer (dentin tubules, enamel hatch, bone) ---------------- */
+let TEX = null;
+function buildTexture() {
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const g = cv.getContext('2d');
+  const poly = (p) => { g.beginPath(); p.forEach((q, i) => (i ? g.lineTo(q[0], q[1]) : g.moveTo(q[0], q[1]))); g.closePath(); };
+  // PDL contour: root outline (top-left -> apex -> top-right) offset 11 px outward
+  const rootC = TOOTH.outerL.filter((p) => p[1] > 725).reverse().concat(TOOTH.outerR.filter((p) => p[1] > 725).reverse());
+  const pdl = offsetPoly(rootC, 11);
+  // bone (alveolar) — cancellous texture: elongated, interconnected trabecular loops
+  g.save();
+  g.beginPath(); g.rect(120, 760, 400, 380);
+  pdl.forEach((q, i) => (i ? g.lineTo(q[0], q[1]) : g.moveTo(q[0], q[1]))); g.closePath();
+  g.clip('evenodd');
+  const r = Kit.rng(13);
+  const fade = (x, y) => clamp(1 - Math.abs(x - 322) / 215) * clamp((y - 768) / 70) * clamp((1138 - y) / 60);
+  // jittered lattice of strut junctions; cells taller than wide (trabeculae run roughly along the root)
+  const nodes = [];
+  for (let j = 0; j < 13; j++) for (let i = 0; i < 17; i++) nodes.push([122 + i * 25 + (j % 2) * 12.5 + (r() - 0.5) * 13, 768 + j * 30 + (r() - 0.5) * 12]);
+  g.lineCap = 'round';
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const [x1, y1] = nodes[i], [x2, y2] = nodes[j];
+      if (Math.hypot(x2 - x1, (y2 - y1) * 0.85) > 34) continue;
+      if (Kit.hash(i, j, 13) < 0.4) continue;              // open some marrow spaces
+      const a = 0.17 * Math.min(fade(x1, y1), fade(x2, y2));
+      if (a <= 0.004) continue;
+      g.strokeStyle = `rgba(255,255,255,${a.toFixed(3)})`; g.lineWidth = 1 + 1.3 * Kit.hash(j, i, 7);
+      const mx = (x1 + x2) / 2 + (Kit.hash(i, j, 3) - 0.5) * 16, my = (y1 + y2) / 2 + (Kit.hash(i, j, 5) - 0.5) * 16;
+      g.beginPath(); g.moveTo(x1, y1); g.quadraticCurveTo(mx, my, x2, y2); g.stroke();
+    }
+  }
+  g.restore();
+  // PDL line + bone crest
+  g.strokeStyle = 'rgba(255,255,255,0.22)'; g.lineWidth = 1.4;
+  g.beginPath(); pdl.forEach((q, i) => (i ? g.lineTo(q[0], q[1]) : g.moveTo(q[0], q[1]))); g.stroke();
+  g.strokeStyle = 'rgba(255,255,255,0.14)';
+  g.beginPath(); g.moveTo(150, 790); g.bezierCurveTo(190, 770, 215, 762, 236, 760); g.stroke();
+  g.beginPath(); g.moveTo(490, 790); g.bezierCurveTo(450, 770, 425, 762, 404, 760); g.stroke();
+
+  // dentin fill
+  g.save(); poly(TOOTH.body); g.clip();
+  g.fillStyle = '#121212'; g.fillRect(150, 480, 320, 640);
+  // tubules: gentle S-curves from canal wall to outer surface, curving occlusally in the crown
+  g.lineWidth = 1; g.strokeStyle = 'rgba(255,255,255,0.13)';
+  for (let y = 548; y < 1064; y += 6.5) {
+    for (const side of [-1, 1]) {
+      const wx = xAtY(side < 0 ? TOOTH.wallL : TOOTH.wallR, y);
+      const ox = xAtY(side < 0 ? TOOTH.outerL : TOOTH.outerR, y);
+      const crown = clamp((720 - y) / 180);
+      const lift = 14 + 26 * crown;
+      g.beginPath(); g.moveTo(wx, y);
+      g.bezierCurveTo(lerp(wx, ox, 0.35), y - lift * 0.15, lerp(wx, ox, 0.6), y - lift * 0.9, ox + side * 4, y - lift);
+      g.stroke();
+    }
+  }
+  g.restore();
+  // enamel: lighter fill + fine diagonal hatch
+  for (const side of ['L', 'R']) {
+    const outer = TOOTH['outer' + side].filter((p) => p[1] < 703);
+    const dej = TOOTH['dej' + side];
+    g.save(); poly(side === 'L' ? outer.concat(dej.slice().reverse()) : outer.concat(dej)); g.clip();
+    g.fillStyle = '#1c1c1c'; g.fillRect(200, 480, 240, 240);
+    g.strokeStyle = 'rgba(255,255,255,0.2)'; g.lineWidth = 1;
+    for (let k = -300; k < 400; k += 7) { g.beginPath(); g.moveTo(200 + k, 720); g.lineTo(440 + k, 480); g.stroke(); }
+    g.restore();
+  }
+  TEX = cv;
+}
+
+/* ---------------- chemistry text renderer (own sub/superscripts + arrows) ----------------
+   tokens: '->' forward arrow, '<=>' equilibrium, '<=L>' equilibrium lying to the left (long reverse arrow),
+   '↓' drawn down-arrow, _x / _{..} subscript, ^x / ^{..} superscript */
+function chemParse(segs) {
+  const items = [];
+  const special = (txt, j) => txt[j] === '_' || txt[j] === '^' || txt[j] === '↓' || txt.startsWith('->', j) || txt.startsWith('<=>', j) || txt.startsWith('<=L>', j);
+  segs.forEach((sg, si) => {
+    const txt = sg[0], col = sg[1], a = sg[2] == null ? 1 : sg[2];
+    let i = 0;
+    while (i < txt.length) {
+      if (txt.startsWith('<=L>', i)) { items.push({ k: 'eqL', col, a, si }); i += 4; continue; }
+      if (txt.startsWith('<=>', i)) { items.push({ k: 'eq', col, a, si }); i += 3; continue; }
+      if (txt.startsWith('->', i)) { items.push({ k: 'fw', col, a, si }); i += 2; continue; }
+      if (txt[i] === '↓') { items.push({ k: 'dn', col, a, si }); i += 1; continue; }
+      const ch = txt[i];
+      if (ch === '_' || ch === '^') {
+        let s; if (txt[i + 1] === '{') { const j = txt.indexOf('}', i); s = txt.slice(i + 2, j); i = j + 1; } else { s = txt[i + 1]; i += 2; }
+        s = s.replace(/-/g, '−');
+        items.push({ k: ch === '_' ? 'sub' : 'sup', s, col, a, si }); continue;
+      }
+      let j = i; while (j < txt.length && !special(txt, j)) j++;
+      items.push({ k: 'n', s: txt.slice(i, j), col, a, si }); i = j;
+    }
+  });
+  return items;
+}
+function chemFont(fs, weight, k, ital) { return `${ital ? 'italic ' : ''}${weight} ${k === 'sub' || k === 'sup' ? Math.round(fs * 0.64) : fs}px ${SERIF}`; }
+function chemMeasure(items, fs, weight, ital) {
+  let x = 0;
+  for (const it of items) {
+    it.x = x;
+    if (it.k === 'fw') it.w = fs * 1.35; else if (it.k === 'eq' || it.k === 'eqL') it.w = fs * 1.5; else if (it.k === 'dn') it.w = fs * 0.5;
+    else { ctx.font = chemFont(fs, weight, it.k, ital); it.w = ctx.measureText(it.s).width + (it.k === 'n' ? 0 : fs * 0.02); }
+    x += it.w;
+  }
+  return x;
+}
+/** draws colour-coded chemistry; returns per-segment extents {x0,x1} and total box. o.measure: layout only */
+function drawChem(segs, x, y, fs, o = {}) {
+  const weight = o.weight || 500, ital = !!o.italic;
+  const items = chemParse(segs);
+  const w = chemMeasure(items, fs, weight, ital);
+  const scale = o.maxWidth && w > o.maxWidth ? o.maxWidth / w : 1;
+  const x0 = o.align === 'center' ? x - (w * scale) / 2 : o.align === 'right' ? x - w * scale : x;
+  const ext = {};
+  for (const it of items) {
+    const e = ext[it.si] || (ext[it.si] = { x0: Infinity, x1: -Infinity });
+    e.x0 = Math.min(e.x0, x0 + it.x * scale); e.x1 = Math.max(e.x1, x0 + (it.x + it.w) * scale);
+  }
+  const res = { ext, x0, x1: x0 + w * scale, w: w * scale, fs: fs * scale };
+  if (o.measure) return res;
+  ctx.save();
+  ctx.translate(x0, y); ctx.scale(scale, scale);
+  ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+  const base = ctx.globalAlpha;
+  for (const it of items) {
+    if (it.a <= 0) continue;
+    ctx.globalAlpha = base * it.a;
+    ctx.fillStyle = it.col; ctx.strokeStyle = it.col;
+    if (it.k === 'n') { ctx.font = chemFont(fs, weight, 'n', ital); ctx.fillText(it.s, it.x, 0); }
+    else if (it.k === 'sub') { ctx.font = chemFont(fs, weight, 'sub', ital); ctx.fillText(it.s, it.x + fs * 0.01, fs * 0.2); }
+    else if (it.k === 'sup') { ctx.font = chemFont(fs, weight, 'sup', ital); ctx.fillText(it.s, it.x + fs * 0.01, -fs * 0.4); }
+    else if (it.k === 'dn') {
+      const cx = it.x + it.w / 2, lw = Math.max(2, fs * 0.075), hh = fs * 0.2;
+      ctx.lineWidth = lw; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.beginPath(); ctx.moveTo(cx, -fs * 0.68); ctx.lineTo(cx, -fs * 0.04); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx - hh * 0.8, -fs * 0.04 - hh); ctx.lineTo(cx, -fs * 0.04); ctx.lineTo(cx + hh * 0.8, -fs * 0.04 - hh); ctx.stroke();
+    } else {
+      const ax = it.x + fs * 0.14, bx = it.x + it.w - fs * 0.14, ay = -fs * 0.3, lw = Math.max(2, fs * 0.055), hh = fs * 0.2;
+      ctx.lineWidth = lw; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      if (it.k === 'fw') {
+        ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, ay); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(bx - hh, ay - hh * 0.75); ctx.lineTo(bx, ay); ctx.lineTo(bx - hh, ay + hh * 0.75); ctx.stroke();
+      } else if (it.k === 'eq') {
+        const d = fs * 0.11;
+        ctx.beginPath(); ctx.moveTo(ax, ay - d); ctx.lineTo(bx, ay - d); ctx.lineTo(bx - hh, ay - d - hh * 0.8); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(bx, ay + d); ctx.lineTo(ax, ay + d); ctx.lineTo(ax + hh, ay + d + hh * 0.8); ctx.stroke();
+      } else { // eqL: short forward harpoon on top, long reverse harpoon below
+        const d = fs * 0.11, m = (ax + bx) / 2, hl = (bx - ax) * 0.26;
+        ctx.beginPath(); ctx.moveTo(m - hl, ay - d); ctx.lineTo(m + hl, ay - d); ctx.lineTo(m + hl - hh * 0.8, ay - d - hh * 0.65); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(bx, ay + d); ctx.lineTo(ax, ay + d); ctx.lineTo(ax + hh, ay + d + hh * 0.8); ctx.stroke();
+      }
+    }
+  }
+  ctx.restore();
+  return res;
+}
+
+/* ---------------- small drawing helpers ---------------- */
+function text(s, x, y, font, col, align = 'left', a = 1, base = 'alphabetic') {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha *= a; ctx.font = font; ctx.fillStyle = col; ctx.textAlign = align; ctx.textBaseline = base; ctx.fillText(s, x, y); ctx.restore();
+}
+/** single-line text shrunk to fit maxW */
+function textFit(s, x, y, weightStyle, size, col, align, a, maxW) {
+  ctx.save(); ctx.font = `${weightStyle} ${size}px ${SERIF}`; const w = ctx.measureText(s).width; ctx.restore();
+  const fs = w > maxW ? size * maxW / w : size;
+  text(s, x, y, `${weightStyle} ${fs.toFixed(1)}px ${SERIF}`, col, align, a);
+}
+function typeText(s, x, y, font, col, u, align = 'left') { text(Kit.type(s, u), x, y, font, col, align); }
+function dot(x, y, r, col, a = 1) { ctx.save(); ctx.globalAlpha *= a; ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill(); ctx.restore(); }
+function line(x1, y1, x2, y2, col, lw = 2, a = 1) { ctx.save(); ctx.globalAlpha *= a; ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.restore(); }
+function roundRect(x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+
+/** leader label: text at (tx,ty), leader from text end to anchor (ax,ay) with a dot */
+function leaderLabel(s, col, tx, ty, ax, ay, p, font) {
+  if (p <= 0) return;
+  ctx.save();
+  ctx.font = font; const w = ctx.measureText(s).width;
+  const lp = seg(p, 0, 0.7, ease.inOut), tp = seg(p, 0.35, 1);
+  const sx = tx + w + 12, sy = ty - 11, kx = sx + 26;
+  const pts = [[sx, sy], [kx, sy], [ax, ay]];
+  ctx.strokeStyle = col; ctx.globalAlpha *= 0.85; ctx.lineWidth = 2;
+  strokePartial(pts, lp);
+  if (lp > 0.98) dot(ax, ay, 4.5, col);
+  ctx.globalAlpha = ctx.globalAlpha / 0.85;
+  text(s, tx, ty, font, col, 'left', tp);
+  ctx.restore();
+}
+
+/* ---------------- atoms & bonds (line-art ball-and-stick) ---------------- */
+function atom(x, y, r, col, label, o = {}) {
+  ctx.save();
+  if (o.a != null) ctx.globalAlpha *= o.a;
+  if (ctx.globalAlpha <= 0) { ctx.restore(); return; }
+  if (o.glow) { ctx.shadowColor = col; ctx.shadowBlur = o.glow; }
+  ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = '#050505'; ctx.fill();
+  ctx.lineWidth = o.lw || 3; ctx.strokeStyle = col; ctx.stroke();
+  ctx.shadowBlur = 0;
+  if (label) {
+    ctx.fillStyle = col; ctx.font = `600 ${o.fs || 18}px ${SERIF}`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(label, x, y + 1);
+  }
+  if (o.charge) {
+    ctx.font = `700 ${Math.max(16, Math.round(r * 0.95))}px ${SERIF}`; ctx.fillStyle = col; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.globalAlpha *= o.chargeA == null ? 1 : o.chargeA;
+    ctx.fillText(o.charge === '-' ? '−' : '+', x + r * 1.0, y - r * 1.0);
+  }
+  ctx.restore();
+}
+function bond(x1, y1, r1, x2, y2, r2, col = COL.ink, o = {}) {
+  const d = Math.hypot(x2 - x1, y2 - y1); if (d < r1 + r2 + 1) return;
+  const ux = (x2 - x1) / d, uy = (y2 - y1) / d;
+  const a = [x1 + ux * r1, y1 + uy * r1], b = [x2 - ux * r2, y2 - uy * r2];
+  ctx.save(); if (o.a != null) ctx.globalAlpha *= o.a;
+  ctx.strokeStyle = col; ctx.lineWidth = o.lw || 3; ctx.lineCap = 'round';
+  const offs = o.double ? [-4, 4] : [0];
+  for (const of of offs) { ctx.beginPath(); ctx.moveTo(a[0] - uy * of, a[1] + ux * of); ctx.lineTo(b[0] - uy * of, b[1] + ux * of); ctx.stroke(); }
+  ctx.restore();
+}
+function zigzag(x0, y0, n, step, amp, col, lw = 4, a = 1) {
+  ctx.save(); ctx.globalAlpha *= a; ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(x0, y0);
+  for (let i = 1; i <= n; i++) ctx.lineTo(x0 + i * step, y0 + (i % 2 ? -amp : amp) * (i === n ? 0.6 : 1));
+  ctx.stroke(); ctx.restore();
+}
+function flash(x, y, u, col) { // small radial burst at the reaction moment
+  if (u <= 0 || u >= 1) return;
+  ctx.save(); ctx.globalAlpha *= Math.sin(u * Math.PI) * 0.9; ctx.strokeStyle = col; ctx.lineWidth = 2.4;
+  for (let k = 0; k < 8; k++) { const th = k / 8 * TAU + 0.3, r0 = 14 + 18 * u, r1 = r0 + 13; ctx.beginPath(); ctx.moveTo(x + Math.cos(th) * r0, y + Math.sin(th) * r0); ctx.lineTo(x + Math.cos(th) * r1, y + Math.sin(th) * r1); ctx.stroke(); }
+  ctx.restore();
+}
+const lp2 = (a, b, u) => [lerp(a[0], b[0], u), lerp(a[1], b[1], u)];
+
+/* ---------------- illustration state over time ---------------- */
+const tauAlone = (t) => 5 * seg(t, T.ga0, T.ga1);
+const tauRef = (t) => 5 * seg(t, T.gr0, T.gr1);
+const S_ALONE_END = MODEL.alone[MODEL.alone.length - 1].S;
+function cRaw(t) {               // free-chlorine "freshness" (model value)
+  if (t < T.ga0) return lerp(1, 0.9, seg(t, T.fill[1], RX_END, ease.inOut));
+  if (t < T.gr0) return 0.9 * modelAt(MODEL.alone, tauAlone(t)).C;
+  return modelAt(MODEL.ref, tauRef(t)).C;
+}
+function cLevel(t) {             // displayed value: eased toward the model over ~0.15 s (no hard jumps)
+  let s = 0; for (let k = 0; k < 6; k++) s += cRaw(t - k * 0.03); return s / 6;
+}
+function tissueArea(t) {         // remaining pulp tissue (area factor) — narrative: leave it, then refresh
+  if (t < T.ga0) return lerp(1, 0.9, seg(t, T.fill[0], RX_END, ease.inOut));
+  if (t < T.gr0) return 0.9 * modelAt(MODEL.alone, tauAlone(t)).S;
+  return 0.9 * S_ALONE_END * modelAt(MODEL.ref, tauRef(t)).S;
+}
+function refreshPulse(t) {       // 0..1 pulse after each refresh (incl. the fresh start)
+  let best = 0;
+  for (let k = 0; k < 5; k++) { const tk = T.gr0 + (k / 5) * (T.gr1 - T.gr0); const u = (t - tk) / 0.5; if (u >= 0 && u < 1) best = Math.max(best, Math.sin(Math.min(1, u * 3) * Math.PI / 2) * (1 - u)); }
+  return best;
+}
+
+/* ---------------- tooth drawing ---------------- */
+function blobPath(b, s, t, wob) {
+  ctx.beginPath();
+  const cx = lerp(b.ax, b.cx, s), cy = b.cy;
+  for (let i = 0; i <= 40; i++) {
+    const th = (i / 40) * TAU;
+    const k = 1 + 0.22 * Kit.noise1(th * 1.3 + b.seed * 10, b.seed) + 0.05 * wob * Math.sin(th * 3 + t * 1.3 + b.seed);
+    const x = cx + Math.cos(th) * b.rx * s * k, y = cy + Math.sin(th) * b.ry * s * k;
+    i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+  }
+  ctx.closePath();
+}
+function drawGhost() {             // faint outline: the cover/loop frame shows a tooth from frame 0
+  ctx.save(); ctx.globalAlpha *= 0.2;
+  ctx.strokeStyle = COL.ink; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+  ctx.lineWidth = 3; for (const k of ['outerL', 'outerR']) { ctx.beginPath(); tracePoly(TOOTH[k]); ctx.stroke(); }
+  ctx.lineWidth = 2.4; for (const k of ['wallL', 'wallR']) { ctx.beginPath(); tracePoly(TOOTH[k]); ctx.stroke(); }
+  ctx.globalAlpha *= 0.55; ctx.lineWidth = 1.5; for (const k of ['dejL', 'dejR']) { ctx.beginPath(); tracePoly(TOOTH[k]); ctx.stroke(); }
+  ctx.restore();
+}
+function drawTooth(t, A) {
+  const pd = seg(t, T.draw[0], T.draw[1], ease.out);
+  if (pd <= 0.004 || A <= 0) return;
+  ctx.save(); ctx.globalAlpha *= A;
+  // textures
+  const tx = seg(t, T.tex[0], T.tex[1], ease.smooth);
+  if (tx > 0) { ctx.save(); ctx.globalAlpha *= tx; ctx.drawImage(TEX, 0, 0); ctx.restore(); }
+
+  // irrigant inside the canal
+  const pf = seg(t, T.fill[0], T.fill[1], ease.inOut);
+  const c = cLevel(t), pulse = refreshPulse(t);
+  if (pf > 0) {
+    ctx.save();
+    ctx.beginPath(); tracePoly(TOOTH.canal); ctx.closePath(); ctx.clip();
+    const top = lerp(NEEDLE.tip, 532, pf), bot = lerp(NEEDLE.tip, 1095, pf);
+    ctx.beginPath();
+    ctx.moveTo(250, bot);
+    for (let x = 250; x <= 400; x += 6) ctx.lineTo(x, top + 4 * Math.sin(x * 0.09 + t * 3) * (pf < 1 ? 1 : 0.4));
+    ctx.lineTo(400, bot); ctx.closePath();
+    const g = ctx.createLinearGradient(0, 530, 0, 1090);
+    const a0 = 0.3 + 0.3 * c + 0.1 * pulse, tc = Kit.mix('#8c8e80', COL.cl, clamp(c + pulse * 0.3));
+    g.addColorStop(0, Kit.rgba(tc, a0 * 0.85)); g.addColorStop(0.5, Kit.rgba(tc, a0)); g.addColorStop(1, Kit.rgba(tc, a0 * 0.8));
+    ctx.fillStyle = g; ctx.fill();
+    // faint caustic streaks
+    ctx.strokeStyle = Kit.rgba('#ffffff', 0.10 * c); ctx.lineWidth = 1.2;
+    for (let k = 0; k < 7; k++) {
+      ctx.beginPath();
+      for (let y = top + 10; y < bot; y += 10) { const x = 302 + k * 6 + 5 * Kit.noise2(k * 3.1, y * 0.02 + t * 0.6); y === top + 10 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  drawNeedle(t);
+
+  // pulp remnants (coral) — drawn over the needle: tags on the near wall
+  const pt = seg(t, T.tissue[0], T.tissue[1], ease.out);
+  if (pt > 0) {
+    const s = Math.sqrt(tissueArea(t)) * pt;
+    ctx.save();
+    ctx.beginPath(); tracePoly(TOOTH.canal); ctx.closePath(); ctx.clip();
+    for (const b of BLOBS) {
+      blobPath(b, s, t, c);
+      ctx.fillStyle = Kit.rgba(COL.tis, 0.55); ctx.fill();
+      ctx.strokeStyle = Kit.rgba(COL.tis, 0.95); ctx.lineWidth = 2; ctx.stroke();
+      ctx.strokeStyle = Kit.rgba('#ffd6cc', 0.5); ctx.lineWidth = 1;
+      for (let k = 0; k < 3; k++) { const yy = b.cy + (k - 1) * b.ry * 0.45 * s; ctx.beginPath(); ctx.moveTo(b.ax, yy); ctx.quadraticCurveTo(lerp(b.ax, b.cx, 1.2 * s), yy + 4, lerp(b.ax, b.cx, 1.7 * s), yy - 3); ctx.stroke(); }
+    }
+    ctx.restore();
+  }
+
+  // line work (draws on from the apex)
+  ctx.strokeStyle = COL.ink; ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+  strokePartial(TOOTH.outerL, pd, TOOTH.outerLC);
+  strokePartial(TOOTH.outerRr, pd, TOOTH.outerRrC);
+  ctx.lineWidth = 2.4;
+  strokePartial(TOOTH.wallLr, seg(pd, 0.08, 1), TOOTH.wallLrC);
+  strokePartial(TOOTH.wallRr, seg(pd, 0.08, 1), TOOTH.wallRrC);
+  ctx.globalAlpha *= 0.55; ctx.lineWidth = 1.5;
+  strokePartial(TOOTH.dejL, seg(pd, 0.4, 1), TOOTH.dejLC);
+  strokePartial(TOOTH.dejR, seg(pd, 0.4, 1), TOOTH.dejRC);
+  ctx.restore();
+}
+
+function drawNeedle(t) {
+  const p = seg(t, T.needle[0], T.needle[1], ease.out);
+  if (p <= 0) return;
+  const dy = (1 - p) * -60;
+  ctx.save(); ctx.globalAlpha *= p;
+  ctx.beginPath(); ctx.rect(0, 462, W, H); ctx.clip();
+  const x = NEEDLE.x, hw = NEEDLE.hw, top = NEEDLE.top + dy, tip = NEEDLE.tip + dy;
+  ctx.fillStyle = '#0a0a0a'; ctx.strokeStyle = '#cfcfcf'; ctx.lineWidth = 1.8;
+  ctx.beginPath(); ctx.moveTo(x - hw, top + 20); ctx.lineTo(x - hw, tip - 2); ctx.quadraticCurveTo(x - hw, tip + 1, x, tip + 1); ctx.quadraticCurveTo(x + hw, tip + 1, x + hw, tip - 2); ctx.lineTo(x + hw, top + 20); ctx.closePath(); ctx.fill(); ctx.stroke();
+  // luer hub
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(x - 15, top - 8); ctx.lineTo(x + 15, top - 8); ctx.lineTo(x + 9, top + 20); ctx.lineTo(x - 9, top + 20); ctx.closePath(); ctx.fill(); ctx.stroke();
+  // side vent (closed end)
+  ctx.fillStyle = '#000'; ctx.beginPath(); ctx.rect(x + 0.5, tip - 15, 2.6, 8); ctx.fill();
+  // outflow pulse (single soft arc at the vent)
+  const pf = seg(t, T.fill[0], T.fill[1]);
+  const pulse = Math.max(refreshPulse(t), pf > 0 && pf < 1 ? 1 - pf : 0);
+  if (pulse > 0) {
+    ctx.strokeStyle = Kit.rgba(COL.cl, 0.8 * pulse); ctx.lineWidth = 2.2;
+    ctx.beginPath(); ctx.arc(x + 3, tip - 11, 3 + 12 * (1 - pulse), -1.1, 1.1); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+/* ---------------- magnifier ---------------- */
+function magGeom(t) {
+  const e = seg(t, T.mag[0] + 0.3, T.mag[1], ease.inOut);
+  const cx = lerp(MAG.sx, MAG.cx, e), cy = lerp(MAG.sy, MAG.cy, e), R = lerp(MAG.sr, MAG.R, e);
+  return { e, cx, cy, R };
+}
+function tangents(sx, sy, sr, cx, cy, R) {
+  const d = Math.hypot(cx - sx, cy - sy), th = Math.atan2(cy - sy, cx - sx);
+  if (d <= Math.abs(R - sr) + 1) return null;
+  const ph = Math.acos((sr - R) / d);
+  return [1, -1].map((s) => { const a = th + s * ph; return [[sx + sr * Math.cos(a), sy + sr * Math.sin(a)], [cx + R * Math.cos(a), cy + R * Math.sin(a)]]; });
+}
+// pre-seeded free-chlorine dots inside the magnifier (local coords), ranked by distance to the tissue
+const DOTS = (() => {
+  const r = Kit.rng(77), out = [];
+  while (out.length < 46) { const x = -185 + r() * 290, y = -185 + r() * 370; if (x * x + y * y < 175 * 175 && x < 88) out.push({ x, y, ph: r() * 10 }); }
+  out.forEach((d) => (d.dist = Math.hypot(d.x - 110, d.y)));
+  out.sort((a, b) => a.dist - b.dist).forEach((d, i) => (d.rank = i / out.length));
+  return out;
+})();
+const tissueEll = (area) => { const s = Math.sqrt(area); return { cx: lerp(120, 68, s), rx: 52 * s, ry: 96 * s }; };
+
+function drawWall(t, a, area, act) {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha *= a;
+  // canal wall (right side of the close-up) with tubules
+  ctx.beginPath(); ctx.moveTo(126, -230);
+  for (let y = -230; y <= 230; y += 10) ctx.lineTo(118 + 10 * Math.cos(y * 0.012) + 3 * Kit.noise1(y * 0.05, 9), y);
+  ctx.lineTo(260, 230); ctx.lineTo(260, -230); ctx.closePath();
+  ctx.fillStyle = '#141414'; ctx.fill();
+  ctx.save(); ctx.clip();
+  ctx.strokeStyle = 'rgba(255,255,255,0.16)'; ctx.lineWidth = 1.2;
+  for (let y = -220; y < 230; y += 13) { ctx.beginPath(); ctx.moveTo(120, y); ctx.bezierCurveTo(150, y - 3, 180, y + 4, 230, y - 2); ctx.stroke(); }
+  ctx.restore();
+  ctx.strokeStyle = 'rgba(244,242,236,0.75)'; ctx.lineWidth = 2.5; ctx.stroke();
+  // tissue tag on the wall (wobbles only while chlorine is active)
+  const s = Math.sqrt(area);
+  if (s > 0.02) {
+    const b = { ax: 120, cx: 120 - 52, cy: 0, rx: 52, ry: 96 };
+    ctx.beginPath();
+    for (let i = 0; i <= 60; i++) {
+      const th = (i / 60) * TAU, k = 1 + 0.18 * Kit.noise1(th * 1.7 + 3, 4) + 0.045 * act * Math.sin(th * 4 + t * 1.2);
+      const x = lerp(b.ax, b.cx, s) + Math.cos(th) * b.rx * s * k, y = b.cy + Math.sin(th) * b.ry * s * k;
+      i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+    }
+    ctx.closePath();
+    ctx.fillStyle = Kit.rgba(COL.tis, 0.35); ctx.fill(); ctx.strokeStyle = COL.tis; ctx.lineWidth = 2.5; ctx.stroke();
+    ctx.save(); ctx.clip(); ctx.strokeStyle = Kit.rgba('#ffd6cc', 0.45); ctx.lineWidth = 1.3;
+    for (let k = -4; k <= 4; k++) { const y = k * 20 * s; ctx.beginPath(); ctx.moveTo(122, y); ctx.bezierCurveTo(100 - 30 * s, y + 8, 80 - 60 * s, y - 8, 40 - 90 * s, y + 3); ctx.stroke(); }
+    ctx.restore();
+  }
+  ctx.restore();
+}
+function drawFreeCl(t, a, c, pulse, area) {
+  if (a <= 0) return;
+  const te = tissueEll(area), th = lerp(-0.1, 1.1, 1 - c);
+  ctx.save(); ctx.globalAlpha *= a;
+  ctx.shadowColor = COL.cl; ctx.shadowBlur = 10;
+  for (const d of DOTS) {
+    const vis = clamp((d.rank - th) / 0.2 + 0.5);
+    if (vis <= 0) continue;
+    const x = d.x + 7 * Kit.noise1(t * 0.7 + d.ph, 1), y = d.y + 7 * Kit.noise1(t * 0.7 + d.ph, 2);
+    const ex = (x - te.cx) / (te.rx + 12), ey = y / (te.ry + 12);
+    if (te.rx > 1 && ex * ex + ey * ey < 1) continue;   // never draw over the tissue
+    dot(x, y, 5.5 + 1.5 * pulse, COL.cl, vis);
+  }
+  ctx.restore();
+}
+
+/* --- reaction scenes (lens-local px, origin = magnifier centre; every atom edge stays <= 188 px out) --- */
+const AT = { C: 11, Cl: 15, O: 15, N: 19, H: 13, CL: 22, NA: 19, OH: 21 };
+const rxPhases = (u) => ({
+  ap: seg(u, 0.08, 0.38, ease.inOut), rx: seg(u, 0.38, 0.48), sep: seg(u, 0.44, 0.68, ease.out), k: seg(u, 0.38, 0.56, ease.inOut),
+  l0: seg(u, 0.02, 0.1) * (1 - seg(u, 0.3, 0.38)), lp: seg(u, 0.56, 0.64), fl: seg(u, 0.38, 0.56),
+});
+
+function sceneSapon(u) {
+  const { ap, rx, sep, k, l0, lp, fl } = rxPhases(u);
+  const bx = -100, ys = [-90, 0, 90];
+  // glycerol backbone (stays)
+  bond(bx, ys[0], 10, bx, ys[1], 10); bond(bx, ys[1], 10, bx, ys[2], 10);
+  ys.forEach((y, i) => {
+    const ox = bx + 38;                                   // ester O: stays on glycerol (ink)
+    const C0 = [bx + 76, y];
+    const C = [C0[0] + 40 * sep, y + (y / 90) * 28 * sep]; // carbonyl C -> carboxylate C (soap head)
+    const Oc = [C[0] + 6, C[1] - 36];                     // carbonyl O
+    const tg = [C0[0] + 34, y + 32];                      // OH- attack position
+    const Om = [C[0] + 4, C[1] + 34];                     // carboxylate O- (oxygen from OH-)
+    const st = [[128, -50], [132, 40], [96, 130]][i];
+    const p = rx <= 0 ? lp2(st, tg, ap) : lp2(tg, Om, k);
+    zigzag(C[0] + 11, C[1], 4, 22, 10, COL.tis, 4);         // fatty-acid tail
+    if (rx < 1) bond(ox, y, AT.O, C[0], C[1], AT.C, COL.ink, { a: 1 - rx });
+    bond(bx, y, 10, ox, y, AT.O);
+    bond(C[0], C[1], AT.C, Oc[0], Oc[1], AT.O, COL.ink, { double: true });
+    if (rx > 0) bond(C[0], C[1], AT.C, p[0], p[1], AT.O, COL.oh, { a: rx });
+    atom(bx, y, 10, COL.ink, '', { lw: 2.6 });
+    atom(ox, y, AT.O, COL.ink, 'O');
+    atom(C[0], C[1], AT.C, COL.ink, '', { lw: 2.6 });
+    atom(Oc[0], Oc[1], AT.O, COL.ink, 'O');
+    const rO = lerp(AT.OH, AT.O, rx);
+    atom(p[0], p[1], rO, COL.oh, rx < 0.5 ? 'OH' : 'O', { charge: '-', glow: rx < 1 ? 8 : 0 });
+    // Na+ joins each carboxylate: soap = sodium salt of the fatty acid
+    const na = seg(u, 0.5, 0.64, ease.out);
+    if (na > 0) atom(Om[0] - 41 + 16 * (1 - na), Om[1] + 6 + 8 * (1 - na), AT.NA, COL.na, 'Na', { charge: '+', a: na });
+    flash(C0[0], C0[1], fl, COL.oh);
+  });
+  text('fat', -95, -112, `600 30px ${SERIF}`, COL.tis, 'center', l0);
+  drawChem([['OH^-', COL.oh, l0]], 152, 2, 30, { align: 'center', weight: 600 });
+  text('glycerol', -95, -112, `600 28px ${SERIF}`, COL.ink, 'center', lp);
+  text('soap', 148, 44, `600 30px ${SERIF}`, COL.tis, 'center', lp);
+}
+
+function sceneNeutral(u) {
+  const { ap, rx, sep, k, l0, lp, fl } = rxPhases(u);
+  // zwitterion H3N+–CHR–COO-
+  const N = [-78, -8], CA = [-8, -8], C2 = [58, -8], O1 = [84, -50], O2 = [86, 32], HA = [-8, -50];
+  const Ha = [-96, -44], Hb = [-116, 0], Hc0 = [-92, 30];
+  const ohSt = [-60, 140], ohTg = [-96, 72];
+  const w = lp2(ohTg, [-60, 118], sep);                   // water drifts away
+  const oh = rx <= 0 ? lp2(ohSt, ohTg, ap) : w;
+  const Hc = lp2(Hc0, [w[0] + 25, w[1] + 20], k);         // H+ taken from N+ by OH- (water drawn bent)
+  const Hown = [w[0] - 25, w[1] + 18];
+  const na = lp2([132, 92], [126, 60], ap);                // Na+ arrives with OH- (NaOH)
+  // bonds
+  bond(N[0], N[1], AT.N, CA[0], CA[1], AT.O, COL.tis);
+  bond(CA[0], CA[1], AT.O, C2[0], C2[1], AT.O);
+  bond(C2[0], C2[1], AT.O, O1[0], O1[1], AT.O, COL.ink, { double: true });
+  bond(C2[0], C2[1], AT.O, O2[0], O2[1], AT.O);
+  bond(CA[0], CA[1], AT.O, HA[0], HA[1], AT.H);
+  bond(CA[0], CA[1], AT.O, CA[0], CA[1] + 52, 0, COL.tis);
+  text('R', CA[0], CA[1] + 82, `italic 600 30px ${SERIF}`, COL.tis, 'center');
+  bond(N[0], N[1], AT.N, Ha[0], Ha[1], AT.H, COL.tis); bond(N[0], N[1], AT.N, Hb[0], Hb[1], AT.H, COL.tis);
+  if (rx < 1) bond(N[0], N[1], AT.N, Hc[0], Hc[1], AT.H, COL.tis, { a: 1 - rx });
+  if (rx > 0) { bond(w[0], w[1], AT.O, Hc[0], Hc[1], AT.H, COL.oh, { a: rx }); bond(w[0], w[1], AT.O, Hown[0], Hown[1], AT.H, COL.oh, { a: rx }); }
+  // atoms
+  atom(N[0], N[1], AT.N, COL.tis, 'N', { fs: 20, charge: '+', chargeA: 1 - rx });
+  atom(Ha[0], Ha[1], AT.H, COL.tis, 'H'); atom(Hb[0], Hb[1], AT.H, COL.tis, 'H');
+  atom(CA[0], CA[1], AT.O, COL.ink, 'C'); atom(HA[0], HA[1], AT.H, COL.ink, 'H');
+  atom(C2[0], C2[1], AT.O, COL.ink, 'C');
+  atom(O1[0], O1[1], AT.O, COL.ink, 'O');
+  atom(O2[0], O2[1], AT.O, COL.ink, 'O', { charge: '-' });
+  atom(na[0], na[1], AT.NA, COL.na, 'Na', { charge: '+', a: seg(u, 0.06, 0.16) });
+  atom(Hc[0], Hc[1], AT.H, rx > 0.5 ? COL.oh : COL.tis, 'H', { glow: rx > 0 && rx < 1 ? 6 : 0 });
+  if (rx < 1) atom(oh[0], oh[1], AT.OH, COL.oh, 'OH', { charge: '-', glow: 8, a: 1 - seg(rx, 0.5, 1) });
+  if (rx > 0) { atom(w[0], w[1], AT.O, COL.oh, 'O', { a: seg(rx, 0.5, 1) }); atom(Hown[0], Hown[1], AT.H, COL.oh, 'H', { a: seg(rx, 0.5, 1) }); }
+  flash(Hc0[0], Hc0[1] + 6, fl, COL.oh);
+  // labels
+  text('amino acid', -14, -100, `600 30px ${SERIF}`, COL.tis, 'center', seg(u, 0.02, 0.1) * (1 - seg(u, 0.48, 0.56)));
+  drawChem([['OH^-', COL.oh, l0]], 6, 158, 30, { align: 'center', weight: 600 });
+  text('salt', 128, 112, `600 30px ${SERIF}`, COL.na, 'center', lp);
+  ctx.save(); ctx.globalAlpha *= lp; drawChem([['H_2O', COL.oh]], 36, 152, 30, { align: 'center', weight: 600 }); ctx.restore();
+}
+
+function sceneChloram(u) {
+  const { ap, rx, sep, l0, lp, fl } = rxPhases(u);
+  zigzag(-192, -90, 16, 26, 12, COL.tis, 4);               // protein backbone runs out of view
+  const Np = [-36, -14], Ha = [-74, 16], Hb0 = [2, 18];
+  bond(-36, -78, 0, Np[0], Np[1], AT.N, COL.tis);
+  const m = lp2([78, 70], [34, 52], ap);                   // HOCl approaches
+  const k1 = seg(u, 0.38, 0.52, ease.inOut), k2 = seg(u, 0.42, 0.58, ease.inOut);
+  const Cl = lp2(m, [6, 32], k2);
+  const O0 = [m[0] + 36, m[1] + 22];
+  const Ow = lp2(O0, [96, 108], sep);
+  const Hown = [Ow[0] - 16, Ow[1] + 28];
+  const HbT = [Ow[0] + 31, Ow[1] + 6];
+  // H leaves N on an arc above the incoming Cl
+  const Hb = k1 <= 0 ? Hb0 : (() => { const c = [70, -10], v = k1, a = (1 - v) * (1 - v), b = 2 * v * (1 - v), d = v * v; return [a * Hb0[0] + b * c[0] + d * HbT[0], a * Hb0[1] + b * c[1] + d * HbT[1]]; })();
+  const wc = rx > 0.5 ? Kit.rgba(Kit.mix(COL.cl, COL.ink, seg(rx, 0.5, 1)), 1) : COL.cl;
+  bond(Np[0], Np[1], AT.N, Ha[0], Ha[1], AT.H, COL.tis);
+  if (rx < 1) bond(Np[0], Np[1], AT.N, Hb[0], Hb[1], AT.H, COL.tis, { a: 1 - rx });
+  if (rx < 1) bond(Cl[0], Cl[1], AT.CL, Ow[0], Ow[1], AT.O, COL.cl, { a: 1 - rx });
+  if (rx > 0) bond(Np[0], Np[1], AT.N, Cl[0], Cl[1], AT.CL, COL.cl, { a: rx });
+  bond(Ow[0], Ow[1], AT.O, Hown[0], Hown[1], AT.H, wc);
+  if (rx > 0) bond(Ow[0], Ow[1], AT.O, Hb[0], Hb[1], AT.H, COL.ink, { a: seg(k1, 0.7, 1) });
+  atom(Np[0], Np[1], AT.N, COL.tis, 'N', { fs: 20 });
+  atom(Ha[0], Ha[1], AT.H, COL.tis, 'H');
+  atom(Hb[0], Hb[1], AT.H, k1 > 0.6 ? COL.ink : COL.tis, 'H');
+  atom(Ow[0], Ow[1], AT.O, wc, 'O');
+  atom(Hown[0], Hown[1], AT.H, wc, 'H');
+  atom(Cl[0], Cl[1], AT.CL, COL.cl, 'Cl', { fs: 20, glow: 12 });
+  flash(Hb0[0] - 8, Hb0[1] - 4, fl, COL.cl);
+  // labels
+  text('protein', -60, -122, `600 30px ${SERIF}`, COL.tis, 'center', seg(u, 0.02, 0.1) * (1 - seg(u, 0.5, 0.58)));
+  text('HOCl', 140, 26, `600 30px ${SERIF}`, COL.cl, 'center', l0);
+  text('chloramine', -40, 96, `600 30px ${SERIF}`, COL.cl, 'center', lp);
+  ctx.save(); ctx.globalAlpha *= lp; drawChem([['H_2O', COL.ink]], 156, 60, 30, { align: 'center', weight: 600 }); ctx.restore();
+}
+
+const RX = [
+  { title: 'Saponification', scene: sceneSapon, site: [-24, 0],
+    eq: [['fat', COL.tis], [' + ', COL.ink], ['NaOH', COL.oh], [' -> ', COL.ink], ['soap + glycerol', COL.ink]] },
+  { title: 'Neutralization', scene: sceneNeutral, site: [-92, 36],
+    eq: [['amino acid', COL.tis], [' + ', COL.ink], ['NaOH', COL.oh], [' -> ', COL.ink], ['salt + H_2O', COL.ink]] },
+  { title: 'Chloramination', scene: sceneChloram, site: [-36, -14],
+    eq: [['R–NH_2', COL.tis], [' + ', COL.ink], ['HOCl', COL.cl], [' -> ', COL.ink], ['R–NHCl + H_2O', COL.ink]] },
+];
+
+function drawMagnifier(t, A) {
+  if (t < T.mag[0]) return;
+  const { e, cx, cy, R } = magGeom(t);
+  ctx.save(); ctx.globalAlpha *= A;
+  const pl = seg(t, T.mag[0], T.mag[0] + 0.4, ease.out);
+  // small target ring
+  ctx.strokeStyle = COL.ink; ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.arc(MAG.sx, MAG.sy, MAG.sr, -Math.PI / 2, -Math.PI / 2 + TAU * pl); ctx.stroke();
+  // leader (tangent) lines
+  const tg = tangents(MAG.sx, MAG.sy, MAG.sr, cx, cy, Math.max(R, MAG.sr + 2));
+  if (tg && e > 0) {
+    ctx.lineWidth = 1.8; ctx.strokeStyle = Kit.rgba(COL.ink, 0.7);
+    for (const [p, q] of tg) { ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); }
+  }
+  if (e > 0) {
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.fillStyle = '#000'; ctx.fill(); ctx.clip();
+    const c = cLevel(t), pulse = refreshPulse(t), area = tissueArea(t);
+    const wash = ctx.createRadialGradient(cx - R * 0.3, cy, 10, cx, cy, R);
+    wash.addColorStop(0, Kit.rgba(COL.cl, 0.05 + 0.12 * c)); wash.addColorStop(1, Kit.rgba(COL.cl, 0.02 + 0.05 * c));
+    ctx.fillStyle = wash; ctx.fillRect(cx - R, cy - R, 2 * R, 2 * R);
+    ctx.translate(cx, cy); ctx.scale(R / MAG.R, R / MAG.R);
+    // wall + tissue: intro (zooms into the tissue, then gives way to the molecules) and the graph phase
+    const wz = t < RX_END ? seg(t, T.rx0 - 0.35, T.rx0, ease.in) : 0;
+    const wallA = (t < RX_END ? 1 - wz : 0) + seg(t, RX_END, RX_END + 0.4);
+    if (wallA > 0) {
+      ctx.save(); const zz = 1 + 0.45 * wz; ctx.translate(70, 0); ctx.scale(zz, zz); ctx.translate(-70, 0);
+      drawWall(t, wallA, area, c); ctx.restore();
+    }
+    // reactions (sequential, no overlap with the wall)
+    for (let i = 0; i < 3; i++) {
+      const s0 = T.rx0 + i * T.rxLen, u = (t - s0) / T.rxLen;
+      if (u < 0 || u > 1) continue;
+      ctx.save(); ctx.globalAlpha *= env(t, s0, s0 + T.rxLen, 0.25, 0.25); RX[i].scene(u); ctx.restore();
+    }
+    // free chlorine dots (graph phase)
+    drawFreeCl(t, seg(t, RX_END, RX_END + 0.35), c, pulse, area);
+    ctx.restore();
+    // ring
+    ctx.lineWidth = 3.5; ctx.strokeStyle = COL.ink;
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.stroke();
+    ctx.lineWidth = 1; ctx.strokeStyle = Kit.rgba(COL.ink, 0.35);
+    ctx.beginPath(); ctx.arc(cx, cy, R + 8, 0, TAU); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+/* captions under the magnifier */
+function drawMagCaption(t, A) {
+  const X = MAG.cx;
+  ctx.save(); ctx.globalAlpha *= A;
+  // header fine print
+  text('reactions described by Estrela et al., Braz Dent J 2002 · schematic', 1000, 494, `italic 400 22px ${SERIF}`, COL.grey, 'right', seg(t, T.mag[1] - 0.1, T.mag[1] + 0.4));
+  for (let i = 0; i < 3; i++) {
+    const s0 = T.rx0 + i * T.rxLen;
+    const a = env(t, s0 + 0.1, s0 + T.rxLen - 0.05, 0.2, 0.2);
+    if (a <= 0) continue;
+    ctx.save(); ctx.globalAlpha *= a;
+    for (let k = 0; k < 3; k++) {               // progress dots
+      ctx.beginPath(); ctx.arc(X - 26 + k * 26, 930, 6, 0, TAU);
+      ctx.lineWidth = 2; ctx.strokeStyle = COL.ink;
+      if (k === i) { ctx.fillStyle = COL.ink; ctx.fill(); } else ctx.stroke();
+    }
+    ctx.restore();
+    const yo = 10 * (1 - ease.out(seg(t, s0 + 0.1, s0 + 0.45)));
+    text(RX[i].title, X, 978 + yo, `600 38px ${SERIF}`, COL.ink, 'center', a);
+    ctx.save(); ctx.globalAlpha *= a; drawChem(RX[i].eq, X, 1024 + yo, 31, { align: 'center', weight: 500, maxWidth: 440 }); ctx.restore();
+  }
+  // chlorine also oxidizes protein (shown with chloramination, kept through 'left alone')
+  const s2 = T.rx0 + 2 * T.rxLen;
+  const na = seg(t, s2 + 0.6, s2 + 1.0) * (1 - seg(t, T.gr0 - 0.05, T.gr0 + 0.15));
+  if (na > 0) { ctx.save(); ctx.globalAlpha *= na; drawChem([['HOCl/OCl^- also oxidize & break down proteins', COL.grey]], X, 1062, 24, { align: 'center', weight: 400, italic: true, maxWidth: 456 }); ctx.restore(); }
+  // graph-phase caption
+  const ga = seg(t, RX_END + 0.1, RX_END + 0.4);
+  if (ga > 0) {
+    textFit('Free chlorine gets used up', X, 978, '600', 38, COL.ink, 'center', ga, 456);
+    ctx.save(); ctx.globalAlpha *= ga;
+    ctx.font = `500 30px ${SERIF}`;
+    const l1 = 'free chlorine', l2 = 'tissue';
+    const w1 = ctx.measureText(l1).width, w2 = ctx.measureText(l2).width, gap = 46, tot = 22 + w1 + gap + 22 + w2;
+    let x = X - tot / 2;
+    ctx.shadowColor = COL.cl; ctx.shadowBlur = 8; dot(x + 7, 1014, 7, COL.cl); ctx.shadowBlur = 0;
+    text(l1, x + 22, 1024, `500 30px ${SERIF}`, COL.cl); x += 22 + w1 + gap;
+    ctx.beginPath(); ctx.arc(x + 7, 1014, 8, 0, TAU); ctx.fillStyle = Kit.rgba(COL.tis, 0.4); ctx.fill(); ctx.strokeStyle = COL.tis; ctx.lineWidth = 2; ctx.stroke();
+    text(l2, x + 22, 1024, `500 30px ${SERIF}`, COL.tis);
+    ctx.restore();
+    text('… refreshing puts it back', X, 1064, `italic 400 30px ${SERIF}`, COL.cl, 'center', seg(t, T.gr0 + 0.2, T.gr0 + 0.5));
+  }
+  ctx.restore();
+}
+
+/* ---------------- graph panel ---------------- */
+const G = { x0: 162, x1: 760, yT: 1180, yB: 1280 };
+const gx = (tau) => G.x0 + (tau / 5) * (G.x1 - G.x0);
+const gy = (v) => G.yB - v * (G.yB - G.yT);
+function traceTo(pts, tau, col, lw, dash, glow) {
+  ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+  if (dash) ctx.setLineDash(dash);
+  if (glow) { ctx.shadowColor = col; ctx.shadowBlur = glow; }
+  ctx.beginPath(); let last = null;
+  for (const p of pts) { if (p.tau > tau) break; const x = gx(p.tau), y = gy(p.C); last ? ctx.lineTo(x, y) : ctx.moveTo(x, y); last = [x, y]; }
+  ctx.stroke(); ctx.restore();
+  return last;
+}
+function drawGraph(t, A, Aplot) {
+  const pa = seg(t, T.gAx, T.gAx + 0.6, ease.out);
+  if (pa <= 0) return;
+  const lift = lerp(0.3, 1, seg(t, RX_END - 0.3, RX_END + 0.2, ease.inOut));   // empty frame waits at 30%
+  ctx.save(); ctx.globalAlpha *= A * lift;
+  // title row
+  ctx.save(); ctx.globalAlpha *= pa;
+  drawChem([['Free chlorine near tissue', COL.ink], ['  (HOCl + OCl^-)', COL.cl]], 90, 1144, 30, { weight: 600, maxWidth: 720 });
+  // below the axis: model disclaimer + unit-free time axis
+  text('toy model · time & amounts illustrative', G.x0, G.yB + 30, `italic 400 24px ${SERIF}`, COL.grey, 'left');
+  drawChem([['time ->', COL.grey]], G.x1 + 14, G.yB + 30, 24, { align: 'right', weight: 400, italic: true });
+  text('two separate runs · Moorer & Wesselink 1982; Boutsioukis & Arias-Moliz 2022', G.x0, G.yB + 56, `italic 400 22px ${SERIF}`, COL.grey, 'left');
+  ctx.restore();
+  // axes
+  ctx.strokeStyle = COL.ink; ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  strokePartial([[G.x0, G.yT - 14], [G.x0, G.yB], [G.x1 + 14, G.yB]], pa);
+  if (pa > 0.95) { ctx.beginPath(); ctx.moveTo(G.x1 + 4, G.yB - 6); ctx.lineTo(G.x1 + 14, G.yB); ctx.lineTo(G.x1 + 4, G.yB + 6); ctx.stroke(); }
+  ctx.save(); ctx.globalAlpha *= pa * 0.5; ctx.setLineDash([3, 8]); ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(G.x0, G.yT); ctx.lineTo(G.x1, G.yT); ctx.stroke(); ctx.restore();
+  text('fresh', G.x0 - 12, G.yT + 9, `italic 400 26px ${SERIF}`, COL.grey, 'right', pa);
+  text('0', G.x0 - 12, G.yB + 9, `400 26px ${SERIF}`, COL.grey, 'right', pa);
+  // trace 1: left alone
+  const ta = tauAlone(t);
+  if (ta > 0) {
+    const la = traceTo(MODEL.alone, ta, Kit.rgba(COL.ink, 0.9), 3, [9, 8], 0);
+    if (ta < 5 && la) dot(la[0], la[1], 6, COL.ink);
+    text('left alone', G.x1 + 24, G.yB + 10, `600 30px ${SERIF}`, COL.ink, 'left', seg(ta, 3.2, 5));
+  }
+  ctx.restore();
+  // trace 2: refreshed often (kept at full strength while the answer is up)
+  const tr = tauRef(t);
+  if (tr > 0) {
+    ctx.save(); ctx.globalAlpha *= Aplot * lift;
+    const lr = traceTo(MODEL.ref, tr, COL.cl, 4, null, 10);
+    if (tr < 5 && lr) { ctx.save(); ctx.shadowColor = COL.cl; ctx.shadowBlur = 12; dot(lr[0], lr[1], 7, COL.cl); ctx.restore(); }
+    for (let k = 1; k <= 4; k++) {               // refresh droplets (stay as markers)
+      const a = seg(tr, k, k + 0.3);
+      if (a <= 0) continue;
+      const x = gx(k), y = G.yT - 12;
+      ctx.save(); ctx.globalAlpha *= a; ctx.fillStyle = COL.cl;
+      ctx.beginPath(); ctx.moveTo(x, y - 12); ctx.bezierCurveTo(x + 6.5, y - 4, x + 6.5, y + 3, x, y + 3); ctx.bezierCurveTo(x - 6.5, y + 3, x - 6.5, y - 4, x, y - 12); ctx.fill(); ctx.restore();
+    }
+    const la = seg(tr, 3.6, 5);
+    text('refreshed', G.x1 + 24, G.yT + 22, `600 30px ${SERIF}`, COL.cl, 'left', la);
+    text('often', G.x1 + 24, G.yT + 52, `600 30px ${SERIF}`, COL.cl, 'left', la);
+    ctx.restore();
+  }
+}
+
+/* ---------------- worked equation (bottom band) + 'used up' chips + answer ---------------- */
+const EQ = { y: 1392, fs: 46, chipY: 1441, brY: 1464 };
+const EQ_TERMS = [['NaOCl', COL.cl], [' + ', COL.ink], ['H_2O', COL.ink], [' <=L> ', COL.ink], ['NaOH', COL.oh], [' + ', COL.ink], ['HOCl', COL.cl]];
+let EQL = null;
+const eqLayout = () => EQL || (EQL = drawChem(EQ_TERMS, W / 2, EQ.y, EQ.fs, { align: 'center', weight: 600, measure: true }));
+// each reaction sends what it used from the lens down to the equation (OH- or free chlorine)
+const SHOT_DUR = 0.6;
+const SHOTS = [0, 1, 2].map((i) => ({ i, t0: T.rx0 + i * T.rxLen + 0.42 * T.rxLen, kind: i < 2 ? 'oh' : 'cl', col: i < 2 ? COL.oh : COL.cl }));
+const arrived = (kind, t) => SHOTS.filter((s) => s.kind === kind && t >= s.t0 + SHOT_DUR).length;
+function popOf(kind, t) { let p = 0; for (const s of SHOTS) if (s.kind === kind) { const u = (t - s.t0 - SHOT_DUR) / 0.35; if (u >= 0 && u < 1) p = Math.max(p, Math.sin(u * Math.PI)); } return p; }
+function chipSegs(kind, n) { return kind === 'oh' ? [['OH^-', COL.oh], [' ' + '↓'.repeat(n), COL.oh]] : [['free chlorine', COL.cl], [' ↓', COL.cl]]; }
+function chipBoxes(t) {
+  const L = eqLayout();
+  const nOH = Math.max(1, arrived('oh', t));
+  const wOH = drawChem(chipSegs('oh', nOH), 0, 0, 28, { weight: 600, measure: true }).w + 26;
+  const wCL = drawChem(chipSegs('cl', 1), 0, 0, 28, { weight: 600, measure: true }).w + 26;
+  const cOH = (L.ext[4].x0 + L.ext[4].x1) / 2, cCL = (L.ext[6].x0 + L.ext[6].x1) / 2;
+  const oh = { x0: cOH - wOH / 2, x1: cOH + wOH / 2 };
+  const x0 = Math.max(cCL - wCL / 2, oh.x1 + 14);
+  return { oh, cl: { x0, x1: x0 + wCL } };
+}
+function drawChip(segs, box, col, pop, a) {
+  if (a <= 0) return;
+  const cx = (box.x0 + box.x1) / 2, w = box.x1 - box.x0, h = 38, cy = EQ.chipY - 9, s = 1 + 0.14 * pop;
+  ctx.save(); ctx.globalAlpha *= a; ctx.translate(cx, cy); ctx.scale(s, s);
+  roundRect(-w / 2, -h / 2, w, h, 12);
+  ctx.fillStyle = Kit.rgba(col, 0.08 + 0.12 * pop); ctx.fill();
+  ctx.strokeStyle = Kit.rgba(col, 0.65); ctx.lineWidth = 2; ctx.stroke();
+  drawChem(segs, 0, 10, 28, { align: 'center', weight: 600 });
+  ctx.restore();
+}
+function drawEquation(t, A) {
+  const p = seg(t, T.eq[0], T.eq[1]);
+  if (p <= 0 || A <= 0) return;
+  ctx.save(); ctx.globalAlpha *= A;
+  const segs = EQ_TERMS.map((tm, i) => [tm[0], tm[1], ease.out(seg(p, i * 0.08, i * 0.08 + 0.35))]);
+  const r = drawChem(segs, W / 2, EQ.y, EQ.fs, { align: 'center', weight: 600 });
+  // the hydrolysis lies far to the left at the solution's pH
+  const nx = (r.ext[0].x0 + r.ext[3].x1) / 2 - 8, na = seg(t, T.eqNote[0], T.eqNote[1]);
+  if (na > 0) {
+    ctx.save(); ctx.globalAlpha *= na;
+    text('at pH 11–12 this lies far left:', nx, 1432, `italic 400 24px ${SERIF}`, COL.grey, 'center');
+    drawChem([['free chlorine is mostly OCl^-', COL.grey]], nx, 1460, 24, { align: 'center', weight: 400, italic: true });
+    ctx.restore();
+  }
+  // persistent 'used up' chips under the products
+  const B = chipBoxes(t);
+  const nOH = arrived('oh', t), nCL = arrived('cl', t);
+  if (nOH > 0) drawChip(chipSegs('oh', nOH), B.oh, COL.oh, popOf('oh', t), seg(t, SHOTS[0].t0 + SHOT_DUR - 0.05, SHOTS[0].t0 + SHOT_DUR + 0.15));
+  if (nCL > 0) drawChip(chipSegs('cl', 1), B.cl, COL.cl, popOf('cl', t), seg(t, SHOTS[2].t0 + SHOT_DUR - 0.05, SHOTS[2].t0 + SHOT_DUR + 0.15));
+  // bracket joining both chips, with a stem into the answer
+  const pb = seg(t, T.br[0], T.br[1], ease.inOut);
+  if (pb > 0) {
+    const b0 = B.oh.x0 + 6, b1 = B.cl.x1 - 6, by = EQ.brY, bm = (b0 + b1) / 2;
+    const gr = ctx.createLinearGradient(b0, 0, b1, 0); gr.addColorStop(0, COL.oh); gr.addColorStop(1, COL.cl);
+    ctx.strokeStyle = gr; ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    const hw = ((b1 - b0) / 2) * pb;
+    ctx.beginPath(); ctx.moveTo(bm - hw, by - 7 * seg(pb, 0.85, 1)); ctx.lineTo(bm - hw, by); ctx.lineTo(bm + hw, by); ctx.lineTo(bm + hw, by - 7 * seg(pb, 0.85, 1)); ctx.stroke();
+    const st = seg(t, T.br[1] - 0.1, T.br[1] + 0.25);
+    if (st > 0) { ctx.beginPath(); ctx.moveTo(bm, by); ctx.lineTo(bm, by + 16 * st); ctx.stroke(); }
+  }
+  ctx.restore();
+}
+function drawShots(t, A) {
+  const B = chipBoxes(t);
+  for (const s of SHOTS) {
+    const u = (t - s.t0) / SHOT_DUR;
+    if (u <= 0 || u >= 1.05) continue;
+    const site = RX[s.i].site, P0 = [MAG.cx + site[0], MAG.cy + site[1]];
+    const box = s.kind === 'oh' ? B.oh : B.cl, P2 = [(box.x0 + box.x1) / 2, EQ.chipY - 9];
+    const P1 = [1012, 1070];
+    const at = (v) => { v = ease.inOut(clamp(v)); const a = (1 - v) * (1 - v), b = 2 * v * (1 - v), d = v * v; return [a * P0[0] + b * P1[0] + d * P2[0], a * P0[1] + b * P1[1] + d * P2[1]]; };
+    ctx.save(); ctx.globalAlpha *= A * (1 - seg(u, 0.95, 1.05));
+    ctx.lineCap = 'round'; ctx.strokeStyle = s.col; ctx.shadowColor = s.col; ctx.shadowBlur = 10;
+    const N = 18, span = 0.3;
+    for (let k = 0; k < N; k++) {             // fading streak behind the head
+      const v0 = u - span * (k + 1) / N, v1 = u - span * k / N;
+      if (v1 <= 0) continue;
+      const a = at(Math.max(0, v0)), b = at(v1);
+      ctx.globalAlpha = A * (1 - seg(u, 0.95, 1.05)) * 0.8 * (1 - k / N);
+      ctx.lineWidth = 6 * (1 - k / N) + 1;
+      ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+    }
+    ctx.globalAlpha = A * (1 - seg(u, 0.95, 1.05)); ctx.shadowBlur = 16;
+    const h = at(u); dot(h[0], h[1], 7.5, s.col);
+    ctx.restore();
+  }
+}
+const ANS = [['Tissue & dentin use it up', COL.ink], [' -> ', COL.ink], ['refresh often.', COL.cl]];
+function drawAnswer(t, A) {
+  const p = seg(t, T.ans[0], T.ans[1], ease.out);
+  if (p <= 0 || A <= 0) return;
+  const m = drawChem(ANS, 0, 0, 46, { weight: 600, measure: true });
+  const fs = Math.min(46, 46 * 784 / m.w);
+  ctx.save(); ctx.globalAlpha *= A;
+  ctx.save(); ctx.globalAlpha *= p;
+  const r = drawChem(ANS, W / 2, 1525 + 10 * (1 - p), fs, { align: 'center', weight: 600 });
+  ctx.restore();
+  const pb = seg(t, T.ans[0] + 0.1, T.ans[1] + 0.45, ease.inOut);
+  const x0 = r.x0 - 24, x1 = r.x1 + 24, y0 = 1480, y1 = 1543;
+  ctx.strokeStyle = COL.cl; ctx.lineWidth = 3; ctx.lineJoin = 'round';
+  strokePartial([[W / 2, y0], [x1, y0], [x1, y1], [x0, y1], [x0, y0], [W / 2, y0]], pb);
+  text('agitation & concentration matter too · Stojicic et al., J Endod 2010', W / 2, 1572, `italic 400 22px ${SERIF}`, COL.grey, 'center', seg(t, T.ans[1] + 0.3, T.ans[1] + 0.8));
+  ctx.restore();
+}
+
+/* ---------------- render ---------------- */
+window.REEL = {
+  title: 'NaOCl in the canal',
+  duration: T.dur,
+  poster: 25.4,
+  canvas,
+  fonts: ['500 64px "Source Serif 4"', '600 38px "Source Serif 4"', 'italic 400 30px "Source Serif 4"', 'italic 400 24px "Source Serif 4"', 'italic 400 34px "EB Garamond"'],
+  async setup() { buildTexture(); },
+  render(t) {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+
+    const out = 1 - seg(t, T.out[0], T.out[1], ease.smooth);           // loop back to question + ghost tooth
+    const ansP = seg(t, T.ans[0], T.ans[1], ease.smooth);
+    const dimA = 1 - 0.2 * ansP;                                       // gentle focus on the answer
+
+    // question (the hook) + handle as a byline
+    const qA = 1 - 0.22 * ansP * out;
+    text('Why does NaOCl in a canal', 78, 322, `500 64px ${SERIF}`, COL.ink, 'left', qA);
+    text('need to be refreshed?', 78, 398, `500 64px ${SERIF}`, COL.ink, 'left', qA);
+    text('@natebrooksendo', 1000, 398, `italic 400 24px ${SERIF}`, COL.grey, 'right', 0.75);
+    // assumptions (typed)
+    ctx.save(); ctx.globalAlpha *= out;
+    const as = 'Assumed: unbuffered NaOCl (2.5–6%, pH ~11–12), pulp remnants, no agitation';
+    ctx.font = `italic 400 33px ${GARA}`;
+    const aw = ctx.measureText(as).width, af = aw > 930 ? 33 * 930 / aw : 33;
+    typeText(as, 80, 452, `italic 400 ${af.toFixed(1)}px ${GARA}`, COL.grey, seg(t, T.assumed[0], T.assumed[1]));
+    ctx.restore();
+
+    const A = out * dimA;
+    drawGhost();
+    drawTooth(t, A);
+    // tooth labels
+    const pl = (d) => seg(t, T.labels[0] + d, T.labels[1] + d);
+    ctx.save(); ctx.globalAlpha *= A;
+    leaderLabel('NaOCl', COL.cl, 80, 586, 340, 600, seg(t, T.fill[0] + 0.3, T.fill[1] + 0.5), `600 36px ${SERIF}`);
+    leaderLabel('dentin', COL.grey, 80, 806, 279, 812, pl(0), `500 30px ${SERIF}`);
+    leaderLabel('pulp tissue', COL.tis, 80, 990, 315, 973, pl(0.35), `600 30px ${SERIF}`);
+    text('not to scale', 80, 1090, `italic 400 22px ${SERIF}`, COL.grey, 'left', seg(t, T.tex[1], T.tex[1] + 0.5));
+    ctx.restore();
+
+    drawMagnifier(t, A);
+    drawMagCaption(t, A);
+    drawGraph(t, A, out);
+    drawEquation(t, out * (1 - 0.08 * ansP));
+    drawShots(t, out);
+    drawAnswer(t, out);
+  },
+};
+Kit.boot(REEL);
+</script>
+</body>
+</html>

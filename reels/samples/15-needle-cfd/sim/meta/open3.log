@@ -1,0 +1,32 @@
+open3: NX=80 NY=641 fluid=31314 Re=900 nu=0.00087 tau=0.5026 inlet=16 outlet=48
+  step 0 maxU=0.0000 inU=0.0000 rho=[1.0000,1.0000] 0.0s
+  step 20000 maxU=0.0849 inU=-0.0747 rho=[0.9994,1.2650] 45.4s
+  step 40000 maxU=0.0849 inU=-0.0747 rho=[0.9994,1.2650] 92.1s
+  step 60000 maxU=0.1230 inU=-0.0747 rho=[0.9696,1.0000] 139.0s
+  step 80000 maxU=0.1246 inU=-0.0747 rho=[0.9999,1.0485] 203.7s
+  step 100000 maxU=0.1246 inU=-0.0747 rho=[0.9994,1.0489] 254.9s
+{
+  case: 'open3',
+  type: 'open',
+  tipY: 3,
+  re: 900,
+  re0: 15,
+  s0: 50000,
+  steps: 115000,
+  um: 0.05,
+  cs: 0.18,
+  nx: 80,
+  ny: 641,
+  dx: 0.0125,
+  apex: 0.45,
+  taper: 0.06,
+  nod: 0.32,
+  nid: 0.196,
+  cap: 0.05,
+  vent0: 0.05,
+  vent1: 0.55,
+  fillet: 0.07,
+  apicalP: 2.62388440767924,
+  firstFastRow_mm: 0.018750000000000003,
+  secs: 301.718
+}

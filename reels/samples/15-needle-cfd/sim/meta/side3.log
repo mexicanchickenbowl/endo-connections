@@ -1,0 +1,32 @@
+side3: NX=80 NY=641 fluid=31450 Re=900 nu=0.00087 tau=0.5026 inlet=16 outlet=48
+  step 0 maxU=0.0000 inU=0.0000 rho=[1.0000,1.0000] 0.0s
+  step 20000 maxU=0.0838 inU=-0.0747 rho=[0.9994,1.2313] 46.5s
+  step 40000 maxU=0.0838 inU=-0.0747 rho=[0.9994,1.2313] 93.6s
+  step 60000 maxU=0.1629 inU=-0.0747 rho=[0.9791,1.0001] 140.6s
+  step 80000 maxU=0.1950 inU=-0.0747 rho=[0.9978,1.0166] 206.8s
+  step 100000 maxU=0.1508 inU=-0.0747 rho=[0.9903,1.0159] 257.2s
+{
+  case: 'side3',
+  type: 'side',
+  tipY: 3,
+  re: 900,
+  re0: 15,
+  s0: 50000,
+  steps: 115000,
+  um: 0.05,
+  cs: 0.18,
+  nx: 80,
+  ny: 641,
+  dx: 0.0125,
+  apex: 0.45,
+  taper: 0.06,
+  nod: 0.32,
+  nid: 0.196,
+  cap: 0.05,
+  vent0: 0.05,
+  vent1: 0.55,
+  fillet: 0.07,
+  apicalP: 0.5210081934928894,
+  firstFastRow_mm: 1.8062500000000001,
+  secs: 304.736
+}
