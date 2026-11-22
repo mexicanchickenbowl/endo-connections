@@ -7,7 +7,7 @@
   "duration": 22.4,
   "claims": [
     {
-      "claim": "Internal resorption: dead (necrotic, infected) pulp above, live (vital) pulp below - the classic model",
+      "claim": "Internal resorption: necrotic (infected) pulp coronal, vital pulp apical to the lesion - the classic model (inflammatory type)",
       "source": "Abbott PV, Lin S. Dent Traumatol 2022;38:267-85 (PMID 35605161) - review full text, sect. 5.2; definition: Patel S, Ricucci D, Durak C, Tay F. J Endod 2010;36:1107-21 (PMID 20630282) - abstract"
     },
     {
@@ -23,12 +23,12 @@
       "source": "Patel et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text"
     },
     {
-      "claim": "Odontoclasts resorb the dentin; the canal balloons into a symmetric oval continuous with the canal (schematic: cell number, size, route, mid-root site)",
+      "claim": "Odontoclasts (label); the canal balloons into a symmetric oval continuous with the canal (picture; schematic: cell number, size, route, mid-root site)",
       "source": "Patel et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text (odontoclasts; \"symmetrical oval- or circular-shaped extension of the root canal\"); Patel et al. J Endod 2010;36:1107-21 (PMID 20630282) - abstract (clastic destruction of dentin only, not the shape)"
     },
     {
-      "claim": "Pulp out -> blood supply cut -> resorption stops (defect stays; schematic of root canal treatment; expert consensus, no trial)",
-      "source": "Patel et al. 2022 (PMID 35229320) - review full text; Nilsson E et al. Int J Dent 2013;2013:929486 (PMID 24348560) - abstract"
+      "claim": "RCT: pulp out -> blood supply cut -> resorption stops (defect stays; schematic of root canal treatment; expert consensus, no trial)",
+      "source": "Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text; Nilsson E et al. Int J Dent 2013;2013:929486 (PMID 24348560) - abstract"
     },
     {
       "claim": "CBCT: perforated? Calcium silicate cement (e.g. MTA) in the defect and the perforation (case-report level; the picture also shows an unlabeled gutta-percha fill apical to it)",
@@ -36,16 +36,16 @@
     },
     {
       "claim": "Classic X-ray sign 1: symmetric, well-defined ballooning",
-      "source": "Patel et al. 2022 (PMID 35229320), after Gartner AH et al. J Endod 1976;2:329-34 (PMID 1069086; no abstract, not read); Thomas P et al. ISRN Dent 2014;2014:759326 (PMID 24944822) - review full texts"
+      "source": "Patel et al. 2022 (PMID 35229320), after Gartner AH et al. J Endod 1976;2:329-34 (PMID 1069086; no abstract, not read); Aidos H, Diogo P, Santos JM. Eur Endod J 2018;3:134-45 (PMID 32161869); Thomas P et al. ISRN Dent 2014;2014:759326 (PMID 24944822) - review full texts"
     },
     {
-      "claim": "Classic X-ray sign 2: canal outline lost in the lesion",
-      "source": "Thomas et al. 2014 (PMID 24944822); Aidos H, Diogo P, Santos JM. Eur Endod J 2018;3:134-45 (PMID 32161869); Abbott & Lin 2022 (PMID 35605161) - review full texts"
+      "claim": "Classic X-ray sign 2: canal outline lost (inside the lesion)",
+      "source": "Aidos H, Diogo P, Santos JM. Eur Endod J 2018;3:134-45 (PMID 32161869); Thomas et al. 2014 (PMID 24944822); Abbott & Lin 2022 (PMID 35605161) - review full texts"
     },
     {
-      "claim": "Classic X-ray sign 3: on a cone shift the lesion stays on the canal (does not move relative to it). Schematic film: image slides, ghost outline stays",
-      "source": "Patel et al. 2022 (PMID 35229320); Thomas et al. 2014 (PMID 24944822) - review full texts"
+      "claim": "Classic X-ray sign 3: on a cone shift the lesion stays on the canal (does not move relative to it). Schematic film: the whole image slides, a dashed ghost marks where the lesion was",
+      "source": "Aidos et al. 2018 (PMID 32161869; after Kanas & Kanas 2011, not read); Patel et al. 2022 (PMID 35229320); Thomas et al. 2014 (PMID 24944822) - review full texts"
     }
   ],
-  "caption": "Internal (inflammatory) resorption: the canal wall is resorbed from the inside.\nClassic model: necrotic, infected coronal pulp = stimulus; vital apical pulp = blood supply; odontoclasts work where predentin is lost. Root canal treatment removes both, so it stops; lost dentin is not restored. Classic 2-D signs are fallible: internal and external cervical resorption can look alike. CBCT helps and shows perforation. Rare replacement type: irregular, mottled. Evidence: reviews, case reports, small studies.\nSchematic animation.\nRefs: Patel 2022, Patel 2009 Int Endod J; Abbott & Lin 2022 Dent Traumatol; Patel 2010 J Endod\n#endodontics #rootresorption #internalresorption #endoresident #boardprep"
+  "caption": "Internal (inflammatory) resorption: the canal wall is resorbed from the inside.\nClassic model: necrotic, infected coronal pulp = stimulus; vital apical pulp = blood supply; odontoclasts work where predentin is lost. Root canal treatment removes both, so it stops; lost dentin is not restored. Classic 2-D signs are fallible: internal and external cervical resorption can look alike. CBCT shows perforation. Rare replacement type: irregular, mottled. Evidence: reviews, case reports.\nSchematic animation.\nRefs: Patel 2022, Patel 2009 Int Endod J; Abbott & Lin 2022 Dent Traumatol; Patel 2010 J Endod; Aidos 2018 Eur Endod J\n#endodontics #rootresorption #internalresorption #endoresident #boardprep"
 }

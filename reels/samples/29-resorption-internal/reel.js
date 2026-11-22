@@ -866,7 +866,7 @@ function drawScene(t) {
   const up = softBack(seg(t, T.plus, T.plus + 0.4)) * (1 - ease.in(seg(t, T.reqOut - 0.05, T.reqOut + 0.2)));
   if (up > 0) {
     ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.translate(PLUS_AT[0], PLUS_AT[1]); ctx.scale(up, up);
-    const disc = new Path2D(); disc.arc(0, 0, 37, 0, TAU); paper(disc, P.coralDk, 6, { hl: 0.25 });
+    const disc = new Path2D(); disc.arc(0, 0, 37, 0, TAU); paper(disc, P.ink, 6, { hl: 0.2 });
     ctx.rotate(0.6 * (1 - up)); ctx.scale(0.82, 0.82); paper(PLUS, P.cream, 1.5, { hl: 0.5 });
   }
   drawInset(t);
