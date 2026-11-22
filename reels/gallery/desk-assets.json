@@ -38,7 +38,8 @@
   "29-resorption-internal": "34f97b72f5650c16013c017baf2b3d65",
   "40-survival-eight-conditions": "ae204c6df6955f7f9fea2ab29b2a9bdd",
   "41-healing-seven-factors": "d133b8068d26e74c22cfac494b0d9cb1",
-  "39-surgery-ten-factors": "919b50148d74ac9105d9bebe79d3fb93"
+  "39-surgery-ten-factors": "919b50148d74ac9105d9bebe79d3fb93",
+  "42-culture-negative-stages": "3e7f8f699724fda93a295fec91f09512"
  },
  "pos": {
   "01-pain-pathway": "0ae050f62c9b82b5273d3b41f29d33db",
@@ -79,6 +80,7 @@
   "29-resorption-internal": "fa655322caaa9ce92349d3f19fd3b7e1",
   "40-survival-eight-conditions": "ff121ea2f92ccc774aeaffba3c68e72f",
   "41-healing-seven-factors": "4e0e96fa983d07b7ae0efc67b7b77291",
-  "39-surgery-ten-factors": "a80cf64a8056dd2cb7313f5a74932f6d"
+  "39-surgery-ten-factors": "a80cf64a8056dd2cb7313f5a74932f6d",
+  "42-culture-negative-stages": "cfa2a44c1dd1ab38832f3c212313c00f"
  }
 }
