@@ -59,15 +59,15 @@
     for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i += 4) {
       const h1 = hash(x, y, seed), h2 = hash(x >> 1, y >> 1, seed + 3);
       let a = 0.03 + 0.11 * h1;
-      if (h2 > 0.915) a += 0.22 + 0.5 * hash(x >> 1, y >> 1, seed + 9);
-      else if (h2 < 0.05) a += 0.16;
+      if (h2 > 0.925) a += 0.16 + 0.42 * hash(x >> 1, y >> 1, seed + 9);
+      else if (h2 < 0.05) a += 0.13;
       d[i + 3] = Math.min(255, a * 255);
     }
     g.putImageData(id, 0, 0);
     const lw = 135, lh = 240, l = mk(lw, lh), lg = l.getContext('2d'), li = lg.createImageData(lw, lh);
     for (let y = 0, i = 0; y < lh; y++) for (let x = 0; x < lw; x++, i += 4) {
       const n = noise2(x / 6, y / 6, seed + 20) * 0.5 + 0.5, m = noise2(x / 1.7, y / 1.7, seed + 21) * 0.5 + 0.5;
-      li.data[i + 3] = (n * n * 0.2 + m * m * 0.07) * 255;
+      li.data[i + 3] = (n * n * 0.17 + m * m * 0.06) * 255;
     }
     lg.putImageData(li, 0, 0);
     g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';

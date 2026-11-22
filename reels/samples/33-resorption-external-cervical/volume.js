@@ -150,7 +150,7 @@
           if (nSd > dMax) dMax = nSd;
           // --- bone ---
           const cs = Math.cos(Math.PI * x / SP);
-          const crest = 1.25 + 0.65 * cs * cs;           // scalloped margin: higher between the teeth, lower over the roots
+          const crest = 1.95 + 0.15 * cs * cs;           // gently scalloped margin, ~2 mm apical to the CEJ (supracrestal attachment zone above it)
           const yb = -(4.75 + 0.10 * z), yl = 4.95 + 0.20 * z;
           const dLat = Math.min(ya - yb, yl - ya), dCr = z - crest;
           const sdB0 = smin(smin(dCr, ya - yb, 0.9), yl - ya, 0.9);
@@ -239,7 +239,8 @@
    * (cu, cv) = world coords at the buffer centre, mpp = mm per buffer pixel, pr = lesion progress, q = repair progress,
    * tint = strength of the lesion overlay (0..1), front = strength of the advancing-front glow.
    */
-  function renderSlice(data, bw, bh, plane, cu, cv, sl, mpp, pr, q, tint, front, seed) {
+  function renderSlice(data, bw, bh, plane, cu, cv, sl, mpp, pr, q, tint, front, seed, rb) {
+    rb = rb || 0;                    // brief brightening of the repair tissue as it appears
     const pA = pr * AK, qA = q * RCUT * AK, SOFT = 0.03 * AK, FW = 0.022 * AK;
     const lx0 = X0 + LB.x0 * VS, lx1 = X0 + (LB.x1 + 1) * VS, ly0 = Y0 + LB.y0 * VS, ly1 = Y0 + (LB.y1 + 1) * VS, lz0 = Z0 + LB.z0 * VS, lz1 = Z0 + (LB.z1 + 1) * VS;
     const zMin = Z0, zMax = Z0 + NZ * VS, R2 = FOV_R * FOV_R;
@@ -300,7 +301,7 @@
               const act = les * (1 - rep) * tint;
               tr = 96 * act; tg = 34 * act; tb = -6 * act;
               if (front > 0.001) { const dd = (pA - av) / FW; const f = m * Math.exp(-dd * dd) * front * (dd > -1.2 ? 1 : 0); tr += 92 * f; tg += 52 * f; tb += 6 * f; }
-              if (rep > 0.003) { const rr2 = rep * les * tint; tr += 44 * rr2; tg += 33 * rr2; tb += 2 * rr2; }
+              if (rep > 0.003) { const rr2 = rep * les * tint * (1 + rb); g += 26 * rb * rep * les; tr += 44 * rr2; tg += 33 * rr2; tb += 2 * rr2; }
             }
           }
         }
@@ -492,6 +493,8 @@
       }
     }
   }
+  let PA_T0 = 0.9, PA_T1 = 2.6;      // mm of lesion along the beam: below T0 invisible, full contrast above T1
+  function setPAT(a, b) { PA_T0 = a; PA_T1 = b; }
   function bil(arr, fx, fz) {
     let ix = Math.floor(fx), iz = Math.floor(fz);
     if (ix < 0) { ix = 0; fx = 0; } else if (ix > NX - 2) { ix = NX - 2; fx = NX - 1; }
@@ -510,7 +513,9 @@
         const x = cu + (i + 0.5 - bw / 2) * mpp;
         if (x < xMin || x > xMax || z < zMin || z > zMax) { data[o] = 4; data[o + 1] = 5; data[o + 2] = 7; data[o + 3] = 255; continue; }
         const fx = (x - X0) * INV - 0.5, fz = (z - Z0) * INV - 0.5;
-        const S = bil(S0, fx, fz) + bil(dS, fx, fz);
+        // thin lesion margins (short path through the lesion) stay below visible contrast: detection threshold (schematic)
+        const cL = bil(cnt, fx, fz);
+        const S = bil(S0, fx, fz) + bil(dS, fx, fz) * sstep(PA_T0, PA_T1, cL);
         let v = 1 - Math.exp(-0.36 * S);
         v = Math.pow(v, 1.5) * 1.27;
         v = v * v * (3 - 2 * Math.min(1, v)) * 0.55 + v * 0.45;     // gentle S-curve
@@ -522,11 +527,11 @@
         if (ex < 0.5) g *= ex / 0.5;
         let r = g * 0.99, gg = g, b = g * 1.03;
         if (ov > 0.001) {
-          const c = bil(cnt, fx, fz);
+          const c = cL;
           if (c > 0.01) {
             const mk = sstep(0.02, 0.30, c);
             const edge = mk * (1 - mk) * 4;
-            const k2 = Math.min(1, ov * (0.10 * mk + 1.25 * edge));
+            const k2 = Math.min(1, ov * 1.25 * edge);        // outline only: the radiolucency inside stays gray
             r += (255 - r) * k2; gg += (138 - gg) * k2; b += (40 - b) * k2;
           }
         }
@@ -537,7 +542,7 @@
 
   const Vol = {
     NX, NY, NZ, VS, X0, Y0, Z0, FOV_R, TS, PZ, RP, ROOT_LEN, GREY,
-    build, renderSlice, render3D, updatePA, renderPA, measureSpread, measureHeight, tri,
+    build, renderSlice, render3D, updatePA, renderPA, setPAT, get cnt() { return cnt; }, measureSpread, measureHeight, tri,
     outerA, outerB, canalA, canalB, enamelT, superR, ztop,
     get Base() { return Base; }, get A() { return A; }, get M() { return M; }, get RM() { return RM; }, get T() { return T; }, get P() { return P; },
   };

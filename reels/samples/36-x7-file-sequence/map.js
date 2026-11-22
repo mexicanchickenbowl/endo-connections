@@ -9,7 +9,7 @@
   const { canvas, ctx } = Kit.createCanvas();
   const { W, H, clamp, lerp, seg, ease } = Kit;
 
-  const DUR = 23.6;
+  const DUR = 22.4;
   const C = {
     paper: '#F6F3EC', ink: '#17202F', sub: '#465064', fine: '#667085',
     ghost: '#DDD8CD', ghostRing: '#C6C0B3', white: '#FFFFFF',
@@ -64,51 +64,56 @@
 
   // ---------------------------------------------------------------- the network
   const X1 = 140, X2 = 204, XL = 274;
-  const YA = 514, YB = 616, YC = 726, YD = 866, YL = 974, YE = 1068;
-  const YH = 1258, XF1 = 470, XG = 730, XT = 872, XF2 = 530, YF2 = 1348;
+  const YA = 532, YB = 616, YC = 726, YD = 866, YL = 974, YE = 1068;
+  const YH = 1258, XF1 = 470, XG = 730, XT = 872, XF2 = 530, YF2 = 1330;
 
   const P1 = mk([[X1, YA], [X1, YC]]);                                                   // line 1 · negotiate
   const HOP = mk([[X1, YC], [X2, YC]]);                                                   // across the interchange capsule
   const P2 = mk([[X2, YC], [X2, YE]]);                                                    // line 2 · shape
   const PL = mk([[X2, 876], [X2, 898], [XL, 968], [XL, 980], [X2, 1050], [X2, 1066]], 22); // 20/.04 loop
   const P3 = mk([[X2, YE], [X2, 1148], [314, YH], [XG, YH]], 44);                          // line 3 · enlarge (.04 branch)
-  const P3B = mk([[306, YH], [340, YH], [430, YF2], [590, YF2], [680, YH], [712, YH]], 36); // .06 branch
+  const P3B = mk([[306, YH], [340, YH], [340 + YF2 - YH, YF2], [680 - YF2 + YH, YF2], [680, YH], [712, YH]], 36); // .06 branch
   const P4 = mk([[XG, YH], [XT, YH]]);                                                    // line 4 · finish
 
   const sB = YB - YA, sD = YD - YC, sL = sNear(PL, XL, YL), sF1 = sNear(P3, XF1, YH), sF2 = sNear(P3B, XF2, YF2);
   const ST = {
-    A: { x: X1, y: YA, r: 13, pop: 0.5 },
-    B: { x: X1, y: YB, r: 13, pop: 2.15 },
-    D: { x: X2, y: YD, r: 14, pop: 8.62 },
-    L: { x: XL, y: YL, r: 13, pop: 11.75 },
-    E: { x: X2, y: YE, r: 17, pop: 10.72 },
-    F1: { x: XF1, y: YH, r: 14, pop: 14.4 },
-    F2: { x: XF2, y: YF2, r: 14, pop: 14.8 },
-    G: { x: XG, y: YH, r: 16, pop: 16.5, dash: true },
-    H: { x: XT, y: YH, r: 16, pop: 17.6 },
+    A: { x: X1, y: YA, r: 13, pop: 0.15 },
+    B: { x: X1, y: YB, r: 13, pop: 1.35 },
+    D: { x: X2, y: YD, r: 14, pop: 7.82 },
+    L: { x: XL, y: YL, r: 13, pop: 10.95 },
+    E: { x: X2, y: YE, r: 17, pop: 9.92 },
+    F1: { x: XF1, y: YH, r: 14, pop: 13.6 },
+    F2: { x: XF2, y: YF2, r: 14, pop: 14.0 },
+    G: { x: XG, y: YH, r: 16, pop: 15.7 },
+    H: { x: XT, y: YH, r: 16, pop: 16.8 },
   };
   const ORDER = ['A', 'B', 'C', 'D', 'L', 'E', 'F1', 'F2', 'G', 'H'];
-  const TC = 3.4;                                   // capsule pop
+  const TC = 2.6;                                   // capsule pop
 
   // train legs: path, from s, to s, t0, t1
   const LEGS = [
-    { p: P1, a: 0, b: sB, t0: 1.3, t1: 2.2 },
-    { p: P1, a: sB, b: P1.total, t0: 2.5, t1: 3.5 },
-    { p: HOP, a: 0, b: HOP.total, t0: 6.1, t1: 6.45 },
-    { p: P2, a: 0, b: sD, t0: 7.7, t1: 8.7 },
-    { p: P2, a: sD, b: P2.total, t0: 9.8, t1: 10.8 },
-    { p: PL, a: PL.total, b: sL, t0: 11.2, t1: 11.85 },
-    { p: PL, a: sL, b: PL.total, t0: 12.5, t1: 13.1 },
-    { p: P3, a: 0, b: sF1, t0: 13.3, t1: 14.5 },
-    { p: P3, a: sF1, b: P3.total, t0: 15.7, t1: 16.6 },
-    { p: P4, a: 0, b: P4.total, t0: 16.9, t1: 17.7 },
+    { p: P1, a: 0, b: sB, t0: 0.5, t1: 1.4 },
+    { p: P1, a: sB, b: P1.total, t0: 1.7, t1: 2.7 },
+    { p: HOP, a: 0, b: HOP.total, t0: 5.3, t1: 5.65 },
+    { p: P2, a: 0, b: sD, t0: 6.9, t1: 7.9 },
+    { p: P2, a: sD, b: P2.total, t0: 9.0, t1: 10.0 },
+    { p: PL, a: PL.total, b: sL, t0: 10.4, t1: 11.05 },
+    { p: PL, a: sL, b: PL.total, t0: 11.7, t1: 12.3 },
+    { p: P3, a: 0, b: sF1, t0: 12.5, t1: 13.7 },
+    { p: P3, a: sF1, b: P3.total, t0: 14.9, t1: 15.8 },
+    { p: P4, a: 0, b: P4.total, t0: 16.1, t1: 16.9 },
   ];
+  const TURN = 0.2;                                // the heading eases into the next leg over this long
+  const legAng = (l, s) => at(l.p, s).ang + (l.b < l.a ? Math.PI : 0);
+  function lerpAng(a, b, u) { let d = (b - a) % (Math.PI * 2); if (d > Math.PI) d -= Math.PI * 2; if (d < -Math.PI) d += Math.PI * 2; return a + d * u; }
   function legPos(t) {
-    let L = null;
-    for (const l of LEGS) if (t >= l.t0) L = l;
-    if (!L) return { x: X1, y: YA, ang: Math.PI / 2, leg: null, u: 0 };
-    const u = seg(t, L.t0, L.t1, ease.inOut), q = at(L.p, lerp(L.a, L.b, u));
-    return { x: q.x, y: q.y, ang: q.ang + (L.b < L.a ? Math.PI : 0), leg: L, u };
+    let i = -1;
+    for (let k = 0; k < LEGS.length; k++) if (t >= LEGS[k].t0) i = k;
+    if (i < 0) return { x: X1, y: YA, ang: Math.PI / 2, leg: null, u: 0 };
+    const L = LEGS[i], nx = LEGS[i + 1], u = seg(t, L.t0, L.t1, ease.inOut), q = at(L.p, lerp(L.a, L.b, u));
+    let ang = legAng(L, lerp(L.a, L.b, u));
+    if (nx && t > nx.t0 - TURN) ang = lerpAng(legAng(L, L.b), legAng(nx, nx.a), seg(t, nx.t0 - TURN, nx.t0, ease.inOut));
+    return { x: q.x, y: q.y, ang, leg: L, u };
   }
   /** how far (s) a route has been drawn at time t */
   function drawn(p, t) { let s = 0; for (const l of LEGS) if (l.p === p && t >= l.t0) s = Math.max(s, lerp(l.a, l.b, seg(t, l.t0, l.t1, ease.inOut))); return s; }
@@ -126,13 +131,13 @@
   DIA[3].t = tPass(8, sNear(P3, 604, YH));
 
   const T = {
-    aLab: 0.95, bLab: 2.12, cName: 3.5, cSub: 3.8, cPill: 4.2,
-    ev: 4.6, info: 6.3,
-    serv: DIA[0].t, dLab: 8.6, eLab: 10.7,
-    loop0: 11.1, loop1: 11.9, lLab: 11.8, lSub: 12.0,
-    opt: 13.45, f1Lab: 14.42, br0: 14.1, br1: 14.9, br2: 15.55, br3: 16.3, f2Lab: 14.88,
-    gLab: 16.52, gTag: 16.8, hLab: 17.62,
-    notice: 18.0, inset: 18.8, fine: 19.0, wave: 19.7,
+    aLab: 1.0, bLab: 1.95, cName: 2.7, cSub: 3.0, cPill: 3.4,
+    ev: 3.8, info: 5.5,
+    serv: 8.0, dLab: 7.8, eLab: 9.9,
+    loop0: 10.3, loop1: 11.1, lLab: 11.0, lSub: 11.2,
+    opt: 12.65, f1Lab: 13.62, br0: 13.3, br1: 14.1, br2: 14.75, br3: 15.5, f2Lab: 14.08,
+    gLab: 15.72, hLab: 16.82,
+    notice: 17.2, fine: 17.8, wave: 18.4,
     fade0: DUR - 0.8, fade1: DUR - 0.34, back0: DUR - 0.32, back1: DUR - 0.04,
   };
 
@@ -274,7 +279,7 @@
   const lv = document.createElement('canvas'); lv.width = W; lv.height = H; const lg = lv.getContext('2d');
   const KEY = [['1', 'Negotiate', C.L1], ['2', 'Shape', C.L2], ['3', 'Enlarge', C.L3], ['4', 'Finish', C.L4]];
   const KEYX = [64, 302, 540, 778];
-  const INFO = { x: 620, y: 486, w: 396, h: 214 };
+  const INFO = { x: 620, y: 486, w: 396, h: 168 };
 
   function buildBg() {
     const b = bg.getContext('2d');
@@ -327,10 +332,10 @@
     // key strip
     KEY.forEach(([n, name, col], i) => {
       const kx = KEYX[i];
-      rr(b, kx, 424, 38, 38, 10); b.fillStyle = col; b.fill();
+      rr(b, kx, 424, 38, 38, 10); b.fillStyle = C.ghostRing; b.fill();
       tx(b, n, kx + 19, 444, BC(700, 28), C.white, { align: 'center' });
       tx(b, name, kx + 50, 444, BC(600, 34), C.ink);
-      rr(b, kx, 468, 196, 5, 2.5); b.fillStyle = C.ghost; b.fill();
+      rr(b, kx, 468, 196, 8, 4); b.fillStyle = C.ghost; b.fill();
     });
 
     // ghost network (the planned route)
@@ -346,11 +351,9 @@
     tx(b, 'IFU · DFU', ix + iw - 18, iy + 23, BC(500, 26), C.headTxt, { align: 'right', ls: 1 });
     const lf = BC(600, 30), lab = (s, y) => tx(b, s, ix + 18, y, lf, C.sub, { ls: 1.5 });
     const val = (s, y, f) => tx(b, s, ix + iw - 18, y, f || BC(700, 46), C.ink, { align: 'right' });
-    lab('SPEED', iy + 74); val('300–500 rpm', iy + 73);
-    b.fillStyle = '#E3DFD6'; b.fillRect(ix + 18, iy + 101, iw - 36, 2); b.fillRect(ix + 18, iy + 169, iw - 36, 2);
-    lab('TORQUE LIMIT', iy + 122); val('300 g·cm', iy + 134);
-    tx(b, '= 2.94 N·cm', ix + 18, iy + 150, BC(500, 26), C.fine);
-    lab('APICAL PRESSURE', iy + 192); val('minimal', iy + 191, BC(700, 40));
+    lab('SPEED', iy + 76); val('300–500 rpm', iy + 75);
+    b.fillStyle = '#E3DFD6'; b.fillRect(ix + 18, iy + 105, iw - 36, 2);
+    lab('TORQUE LIMIT', iy + 137); val('300 g·cm', iy + 136);
   }
 
   // ---------------------------------------------------------------- live layer
@@ -394,25 +397,27 @@
     });
 
     // ---- station labels
-    const NAME = BC(700, 44), SUB = BC(500, 32), FILE = BC(700, 56);
+    const NAME = BC(700, 44), SUB = BC(600, 36), FILE = BC(700, 56);
     let r;
     r = rv(t, T.aLab); tx(g, 'ACCESS', 186 + r.d, YA, NAME, C.ink, { a: r.a });
-    r = rv(t, T.aLab + 0.15); tx(g, 'straight-line', 186 + r.d, YA + 38, SUB, C.sub, { a: r.a });
     r = rv(t, T.bLab); tx(g, 'SCOUT', 186 + r.d, YB, NAME, C.ink, { a: r.a });
-    r = rv(t, T.bLab + 0.15); tx(g, 'hand files', 186 + r.d, YB + 38, SUB, C.sub, { a: r.a });
 
     r = rv(t, T.cName); tx(g, 'WORKING LENGTH', 250 + r.d, YC, NAME, C.ink, { a: r.a });
     r = rv(t, T.cSub);
     if (r.a > 0) {
-      const w = tx(g, '#10 K or larger', 250 + r.d, YC + 39, SUB, C.sub, { a: r.a });
+      const w = tx(g, '#10 K, then #15 K', 250 + r.d, YC + 41, SUB, C.sub, { a: r.a });
       g.save(); g.globalAlpha = r.a;
-      icon(g, 'locator', 250 + w + 38 + r.d, YC + 39, 0.92 * pop(t, T.cSub + 0.15), C.ink);
-      icon(g, 'xray', 250 + w + 88 + r.d, YC + 39, 0.92 * pop(t, T.cSub + 0.3), C.ink);
+      [['locator', 0.15, 44], ['xray', 0.3, 102]].forEach(([nm, dt, dx]) => {       // apex locator + radiograph
+        const sc = pop(t, T.cSub + dt); if (sc <= 0) return;
+        const cx = 250 + w + dx + r.d, cy = YC + 42;
+        g.beginPath(); g.arc(cx, cy, 24 * sc, 0, Math.PI * 2); g.fillStyle = C.white; g.fill(); g.lineWidth = 3; g.strokeStyle = C.ink; g.stroke();
+        icon(g, nm, cx, cy, 1.02 * sc, C.ink);
+      });
       g.restore();
     }
     r = rv(t, T.cPill);
     let pillW = 0;
-    if (r.a > 0) { g.save(); g.globalAlpha = r.a; pillW = pill(g, '= GLIDE PATH', 250 + r.d, YC + 80, { bg: C.L1, fg: C.white, font: BC(700, 30), h: 38 }); g.restore(); }
+    if (r.a > 0) { g.save(); g.globalAlpha = r.a; pillW = pill(g, '= GLIDE PATH', 250 + r.d, YC + 86, { bg: C.L1, fg: C.white, font: BC(700, 30), h: 38 }); g.restore(); }
 
     r = rv(t, T.dLab); tx(g, '17/.04', 250 + r.d, YD, FILE, C.ink, { a: r.a });
     r = rv(t, T.eLab); tx(g, '25/.04', 250 + r.d, YE, FILE, C.ink, { a: r.a });
@@ -420,40 +425,45 @@
     if (r.a > 0) {
       const w = tx(g, '20/.04', 314 + r.d, YL, BC(700, 48), C.ink, { a: r.a });
       // "alternate" double arrow
-      const ax = 314 + w + 16 + r.d, pu = 0.5 + 0.5 * Math.sin((t - T.lLab) * 5.2) * (t < 13.3 ? 1 : 0);
+      const ax = 314 + w + 16 + r.d, pu = 0.5 + 0.5 * Math.sin((t - T.lLab) * 5.2) * (t < 12.5 ? 1 : 0);
       g.save(); g.globalAlpha = r.a;
       arrow(g, ax, YL - 7, ax + 34 + 3 * pu, YL - 7, 4, 9, C.L2); arrow(g, ax + 37, YL + 8, ax + 3 - 3 * pu, YL + 8, 4, 9, C.L2);
       g.restore();
     }
-    r = rv(t, T.lSub); tx(g, 'if 25 won’t reach length', 314 + r.d, YL + 38, SUB, C.sub, { a: r.a });
+    r = rv(t, T.lSub); tx(g, 'only after 25 stops short', 312 + r.d, YL + 39, BC(600, 33), C.sub, { a: r.a });
 
     r = rv(t, T.opt);
-    if (r.a > 0) { g.save(); g.globalAlpha = r.a; pill(g, 'IF WANTED', 238 + r.d, 1130, { stroke: C.L3, fg: C.L3, bg: C.white, font: BC(700, 30), h: 38 }); g.restore(); }
-    r = rv(t, T.f1Lab); tx(g, 'LARGER .04', XF1, 1178 - r.d * 0.6, NAME, C.ink, { a: r.a, align: 'center' });
-    r = rv(t, T.f1Lab + 0.15); tx(g, 'all canals', XF1, 1216 - r.d * 0.6, SUB, C.sub, { a: r.a, align: 'center' });
-    r = rv(t, T.f2Lab); tx(g, 'LARGER .06', XF2, 1397 + r.d * 0.6, NAME, C.ink, { a: r.a, align: 'center' });
-    r = rv(t, T.f2Lab + 0.15); tx(g, 'straight to mildly curved', XF2, 1433 + r.d * 0.6, SUB, C.sub, { a: r.a, align: 'center' });
+    if (r.a > 0) {                                   // the tag carries a sample of the white dashed core = conditional service
+      const f = BC(700, 30), tw = mw(g, 'IF WANTED', f, 1.5) - 1.5, x0 = 238 + r.d, y0 = 1130, w = 14 + 44 + 10 + tw + 14;
+      g.save(); g.globalAlpha = r.a;
+      rr(g, x0, y0 - 20, w, 40, 20); g.fillStyle = C.white; g.fill(); g.lineWidth = 3; g.strokeStyle = C.L3; g.stroke();
+      g.beginPath(); g.moveTo(x0 + 20, y0); g.lineTo(x0 + 52, y0); stroke(g, C.L3, 14);
+      g.beginPath(); g.moveTo(x0 + 17, y0); g.lineTo(x0 + 56, y0); g.setLineDash([8, 7]); stroke(g, C.white, 4, 'butt'); g.setLineDash([]);
+      tx(g, 'IF WANTED', x0 + 68, y0 + 1, f, C.L3, { ls: 1.5 });
+      g.restore();
+    }
+    r = rv(t, T.f1Lab); tx(g, 'LARGER .04', XF1, 1175 - r.d * 0.6, NAME, C.ink, { a: r.a, align: 'center' });
+    r = rv(t, T.f1Lab + 0.15); tx(g, 'all canals', XF1, 1215 - r.d * 0.6, SUB, C.sub, { a: r.a, align: 'center' });
+    r = rv(t, T.f2Lab); tx(g, 'LARGER .06', XF2, 1378 + r.d * 0.6, NAME, C.ink, { a: r.a, align: 'center' });
+    r = rv(t, T.f2Lab + 0.15); tx(g, 'straight to mildly curved', XF2, 1416 + r.d * 0.6, SUB, C.sub, { a: r.a, align: 'center' });
     r = rv(t, T.gLab); tx(g, 'IRRIGATE', XG, 1212 - r.d * 0.6, NAME, C.ink, { a: r.a, align: 'center' });
-    r = rv(t, T.gTag);
-    if (r.a > 0) { g.save(); g.globalAlpha = r.a; pill(g, 'convention', XG, 1168, { align: 'center', stroke: C.sub, fg: C.sub, bg: C.white, dash: [6, 5], font: BC(600, 30), h: 36, lw: 2.5, ls: 0.5 }); g.restore(); }
     r = rv(t, T.hLab); tx(g, 'OBTURATE', 950, 1308 + r.d * 0.6, NAME, C.ink, { a: r.a, align: 'right' });
-    r = rv(t, T.hLab + 0.15); tx(g, 'check cone fit', 950, 1346 + r.d * 0.6, SUB, C.sub, { a: r.a, align: 'right' });
+    r = rv(t, T.hLab + 0.15); tx(g, 'check cone fit', 950, 1348 + r.d * 0.6, SUB, C.sub, { a: r.a, align: 'right' });
 
     // ---- evidence flag (in vitro) with a leader from the glide-path tag
     evCard(g, t, 250 + pillW);
     servCard(g, t);
     notice(g, t);
-    inset(g, t);
     const fa = seg(t, T.fine, T.fine + 0.4);
     if (fa > 0) {
-      const s = 'Manufacturer IFU 2026 / US DFU 2023 + evidence-informed habits · no sequence is proven “most efficient”';
+      const s = 'Schematic · manufacturer IFU / US DFU + one in vitro study · no sequence is proven “most efficient”';
       let fs = 24; while (fs > 22 && mw(g, s, BC(500, fs)) > 884) fs -= 0.5;
-      tx(g, s, 64, 1564, BC(500, fs), C.fine, { a: fa });
+      tx(g, s, 64, 1570, BC(500, fs), C.fine, { a: fa });
     }
   }
 
   function evCard(g, t, leadX) {
-    const x = 620, y = 724, w = 396, h = 156, py = YC + 80;
+    const x = 620, y = 734, w = 396, h = 156, py = YC + 86;
     const ul = seg(t, T.ev - 0.25, T.ev + 0.15, ease.inOut);
     if (ul > 0) {                                    // dotted leader
       g.save(); g.strokeStyle = C.ink; g.lineWidth = 3.4; g.lineCap = 'round'; g.setLineDash([0.1, 9]);
@@ -468,22 +478,22 @@
     rr(g, x, y, w, h, 16); g.fillStyle = '#FFFDF4'; g.fill(); g.lineWidth = 3; g.strokeStyle = C.ink; g.stroke();
     pill(g, 'EVIDENCE · IN VITRO', x + 16, y, { bg: C.ev, stroke: C.ink, fg: C.ink, font: BC(700, 28), ls: 2, h: 38 });
     const a = seg(t, T.ev + 0.25, T.ev + 0.6);
-    tx(g, 'Glide path first:', x + 18, y + 47, BC(600, 34), C.ink, { a });
-    tx(g, 'file lasted about 6× longer', x + 18, y + 84, BC(700, 35), C.ink, { a });
-    tx(g, 'ProTaper S1 in resin blocks: mean 59 vs 10', x + 18, y + 115, BC(500, 23), C.fine, { a });
-    tx(g, 'Berutti 2004, J Endod', x + 18, y + 138, BC(500, 23), C.fine, { a });
+    tx(g, 'Hand preflaring first:', x + 18, y + 47, BC(600, 34), C.ink, { a });
+    tx(g, 'shaped about 6× more blocks', x + 18, y + 84, BC(700, 35), C.ink, { a });
+    tx(g, 'ProTaper S1, resin blocks: mean 59 vs 10', x + 18, y + 115, BC(500, 23), C.fine, { a });
+    tx(g, 'before breaking · Berutti 2004, J Endod', x + 18, y + 138, BC(500, 23), C.fine, { a });
     g.restore();
   }
 
-  const SERV = [['irrigate', ['irrigate']], ['recap', ['recap', '#10/#15']], ['clean', ['clean', 'flutes']], ['inspect', ['inspect']]];
+  const SERV = [['irrigate', ['irrigate']], ['recap', ['recap', '#10–15']], ['clean', ['clean', 'flutes']], ['inspect', ['inspect']]];
   function servCard(g, t) {
-    const x = 620, y = 894, w = 396, h = 204;
+    const x = 620, y = 904, w = 396, h = 194;
     const u = seg(t, T.serv, T.serv + 0.45); if (u <= 0) return;
     g.save(); g.globalAlpha = u; g.translate((1 - ease.out(u)) * 28, 0);
     panel(g, x, y, w, h, 'EVERY FILE', { tx: 48 });
     diamond(g, x + 27, y + 22, 8, C.white, C.white);
     SERV.forEach(([ic, lines], i) => {
-      const cx = x + 63 + i * 90, cy = y + 88, t0 = T.serv + 0.3 + i * 0.3;
+      const cx = x + 60 + i * 92, cy = y + 84, t0 = T.serv + 0.2 + i * 0.15;
       const s = pop(t, t0); if (s <= 0) return;
       let lit = bump(t, t0, 0.7);
       for (let k = 1; k < DIA.length; k++) lit = Math.max(lit, bump(t, DIA[k].t + i * 0.13, 0.62));
@@ -493,40 +503,21 @@
       g.lineWidth = 3; g.strokeStyle = C.ink; g.stroke(); g.restore();
       icon(g, ic, cx, cy, s, C.ink);
       const la = seg(t, t0 + 0.15, t0 + 0.45);
-      lines.forEach((ln, j) => tx(g, ln, cx, y + 140 + j * 32, BC(600, 30), C.ink, { a: la, align: 'center' }));
+      lines.forEach((ln, j) => tx(g, ln, cx, y + 136 + j * 32, BC(600, 32), C.ink, { a: la, align: 'center' }));
     });
     g.restore();
   }
 
   function notice(g, t) {
-    const x = 64, y = 1454, w = 886, h = 86;
+    const x = 64, y = 1476, w = 886, h = 72;
     const u = seg(t, T.notice, T.notice + 0.5); if (u <= 0) return;
     g.save(); g.globalAlpha = u; g.translate(0, (1 - ease.out(u)) * 24);
     rr(g, x + 6, y + 7, w, h, 16); g.fillStyle = SHADOW; g.fill();
     rr(g, x, y, w, h, 16); g.fillStyle = C.white; g.fill(); g.lineWidth = 3; g.strokeStyle = C.ink; g.stroke();
-    noReuse(g, x + 46, y + 43, 25 * (0.85 + 0.15 * pop(t, T.notice + 0.2)));
-    tx(g, 'One patient · one procedure · then discard', x + 88, y + 26, BC(700, 37), C.ink);
-    tx(g, 'max 4 canals per file — IFU 2026', x + 88, y + 62, BC(500, 31), C.sub);
+    noReuse(g, x + 42, y + 36, 24 * (0.85 + 0.15 * pop(t, T.notice + 0.2)));
+    tx(g, 'One patient · one procedure · then discard', x + 82, y + 37, BC(700, 36), C.ink);
     const a = seg(t, T.notice + 0.5, T.notice + 0.9);
-    g.globalAlpha = u * a; pill(g, 'FOLLOW THE CURRENT DFU', x + w - 12, y + 62, { align: 'right', bg: C.ink, fg: C.white, font: BC(700, 28), ls: 2, h: 38 });
-    g.restore();
-  }
-
-  function inset(g, t) {
-    const x = 64, y = 1298, w = 284, h = 146;
-    const u = seg(t, T.inset, T.inset + 0.45); if (u <= 0) return;
-    g.save(); g.globalAlpha = u; g.translate((1 - ease.out(u)) * -20, 0);
-    rr(g, x, y, w, h, 14); g.fillStyle = 'rgba(255,255,255,0.72)'; g.fill(); g.lineWidth = 2.5; g.strokeStyle = C.sub; g.setLineDash([7, 6]); g.stroke(); g.setLineDash([]);
-    tx(g, 'ALTERNATIVE SERVICE', x + 16, y + 22, BC(600, 22), C.fine, { ls: 2 });
-    tx(g, 'CROWN-DOWN', x + 16, y + 52, BC(700, 32), C.ink, { ls: 1 });
-    // dotted mini line: 25 -> 20 -> (17)
-    const yy = y + 92, f = BC(700, 34);
-    let cx = x + 16; cx += tx(g, '25', cx, yy, f, C.ink);
-    arrow(g, cx + 12, yy, cx + 50, yy, 3.4, 9, C.sub); cx += 62;
-    cx += tx(g, '20', cx, yy, f, C.ink);
-    arrow(g, cx + 12, yy, cx + 50, yy, 3.4, 9, C.sub); cx += 62;
-    tx(g, '(17)', cx, yy, f, C.ink);
-    tx(g, 'to resistance · US DFU 2023', x + 16, y + 126, BC(500, 24), C.fine);
+    g.globalAlpha = u * a; pill(g, 'FOLLOW THE CURRENT DFU', x + w - 18, y - 1, { align: 'right', bg: C.ev, stroke: C.ink, fg: C.ink, font: BC(700, 28), ls: 1.5, h: 40, px: 12 });
     g.restore();
   }
 
@@ -534,15 +525,16 @@
   function train(g, x, y, ang, col, a) {
     if (a <= 0) return;
     g.save(); g.globalAlpha = a; g.translate(x, y);
-    g.beginPath(); g.arc(0, 0, 36, 0, Math.PI * 2); g.fillStyle = Kit.rgba(col, 0.16); g.fill();
+    g.beginPath(); g.arc(0, 0, 48, 0, Math.PI * 2); g.fillStyle = Kit.rgba(col, 0.28); g.fill();
     g.rotate(ang);
-    rr(g, -29, -16, 58, 32, 13); g.fillStyle = C.ink; g.fill(); g.lineWidth = 4.5; g.strokeStyle = C.white; g.stroke();
-    g.strokeStyle = C.white; g.lineWidth = 4.2; g.lineCap = 'round'; g.lineJoin = 'round';
-    g.beginPath(); g.moveTo(4, -7); g.lineTo(13, 0); g.lineTo(4, 7); g.stroke();
-    g.beginPath(); g.arc(-13, 0, 5.2, 0, Math.PI * 2); g.fillStyle = col; g.fill();
+    rr(g, -41.5, -24.5, 83, 49, 20.5); g.fillStyle = C.ink; g.fill();
+    rr(g, -39, -22, 78, 44, 18); g.fillStyle = col; g.fill(); g.lineWidth = 5; g.strokeStyle = C.white; g.stroke();
+    g.strokeStyle = C.white; g.lineWidth = 5.6; g.lineCap = 'round'; g.lineJoin = 'round';
+    g.beginPath(); g.moveTo(5, -10); g.lineTo(18, 0); g.lineTo(5, 10); g.stroke();
+    g.beginPath(); g.arc(-18, 0, 6.5, 0, Math.PI * 2); g.fillStyle = C.white; g.fill();
     g.restore();
   }
-  function lineColorAt(t) { return t < 6.28 ? C.L1 : t < 13.3 ? C.L2 : t < 16.75 ? C.L3 : C.L4; }
+  function lineColorAt(t) { return t < 5.48 ? C.L1 : t < 12.5 ? C.L2 : t < 15.95 ? C.L3 : C.L4; }
   function compass(g, a) {                           // intro ornament: "this way to the apex"
     if (a <= 0) return;
     const x = 818, y = 900, col = C.ghostRing;
@@ -555,9 +547,9 @@
     tx(g, 'APEX', 0, 152, BC(700, 40), col, { align: 'center', ls: 5 });
     g.restore();
   }
-  function bubble(g, a) {
+  function bubble(g, a, y) {
     if (a <= 0) return;
-    const x = 196, y = YA;
+    const x = 206;
     g.save(); g.globalAlpha = a;
     g.beginPath(); g.moveTo(x - 14, y); g.lineTo(x + 2, y - 11); g.lineTo(x + 2, y + 11); g.closePath(); g.fillStyle = C.ink; g.fill();
     pill(g, 'YOU ARE HERE', x, y, { bg: C.ink, fg: C.white, font: BC(700, 30), ls: 2.5, h: 46, px: 18 });
@@ -571,16 +563,20 @@
     const live = 1 - seg(t, T.fade0, T.fade1, ease.smooth);
     const back = seg(t, T.back0, T.back1, ease.smooth);          // intro state returning for a clean loop
 
-    // key strip: progress under each line name
+    // key strip: a phase chip takes its color when its line starts; progress bar under each line name
     [[P1, C.L1], [P2, C.L2], [P3, C.L3], [P4, C.L4]].forEach(([p, col], i) => {
       const u = drawn(p, t) / p.total; if (u <= 0) return;
-      ctx.globalAlpha = live; rr(ctx, KEYX[i], 468, Math.max(5, 196 * u), 5, 2.5); ctx.fillStyle = col; ctx.fill(); ctx.globalAlpha = 1;
+      const l0 = LEGS.find((l) => l.p === p).t0;
+      ctx.globalAlpha = live * seg(t, l0, l0 + 0.3);
+      rr(ctx, KEYX[i], 424, 38, 38, 10); ctx.fillStyle = col; ctx.fill();
+      tx(ctx, KEY[i][0], KEYX[i] + 19, 444, BC(700, 28), C.white, { align: 'center' });
+      ctx.globalAlpha = live; rr(ctx, KEYX[i], 468, Math.max(8, 196 * u), 8, 4); ctx.fillStyle = col; ctx.fill(); ctx.globalAlpha = 1;
     });
     // line-info ping when the rotary line opens
     const ping = bump(t, T.info, 1.1);
     if (ping > 0) { ctx.save(); ctx.globalAlpha = ping; rr(ctx, INFO.x - 5, INFO.y - 5, INFO.w + 10, INFO.h + 10, 20); ctx.lineWidth = 7; ctx.strokeStyle = C.ev; ctx.stroke(); ctx.restore(); }
 
-    compass(ctx, Math.max(1 - seg(t, 4.0, 4.6), back));
+    compass(ctx, Math.max(1 - seg(t, 3.2, 3.8), back));
 
     lg.clearRect(0, 0, W, H); drawLive(lg, t);
     ctx.globalAlpha = live; ctx.drawImage(lv, 0, 0); ctx.globalAlpha = 1;
@@ -590,13 +586,13 @@
     train(ctx, q.x, q.y, q.ang, lineColorAt(t), live * (1 - seg(t, T.notice, T.notice + 0.45)));
     ctx.restore();
     if (back > 0) train(ctx, X1, YA, Math.PI / 2, C.L1, back);
-    bubble(ctx, Math.max(1 - seg(t, 0.7, 0.95), back));
+    if (back > 0) bubble(ctx, back, YA); else bubble(ctx, 1 - seg(t, 1.7, 1.95), legPos(Math.min(t, 1.7)).y);
   }
 
   window.REEL = {
     title: 'EdgeFile X7 shaping route — transit map',
     duration: DUR,
-    poster: 22.3,
+    poster: 21.0,
     canvas,
     fonts: ['700 44px "Barlow Condensed"', '600 34px "Barlow Condensed"', '500 32px "Barlow Condensed"',
       '600 30px "Barlow"', '500 26px "Barlow"'],

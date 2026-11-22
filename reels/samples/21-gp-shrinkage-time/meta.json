@@ -1,0 +1,43 @@
+{
+  "id": "21",
+  "slug": "21-gp-shrinkage-time",
+  "title": "Warm GP: when does it stop shrinking?",
+  "style": "Strip-chart recorder",
+  "topic": "Bench data on how long heated gutta-percha keeps shrinking: minutes while cooling, up to 10 h at 37 °C, no data found past 24 h.",
+  "duration": 20.6,
+  "claims": [
+    {
+      "claim": "Cooling: 1.0–2.3 % linear shrinkage in 10 min, 75→37 °C, in vitro (3 backfill GP brands, tabletop device)",
+      "source": "Lottanti S, Tauböck TT, Zehnder M, J Endod 2014;40:721-4 (PMID 24767571; abstract)"
+    },
+    {
+      "claim": "Held at 37 °C: keeps shrinking for 45 min–10 h, in vitro (4 thermosensitive GP products, dilatometer; clock start not defined in the abstract)",
+      "source": "Lee CQ et al., J Endod 1997;23:579-82 (PMID 9587286; abstract)"
+    },
+    {
+      "claim": "Stamp CRYSTALLIZING = inferred mechanism label (Lee's abstract names no mechanism)",
+      "source": "Inferred from Grassi MD et al., J Endod 1989;15:517-21 (PMID 2639948; abstract: isothermal shrinkage during crystallization) and Schilder H et al., Oral Surg Oral Med Oral Pathol 1985;59:285-96 (PMID 3856822; abstract)"
+    },
+    {
+      "claim": "Then stable to 24 h (end of the 24-h hold), in vitro",
+      "source": "Lee CQ et al., J Endod 1997;23:579-82 (PMID 9587286; abstract)"
+    },
+    {
+      "claim": "After 24 h: no data found for heated GP",
+      "source": "Literature search, no study found (RESEARCH.md L4); not a claim that it was never measured"
+    },
+    {
+      "claim": "Compact it warm (in vitro): vertical compaction of warm GP more than compensated for shrinkage on cooling",
+      "source": "Marlin J, MSD thesis, Boston University 1971 (thesis abstract only; published as Marlin J, Schilder H, Oral Surg Oral Med Oral Pathol 1973;36:872-9, PMID 4524837, paper not read)"
+    },
+    {
+      "claim": "Use sealer (in vitro): GP without sealer leaked more than GP + sealer at 48 h",
+      "source": "Wu MK, Fan B, Wesselink PR, Int Endod J 2000;33:121-5 (PMID 11307452; abstract)"
+    },
+    {
+      "claim": "Curves, temperature trace, time axis and canal view are schematic",
+      "source": "Toy model / schematic: curve shapes and the split between phases are drawn, not measured; the time axis is a composite of two bench experiments; canal gap exaggerated; no y-scale"
+    }
+  ],
+  "caption": "Warm gutta-percha: when does it stop shrinking?\n\nCooling 75→37 °C, backfill GP shrank 1.0–2.3 % (linear) within 10 min. In one 1997 dilatometer study, GP held at 37 °C kept shrinking for 45 min–10 h, then was stable through the 24-h hold. Past 24 h I found no data.\nBench data on free GP, not canals. In vitro, compacting warm GP more than made up for the shrinkage, and GP without sealer leaked more at 48 h.\n\nRefs: Lottanti 2014 & Lee 1997, J Endod; Marlin 1971 thesis (publ. OOO 1973); Wu 2000, Int Endod J.\nSchematic animation, composite timeline.\n\n#endodontics #endo #guttapercha #obturation #dentalmaterials #rootcanal"
+}

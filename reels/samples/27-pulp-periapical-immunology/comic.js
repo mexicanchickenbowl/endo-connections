@@ -5,9 +5,15 @@
  */
 (function () {
   'use strict';
-  const { clamp, lerp, hash, noise1 } = Kit;
+  const { clamp, lerp, noise1 } = Kit;
   const TAU = Math.PI * 2;
   let c = null, pencil = false;
+  /** well-mixed integer hash -> [0,1) (Kit.hash is too correlated between neighbouring seeds for scatter plots) */
+  function hash(a, b = 0, d = 0) {
+    let h = (Math.imul(a | 0, 374761393) + Math.imul(b | 0, 668265263) + Math.imul(d | 0, 1274126177) + 0x27d4eb2f) | 0;
+    h = Math.imul(h ^ (h >>> 15), 2246822519); h = Math.imul(h ^ (h >>> 13), 3266489917); h ^= h >>> 16;
+    return (h >>> 0) / 4294967296;
+  }
 
   const INK = {
     paper: '#f2e8d4', white: '#fbf6e9', K: '#1c1916', K2: '#6e675d', K1: '#b9b1a2', K0: '#dcd4c2',
@@ -21,7 +27,7 @@
   };
   const PEN = {};
   Object.keys(INK).forEach((k) => (PEN[k] = '#f8f2e4'));
-  Object.assign(PEN, { K: '#5a93cf', K2: '#86afdb', K1: '#aecbe6', K0: '#e2e9ec', paper: INK.paper });
+  Object.assign(PEN, { K: '#4f8bcb', K2: '#7fa9d8', K1: '#cfdfee', K0: '#e6edf0', paper: INK.paper });
   const P = Object.assign({}, INK);
   function mode(pen) { pencil = !!pen; Object.assign(P, pencil ? PEN : INK); }
   function use(ctx) { c = ctx; }
@@ -137,7 +143,7 @@
   }
 
   // ---------- ink ----------
-  function st(lw, col) { c.lineWidth = pencil ? Math.max(1.6, lw * 0.5) : lw; c.strokeStyle = col || P.K; c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke(); }
+  function st(lw, col) { c.lineWidth = pencil ? Math.max(2.4, lw * 0.62) : lw; c.strokeStyle = col || P.K; c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke(); }
   function stRaw(lw, col) { c.lineWidth = lw; c.strokeStyle = col || P.K; c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke(); }
   function fl(col) { c.fillStyle = col; c.fill(); }
   function fp(pat) { if (pat) { c.fillStyle = pat; c.fill(); } }
@@ -283,10 +289,14 @@
     if (!pencil) { c.save(); c.translate(r * 0.06, r * 0.1); body(); c.lineWidth = 5; c.strokeStyle = P.K; c.stroke(); fl(P.K); c.restore(); }
     union(parts, P.P1, 5);
     crescent(body, HT('R', 2), -r * 0.2, -r * 0.24, P.P1);
-    for (let k = 0; k < 3; k++) { const a = 0.5 + k * 0.55; c.beginPath(); c.arc(Math.cos(a) * r * 0.2, Math.sin(a) * r * 0.2, r * 0.66, a - 0.2, a + 0.22); st(2.4, P.R); }
-    const V = [[0.44, 0.3, 0.21], [-0.12, 0.5, 0.18], [0.55, -0.2, 0.16]], nv = o.vac || 0;
-    V.forEach((v, i) => { const a = clamp(nv - i); if (a <= 0.02) return; circle(v[0] * r, v[1] * r, v[2] * r * a); fl(P.white); st(3); circle(v[0] * r, v[1] * r, v[2] * r * a * 0.45); fl(P.M); st(1.8); });
-    shape(() => bean(-r * 0.22, -r * 0.14, r * 0.44, r * 0.31, -0.5), P.B, { lw: 3.5 });
+    for (let k = 0; k < 6; k++) { const a = 0.3 + k * 1.1 + hash(seed, k) * 0.5, d = r * (0.5 + 0.28 * hash(seed, k, 2)); circle(Math.cos(a) * d, Math.sin(a) * d * 0.85, r * (0.045 + 0.035 * hash(seed, k, 3))); fl(P.P0); st(1.8, P.R); }
+    const V = [[0.5, 0.22, 0.25, 0.6], [0.02, 0.55, 0.17, 2.2], [0.42, -0.4, 0.13, 1.2]], nv = o.vac || 0;
+    V.forEach((v, i) => {
+      const a = clamp(nv - i); if (a <= 0.02) return; const vx = v[0] * r, vy = v[1] * r, vr = v[2] * r * a;
+      circle(vx, vy, vr); fl(P.white); st(3);
+      if (i === 0) rod(vx, vy, vr * 1.25, vr * 0.5, v[3], { lw: 1.8 }); else cocci(vx, vy, i === 1 ? 2 : 1, v[3], vr * 0.3, { lw: 1.6 });
+    });
+    shape(() => bean(-r * 0.3, -r * 0.2, r * 0.42, r * 0.3, -0.7), P.B, { lw: 3.5 });
     c.restore();
   }
   /** dendritic cell: stellate body with long tapering arms. arms: [{from?,c,to,w,e,knob}] in panel coords */
@@ -319,9 +329,13 @@
     };
     const col = pencil ? P.P1 : Kit.rgba(Kit.mix(INK.P0, INK.R1, act));
     shape(body, col, { sh: [5, 8], cres: [HT('R', act > 0.5 ? 3 : 2), -w * 0.03, -h * 0.2], lw: 5.5 });
-    const nn = o.nuc || 6, rn = Math.min(h * 0.19, w * 0.062);
-    for (let k = 0; k < nn; k++) { const u = (k + 0.5) / nn, nx = (u - 0.5) * w * 0.72, ny = -h * (0.5 + 0.16 * Math.sin(u * Math.PI) + 0.1 * (hash(k, seed) - 0.5)); circle(nx, ny, rn); fl(P.B1); st(3.2); circle(nx + rn * 0.2, ny + rn * 0.1, rn * 0.3); fl(P.B); }
-    for (let k = 0; k < 5; k++) { const u = (k + 0.5) / 5; circle((u - 0.5) * w * 0.6, -h * 0.12 + sag * 0.3, 4 + 3 * hash(k, seed + 3)); fl(P.white); st(2.2); }
+    const nn = o.nuc || 6, rn0 = Math.min(h * 0.17, w * 0.056);
+    for (let k = 0; k < nn; k++) {
+      const u = (k + 0.5) / nn, dome = Math.sin(Math.PI * (0.12 + 0.76 * u)), rn = rn0 * (0.85 + 0.3 * hash(k, seed, 5));
+      const nx = (u - 0.5) * w * 0.7 + (hash(k, seed, 6) - 0.5) * rn, ny = -h * dome * (k % 2 ? 0.66 : 0.4) + (hash(k, seed, 7) - 0.5) * rn * 0.6;
+      circle(nx, ny, rn); fl(P.B1); st(3.2); circle(nx + rn * 0.22, ny + rn * 0.12, rn * 0.3); fl(P.B);
+    }
+    for (let k = 0; k < 9; k++) { const u = 0.1 + 0.8 * hash(k, seed, 8), vx = (u - 0.5) * w * 0.84, vy = sag * (1 - Math.pow(2 * u - 1, 2)) - h * (0.08 + 0.12 * hash(k, seed, 9)); circle(vx, vy, 3.5 + 4.5 * hash(k, seed, 10)); fl(P.white); st(2.2); }
     c.restore();
   }
   /** antibody: a bold Y (arms point along -y before rotation) */
@@ -346,7 +360,7 @@
   }
 
   window.Comic = {
-    TAU, INK, P, mode, use, isPencil, HT, htGrad,
+    TAU, INK, P, hash, mode, use, isPencil, HT, htGrad,
     smoothClosed, smoothOpen, sample, along, blob, bean, circle, ell, taper,
     st, stRaw, fl, fp, fpRect, crescent, shape, union,
     burstPath, burst, speedLines, focusLines, sfx,

@@ -1,0 +1,47 @@
+{
+  "id": "33",
+  "slug": "33-resorption-external-cervical",
+  "title": "External cervical resorption on CBCT",
+  "style": "CBCT viewer",
+  "topic": "ECR enters below the epithelial attachment, spreads around a canal walled off by a resistant sheet, and looks smaller on 2-D films.",
+  "duration": 24.0,
+  "claims": [
+    {
+      "claim": "Initiation: entry at the cervical root surface, just below the epithelial attachment",
+      "source": "Mavridou et al., J Endod 2016;42:1737-1751 (PMID 27776885) - abstract"
+    },
+    {
+      "claim": "Resorption spreads around the canal (circumferentially and apico-coronally)",
+      "source": "Patel et al., Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text; Mavridou et al., J Endod 2016;42:1737-1751 (PMID 27776885)"
+    },
+    {
+      "claim": "Pulp walled off - until late - by a pericanalar resorption-resistant sheet; avg ~0.2 mm, ex vivo",
+      "source": "Mavridou et al., J Endod 2016;42:1737-1751 (PMID 27776885): sheet, 'averaging 210 um'; 'until late': Heithersay, Quintessence Int 1999;30:27-37 (PMID 10323156)"
+    },
+    {
+      "claim": "Repair: bone-like tissue grows in while resorption continues elsewhere (proposed 3-stage model: initiation, resorption, repair)",
+      "source": "Mavridou et al., J Endod 2016;42:1737-1751 (PMID 27776885) - abstract"
+    },
+    {
+      "claim": "Patel 3-D classification: height 1-4; spread A <=90, B <=180, C <=270, D >270 degrees; proximity d (dentin only) / p (probable pulp involvement)",
+      "source": "Patel et al., Int Endod J 2018;51:206-214 (PMID 28746776) - abstract"
+    },
+    {
+      "claim": "The periapical underestimates the lesion",
+      "source": "Patel K et al., J Endod 2016;42:1435-1440 (PMID 27507628) - abstract"
+    },
+    {
+      "claim": "Canal outline often still traceable on the periapical",
+      "source": "Heithersay, Quintessence Int 1999;30:27-37 (PMID 10323156); Patel et al., Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320); 'often': Luso & Luder, Schweiz Monatsschr Zahnmed 2012;122:914-930 (PMID 23097140)"
+    },
+    {
+      "claim": "Take-home: recognize it early; consider CBCT before you treat; treatment depends on extent",
+      "source": "Patel K et al., J Endod 2016;42:1435-1440 (PMID 27507628); Patel et al., Int Endod J 2018;51:1224-1238 (PMID 29737544); Heithersay, Quintessence Int 1999;30:96-110 (PMID 10356561)"
+    },
+    {
+      "claim": "Toy model / schematic: procedural CBCT volume of a single-rooted tooth; lesion shape, timing, the ~245 degree reading and the 'Patel 2Cp' label describe the drawn model, not a patient; the sheet is drawn thicker than 0.2 mm",
+      "source": "Original schematic (labeled 'SCHEMATIC - not a patient scan - not to scale' on screen)"
+    }
+  ],
+  "caption": "External cervical resorption, the way CBCT shows it.\nIt enters just below the epithelial attachment, then spreads AROUND the canal. A thin resorption-resistant sheet (avg ~0.2 mm, ex vivo) walls off the pulp until late; later, bone-like repair tissue grows in while resorption continues elsewhere.\nPeriapicals underestimate lesion size and show circumferential spread poorly, so consider CBCT before you treat. Patel's \"p\" = probable pulp involvement on the scan.\nSchematic animation, not a patient scan.\nRefs: Mavridou 2016, J Endod; Heithersay 1999, Quintessence Int; Patel 2018 & 2022, Int Endod J; Patel K 2016, J Endod.\n#endodontics #rootresorption #ECR #CBCT #endoresident"
+}

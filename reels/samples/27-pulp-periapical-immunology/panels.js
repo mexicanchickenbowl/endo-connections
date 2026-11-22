@@ -7,7 +7,8 @@
  */
 (function () {
   'use strict';
-  const { clamp, lerp, seg, ease, hash, noise1 } = Kit;
+  const { clamp, lerp, seg, ease, noise1 } = Kit;
+  const hash = Comic.hash;
   const X = Comic, P = Comic.P, INK = Comic.INK, TAU = Math.PI * 2;
   const PW = 900, PH = 1286;
   const H = (k, l) => X.HT(k, l);
@@ -63,8 +64,9 @@
       c.fillStyle = P.Y0; c.fillRect(0, PRE, PW, 70);
       c.fillStyle = P.M0; c.fillRect(0, ODT + 22, PW, PH - ODT);
       X.fpRect(H('M', 1), 0, ODT + 22, PW, PH - ODT);
-      X.vessel([[-30, 1004], [190, 962], [450, 1002], [700, 954], [930, 986]], 30);
-      for (let k = 0; k < 7; k++) X.rbc(60 + k * 130, 990 - 30 * Math.sin((60 + k * 130) / 150 + 1.1) + (k % 2 ? 6 : -6) - 8, 13, 0.2 * (k % 3 - 1));
+      const capPts = [[-30, 1004], [190, 962], [450, 1002], [700, 954], [930, 986]], capS = X.sample(capPts, 10);
+      X.vessel(capPts, 30);
+      for (let k = 0; k < 7; k++) { const q = X.along(capS, (k + 0.6) / 7.4); X.rbc(q[0], q[1], 11, q[2]); }
       for (let k = 0; k < 9; k++) X.fibro(60 + k * 100 + 40 * hash(k, 1), 912 + 40 * hash(k, 2) + (k % 2) * 110, 62, (hash(k, 4) - 0.5) * 0.9);
       for (let i = 0; i < N; i++) {
         const L = wall(i, -1, -10, ODT + 8), R = wall(i, 1, -10, ODT + 8);
@@ -262,22 +264,21 @@
     }
     if (save) setC(save);
   }
-  /** jaw + tooth hard tissues (static). opts.access: draw an access cavity instead of caries */
-  function toothBG(marrow, seed, opts = {}) {
+  /** jaw around the tooth (static): socket/PDL, gingiva, bone, ligament fibres */
+  function jawBG(marrow, seed) {
     X.shape(TOOTH.socket, P.C0, { lw: 0 });
     X.shape(() => TOOTH.ging(0), P.M1, { cres: [H('M', 3), 0, -16], lw: 5 });
     X.shape(() => TOOTH.ging(1), P.M1, { cres: [H('M', 3), 0, -16], lw: 5 });
     boneFill(TOOTH.bone, marrow, seed);
-    // periodontal ligament fibres
     for (let k = 1; k < 13; k++) {
       const s = k / 13, a = qb([300, 400], [318, 640], [414, 872], s), b = qb([280, 470], [300, 660], [396, 884], Math.max(0, s - 0.06));
       if (a[1] < 478) continue;
       c.beginPath(); c.moveTo(a[0] + 2, a[1]); c.lineTo(b[0] + 2, b[1] + 6); c.moveTo(900 - a[0] - 2, a[1]); c.lineTo(900 - b[0] - 2, b[1] + 6); X.st(2.4, P.K2);
     }
-    X.shape(() => TOOTH.outline(), P.Y1, { lw: 0 });
-    c.save(); TOOTH.outline(); c.clip();
-    X.htGrad('R', 10, 0.32, 250, 160, 650, 910, (x, y) => clamp((x - 470) / 620 + 0.03, 0, 0.26));
-    c.restore();
+  }
+  /** tooth hard tissues (static). opts.access: draw an access cavity instead of caries */
+  function toothHard(opts = {}) {
+    X.shape(() => TOOTH.outline(), P.Y1, { cres: [H('R', 2), -22, -8], lw: 0 });
     X.shape(TOOTH.enamel, P.white, { cres: [H('C', 2), -11, -7], lw: 4 });
     if (opts.access) {
       c.save(); TOOTH.outline(); c.clip();
@@ -301,7 +302,7 @@
       c.fillStyle = P.C0; c.fillRect(0, 0, PW, 520);
       X.htGrad('C', 11, 0.32, 0, 0, PW, 500, (x, y) => clamp(0.44 - y / 640, 0, 0.44));
       X.focusLines(450, 300, 240, 1100, 30, 3, P.white, 1.5);
-      toothBG(marrow, 31);
+      jawBG(marrow, 31); toothHard();
       X.vessel([[486, PH + 10], [488, 1130], [446, 1030], [452, 942]], 16, { fill: P.R });
     }
     function fg(lt) {
@@ -316,12 +317,11 @@
       c.save(); TOOTH.pulp(); c.clip();
       c.fillStyle = P.M1; c.fillRect(350, 250, 200, 700); X.fpRect(H('M', 3), 350, 250, 200, 700);
       [[[452, 900], [446, 760], [458, 600], [440, 440], [420, 340], [404, 292]], [[448, 900], [458, 720], [460, 500], [480, 350], [498, 294]]].forEach((v) => { X.smoothOpen(v); X.stRaw(X.isPencil() ? 3 : 9.5, P.K); if (!X.isPencil()) { X.smoothOpen(v); X.stRaw(4.6, P.R); } });
-      DEF.forEach((d) => { if (yN < d[1] - 6) X.neutrophil(d[0], d[1], 19, { seed: d[2], ph }); });
+      DEF.forEach((d) => { const a = 1 - seg(yN, d[1] - 40, d[1] - 4); if (a > 0.02) X.neutrophil(d[0], d[1], 19, { seed: d[2], ph, s: a }); });
       // necrotic part (above the advancing front)
       c.save(); c.beginPath(); c.moveTo(340, 240); c.lineTo(560, 240); c.lineTo(560, yN); for (let x = 560; x >= 340; x -= 10) c.lineTo(x, wav(x)); c.closePath(); c.clip();
       c.fillStyle = P.K1; c.fillRect(340, 240, 220, 700); X.fpRect(H('K', 3), 340, 240, 220, 700);
       for (let k = 0; k < 40; k++) { const x = 372 + hash(k, 71) * 156, y = 280 + hash(k, 72) * 610, a = hash(k, 73) * 3.14; c.beginPath(); c.moveTo(x, y); c.lineTo(x + Math.cos(a) * 11, y + Math.sin(a) * 11); X.st(2.6, P.K2); }
-      DEF.forEach((d) => { if (yN >= d[1] - 6) X.neutrophil(d[0], d[1], 19, { seed: d[2], dead: true, rot: 0.6 }); });
       for (const s of pulpSeeds) { const a = seg(yN, s[1] + 14, s[1] + 62); if (a <= 0) continue; const e = ease.outBack(a); if (s[2] > 0.62) X.rod(s[0], s[1], 21, 9, s[3] * 3.14, { s: e, lw: 2.3 }); else X.cocci(s[0], s[1], s[2] > 0.3 ? 2 : 1, s[3] * 3.14, 6.2, { s: e, lw: 2.3 }); }
       c.restore();
       if (yN < 905) { c.beginPath(); for (let x = 350; x <= 550; x += 8) { if (x === 350) c.moveTo(x, wav(x)); else c.lineTo(x, wav(x)); } X.st(4.5); }
@@ -363,11 +363,8 @@
       X.vessel([[60, 800], [150, 700], [130, 580], [196, 470]], 20); X.vessel([[850, 760], [800, 640], [826, 540]], 18);
       c.restore();
       lesion(); X.st(6);
-      X.shape(() => root(), P.Y1, { lw: 0 });
-      c.save(); root(); c.clip();
-      X.htGrad('R', 10, 0.32, 430, 0, 790, 320, (x, y) => clamp((x - 610) / 420 + 0.04, 0, 0.3));
-      root(); X.stRaw(X.isPencil() ? 0.01 : 22, P.P1);
-      c.restore();
+      X.shape(() => root(), P.Y1, { cres: [H('R', 2), -26, -6], lw: 0 });
+      c.save(); root(); c.clip(); root(); X.stRaw(X.isPencil() ? 0.01 : 22, P.P1); c.restore();
       root(); X.st(6);
       X.shape(canal, P.K1, { pat: H('K', 3), lw: 0 });
       c.beginPath(); c.moveTo(578, -10); c.bezierCurveTo(584, 120, 592, 230, 597, 313); c.moveTo(642, -10); c.bezierCurveTo(636, 120, 628, 230, 623, 313); X.st(4.5);
@@ -397,13 +394,14 @@
       PL.forEach((p, k) => { const a = seg(lt, 1.7 + 0.12 * k, 2.1 + 0.12 * k); if (a > 0) X.plasma(p[0], p[1], 40, { rot: p[2], s: ease.outBack(a) }); });
       // antibodies leave the plasma cells and tag what leaks out
       for (let j = 0; j < 3; j++) for (let k = 0; k < 4; k++) {
-        const idx = j * 4 + k, t0 = 2.15 + 0.16 * k + 0.07 * j, stick = k < 2, tgt = LK[(idx * 5 + j) % 6];
-        const u = Math.min(seg(lt, t0, t0 + 1.0), stick ? 1 : 0.28 + 0.5 * hash(idx, 61)); if (u <= 0) continue;
-        const p0 = [PL[j][0] + 20 * Math.cos(PL[j][2]), PL[j][1] - 34], dx = tgt[0] - p0[0], dy = tgt[1] - p0[1], d = Math.hypot(dx, dy);
-        const p1 = [tgt[0] - (dx / d) * 24 + (hash(idx, 62) - 0.5) * 16, tgt[1] - (dy / d) * 24 + (hash(idx, 63) - 0.5) * 16];
-        const pc = [(p0[0] + p1[0]) / 2 - (dy / d) * 150 * (hash(idx, 64) - 0.5), (p0[1] + p1[1]) / 2 + (dx / d) * 150 * (hash(idx, 64) - 0.5)];
-        const q = qb(p0, pc, p1, ease.inOut(u));
-        X.antibody(q[0], q[1], 21, q[2] + Math.PI / 2, { s: ease.out(seg(u, 0, 0.12)) });
+        const idx = j * 4 + k, t0 = 2.15 + 0.16 * k + 0.07 * j, stick = k < 2, tgt = stick ? LK[j * 2 + k] : LK[(idx * 5 + j) % 6];
+        const u = Math.min(seg(lt, t0, t0 + 1.0), stick ? 1 : 0.3 + 0.45 * hash(idx, 61)); if (u <= 0) continue;
+        const p0 = [PL[j][0] + 20 * Math.cos(PL[j][2]), PL[j][1] - 34];
+        let ox = tgt[0] - F[0], oy = tgt[1] - (F[1] + 40); const od = Math.hypot(ox, oy) || 1; ox /= od; oy /= od;
+        const p1 = [tgt[0] + ox * 27, tgt[1] + oy * 27], dx = p1[0] - p0[0], dy = p1[1] - p0[1], d = Math.hypot(dx, dy);
+        const pc = [(p0[0] + p1[0]) / 2 - (dy / d) * 130 * (hash(idx, 64) - 0.5), (p0[1] + p1[1]) / 2 + (dx / d) * 130 * (hash(idx, 64) - 0.5)];
+        const e = ease.inOut(u), q = qb(p0, pc, p1, e), rot = stick ? lerp(q[2], Math.atan2(-oy, -ox), seg(e, 0.6, 1)) : q[2];
+        X.antibody(q[0], q[1], 19, rot + Math.PI / 2, { s: ease.out(seg(u, 0, 0.12)) });
       }
       tag('mostly IgG', 610, 866, pop(lt, 2.5), { ptr: [-112, -72] });
     }
@@ -422,14 +420,14 @@
     function bolt(x, y, b, s) {
       if (s <= 0.02) return;
       c.save(); c.translate(x, y); c.scale(s, s);
-      X.shape(boltPath, P[b[1]], { sh: [7, 9], lw: 6 });
+      X.shape(boltPath, X.isPencil() ? P.white : P[b[1]], { sh: [7, 9], lw: 6 });
       if (!X.isPencil()) {
-        if (b[1] === 'K') { c.save(); c.scale(0.86, 0.9); boltPath(); X.stRaw(3, P.white); c.restore(); } else X.crescent(boltPath, H(b[1] === 'Y' ? 'R' : 'K', 1), -12, -16, P[b[1]]);
+        if (b[1] === 'K') { c.save(); c.scale(0.9, 0.92); boltPath(); X.stRaw(2.6, P.K2); c.restore(); } else X.crescent(boltPath, H(b[1] === 'Y' ? 'R' : 'K', 1), -12, -16, P[b[1]]);
         boltPath(); X.st(6);
       }
       c.fillStyle = b[1] === 'K' && !X.isPencil() ? P.white : P.K; c.textBaseline = 'alphabetic';
       let fs = 60; c.font = `400 ${fs}px Bangers`;
-      const full = b[0] === 'PGE' ? 'PGE2' : b[0], w0 = c.measureText(full).width; if (w0 > 128) { fs = Math.floor((fs * 128) / w0); c.font = `400 ${fs}px Bangers`; }
+      const full = b[0] === 'PGE' ? 'PGE2' : b[0], w0 = c.measureText(full).width; if (w0 > 116) { fs = Math.floor((fs * 116) / w0); c.font = `400 ${fs}px Bangers`; }
       if (b[0] === 'PGE') { const w1 = c.measureText('PGE').width; c.font = `400 ${Math.round(fs * 0.68)}px Bangers`; const w2 = c.measureText('2').width; c.font = `400 ${fs}px Bangers`; c.textAlign = 'left'; c.fillText('PGE', -(w1 + w2) / 2 - 1, 22); c.font = `400 ${Math.round(fs * 0.68)}px Bangers`; c.fillText('2', -(w1 + w2) / 2 + w1 + 1, 30); } else { c.textAlign = 'center'; c.fillText(b[0], 0, 22); }
       c.restore();
     }
@@ -457,14 +455,14 @@
       X.macrophage(520, 256, 46, { seed: 8, ph, vac: 1 }); X.lymphocyte(634, 276, 30, 'B'); X.plasma(790, 262, 34, { rot: 0.4 });
       // osteoclasts on the bone surface
       const y1 = yF(215, E) - 10, sag1 = Math.max(8, yF(XO, E) - yF(215, E) + 6);
-      if (act > 0.02 && act < 1 || (lt > 1.5 && lt < 2.5)) { const f = act * (1 - seg(lt, 1.9, 2.5)); if (f > 0.02 && !X.isPencil()) { c.save(); c.globalAlpha = Math.min(1, f * 1.5); X.focusLines(XO, 640, 330, 330 + 90 * act, 26, 9, P.K, 1.5); c.restore(); } }
+      const fo = act * (1 - seg(lt, 1.9, 2.5));
+      if (fo > 0.02 && !X.isPencil()) { c.save(); c.globalAlpha = Math.min(1, fo * 1.5); X.focusLines(XO, 640, 330, 330 + 90 * act, 26, 9, P.K, 1.5); c.restore(); }
       X.osteoclast(852, yF(790, E) - 6, 150, 74, { act, ph, seed: 5, nuc: 3, sag: Math.max(6, yF(852, E) - yF(790, E)) });
       X.osteoclast(XO, y1, 584, 164, { act, ph, seed: 2, nuc: 7, sag: sag1 });
       // four signals, side by side
       BL.forEach((b, i) => {
         const t0 = 0.4 + 0.24 * i, u = seg(lt, t0, t0 + 0.5); if (u <= 0) return;
         const x = 192 + i * 172, y = lerp(300, 418, ease.outBack(u)) + E * 10;
-        if (u < 1) X.speedLines(x, y - 120, -Math.PI / 2 + Math.PI, 0, 0);
         if (u > 0.05 && u < 0.98) { c.save(); for (let q = -1; q <= 1; q++) { c.beginPath(); c.moveTo(x + q * 34, y - 118); c.lineTo(x + q * 34, y - 118 - 70 * Math.sin(Math.PI * u)); X.st(4); } c.restore(); }
         bolt(x, y, b, ease.out(seg(u, 0, 0.45)));
         const hit = pop(lt, t0 + 0.42, 0.25) * (1 - seg(lt, t0 + 0.7, t0 + 1.0));
@@ -487,27 +485,13 @@
       c.fillStyle = P.C0; c.fillRect(0, 0, PW, 620);
       X.htGrad('C', 11, 0.32, 0, 0, PW, 600, (x, y) => clamp(0.44 - y / 720, 0, 0.44));
       X.focusLines(450, 380, 300, 1200, 30, 7, P.white, 1.5);
-      T(() => toothBG(marrow, 37, { access: true }));
-      // the lesion: inflammatory tissue where bone used to be (drawn around the apex, tooth stays on top)
-      c.save(); c.beginPath(); c.rect(0, 0, PW, PH); c.translate(450, 0); c.scale(TS, TS); c.translate(-450, TY); TOOTH.outline(true); c.setTransform(c.getTransform().multiply(new DOMMatrix([1 / TS, 0, 0, 1 / TS, 0, 0]).translate(450 * TS - 450, -TY * TS))); c.clip('evenodd');
-      c.restore();
-    }
-    function lesionLayer() {
-      c.save(); c.beginPath(); c.rect(-20, -20, PW + 40, PH + 40);
-      // subtract the tooth (in its own transform) with an even-odd clip
-      const m = [[414, 872], [340, 740], [308, 520], [300, 400]];
-      c.moveTo(450 + (300 - 450) * TS, (400 + TY) * TS);
-      const tp = (x, y) => [450 + (x - 450) * TS, (y + TY) * TS];
-      const B = (a, b, d) => { const p = tp(a[0], a[1]), q = tp(b[0], b[1]), r = tp(d[0], d[1]); c.bezierCurveTo(p[0], p[1], q[0], q[1], r[0], r[1]); };
-      B([258, 330], [270, 215], [350, 170]); { const p = tp(400, 172), q = tp(450, 206); c.quadraticCurveTo(p[0], p[1], q[0], q[1]); } { const p = tp(500, 172), q = tp(550, 170); c.quadraticCurveTo(p[0], p[1], q[0], q[1]); }
-      B([630, 215], [642, 330], [600, 400]); B([592, 520], [560, 740], [486, 872]); B([470, 902], [430, 902], [414, 872]); B(m[1], m[2], m[3]); c.closePath();
-      c.clip('evenodd');
+      T(() => jawBG(marrow, 37));
+      // the lesion: inflammatory tissue where bone used to be
       X.shape(lesion, P.M0, { pat: H('M', 2), lw: 6 });
-      c.restore();
+      T(() => toothHard({ access: true }));
     }
     function fg(lt) {
       const ph = lt * 1.4;
-      lesionLayer();
       const yt = lerp(-60, 968, ease.inOut(seg(lt, 1.55, 2.5))), tipT = yt / TS - TY;
       // canal contents: necrotic debris + bacteria; the file removes most (not all) of what it reaches
       T(() => {
@@ -537,13 +521,13 @@
         const u = seg(lt, 1.55, 2.5); if (u > 0.05 && u < 0.97) for (let q = -1; q <= 1; q += 2) { c.beginPath(); c.moveTo(450 + q * 62, yt - 900); c.lineTo(450 + q * 62, yt - 900 - 120 * Math.sin(Math.PI * u)); X.st(4.5); }
       }
     }
-    return { bg, fg, head: (lt) => X.sfx(['STANDOFF'], 50, 132, 104, { s: pop(lt, 0.25), fill: P.Y }) };
+    return { bg, fg, head: (lt) => X.sfx(['STANDOFF'], 46, 128, 94, { s: pop(lt, 0.25), fill: P.Y }) };
   })();
 
   // =====================================================================================
   const panels = [p1, p2, p3, p4, p5, p6];
   const bgCache = [];
-  const dur = [3.4, 4.4, 3.9, 4.3, 4.4, 9];
+  const dur = [3.4, 4.4, 4.15, 4.3, 4.4, 9];
   function init() { initSeeds(); }
   /** draw panel i (0..5) at local time lt into ctx (already transformed to panel space). pen = blue-line rough */
   function render(i, ctx, lt, pen) {

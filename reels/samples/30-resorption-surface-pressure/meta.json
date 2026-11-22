@@ -1,0 +1,43 @@
+{
+  "id": "30",
+  "slug": "30-resorption-surface-pressure",
+  "title": "Surface + pressure resorption",
+  "style": "Risograph duotone print",
+  "topic": "External surface and pressure resorption stop when the cause stops: pulp tests normal, no root canal treatment, remove the cause.",
+  "duration": 22.0,
+  "claims": [
+    {
+      "claim": "Surface resorption: small injury -> shallow lacunae in cementum (schematic cells)",
+      "source": "Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, section 6.1"
+    },
+    {
+      "claim": "No infection -> new cementum in weeks (no numbers: narrative-review time frame)",
+      "source": "Abbott & Lin 2022 (PMID 35605161); Lin S et al. Dent Traumatol 2022;38:253-266 (PMID 35559593) - full text"
+    },
+    {
+      "claim": "Pressure keeps the clastic cells working (ortho force, impacted tooth)",
+      "source": "Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract"
+    },
+    {
+      "claim": "Pressure off -> it stops; a shortened root stays short",
+      "source": "Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text (relevant sections) and abstract"
+    },
+    {
+      "claim": "Pulp tests normal. No root canal treatment - remove the cause",
+      "source": "Patel et al. Int Endod J 2022 (PMID 35229320) - Table 1 and text"
+    },
+    {
+      "claim": "X-ray, surface: usually nothing",
+      "source": "Abbott & Lin. Dent Traumatol 2022 (PMID 35605161) - full text, section 6.1"
+    },
+    {
+      "claim": "X-ray, orthodontic: blunted apex",
+      "source": "Abbott & Lin 2022 (PMID 35605161), section 6.6; Patel et al. 2022 (PMID 35229320)"
+    },
+    {
+      "claim": "Toy model / schematic: cell size, amount of root loss and timing are exaggerated, not to scale",
+      "source": "Illustration only"
+    }
+  ],
+  "caption": "Two resorptions that stop when the cause stops.\n\nSurface: small injury to cementum/PDL, shallow lacunae, new cementum within weeks if no infection (review-level time frame). Usually invisible on a radiograph.\nPressure (ortho force, impacted tooth, cyst/tumor): active while the pressure lasts. Remove it and it arrests, not instantly and not always. Lost root length does not return.\nThe pulp is not the cause and tests normal: no root canal treatment.\n\nRefs: Abbott & Lin 2022, Dent Traumatol; Fuss 2003, Dent Traumatol; Patel 2022, Int Endod J; Falahat 2008, Angle Orthod.\nSchematic animation.\n#endodontics #rootresorption #orthodontics #dentaltrauma #endoresident"
+}

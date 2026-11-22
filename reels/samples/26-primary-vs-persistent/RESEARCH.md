@@ -604,3 +604,32 @@ Arithmetic re-done: 22/55 = 40 %; 20/30 = 67 %; 9/50 = 18 %; crude odds ratio 9.
 **Still not verified (keep off screen):** Sundqvist 1976 numbers; Sundqvist 1998 full-text numbers; cell shapes
 and the textbook oxygen-tolerance entries in the card table; the 2021 phylum renaming; the former name of
 *Filifactor alocis*; anything from Cohen's Pathways of the Pulp.
+
+---
+
+## (i) Builder additions (2026-11-22): morphology and oxygen tolerance behind the card icons
+
+The card table in section 9 marked cell shapes and three oxygen entries (*Treponema*, *Tannerella*, *Olsenella*)
+as textbook only. Before drawing morphology icons, each was checked against a PubMed abstract (abstract read by
+the builder; none in full text). According to PubMed:
+
+| Card | What the abstract says | Source |
+|---|---|---|
+| *Fusobacterium* | "*F. nucleatum*, a spindle-shaped, Gram-negative anaerobe" | Liu H et al. Exploration (Beijing) 2024;4:20230092. PMID 38854496. [DOI](https://doi.org/10.1002/EXP.20230092) |
+| *Porphyromonas* | "*Porphyromonas endodontalis* is a black-pigmented, obligate anaerobic rod-shaped bacterium" | Zerr M et al. Oral Microbiol Immunol 2001;16:229-34. PMID 11442848. [DOI](https://doi.org/10.1034/j.1399-302x.2001.160406.x) |
+| *Prevotella* | "*Prevotella intermedia*, a Gram-negative black-pigmented anaerobic rod" | Nambu T et al. Genome Announc 2015;3(4):e00951-15. PMID 26294638. [DOI](https://doi.org/10.1128/genomeA.00951-15) |
+| *Treponema* | "Among periodontal anaerobic pathogens, the oral spirochetes, and especially *Treponema denticola*" | Sela MN. Crit Rev Oral Biol Med 2001;12:399-413. PMID 12002822. [DOI](https://doi.org/10.1177/10454411010120050301) |
+| *Tannerella* | "*Tannerella forsythia* is a Gram-negative, anaerobic, fusiform bacterium" | Veith PD et al. J Proteome Res 2009;8:4279-92. PMID 19663511. [DOI](https://doi.org/10.1021/pr900372c) |
+| *Dialister* | "anaerobic, Gram-negative coccobacilli isolated from the root canals" (*D. invisus*) | Downes J et al. Int J Syst Evol Microbiol 2003;53:1937-40. PMID 14657126. [DOI](https://doi.org/10.1099/ijs.0.02640-0) |
+| *Parvimonas* | "*Parvimonas micra* is a gram-positive anaerobic coccus (GPAC)" | Yamada K et al. Respir Med Case Rep 2023;45:101892. PMID 37577121. [DOI](https://doi.org/10.1016/j.rmcr.2023.101892) |
+| *Pseudoramibacter* | "*Eubacterium* species are gram-positive anaerobic rods" (the study includes *E. alactolyticum*, the old name) | George KS, Falkler WA. Oral Microbiol Immunol 1992;7:285-90. PMID 1494452. [DOI](https://doi.org/10.1111/j.1399-302x.1992.tb00590.x) |
+| *Olsenella* | *O. uli* reported among "anaerobic, non-sporulating, Gram-positive bacilli" | Lau SK et al. J Med Microbiol 2004;53:1247-53. PMID 15585505. [DOI](https://doi.org/10.1099/jmm.0.45803-0) |
+| *Streptococcus* | oral streptococci: "gram-positive ... cocci that were arranged in short chains ... facultatively anaerobic" | Tong H et al. Int J Syst Evol Microbiol 2003;53:1101-4. PMID 12892133. [DOI](https://doi.org/10.1099/ijs.0.02493-0) |
+| *E. faecalis* | "a Gram-positive, facultative anaerobic coccus" | Chidambar CK et al. J Indian Soc Periodontol 2019;23:416-418. PMID 31543613. [DOI](https://doi.org/10.4103/jisp.jisp_44_19) |
+| *Candida* | "switch between a budding yeast form and an elongated hyphal form" | McBride AE. Curr Genet 2017;63:989-995. PMID 28512683. [DOI](https://doi.org/10.1007/s00294-017-0707-6) |
+
+Limits: these are one-line descriptions from abstracts, several from non-endodontic papers, and most describe one
+species of the genus named on the card. "Short" (rods), "small" (cocci), and the pair / V-shaped / chain
+arrangements drawn for *Enterococcus*, *Pseudoramibacter* and *Olsenella* are textbook detail, not in these
+abstracts. The cards therefore print only the abstract-level word, and badge the nine anaerobes "ANAEROBE"
+(not "obligate").

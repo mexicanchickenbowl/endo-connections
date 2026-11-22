@@ -1,0 +1,51 @@
+{
+  "id": "36",
+  "slug": "36-x7-file-sequence",
+  "title": "EdgeFile X7: the route from access to apex",
+  "style": "Transit route map",
+  "topic": "The manufacturer's EdgeFile X7 shaping sequence and settings as a metro map, with the habits and the one evidence flag that go with it.",
+  "duration": 23.6,
+  "claims": [
+    {
+      "claim": "Line info: speed 300–500 rpm; torque limit 300 g·cm (= 2.94 N·cm); apical pressure minimal",
+      "source": "Manufacturer directions, not evidence. Speed and torque limit: EdgeEndo, Instructions for Use – EdgeFile X7, REF 99.EX7.10.01A.XX ('IFU 2026'), edgeendo.com, accessed 22 Nov 2026 (section 1) and EdgeEndo, Rotary/Reciprocating Files Directions for Use, DFU-RF-US Rev D 06/23 ('US DFU 2023'), edgeendo.com, accessed 22 Nov 2026. 'Minimal apical pressure' is in the US DFU only"
+    },
+    {
+      "claim": "Route: ACCESS straight-line → SCOUT with hand files → WORKING LENGTH with a #10 K or larger (apex locator and radiograph pictograms) = glide path",
+      "source": "Manufacturer: EdgeEndo, Instructions for Use – EdgeFile X7, REF 99.EX7.10.01A.XX ('IFU 2026'), edgeendo.com, accessed 22 Nov 2026, 'Simplified Technique Guide' steps 1, 2 and 4 (this technique is printed in the IFU 2026 only)"
+    },
+    {
+      "claim": "Evidence · in vitro: glide path first, file lasted about 6× longer (ProTaper S1 in resin blocks: mean 59 vs 10 blocks before breakage)",
+      "source": "Berutti et al., J Endod 2004;30(4):228-30 (PMID 15085052); abstract only; conventional NiTi, not EdgeFile X7"
+    },
+    {
+      "claim": "17/.04, then 25/.04; 20/.04 only if the 25 won't reach length (alternate 20 and 25)",
+      "source": "Manufacturer: EdgeEndo, Instructions for Use – EdgeFile X7, REF 99.EX7.10.01A.XX ('IFU 2026'), edgeendo.com, accessed 22 Nov 2026, 'Simplified Technique Guide' steps 5-6"
+    },
+    {
+      "claim": "Every file: irrigate · recap #10/#15 · clean flutes · inspect",
+      "source": "Manufacturer: IFU 2026 step 3 (irrigate before each hand or rotary file) and section 5 (clean flutes, inspect, discard if distorted); 'recapitulate with a #10 or #15' is the crown-down wording in IFU 2026 and DFU-RF-US Rev D 06/23"
+    },
+    {
+      "claim": "If wanted: larger .04 (all canals) or larger .06 (straight to mildly curved); drawn with a white core = conditional service",
+      "source": "Manufacturer: IFU 2026 step 7 (larger .04 or .06 instruments if the clinician desires); the taper rule comes from the crown-down section headings (IFU 2026; DFU-RF-US Rev D 06/23), no angle is given"
+    },
+    {
+      "claim": "IRRIGATE (tagged 'convention') → OBTURATE: check cone fit",
+      "source": "Final irrigation station = convention, not an IFU 2026 step. Cone fit: IFU 2026 and DFU-RF-US Rev D 06/23 ('may need to drop down in cone tip size'); Keith et al., J Endod 2024;50(12):1766-71 (PMID 39393517; abstract, EdgeTaper Platinum not X7)"
+    },
+    {
+      "claim": "One patient · one procedure · then discard; max 4 canals per file (IFU 2026); follow the current DFU",
+      "source": "Manufacturer: IFU 2026 section 5 ('up to four (4) canals during a single procedure. Discard after use'); DFU-RF-US Rev D 06/23 says 'single use only'"
+    },
+    {
+      "claim": "Alternative service: crown-down 25 → 20 → (17), each to resistance (US DFU 2023)",
+      "source": "Manufacturer: DFU-RF-US Rev D 06/23, X7 '04 Taper Crown Down for All Canals' (the only sequence in the US-labelled DFU; also printed in IFU 2026)"
+    },
+    {
+      "claim": "Fine print: manufacturer IFU 2026 / US DFU 2023 + evidence-informed habits; no sequence is proven 'most efficient'",
+      "source": "No study comparing EdgeFile X7 sequences found on PubMed (searches of 22 Nov 2026, see RESEARCH.md); Peters OA, J Endod 2004;30(8):559-67 (PMID 15273636; abstract) lists instrument sequence among the less significant factors"
+    }
+  ],
+  "caption": "EdgeFile X7, access to apex, as a transit map.\n\nMain line = manufacturer's simplified technique (IFU 2026): #10 K or larger to length (= glide path) → 17/.04 → 25/.04, 20/.04 only if the 25 won't reach. Larger .04/.06 only if wanted. 300–500 rpm, torque limit 300 g·cm.\nThe US DFU (2023) prints crown-down only: check your leaflet.\nPubMed, Nov 2026: no study compares X7 sequences, so none is proven \"most efficient\". Glide-path flag: in vitro (ProTaper S1, resin blocks).\n\nRefs: EdgeEndo IFU EdgeFile X7 + DFU-RF-US Rev D (accessed Nov 2026); Berutti 2004, J Endod\nSchematic map. Disclosure: [add sponsorship statement]\n\n#endodontics #endo #rootcanal #NiTi #rotaryfiles #endoresident"
+}

@@ -6,21 +6,21 @@
 (function () {
   const { clamp, lerp, seg, ease, hash, noise1, noise2, rng } = Kit;
   const { S, Scene, INK, FONT, trace, drawText, textWidth, layout, paper, magnet, tape, eraser, hl, rr } = WB;
-  const W = 1080, H = 1920, DUR = 25.6;
+  const W = 1080, H = 1920, DUR = 24.9;
   const { canvas, ctx } = Kit.createCanvas();
   const mk = (w = W, h = H) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
   const bg = mk(), ink = mk(), tex = mk(), glare = mk();
   const ig = ink.getContext('2d');
 
   // ---------------- timeline (seconds) ----------------
-  const P1 = 3.4;      // part 1 "where to stop" begins
-  const W1 = 12.0;     // first wipe (eraser's first sweep starts)
-  const B0 = 12.5;     // part 2 "how big" begins
-  const W2 = 18.6;     // second wipe
-  const C0 = 19.1;     // summary begins
-  const W3 = 24.52;    // last wipe (board is clean again exactly at DUR)
-  const LIFT = 0.3, SW = 0.16, ROWDT = 0.205, WIPE = ROWDT * 3 + SW;   // sweep time, row period, total erase time
-  const ROWS = [478, 790, 1102, 1414], EXR = 940, EXL = 140, REST = { x: 852, y: 1663 };
+  const P1 = 2.6;      // part 1 "where to stop" begins
+  const W1 = 11.2;     // first wipe (eraser's first sweep starts)
+  const B0 = 11.7;     // part 2 "how big" begins
+  const W2 = 17.4;     // second wipe
+  const C0 = 17.9;     // summary begins
+  const W3 = 23.66;    // last wipe (board is clean again exactly at DUR)
+  const LIFT = 0.3, SW = 0.2, ROWDT = 0.24, WIPE = ROWDT * 3 + SW;   // sweep time, row period, total erase time
+  const ROWS = [512, 816, 1118, 1418], EXR = 940, EXL = 140, REST = { x: 852, y: 1663 };
 
   // ---------------- geometry helpers ----------------
   /** Catmull-Rom through pts (any dimension), ~one sample every `per` px */
@@ -48,6 +48,7 @@
   // =====================================================================================
   //  SCENE A — the apex sketch + part 1 "where to stop"
   // =====================================================================================
+  const RUL = 0.5;                     // the paper ruler slides in during the hook
   const MM = 170;                     // px per millimetre in the apex sketch (schematic)
   const A = new Scene();
   const GA = {};                      // geometry shared with props / dynamic items
@@ -78,22 +79,22 @@
     A.fn((g, t) => { if (!GHOST) band(g, t); });      // green highlighter (under the marker ink)
 
     // ---- anatomy, black marker ----
-    A.stroke(S.curve(dec(outL, 80), { roughness: 1.5 }), { t0: 0.12, d: 0.7, w: 8 });
-    A.stroke(S.curve(dec(outR, 80), { roughness: 1.5 }), { t0: 0.72, d: 0.85, w: 8 });
-    A.stroke(S.curve([[236, 410], [296, 396], [356, 414], [430, 398], [500, 416], [574, 398], [654, 408]], { roughness: 1.4 }), { t0: 1.5, d: 0.3, w: 6 });
-    A.stroke(S.curve(dec(wIn, 46), { roughness: 0.8 }), { t0: 1.35, d: 0.55, w: 6.5 });
-    A.stroke(S.curve(dec(wOut, 46), { roughness: 0.8 }), { t0: 1.5, d: 0.55, w: 6.5 });
-    A.stroke(S.curve(dec(cdjL, 70), { roughness: 0.8 }), { t0: 1.95, d: 0.35, w: 3.6, a: 0.85 });
-    A.stroke(S.curve(dec(cdjR, 70), { roughness: 0.8 }), { t0: 2.05, d: 0.45, w: 3.6, a: 0.85 });
+    A.stroke(S.curve(dec(outL, 80), { roughness: 1.5 }), { t0: 0.02, d: 0.36, w: 8 });
+    A.stroke(S.curve(dec(outR, 80), { roughness: 1.5 }), { t0: 0.28, d: 0.46, w: 8 });
+    A.stroke(S.curve([[236, 410], [296, 396], [356, 414], [430, 398], [500, 416], [574, 398], [654, 408]], { roughness: 1.4 }), { t0: 0.7, d: 0.25, w: 6 });
+    A.stroke(S.curve(dec(wIn, 46), { roughness: 0.8 }), { t0: 0.56, d: 0.38, w: 6.5 });
+    A.stroke(S.curve(dec(wOut, 46), { roughness: 0.8 }), { t0: 0.66, d: 0.38, w: 6.5 });
+    A.stroke(S.curve(dec(cdjL, 70), { roughness: 0.8 }), { t0: 1.02, d: 0.3, w: 3.6, a: 0.85 });
+    A.stroke(S.curve(dec(cdjR, 70), { roughness: 0.8 }), { t0: 1.1, d: 0.36, w: 3.6, a: 0.85 });
     const dL = wIn.slice(0, iJ + 1).concat(cdjL.slice().reverse()), dR = wOut.slice(0, iJ + 1).concat(cdjR.slice().reverse());
-    A.stroke(S.hatch(dec(dL, 16), { hachureGap: 19, hachureAngle: -48, roughness: 1.3 }), { t0: 2.15, d: 0.7, w: 3, a: 0.42, e: ease.linear });
-    A.stroke(S.hatch(dec(dR, 16), { hachureGap: 19, hachureAngle: -48, roughness: 1.3 }), { t0: 2.25, d: 0.75, w: 3, a: 0.42, e: ease.linear });
+    A.stroke(S.hatch(dec(dL, 16), { hachureGap: 19, hachureAngle: -48, roughness: 1.3 }), { t0: 1.22, d: 0.6, w: 3, a: 0.42, e: ease.linear });
+    A.stroke(S.hatch(dec(dR, 16), { hachureGap: 19, hachureAngle: -48, roughness: 1.3 }), { t0: 1.3, d: 0.65, w: 3, a: 0.42, e: ease.linear });
     // cementum: finer cross-hatch the other way, so it reads as a separate layer lining the surface and the foramen funnel
     const cemL = outL.concat(wIn.slice(iJ).reverse(), cdjL.slice().reverse()), cemR = outR.concat(cdjR, wOut.slice(iJ));
-    A.stroke(S.hatch(dec(cemL, 12), { hachureGap: 12, hachureAngle: 42, roughness: 0.8 }), { t0: 2.5, d: 0.4, w: 2.2, a: 0.34, e: ease.linear });
-    A.stroke(S.hatch(dec(cemR, 12), { hachureGap: 12, hachureAngle: 42, roughness: 0.8 }), { t0: 2.6, d: 0.5, w: 2.2, a: 0.34, e: ease.linear });
+    A.stroke(S.hatch(dec(cemL, 12), { hachureGap: 12, hachureAngle: 42, roughness: 0.8 }), { t0: 1.6, d: 0.35, w: 2.2, a: 0.34, e: ease.linear });
+    A.stroke(S.hatch(dec(cemR, 12), { hachureGap: 12, hachureAngle: 42, roughness: 0.8 }), { t0: 1.68, d: 0.4, w: 2.2, a: 0.34, e: ease.linear });
     // socket wall (lamina dura) around the apex, light
-    A.stroke(S.curve([[236, 905], [246, 1010], [258, 1102], [300, 1196], [372, 1250], [446, 1264], [516, 1250], [580, 1200], [628, 1106], [650, 1000]], { roughness: 1.3 }), { t0: 2.6, d: 0.55, w: 4, c: 's', a: 0.55 });
+    A.stroke(S.curve([[236, 905], [246, 1010], [258, 1102], [300, 1196], [372, 1250], [446, 1264], [516, 1250], [580, 1200], [628, 1106], [650, 1000]], { roughness: 1.3 }), { t0: 1.75, d: 0.45, w: 4, c: 's', a: 0.55 });
 
     // ---- labels, blue marker ----
     const lab = (lines, x, y, align, t0, lead, o = {}) => {
@@ -101,15 +102,16 @@
       if (lead) { A.stroke(S.line(lead[0], lead[1], lead[2], lead[3], { roughness: 0.7 }), { c: 'b', w: 4, t0: t0 + 0.12, d: 0.25 }); A.dot(lead[2], lead[3], 7, { c: 'b', t0: t0 + 0.35 }); }
     };
     const con = cl[iC];
-    lab(['minor', 'constriction'], 236, 946, 'right', 2.3, [244, 962, wIn[iC][0] - 2, wIn[iC][1] - 1]);
-    lab(['CDJ'], 236, 1070, 'right', 2.65, [244, 1058, wIn[iJ][0] - 3, wIn[iJ][1]]);
-    lab(['major', 'foramen'], 236, 1140, 'right', 2.9, [244, 1150, 320, 1132]);
-    lab(['radiographic apex'], 478, 1304, 'left', 3.15, [472, 1286, tip[0] + 2, tip[1] + 3]);
-    A.text('schematic · not to scale', 70, 392, { c: 's', s: 26, t0: 1.2, d: 0.4, a: 0.9 });
+    lab(['minor', 'constriction'], 226, 946, 'right', 1.5, [234, 962, wIn[iC][0] - 2, wIn[iC][1] - 1]);
+    lab(['CDJ'], 226, 1070, 'right', 1.82, [234, 1058, wIn[iJ][0] - 3, wIn[iJ][1]]);
+    lab(['major', 'foramen'], 226, 1140, 'right', 2.02, [234, 1150, 318, 1130]);
+    lab(['radiographic apex'], 478, 1304, 'left', 2.25, [472, 1286, tip[0] + 2, tip[1] + 3]);
+    A.text('schematic', 70, 456, { c: 's', s: 26, t0: 0.9, d: 0.2, a: 0.9 });
+    A.text('not to scale', 70, 486, { c: 's', s: 26, t0: 1.1, d: 0.25, a: 0.9 });
 
     // ---- part 1, on the sketch ----
     const y0 = tip[1], y2 = y0 - 2 * MM, y3 = y0 - 3 * MM;
-    A.stroke(S.line(tip[0] + 14, y0, 664, y0, { roughness: 0.5, bowing: 0.3 }), { c: 'b', w: 4, t0: P1 + 0.7, d: 0.25, dash: [14, 13] });
+    A.stroke(S.line(664, y0, 262, y0, { roughness: 0.5, bowing: 0.3 }), { c: 'b', w: 4, t0: P1 + 0.7, d: 0.25, dash: [14, 13] });
     // the file (blue), slides down the canal and settles at the constriction, 1 mm short on the ruler
     A.fn((g, t) => {
       const u = GHOST ? 0 : seg(t, P1 + 1.3, P1 + 2.15, ease.out); if (u <= 0) return;
@@ -119,7 +121,7 @@
       // edges use the local normal (-ty, tx)
       const eL = [], eR = [];
       for (let s = sTip; s > -60; s -= 9) { const q = at(Math.max(0, s)), w = hw(sTip - s), ext = s < 0 ? s : 0; eL.push([q[0] - q[3] * w, q[1] + q[2] * w + ext]); eR.push([q[0] + q[3] * w, q[1] - q[2] * w + ext]); }
-      g.save(); g.beginPath(); g.rect(0, 362, W, 1200); g.clip(); g.lineCap = 'round'; g.lineJoin = 'round';
+      g.save(); g.beginPath(); g.rect(0, 386, W, 1180); g.clip(); g.lineCap = 'round'; g.lineJoin = 'round';
       g.beginPath(); g.moveTo(eL[0][0], eL[0][1]); for (const p of eL) g.lineTo(p[0], p[1]); for (let i = eR.length - 1; i >= 0; i--) g.lineTo(eR[i][0], eR[i][1]); g.closePath();
       g.fillStyle = 'rgba(255,255,255,0.9)'; g.fill(); g.fillStyle = 'rgba(26,85,181,0.14)'; g.fill();
       g.strokeStyle = INK.b; g.lineWidth = 4.2; g.beginPath(); for (let i = eL.length - 1; i >= 0; i--) g.lineTo(eL[i][0], eL[i][1]); for (const p of eR) g.lineTo(p[0], p[1]); g.stroke();
@@ -130,7 +132,9 @@
     // emphasis during the hold: the target is circled in green
     A.stroke(S.ellipse(cl[iC][0] + 4, cl[iC][1] - 6, 92, 76, { roughness: 1.3 }), { c: 'g', w: 5.5, t0: P1 + 6.4, d: 0.45 });
     // "long": material beyond the foramen (red)
-    const blob = [[326, 1120], [302, 1138], [282, 1168], [280, 1196], [300, 1210], [326, 1198], [346, 1172], [356, 1150]];
+    // (Sjögren 1990: 'long' = filling material radiographically beyond the apex, so the scribble runs out of the
+    //  side-exit foramen and on past the dashed 0 line, below the root tip)
+    const blob = [[322, 1124], [298, 1146], [284, 1184], [290, 1232], [318, 1268], [364, 1288], [410, 1284], [432, 1262], [414, 1244], [380, 1226], [352, 1196], [352, 1156]];
     A.stroke(S.hatch(blob, { hachureGap: 8, hachureAngle: 30, roughness: 1 }), { c: 'r', w: 3.6, t0: P1 + 2.55, d: 0.3, e: ease.linear });
     A.stroke(S.curve(blob.concat([blob[0]]), { roughness: 0.9 }), { c: 'r', w: 5, t0: P1 + 2.7, d: 0.3 });
     A.stroke(S.arrow(206, 1290, 268, 1226, { roughness: 0.8, head: 20 }), { c: 'r', w: 5, t0: P1 + 3.05, d: 0.25 });
@@ -139,7 +143,7 @@
     A.stroke(S.curve([[bx, y3 + 4], [bx + 9, y3 + 14], [bx + 9, (y2 + y3) / 2 - 12], [bx + 20, (y2 + y3) / 2], [bx + 9, (y2 + y3) / 2 + 12], [bx + 9, y2 - 14], [bx, y2 - 4]], { roughness: 0.6 }), { c: 'r', w: 5, t0: P1 + 4.75, d: 0.3 });
     A.text('per mm short', 894, y3 + 44, { c: 'r', s: 38, align: 'center', t0: P1 + 4.95, d: 0.3 });
     A.text('~12–14%', 894, y3 + 106, { c: 'r', f: 'pm', s: 52, align: 'center', t0: P1 + 5.2, d: 0.3 });
-    A.text('lower odds', 894, y3 + 152, { c: 'r', s: 38, align: 'center', t0: P1 + 5.45, d: 0.25 });
+    A.text('worse odds', 894, y3 + 152, { c: 'r', s: 38, align: 'center', t0: P1 + 5.45, d: 0.25 });
     // denominator for the three slips
     A.text('healed · necrotic + lesion · 8–10 yr', 372, 1408, { c: 'k', s: 38, t0: P1 + 4.1, d: 0.55 });
     A.text('Sjögren 1990, J Endod · Chugal 2003, OOOOE · Ng 2011, Int Endod J', 70, 1530, { c: 's', s: 26, t0: P1 + 5.6, d: 0.45 });
@@ -186,7 +190,7 @@
     B.fn((g, t) => {
       if (GHOST) return;
       const uN = seg(t, B0 + 1.15, B0 + 1.75, ease.out), tF = B0 + 1.8;
-      g.save(); g.beginPath(); g.rect(0, 366, W, 1300); g.clip();
+      g.save(); g.beginPath(); g.rect(0, 386, W, 1280); g.clip();
       defs.forEach((D, k) => {
         const { cx } = D;
         // debris first (under the needle outline)
@@ -222,15 +226,16 @@
     // labels
     B.text('<#30', cxL, 1128, { f: 'pm', s: 64, align: 'center', t0: B0 + 1.3, d: 0.3 });
     B.text('≥#30', cxR, 1128, { f: 'pm', s: 64, align: 'center', t0: B0 + 1.5, d: 0.3 });
-    B.text('irrigant', 531, 792, { c: 'b', s: 40, align: 'center', t0: B0 + 2.5, d: 0.25 });
-    B.text('reaches', 531, 836, { c: 'b', s: 40, align: 'center', t0: B0 + 2.72, d: 0.22 });
-    B.text('apical third', 531, 880, { c: 'b', s: 40, align: 'center', t0: B0 + 2.9, d: 0.3 });
-    B.stroke(S.carrow([[620, 884], [690, 906], [cxR - 34, 946]], { roughness: 0.7, head: 20 }), { c: 'b', w: 5, t0: B0 + 3.15, d: 0.3 });
-    B.text('(in vitro)', 531, 930, { c: 'k', s: 38, align: 'center', t0: B0 + 3.3, d: 0.25 });
-    B.text('debris', 482, 1042, { c: 'r', s: 38, align: 'center', t0: B0 + 2.05, d: 0.2 });
-    B.stroke(S.carrow([[428, 1026], [360, 1000], [cxL + 20, 962]], { roughness: 0.7, head: 18 }), { c: 'r', w: 4.5, t0: B0 + 2.2, d: 0.25 });
-    B.text('schematic · not to scale', 531, 420, { c: 's', s: 26, align: 'center', t0: B0 + 1.2, d: 0.4, a: 0.9 });
-    B.text('Khademi 2006 · Boutsioukis 2021 · Saini 2012, J Endod', 70, 1530, { c: 's', s: 26, t0: B0 + 4.2, d: 0.4 });
+    B.text('irrigant', 531, 792, { c: 'b', s: 40, align: 'center', t0: B0 + 2.1, d: 0.25 });
+    B.text('reaches', 531, 836, { c: 'b', s: 40, align: 'center', t0: B0 + 2.3, d: 0.2 });
+    B.text('apical third', 531, 880, { c: 'b', s: 40, align: 'center', t0: B0 + 2.46, d: 0.28 });
+    B.stroke(S.carrow([[620, 884], [690, 906], [cxR - 34, 946]], { roughness: 0.7, head: 20 }), { c: 'b', w: 5, t0: B0 + 2.72, d: 0.28 });
+    B.text('(in vitro)', 531, 930, { c: 'k', s: 38, align: 'center', t0: B0 + 2.9, d: 0.22 });
+    B.text('debris', 482, 1042, { c: 'r', s: 38, align: 'center', t0: B0 + 1.75, d: 0.2 });
+    B.stroke(S.carrow([[428, 1026], [360, 1000], [cxL + 20, 962]], { roughness: 0.7, head: 18 }), { c: 'r', w: 4.5, t0: B0 + 1.9, d: 0.25 });
+    B.text('schematic', 531, 500, { c: 's', s: 26, align: 'center', t0: B0 + 1.2, d: 0.2, a: 0.9 });
+    B.text('not to scale', 531, 530, { c: 's', s: 26, align: 'center', t0: B0 + 1.4, d: 0.25, a: 0.9 });
+    B.text('Khademi 2006 · Boutsioukis 2021 · Saini 2012, J Endod', 70, 1530, { c: 's', s: 26, t0: B0 + 3.5, d: 0.4 });
   }
 
   // =====================================================================================
@@ -239,27 +244,28 @@
   const Cs = new Scene();
   const GC = {};
   function buildC() {
-    const l1 = 'Infected canals: stop 0–2 mm short', l2 = 'Binding file +3 sizes beat +2';
+    const l1 = 'Infected: fill 0–2 mm short of x-ray apex', l2 = 'Binding file +3 sizes beat +2';
+    const LS = Math.min(58, Math.floor(58 * 862 / textWidth(l1, 'ph', 58)));     // both headlines at one size, line 1 must end by x = 1010
+    const Y1 = 456, Y2 = 900;
     const num = (ch, y, t0) => {
       Cs.stroke(S.ellipse(100, y - 19, 62, 60, { roughness: 1.1 }), { c: 'r', w: 5, t0, d: 0.25 });
       Cs.text(ch, 100, y - 2, { f: 'pm', s: 42, c: 'r', align: 'center', t0: t0 + 0.05, d: 0.15 });
     };
-    const L = layout(l1, 'ph', 58), i0 = l1.indexOf('0–2'), hx0 = 148 + L.xs[i0] - 8, hx1 = 148 + L.w + 10;
-    Cs.fn((g, t) => { if (!GHOST) hl(g, hx0, 414, hx1, 411, 60, 'rgba(255,230,50,0.72)', seg(t, C0 + 0.66, C0 + 0.92, ease.inOut), 8); });
-    num('1', 432, C0);
-    Cs.text(l1, 148, 432, { s: 58, t0: C0 + 0.08, d: 0.55 });
-    Cs.text('healed · necrotic + lesion · 8–10 yr', 84, 712, { s: 38, t0: C0 + 0.9, d: 0.4 });
-    const a = 'per mm short: ', b = '~12–14%', c = ' lower odds (2 cohorts)';
+    const L = layout(l1, 'ph', LS), i0 = l1.indexOf('0–2'), i1 = l1.indexOf(' of x-ray'), hx0 = 148 + L.xs[i0] - 8, hx1 = 148 + L.xs[i1] + 8;
+    Cs.fn((g, t) => { if (!GHOST) hl(g, hx0, Y1 - 18, hx1, Y1 - 21, 60, 'rgba(255,230,50,0.72)', seg(t, C0 + 0.66, C0 + 0.92, ease.inOut), 8); });
+    num('1', Y1, C0);
+    Cs.text(l1, 148, Y1, { s: LS, t0: C0 + 0.08, d: 0.55 });
+    Cs.text('healed · necrotic + lesion · 8–10 yr', 84, 736, { s: 38, t0: C0 + 0.9, d: 0.35 });
+    const a = 'per mm short: ', b = '~12–14%', c = ' worse odds';
     const wa = textWidth(a, 'ph', 40), wb = textWidth(b, 'pm', 46);
-    Cs.text(a, 84, 776, { c: 'r', s: 40, t0: C0 + 1.15, d: 0.2 });
-    Cs.text(b, 84 + wa, 778, { c: 'r', f: 'pm', s: 46, t0: C0 + 1.3, d: 0.2 });
-    Cs.text(c, 84 + wa + wb, 776, { c: 'r', s: 40, t0: C0 + 1.45, d: 0.2 });
-    const L2 = layout(l2, 'ph', 58), j0 = l2.indexOf('+3'), j1 = l2.indexOf(' beat');
-    Cs.fn((g, t) => { if (!GHOST) hl(g, 148 + L2.xs[j0] - 8, 854, 148 + L2.xs[j1] + 8, 851, 60, 'rgba(255,230,50,0.72)', seg(t, C0 + 2.55, C0 + 2.8, ease.inOut), 9); });
-    num('2', 872, C0 + 1.45);
-    Cs.text(l2, 148, 872, { s: 58, t0: C0 + 1.52, d: 0.45 });
-    Cs.text('≥#30: irrigant reaches apical third (in vitro)', 148, 1196, { c: 'b', s: 38, t0: C0 + 1.85, d: 0.35 });
-    Cs.text('Sjögren 1990 · Saini 2012 · Khademi 2006 · Sabeti 2024, J Endod · Chugal 2003, OOOOE · Ng 2011, Int Endod J', 70, 1530, { c: 's', s: 22, t0: C0 + 2.1, d: 0.4 });
+    Cs.text(a, 84, 800, { c: 'r', s: 40, t0: C0 + 1.1, d: 0.18 });
+    Cs.text(b, 84 + wa, 802, { c: 'r', f: 'pm', s: 46, t0: C0 + 1.24, d: 0.18 });
+    Cs.text(c, 84 + wa + wb, 800, { c: 'r', s: 40, t0: C0 + 1.38, d: 0.16 });
+    const L2 = layout(l2, 'ph', LS), j0 = l2.indexOf('+3'), j1 = l2.indexOf(' beat');
+    Cs.fn((g, t) => { if (!GHOST) hl(g, 148 + L2.xs[j0] - 8, Y2 - 18, 148 + L2.xs[j1] + 8, Y2 - 21, 60, 'rgba(255,230,50,0.72)', seg(t, C0 + 2.1, C0 + 2.35, ease.inOut), 9); });
+    num('2', Y2, C0 + 1.4);
+    Cs.text(l2, 148, Y2, { s: LS, t0: C0 + 1.47, d: 0.42 });
+    Cs.text('Sjögren 1990 · Saini 2012, J Endod · Chugal 2003, OOOOE · Ng 2011, Int Endod J', 70, 1514, { c: 's', s: 24, t0: C0 + 1.85, d: 0.35 });
   }
 
   // =====================================================================================
@@ -291,8 +297,8 @@
     return { x: x + (1 - u) * 760 + dxOut * o, y: y + (1 - u) * 30, rot: (rot + (1 - u) * 7) * Math.PI / 180, sc: 1, al: 1, lift: lerp(0.9, 0.22, u) + o * 0.5, pop: 1 };
   }
   function drawRuler(g, t) {
-    if (t < P1 + 0.05 || t > W1 + 0.4) return;
-    const u = seg(t, P1 + 0.05, P1 + 0.7, ease.outQuint), o = seg(t, W1 - 0.3, W1 + 0.02, ease.in);
+    if (t < RUL || t > W1 + 0.4) return;
+    const u = seg(t, RUL, RUL + 0.65, ease.outQuint), o = seg(t, W1 - 0.3, W1 + 0.02, ease.in);
     const { y0 } = GA, cx = 704, top = y0 - 4.32 * MM, bot = y0 + 40, h = bot - top, cy = (top + bot) / 2;
     g.save(); g.translate(cx + (1 - u) * 470 + o * 480, cy); g.rotate(((1 - u) * 5 + 0.5) * Math.PI / 180);
     paper(g, 76, h, { lift: lerp(0.8, 0.2, u), seed: 12 });
@@ -319,12 +325,12 @@
   }
   /** the wide RCT slip: appears in part 2, then moves up into the summary */
   function drawRct(g, t) {
-    const tIn = B0 + 3.9; if (t < tIn || t > W3 + 0.4) return;
+    const tIn = B0 + 3.1; if (t < tIn || t > W3 + 0.4) return;
     const u = seg(t, tIn, tIn + 0.3), m = seg(t, W2 - 0.1, W2 + 0.55, ease.inOut), o = seg(t, W3 - 0.14, W3 + 0.18, ease.in);
-    const x = lerp(520, 512, m) - o * 900, y = lerp(1322, 1026, m) - 26 * (1 - ease.out(u)), sc = lerp(1.14, 1, ease.outBack(u)) * lerp(1, 0.94, m);
+    const x = lerp(520, 512, m) - o * 900, y = lerp(1322, 1058, m) - 26 * (1 - ease.out(u)), sc = lerp(1.14, 1, ease.outBack(u)) * lerp(1, 0.94, m);
     g.save(); g.translate(x, y); g.rotate((-0.8 + 3 * (1 - ease.out(u)) + Math.sin(m * Math.PI) * 1.5 - o * 5) * Math.PI / 180); g.scale(sc, sc); g.globalAlpha = clamp(u * 4);
     paper(g, 700, 252, { lift: lerp(1, 0.22, ease.out(u)) + Math.sin(m * Math.PI) * 0.5 + o * 0.5, seed: 21, curl: 18 });
-    drawText(g, { str: 'RCT · mand. molars · healed at 12 mo', x: 0, y: -74, f: 'ph', s: 36, c: '#39434f', align: 'center' }, 1);
+    drawText(g, { str: 'RCT · healed at 12 mo', x: 0, y: -74, f: 'ph', s: 36, c: '#39434f', align: 'center' }, 1);
     drawText(g, { str: 'binding file +2 →', x: -4, y: -2, f: 'ph', s: 44, c: 'k', align: 'right' }, 1);
     drawText(g, { str: '48%', x: 22, y: 8, f: 'pm', s: 78, c: 'r', jit: 0.004 }, 1);
     drawText(g, { str: '+3 or more →', x: -4, y: 86, f: 'ph', s: 44, c: 'k', align: 'right' }, 1);
@@ -334,11 +340,11 @@
     g.restore();
   }
   function drawTag(g, t) {
-    const tIn = C0 + 2.05; if (t < tIn || t > W3 + 0.5) return;
+    const tIn = C0 + 1.7; if (t < tIn || t > W3 + 0.5) return;
     const u = seg(t, tIn, tIn + 0.3), o = seg(t, W3 - 0.06, W3 + 0.26, ease.in);
-    g.save(); g.translate(520 + o * 900, 1352 - 26 * (1 - ease.out(u))); g.rotate((1.2 + 3 * (1 - ease.out(u)) + o * 5) * Math.PI / 180); const sc = lerp(1.16, 1, ease.outBack(u)); g.scale(sc, sc); g.globalAlpha = clamp(u * 4);
+    g.save(); g.translate(520 + o * 900, 1336 - 26 * (1 - ease.out(u))); g.rotate((1.2 + 3 * (1 - ease.out(u)) + o * 5) * Math.PI / 180); const sc = lerp(1.16, 1, ease.outBack(u)); g.scale(sc, sc); g.globalAlpha = clamp(u * 4);
     paper(g, 640, 214, { color: '#ffe566', top: '#fff29a', lift: lerp(1, 0.25, ease.out(u)) + o * 0.5, seed: 31, curl: 22 });
-    const a = 'Certainty: ', b = 'LOW', wa = textWidth(a, 'pm', 56), wb = textWidth(b, 'pm', 74), x0 = -(wa + wb) / 2;
+    const a = 'Evidence: ', b = 'LOW', wa = textWidth(a, 'pm', 56), wb = textWidth(b, 'pm', 74), x0 = -(wa + wb) / 2;
     drawText(g, { str: a, x: x0, y: 14, f: 'pm', s: 56, c: 'k' }, 1);
     drawText(g, { str: b, x: x0 + wa, y: 18, f: 'pm', s: 74, c: 'r', jit: 0.004 }, 1);
     g.strokeStyle = INK.r; g.lineWidth = 5; g.lineCap = 'round'; g.beginPath(); g.moveTo(x0 + wa - 2, 32); g.quadraticCurveTo(x0 + wa + wb / 2, 27, x0 + wa + wb + 4, 31); g.stroke();
@@ -352,12 +358,12 @@
     if ((st = snap(t, P1 + 1.95, W1 - 0.26, 888, 1008, -1.5, 480))) drawNumSlip(g, SLIPS.s94, st);
     if ((st = snap(t, P1 + 2.95, W1 - 0.2, 200, 1380, -2.2, -480))) drawNumSlip(g, SLIPS.s76, st);
     if ((st = snap(t, P1 + 3.7, W1 - 0.32, 888, 548, 1.8, 480))) drawNumSlip(g, SLIPS.s68, st);
-    if ((st = slide(t, C0 + 0.4, W3 - 0.24, 214, 566, -1.6, 1150))) drawNumSlip(g, SLIPS.s94, st);
-    if ((st = slide(t, C0 + 0.5, W3 - 0.29, 522, 570, 1.2, 1150))) drawNumSlip(g, SLIPS.s76, st);
-    if ((st = slide(t, C0 + 0.6, W3 - 0.34, 830, 564, -0.8, 1150))) drawNumSlip(g, SLIPS.s68, st);
+    if ((st = slide(t, C0 + 0.4, W3 - 0.24, 214, 590, -1.6, 1150))) drawNumSlip(g, SLIPS.s94, st);
+    if ((st = slide(t, C0 + 0.5, W3 - 0.29, 522, 594, 1.2, 1150))) drawNumSlip(g, SLIPS.s76, st);
+    if ((st = slide(t, C0 + 0.6, W3 - 0.34, 830, 588, -0.8, 1150))) drawNumSlip(g, SLIPS.s68, st);
     if (!(t > W2 && t < W2 + WIPE + 0.3)) drawRct(g, t);
     drawTag(g, t);
-    tape(g, 176, 1572, 232, 40, -0.02, '@natebrooksendo');
+    tape(g, 176, 1560, 232, 38, -0.02, '@natebrooksendo');
   }
 
   // =====================================================================================
@@ -392,7 +398,7 @@
   // =====================================================================================
   //  static board
   // =====================================================================================
-  const HDR = { y: 306, s: 62, a: 'WHERE TO STOP?', b: 'HOW BIG?' };
+  const HDR = { y: 330, s: 62, a: 'WHERE TO STOP?', b: 'HOW BIG?' };
   function makeTex() {
     const hw = W / 2, hh = H / 2, c = mk(hw, hh), g = c.getContext('2d'), id = g.createImageData(hw, hh), d = id.data;
     for (let y = 0; y < hh; y++) for (let x = 0; x < hw; x++) {
@@ -452,7 +458,7 @@
     const gh = mk(), gg = gh.getContext('2d');
     GHOST = true;
     for (const [sc, tEnd] of [[A, W1 - 0.01], [B, W2 - 0.01], [Cs, W3 - 0.01]]) {
-      clearInk(); sc.draw(ig, tEnd);
+      const all = sc.items; sc.items = all.filter((it) => it.kind !== 't'); clearInk(); sc.draw(ig, tEnd); sc.items = all;   // strokes only: residue must not be readable
       gg.globalAlpha = 0.35; gg.drawImage(ink, -5, 0); gg.globalAlpha = 1; gg.drawImage(ink, 0, 0);
     }
     GHOST = false;
@@ -460,7 +466,7 @@
     const R2 = rng(19);
     for (let i = 0; i < 70; i++) { const y = 330 + R2() * 1260, x = -100 + R2() * 800, l = 300 + R2() * 600; gg.strokeStyle = `rgba(0,0,0,${0.4 + R2() * 0.55})`; gg.lineWidth = 30 + R2() * 80; gg.lineCap = 'round'; gg.beginPath(); gg.moveTo(x, y); gg.lineTo(x + l, y + (R2() - 0.5) * 50); gg.stroke(); }
     gg.filter = 'none';
-    g.save(); g.globalCompositeOperation = 'multiply'; g.globalAlpha = 0.026; g.filter = 'blur(1.6px)'; g.drawImage(gh, 0, 0); g.restore(); g.filter = 'none';
+    g.save(); g.globalCompositeOperation = 'multiply'; g.globalAlpha = 0.026; g.filter = 'blur(4.5px)'; g.globalAlpha = 0.034; g.drawImage(gh, 0, 0); g.restore(); g.filter = 'none';
 
     // header: highlighter + black marker
     const wa = HDR.wa, wb = HDR.wb;
@@ -494,8 +500,8 @@
   //  frame
   // =====================================================================================
   function underline(sc, x, w, t0) {
-    sc.stroke(S.line(x - 4, HDR.y + 27, x + w + 6, HDR.y + 23, { roughness: 1.1 }), { c: 'r', w: 6, t0, d: 0.22 });
-    sc.stroke(S.line(x + w * 0.2, HDR.y + 39, x + w + 2, HDR.y + 35, { roughness: 1.1 }), { c: 'r', w: 5, t0: t0 + 0.16, d: 0.18 });
+    sc.stroke(S.line(x - 4, HDR.y + 30, x + w + 6, HDR.y + 26, { roughness: 1.1 }), { c: 'r', w: 6, t0, d: 0.22 });
+    sc.stroke(S.line(x + w * 0.2, HDR.y + 42, x + w + 2, HDR.y + 38, { roughness: 1.1 }), { c: 'r', w: 5, t0: t0 + 0.16, d: 0.18 });
   }
   function drawScene(g, sc, t, wipeAt) {
     clearInk(); sc.draw(ig, t); inkTexture(); if (wipeAt != null) eraseMask(ig, t - wipeAt); stamp(g);
@@ -504,7 +510,7 @@
   window.REEL = {
     title: 'Working length & apical size',
     duration: DUR,
-    poster: 23.7,
+    poster: 22.9,
     canvas,
     fonts: ['400 62px "Permanent Marker"', '400 40px "Patrick Hand"'],
     setup() {
@@ -528,7 +534,7 @@
       drawProps(g, t);
       // eraser (with a short motion trail while it sweeps)
       const e = eraserAt(t);
-      if (e.flip > 0.98) for (let k = 3; k >= 1; k--) { const p = eraserAt(t - k / 110); eraser(g, p.x, p.y, p.rot, p.flip, 0.16); }
+      if (e.flip > 0.98) { const p0 = eraserAt(t - 1 / 30); if (Math.hypot(p0.x - e.x, p0.y - e.y) > 6) for (let k = 18; k >= 1; k--) { const p = eraserAt(t - k / 540); eraser(g, p.x, p.y, p.rot, p.flip, 0.06); } }   // continuous smear over the last frame interval
       eraser(g, e.x, e.y, e.rot, e.flip, 1);
       if (t > W2 && t < W2 + WIPE + 0.3) drawRct(g, t);
     },

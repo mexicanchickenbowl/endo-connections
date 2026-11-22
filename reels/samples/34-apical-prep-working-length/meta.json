@@ -1,0 +1,43 @@
+{
+  "id": "34",
+  "slug": "34-apical-prep-working-length",
+  "title": "Working length & apical size: the evidence",
+  "style": "Whiteboard marker talk",
+  "topic": "What outcome studies say about stopping 0–2 mm short of the radiographic apex and about apical size, and how weak the evidence is.",
+  "duration": 25.6,
+  "claims": [
+    {
+      "claim": "Toy model / schematic: apex sketch labeled radiographic apex, major foramen (opening on the side, off the root tip), minor constriction, CDJ; 'schematic · not to scale'",
+      "source": "Textbook apical anatomy (Hargreaves & Berman, Cohen's Pathways of the Pulp; not re-read). No number shown. Off-tip foramen is consistent with Martos et al., Int Endod J 2009;42:329-34 (PMID 19220517; abstract: foramen at the root tip in 40%)"
+    },
+    {
+      "claim": "Green zone 0–2 mm short of the radiographic apex; slips 94% '0–2 mm short' · 76% 'long' · 68% '>2 mm short' — 'healed · necrotic + lesion · 8–10 yr'",
+      "source": "Sjögren et al., J Endod 1990;16:498-504 (PMID 2084204). PubMed abstract gives design (356 patients, 8-10 yr) and that filling level significantly affected outcome; the 94/76/68 breakdown is full-text data confirmed only through secondary quotation (PMC3574741), primary full text not read. Unit = roots"
+    },
+    {
+      "claim": "per mm short ~12–14% lower odds (2 cohorts)",
+      "source": "Chugal et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2003;96:81-90 (PMID 12847449; abstract: each mm of working length lost raised the chance of failure by 14% in teeth with apical periodontitis). Ng et al., Int Endod J 2011;44:583-609 (PMID 21366626; full text: OR 0.88, 95% CI 0.79-0.97, per un-instrumented mm short of the apex-locator zero)"
+    },
+    {
+      "claim": "<#30 vs ≥#30: 'irrigant reaches apical third (in vitro)'; 'debris' left in the smaller preparation",
+      "source": "Khademi et al., J Endod 2006;32:417-20 (PMID 16631839; abstract: SEM of debris/smear layer, minimum size #30 for irrigant penetration to the apical third). Toy model / schematic: the flow lines and specks are drawn, not simulated; consistent with Boutsioukis & Gutierrez Nova, J Endod 2021;47:1487-95 (PMID 34118256; abstract)"
+    },
+    {
+      "claim": "RCT · mand. molars · healed at 12 mo: binding file +2 → 48%; +3 or more → 71–92%",
+      "source": "Saini et al., J Endod 2012;38:1309-15 (PMID 22980168; abstract: 48%, 71.43%, 80%, 84.61%, 92% for 2-6 sizes past the first apical binding file; mandibular first molars; 129 evaluated at 12 months)"
+    },
+    {
+      "claim": "Summary 1: Infected canals: stop 0–2 mm short",
+      "source": "Sjögren 1990 (PMID 2084204), Chugal 2003 (PMID 12847449), Ng 2011 (PMID 21366626) as above; applies to infected teeth (Chugal 2003 found the opposite trend with a normal pulp/periapex)"
+    },
+    {
+      "claim": "Summary 2: Binding file +3 sizes beat +2; ≥#30: irrigant reaches apical third (in vitro)",
+      "source": "Saini 2012 (PMID 22980168) and Khademi 2006 (PMID 16631839) as above; +2 also worst in Fatima et al., J Endod 2021;47:1345-51 (PMID 34058250; abstract)"
+    },
+    {
+      "claim": "Certainty: LOW · cohorts · in vitro · small RCTs",
+      "source": "Sabeti et al., J Endod 2024;50:292-8 (PMID 38135112; abstract: 2 studies, overall quality of evidence low) for apical size and healing. For working length the tag describes the evidence type (observational cohorts); it is not a published GRADE rating"
+    }
+  ],
+  "caption": "Where to stop, and how big? The evidence on one whiteboard.\n\nInfected roots (necrotic pulp + lesion): 94% healed when the fill ended 0–2 mm short of the radiographic apex, 76% when long, 68% when >2 mm short (8–10 yr). Two cohorts: each mm short, ~12–14% lower odds of healing. Vital cases did as well slightly shorter.\nSize: in vitro, irrigant reached the apical third from about #30. In an RCT (mandibular molars, 12 mo), binding file +2 healed 48% vs 71–92% for +3 to +6. Certainty: low.\nSchematic animation.\n\nRefs: Sjögren 1990, Khademi 2006, Saini 2012, Sabeti 2024 (J Endod); Chugal 2003 (OOOOE); Ng 2011 (Int Endod J).\n\n#endodontics #endodontist #rootcanal #workinglength #dentalresident"
+}

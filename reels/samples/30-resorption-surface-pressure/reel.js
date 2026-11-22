@@ -26,7 +26,7 @@
       Pdecor: Riso.dots(P, 12, 0.22, 68),
       Pdent: Riso.dots(P, 10, 0.20, 68),
       Pmarrow: Riso.dots(P, 10, 0.13, 68),
-      Pgum: Riso.dots(P, 9, 0.40, 68),
+      Pgum: Riso.dots(P, 9, 0.30, 68),
       Pclock: Riso.dots(P, 9, 0.36, 68),
       P50: Riso.dots(P, 8, 0.5, 68),
       KOtrab: Riso.dots(T, 13, 0.20, 40, '#000'),
@@ -281,12 +281,12 @@
 
     /* layer labels */
     chipLabel('PDL', 78, 838);
-    ko(T, (c) => txt(c, 'cementum', 78, 966, FG(700, 30), { ls: '1px', keep: true }));
+    chipLabel('cementum', 78, 966);
     chipLabel('dentin', 78, 1124);
   }
 
   function clock(t) {
-    const a = seg(t, 5.3, 5.65, ease.outBack); if (a <= 0) return;
+    const a = seg(t, 5.3, 5.65, ease.outBack); if (a <= 0.004) return;
     const cx = 884, cy = 432, R = 92 * a;
     for (const c of [T, P]) ko(c, (k) => circ(k, cx, cy, R + 9));
     const th = seg(t, 5.65, 8.3, ease.inOut) * TAU * 0.9;
@@ -323,21 +323,21 @@
     const cause = seg(t, 2.02, 2.16, ease.out) * (1 - seg(t, 2.78, 2.96, ease.inOut));
     const up = seg(t, 2.9, 3.6, ease.out), dn = seg(t, 5.25, 6.7, ease.inOut);
     const act = 0.74 * up * (1 - dn) + 0.03 * Math.sin(t * 9) * up * (1 - dn);
-    gauge(cause, act, t < 2.95 ? '' : (t < 6.45 ? 'working' : 'stopped'), t < 6.45 ? seg(t, 2.95, 3.2, ease.out) : seg(t, 6.45, 6.7, ease.out));
+    gauge(cause, act, t < 2.95 ? '' : (t < 6.2 ? 'working' : 'stopped'), t < 6.2 ? seg(t, 2.95, 3.2, ease.out) : seg(t, 6.2, 6.45, ease.out));
     sourceLine(t, 2.6, 99, 'Abbott & Lin, Dent Traumatol 2022');
     schematic();
   }
 
   /* ================= SHEET 2 · pressure resorption (whole tooth) ================= */
-  const TO = { cx: 492, cy: 1008 };
+  const TO = { cx: 492, cy: 992 }, TOOTH_L = 340;
   const UV = (() => { const a = -38 * Math.PI / 180; return [Math.cos(a), Math.sin(a)]; })();
 
   /** tooth outline from a half-width profile. v = distance from the cervix toward the apex. Crown points down. */
   function toothGeom(cx, cy, s, blunt, scoop) {
-    const L0 = 385 * s, rw = 74 * s, cw = 90 * s, ch = 196 * s;
-    const wall = (v) => rw * (1 - 0.72 * Math.pow(clamp(v / L0), 1.4));
-    const vEnd = L0 * (1 - 0.19 * blunt), r = lerp(26, 19, blunt) * s, vb = vEnd - r, A = wall(vb);
-    const vq = 0.52 * L0, hq = 66 * s * (0.55 + 0.45 * scoop), dq = 27 * s * scoop;
+    const L0 = TOOTH_L * s, rw = 82 * s, cw = 114 * s, ch = 210 * s;
+    const wall = (v) => rw * (1 - 0.76 * Math.pow(clamp(v / L0), 1.7));
+    const vEnd = L0 * (1 - 0.19 * blunt), r = lerp(24, 20, blunt) * s, vb = vEnd - r, A = wall(vb);
+    const vq = 0.5 * L0, hq = 70 * s * (0.55 + 0.45 * scoop), dq = 30 * s * scoop;
     const dep = (v) => { const u = (v - vq) / hq; return Math.abs(u) >= 1 ? 0 : dq * Math.pow(1 - u * u, 1.3); };
     const hwR = (v) => wall(v) - dep(v);
     const N = 44, left = [], right = [], cap = [];
@@ -347,17 +347,17 @@
     const root = new Path2D(), all = new Path2D();
     pts.forEach((p, i) => { if (i) { root.lineTo(p[0], p[1]); all.lineTo(p[0], p[1]); } else { root.moveTo(p[0], p[1]); all.moveTo(p[0], p[1]); } });
     root.closePath();
-    all.bezierCurveTo(cx + rw + 14 * s, cy + 0.2 * ch, cx + cw + 4 * s, cy + 0.5 * ch, cx + cw, cy + 0.8 * ch);
-    all.quadraticCurveTo(cx + cw - s, cy + ch, cx + cw - 24 * s, cy + ch);
-    all.lineTo(cx - cw + 24 * s, cy + ch);
-    all.quadraticCurveTo(cx - cw + s, cy + ch, cx - cw, cy + 0.8 * ch);
-    all.bezierCurveTo(cx - cw - 4 * s, cy + 0.5 * ch, cx - rw - 14 * s, cy + 0.2 * ch, cx - rw, cy);
+    all.bezierCurveTo(cx + rw + 5 * s, cy + 0.1 * ch, cx + cw + 7 * s, cy + 0.36 * ch, cx + cw, cy + 0.7 * ch);
+    all.quadraticCurveTo(cx + cw - 2 * s, cy + ch, cx + cw - 34 * s, cy + ch);
+    all.lineTo(cx - cw + 22 * s, cy + ch);
+    all.quadraticCurveTo(cx - cw + s, cy + ch, cx - cw, cy + 0.78 * ch);
+    all.bezierCurveTo(cx - cw - 7 * s, cy + 0.36 * ch, cx - rw - 5 * s, cy + 0.1 * ch, cx - rw, cy);
     all.closePath();
     // pulp: chamber in the crown, canal tapering to just short of the apex
-    const canal = new Path2D(), vC = vb - 10 * s, v0 = -0.44 * ch, cl = [], cr = [];
+    const canal = new Path2D(), vC = vb - 10 * s, v0 = -0.4 * ch, cl = [], cr = [];
     const cwf = (v) => {
-      if (v < 0) { const q = (v - v0) / -v0; return s * (19 * Math.pow(q, 0.5) + 8 * Math.sin(q * Math.PI)); }
-      let w = s * (4 + 15 * Math.pow(1 - v / L0, 1.3));
+      if (v < 0) { const q = (v - v0) / -v0; return s * (21 * Math.pow(q, 0.3) + 11 * Math.sin(q * Math.PI)); }
+      let w = s * (4 + 17 * Math.pow(1 - v / L0, 1.3));
       if (v > vC - 10 * s) w *= Math.sqrt(Math.max(0, 1 - Math.pow((v - (vC - 10 * s)) / (10 * s), 2)));
       return w;
     };
@@ -367,26 +367,28 @@
     return { all, root, canal, cap, scoopPts, hwR, wall, vq, hq, vb, r, A, vEnd, L0, rw, cw, ch, cx, cy, s };
   }
   function canineGeom(tip) {
-    const hwc = (a) => (a < 170 ? 80 * Math.pow(Math.sin(Math.min(1, a / 170) * Math.PI / 2), 0.62) : a < 235 ? lerp(80, 60, ease.smooth((a - 170) / 65)) : lerp(60, 34, clamp((a - 235) / 330)));
-    const loc = (a, b) => [tip[0] + UV[0] * a - UV[1] * b, tip[1] + UV[1] * a + UV[0] * b];
-    const s1_ = [], s2_ = [];
-    for (let a = 0; a <= 620; a += 5) { const w = hwc(a); s1_.push(loc(a, w)); s2_.push(loc(a, -w)); }
-    const body = new Path2D(); [...s1_, ...s2_.reverse()].forEach((p, i) => (i ? body.lineTo(p[0], p[1]) : body.moveTo(p[0], p[1]))); body.closePath();
-    // enamel cap line (DEJ) inside the crown
-    const dej = new Path2D();
-    for (let a = 26; a <= 232; a += 6) { const w = Math.max(0, hwc(a) - 17) * (a < 60 ? (a - 26) / 34 : 1); const p = loc(a, w); a === 26 ? dej.moveTo(p[0], p[1]) : dej.lineTo(p[0], p[1]); }
-    for (let a = 232; a >= 26; a -= 6) { const w = Math.max(0, hwc(a) - 17) * (a < 60 ? (a - 26) / 34 : 1); const p = loc(a, -w); dej.lineTo(p[0], p[1]); }
-    dej.closePath();
-    return { body, dej, loc };
+    const sm = ease.smooth;
+    const hwc = (a) => (a < 78 ? 68 * Math.pow(a / 78, 0.82) : a < 150 ? lerp(68, 84, sm((a - 78) / 72)) : a < 232 ? lerp(84, 58, sm((a - 150) / 82)) : lerp(58, 30, clamp((a - 232) / 340)));
+    const K = 0.82, loc = (a, b) => [tip[0] + (UV[0] * a - UV[1] * b) * K, tip[1] + (UV[1] * a + UV[0] * b) * K];
+    const A1 = [], A2 = [];
+    for (let a = 0; a <= 700; a += 4) { const w = hwc(a); A1.push(loc(a, w)); A2.push(loc(a, -w)); }
+    const body = new Path2D(); [...A1, ...A2.reverse()].forEach((p, i) => (i ? body.lineTo(p[0], p[1]) : body.moveTo(p[0], p[1]))); body.closePath();
+    // dentin core of the crown (inside the enamel cap)
+    const dw = (a) => Math.max(0, hwc(a) - 19) * Math.min(1, (a - 30) / 40);
+    const D1 = [], D2 = [];
+    for (let a = 30; a <= 236; a += 4) { D1.push(loc(a, dw(a))); D2.push(loc(a, -dw(a))); }
+    const dej = new Path2D(); [...D1, ...D2.reverse()].forEach((p, i) => (i ? dej.lineTo(p[0], p[1]) : dej.moveTo(p[0], p[1])));
+    const crown = new Path2D(); [loc(-60, -220), loc(236, -220), loc(236, 220), loc(-60, 220)].forEach((p, i) => (i ? crown.lineTo(p[0], p[1]) : crown.moveTo(p[0], p[1]))); crown.closePath();
+    return { body, dej, crown, loc };
   }
   function miniClast(x, y, ang, sc, ph) {
     if (sc <= 0.03) return;
-    const a = 25 * sc, b = 14.5 * sc, ca = Math.cos(ang), sa = Math.sin(ang), pth = new Path2D(), n = 20;
+    const a = 31 * sc, b = 18 * sc, ca = Math.cos(ang), sa = Math.sin(ang), pth = new Path2D(), n = 20;
     for (let i = 0; i < n; i++) { const th = i / n * TAU, k = 1 + 0.11 * Math.sin(th * 5 + ph), lx = Math.cos(th) * a * k, ly = Math.sin(th) * b * k; const X = x + lx * ca - ly * sa, Y = y + lx * sa + ly * ca; i ? pth.lineTo(X, Y) : pth.moveTo(X, Y); }
     pth.closePath();
     ko(T, (c) => { c.lineWidth = 5; c.fill(pth); c.stroke(pth); });
     ink(P); P.fill(pth);
-    ink(T); for (const k of [-0.46, 0.02, 0.48]) circ(T, x + ca * a * k, y + sa * a * k, 4.4 * sc);
+    ink(T); for (const k of [-0.46, 0.02, 0.48]) circ(T, x + ca * a * k, y + sa * a * k, 5.2 * sc);
   }
 
   function s2(t) {
@@ -428,9 +430,9 @@
 
     /* impacted canine: position (slides in along its axis, presses, later moves away) */
     const wq = [cx + g.hwR(g.vq), cy - g.vq];
-    const gap = 9 + 205 * (1 - st.cin) + 130 * st.cout - 2 * st.pulse * st.cin;
+    const gap = 9 + 205 * (1 - st.cin) + 76 * st.cout - 2 * st.pulse * st.cin;
     const tip = [wq[0] + UV[0] * gap, wq[1] + UV[1] * gap], can = canineGeom(tip);
-    ko(T, (c) => { c.lineWidth = 28; c.stroke(can.body); c.fill(can.body); });   // crypt
+    ko(T, (c) => { c.lineWidth = 24; c.stroke(can.body); c.fill(can.body); });   // crypt
 
     /* gingiva */
     const gy = (x) => cy + 34 - 44 * Math.exp(-Math.pow((x - cx) / 108, 2));
@@ -442,7 +444,7 @@
     /* the tooth */
     ko(P, (c) => c.fill(gt.all)); ko(T, (c) => c.fill(gt.all));
     P.fillStyle = PAT.Pdent; P.fill(gt.all);
-    ko(P, (c) => { c.save(); c.beginPath(); c.rect(0, cy - st.push + 10, W, 400); c.clip(); c.lineWidth = 36; c.stroke(gt.all); c.restore(); });   // enamel
+    ko(P, (c) => { c.save(); c.clip(gt.all); c.beginPath(); c.rect(0, cy - st.push + 12, W, 400); c.clip(); c.lineWidth = 40; c.stroke(gt.all); c.restore(); });   // enamel
     ink(P); P.fill(gt.canal);                                         // pulp: the same living pink throughout
     ink(T); T.lineWidth = 6; T.stroke(gt.all);
 
@@ -464,37 +466,37 @@
     }
 
     /* bracket + archwire */
-    const by = cy - st.push + 0.63 * 196;
+    const by = cy - st.push + 0.66 * gt.ch;
     if (st.bracket > 0.02) {
       const k = st.bracket, bw = 70 * k, bh = 58 * k;
       ko(P, (c) => { rr(c, cx - bw / 2 - 2, by - bh / 2 - 2, bw + 4, bh + 4, 9 * k); c.fill(); });
       ink(T); rr(T, cx - bw / 2, by - bh / 2, bw, bh, 9 * k); T.fill();
       ko(T, (c) => { c.fillRect(cx - bw / 2 - 1, by - 8 * k, bw + 2, 16 * k); c.fillRect(cx - 4 * k, by - bh / 2 - 1, 8 * k, bh + 2); });
     }
-    if (st.wire < 0.99) { T.save(); T.beginPath(); T.rect(0, by - 20, (W + 10) * (1 - st.wire), 40); T.clip(); ink(T); T.lineWidth = 7; T.lineCap = 'butt'; T.beginPath(); T.moveTo(-10, by); T.lineTo(W + 10, by); T.stroke(); T.restore(); }
+    if (st.wire < 0.99) { const x0 = cx - 176, x1 = x0 + 352 * (1 - st.wire); ink(T); T.lineWidth = 8; T.lineCap = 'round'; T.beginPath(); T.moveTo(x0, by); T.lineTo(x1, by); T.stroke(); }
 
     /* canine drawn */
     P.fillStyle = PAT.Pdent; P.fill(can.body);
-    ko(P, (c) => { c.save(); c.clip(can.body); c.fill(can.dej); c.restore(); });
-    P.save(); P.clip(can.dej); P.fillStyle = PAT.Pdent; P.fillRect(0, Y0, W, Y1 - Y0); P.restore();
-    ko(P, (c) => { c.save(); c.clip(can.body); c.lineWidth = 15; c.stroke(can.dej); c.restore(); });
-    ink(T); T.lineWidth = 6; T.stroke(can.body);
+    ko(P, (c) => { c.save(); c.clip(can.body); c.fill(can.crown); c.restore(); });        // enamel cap = bare paper
+    P.save(); P.clip(can.body); P.fillStyle = PAT.Pdent; P.fill(can.dej); P.restore();
+    ink(T); T.lineWidth = 3; T.stroke(can.dej);
+    T.lineWidth = 6; T.stroke(can.body);
 
     /* force arrows (pink), teal knocked out beneath */
     if (st.pressing > 0.02) {
-      const k = st.pressing, ax = cx - 196, y0 = cy + 196 - 10 * st.pulse, y1 = y0 - 132 * k;
+      const k = st.pressing, ax = cx - 236, y0 = cy + 214 - 10 * st.pulse, y1 = y0 - 136 * k;
       ko(T, (c) => arrow(c, ax, y0 + 3, ax, y1 - 4, 44, 96, 62 * k));
       ink(P); arrow(P, ax, y0, ax, y1, 36, 86, 56 * k);
       // squeeze marks over the apex
       ink(P); P.lineWidth = 7; P.lineCap = 'round';
       const ay = gt.cy - gt.vb;
-      for (let i = 0; i < 2; i++) { const rr_ = gt.r + 30 + i * 17 + 4 * st.pulse; P.globalAlpha = k; P.beginPath(); P.arc(cx, ay, rr_, -Math.PI / 2 - 0.62 + i * 0.12, -Math.PI / 2 + 0.62 - i * 0.12); P.stroke(); }
+      for (let i = 0; i < 2; i++) { const rr_ = gt.r + 26 + i * 16 + 4 * st.pulse; P.globalAlpha = k; P.beginPath(); P.arc(cx, ay, rr_, -Math.PI / 2 - 0.62 + i * 0.12, -Math.PI / 2 + 0.62 - i * 0.12); P.stroke(); }
       P.globalAlpha = 1;
     }
     if (st.on2 > 0.02) {
-      const k = st.on2, a0 = can.loc(214 - 8 * st.pulse, 0), a1 = can.loc(214 - 8 * st.pulse - 138 * k, 0);
-      ko(T, (c) => arrow(c, a0[0], a0[1], a1[0], a1[1], 40, 90, 56 * k));
-      ink(P); arrow(P, a0[0], a0[1], a1[0], a1[1], 34, 82, 52 * k);
+      const k = st.on2, a0 = can.loc(226 - 8 * st.pulse, 0), a1 = can.loc(226 - 8 * st.pulse - 150 * k, 0);
+      ko(T, (c) => arrow(c, a0[0], a0[1], a1[0], a1[1], 36, 80, 50 * k));
+      ink(P); arrow(P, a0[0], a0[1], a1[0], a1[1], 30, 72, 46 * k);
     }
 
     /* clastic cells at the pressed surfaces */
@@ -515,14 +517,14 @@
   function sheet2(t) {
     header('2', 'PRESSURE', 1);
     macro(t);
-    labelWipe(t, 9.45, 13.3, 60, 1160, 230, () => txt(T, 'ortho force', 264, 1160, FG(700, 32), { align: 'right', ls: '1px' }));
-    labelWipe(t, 10.9, 13.3, 660, 960, 320, () => chipLabel('impacted tooth', 690, 960));
+    labelWipe(t, 9.45, 13.3, 40, 1166, 230, () => txt(T, 'ortho force', 228, 1166, FG(700, 32), { align: 'right', ls: '1px' }));
+    labelWipe(t, 10.9, 13.3, 660, 944, 320, () => chipLabel('impacted tooth', 690, 944));
     caption(t, 9.2, 13.15, [[{ s: 'Pressure', hl: 1 }, ' keeps'], ['them working']]);
     caption(t, 13.3, 99, [['Pressure off', ARW, { s: 'it stops.', hl: 1 }], [{ s: 'A shortened root stays short.', font: FG(700, 46) }]], 56);
     const cause = seg(t, 9.28, 9.44, ease.out) * (1 - seg(t, 13.12, 13.3, ease.inOut));
     const up = seg(t, 9.55, 10.3, ease.out), dn = seg(t, 13.7, 15.0, ease.inOut);
     const act = 0.86 * up * (1 - dn) + 0.03 * Math.sin(t * 9) * up * (1 - dn);
-    gauge(cause, act, t < 9.6 ? '' : (t < 14.75 ? 'working' : 'stopped'), t < 14.75 ? seg(t, 9.6, 9.85, ease.out) : seg(t, 14.75, 15.0, ease.out));
+    gauge(cause, act, t < 9.6 ? '' : (t < 14.5 ? 'working' : 'stopped'), t < 14.5 ? seg(t, 9.6, 9.85, ease.out) : seg(t, 14.5, 14.75, ease.out));
     sourceLine(t, 9.3, 13.2, 'Fuss et al., Dent Traumatol 2003');
     sourceLine(t, 13.4, 99, 'Patel et al., Int Endod J 2022');
     schematic();
@@ -538,7 +540,7 @@
     txt(T, o.num, x0 + 38, y0 + hb / 2 + 13, FT(36), { align: 'center' });
     ko(T, (c) => { txt(c, o.title, x0 + 74, y0 + 44, FT(34), { keep: true }); if (o.sub) txt(c, o.sub, x0 + 74 + tw(o.title, FT(34)) + 12, y0 + 43, FG(600, 30), { keep: true }); });
     // the radiograph
-    const cx = x0 + w / 2, s = 0.66, cyv = y0 + hb + 36 + 385 * s, crest = cyv - 16, top = y0 + hb;
+    const cx = x0 + w / 2, s = 0.7, cyv = y0 + hb + 42 + TOOTH_L * s, crest = cyv - 16, top = y0 + hb;
     const g = toothGeom(cx, cyv, s, o.blunt, 0);
     for (const c of [T, P]) { c.save(); c.clip(frame); c.beginPath(); c.rect(x0, top, w, h - hb); c.clip(); }
     ko(P, (c) => c.fillRect(x0, top, w, crest - top));                               // bone = teal only (mid-gray)
@@ -549,12 +551,12 @@
     for (const c of [T, P]) { c.save(); c.beginPath(); c.rect(x0, top, w, crest - top); c.clip(); ink(c); c.lineWidth = 9; c.stroke(g.root); c.restore(); }   // PDL space (dark)
     ko(P, (c) => c.fill(g.all)); ko(T, (c) => c.fill(g.all));
     T.fillStyle = PAT.Tfilm; T.fill(g.all);
-    ko(T, (c) => { c.save(); c.beginPath(); c.rect(x0, cyv + 6, w, 300); c.clip(); c.lineWidth = 24; c.stroke(g.all); c.restore(); });   // enamel (brightest)
+    ko(T, (c) => { c.save(); c.clip(g.all); c.beginPath(); c.rect(x0, cyv + 8, w, 300); c.clip(); c.lineWidth = 28; c.stroke(g.all); c.restore(); });   // enamel (brightest)
     ink(T); T.lineWidth = 3; T.stroke(g.all);
     ko(T, (c) => c.fill(g.canal)); ink(P); P.fill(g.canal);                           // pulp drawn alive
     if (o.bracket) {
-      const by = cyv + 0.63 * 196 * s;
-      for (const c of [T, P]) ko(c, (k) => { rr(k, cx - 23, by - 19, 46, 38, 6); k.fill(); k.fillRect(x0, by - 3, w, 6); });
+      const by = cyv + 0.66 * g.ch;
+      for (const c of [T, P]) ko(c, (k) => { rr(k, cx - 25, by - 20, 50, 40, 6); k.fill(); k.lineWidth = 6; k.lineCap = 'round'; k.beginPath(); k.moveTo(cx - 128, by); k.lineTo(cx + 128, by); k.stroke(); });
     }
     if (o.ring > 0) {
       const ay = cyv - g.vb + 4, a0 = -Math.PI * 0.5, a1 = a0 + TAU * o.ring;

@@ -1,0 +1,51 @@
+{
+  "id": "26",
+  "slug": "26-primary-vs-persistent",
+  "title": "Primary vs persistent: who lives in the canal",
+  "style": "Collectible trading cards",
+  "topic": "How the flora of an untreated necrotic pulp differs from that of a previously treated tooth, and where E. faecalis really stands.",
+  "duration": 24.0,
+  "claims": [
+    {
+      "claim": "PRIMARY = untreated necrotic pulp; PERSISTENT = survived treatment; SECONDARY = got in during or after treatment",
+      "source": "Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1:2009 (PMID 21523208; full text)"
+    },
+    {
+      "claim": "Primary infection: 10-20 taxa per canal (molecular studies)",
+      "source": "Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1:2009 (PMID 21523208; full text, text and Table 1; review-level range)"
+    },
+    {
+      "claim": "Primary deck: Gram-negative and Gram-positive genera mixed, nine anaerobes and one facultative Streptococcus (genus names, Gram colour, anaerobe/facultative badges)",
+      "source": "Genus lists and Gram: Siqueira & Rôças, J Oral Microbiol 2009 (PMID 21523208); mix dominated by obligate anaerobes: Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-51 (PMID 17546861); per-genus oxygen tolerance and shape: abstracts listed in NOTES.md"
+    },
+    {
+      "claim": "Treatment removes most of the deck; what is left is mostly Gram-positive (two violet cards cross the line)",
+      "source": "Siqueira JF Jr & Rôças IN, J Endod 2008;34:1291-1301.e3 (PMID 18928835; abstract)"
+    },
+    {
+      "claim": "Previously treated tooth: 1-5 taxa per canal (adequately treated; culture + PCR)",
+      "source": "Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1:2009 (PMID 21523208; full text); Siqueira JF Jr et al., PLoS One 2016;11:e0162887 (PMID 27689802; full text)"
+    },
+    {
+      "claim": "E. faecalis: often found, rarely dominant; qPCR, 29 teeth: found in 11, dominant in 1",
+      "source": "Rôças IN & Siqueira JF Jr, J Clin Microbiol 2012;50:1721-4 (PMID 22403423; full text); 'often found' = prevalence 24-77%: Stuart CH et al., J Endod 2006;32:93-8 (PMID 16427453)"
+    },
+    {
+      "claim": "Primary: mostly obligate anaerobes, Gram - and +",
+      "source": "Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-51 (PMID 17546861); Byström A & Sundqvist G, Scand J Dent Res 1981;89:321-8 (PMID 6947391)"
+    },
+    {
+      "claim": "Persistent/secondary: more facultatives, mostly Gram + (culture findings), sometimes yeast",
+      "source": "Pinheiro ET et al., Int Endod J 2003;36:1-11 (PMID 12656508); Molander A et al., Int Endod J 1998;31:1-7 (PMID 9823122); Siqueira & Rôças, J Oral Microbiol 2009 (PMID 21523208); yeast: Mergoni G et al., J Endod 2018;44:1616-1625.e9 (PMID 30241680)"
+    },
+    {
+      "claim": "Culture + PCR picture; sequencing finds more in both",
+      "source": "Siqueira JF Jr et al., PLoS One 2016;11:e0162887 (PMID 27689802); Manoil D et al., Proteomics Clin Appl 2020;14:e1900060 (PMID 31950679)"
+    },
+    {
+      "claim": "Which cards are dealt, how many survive the sweep, card order and pip meters",
+      "source": "Toy model / schematic: labelled on screen 'schematic decks'; icons are textbook morphology, not to scale"
+    }
+  ],
+  "caption": "Who lives in the canal? Depends on whether the tooth was treated.\n\nPrimary (untreated necrotic pulp): about 10-20 taxa per canal in molecular studies, mostly obligate anaerobes, Gram - and +.\nPreviously treated: 1-5 taxa if adequately treated, more facultatives, mostly Gram + by culture, sometimes yeast.\nPersistent = survived treatment; secondary = got in during or after it.\nE. faecalis: by qPCR in 11 of 29 treated teeth, dominant in 1. Sequencing finds more taxa in both.\n\nRefs: Siqueira & Rôças 2009, J Oral Microbiol; Rôças & Siqueira 2012, J Clin Microbiol; Siqueira 2016, PLoS One\nSchematic animation.\n\n#endodontics #endo #microbiology #rootcanal #endoresident #boardreview"
+}
