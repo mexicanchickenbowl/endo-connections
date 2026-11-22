@@ -477,7 +477,7 @@
       X.macrophage(520, 256, 46, { seed: 8, ph, vac: 1 }); X.lymphocyte(634, 276, 30, 'B'); X.plasma(790, 262, 34, { rot: 0.4 });
       // osteoclasts on the bone surface
       const y1 = yF(215, E) - 10, sag1 = Math.max(8, yF(XO, E) - yF(215, E) + 6);
-      const fo = act * (1 - seg(lt, 1.9, 2.5));
+      const fo = act * (1 - seg(lt, 1.85, 2.15));
       if (fo > 0.02 && !X.isPencil()) { c.save(); c.globalAlpha = Math.min(1, fo * 1.5); X.focusLines(XO, 640, 330, 330 + 90 * act, 26, 9, P.K, 1.5); c.restore(); }
       X.osteoclast(852, yF(790, E) - 6, 150, 74, { act, ph, seed: 5, nuc: 3, sag: Math.max(6, yF(852, E) - yF(790, E)) });
       X.osteoclast(XO, y1, 584, 164, { act, ph, seed: 2, nuc: 7, sag: sag1 });

@@ -185,9 +185,9 @@
     // 2 · patency: a fine file passes through the canal terminus
     () => {
       g2((c) => root(c, 0, -96, 40, 52, 16), IVORY);
-      g2((c) => root(c, 0, -96, 42, 15, 6.5), CANAL, { lead: 3 });
-      g2((c) => { c.moveTo(-4, -96); c.lineTo(4, -96); c.lineTo(1.6, 64); c.lineTo(-1.6, 64); c.closePath(); }, '#e6edf7', { lead: 2.4, mottle: 0.3 });
-      p2((c) => { for (let y = -84; y < 30; y += 9) { c.moveTo(-3, y); c.lineTo(3, y + 4); } }, 1.3, '#2c3648');
+      g2((c) => root(c, 0, -96, 42, 19, 7.5), CANAL, { lead: 3 });
+      g2((c) => { c.moveTo(-6, -96); c.lineTo(6, -96); c.lineTo(2.6, 60); c.lineTo(0, 70); c.lineTo(-2.6, 60); c.closePath(); }, '#eef3fb', { lead: 2, mottle: 0.25, streak: 0.2, hi: 0.3, lo: 0.1 });
+      p2((c) => { for (let y = -86; y < 44; y += 13) { const w = lerp(4.6, 2.2, (y + 86) / 130); c.moveTo(-w, y); c.lineTo(w, y + 6); } }, 1.2, '#2c3648');
     },
     // 3 · apical extent of the preparation measured against the radiographic apex
     () => {
@@ -217,7 +217,7 @@
     // 6 · root-filling quality as seen on the radiograph: a dense, even filling
     () => {
       g2(DISC, '#17223f', { lead: 0, R: 90 });
-      g2((c) => root(c, 0, -96, 62, 45, 14), '#6f8cc0');
+      g2((c) => root(c, 0, -96, 62, 45, 14), '#5a79b4');
       g2((c) => root(c, 0, -96, 50, 14, 5), '#fffbe8', { lead: 3, mottle: 0.2, streak: 0.2, hi: 0.3, lo: 0.08 });
     },
     // 7 · final coronal restoration over the root-filled tooth
@@ -490,7 +490,7 @@
     for (let k = 0; k < N; k++) if (lit[k] > 0.004) { ctx.globalAlpha = (0.3 + 0.05 * act[k]) * lit[k]; ctx.drawImage(paneBloom[k + 1], ox, oy, OS, OS); }
     // shafts of light
     for (let k = 0; k < N; k++) {
-      const a = (0.62 * act[k] + 0.13 * fin * (1 - out)) * lit[k];
+      const a = (0.5 * act[k] + 0.13 * fin * (1 - out)) * lit[k];
       if (a < 0.004) continue;
       const [mx, my] = medPx(k);
       ctx.save(); ctx.translate(mx, my); ctx.rotate(0.2 + 0.03 * Math.sin(t * 0.7 + k)); ctx.globalAlpha = a; ctx.drawImage(beams[k + 1], -230, 10); ctx.restore();
@@ -552,7 +552,7 @@
   window.REEL = {
     title: 'Seven factors in periapical healing',
     duration: +DUR.toFixed(2),
-    poster: +(TALL + 3.2).toFixed(2),
+    poster: +(TALL + 4.5).toFixed(2),
     canvas,
     fonts: ['600 82px Fraunces', '700 104px Fraunces', '500 50px Fraunces', 'italic 400 36px Fraunces', 'italic 500 30px Fraunces',
       '600 30px Inter', '500 24px Inter', '400 23px Inter'],

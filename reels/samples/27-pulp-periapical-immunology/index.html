@@ -15,6 +15,8 @@
  * Reel 27 — silent comic strip. One printed page (masthead, six panels, takeaway banner); the camera reads it
  * panel by panel and pulls back to the whole page. Page space = final screen space (1080 x 1920).
  * Everything is a pure function of t.
+ * Lettering rules: a close-up caption belongs to the panel the camera is on and leaves with the camera; the page
+ * captions (30 px) appear only after the takeaway is complete; boxes that fade are composited as one layer.
  */
 const { canvas, ctx: mainCtx } = Kit.createCanvas();
 let ctx = mainCtx;                                           // swapped to an offscreen layer while a box fades (see faded())
@@ -46,8 +48,8 @@ const ARR = [1.12, 4.07, 7.92, 11.47, 15.62, 19.62];        // local clock of ea
 const INKT = [0.42, 4.07, 7.92, 11.47, 15.62];              // ink wipe: panel 1 is inked on the page view, before the dive
 const TB = 19.55, TL = [19.95, 20.50, 20.95];               // banner drop, takeaway lines (line 3 lands after the file is in)
 const TPC = 21.3;                                           // page captions come up once the takeaway is complete
-const textOut = (t) => seg(t, D - 0.48, D - 0.28);          // all lettering leaves before the loop
-const banOut = (t) => seg(t, D - 0.42, D - 0.18);           // banner slides back off
+const textOut = (t) => seg(t, D - 0.48, D - 0.28);          // page captions + footnote leave before the loop
+const banOut = (t) => seg(t, D - 0.46, D - 0.2);            // the banner slides back off with its lettering (one composited layer)
 const wipeOut = (i, t) => { const a = D - 0.36 + 0.03 * (i % 3) + 0.02 * ((i / 3) | 0); return seg(t, a, a + 0.26); };   // inks wiped back to blue pencil
 
 function view(t) {
@@ -203,7 +205,7 @@ function banner(t, tf) {
   ctx.lineWidth = 2.6; ctx.strokeStyle = PB; ctx.setLineDash([10, 7]); ctx.strokeRect(b.x, b.y, b.w, b.h);
   ctx.beginPath(); [52, 102, 140, 186].forEach((dy) => { ctx.moveTo(b.x + 22, b.y + dy); ctx.lineTo(b.x + 700, b.y + dy); }); ctx.globalAlpha = 0.6; ctx.stroke(); ctx.globalAlpha = 1; ctx.setLineDash([]);
   const u = seg(t, TB, TB + 0.42), out = banOut(t); if (u <= 0 || out >= 1) return;
-  const to = 1 - textOut(t), dy = (1 - ease.outBack(u)) * 170 + ease.in(out) * 210;       // drops in, slides back off for the loop
+  const dy = (1 - ease.outBack(u)) * 170 + ease.in(out) * 210;                           // drops in, slides back off for the loop
   faded(clamp(u * 3) * clamp((1 - out) * 2.5), tf, () => {
     ctx.save(); ctx.translate(0, dy);
     box(b.x, b.y, b.w, b.h, { fill: INK.Y, drop: 8 });
@@ -213,9 +215,9 @@ function banner(t, tf) {
     ctx.lineWidth = 5; ctx.strokeStyle = INK.K; ctx.strokeRect(b.x, b.y, b.w, b.h);
     const L = ['The lesion contains the infection.', 'It can\u2019t reach the canal.'];
     ctx.font = '700 43px "Comic Neue"'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.fillStyle = INK.K;
-    L.forEach((s, i) => { const a = seg(t, TL[i], TL[i] + 0.22); if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a * to; ctx.fillText(s, b.x + 28 - 18 * (1 - ease.out(a)), b.y + 54 + i * 50); ctx.restore(); });
+    L.forEach((s, i) => { const a = seg(t, TL[i], TL[i] + 0.22); if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a; ctx.fillText(s, b.x + 28 - 18 * (1 - ease.out(a)), b.y + 54 + i * 50); ctx.restore(); });
     const a3 = seg(t, TL[2], TL[2] + 0.3);
-    if (a3 > 0) { ctx.save(); ctx.globalAlpha *= clamp(a3 * 2) * to; X.sfx(['TREATMENT CAN.'], b.x + 30, b.y + 183, 74, { fill: INK.white, rot: -0.018, s: lerp(1.25, 1, ease.out(a3)) }); ctx.restore(); }
+    if (a3 > 0) { ctx.save(); ctx.globalAlpha *= clamp(a3 * 2); X.sfx(['TREATMENT CAN.'], b.x + 30, b.y + 183, 74, { fill: INK.white, rot: -0.018, s: lerp(1.25, 1, ease.out(a3)) }); ctx.restore(); }
     ctx.restore();
   });
   ctx.setTransform(...tf);
