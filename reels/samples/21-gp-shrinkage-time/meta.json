@@ -24,7 +24,7 @@
     },
     {
       "claim": "After 24 h: stamp NO DATA FOUND, ruler 'days ?', stopwatch reads '>24 h' (no volume data found for heated GP)",
-      "source": "Literature search of PubMed abstracts, no study found (RESEARCH.md L4); not a claim that it was never measured. Wong M, Peters DD, Lorton L, J Endod 1981;7:551-8 (PMID 6985547) has no abstract and was not read. Indirect long-term data point to expansion: Wu 2000 (PMID 11307452; abstract), Michaud RA et al., J Endod 2008;34:1528-32 (PMID 19026888; abstract)"
+      "source": "Literature search of PubMed abstracts, no study found (RESEARCH.md L4); not a claim that it was never measured. Wong M, Peters DD, Lorton L, J Endod 1981;7:551-8 (PMID 6985547) has no abstract and was not read. Indirect long-term data point to expansion: Wu MK, Fan B, Wesselink PR, Int Endod J 2000;33:121-5 (PMID 11307452; abstract), Michaud RA et al., J Endod 2008;34:1528-32 (PMID 19026888; abstract)"
     },
     {
       "claim": "Compact it warm (in vitro): warm vertical compaction (Schilder technique) more than compensated for shrinkage on cooling; not tested against the hours-long tail",
@@ -39,5 +39,5 @@
       "source": "Toy model / schematic: curve shapes and the split between phases are drawn, not measured; the time axis is a composite of two bench experiments; no y-scale; the canal views are illustrations (no cited study measured a wall gap)"
     }
   ],
-  "caption": "Warm gutta-percha: when does it stop shrinking?\n\nCooling 75→37 °C: 1.0–2.3% linear shrinkage in 10 min. At 37 °C: 45 min–10 h more by product, then stable to 24 h; Goodman's thesis (Schilder 1985): contraction through 24 h. Past 24 h: no volume data found; indirect data hint at expansion.\nBench data on free GP; crystallization inferred. In vitro, warm vertical compaction offset cooling shrinkage; injected GP sealed better with sealer. Neither covers the late tail.\n\nRefs: Lottanti 2014, Lee 1997, Grassi 1989, J Endod; Schilder 1985, OOO; Marlin 1971 BU thesis; Bradshaw 1989, Wu 2000, Int Endod J\nSchematic animation: no wall gap measured.\n\n#endodontics #endo #guttapercha #obturation #rootcanal"
+  "caption": "Warm gutta-percha: when does it stop shrinking?\n\nCooling 75→37 °C: 1.0–2.3% linear shrinkage in 10 min. At 37 °C: 45 min–10 h more by product, then stable to 24 h; Goodman's thesis: contraction through 24 h. Past 24 h: no volume data found; indirect data hint at expansion.\nBench data on free GP; crystallization inferred. In vitro, warm vertical compaction offset cooling shrinkage; injected GP sealed better with sealer. Neither covers the late tail.\n\nRefs: Lottanti 2014, Lee 1997, Grassi 1989, J Endod; Goodman 1973, Marlin 1971, BU theses; Schilder 1985, OOO; Bradshaw 1989, Wu 2000, Int Endod J\nSchematic animation: no wall gap measured.\n\n#endodontics #endo #guttapercha #obturation #rootcanal"
 }

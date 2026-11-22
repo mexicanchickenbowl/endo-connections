@@ -274,14 +274,15 @@
 
   // ------------------------------------------------------------------ roster
   // Gram stain: genus lists in Siqueira & Rôças, J Oral Microbiol 2009. Oxygen tolerance and shape: see RESEARCH.md section (i).
+  // Citation audit: each shape word is the word in the cited abstract (no 'short' / 'small': those size adjectives are not in the abstracts).
   const ROSTER = {
     fuso: { name: 'Fusobacterium', gram: 'neg', o2: 'an', icon: 'spindles', shape: 'spindle-shaped' },
-    parvi: { name: 'Parvimonas', gram: 'pos', o2: 'an', icon: 'cocci', shape: 'small cocci' },
-    porph: { name: 'Porphyromonas', gram: 'neg', o2: 'an', icon: 'rodsPlump', shape: 'short rods' },
-    olsen: { name: 'Olsenella', gram: 'pos', o2: 'an', icon: 'rodsChain', shape: 'short rods' },
+    parvi: { name: 'Parvimonas', gram: 'pos', o2: 'an', icon: 'cocci', shape: 'cocci' },
+    porph: { name: 'Porphyromonas', gram: 'neg', o2: 'an', icon: 'rodsPlump', shape: 'rods' },
+    olsen: { name: 'Olsenella', gram: 'pos', o2: 'an', icon: 'rodsChain', shape: 'rods' },
     trepo: { name: 'Treponema', gram: 'neg', o2: 'an', icon: 'spiro', shape: 'spirochetes' },
-    prevo: { name: 'Prevotella', gram: 'neg', o2: 'an', icon: 'rodsShort', shape: 'short rods' },
-    tanne: { name: 'Tannerella', gram: 'neg', o2: 'an', icon: 'fusiform', shape: 'fusiform rods' },
+    prevo: { name: 'Prevotella', gram: 'neg', o2: 'an', icon: 'rodsShort', shape: 'rods' },
+    tanne: { name: 'Tannerella', gram: 'neg', o2: 'an', icon: 'fusiform', shape: 'fusiform' },
     pseud: { name: 'Pseudoramibacter', gram: 'pos', o2: 'an', icon: 'rodsSlender', shape: 'rods' },
     strep: { name: 'Streptococcus', gram: 'pos', o2: 'fac', icon: 'chains', shape: 'cocci in chains' },
     diali: { name: 'Dialister', gram: 'neg', o2: 'an', icon: 'coccobacilli', shape: 'coccobacilli' },

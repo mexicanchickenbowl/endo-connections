@@ -24,6 +24,9 @@ import { T } from './timeline.js';
 const { canvas: out, ctx } = Kit.createCanvas();
 const glc = document.createElement('canvas'); glc.width = Kit.W; glc.height = Kit.H;
 let S = null;
+// The stills/video tool first sweeps the timeline in 0.25 s steps only to make the browser load every font face.
+// That sweep needs the 2-D text, not the (slow, software-GL) 3-D pass, so the 3-D render is skipped for it.
+let calls = 0, warmK = 0, warming = !!window.__RENDER__;
 
 window.REEL = {
   title: 'From X-ray to pixel',
@@ -34,7 +37,9 @@ window.REEL = {
   setup() { S = buildScene(glc); window.__S = S; },
   render(t) {
     t = Kit.clamp(t, 0, T.dur - 1e-4);
-    const A = S.update(t);
+    let skip3d = false; calls++;
+    if (warming && calls > 1) { if (Math.abs(t - warmK * 0.25) < 1e-6) { skip3d = true; warmK++; } else warming = false; }
+    const A = S.update(t, skip3d);
     drawBackground(ctx);
     ctx.drawImage(glc, 0, 0);
     drawOverlay(ctx, t, A);

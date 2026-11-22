@@ -16,7 +16,7 @@ const lin = (hex) => { const c = new THREE.Color(hex); return [c.r, c.g, c.b]; }
 /* ---------- palette (linear RGB for the sprite shader) ---------- */
 const C = {
   xray: lin(0xff8a00), xrayHot: lin(0xffd27a),
-  light: lin(0x0fc463), lightHot: lin(0xe9fff1),
+  light: lin(0x00b956), lightHot: lin(0xe9fff1),
   charge: lin(0x1f7dff), chargeHot: lin(0x8fd4ff),
   data: lin(0xffffff),
   laser: lin(0xff2a1f), violet: lin(0x6a4dff), violetHot: lin(0xcfc6ff),
@@ -34,8 +34,8 @@ const LAY = {                                       // local y of each layer's u
 };
 const ORDER = ['lid', 'scint', 'fop', 'chip', 'pcb'];
 const YAW_M = 27 * DEG;                             // where the monitor stands (in front of the stack, toward the camera)
-const FWD = new THREE.Vector3(Math.sin(YAW_M), 0, Math.cos(YAW_M));
-const DART_V = 9;                                   // world units / s
+const FWD = new THREE.Vector3(Math.sin(YAW_M), 0, Math.cos(YAW_M)), LAT = new THREE.Vector3(Math.cos(YAW_M), 0, -Math.sin(YAW_M));
+const DART_V = 9, DART_T = 0.3;                                   // world units / s
 const PLATE_TOP = 0.205;                            // PSP phosphor surface (bed 0.14 + plate 0.065)
 
 /* camera keys: t, yaw°, elevation°, px per world unit at the target, target screen x / y, target world y, easing into this key */
@@ -44,8 +44,8 @@ const CAM = [
   [T.explode[0], 37.5, 30, 150, 540, 1085, 0.5, 0],
   [T.explode[1], 30, 25, 95, 705, 765, 3.6, 1],
   [T.sensorOut[0], 25.5, 25, 95, 705, 765, 3.6, 0],
-  [T.pspIn[1], 25, 32, 112, 742, 770, 1.4, 1],
-  [T.family[0], 22, 32, 112, 742, 770, 1.4, 0],
+  [T.pspIn[1], 25, 32, 101, 728, 800, 1.4, 1],
+  [T.family[0], 22.5, 32, 101, 728, 800, 1.4, 0],
   [T.family[1], 23, 25, 95, 705, 765, 3.6, 1],
   [T.loop[0], 21, 25, 95, 705, 765, 3.6, 0],
   [T.loop[1], 40, 30, 150, 540, 1085, 0.5, 1],
@@ -170,10 +170,11 @@ export function buildScene(glc) {
   renderer.toneMapping = THREE.NeutralToneMapping; renderer.toneMappingExposure = 1.0;
   const scene = new THREE.Scene();
   const pmrem = new THREE.PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 0.8;
+  const ENV = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  const env = (m, k = 0.8) => { m.envMap = ENV; m.envMapIntensity = k; return m; };
   const key = new THREE.DirectionalLight(0xffffff, 2.3); key.position.set(-7, 14, 9); scene.add(key);
   const rim = new THREE.DirectionalLight(0xdfe8ff, 0.9); rim.position.set(9, 6, -10); scene.add(rim);
-  scene.add(new THREE.HemisphereLight(0xffffff, 0xc9d1dc, 0.5));
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xc9d1dc, 1.15));
   const camera = new THREE.PerspectiveCamera(20, W / H, 2, 300);
 
   const R = buildRadiograph();
@@ -182,17 +183,17 @@ export function buildScene(glc) {
   const S = (o) => new THREE.MeshStandardMaterial(o);
   const P = QS.get('phys') === '0' ? (o) => { const c = { ...o }; delete c.clearcoat; delete c.clearcoatRoughness; return new THREE.MeshStandardMaterial(c); } : (o) => new THREE.MeshPhysicalMaterial(o);
   const M = {
-    shell: P({ color: 0x2a2e36, roughness: 0.44, clearcoat: 0.4, clearcoatRoughness: 0.42 }),
+    shell: env(P({ color: 0x2a2e36, roughness: 0.44, clearcoat: 0.4, clearcoatRoughness: 0.42 })),
     shellIn: S({ color: 0x17191e, roughness: 0.85 }),
-    accent: S({ color: 0x8c96a4, roughness: 0.35, metalness: 0.85 }),
-    silver: S({ color: 0xc5cbd4, roughness: 0.32, metalness: 0.9 }),
-    chipBody: S({ color: 0x1a2033, roughness: 0.3, metalness: 0.45 }),
+    accent: env(S({ color: 0x8c96a4, roughness: 0.35, metalness: 0.85 })),
+    silver: env(S({ color: 0xc5cbd4, roughness: 0.32, metalness: 0.9 })),
+    chipBody: env(S({ color: 0x1a2033, roughness: 0.3, metalness: 0.45 })),
     pcbBody: S({ color: 0x0f2f29, roughness: 0.6 }),
     ic: S({ color: 0x17191d, roughness: 0.45 }),
-    gold: S({ color: 0xe0ad4a, roughness: 0.3, metalness: 1.0 }),
+    gold: env(S({ color: 0xe0ad4a, roughness: 0.3, metalness: 1.0 })),
     cable: S({ color: 0x24272d, roughness: 0.5 }),
-    glass: P({ color: 0xa9c0d8, roughness: 0.1, transparent: true, opacity: 0.46, depthWrite: false }),
-    bezel: S({ color: 0x25282e, roughness: 0.32, metalness: 0.7 }),
+    glass: env(S({ color: 0x9fbcd9, roughness: 0.1, transparent: true, opacity: 0.5, depthWrite: false }), 1.0),
+    bezel: env(S({ color: 0x25282e, roughness: 0.32, metalness: 0.7 })),
   };
 
   /* ---------- soft contact shadows (pre-blurred textures on the floor) ---------- */
@@ -274,7 +275,7 @@ export function buildScene(glc) {
   bars.position.y = LAY.chip.h + 0.003; bars.frustumCulled = false; chip.add(bars);
   { const lo = new THREE.Color(0x1a3fd0), hi = new THREE.Color(0x53d2ff), c = new THREE.Color(), m = bars.instanceMatrix.array; m.fill(0);
     for (let k = 0; k < GW * GH; k++) { bars.setColorAt(k, c.lerpColors(lo, hi, Math.pow(R.E[k], 1.1))); m[k * 16 + 15] = 1; } bars.instanceColor.needsUpdate = true; }
-  const BAR_H = 0.82, bw = cw * 0.56;
+  const BAR_H = 0.66, bw = cw * 0.56;
   const rowLine = mesh(new THREE.BoxGeometry(AW + 0.12, 0.014, cw * 0.9), new THREE.MeshBasicMaterial({ color: 0xbff0ff, toneMapped: false }), chip, LAY.chip.h + 0.012);
 
   // fiber-optic plate: glass block, vertical fibers inside, fiber ends on top
@@ -287,7 +288,7 @@ export function buildScene(glc) {
     const top = mesh(flatPlane(3.6, 2.72), new THREE.MeshBasicMaterial({ map: dots, transparent: true, opacity: 0.42, depthWrite: false }), fop, LAY.fop.h + 0.003); top.renderOrder = 4; }
 
   // scintillator screen
-  const scintMat = S({ color: 0xa6dcbf, roughness: 0.8, emissive: 0x18c26a, emissiveIntensity: 0,
+  const scintMat = S({ color: 0xbfe6cf, roughness: 0.8, emissive: 0x18c26a, emissiveIntensity: 0,
     map: canvasTex(256, 256, (g) => { const im = g.createImageData(256, 256); for (let i = 0; i < 256 * 256; i++) { const v = 222 + hash(i, 5) * 33; im.data[i * 4] = im.data[i * 4 + 1] = im.data[i * 4 + 2] = v; im.data[i * 4 + 3] = 255; } g.putImageData(im, 0, 0); }) });
   scintMat.map.wrapS = scintMat.map.wrapT = THREE.RepeatWrapping; scintMat.map.repeat.set(3, 3);
   const scint = new THREE.Group(); sensor.add(scint); mesh(slabGeo(3.72, 2.84, LAY.scint.h, 0.1, 0.012), scintMat, scint);
@@ -304,18 +305,19 @@ export function buildScene(glc) {
   /* ---------- ghost teeth (the object in the beam) ---------- */
   const ghost = new THREE.Group(); scene.add(ghost);
   const gMat = {
-    body: P({ color: 0xf1e9d8, roughness: 0.35, transparent: true, opacity: 0.6, depthWrite: false }),
-    enamel: P({ color: 0xffffff, roughness: 0.18, clearcoat: 0.6, transparent: true, opacity: 0.82, depthWrite: false }),
-    pulp: S({ color: 0xe07f7f, roughness: 0.6, transparent: true, opacity: 0.75, depthWrite: false }),
+    body: S({ color: 0xf3e9d2, roughness: 0.55, transparent: true, opacity: 0.9, depthWrite: false }),
+    enamel: S({ color: 0xffffff, roughness: 0.3, transparent: true, opacity: 0.96, depthWrite: false }),
+    pulp: S({ color: 0xe58a86, roughness: 0.6, transparent: true, opacity: 0.9, depthWrite: false }),
   };
-  { const toW = (xf) => (x, y) => { const p = xf(x, y); return [(p[0] / RW - 0.5) * AW, -(p[1] / RH - 0.5) * AD]; };
-    const ext = (shape, depth, bevel, y, mat, order) => { const g = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: bevel > 0, bevelThickness: bevel, bevelSize: bevel, bevelOffset: -bevel * 0.6, bevelSegments: 4, curveSegments: 12 }); g.rotateX(-Math.PI / 2); const m = new THREE.Mesh(g, mat); m.position.y = y + bevel; m.renderOrder = order; ghost.add(m); };
+  const G_OP = { body: 0.9, enamel: 0.96, pulp: 0.9 }, G_H = 0.1;
+  { const toW = (p) => [(p[0] / RW - 0.5) * AW, -(p[1] / RH - 0.5) * AD];
+    const ext = (shape, depth, bevel, mat, order) => { const g = new THREE.ExtrudeGeometry(shape, { depth: depth - 2 * bevel, bevelEnabled: bevel > 0, bevelThickness: bevel, bevelSize: bevel, bevelOffset: -bevel, bevelSegments: 2, curveSegments: 14 }); g.rotateX(-Math.PI / 2); const m = new THREE.Mesh(g, mat); m.position.y = bevel; m.renderOrder = order; ghost.add(m); };
     for (const t of TEETH) {
-      const mk = (cmds) => { const s = new THREE.Shape(); trace(s, cmds, toW(t.xf)); return s; };
-      for (const p of t.pulp) ext(mk(p), 0.12, 0, 0.16, gMat.pulp, 5);
-      for (const cn of t.canals) { const s = new THREE.Shape(); R.canalPoly(cn, toW(t.xf)).forEach((p, i) => (i ? s.lineTo(p[0], p[1]) : s.moveTo(p[0], p[1]))); s.closePath(); ext(s, 0.1, 0, 0.17, gMat.pulp, 5); }
-      ext(mk(t.out), 0.3, 0.07, 0, gMat.body, 6);
-      ext(mk(t.en), 0.34, 0.07, -0.02, gMat.enamel, 7);
+      const mk = (cmds) => { const sh = new THREE.Shape(); trace(sh, cmds, (x, y) => toW(t.xf(x, y))); return sh; };
+      ext(mk(t.out), 0.07, 0.02, gMat.body, 5);
+      for (const p of t.pulp) ext(mk(p), 0.078, 0, gMat.pulp, 6);
+      for (const cn of t.canals) { const sh = new THREE.Shape(); R.canalPoly(cn, t.xf).map(toW).forEach((p, i) => (i ? sh.lineTo(p[0], p[1]) : sh.moveTo(p[0], p[1]))); sh.closePath(); ext(sh, 0.078, 0, gMat.pulp, 6); }
+      ext(mk(t.en), G_H, 0.025, gMat.enamel, 7);
     } }
 
   /* ---------- the small screen ---------- */
@@ -326,7 +328,7 @@ export function buildScene(glc) {
     const bz = new THREE.Mesh(panelGeo(4.24, 3.24, 0.16, 0.18), M.bezel); bz.position.set(0, 1.62, -0.08); tilt.add(bz);
     const sp = new THREE.Mesh(new THREE.PlaneGeometry(3.96, 2.97), new THREE.MeshBasicMaterial({ map: scrTex, toneMapped: false })); sp.position.set(0, 1.62, 0.083); tilt.add(sp);
     mesh(slabGeo(1.7, 1.0, 0.07, 0.2, 0.02), M.bezel, mon, 0).position.z = -0.25;
-    const neck = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.5, 0.1), M.bezel); neck.position.set(0, 0.3, -0.2); neck.rotation.x = -9 * DEG; mon.add(neck); }
+    const neck = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.26, 0.1), M.bezel); neck.position.set(0, 0.19, -0.17); mon.add(neck); }
 
   /* =====================================================================================
    *  PSP plate + schematic scanner
@@ -336,7 +338,7 @@ export function buildScene(glc) {
   mesh(slabGeo(4.24, 3.24, 0.006, 0.36, 0, [4.14, 3.14, 0.33]), M.accent, psp, 0.139);
   const plate = new THREE.Group(); plate.rotation.order = 'YXZ'; scene.add(plate);
   mesh(slabGeo(4.1, 3.1, 0.05, 0.32, 0.012), S({ color: 0x1b2740, roughness: 0.5 }), plate, 0);
-  const phosMat = P({ color: 0xe6ecfa, roughness: 0.42, clearcoat: 0.25, clearcoatRoughness: 0.5, emissive: 0xffffff, emissiveIntensity: 0 });
+  const phosMat = env(S({ color: 0xeef2fc, roughness: 0.4, emissive: 0xffffff, emissiveIntensity: 0 }), 0.9);
   mesh(slabGeo(4.0, 3.0, 0.015, 0.28, 0.004), phosMat, plate, 0.05);
   { const d = mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.004, 20), M.accent, plate, 0.066); d.position.set(1.72, 0.066, 1.24); }
 
@@ -364,13 +366,14 @@ export function buildScene(glc) {
   const scanLine = new THREE.Mesh(new THREE.BoxGeometry(AW + 0.3, 0.004, 0.03), new THREE.MeshBasicMaterial({ color: 0xff4a3a, toneMapped: false })); scene.add(scanLine);
   const pspCable = makeCable(M.cable); scene.add(pspCable.mesh);
 
-  // erase lamp
+  // erase lamp: a ring light, so the plate stays visible through it
   const lamp = new THREE.Group(); scene.add(lamp);
-  const lampMat = S({ color: 0xf2f3f5, roughness: 0.5, emissive: 0xfff4cc, emissiveIntensity: 0 });
-  mesh(slabGeo(4.5, 3.5, 0.16, 0.34, 0.03), M.shell, lamp, 0.02);
-  mesh(slabGeo(4.2, 3.2, 0.03, 0.26, 0.008), lampMat, lamp, 0);
-  const coneMat = new THREE.MeshBasicMaterial({ color: 0xffefb0, transparent: true, opacity: 0, depthWrite: false, toneMapped: false });
-  const cone = new THREE.Mesh(new THREE.BoxGeometry(4.15, 1, 3.15), coneMat); cone.renderOrder = 8; scene.add(cone);
+  const lampMat = S({ color: 0xf2f3f5, roughness: 0.5, emissive: 0xfff1bd, emissiveIntensity: 0 });
+  mesh(slabGeo(5.0, 4.0, 0.16, 0.45, 0.03, [3.86, 2.86, 0.24]), M.shell, lamp, 0);
+  mesh(slabGeo(4.06, 3.06, 0.2, 0.3, 0.01, [3.78, 2.78, 0.2]), lampMat, lamp, -0.03);
+  const LAMP_Y = 1.35;
+  const coneMat = new THREE.MeshBasicMaterial({ color: 0xffe9a0, transparent: true, opacity: 0, depthWrite: false, toneMapped: false });
+  const cone = new THREE.Mesh(slabGeo(3.96, 2.96, 1, 0.27, 0), coneMat); cone.renderOrder = 8; scene.add(cone);
 
   /* ---------- particles ---------- */
   const fl = new Sprites(1700, true, 9), bb = new Sprites(900, false, 10); scene.add(fl.mesh, bb.mesh);
@@ -422,7 +425,7 @@ export function buildScene(glc) {
   /* =====================================================================================
    *  update(t): pose everything, render, return projected anchors for the 2-D labels
    * ===================================================================================== */
-  function update(t) {
+  function update(t, skip3d) {
     /* camera */
     const [yawD, elD, Spx, cx, cy, ty] = camAt(t);
     const yaw = yawD * DEG, el = elD * DEG, dist = (H / 2) / (Spx * Math.tan(10 * DEG));
@@ -431,8 +434,9 @@ export function buildScene(glc) {
     camera.setViewOffset(W, H, -(cx - W / 2), -(cy - H / 2), W, H); camera.updateMatrixWorld();
 
     /* sensor pose */
-    const sx = 15 * io(seg(t, T.sensorOut[0] + 0.2, T.sensorOut[1])) - 15 * io(seg(t, T.family[0], T.family[1]));
-    const sy = 2.35 * io(seg(t, T.family[0], T.family[1])) * (1 - io(seg(t, T.loop[0], T.loop[0] + 0.55)));
+    const ret = io(seg(t, T.family[0] - 0.15, T.family[0] + 0.5));                 // the sensor returns for the end card
+    const sx = 15 * io(seg(t, T.sensorOut[0] + 0.2, T.sensorOut[1])) - 15 * ret;
+    const sy = 2.35 * ret * (1 - io(seg(t, T.loop[0], T.loop[0] + 0.55)));
     sensor.position.set(sx, sy, 0);
     const Y = {}; ORDER.forEach((n, i) => { Y[n] = lerp(LAY[n].c, LAY[n].o, layerE(i, t)); });
     lid.position.y = Y.lid; scint.position.y = Y.scint; fop.position.y = Y.fop; chip.position.y = Y.chip; pcb.position.y = Y.pcb;
@@ -442,9 +446,10 @@ export function buildScene(glc) {
     /* monitor */
     const kIn = io(seg(t, T.monitorIn[0], T.monitorIn[1])), kOut = io(seg(t, T.family[0], T.family[0] + 0.7));
     const kM = lerp(lerp(24, 9, kIn), 26, kOut);
-    mon.position.set(FWD.x * kM, 0, FWD.z * kM); mon.visible = kM < 23.5;
+    const lat = -0.8 * io(seg(t, T.sensorOut[0], T.pspIn[1])) * (1 - kOut);
+    mon.position.set(FWD.x * kM + LAT.x * lat, 0, FWD.z * kM + LAT.z * lat); mon.visible = kM < 23.5;
     drawScreen(t);
-    const monBase = tB.set(FWD.x * (kM - 0.55), 0, FWD.z * (kM - 0.55));
+    const monBase = tB.set(mon.position.x - FWD.x * 0.55, 0, mon.position.z - FWD.z * 0.55);
 
     /* PSP rig */
     const px = -16 * (1 - io(seg(t, T.pspIn[0], T.pspIn[1]))) - 16 * io(seg(t, T.family[0], T.family[0] + 0.65));
@@ -471,14 +476,14 @@ export function buildScene(glc) {
     // plate: on the bed, then lifted and tilted toward the camera for the end card, then out
     const pe = io(seg(t, T.family[0] + 0.05, T.family[1])), pOut = io(seg(t, T.loop[0], T.loop[0] + 0.5));
     const pxPlate = -16 * (1 - io(seg(t, T.pspIn[0], T.pspIn[1])));
-    plate.position.set(lerp(pxPlate, FWD.x * 6.6, pe) + 16 * pOut, lerp(0.14, 1.75, pe), lerp(0, FWD.z * 6.6, pe));
+    plate.position.set(lerp(pxPlate, FWD.x * 6.6 - LAT.x * 0.4, pe) + 16 * pOut, lerp(0.14, 1.75, pe), lerp(0, FWD.z * 6.6 - LAT.z * 0.4, pe));
     plate.rotation.y = YAW_M * pe; plate.rotation.x = 50 * DEG * pe; plate.visible = pxPlate > -15.9 && pOut < 0.999;
     // erase lamp
     const lampIn = io(seg(t, T.eraseIn[0], T.eraseIn[1])), lampOut = io(seg(t, T.family[0] - 0.05, T.family[0] + 0.5));
     const glow = Kit.env(t, T.eraseGlow[0], T.eraseGlow[1], 0.25, 0.3);
-    lamp.position.set(px, lerp(11, 1.75, lampIn) + 10 * lampOut, 0); lamp.visible = lampIn > 0 && lampOut < 1;
-    lampMat.emissiveIntensity = 2.2 * glow; phosMat.emissiveIntensity = 0.1 * glow;
-    cone.visible = glow > 0.01; cone.position.set(px, (PLATE_TOP + 1.75) / 2, 0); cone.scale.y = 1.75 - PLATE_TOP; coneMat.opacity = 0.2 * glow;
+    lamp.position.set(px, lerp(11, LAMP_Y, lampIn) + 10 * lampOut, 0); lamp.visible = lampIn > 0 && lampOut < 1;
+    lampMat.emissiveIntensity = 2.4 * glow; phosMat.emissiveIntensity = 0.12 * glow;
+    cone.visible = glow > 0.01; cone.position.set(px, PLATE_TOP + 0.01, 0); cone.scale.y = LAMP_Y - PLATE_TOP - 0.02; coneMat.opacity = 0.26 * glow;
 
     /* ghost teeth */
     let gO, gx, gy;
@@ -486,13 +491,13 @@ export function buildScene(glc) {
     else if (t < 20) { gO = seg(t, T.pspIn[1] - 0.3, T.pspExpose[0]) * (1 - seg(t, T.pspExpose[1] + 0.05, T.pspExpose[1] + 0.4)); gx = px; gy = 1.6; }
     else { gO = seg(t, T.loop[0] + 0.3, T.loop[1] - 0.1); gx = sx; gy = sy + Y.lid + LAY.lid.h + 0.75; }
     ghost.visible = gO > 0.01; ghost.position.set(gx, gy, 0);
-    gMat.body.opacity = 0.6 * gO; gMat.enamel.opacity = 0.82 * gO; gMat.pulp.opacity = 0.75 * gO;
+    gMat.body.opacity = G_OP.body * gO; gMat.enamel.opacity = G_OP.enamel * gO; gMat.pulp.opacity = G_OP.pulp * gO;
 
     /* cables */
     const cA = tA.set(sx + BOSS.x, sy + BOSS.y, BOSS.z);
     let cB;
-    if (t < T.family[0]) cB = v3.set(monBase.x + sx, 0, monBase.z);
-    else { const w = io(seg(t, T.loop[0], T.loop[0] + 0.6)); cB = v3.set(lerp(sx + 11, FWD.x * 23, w), 0, lerp(2.4, FWD.z * 23, w)); }
+    if (t < T.family[0] - 0.15) cB = v3.set(monBase.x + sx, 0, monBase.z);
+    else { const w = io(seg(t, T.loop[0], T.loop[0] + 0.6)); cB = v3.set(lerp(sx + 11, FWD.x * 23.45, w), 0, lerp(2.4, FWD.z * 23.45, w)); }
     const sCurve = sensorCable.set(cA, DIRX, cB);
     sensorCable.mesh.visible = sx < 14.9;
     pspCable.mesh.visible = psp.visible;
@@ -518,7 +523,7 @@ export function buildScene(glc) {
     rowLine.visible = rf > 0 && rf < GH; if (rowLine.visible) rowLine.position.z = rowZ(Math.floor(rf));
 
     /* shadows */
-    shSensor.position.set(sx, 0.003, 0); shSensor.material.opacity = 0.62 - 0.2 * eLid - 0.12 * (sy / 2.35); shSensor.scale.setScalar(1 + 0.12 * eLid + 0.1 * (sy / 2.35)); shSensor.visible = sx < 14.9;
+    shSensor.position.set(sx, 0.003, 0); shSensor.material.opacity = 0.62 - 0.2 * eLid - 0.3 * (sy / 2.35); shSensor.scale.setScalar(1 + 0.12 * eLid + 0.1 * (sy / 2.35)); shSensor.visible = sx < 14.9;
     shMon.position.set(mon.position.x, 0.003, mon.position.z - 0.2); shMon.rotation.y = YAW_M; shMon.visible = mon.visible; shMon.material.opacity = 0.5;
     shPsp.position.set(px, 0.003, 0); shPsp.visible = psp.visible; shPsp.material.opacity = 0.6;
     shPlate.position.set(plate.position.x, 0.003, plate.position.z - 0.5); shPlate.rotation.y = YAW_M; shPlate.visible = pe > 0.02 && plate.visible; shPlate.material.opacity = 0.34 * pe;
@@ -527,20 +532,25 @@ export function buildScene(glc) {
     fl.begin(); bb.begin();
     // X-ray darts on the sensor (t wraps for the loop: the last 0.75 s replays the approach to t = 0)
     const td = t > T.loop[0] ? t - T.dur : t;
-    const yGhostMid = gy + 0.26, yClip = lerp(yScintBot, yFopTop, seg(t, T.scint + 0.75, T.fop)) + (yFopBot - yFopTop) * seg(t, T.fop + 0.1, T.cmos - 0.25) + (yChipTop - yFopBot) * seg(t, T.cmos - 0.25, T.cmos + 0.1);
+    const yGhostMid = gy + G_H, yClip = lerp(yScintBot, yFopTop, seg(t, T.scint + 0.75, T.fop)) + (yFopBot - yFopTop) * seg(t, T.fop + 0.1, T.cmos - 0.25) + (yChipTop - yFopBot) * seg(t, T.cmos - 0.25, T.cmos + 0.1);
     const flashOn = seg(t, T.scint - 0.2, T.scint + 0.1) * (eLid > 0.9 ? 1 : 0);
     if (td < T.exposeEnd + 0.9 && sx < 1) for (const d of dartsS) {
       const dt = d.t0 - td;
-      if (dt > 0.44) continue;
+      if (dt > DART_T) continue;
       if (dt >= 0) {                                                                // in flight
         const yEnd = d.pass ? yScintTop : yGhostMid, y = yEnd + DART_V * dt;
-        let a = Math.min(1, (0.44 - dt) / 0.1) * 0.95; if (!d.pass) a *= clamp(dt / 0.05);
+        let a = Math.min(1, (DART_T - dt) / 0.09) * 0.95; if (!d.pass) a *= clamp(dt / 0.05);
         bb.add(sx + d.x, y + 0.3, d.z, 0.05, 0.3, C.xray, a, 2); bb.add(sx + d.x, y + 0.04, d.z, 0.03, 0.03, C.xrayHot, a, 0);
       } else if (d.pass && flashOn > 0) {
         const age = -dt;
-        if (age < 0.5) { const u = age / 0.5, s = 0.06 + 0.2 * ease.out(u), a = flashOn * Math.pow(1 - u, 1.3); fl.add(sx + d.x, yScintTop + 0.004, d.z, s, s, C.light, a * 0.9, 0); fl.add(sx + d.x, yScintTop + 0.005, d.z, s * 0.4, s * 0.4, C.lightHot, a, 0); }
-        const yl = yScintBot - 4.6 * (age - 0.03);                                  // visible light heading for the chip
-        if (age > 0.03 && yl > yClip && yl > yChipTop) bb.add(sx + d.x, yl + 0.1, d.z, 0.032, 0.11, C.light, 0.9, 2);
+        if (age < 0.5) { const u = age / 0.5, s = 0.08 + 0.24 * ease.out(u), a = flashOn * Math.pow(1 - u, 1.2); fl.add(sx + d.x, yScintTop + 0.004, d.z, s, s, C.light, a, 0); fl.add(sx + d.x, yScintTop + 0.005, d.z, s * 0.4, s * 0.4, C.lightHot, a, 0); }
+        const yl = yScintBot - 3.4 * (age - 0.03);                                  // visible light heading for the chip
+        if (age > 0.03 && yl > yClip && yl > yChipTop) {
+          bb.add(sx + d.x, yl + 0.15, d.z, 0.042, 0.16, C.light, 0.95, 2);
+          if (yl < yFopTop + 0.1 && yl > yFopBot - 0.25) {                           // the fiber it travels in lights up
+            const yb = Math.max(yFopBot, yClip); if (yFopTop - yb > 0.02) bb.add(sx + d.x, (yFopTop + yb) / 2, d.z, 0.016, (yFopTop - yb) / 2, C.light, 0.75, 3);
+          }
+        }
       }
     }
     scintMat.emissiveIntensity = 0.28 * flashOn * (1 - seg(t, T.exposeEnd, T.exposeEnd + 0.5));
@@ -548,12 +558,12 @@ export function buildScene(glc) {
     // read-out: charge packets leave the chip (blue), numbers leave the ADC (white squares)
     if (t > T.read[0] - 0.1 && t < T.read[1] + 2.2 && sx < 1) {
       const xe = AW / 2 + 0.12, yc = yChipTop + 0.03, yp = yPcbTop + 0.14, zA = ADC.z;
-      for (let te = T.read[0]; te < T.read[1]; te += 0.05) {
+      for (let te = T.read[0]; te < T.read[1]; te += 0.04) {
         const age = t - te; if (age < 0 || age > 1.2) continue;
         const z0 = rowZ(clamp(Math.floor(((te - T.read[0]) / (T.read[1] - T.read[0])) * GH), 0, GH - 1));
         const Pth = [tA.set(xe, yc, z0), tP.set(xe, yc, zA), new THREE.Vector3(xe, yp, zA), new THREE.Vector3(ADC.x + 0.4, yp, zA)];
         const s = age * 5.5, L = polyLen(Pth); if (s > L) continue;
-        polyAt(Pth, s, v3); bb.add(v3.x, v3.y, v3.z, 0.085, 0.085, C.charge, 0.95, 0); bb.add(v3.x, v3.y, v3.z, 0.035, 0.035, C.chargeHot, 1, 1);
+        polyAt(Pth, s, v3); bb.add(v3.x, v3.y, v3.z, 0.12, 0.12, C.charge, 0.95, 0); bb.add(v3.x, v3.y, v3.z, 0.045, 0.045, C.chargeHot, 1, 1);
       }
       if (sCurve) {
         const P2 = [new THREE.Vector3(ADC.x + 0.42, yp, zA), new THREE.Vector3(1.9, yp, BOSS.z), new THREE.Vector3(BOSS.x - 0.3, BOSS.y + 0.2, BOSS.z)];
@@ -578,8 +588,8 @@ export function buildScene(glc) {
         }
       }
       for (const d of dartsP) {
-        const dt = d.t0 - t; if (dt > 0.44 || dt < -0.3) continue;
-        if (dt >= 0) { const yEnd = d.pass ? PLATE_TOP : 1.6 + 0.26, y = yEnd + DART_V * dt; let a = Math.min(1, (0.44 - dt) / 0.1) * 0.95; if (!d.pass) a *= clamp(dt / 0.05);
+        const dt = d.t0 - t; if (dt > DART_T || dt < -0.3) continue;
+        if (dt >= 0) { const yEnd = d.pass ? PLATE_TOP : 1.6 + G_H, y = yEnd + DART_V * dt; let a = Math.min(1, (DART_T - dt) / 0.09) * 0.95; if (!d.pass) a *= clamp(dt / 0.05);
           bb.add(px + d.x, y + 0.3, d.z, 0.05, 0.3, C.xray, a, 2); bb.add(px + d.x, y + 0.04, d.z, 0.03, 0.03, C.xrayHot, a, 0);
         } else if (d.pass) { const u = -dt / 0.3; fl.add(px + d.x, PLATE_TOP + 0.005, d.z, 0.05 + 0.12 * u, 0.05 + 0.12 * u, C.chargeHot, 0.8 * (1 - u), 0); }
       }
@@ -598,12 +608,12 @@ export function buildScene(glc) {
         for (let s = ph; s < Lc; s += gap) { if (s > front || s < tail) continue; pCurve.getPointAt(clamp(s / Lc), v3); bb.add(v3.x, v3.y + 0.07, v3.z, 0.05, 0.05, C.data, 0.95, 3); }
       }
       if (glow > 0.01) for (let k = 0; k < 26; k++) {                                   // erase light raining softly on the plate
-        const u = (t * 1.6 + hash(k, 31)) % 1; bb.add(px + (hash(k, 32) - 0.5) * 3.8, lerp(1.7, PLATE_TOP + 0.1, u), (hash(k, 33) - 0.5) * 2.8, 0.05, 0.2, C.lamp, 0.8 * glow * Math.sin(u * Math.PI), 0);
+        const u = (t * 1.6 + hash(k, 31)) % 1; bb.add(px + (hash(k, 32) - 0.5) * 3.5, lerp(LAMP_Y - 0.1, PLATE_TOP + 0.1, u), (hash(k, 33) - 0.5) * 2.5, 0.05, 0.2, C.lamp, 0.8 * glow * Math.sin(u * Math.PI), 0);
       }
     }
     fl.end(); bb.end();
 
-    renderer.render(scene, camera);
+    if (!skip3d) renderer.render(scene, camera);
 
     /* ---------- anchors for the 2-D overlay (pixels) ---------- */
     const cx0 = sx - OW / 2 + 0.16, cz0 = OD / 2 - 0.16, ix = sx - 1.86 + 0.1, iz = 1.42 - 0.1;
@@ -611,8 +621,8 @@ export function buildScene(glc) {
       lid: proj(cx0, sy + Y.lid + LAY.lid.h, cz0), scint: proj(ix, yScintTop, iz), fop: proj(ix, yFopTop, iz), chip: proj(sx - 1.92 + 0.08, yChipTop, 1.45 - 0.08),
       pcb: proj(sx - 1.95 + 0.14, yPcbTop, 1.45 - 0.14), back: proj(cx0, sy + 0.45, cz0),
       mon: (() => { v3.set(-2.12, 0.3 + 1.62, 0.08).applyEuler(mon.rotation).add(mon.position); return proj(v3.x, v3.y, v3.z); })(),
-      plate: (() => { v3.set(-2.05 + 0.2, 0.066, 1.55 - 0.2).applyEuler(plate.rotation).add(plate.position); return proj(v3.x, v3.y, v3.z); })(),
-      pmt: proj(px + PMT_X, BAR_Y + 1.4, zc), laser: proj(px, LASER_Y + 0.4, zScan), lamp: proj(px - 2.1, lamp.position.y + 0.1, 1.6),
+      plate: (() => { v3.set(-2.05 + 0.2, 0.066, (1.55 - 0.2) * (1 - 2 * pe)).applyEuler(plate.rotation).add(plate.position); return proj(v3.x, v3.y, v3.z); })(),
+      pmt: proj(px + PMT_X, BAR_Y + 1.4, zc), laser: proj(px, LASER_Y + 0.4, zScan), lamp: proj(px - 2.2, lamp.position.y + 0.16, 1.7),
       sensorX: sx, explode: eLid,
     };
   }

@@ -48,7 +48,7 @@ function txt(s, x, y, font, c, align, ls) {
   ctx.letterSpacing = (ls || 0) + 'px'; ctx.fillText(s, x + (align === 'center' ? (ls || 0) / 2 : 0), y); ctx.letterSpacing = '0px';
 }
 function tw(s, font, ls) { ctx.font = font; ctx.letterSpacing = (ls || 0) + 'px'; const w = ctx.measureText(s).width; ctx.letterSpacing = '0px'; return w; }
-function fit(s, maxW, px, fontFn, ls) { let p = px; while (p > 20 && tw(s, fontFn(p), ls) > maxW) p -= 2; return p; }
+function fit(s, maxW, px, fontFn, ls) { let p = px; while (p > 20 && tw(s, fontFn(p), ls) > maxW) p -= 1; return p; }
 /** draw fn() scaled about (x,y) with an overshoot pop; u in 0..1 */
 function popAt(x, y, u, fn) {
   if (u <= 0) return; const k = ease.outBack(clamp(u));
@@ -73,7 +73,7 @@ function shadow(x0, y0, h, fn, a) {
   ctx.beginPath(); ctx.rect(-400, yt, 1900, yb - yt); ctx.clip();
   ctx.translate(x0, y0); ctx.transform(1, 0, -SH_KX, -SH_KY, 0, 0);
   const g = ctx.createLinearGradient(0, 0, 0, -Math.min(h, 125));
-  g.addColorStop(0, `rgba(60,48,70,${a || 0.26})`); g.addColorStop(1, 'rgba(60,48,70,0.03)');
+  g.addColorStop(0, `rgba(60,48,70,${a || 0.34})`); g.addColorStop(1, 'rgba(60,48,70,0.10)');
   ctx.fillStyle = g; fn(); ctx.restore();
 }
 function boxShadow(x, y, w, h, a) { shadow(x, y, h, () => ctx.fillRect(0, -h, w, h), a); }
@@ -140,12 +140,16 @@ function drawGround(cam) {
     if (sk) { circ(x, 1280 - hash(m, 52) * 12, 15 + hash(m, 53) * 9, '#FFDD95'); circ(x + 22, 1290, 12, '#FFD27F'); }         // fat lobules
     else if (hash(m, 54) < 0.6) fillRR(x, BAND_B + 14 + hash(m, 55) * 52, 12 + hash(m, 56) * 20, 8 + hash(m, 57) * 7, 5, hash(m, 58) < 0.5 ? 'rgba(255,235,200,0.35)' : 'rgba(110,70,35,0.3)');
   }
-  // underground
+  // underground: strata, a service main, a conduit, stones
   rect(x0, FACE_B, w, H - FACE_B, C.deep);
+  rect(x0, 1392, w, 86, '#243040'); rect(x0, 1560, w, 120, '#1D2733');
   for (let i = Math.floor(x0 / 90); i < (x0 + w) / 90; i++) {
     const m = ((i % 60) + 60) % 60;
-    fillRR(i * 90 + hash(m, 61) * 60, 1610 + hash(m, 62) * 260, 26 + hash(m, 63) * 50, 14 + hash(m, 64) * 16, 9, C.deep2);
+    fillRR(i * 90 + hash(m, 61) * 60, 1372 + hash(m * 3 + 1, 62, 5) * 500, 22 + hash(m, 63) * 46, 12 + hash(m, 64) * 16, 9, hash(m, 65) < 0.5 ? C.deep2 : '#303E4F');
   }
+  rect(x0, 1418, w, 34, '#34455A'); rect(x0, 1418, w, 7, '#41546B'); rect(x0, 1445, w, 7, '#2A394B');                 // service main
+  for (let i = Math.floor(x0 / 270); i < (x0 + w) / 270; i++) { fillRR(i * 270 + 60, 1410, 22, 50, 5, '#3D5068'); rect(i * 270 + 60, 1410, 22, 7, '#4A5F7A'); }
+  ctx.save(); ctx.setLineDash([26, 14]); ctx.lineDashOffset = 0; line(x0 - (x0 % 40), 1516, x0 + w, 1516, 'rgba(255,122,26,0.42)', 7, 'butt'); ctx.restore();   // conduit
 }
 /** pale site hoarding along the back of a plot (local coords) */
 function fence(x0, x1) {
@@ -194,10 +198,10 @@ function block(x, y, w, h, label, seed, labelPx) {
   fillRR(x, y, w, h, 5, C.conc);
   ctx.save(); rr(x, y, w, h, 5); ctx.clip();
   rect(x, y, w, 9, C.concL); rect(x + w - 12, y, 12, h, C.concD); rect(x, y + h - 8, w, 8, C.concD);
-  const n = Math.round(w * h / 1500);
+  const n = Math.round(w * h / 620);
   for (let i = 0; i < n; i++) {
-    const px = x + 8 + hash(i, seed) * (w - 28), py = y + 16 + hash(i, seed + 1) * (h - 30), r = 2 + hash(i, seed + 2) * 4.5;
-    circ(px, py, r, hash(i, seed + 3) < 0.5 ? 'rgba(125,134,144,0.55)' : 'rgba(225,229,233,0.8)');
+    const px = x + 8 + hash(i * 31 + 7, seed, 101) * (w - 30), py = y + 16 + hash(i * 17 + 3, seed, 211) * (h - 32), r = 1.3 + hash(i * 13 + 1, seed, 307) * 2.6;
+    circ(px, py, r, hash(i * 7 + 5, seed, 401) < 0.55 ? 'rgba(125,134,144,0.5)' : 'rgba(228,232,236,0.85)');
   }
   rect(x, y + h * 0.5, w - 12, 2.5, 'rgba(125,134,144,0.35)');
   ctx.restore();
@@ -262,7 +266,7 @@ const ROLE = {
 };
 function workerShadow(x, y, s) {
   s = s || 1;
-  shadow(x, y, 110 * s, () => { ctx.beginPath(); ctx.roundRect(-14 * s, -84 * s, 28 * s, 84 * s, 8 * s); ctx.fill(); ctx.beginPath(); ctx.arc(0, -96 * s, 14 * s, 0, TAU); ctx.fill(); }, 0.24);
+  shadow(x, y, 110 * s, () => { ctx.beginPath(); ctx.roundRect(-14 * s, -84 * s, 28 * s, 84 * s, 8 * s); ctx.fill(); ctx.beginPath(); ctx.arc(0, -96 * s, 14 * s, 0, TAU); ctx.fill(); }, 0.34);
 }
 /**
  * o: {x,y,s,dir,role,skinI,hairI,leg (swing rad),armF,armB (raise angle: 0 down, PI/2 forward, PI up),bob,

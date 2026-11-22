@@ -4,48 +4,48 @@
   "title": "kVp, mA, time: inside the X-ray tube",
   "style": "Retro control console",
   "topic": "mA sets how many electrons, time how long, kVp how hard each hits (max keV = kVp, plus more photons); ~99% of the energy becomes heat.",
-  "duration": 24.0,
+  "duration": 23.4,
   "claims": [
     {
       "claim": "Toy model / schematic: tube-head cutaway (filament in a focusing cup, tungsten target on a copper anode, aluminum filter, collimator); blue dots = electrons, green wave packets = X-ray photons; not to scale",
-      "source": "Seibert JA. J Nucl Med Technol 2004;32(3):139-47 (PMID 15347692) - full text: thermionic emission, tube current = electrons crossing the gap. Drawing is original and schematic"
+      "source": "Seibert JA. J Nucl Med Technol 2004;32(3):139-47 (PMID 15347692) - full text: thermionic emission from a heated filament, a metal focusing cup at the cathode, tungsten target, tube current = electrons crossing the gap, transformer oil in the tube housing (Fig. 3 caption). The copper anode block is standard textbook tube anatomy and is not in Seibert (textbook excerpt read online at the research stage only, not re-verified); it is drawn, not labeled, and carries no number. Drawing is original and schematic"
     },
     {
-      "claim": "~99% heat (gauge needle follows kV x mA; no units shown)",
+      "claim": "Toy model / schematic: the aluminum filter stops the low-energy photons and the collimator trims the beam",
+      "source": "European Commission. Radiation Protection 136: European guidelines on radiation protection in dental radiology (2004), sect. 4.2 (filtration preferentially removes lower-energy photons; aluminium filtration is an established component of dental X-ray equipment) and sect. 4.3 (Collimation, field-size trimming) - guideline full text. Proportions in the animation follow the toy model, not a measurement"
+    },
+    {
+      "claim": "~99% heat (round teaching figure for diagnostic X-ray tubes in general). Needle = heating rate kV x mA, arbitrary scale, no units shown",
       "source": "Zink FE. Radiographics 1997;17(5):1259-68 (PMID 9308113) - abstract: 1% to X-ray photons, 99% to heat (diagnostic tubes in general). kV x mA (x s) heat unit: Seibert 2004 (PMID 15347692) - full text"
     },
     {
-      "claim": "mA -> how many: more electrons, more photons, same energies (4 -> 8 mA, values illustrative)",
-      "source": "Seibert JA. J Nucl Med Technol 2004;32(3):139-47 (PMID 15347692) - full text; McCollough CH. Radiographics 1997;17(4):967-84 (PMID 9225393) - abstract: quantity proportional to tube current"
+      "claim": "Toy model / schematic: spectrum on the scope = Kramers shape x 2 mm aluminum; right-hand end = kVp (MAX 60 -> 70 keV), height doubles with mA, hump stays near 30 keV; no vertical scale, no characteristic lines drawn (tungsten K lines need >69.5 kV: none at 60, negligible at 70 kVp)",
+      "source": "Toy model built for this reel (NIST aluminum attenuation coefficients); not a measured dental spectrum. End point = kVp and K-line threshold >69.5 kVp: Seibert 2004 (PMID 15347692) - full text. 'Negligible at 70 kVp' is physics reasoning (70 is only 0.5 kV above the threshold), not a sentence read in a source"
     },
     {
-      "claim": "kVp -> how hard: each electron hits harder; max keV = kVp (60 -> 70 kVp, values illustrative)",
+      "claim": "mA -> how many: more electrons, more photons, same energies (4 -> 8 mA, values illustrative)",
+      "source": "Seibert JA. J Nucl Med Technol 2004;32(3):139-47 (PMID 15347692) - full text: a larger filament current releases more electrons; McCollough CH. Radiographics 1997;17(4):967-84 (PMID 9225393) - abstract: quantity proportional to tube current; spectrum shape depends on anode material, tube potential, filtration and waveform (not on tube current)"
+    },
+    {
+      "claim": "kVp -> how hard: max keV = kVp (60 -> 70 kVp, values illustrative); electrons drawn faster with a bigger impact flash",
       "source": "Seibert JA. J Nucl Med Technol 2004;32(3):139-47 (PMID 15347692) - full text: electron kinetic energy (keV) = tube voltage; maximum X-ray energy (keV) set by the peak voltage (kVp)"
     },
     {
-      "claim": "kVp -> + how many: more photons; output ~ kVp squared (electron count unchanged)",
+      "claim": "kVp -> + how many: output ~ kVp squared, i.e. tube output (exposure / air kerma at the port) rises roughly with the square of kVp; electron count unchanged",
       "source": "McCollough CH. Radiographics 1997;17(4):967-84 (PMID 9225393) - abstract; Nickoloff EL, Berman HL. Radiographics 1993;13(6):1337-48 (PMID 8290728) - abstract: output increases by approximately the square of the tube potential"
     },
     {
-      "claim": "kVp up: less image contrast (swatch change exaggerated)",
-      "source": "European Commission. Radiation Protection 136: European guidelines on radiation protection in dental radiology. 2004, sect. 4.1 - guideline full text. Caveat: 60 vs 70 kVp had minimal effect on CMOS sensors in one phantom study (Pita de Melo D et al. Dentomaxillofac Radiol 2026, PMID 42538829 - abstract)"
+      "claim": "kVp up: less image contrast (swatch change exaggerated and drawn density-matched: object tones compress, the directly exposed background stays black)",
+      "source": "European Commission. Radiation Protection 136: European guidelines on radiation protection in dental radiology. 2004, sect. 4.1 - guideline full text. At unchanged mAs the real image would also be darker. Caveat: 60 vs 70 kVp had minimal effect on CMOS sensors in one phantom study (Pita de Melo D et al. Dentomaxillofac Radiol 2026, PMID 42538829 - abstract)"
     },
     {
       "claim": "Time -> how long: same beam, on longer; mAs = mA x s (0.10 s -> 0.80 mAs, 0.20 s -> 1.60 mAs at 8 mA; values illustrative, slow motion)",
       "source": "McCollough CH. Radiographics 1997;17(4):967-84 (PMID 9225393) - abstract: quantity proportional to exposure time; Seibert 2004 (PMID 15347692) - full text: mAs"
     },
     {
-      "claim": "Toy model / schematic: spectrum on the scope = Kramers shape x 2 mm aluminum; right-hand end = kVp (60 -> 70 keV), height doubles with mA, hump stays near 30 keV; no vertical scale, no characteristic lines drawn",
-      "source": "Toy model built for this reel (NIST aluminum attenuation coefficients); not a measured dental spectrum. End point = kVp: Seibert 2004 (PMID 15347692)"
-    },
-    {
-      "claim": "Toy model / schematic: the aluminum filter stops the low-energy photons and the collimator trims the beam",
-      "source": "European Commission. Radiation Protection 136 (2004), sect. 4.2 - guideline full text: filtration preferentially removes lower-energy photons. Proportions in the animation follow the toy model, not a measurement"
-    },
-    {
       "claim": "Cheat sheet: mA -> how many (same energies); kVp -> how hard + how many (max keV = kVp, output ~ kVp squared); time -> how long (mAs = mA x s)",
-      "source": "McCollough 1997, Radiographics (PMID 9225393); Seibert 2004, J Nucl Med Technol (PMID 15347692). On-screen source line: McCollough; Zink, Radiographics 1997 - Seibert, J Nucl Med Technol 2004 - EC RP136 2004"
+      "source": "McCollough 1997, Radiographics (PMID 9225393); Seibert 2004, J Nucl Med Technol (PMID 15347692). On-screen source line: McCollough; Zink, Radiographics 1997 - Seibert, J Nucl Med Technol 2004 - values illustrative"
     }
   ],
-  "caption": "3 knobs. What does each do inside the X-ray tube?\nmA = how many: hotter filament, more electrons, more photons, same energies.\nkVp = how hard: max photon energy (keV) = kVp, and output rises ~kVp². Higher kVp = less contrast (minimal for 60 vs 70 kVp on CMOS sensors in a phantom study).\nTime = how long: same beam, on longer. mAs = mA × s.\n~99% of the energy becomes heat.\nSchematic animation, illustrative settings.\nRefs: McCollough 1997, Zink 1997, Radiographics; Seibert 2004, J Nucl Med Technol; EC Radiation Protection 136 (2004); Pita de Melo 2026, Dentomaxillofac Radiol\n#endodontics #dentalradiology #xray #radiology #endoresident #boardprep"
+  "caption": "3 knobs. What does each do inside the X-ray tube?\nmA = how many: hotter filament, more electrons, more photons, same energies.\nkVp = how hard: max photon energy (keV) = kVp, and tube output rises roughly with kVp². Higher kVp = less contrast (minimal for 60 vs 70 kVp on CMOS sensors in one phantom study).\nTime = how long: same beam, on longer. mAs = mA × s. Many intraoral units fix kV or nearly so; time is the main control.\n~99% of the energy becomes heat.\nSchematic; settings illustrative.\nRefs: McCollough 1997, Zink 1997, Radiographics; Seibert 2004, J Nucl Med Technol; EC RP136 2004; Pita de Melo 2026, Dentomaxillofac Radiol\n#endodontics #dentalradiology #xray #endoresident #boardprep"
 }

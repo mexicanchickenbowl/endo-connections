@@ -8,7 +8,7 @@
   "claims": [
     {
       "claim": "Damaged root surface (luxation, avulsion) + infected canal = inflammatory resorption (end card recap: DAMAGE + INFECTION)",
-      "source": "Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract"
+      "source": "Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract (two phases: injury + stimulation by infection); 'luxation, avulsion' as the typical injuries: Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text"
     },
     {
       "claim": "Toxins via dentinal tubules reach the denuded surface; intact cementum blocks them (schematic; source line says 'Tubule theory: Andreasen 1981')",
@@ -24,19 +24,19 @@
     },
     {
       "claim": "Root + bone resorb: bowl-shaped craters in the root and the facing bone (schematic cutaway, not to scale)",
-      "source": "Abbott PV. Aust Dent J 2016;61 Suppl 1:82-94 (PMID 26923450) - abstract; Lin S et al. Dent Traumatol 2022;38:253-66 (PMID 35559593) - review full text"
+      "source": "Abbott PV. Aust Dent J 2016;61 Suppl 1:82-94 (PMID 26923450) - abstract; Lin S, Moreinos D, Kaufman AY, Abbott PV. Dent Traumatol 2022;38:253-66 (PMID 35559593) - review full text (PMC9546147)"
     },
     {
       "claim": "Months: root can be lost (untreated; review-level statement, tagged '(review)' in the source line)",
-      "source": "Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text"
+      "source": "Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text (PMC9790676; the sentence carries no reference there)"
     },
     {
       "claim": "\"Very rapid in children\" (quoted consensus wording, not a measured rate; the sentence comes from the open-apex paragraph - see caption)",
-      "source": "Fouad AF et al. (IADT). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 10 - guideline full text (read by the research stage in the AAPD Reference Manual reprint; not in PMC)"
+      "source": "Fouad AF et al. (IADT). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 10; same sentence in Bourguignon C et al. (IADT). Dent Traumatol 2020;36:314-30 (PMID 32475015), sect. 13.2 - guideline full text (not in PMC; read in the AAPD Reference Manual reprints, re-read at the citation audit)"
     },
     {
       "claim": "Disinfect the canal + Ca(OH)2 dressing: stimulus cut, resorption arrests; crater is lined, not refilled (schematic)",
-      "source": "Fuss Z et al. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract; Bourguignon C et al. (IADT). Dent Traumatol 2020;36:314-30 (PMID 32475015), sect. 13.3 - guideline full text (research stage)"
+      "source": "Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract; Bourguignon C et al. (IADT). Dent Traumatol 2020;36:314-30 (PMID 32475015), sect. 13.3 - guideline full text (AAPD reprint); repair as a cementum lining: Trope M et al. Endod Dent Traumatol 1995;11:124-8 (PMID 7641628; dogs) - abstract"
     },
     {
       "claim": "97% healed: 192 of 197 resorbing teeth (luxated non-vital maxillary incisors, Ca(OH)2 then GP, radiographic, retrospective); 5 went on to ankylosis",
@@ -44,8 +44,8 @@
     },
     {
       "claim": "Replanted mature (closed-apex) tooth: start root canal treatment within 2 weeks",
-      "source": "Fouad AF et al. (IADT). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 10 - guideline full text (research stage)"
+      "source": "Fouad AF et al. (IADT). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 10 - guideline full text (AAPD Reference Manual reprint, re-read at the citation audit)"
     }
   ],
-  "caption": "External inflammatory (infection-related) resorption after trauma = damaged root surface + infected canal.\nSeen by week 1 (monkey histology); on X-ray usually at ~1 month (replanted human incisors).\nCanal treated: 192 of 197 resorbing teeth healed (luxated non-vital incisors, Ca(OH)2 then GP; radiographic, retrospective; 5 ankylosed).\nIADT 2020: replanted closed-apex tooth, start RCT within 2 weeks. Open apex: RCT only if necrosis/infection is evident; resorption is \"very rapid in children\".\nSchematic animation.\nRefs: Fuss 2003, Fouad 2020 Dent Traumatol; Andreasen 1980 Swed Dent J; Andreasen 1995, Cvek 1992 Endod Dent Traumatol\n#endodontics #dentaltrauma #rootresorption #IADT #boardprep"
+  "caption": "External inflammatory (infection-related) resorption after trauma = damaged root surface + infected canal.\nBy week 1 (monkey histology); on X-ray usually ~1 month (human replants).\n192 of 197 resorbing teeth healed after Ca(OH)2 then GP (luxated non-vital incisors; radiographic, retrospective; 5 ankylosed).\nIADT 2020: replanted closed-apex tooth, start RCT within 2 weeks. Open apex: only if necrosis/infection evident; resorption is \"very rapid in children\".\nSchematic animation.\nRefs: Fuss 2003, Fouad 2020 Dent Traumatol; Andreasen 1980 Swed Dent J, 1981 J Endod; Andreasen 1995, Cvek 1992 Endod Dent Traumatol; Patel 2022 Int Endod J\n#endodontics #dentaltrauma #rootresorption #IADT #boardprep"
 }

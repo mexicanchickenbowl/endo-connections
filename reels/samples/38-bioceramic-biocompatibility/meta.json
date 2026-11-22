@@ -1,0 +1,51 @@
+{
+  "id": "38",
+  "slug": "38-bioceramic-biocompatibility",
+  "title": "Bioceramics: are they osteoinductive?",
+  "style": "Construction site diorama",
+  "topic": "Calcium silicate cements are biocompatible and osteoconductive; osteoinduction rests on cell-culture signals, with ectopic bone not shown.",
+  "duration": 24.0,
+  "claims": [
+    {
+      "claim": "BIOCOMPATIBLE · early inflammation subsides (animal histology)",
+      "source": "Torabinejad & Parirokh, J Endod 2010;36:190-202 (PMID 20113774); Gomes-Filho et al., J Endod 2009;35:256-60 (PMID 19166785); Moretton et al., J Biomed Mater Res 2000;52:528-33 (PMID 11007621): subsided to 'mostly moderate' under rat skin; abstracts"
+    },
+    {
+      "claim": "5 of 6 root ends: cementum over MTA · monkey · 5 months",
+      "source": "Torabinejad et al., J Endod 1997;23:225-8 (PMID 9594770); abstract: complete cementum layer over the filling in five of six MTA root ends, 3 monkeys"
+    },
+    {
+      "claim": "AMALGAM billboard: inflammation stays, no cementum over the filling (picture only)",
+      "source": "Torabinejad et al., J Endod 1997;23:225-8 (PMID 9594770); abstract: all amalgam root ends inflamed, no cementum over the filling (amalgam count not stated)"
+    },
+    {
+      "claim": "OSTEOCONDUCTIVE · bone grows on the surface · MTA implanted in bone (animal histology)",
+      "source": "Definition: Albrektsson & Johansson, Eur Spine J 2001;10 Suppl 2:S96-101 (PMID 11716023). Torabinejad et al., J Endod 1998;24:468-71 (PMID 9693572): guinea-pig tibia, direct bone apposition most often with MTA, no frequency given; abstracts"
+    },
+    {
+      "claim": "apatite layer (in vitro)",
+      "source": "Sarkar et al., J Endod 2005;31:97-100 (PMID 15671817); abstract: hydroxyapatite-like layer on MTA in phosphate-buffered fluid"
+    },
+    {
+      "claim": "OSTEOINDUCTIVE? · immature cells → bone-forming cells",
+      "source": "Albrektsson & Johansson, Eur Spine J 2001;10 Suppl 2:S96-101 (PMID 11716023); abstract: recruitment of immature cells and their stimulation to develop into preosteoblasts"
+    },
+    {
+      "claim": "CELL CULTURE · BMP-2, ALP, osteocalcin rise; Ca²⁺ wired to BMP-2 only",
+      "source": "Maeda et al., J Endod 2010;36:647-52 (PMID 20307738): human PDL cells, 2 donors, calcium from MTA and BMP-2. Peng et al., J Endod 2011;37:1240-6 (PMID 21846540): human pulp cells, tricalcium silicate extract, ALP and osteocalcin; abstracts. Schematic: dials show direction only"
+    },
+    {
+      "claim": "NON-BONY SITE · rat skin · mineral deposits, no bone · ECTOPIC BONE: NOT SHOWN",
+      "source": "Moretton et al., J Biomed Mater Res 2000;52:528-33 (PMID 11007621); abstract: no osteogenesis with subcutaneous MTA at 15-60 days, dystrophic calcification. Strict test: Barradas et al., Eur Cell Mater 2011;21:407-29 (PMID 21604242)"
+    },
+    {
+      "claim": "Verdict: BIOCOMPATIBLE ✓ tissue tolerates it (animal + human histology) · OSTEOCONDUCTIVE ✓ bone grows on it (animal histology)",
+      "source": "Claims 1-4 above; human pulp histology: Nair et al., Int Endod J 2008;41:128-50 (PMID 17956562); 'tissue tolerates it' paraphrases Williams (ed.), Definitions in Biomaterials, 1987 (textbook, wording not checked against the book)"
+    },
+    {
+      "claim": "Verdict: OSTEOINDUCTIVE ? cell-culture signals · ectopic bone: not shown",
+      "source": "Maeda 2010; Peng 2011; Moretton 2000 (rat, the only study found that reports directly on bone at a non-bony site); Barradas 2011"
+    }
+  ],
+  "caption": "Are bioceramics osteoinductive? Depends which definition you use.\nBiocompatible: yes. Early inflammation subsides; cementum covered MTA in 5 of 6 monkey root ends at 5 months (amalgam: none).\nOsteoconductive: yes. Bone forms directly on MTA placed in bone (animal histology).\nOsteoinductive: in cell culture BMP-2, ALP and osteocalcin rise. By the strict test (bone at a non-bony site) it is not shown: under rat skin MTA gave mineral, no bone.\nSchematic animation.\nRefs: Albrektsson 2001 Eur Spine J; Barradas 2011 Eur Cell Mater; Torabinejad 1997, 1998, Maeda 2010, Peng 2011 J Endod; Moretton 2000 J Biomed Mater Res.\n#endodontics #bioceramics #MTA #endo #boardprep #dentistry"
+}

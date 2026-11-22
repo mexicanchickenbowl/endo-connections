@@ -650,7 +650,7 @@ function drawWatch(t, S) {
 
 // ───────────────────────── captions (typed on the READING card) ─────────────────────────
 const CAPS = [
-  { a: 0.8, b: 5.9, lines: [
+  { a: 0.8, b: 5.85, lines: [      // gone by 6.10, when the next caption starts typing (no ghosting)
     { y: 80, px: 48, bold: 1, segs: [['1.0–2.3 %', C.red], [' linear shrinkage', C.ink]] },
     { y: 126, px: 38, bold: 1, segs: [['in 10 min · 75→37 °C', C.dim]] }],
     src: 'Lottanti 2014 J Endod' },
@@ -684,7 +684,7 @@ function drawCaption(t) {
 // ───────────────────────── controls (decorative; under the Reels UI) ─────────────────────────
 function drawControls(t) {
   const c = ctx, back = seg(t, EV.reset[0], EV.reset[1], ease.inOut);
-  const a = (-52 + 52 * seg(t, EV.mark1 + 0.05, EV.mark1 + 0.45, ease.inOut) + 52 * seg(t, EV.mark2 + 0.05, EV.mark2 + 0.45, ease.inOut)) * (1 - back);
+  const a = lerp(-52 + 52 * seg(t, EV.mark1 + 0.05, EV.mark1 + 0.45, ease.inOut) + 52 * seg(t, EV.mark2 + 0.05, EV.mark2 + 0.45, ease.inOut), -52, back);   // resets to cm/min (the frame-0 position) for the loop
   c.save(); c.translate(210, 1800);
   c.shadowColor = 'rgba(0,0,0,.6)'; c.shadowBlur = 16; c.shadowOffsetY = 8;
   let g = c.createLinearGradient(-64, -64, 64, 64); g.addColorStop(0, '#4d5856'); g.addColorStop(1, '#151a19'); c.fillStyle = g; c.beginPath(); c.arc(0, 0, 64, 0, TAU); c.fill();

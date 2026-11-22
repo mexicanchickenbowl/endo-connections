@@ -15,18 +15,20 @@
     silk: '#f1f6ec', gold: '#edbd52', goldHi: '#fff3c4', goldDim: '#84713a',
     pink: '#ff7cc4', cyan: '#62e2ff',
     lcdInk: [22, 36, 26], chipInk: '#d5dbd6',
-    saline: '#9ccbff', naocl: '#f4f59c',
+    saline: '#9fcdff', naocl: '#f7f08c',
   };
 
   // ------------------------------------------------------------------ geometry
   const CX = 540;
-  const TIP_PARK = 1130, TIP_A = 1185, TIP_B = 1286, FORAMEN = 1372, FILE_L = 517, PX_MM = 45;
+  const TIP_PARK = 1130, TIP_A = 1185, TIP_B = 1271, FORAMEN = 1372, FILE_L = 517, PX_MM = 45;
   const LCD = { x: 64, y: 456, w: 406, h: 246 };
   const SCO = { x: 640, y: 456, w: 376, h: 246 };
   const CHIP = { x: 690, y: 748, w: 304, h: 256 };
   const SRC_A = { x: 130, y: 800 }, SRC_B = { x: 270, y: 800 }, SRC_R = 34;
 
-  const toothOuter = new Path2D('M454 1050 C430 1024 414 982 420 946 C426 912 446 892 472 887 C492 884 506 892 520 898 L560 898 C574 892 588 884 608 887 C634 892 654 912 660 946 C666 982 650 1024 626 1050 C618 1120 606 1200 592 1270 C582 1320 570 1356 556 1374 C550 1382 530 1382 524 1374 C510 1356 498 1320 488 1270 C474 1200 462 1120 454 1050 Z');
+  const TOOTH_D = 'M454 1050 C430 1024 414 982 420 946 C426 912 446 892 472 887 C492 884 506 892 520 898 L560 898 C574 892 588 884 608 887 C634 892 654 912 660 946 C666 982 650 1024 626 1050 C618 1120 606 1200 592 1270 C582 1320 570 1356 556 1374 C550 1382 530 1382 524 1374 C510 1356 498 1320 488 1270 C474 1200 462 1120 454 1050 Z';
+  const toothOuter = new Path2D(TOOTH_D);
+  const GLINT = { L: 1, top: 0, apex: 1 };                     // outline length and the arc positions of crown top / apex (filled in setup)
   const pulp = new Path2D('M520 893 L520 950 C500 952 486 962 490 984 C492 1010 506 1040 526 1074 L534 1368 L534 1392 L546 1392 L546 1368 L554 1074 C574 1040 588 1010 590 984 C594 962 580 952 560 950 L560 893 Z');
   const pulpWallL = new Path2D('M520 899 L520 950 C500 952 486 962 490 984 C492 1010 506 1040 526 1074 L534 1371');
   const pulpWallR = new Path2D('M560 899 L560 950 C580 952 594 962 590 984 C588 1010 574 1040 554 1074 L546 1371');
@@ -279,11 +281,12 @@
   ];
   /**
    * toy quotient vs distance from the foramen (mm, schematic). Shape follows Rambo 2010, Table 2 (8 kHz / 0.5 kHz):
-   * of the total fall from -3 mm to 0, about 15% happens from -3 to -1 mm, 10% from -1 to -0.5 mm and 75% in the last 0.5 mm.
-   * Never shown as digits.
+   * of the fall from -3 mm to 0, about 15% happens from -3 to -1 mm, 10% from -1 to -0.5 mm and 75% in the last 0.5 mm
+   * (this function: 14% / 11% / 75%). Never shown as digits.
    */
-  const Q0 = 0.455, QN = 0.665;                                // toy set point and coronal plateau
-  const qOf = (d) => Q0 + 0.165 * (1 - Math.exp(-Math.max(d, 0) / 0.2)) + 0.015 * Math.min(Math.max(d, 0), 3);
+  const Q0 = 0.455;                                            // toy set point
+  const qOf = (d) => { const x = Math.max(d, 0); return Q0 + 0.165 * (1 - Math.exp(-x / 0.2)) + 0.081 * (1 - Math.exp(-x / 2.5)); };
+  const QN = qOf((FORAMEN - TIP_A) / PX_MM);                   // value where the reading starts (coronal plateau)
   const qn = (q) => clamp((q - Q0) / (QN - Q0));               // 0 at the set point, 1 on the plateau
   // schematic gains: NaOCl is more conductive than saline (Shin et al., Restor Dent Endod 2012)
   const FLUIDS = [P.saline, P.naocl], FLUID_GAIN = [1, 0.75];
@@ -386,6 +389,18 @@
     // APEX
     const pulse = 0.92 + 0.08 * Math.cos((t - 16.4) * TAU * 0.8);
     txt(g, 'APEX', GL.x + GL.w - 20, GL.y + 166, 54, ink(lerp(0.038, 0.93, s.apex * pulse)), { f: FM, w: 700, align: 'right', ls: 3 });
+    // fluid beat: gold bracket on the bar = "this did not move"
+    if (s.hold > 0.01) {
+      const bx0 = x0 - 10, bx1 = x0 + n * pitch + 4, by0 = yb - 88, by1 = yb + 18, c = 20, pu = 0.8 + 0.2 * Math.sin((t - 12.25) * TAU * 1.1);
+      g.save(); g.globalAlpha = s.hold * pu; g.lineCap = 'round'; g.lineJoin = 'round';
+      g.beginPath();
+      g.moveTo(bx0, by0 + c); g.lineTo(bx0, by0); g.lineTo(bx0 + c, by0); g.moveTo(bx1 - c, by0); g.lineTo(bx1, by0); g.lineTo(bx1, by0 + c);
+      g.moveTo(bx1, by1 - c); g.lineTo(bx1, by1); g.lineTo(bx1 - c, by1); g.moveTo(bx0 + c, by1); g.lineTo(bx0, by1); g.lineTo(bx0, by1 - c);
+      g.strokeStyle = 'rgba(20,30,20,0.55)'; g.lineWidth = 9; g.stroke();
+      g.strokeStyle = rgba('#ffd66e', 0.35); g.lineWidth = 13; g.stroke();
+      g.strokeStyle = '#ffcf4a'; g.lineWidth = 5; g.stroke();
+      g.restore();
+    }
     // glass sheen
     const sh = g.createLinearGradient(GL.x, GL.y, GL.x + GL.w, GL.y + GL.h); sh.addColorStop(0.2, 'rgba(255,255,255,0)'); sh.addColorStop(0.45, 'rgba(255,255,255,0.10)'); sh.addColorStop(0.55, 'rgba(255,255,255,0)');
     g.fillStyle = sh; rr(g, GL.x, GL.y, GL.w, GL.h, 5); g.fill();
@@ -403,7 +418,7 @@
   function drawScope(s, t) {
     const g = ctx, SG = { x: SCO.x + 18, y: SCO.y + 18, w: SCO.w - 36, h: 196 };
     g.save(); rr(g, SG.x, SG.y, SG.w, SG.h, 7); g.clip();
-    const xa = SG.x + 78, xb = SG.x + SG.w - 44, yP = SG.y + 52, yC = SG.y + 144;
+    const xa = SG.x + 20, xb = SG.x + SG.w - 44, yP = SG.y + 52, yC = SG.y + 144;
     const glowLine = (col, a, w = 3.2) => { g.lineJoin = 'round'; g.lineCap = 'round'; g.strokeStyle = rgba(col, 0.2 * a); g.lineWidth = w + 9; g.stroke(); g.strokeStyle = rgba(col, 0.95 * a); g.lineWidth = w; g.stroke(); g.strokeStyle = rgba('#ffffff', 0.7 * a); g.lineWidth = w * 0.35; g.stroke(); };
     // DC stage: one flat level
     const dc = (1 - s.acA) * s.power;
@@ -416,7 +431,7 @@
       if (a <= 0.01) return;
       g.strokeStyle = rgba(col, 0.22 * a); g.lineWidth = 1.5; g.setLineDash([4, 6]); g.beginPath(); g.moveTo(xa, yc); g.lineTo(xb, yc); g.stroke(); g.setLineDash([]);
       g.beginPath();
-      for (let x = xa; x <= xb; x += 2) { const y = yc - amp * Math.sin((x - xa) / lam * TAU - t * sp * TAU); x === xa ? g.moveTo(x, y) : g.lineTo(x, y); }
+      for (let x = xa; x <= xb; x += 1) { const y = yc - amp * Math.sin((x - xa) / lam * TAU - t * sp * TAU); x === xa ? g.moveTo(x, y) : g.lineTo(x, y); }
       glowLine(col, a);
       // amplitude bar at the right
       const bx = SG.x + SG.w - 26;
@@ -424,24 +439,24 @@
       g.fillStyle = rgba(col, 0.95 * a); g.fillRect(bx, yc - amp, 12, amp * 2);
       if (s.refA > 0.01) { g.fillStyle = rgba('#ffffff', 0.9 * a * s.refA); g.fillRect(bx - 5, yc - ref - 1.5, 22, 3); g.fillRect(bx - 5, yc + ref - 1.5, 22, 3); }
     };
-    wave(yP, 40 * s.aLo, 168, 0.9, P.pink, s.acA, 40 * s.refLo);
-    wave(yC, 40 * s.aHi, 30, 1.7, P.cyan, s.acB, 40 * s.refHi);
-    g.globalAlpha = s.acA; txt(g, '0.4k', SG.x + 12, yP + 8, 23, P.pink, { f: FM, w: 600 });
-    g.globalAlpha = s.acB; txt(g, '8k', SG.x + 12, yC + 8, 23, P.cyan, { f: FM, w: 600 });
+    wave(yP, 40 * s.aLo, 230, 0.9, P.pink, s.acA, 40 * s.refLo);
+    wave(yC, 40 * s.aHi, 23, 1.7, P.cyan, s.acB, 40 * s.refHi);
     g.restore();
   }
 
   function drawChip(s, t) {
     const g = ctx, cx = CHIP.x + CHIP.w / 2, cy = CHIP.y + CHIP.h / 2;
-    g.beginPath(); g.arc(CHIP.x + 24, CHIP.y + 24, 7, 0, TAU); g.fillStyle = '#060707'; g.fill();
     const a1 = s.div, on = s.rat;
+    g.beginPath(); g.arc(CHIP.x + 24, CHIP.y + 24, 7, 0, TAU); g.fillStyle = rgba('#060707', clamp(a1)); g.fill();   // pin-1 dot (clears for the marking)
     if (a1 > 0.01) {                                            // divider face: (8 kHz dot) over (0.4 kHz dot)
       g.save(); g.globalAlpha = a1;
       const ink = rgba(mix('#3a4042', P.chipInk, on));
       g.fillStyle = ink; rr(g, cx - 74, cy - 7, 148, 14, 7); g.fill();
-      for (const [dy, col] of [[-52, P.cyan], [52, P.pink]]) {
-        if (on > 0.01) { g.beginPath(); g.arc(cx, cy + dy, 32, 0, TAU); g.fillStyle = rgba(col, 0.14 * on); g.fill(); }
-        g.beginPath(); g.arc(cx, cy + dy, 19, 0, TAU); g.fillStyle = rgba(mix('#3a4042', col, on)); g.fill();
+      const rc = lerp(19, lerp(10.5, 19, qn(s.q)), on);         // the numerator (8 kHz) dot shrinks with the quotient
+      for (const [dy, col, r] of [[-52, P.cyan, rc], [52, P.pink, 19]]) {
+        if (on > 0.01) { g.beginPath(); g.arc(cx, cy + dy, r + 13, 0, TAU); g.fillStyle = rgba(col, 0.14 * on); g.fill(); }
+        if (r < 18.5) { g.beginPath(); g.arc(cx, cy + dy, 19, 0, TAU); g.strokeStyle = rgba(col, 0.4 * on); g.lineWidth = 1.6; g.setLineDash([3, 5]); g.stroke(); g.setLineDash([]); }
+        g.beginPath(); g.arc(cx, cy + dy, r, 0, TAU); g.fillStyle = rgba(mix('#3a4042', col, on)); g.fill();
       }
       txt(g, 'U1', CHIP.x + CHIP.w - 22, CHIP.y + CHIP.h - 18, 22, 'rgba(213,219,214,0.4)', { f: FM, w: 500, align: 'right' });
       g.restore();
@@ -449,12 +464,11 @@
     if (s.stat > 0.01) {                                        // laser-marked accuracy line
       g.save(); g.globalAlpha = s.stat;
       const x = CHIP.x + 22;
-      txt(g, 'ROOT ZX, IN VIVO', x, CHIP.y + 46, 30, P.chipInk);
-      txt(g, '~70–100%', x - 2, CHIP.y + 114, 62, '#ffd76a');
-      txt(g, 'WITHIN ±0.5 mm', x, CHIP.y + 158, 32, P.chipInk);
-      g.fillStyle = 'rgba(213,219,214,0.35)'; g.fillRect(x, CHIP.y + 174, CHIP.w - 44, 2);
-      txt(g, 'SMALL STUDIES,', x, CHIP.y + 209, 30, P.chipInk);
-      txt(g, 'NOT POOLED', x, CHIP.y + 243, 30, P.chipInk);
+      txt(g, 'ROOT ZX, IN VIVO', x, CHIP.y + 52, 30, P.chipInk);
+      txt(g, '~70–100%', x - 2, CHIP.y + 124, 62, '#ffd76a');
+      txt(g, 'WITHIN ±0.5 mm', x, CHIP.y + 172, 33, P.chipInk);
+      g.fillStyle = 'rgba(213,219,214,0.35)'; g.fillRect(x, CHIP.y + 192, CHIP.w - 44, 2);
+      txt(g, 'RANGE OF 16 STUDIES', x, CHIP.y + 229, 24, 'rgba(213,219,214,0.82)');      // fine print: the denominator
       g.restore();
     }
   }
@@ -523,11 +537,28 @@
     g.strokeStyle = P.silk; g.lineWidth = 4.5; g.stroke(toothOuter);
     g.strokeStyle = 'rgba(241,246,236,0.42)'; g.lineWidth = 2.2; g.setLineDash([3, 7]);
     g.stroke(dejL); g.save(); g.translate(1080, 0); g.scale(-1, 1); g.stroke(dejL); g.restore(); g.setLineDash([]);
+    // hook: a glint runs down both sides of the outline and meets at the apex ("find the end?")
+    const gu = seg(t, 1.55, 2.9, ease.inOut), ga = Math.min(seg(t, 1.55, 1.8), 1 - seg(t, 3.0, 3.5));
+    if (ga > 0.01) {
+      const pos = lerp(GLINT.top, GLINT.apex, gu), dl = 90;
+      for (const mir of [0, 1]) {
+        g.save(); if (mir) { g.translate(1080, 0); g.scale(-1, 1); }
+        g.setLineDash([Math.max(1, pos - GLINT.top), GLINT.L * 2]); g.lineDashOffset = -GLINT.top;
+        g.strokeStyle = rgba('#ffd76a', 0.5 * ga); g.lineWidth = 4.5; g.stroke(toothOuter);                 // trail
+        if (gu < 1) {
+          g.setLineDash([dl, GLINT.L * 2]); g.lineDashOffset = -(pos - dl);
+          g.strokeStyle = rgba('#ffd66e', 0.28 * ga); g.lineWidth = 18; g.stroke(toothOuter);
+          g.strokeStyle = rgba('#fff3c4', ga); g.lineWidth = 6; g.stroke(toothOuter);
+        }
+        g.restore();
+      }
+      g.setLineDash([]);
+    }
     // pulp space with canal fluid (conductor)
     g.fillStyle = '#03110c'; g.fill(pulp);
     const lit = Math.max(s.eCanal, 0.0);
     g.save(); g.clip(pulp);
-    g.fillStyle = rgba(s.fluid, 0.5); g.fillRect(480, 926, 120, 474);            // whole canal is wet
+    g.fillStyle = rgba(s.fluid, lerp(0.68, 0.84, s.f)); g.fillRect(480, 926, 120, 474);   // whole canal is wet
     if (lit > 0.01) {                                                             // the stretch that carries the current: file tip -> foramen
       const y0 = lerp(s.tip, s.tip, 1), y1 = lerp(s.tip, 1394, lit);
       const fg = g.createLinearGradient(0, y0 - 10, 0, y0 + 14); fg.addColorStop(0, rgba(s.fluid, 0)); fg.addColorStop(1, rgba(s.fluid, 0.92));
@@ -565,8 +596,10 @@
     }
     // foramen via
     via(g, CX, 1381, 10, Math.max(s.eCanal, s.apex));
-    const fl = seg(t, 16.3, 17.2);                              // one soft ping when the set point is reached
-    if (fl > 0 && fl < 1) { g.save(); g.beginPath(); g.arc(CX, 1378, lerp(12, 96, ease.out(fl)), 0, TAU); g.strokeStyle = rgba('#ffe48a', (1 - fl) * 0.85); g.lineWidth = lerp(7, 2, fl); g.stroke(); g.restore(); }
+    for (const [t0, k] of [[2.85, 0.8], [16.3, 1]]) {             // soft pings: the glints meet (hook); the set point is reached
+      const fl = seg(t, t0, t0 + 0.9);
+      if (fl > 0 && fl < 1) { g.save(); g.beginPath(); g.arc(CX, 1378, lerp(12, 96 * k, ease.out(fl)), 0, TAU); g.strokeStyle = rgba('#ffe48a', (1 - fl) * 0.85); g.lineWidth = lerp(7, 2, fl); g.stroke(); g.restore(); }
+    }
     if (s.ring > 0.01) {                                        // "foramen region"
       const pul = 0.75 + 0.25 * Math.sin(t * TAU * 0.6);
       g.save(); g.globalAlpha = s.ring;
@@ -617,15 +650,14 @@
   function drawChart(s, t) {
     const a = s.rat * s.txo;
     const g = ctx, X0 = 100, X1 = 322, Y0 = TIP_A, Y1 = FORAMEN;
-    const xq = (q) => 140 + (0.76 - q) / 0.31 * 160;
+    const xq = (q) => 150 + qn(q) * 142;                       // conventional axis: the ratio increases to the right, so a drop moves left
     g.save(); g.globalAlpha = lerp(0.3, 1, a);               // the axes are pre-printed silkscreen; they brighten when used
-    txt(g, 'RATIO', X0 - 2, 1144, 34, P.silk);
     g.strokeStyle = 'rgba(241,246,236,0.75)'; g.lineWidth = 2.5; g.lineCap = 'round'; g.lineJoin = 'round';
     g.beginPath(); g.moveTo(X0, Y1 + 6); g.lineTo(X0, 1166); g.lineTo(X1, 1166); g.stroke();
     g.beginPath(); g.moveTo(X1 - 10, 1160); g.lineTo(X1, 1166); g.lineTo(X1 - 10, 1172); g.stroke();
-    txt(g, 'falls', X1 + 2, 1148, 30, 'rgba(241,246,236,0.88)', { f: FM, w: 500, align: 'right' });
+    if (a > 0.01) { g.globalAlpha = a; txt(g, 'RATIO', X0 - 2, 1144, 34, P.silk); g.globalAlpha = lerp(0.3, 1, a); }   // the word appears with the first reading
     // target line (the device's set point)
-    const xt = xq(0.455);
+    const xt = xq(Q0);
     g.setLineDash([6, 7]); g.strokeStyle = rgba('#ffd76a', 0.75); g.lineWidth = 2.5; g.beginPath(); g.moveTo(xt, 1174); g.lineTo(xt, Y1 + 6); g.stroke(); g.setLineDash([]);
     if (a <= 0.01) { g.restore(); return; }
     g.globalAlpha = a;
@@ -636,7 +668,7 @@
     g.strokeStyle = rgba('#ffd66e', 0.25); g.lineWidth = 13; g.stroke();
     g.strokeStyle = '#ffd76a'; g.lineWidth = 4.5; g.stroke();
     // cursor from the file tip + live dot (tiny wobble when the fluid changes: "only negligibly influenced")
-    const wob = (env(t, 11.55, 12.3, 0.2, 0.45) + env(t, 12.55, 13.3, 0.2, 0.45)) * 2.4 * Math.sin(t * 9);
+    const wob = env(t, 12.35, 13.6, 0.25, 0.7) * 6 * Math.sin((t - 12.35) * 8.5);
     const ty = Math.max(Y0, s.tip), dx = xq(s.q) + wob;
     g.setLineDash([3, 8]); g.strokeStyle = 'rgba(241,246,236,0.55)'; g.lineWidth = 2; g.beginPath(); g.moveTo(dx + 14, ty); g.lineTo(CX - 18, ty); g.stroke(); g.setLineDash([]);
     g.beginPath(); g.arc(dx, ty, 15, 0, TAU); g.fillStyle = rgba('#ffd66e', 0.25); g.fill();
@@ -648,13 +680,13 @@
     const g = ctx;
     if (s.jump > 0.01) {
       g.save(); g.globalAlpha = s.jump;
-      const names = ['BLOOD', 'SALINE', 'NaOCl'], y0 = 948, pitch = 38;
-      g.strokeStyle = 'rgba(241,246,236,0.6)'; g.lineWidth = 2; rr(g, 66, y0 - 22, 76, pitch * 2 + 44, 6); g.stroke();
-      for (let i = 0; i < 3; i++) {
+      const names = ['SALINE', 'NaOCl'], y0 = 960, pitch = 46;
+      g.strokeStyle = 'rgba(241,246,236,0.6)'; g.lineWidth = 2; rr(g, 66, y0 - 24, 76, pitch + 48, 6); g.stroke();
+      for (let i = 0; i < 2; i++) {
         const y = y0 + i * pitch, sel = clamp(1 - Math.abs(s.f - i));
         pad(g, 88, y, 14, 14, 0.4, 7); pad(g, 120, y, 14, 14, 0.4, 7);
         g.beginPath(); g.arc(88, y, 3, 0, TAU); g.arc(120, y, 3, 0, TAU); g.fillStyle = '#3d2f10'; g.fill();
-        txt(g, names[i], 160, y + 11, 31, rgba(mix('#8fa397', FLUIDS[i], sel)));
+        txt(g, names[i], 160, y + 12, 34, rgba(mix('#8fa397', FLUIDS[i], sel)));
       }
       const yj = y0 + s.f * pitch;                               // the jumper cap slides between rows
       g.fillStyle = 'rgba(2,14,9,0.6)'; rr(g, 72, yj - 15, 64, 30, 6); g.fill();
@@ -669,7 +701,7 @@
       g.lineJoin = 'round'; g.strokeStyle = '#ffd76a'; g.lineWidth = 5;
       g.beginPath(); g.moveTo(96, 938); g.lineTo(128, 996); g.lineTo(64 + 2, 996); g.closePath(); g.stroke();
       g.fillStyle = '#ffd76a'; g.fillRect(93.5, 958, 5, 20); g.beginPath(); g.arc(96, 986, 3.2, 0, TAU); g.fill();
-      txt(g, 'CONFIRM WITH', 146, 964, 33, P.silk); txt(g, 'A RADIOGRAPH', 146, 1004, 33, P.silk);
+      txt(g, 'CONFIRM WITH', 146, 964, 36, P.silk); txt(g, 'A RADIOGRAPH', 146, 1006, 36, P.silk);
       g.restore();
     }
   }
@@ -682,12 +714,11 @@
       txt(g, str, x, y + (1 - ease.out(a)) * 8, o.size || 32, o.color || P.silk);
       g.restore();
     };
-    lab('FILE', 592, 868, seg(t, 3.5, 3.8) * s.txo, 549, 857);
-    const den = Math.max(env(t, 4.3, 6.4, 0.3, 0.25), seg(t, 17.6, 17.95) * s.txo);
+    const den = env(t, 4.3, 6.4, 0.3, 0.25);
     if (den > 0.01) { g.save(); g.globalAlpha = den; leader(g, 720, 1222, 590, 1236, 1); txt(g, 'DENTIN =', 730, 1220, 32, P.silk); txt(g, 'INSULATOR', 730, 1258, 32, P.silk); g.restore(); }
     const rcl = seg(t, 6.5, 6.9) * (1 - seg(t, 16.7, 17.05));
     lab('CAPACITOR', 730, 1227, rcl, 608, 1216);
-    lab('RESISTOR', 730, 1312, rcl, 556, Math.min(1345, Math.max(s.tip + 40, 1300)));
+    lab('RESISTOR', 730, 1312, rcl * clamp((1360 - (s.tip + 12)) / 40), 556, Math.min(1345, Math.max(s.tip + 40, 1300)));   // goes with its symbol
     lab('FORAMEN', 730, 1392, seg(t, 4.7, 5.0) * s.txo, 554, 1381);
     const lc = seg(t, 5.1, 5.4) * s.txo;
     lab('LIP CLIP', 764, 1152, lc, null);
@@ -696,8 +727,8 @@
     if (s.tag > 0.01) {
       g.save(); g.globalAlpha = s.tag; g.translate(0, (1 - ease.out(s.tag)) * -8);
       g.strokeStyle = '#ffd76a'; g.lineWidth = 3.5; g.lineCap = 'round'; g.lineJoin = 'round';
-      g.beginPath(); g.moveTo(78, 746); g.lineTo(78, 716); g.moveTo(69, 726); g.lineTo(78, 716); g.lineTo(87, 726); g.stroke();
-      let x = 100; txt(g, 'SCALE: ', x, 744, 31, P.silk); x += tw(g, 'SCALE: ', 31); txt(g, 'NOT MILLIMETERS', x, 744, 31, '#ffd76a');
+      g.beginPath(); g.moveTo(78, 744); g.lineTo(78, 714); g.moveTo(69, 724); g.lineTo(78, 714); g.lineTo(87, 724); g.stroke();
+      txt(g, 'NOT MILLIMETERS', 100, 742, 36, '#ffd76a');
       g.restore();
     }
     // persistent honesty tag
@@ -705,33 +736,38 @@
   }
 
   // ---- history strip (board-edge silkscreen) -----------------------------------------------------------------
-  const HIST = [{ s: '1918 CUSTER', k: 'dc' }, { s: '1962 SUNADA', k: 'dc' }, { s: 'AC IMPEDANCE', k: 'ac' }, { s: '1994 RATIO METHOD', k: 'ratio' }];
-  let histSize = 30;
+  const HIST = [{ s: '1918 CUSTER', k: 'dc' }, { s: '1962 SUNADA', k: 'dc' }, { s: 'AC IMPEDANCE', k: 'ac' }, { s: '1994 RATIO', k: 'ratio' }];
+  const HIST_ERA = [0, 0, 1, 2];
+  let histSize = 32;
   function layoutHist() {
     const avail = 956 - 64;
-    for (histSize = 30; histSize >= 26; histSize -= 0.5) { const sum = HIST.reduce((a, h) => a + tw(ctx, h.s, histSize), 0); if (sum + 3 * 24 <= avail) break; }
+    for (histSize = 32; histSize >= 30; histSize -= 0.5) { const sum = HIST.reduce((a, h) => a + tw(ctx, h.s, histSize), 0); if (sum + 3 * 24 <= avail) break; }
     const sum = HIST.reduce((a, h) => a + tw(ctx, h.s, histSize), 0), gap = (avail - sum) / 3;
     let x = 64; for (const h of HIST) { h.x = x; h.w = tw(ctx, h.s, histSize); x += h.w + gap; }
   }
   function drawHistory(s, t) {
     const g = ctx, yI = 1484, yT = 1528;
-    const lit = [s.loop, s.loop, s.acA, s.rat];
+    // future eras are faint pre-printed silkscreen, past eras plain white, the active era gold with an underline
+    const k = [seg(t, 5.6, 6.0), seg(t, 7.4, 7.8), seg(t, 8.6, 9.0)].map((v) => v * s.rst);
+    const act = [k[0] * (1 - k[1]), k[1] * (1 - k[2]), k[2]];
+    const lit = HIST_ERA.map((e) => k[e]), cur = HIST_ERA.map((e) => act[e]);
     g.save();
     g.strokeStyle = 'rgba(241,246,236,0.35)'; g.lineWidth = 2; g.beginPath(); g.moveTo(64, yI); g.lineTo(956, yI); g.stroke();
     HIST.forEach((h, i) => {
-      const a = lerp(0.6, 1, lit[i]), cx = h.x + 26;
+      const a = lerp(0.35, lerp(0.8, 1, cur[i]), lit[i]), cx = h.x + 26, ink = rgba(mix(P.silk, '#ffd76a', cur[i]));
       g.globalAlpha = 1; g.fillStyle = '#0b4430'; g.fillRect(h.x - 6, yI - 17, 64, 34);
-      g.globalAlpha = a; g.strokeStyle = P.silk; g.lineWidth = 3; g.lineCap = 'round'; g.lineJoin = 'round';
+      g.globalAlpha = a; g.strokeStyle = ink; g.lineWidth = 3; g.lineCap = 'round'; g.lineJoin = 'round';
       if (h.k === 'dc') {                                      // cell symbol
         g.beginPath(); g.moveTo(h.x, yI); g.lineTo(cx - 5, yI); g.moveTo(cx - 5, yI - 13); g.lineTo(cx - 5, yI + 13); g.moveTo(cx + 5, yI); g.lineTo(h.x + 52, yI); g.stroke();
         g.lineWidth = 5; g.beginPath(); g.moveTo(cx + 5, yI - 7); g.lineTo(cx + 5, yI + 7); g.stroke();
       } else {
         const wave = (x0, cyc, col) => { g.beginPath(); for (let k = 0; k <= 30; k++) { const u = k / 30, x = x0 + u * 40, y = yI - Math.sin(u * cyc * TAU) * 10; k ? g.lineTo(x, y) : g.moveTo(x, y); } g.strokeStyle = col; g.stroke(); };
-        if (h.k === 'ac') wave(h.x + 4, 1, P.silk);
+        if (h.k === 'ac') wave(h.x + 4, 1, ink);
         else { g.globalAlpha = a; wave(h.x + 4, 1, rgba(mix(P.silk, P.pink, lit[i]))); g.lineWidth = 2.4; wave(h.x + 4, 3, rgba(mix(P.silk, P.cyan, lit[i]))); }
       }
       g.globalAlpha = a;
-      txt(g, h.s, h.x, yT, histSize, rgba(mix(P.silk, '#ffe59a', lit[i] * 0.6)));
+      txt(g, h.s, h.x, yT, histSize, ink);
+      if (cur[i] > 0.01) { g.globalAlpha = cur[i]; g.fillStyle = '#ffd76a'; rr(g, h.x, yT + 9, h.w * ease.out(cur[i]), 4, 2); g.fill(); }
     });
     g.restore();
   }
@@ -742,7 +778,7 @@
   function drawHeadline(s, t) {
     const g = ctx, size = 76, x0 = 64, ys = [326, 408];
     // scene test points (top right): one pad per beat
-    const starts = [0, 3.32, 7.4, 10.95, 14.25, 17.3];
+    const starts = [0, 3.55, 7.4, 10.95, 14.25, 17.3];
     for (let i = 0; i < 6; i++) {
       const on = i === 0 ? 1 : seg(t, starts[i], starts[i] + 0.3) * (1 - seg(t, 23.4, 23.7));
       pad(g, 1008 - (5 - i) * 31, 264, 15, 15, on, 4);
@@ -776,7 +812,13 @@
     poster: 21.6,
     canvas,
     fonts: ['400 76px "Share Tech Mono"', '500 24px "IBM Plex Mono"', '500 30px "IBM Plex Mono"', '600 24px "IBM Plex Mono"', '700 54px "IBM Plex Mono"'],
-    setup() { buildBase(); layoutHist(); },
+    setup() {
+      buildBase(); layoutHist();
+      const sp = document.createElementNS('http://www.w3.org/2000/svg', 'path'); sp.setAttribute('d', TOOTH_D);
+      const L = sp.getTotalLength(); let top = 0, apex = 0, yMax = -1, dTop = 1e9;
+      for (let i = 0; i <= 2000; i++) { const l = L * i / 2000, p = sp.getPointAtLength(l); if (p.y > yMax) { yMax = p.y; apex = l; } const d = Math.hypot(p.x - 540, p.y - 898); if (d < dTop) { dTop = d; top = l; } }
+      GLINT.L = L; GLINT.top = top; GLINT.apex = apex;
+    },
     render,
   };
   Kit.boot(window.REEL);

@@ -23,11 +23,11 @@ function camX(t) {
 
 // ------------------------------------------------------------------ crane-hung signboard (screen space)
 const SIGNS = [
-  { kind: 'title', tin: -0.6, tout: 1.7 },
+  { kind: 'title', tin: -0.55, tout: 1.7 },
   { kind: 'b1', tin: 2.0, tout: 7.05 },
   { kind: 'b2', tin: 7.35, tout: 11.45 },
   { kind: 'b3', tin: 11.75, tout: 18.75 },
-  { kind: 'title', tin: TL.wrap, tout: 99 },
+  { kind: 'title', tin: TL.dur - 0.55, tout: 99 },
 ];
 const SIGN = {
   title: { face: C.navy, edge: C.yellow },
@@ -77,7 +77,7 @@ function drawSigns(t) {
   for (const s of SIGNS) {
     const uin = seg(t, s.tin, s.tin + 0.52, ease.out), uout = seg(t, s.tout, s.tout + 0.33, ease.in);
     if (uin <= 0 || uout >= 1) continue;
-    const tau = t - (s.tin + 0.45), ang = tau > 0 ? 0.011 * Math.exp(-2.4 * tau) * Math.sin(8 * tau) : 0;
+    const tau = t - (s.tin + 0.45), ang = tau > 0 ? 0.007 * Math.exp(-2.6 * tau) * Math.sin(8 * tau) : 0;
     drawSign(s.kind, -650 * (1 - uin) - 650 * uout, ang);
   }
 }
@@ -92,11 +92,14 @@ function pill(x, y, label, kind) {
   txt(label, x + 58, y + 40, F.osw5(32), C.navy, 'left', 2);
   return w;
 }
-function src(s) { txt(s, 64, 1562, F.b5(25), '#9DB0C2'); }
-function info(t, a, b, fn) {
+function src(s, y) { txt(s, 64, y || 1562, F.b5(fit(s, 872, 25, F.b5)), '#9DB0C2'); }
+function info(t, a, b, fn, h) {
   const u = Math.min(seg(t, a, a + 0.35, ease.out), 1 - seg(t, b - 0.3, b));
   if (u <= 0) return;
-  ctx.save(); ctx.globalAlpha = u; ctx.translate(0, (1 - seg(t, a, a + 0.35, ease.out)) * 16); fn(); ctx.restore();
+  h = h || 222;
+  ctx.save(); ctx.globalAlpha = u; ctx.translate(0, (1 - seg(t, a, a + 0.35, ease.out)) * 16);
+  fillRR(36, 1356, 924, h, 14, '#18212C'); strokeRR(37, 1357, 922, h - 2, 13, '#34445A', 2);
+  fn(); ctx.restore();
 }
 function drawHud(t) {
   // plinth nameplate
@@ -106,7 +109,7 @@ function drawHud(t) {
 
   info(t, 2.7, 7.2, () => {
     pill(64, 1368, 'ANIMAL HISTOLOGY', 'animal');
-    const u = seg(t, 3.45, 3.85, ease.out);
+    const u = seg(t, 3.2, 3.6, ease.out);
     ctx.globalAlpha *= u;
     txt('5 of 6', 64, 1524, F.osw7(92), C.yellow);
     const x = 64 + tw('5 of 6', F.osw7(92)) + 28;
@@ -115,25 +118,24 @@ function drawHud(t) {
     src('Torabinejad et al. 1997, J Endod');
   });
   info(t, 7.95, 11.6, () => {
-    pill(64, 1368, 'ANIMAL HISTOLOGY', 'animal');
-    txt('MTA implanted in bone', 64, 1496, F.bc6(54), '#FFFFFF');
-    src('Torabinejad et al. 1998, J Endod · guinea pig');
-  });
+    pill(64, 1370, 'ANIMAL HISTOLOGY', 'animal');
+    src('Torabinejad 1998: MTA in guinea-pig bone · apatite: Sarkar 2005 · J Endod', 1468);
+  }, 136);
   info(t, 12.35, 15.2, () => {
-    pill(64, 1368, 'CELL CULTURE', 'cell');
-    txt('osteogenic markers rise', 64, 1496, F.bc6(54), '#FFFFFF');
-    src('Maeda et al. 2010; Peng et al. 2011 · J Endod');
-  });
+    pill(64, 1370, 'CELL CULTURE', 'cell');
+    src('Maeda et al. 2010 (Ca²⁺, BMP-2) · Peng et al. 2011 (ALP, osteocalcin) · J Endod', 1468);
+  }, 136);
   info(t, 15.95, 18.9, () => {
     pill(64, 1368, 'ANIMAL HISTOLOGY', 'animal');
     txt('mineral deposits, no bone', 64, 1496, F.bc6(54), '#FFFFFF');
     src('Moretton et al. 2000, J Biomed Mater Res · rat, 15–60 days');
   });
   info(t, 19.7, TL.wrap, () => {
-    txt('SOURCES', 64, 1398, F.osw5(28), C.yellow, 'left', 3);
-    txt('Definitions: Albrektsson & Johansson 2001, Eur Spine J', 64, 1440, F.b5(26), '#C4D2DF');
-    txt('Ectopic-site test: Barradas et al. 2011, Eur Cell Mater · Moretton et al. 2000', 64, 1478, F.b5(26), '#C4D2DF');
-    txt('Torabinejad et al. 1997, 1998 · Nair et al. 2008 · Maeda et al. 2010 · Peng et al. 2011', 64, 1516, F.b5(26), '#C4D2DF');
+    txt('SOURCES', 64, 1400, F.osw5(28), C.yellow, 'left', 3);
+    txt('Definitions: Albrektsson & Johansson 2001, Eur Spine J', 64, 1440, F.b5(25), '#C4D2DF');
+    txt('Ectopic-site test: Barradas 2011, Eur Cell Mater · Moretton 2000', 64, 1475, F.b5(25), '#C4D2DF');
+    txt('J Endod: Torabinejad 1997, 1998 · Sarkar 2005 · Maeda 2010 · Peng 2011', 64, 1510, F.b5(25), '#C4D2DF');
+    txt('Int Endod J: Nair 2008', 64, 1545, F.b5(25), '#C4D2DF');
   });
 }
 
@@ -161,7 +163,7 @@ function render(t) {
 window.REEL = {
   title: 'Bioceramics and tissue: biocompatible, osteoconductive — osteoinductive?',
   duration: TL.dur,
-  poster: 22.2,
+  poster: 22.0,
   canvas,
   fonts: ['700 100px Oswald', '500 58px Oswald', '500 40px "Barlow Condensed"', '600 46px "Barlow Condensed"', '700 40px "Barlow Condensed"', 'italic 500 36px "Barlow Condensed"', '500 25px Barlow'],
   render,

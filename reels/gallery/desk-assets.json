@@ -23,7 +23,10 @@
   "33-resorption-external-cervical": "4a4ee0ee8abe0970cf925140aa5bbaf4",
   "34-apical-prep-working-length": "9c7bd89236e3db6f2e1ea55703ab36b0",
   "35-file-separation": "a0bbf324b6a213fde071ce506c02ebcd",
-  "36-x7-file-sequence": "0bb61a039d9202d916cb48edd27b7927"
+  "36-x7-file-sequence": "0bb61a039d9202d916cb48edd27b7927",
+  "24-xray-settings-tubehead": "3898e19b1059e0b76745fe4d1fcd1488",
+  "25-outcome-numbers": "4f680e8a297d53ac4b59466c43ef6243",
+  "26-primary-vs-persistent": "db9f6473be76b8ec12ab739ec6734e16"
  },
  "pos": {
   "01-pain-pathway": "0ae050f62c9b82b5273d3b41f29d33db",
@@ -49,6 +52,9 @@
   "33-resorption-external-cervical": "6071e36d4d309ad7c32616fab6bc7958",
   "34-apical-prep-working-length": "a5035159499c2c68965c6a1165739df7",
   "35-file-separation": "89c76283213c41854449be206bd7ecb9",
-  "36-x7-file-sequence": "1a25f24f7ed353a9a8ff6d0df657cfaa"
+  "36-x7-file-sequence": "1a25f24f7ed353a9a8ff6d0df657cfaa",
+  "24-xray-settings-tubehead": "d94658e1aa029c17235646c3a521961f",
+  "25-outcome-numbers": "d83c180912b51ce4b2675c7643b65384",
+  "26-primary-vs-persistent": "cf8a784e5c2f03ad6444453f9a2fa5ea"
  }
 }

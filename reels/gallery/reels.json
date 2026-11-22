@@ -1048,6 +1048,157 @@
     "caption": "How does a premixed bioceramic sealer set?\nPremixed calcium-silicate sealers carry no water: they hydrate with dentin moisture, so a very dry canal can delay the set.\nHydration forms C–S–H gel + Ca(OH)₂; Ca²⁺ and OH⁻ leach out and pH reaches ~10–12 in lab tests.\nIn PBS, calcium + phosphate form apatite-like deposits at the wall and in tubules. In vitro only: clinical bioactivity is unproven, and ion release means some solubility.\nRefs: Xuereb 2015, J Endod; Antunes 2026, Aust Endod J; Camilleri 2011, Dent Mater; Loushine 2011, J Endod; Lee 2017, Bioinorg Chem Appl; Han & Okiji 2013, IEJ; Sarkar 2005, J Endod (MTA); Donnermeyer 2019, Odontology.\nSchematic animation: not to scale, time compressed.\n#endodontics #endo #dentistry #rootcanal #bioceramics #dentalmaterials #endodontist"
   },
   {
+    "id": "24",
+    "slug": "24-xray-settings-tubehead",
+    "title": "kVp, mA, time: inside the X-ray tube",
+    "style": "Retro control console",
+    "topic": "mA sets how many electrons, time how long, kVp how hard each hits (max keV = kVp, plus more photons); ~99% of the energy becomes heat.",
+    "duration": 23.4,
+    "video": "videos/24-xray-settings-tubehead.mp4",
+    "poster": "posters/24-xray-settings-tubehead.jpg",
+    "claims": [
+      {
+        "claim": "Toy model / schematic: tube-head cutaway (filament in a focusing cup, tungsten target on a copper anode, aluminum filter, collimator); blue dots = electrons, green wave packets = X-ray photons; not to scale",
+        "source": "Seibert JA. J Nucl Med Technol 2004;32(3):139-47 (PMID 15347692) - full text: thermionic emission from a heated filament, a metal focusing cup at the cathode, tungsten target, tube current = electrons crossing the gap, transformer oil in the tube housing (Fig. 3 caption). The copper anode block is standard textbook tube anatomy and is not in Seibert (textbook excerpt read online at the research stage only, not re-verified); it is drawn, not labeled, and carries no number. Drawing is original and schematic"
+      },
+      {
+        "claim": "Toy model / schematic: the aluminum filter stops the low-energy photons and the collimator trims the beam",
+        "source": "European Commission. Radiation Protection 136: European guidelines on radiation protection in dental radiology (2004), sect. 4.2 (filtration preferentially removes lower-energy photons; aluminium filtration is an established component of dental X-ray equipment) and sect. 4.3 (Collimation, field-size trimming) - guideline full text. Proportions in the animation follow the toy model, not a measurement"
+      },
+      {
+        "claim": "~99% heat (round teaching figure for diagnostic X-ray tubes in general). Needle = heating rate kV x mA, arbitrary scale, no units shown",
+        "source": "Zink FE. Radiographics 1997;17(5):1259-68 (PMID 9308113) - abstract: 1% to X-ray photons, 99% to heat (diagnostic tubes in general). kV x mA (x s) heat unit: Seibert 2004 (PMID 15347692) - full text"
+      },
+      {
+        "claim": "Toy model / schematic: spectrum on the scope = Kramers shape x 2 mm aluminum; right-hand end = kVp (MAX 60 -> 70 keV), height doubles with mA, hump stays near 30 keV; no vertical scale, no characteristic lines drawn (tungsten K lines need >69.5 kV: none at 60, negligible at 70 kVp)",
+        "source": "Toy model built for this reel (NIST aluminum attenuation coefficients); not a measured dental spectrum. End point = kVp and K-line threshold >69.5 kVp: Seibert 2004 (PMID 15347692) - full text. 'Negligible at 70 kVp' is physics reasoning (70 is only 0.5 kV above the threshold), not a sentence read in a source"
+      },
+      {
+        "claim": "mA -> how many: more electrons, more photons, same energies (4 -> 8 mA, values illustrative)",
+        "source": "Seibert JA. J Nucl Med Technol 2004;32(3):139-47 (PMID 15347692) - full text: a larger filament current releases more electrons; McCollough CH. Radiographics 1997;17(4):967-84 (PMID 9225393) - abstract: quantity proportional to tube current; spectrum shape depends on anode material, tube potential, filtration and waveform (not on tube current)"
+      },
+      {
+        "claim": "kVp -> how hard: max keV = kVp (60 -> 70 kVp, values illustrative); electrons drawn faster with a bigger impact flash",
+        "source": "Seibert JA. J Nucl Med Technol 2004;32(3):139-47 (PMID 15347692) - full text: electron kinetic energy (keV) = tube voltage; maximum X-ray energy (keV) set by the peak voltage (kVp)"
+      },
+      {
+        "claim": "kVp -> + how many: output ~ kVp squared, i.e. tube output (exposure / air kerma at the port) rises roughly with the square of kVp; electron count unchanged",
+        "source": "McCollough CH. Radiographics 1997;17(4):967-84 (PMID 9225393) - abstract; Nickoloff EL, Berman HL. Radiographics 1993;13(6):1337-48 (PMID 8290728) - abstract: output increases by approximately the square of the tube potential"
+      },
+      {
+        "claim": "kVp up: less image contrast (swatch change exaggerated and drawn density-matched: object tones compress, the directly exposed background stays black)",
+        "source": "European Commission. Radiation Protection 136: European guidelines on radiation protection in dental radiology. 2004, sect. 4.1 - guideline full text. At unchanged mAs the real image would also be darker. Caveat: 60 vs 70 kVp had minimal effect on CMOS sensors in one phantom study (Pita de Melo D et al. Dentomaxillofac Radiol 2026, PMID 42538829 - abstract)"
+      },
+      {
+        "claim": "Time -> how long: same beam, on longer; mAs = mA x s (0.10 s -> 0.80 mAs, 0.20 s -> 1.60 mAs at 8 mA; values illustrative, slow motion)",
+        "source": "McCollough CH. Radiographics 1997;17(4):967-84 (PMID 9225393) - abstract: quantity proportional to exposure time; Seibert 2004 (PMID 15347692) - full text: mAs"
+      },
+      {
+        "claim": "Cheat sheet: mA -> how many (same energies); kVp -> how hard + how many (max keV = kVp, output ~ kVp squared); time -> how long (mAs = mA x s)",
+        "source": "McCollough 1997, Radiographics (PMID 9225393); Seibert 2004, J Nucl Med Technol (PMID 15347692). On-screen source line: McCollough; Zink, Radiographics 1997 - Seibert, J Nucl Med Technol 2004 - values illustrative"
+      }
+    ],
+    "caption": "3 knobs. What does each do inside the X-ray tube?\nmA = how many: hotter filament, more electrons, more photons, same energies.\nkVp = how hard: max photon energy (keV) = kVp, and tube output rises roughly with kVp². Higher kVp = less contrast (minimal for 60 vs 70 kVp on CMOS sensors in one phantom study).\nTime = how long: same beam, on longer. mAs = mA × s. Many intraoral units fix kV or nearly so; time is the main control.\n~99% of the energy becomes heat.\nSchematic; settings illustrative.\nRefs: McCollough 1997, Zink 1997, Radiographics; Seibert 2004, J Nucl Med Technol; EC RP136 2004; Pita de Melo 2026, Dentomaxillofac Radiol\n#endodontics #dentalradiology #xray #endoresident #boardprep"
+  },
+  {
+    "id": "25",
+    "slug": "25-outcome-numbers",
+    "title": "Endo outcome numbers worth memorizing",
+    "style": "Split-flap departure board",
+    "topic": "Success and survival figures for primary NSRCT, retreatment and apical surgery, each with its criteria, follow-up and source.",
+    "duration": 24,
+    "video": "videos/25-outcome-numbers.mp4",
+    "poster": "posters/25-outcome-numbers.jpg",
+    "claims": [
+      {
+        "claim": "PRIMARY NSRCT · SUCCESS 82% · strict · pooled · 1 yr+",
+        "source": "Burns et al., Int Endod J 2022;55:714-731 (PMID 35334111); abstract + PMC full text: 82.0% strict, 39 studies, 7,432 teeth, at least 12 months of review"
+      },
+      {
+        "claim": "PRIMARY NSRCT · SURVIVAL 97% · retained · 8 yr · 1.46M teeth",
+        "source": "Salehrabi & Rotstein, J Endod 2004;30:846-850 (PMID 15564861); abstract: 1,462,936 teeth, US insurance claims (general practitioners and endodontists), outcomes assessed over a period of 8 yr; retention, no radiographs"
+      },
+      {
+        "claim": "Apical lesion at start? NO >96% · YES 86% · success · 8-10 yr",
+        "source": "Sjögren et al., J Endod 1990;16:498-504 (PMID 2084204); abstract (criteria and unit of analysis not stated there)"
+      },
+      {
+        "claim": "RETREATMENT · SUCCESS 77% · strict · pooled · 6 mo+",
+        "source": "Ng, Mann & Gulabivala, Int Endod J 2008;41:1026-1046 (PMID 19133093); abstract: 76.7% by complete healing, inclusion at least 6-month review"
+      },
+      {
+        "claim": "RETREATMENT · SURVIVAL 89% · retained · 5 yr · 4,744 teeth",
+        "source": "Salehrabi & Rotstein, J Endod 2010;36:790-792 (PMID 20416420); abstract: retreatments by endodontists only, US insurance claims; retention, no radiographs"
+      },
+      {
+        "claim": "APICAL SURGERY · SUCCESS: traditional 59% · microsurgery 94% · pooled · 6 mo+",
+        "source": "Setzer et al., J Endod 2010;36:1757-1765 (PMID 20951283); abstract + full text (12 studies n=925 vs 9 studies n=699, separate single-arm groups). Full text, inclusion criteria: 'A minimum follow-up period of 6 months'; success = complete or incomplete (scar) healing on the Rud/Molven scale with no clinical signs, per tooth (surgical criteria, not strict)"
+      },
+      {
+        "claim": "APICAL SURGERY · SURVIVAL: dim placeholder \"– – %\" (no number shown)",
+        "source": "Not a claim: no pooled survival figure could be verified, so the cell shows dashes. Torabinejad et al., J Endod 2015;41:1-10 (PMID 25306305) calculated one, but its abstract prints no number"
+      },
+      {
+        "claim": "SUCCESS ≠ SURVIVAL · NOT HEAD-TO-HEAD",
+        "source": "Definitions differ across sources 1-6: strict success (Burns 2022; Ng 2008), retention in claims data (Salehrabi & Rotstein 2004, 2010), pooled single-arm surgery groups (Setzer 2010)"
+      }
+    ],
+    "caption": "Endo outcome numbers and what each measures.\nPrimary NSRCT: 82% strict pooled success (1 yr+); 97% retained over 8 yr (US claims).\nApical lesion at start: success >96% without, 86% with (8–10 yr).\nRetreatment: 77% strict pooled (6 mo+); 89% retained at 5 yr (claims, endodontists).\nApical surgery, pooled (6 mo+, surgical criteria, not strict): traditional 59%, microsurgery 94% (at 2–13 yr: 78% cohorts, 91% trials). Survival: no figure I could verify.\n1 yr+/6 mo+ = min. follow-up. Success ≠ survival; not head-to-head.\nRefs: Burns 2022, Ng 2008 (Int Endod J); Salehrabi 2004, 2010, Sjögren 1990, Setzer 2010 (J Endod); Pinto 2020 (Medicina).\n#endodontics #endo #rootcanal #boardprep #apicoectomy"
+  },
+  {
+    "id": "26",
+    "slug": "26-primary-vs-persistent",
+    "title": "Primary vs persistent: who lives in the canal",
+    "style": "Collectible trading cards",
+    "topic": "How the flora of an untreated necrotic pulp differs from that of a previously treated tooth, and where E. faecalis really stands.",
+    "duration": 24,
+    "video": "videos/26-primary-vs-persistent.mp4",
+    "poster": "posters/26-primary-vs-persistent.jpg",
+    "claims": [
+      {
+        "claim": "Primary deck: Gram-negative and Gram-positive genera mixed, nine anaerobes and one facultative Streptococcus (genus names, Gram color, anaerobe/facultative badges)",
+        "source": "Genus lists and Gram: Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (doi:10.3402/jom.v1i0.2009; PMID 21523208; full text); mix dominated by obligate anaerobes: Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-51 (PMID 17546861; abstract); per-genus oxygen tolerance and shape word: one PubMed abstract per card, listed in RESEARCH.md section (i) (abstracts only; each card prints the abstract's own word)"
+      },
+      {
+        "claim": "PRIMARY (untreated necrotic pulp): 10-20 taxa per canal (molecular studies)",
+        "source": "Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (doi:10.3402/jom.v1i0.2009; PMID 21523208; full text), text and Table 1; a review-level range of study means ('a mean of 10-20 species/phylotypes'), not the range of single canals"
+      },
+      {
+        "claim": "TREATMENT removes most of the deck; what is left is mostly Gram-positive (two violet cards cross the line, labelled PERSISTENT; one unnamed card from off the table, labelled SECONDARY)",
+        "source": "Mostly Gram-positive after instrumentation/medication: Siqueira JF Jr & Rôças IN, J Endod 2008;34:1291-1301.e3 (PMID 18928835; abstract: 'gram-positive bacteria are the most dominant'); fewer species and cells after treatment: Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (PMID 21523208; full text); no number shown"
+      },
+      {
+        "claim": "PERSISTENT / SECONDARY (previously treated tooth): 1-5 taxa per canal (adequately treated; culture + PCR)",
+        "source": "Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (doi:10.3402/jom.v1i0.2009; PMID 21523208; full text); Siqueira JF Jr et al., PLoS One 2016;11:e0162887 (PMID 27689802; full text: '1 to 2 by culture, and 1 to 5 by early-generation molecular methods'); root-filled teeth with apical periodontitis"
+      },
+      {
+        "claim": "E. faecalis: Often found. Rarely dominant. qPCR, 29 treated teeth: found in 11, dominant in 1 (the slogan is repeated on the end card)",
+        "source": "Rôças IN & Siqueira JF Jr, J Clin Microbiol 2012;50:1721-4 (doi:10.1128/JCM.00531-12; PMID 22403423; full text). The 29 are root canal-treated teeth with apical periodontitis sampled at retreatment: asymptomatic, treated more than 2 years earlier, coronally restored, fillings 0-4 mm short. 'Often found' = prevalence 24-77 % in the wider literature: Stuart CH et al., J Endod 2006;32:93-8 (PMID 16427453; abstract)"
+      },
+      {
+        "claim": "Primary: mostly obligate anaerobes, Gram - and +",
+        "source": "Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-51 (PMID 17546861; abstract); Byström A & Sundqvist G, Scand J Dent Res 1981;89:321-8 (PMID 6947391; abstract)"
+      },
+      {
+        "claim": "Persistent/secondary: more facultatives, mostly Gram + (culture and targeted PCR findings), sometimes yeast",
+        "source": "Pinheiro ET et al., Int Endod J 2003;36:1-11 (PMID 12656508; abstract); Molander A et al., Int Endod J 1998;31:1-7 (PMID 9823122; abstract); Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (doi:10.3402/jom.v1i0.2009; PMID 21523208; full text), Table 1. Yeast: Siqueira & Rôças 2009 (up to 18 % of treated teeth, narrative review); pooled prevalence 8.2 % across all infection types, Mergoni G et al., J Endod 2018;44:1616-1625.e9 (PMID 30241680; abstract); no difference by infection type in Persoon IF et al., Int Endod J 2017;50:1055-66 (PMID 27987307; abstract)"
+      },
+      {
+        "claim": "PERSISTENT: survived treatment. SECONDARY: got in during or after treatment",
+        "source": "Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (doi:10.3402/jom.v1i0.2009; PMID 21523208; full text)"
+      },
+      {
+        "claim": "Sequencing finds more taxa in both",
+        "source": "Treated teeth: Siqueira JF Jr et al., PLoS One 2016;11:e0162887 (PMID 27689802; full text: mean 116 OTUs per root apex, 'substantially larger bacterial richness per tooth'); primary: Santos AL et al., PLoS One 2011;6:e28088 (PMID 22132218; full text: mean 71 OTUs per chronic case, 'much higher than previously reported'); both types 'highly diverse' by sequencing: Manoil D et al., Proteomics Clin Appl 2020;14:e1900060 (PMID 31950679; abstract). OTUs are not species"
+      },
+      {
+        "claim": "Which cards are dealt, how many survive the sweep, card order, the all-Gram-positive right-hand hand and the pip meters",
+        "source": "Toy model / schematic: labelled on screen 'schematic decks'; icons are textbook morphology, not to scale. Gram-negative anaerobes also occur in treated teeth (F. nucleatum in 10 of 42, Rôças & Siqueira 2012); the right hand shows none"
+      }
+    ],
+    "caption": "Who lives in the canal? Depends on whether the tooth was treated.\n\nPrimary (untreated necrotic pulp): ~10-20 taxa per canal (molecular studies), mostly anaerobes, Gram - and +.\nRoot-filled, with a lesion: 1-5 taxa if adequately treated (culture, early PCR), more facultatives, mostly Gram +, sometimes yeast.\nPersistent = survived treatment; secondary = got in during or after it.\nE. faecalis: qPCR, 11 of 29 such teeth, dominant in 1. Sequencing finds more taxa in both.\n\nRefs: Siqueira & Rôças 2009, J Oral Microbiol; Rôças & Siqueira 2012, J Clin Microbiol; Siqueira 2016, PLoS One; Manoil 2020, Proteomics Clin Appl\nSchematic animation.\n\n#endodontics #endo #microbiology #rootcanal #endoresident"
+  },
+  {
     "id": "33",
     "slug": "33-resorption-external-cervical",
     "title": "External cervical resorption on CBCT",

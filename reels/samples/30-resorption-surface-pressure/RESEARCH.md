@@ -526,3 +526,51 @@ Consequence for the reel: the end card now reads "Pulp is not the cause." instea
 "usually responds normally" (Patel 2022) and adds the orthodontic testing caveat (J1, J2).
 Not used: the reviewer's suggestion that the AAE Glossary places pressure resorption under "external surface resorption" — the
 Glossary entry (A2, quoted via Lin 2022) does not say this, so the caption attributes that grouping to Patel 2022 only.
+(Citation audit: Lin 2022 itself does write that the type "named by the AAE as external surface resorption … includes resorption
+due to a tumor, an impacted tooth, etc." and lists "Pressure resorption and orthodontic resorption" as an analogous term in its
+Table 2. That is Lin's interpretation of the Glossary, not the Glossary's wording; the decision above stands.)
+
+---
+
+## (k) Citation audit (independent, PubMed, 2026-11-22)
+
+**Method.** According to PubMed: full metadata and abstract re-read for the 11 papers that carry an on-screen source line, a
+meta.json claim, the caption Refs line or the NOTES.md nuance list (PMID 35605161, 35559593, 12848710, 35229320, 19732664,
+18298199, 19465737, 11138644, 21366625, 39536681, 29771300). PMC full text re-read for Lin 2022 (PMC9546147, whole article),
+Abbott & Lin 2022 (PMC9543863: sections 6.1, 6.5 and 6.6 in full, quotes searched in the whole text) and Patel 2022 (PMC9790676:
+Table 1, the whole "External surface resorption" section, quotes searched in the whole text). The other 53 citations of section
+(h) and table F were matched by journal, year, volume, first page and first author with the PubMed citation matcher: all 53
+returned the PMID given here. The AAE Communiqué page was re-fetched (Blicher B, 5 Jan 2021; quotes of row D3 confirmed).
+
+**Result.** No wrong PMID, author, year, journal, volume or page. Every quote behind an on-screen claim was found in its source:
+
+| On-screen text | Source line on screen | Found in |
+|---|---|---|
+| Small injury → shallow lacunae | Lin et al.; Abbott & Lin, Dent Traumatol 2022 | Abbott & Lin 6.1: "small areas of resorption of the cementum"; "localized injury"; "healing response following a minor injury"; "shallow nature of the resorptive defect" |
+| No infection → new cementum in weeks | (same) | Abbott & Lin 6.1: "as long as the tooth has not been contaminated with bacteria, the resorptive process will not persist"; "a few weeks". Lin 2022: "repaired with the formation of cementoid-like tissue … new cementum will follow … usually takes about 4 weeks to complete" |
+| Pressure keeps clasts working (ortho force, impacted tooth) | Fuss et al., Dent Traumatol 2003 | Abstract: "stimulation by infection or pressure"; "pressure during orthodontic treatment, or an impacted tooth or tumor" |
+| Pressure off → it stops. A shortened root stays short. | Patel et al., Int Endod J 2022 | Full text: "The resorptive process will stop with the removal of the source of pressure"; "once the source of the pressure has been eliminated, cemental repair ensues". Abstract: "root resorption is irreversible" |
+| No root canal treatment. Pulp is not the cause. | Abbott & Lin 2022 · Patel et al. 2022 | Patel: "no signs of endodontic disease. The affected teeth respond normally to pulp sensitivity tests"; "managed by the appropriate elimination of the aetiological factor"; Table 1 pulp sensibility "+ve". Abbott & Lin: 6.1 "no indication for any management"; 6.5 "clinically normal pulp"; 6.6 "Orthodontic resorption itself does not cause pulp pathosis". The literal "endodontic therapy is not indicated" is only in the AAE Communiqué (caption-level source) |
+| usually nothing / blunted apex | (same) | Abbott & Lin 6.1 "will not usually be evident"; 6.6 "shortened and blunted with rounded apices"; Patel "flattening or blunting of the root apices" |
+| Remove the cause. | (same) | Fuss abstract "Removal of the stimulation factor, i.e. pressure, is the treatment of choice"; Patel (management) |
+
+Caption qualifiers: "not instantly" = Cheng 2009 abstract ("root resorption continued for 4 weeks after orthodontic force
+stopped"; maxillary first premolars, micro-CT); "not always" = Falahat 2008 abstract (7 of 32 lesions progressed; 27 followed
+patients) and Abbott & Lin 6.6 ("reduction of forces is not guaranteed to stop the resorption"); "advanced defects can reach
+[the pulp]" = Patel ("In advanced cases, this may result in perforation of the root canal") and Abbott & Lin 6.5.
+
+**Changes made by the audit**
+
+1. On-screen source line of sheet 1: "Lin; Abbott & Lin, Dent Traumatol 2022" → "Lin et al.; Abbott & Lin, Dent Traumatol 2022".
+   Lin 2022 (Part 1) has four authors (Lin S, Moreinos D, Kaufman AY, Abbott PV); the bare "Lin;" beside "Abbott & Lin" and the
+   "et al." used on the other sheets read as a single-author paper or as one garbled author list. Video re-rendered.
+2. meta.json: claims 2 and 5–8 used short forms ("Abbott & Lin 2022", "Patel et al. 2022") without volume and pages; each now
+   carries journal, year, volume, pages, PMID and what was read (full text section or abstract).
+3. NOTES.md: states that "No root canal treatment" is a conclusion from the two reviews, not a quotation, and names the AAE
+   Communiqué (author, date) as the literal source; nuance added on how Lin 2022 reads the AAE Glossary term.
+
+**Left as is (checked, acceptable).** The end-card source line "Abbott & Lin 2022 · Patel et al. 2022" has no journal
+abbreviations (no room beside "schematic · not to scale"); both journals are printed on sheets 1 and 2 and in the caption.
+"AJODO" in the caption Refs line is the customary acronym of Am J Orthod Dentofacial Orthop (kept for the 700-character limit).
+PubMed lists the second author of Ericson & Kurol 2000 (PMID 11138644) as "Kurol PJ"; this file writes "Kurol J". The short
+form "Ericson & Kurol 2000" is unaffected.

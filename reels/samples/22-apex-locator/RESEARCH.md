@@ -528,3 +528,31 @@ Nothing in sections (a)-(g) was changed. Two things were done while building the
 
    Not sourced: the relative conductivity of blood versus saline. The reel draws only a small blood-to-saline step and
    NOTES.md marks it as illustrative. A PubMed query for apex locator + irrigant conductivity + blood returned nothing.
+
+## Builder addendum 2 (2026-11-22, after independent review)
+
+Sections (a)-(g) are unchanged. According to PubMed, the following abstracts were read (metadata + abstract) while
+applying the review. Rows B3-B5 are new facts; B6-B9 are corrections of scope for facts already in the brief.
+
+| # | Fact | Exact source | What the source literally reports | Verified from | Confidence |
+|---|---|---|---|---|---|
+| B3 | In vivo, blood in the canal did not change Root ZX accuracy | Saatchi M, Aminozarbian MG, Noormohammadi H, Baghaei B. Braz Dent J 2016;27(3):336-339. PMID 27224570. [DOI](https://doi.org/10.1590/0103-6440201600678) | 40 single-canal teeth scheduled for extraction; about two drops of finger-prick blood injected into the canal. Within 0.5 mm: Root ZX 91.5% without blood, 86.2% with blood; Raypex 5 88.9% and 83.3%; no significant difference (McNemar). | abstract | High for the numbers. Accuracy-level evidence only: it does not measure conductivity and does not report the two potentials. Not on screen (BLOOD was removed from the fluid beat); NOTES/meta only. |
+| B4 | Primary molars, Root ZX, in vivo: 69% (with resorption) and 65% (without) within ±0.5 mm; over 90% within ±1 mm | Beltrame APCA, Triches TC, Sartori N, Bolan M. Int Endod J 2011;44(5):402-406. PMID 21219365. [DOI](https://doi.org/10.1111/j.1365-2591.2010.01839.x) | 15 primary molars, 30 canals; in vivo 69% / 65%, ex vivo 69% / 77% (tolerance ±0.5 mm); 92% / 94% at ±1 mm. | abstract | High. Outside the scope of A7 (permanent teeth), so the on-screen range is described as "permanent teeth, hand files" in the caption and meta.json. |
+| B5 | NaOCl lowers measured canal resistance compared with deionized water and dry canals (in vivo) | Meredith N, Gulabivala K. Endod Dent Traumatol 1997;13(3):126-131. PMID 9550026. [DOI](https://doi.org/10.1111/j.1600-9657.1997.tb00025.x) | 20 teeth, LCR analyzer at 100 Hz and 1 kHz: mean series resistance 22.19-92.07 kΩ dry, 9.32-12.10 kΩ deionized water, 7.46-8.92 kΩ sodium hypochlorite; "a complex electrical network comprising resistive and capacitive series and parallel elements" involving "the smear layer and bulk dentine". | abstract | High. Supports "fluid shifts both signals" and the note that dentin is a poor conductor rather than a perfect insulator. No kΩ value goes on screen. |
+| B6 | Scope of A7, reference point: the 72% anchor used "the point 0.5 mm coronal to the major foramen" | Stöber EK et al. J Endod 2011;37(5):608-610. PMID 21496657. [DOI](https://doi.org/10.1016/j.joen.2011.02.002) | 40 canals, SEM; Root ZX accurate 72% of the time to ±0.5 mm and 100% to ±1 mm. | abstract | High. A7's "landmark = foramen or constriction" was incomplete: it is the major foramen, a point 0.5 mm coronal to it, or the minor foramen/constriction, depending on the study. |
+| B7 | Scope of A7, sample size: the 100% anchor is not a small study | Vieyra JP, Acosta J, Mondaca JM. Int Endod J 2010;43(1):16-20. PMID 20002800. [DOI](https://doi.org/10.1111/j.1365-2591.2009.01620.x) | 482 canals in 160 teeth; within ±0.5 mm of the minor foramen 100% of the time (both locators); radiographs 15%. | abstract | High. "Small studies" removed from the screen; "most with 11-40 teeth" kept in NOTES only. |
+| B8 | Rotary NiTi counter-example (already A25), re-read | Siu C, Marshall JG, Baumgartner JC. J Endod 2009;35(7):962-965. PMID 19567315. [DOI](https://doi.org/10.1016/j.joen.2009.04.025) | Root ZX II 50% within ±0.5 mm of the minor diameter, 28 teeth. | abstract | High. Named in meta.json as outside the on-screen range. |
+| B9 | "Foramen region" wording, second source | Martins JNR, Marques D, Mata A, Caramês J. J Endod 2014;40(6):759-777. PMID 24862702. [DOI](https://doi.org/10.1016/j.joen.2014.03.011) | "These devices detect the transition of the pulp to the periodontal tissue, which is anatomically very close to the apical constriction"; "At least one radiographic control should be performed". | abstract | High for the quotes (systematic review; the authors rate the evidence base as short and at considerable risk of bias). |
+
+Changes to how existing rows are used:
+- C7/C8 (Rambo 2010, Table 2): the reel's toy curve is now tuned to the 8 kHz / 0.5 kHz proportions derived in C8
+  (0.766, 0.730, 0.705, 0.527 at -3, -1, -0.5 and 0 mm: about 15%, 10.5% and 74.5% of the fall). The source line
+  says "in vivo, 7-21 canals" because n differs by file position (21 at 0 mm, 14 at -0.5 mm, 18 at -1 mm, 7 at
+  -1.5 to -3 mm). No value is printed.
+- M2: Rambo 2010 is treated as supporting only for "it senses the foramen region", because its 0 mm position was
+  defined with a Root ZX plus a radiograph.
+- H6: "1994" on the history strip is the date of the J Endod paper. An earlier Japanese description of the method
+  (about 1991) was suggested by the reviewer and could not be verified in PubMed; nothing on screen or in the caption
+  says "introduced in 1994" or "first".
+- Addendum 1, "Not sourced: the relative conductivity of blood versus saline": still not sourced, and the reel no
+  longer draws a blood step.

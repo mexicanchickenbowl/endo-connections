@@ -3,7 +3,7 @@ export const GW = 36, GH = 27;            // schematic pixel grid of the chip (r
 export const AW = 3.4, AD = 2.55;         // active area in world units (4:3), schematic
 
 export const T = {
-  dur: 23.9,
+  dur: 24.0,
   hook: [0, 1.7],                         // intact sensor, title
   explode: [1.55, 3.15],                  // layers separate, camera pulls back to the teardown view
   monitorIn: [1.75, 3.1],                 // the small screen slides in below the stack
@@ -27,12 +27,12 @@ export const T = {
   pspExpose: [12.65, 13.65],              // X-rays -> trapped electrons (latent image)
   pspScan: [13.8, 15.4],                  // red laser line scan, blue-violet light -> photomultiplier
   carriageOut: [15.4, 15.9],
-  eraseLabel: 15.35,
-  eraseIn: [15.45, 16.0],                 // erase lamp comes down
-  eraseGlow: [15.95, 16.95],
-  eraseDots: [16.1, 16.7],                // residual trapped electrons cleared
-  pspOut: 17.3,                           // PSP labels fade
-  family: [17.35, 18.15],                 // both detectors together
-  endText: [18.1, 23.2],
-  loop: [23.15, 23.9],                    // back to the hero pose
+  eraseLabel: 15.2,
+  eraseIn: [15.4, 15.9],                  // erase lamp (ring light) comes down
+  eraseGlow: [15.85, 16.8],
+  eraseDots: [16.0, 16.55],               // residual trapped electrons cleared
+  pspOut: 17.05,                          // PSP labels fade
+  family: [17.1, 17.9],                   // both detectors together
+  endText: [17.85, 23.3],
+  loop: [23.25, 24.0],                    // back to the hero pose
 };

@@ -32,19 +32,20 @@ Poster = 19.8 s (end card: named, struck-out equation + action + guideline).
 All citations were checked on PubMed (abstract) unless stated; the eight load-bearing ones were re-pulled at build
 time (PMIDs 1521505, 6933704, 7641622, 12848710, 33975756, 35229320, 32460393, 32475015). At the review pass the
 abstracts of PMIDs 1521505, 7641622 and 26923450 were pulled again from PubMed for the new caption wording; the two
-IADT 2020 papers have no full text in PMC (abstracts confirm the citations only; quotes and section numbers rest on
-the research stage, which read them in the AAPD Reference Manual reprints).
+IADT 2020 papers have no full text in PMC (PubMed abstracts confirm the citations only). Their quotes and section
+numbers were read in the AAPD Reference Manual reprints by the research stage and again, independently, at the
+citation audit (see "Citation audit" at the end of this file).
 
 | # | On screen | Source | Verified from |
 |---|---|---|---|
-| 1 | `DAMAGED ROOT SURFACE + INFECTED CANAL = INFLAMMATORY RESORPTION`; `luxation · avulsion`; line `Fuss, Tsesis & Lin 2003 · Dent Traumatol`; end-card recap chips `DAMAGE` + `INFECTION` | Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82. PMID 12848710: "two phases: mechanical or chemical injury to the protective tissues and stimulation by infection or pressure"; "Intrapulpal infection is the stimulation factor in ... external periradicular inflammatory root resorption." | abstract |
+| 1 | `DAMAGED ROOT SURFACE + INFECTED CANAL = INFLAMMATORY RESORPTION`; `luxation · avulsion`; line `Fuss, Tsesis & Lin 2003 · Dent Traumatol`; end-card recap chips `DAMAGE` + `INFECTION` | Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82. PMID 12848710: "two phases: mechanical or chemical injury to the protective tissues and stimulation by infection or pressure"; "Intrapulpal infection is the stimulation factor in ... external periradicular inflammatory root resorption." The sub-label `luxation · avulsion` is not in the Fuss abstract; it rests on Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320, full text): EIR "also affects teeth that suffer severe dental traumatic injury (for example, avulsion and luxation)", and on Abbott 2016 (abstract: damage to the root surface "during trauma"). | abstract (Fuss, Abbott); review full text (Patel) |
 | 2 | `TOXINS VIA TUBULES`; in the scene's single source line: `Tubule theory: Andreasen 1981` | Andreasen JO. J Endod 1981;7:294-301 (PMID 6942086, no abstract); reprint J Endod 2021;47:865-72 (PMID 33975756): inflammatory resorption "as a result of the diffusion of toxic elements from the pulp canal to the resorption cavity", presented as a theory; intact intermediate cementum "will tend to arrest the diffusion". | abstract of the reprint |
 | 3 | `ROOT + BONE RESORB` (bowl-shaped craters in root and facing bone) | Abbott PV. Aust Dent J 2016;61 Suppl 1:82-94 (PMID 26923450, abstract); Lin S et al. Dent Traumatol 2022;38:253-66 (PMID 35559593, full text); IADT 2020 (Fouad, sect. 11.1). "Bowl-shaped": Andreasen & Hjørting-Hansen 1966 as summarized by Patel et al. 2022 (primary not read). | abstract / review full text |
 | 4 | `BY WEEK 1` — `histology · monkey`; source line `Andreasen 1980` (journal in the caption) | Andreasen JO. Swed Dent J 1980;4:101-10. PMID 6933704: "Inflammatory resorption was first recognized after 1 week and showed a rapid extension" (1 week = first time point examined, hence "by"). | abstract |
 | 5 | `~1 MONTH` — `on X-ray`; source line `Andreasen et al. 1995` ("usually" and the population are in the caption) | Andreasen JO, Borum MK, Jacobsen HL, Andreasen FM. Endod Dent Traumatol 1995;11:76-89. PMID 7641622 (400 replanted human incisors): inflammatory resorption "usually observed after 1 month". | abstract |
 | 6 | `MONTHS` — `root can be lost` (shown before the fix, i.e. untreated); source line `Patel 2022 (review)` | Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921. PMID 35229320: "resorption of an entire root can occur within months" (review statement, uncited there); Lin 2022 summarizing Andreasen & Hjørting-Hansen 1966. Kept qualitative ("can", "untreated"). | review full text (EIR section) |
 | 7 | `“VERY RAPID IN CHILDREN” — IADT 2020` (in quotation marks) | Fouad AF et al. Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 10; same sentence in Bourguignon C et al. Dent Traumatol 2020;36:314-30 (PMID 32475015), sect. 13.2. Consensus wording, no reference attached, not a measured rate. | guideline full text |
-| 8 | `DISINFECT THE CANAL` · `Ca(OH)2` · `STIMULUS CUT` | Fuss 2003: "Adequate root canal treatment controls intrapulpal bacteria and arrests the resorption process"; Bourguignon 2020 sect. 13.3: start RCT immediately, medicate with calcium hydroxide. | abstract / guideline full text |
+| 8 | `DISINFECT THE CANAL` · `Ca(OH)2` · `STIMULUS CUT` | Fuss 2003: "Adequate root canal treatment controls intrapulpal bacteria and arrests the resorption process"; Bourguignon 2020 sect. 13.3: start RCT immediately, medicate with calcium hydroxide. The drawn repair (cementum-like lining, PDL space re-formed, crater not refilled): Trope M et al. Endod Dent Traumatol 1995;11:124-8 (PMID 7641628; dogs, "complete cemental repair" in 9/10 with long-term Ca(OH)2, none untreated - abstract); Lin S et al. 2022 (PMID 35559593, full text): "repair of the resorptive defects with re-establishment of normal PDL space" on radiographs. | abstract / guideline full text / review full text |
 | 9 | `97% HEALED` · `192 of 197 resorbing teeth` · legend `5 went on to ankylosis`; line `Cvek 1992 Endod Dent Traumatol · luxated non-vital incisors · calcium hydroxide, then GP · radiographic` | Cvek M. Endod Dent Traumatol 1992;8:45-55. PMID 1521505: "Inflammatory root resorption healed in 192 of 197 teeth (97%); in 5 teeth it developed into ankylosis." The 197 are the teeth that had inflammatory resorption, within 885 luxated non-vital maxillary incisors; retrospective, single center, no control group. | abstract |
 | 10 | `REPLANTED MATURE TOOTH — START ROOT CANAL WITHIN 2 WEEKS` · `IADT 2020`; line `Fouad et al. 2020 Dent Traumatol · mature = closed apex` | Fouad 2020, sect. 10: "When endodontic treatment is indicated (teeth with closed apex), treatment should be initiated within 2 weeks postreplantation." | guideline full text |
 
@@ -79,7 +80,8 @@ Andreasen 1985, Trope 2002 or the 1966 papers directly.
   cream = dentin, blue = disinfected/treated.
 - One source line per scene: the timer scene lists its three time anchors in row order plus the tubule theory
   (`Timeline: Andreasen 1980 · Andreasen et al. 1995 · Patel 2022 (review) · Tubule theory: Andreasen 1981`, 24 px);
-  the same slot then carries Cvek 1992. Journals are in the caption and in the table above.
+  the same slot then carries Cvek 1992. Journals are in the caption Refs line (all four, since the citation audit;
+  before it `Patel 2022` and `Andreasen 1981` had no journal anywhere the viewer could see) and in the table above.
 
 ## Change log
 - v1: first full build (hook, equation, cutaway/timer, fix, end card, tape wipes).
@@ -92,6 +94,7 @@ Andreasen 1985, Trope 2002 or the 1966 papers directly.
   qualifier added under the dial; duration 21.9 s.
 - v4 (review pass): see "Review changes".
 - v5 (Final QA): see "Final QA" at the end of this file.
+- v6 (Citation audit): meta.json and notes only, no on-screen change, no re-render; see "Citation audit" at the end.
 
 ## Review changes
 Applied from the independent science + design review (all "should" items and the cheap nits):
@@ -114,6 +117,7 @@ Science (caption / notes only, no new on-screen words)
   (Superseded: Final QA cut the caption to 696 characters; the dropped lines are listed under "Final QA".)
 - Not done here: opening the two IADT PDFs to re-confirm the three quotes and their section numbers (not in PMC).
   This is a pre-posting check for a person with journal access; see "Verified from" above.
+  (Done at the citation audit, in the AAPD Reference Manual reprints: all quotes and section numbers confirmed.)
 
 Design
 - Outcome plate: fully visible 3.7 s (was about 2.5 s). The flip moved from 13.8 to 12.9, lamps fill in 0.6 s
@@ -167,3 +171,60 @@ Left as is (judgment calls, not defects)
 - Equation scene: the seven new words are on screen for about 2.5–2.7 s before the wipe; readable, slightly brisk.
 - Still open from the review pass: the two IADT 2020 quotes and their section numbers rest on the research stage's
   reading of the AAPD reprints (no full text in PMC). Worth one look by someone with journal access before posting.
+  (Closed by the citation audit below.)
+
+## Citation audit
+Independent audit of every literature citation on screen, in meta.json, in this file and in RESEARCH.md
+(2026-11-22). No on-screen text or number was wrong, so `reel.js` was not touched and the video was not re-rendered
+(`reels/out/31-resorption-external-inflammatory.mp4`: 1080x1920, 30 fps, 657 frames, 21.9 s, rendered after the last
+source edit).
+
+How it was checked
+- PubMed records pulled for the papers behind the ten on-screen claims: PMIDs 12848710, 6942086, 33975756, 6933704,
+  7641622, 1521505, 26923450, 35559593, 35229320, 32460393, 32475015, plus 35605161, 5225449, 5225450, 7641628,
+  9655059, 6943905, 11307251, 12196225, 29866405, 24565654, 19208008. First author, year, journal, volume, pages and
+  PMID belong to the same paper in every case, and every quoted abstract sentence and number is in the abstract.
+- The other 39 PMIDs of RESEARCH.md were matched by journal / year / volume / first page / first author with the
+  PubMed citation matcher: all resolve to the stated PMID. One was confirmed from its PubMed record instead
+  (Andreasen FM & Pedersen 1985, PMID 3867505 = Endod Dent Traumatol 1985;1:207-20; RESEARCH.md gave it without
+  volume and pages, added there).
+- PMC full text searched for the quoted review sentences: Patel 2022 (PMC9790676: "resorption of an entire root can
+  occur within months", no reference attached; "saucer- or bowl-shaped"; "as early as 3-4 weeks"; "avulsion and
+  luxation"; "7-10 days" citing Fouad 2020), Lin 2022 (PMC9546147, read in full: "adjacent radiolucency in the bone";
+  "loss of the tooth within the first year"; "always occurs adjacent to the resorptive defect"), Abbott & Lin 2022
+  (PMC9543863: "resorb the tooth and the adjacent bone"; "not always the case"; "will not arrest the resorption").
+- IADT 2020, both papers (not in PMC): text of the AAPD Reference Manual reprints extracted and read. Fouad et al.,
+  section 10 "Endodontic considerations": "When endodontic treatment is indicated (teeth with closed apex), treatment
+  should be initiated within 2 weeks postreplantation"; "Calcium hydroxide ... for up to 1 month"; open apices: "root
+  canal treatment should be avoided unless there is clinical or radiographic evidence of pulp necrosis and infection";
+  "Such resorption is very rapid in children." Section 11.1: "Evidence of root and/or bone resorption anywhere around
+  the circumference of the root ...". Bourguignon et al., section 13.2: same "very rapid in children" sentence;
+  section 13.3: "root canal treatment should be initiated immediately. The canal should be medicated with calcium
+  hydroxide." All verbatim, section numbers as cited.
+
+Problems found and fixed (none on screen)
+1. The timer source line names `Patel 2022 (review)` and `Andreasen 1981` without a journal, and after Final QA the
+   caption Refs line no longer listed either paper, so a viewer could not identify them (Andreasen JO has at least
+   three 1981 replantation papers: J Endod, Acta Odontol Scand, Int J Oral Surg). Fix: caption Refs line now reads
+   `Fuss 2003, Fouad 2020 Dent Traumatol; Andreasen 1980 Swed Dent J, 1981 J Endod; Andreasen 1995, Cvek 1992 Endod
+   Dent Traumatol; Patel 2022 Int Endod J`. To stay within 700 characters (now 699) three caption phrases were
+   tightened without changing a claim: `Seen by week 1` -> `By week 1`; `(replanted human incisors)` ->
+   `(human replants)`; `Canal treated: 192 of 197 resorbing teeth healed (...)` -> `192 of 197 resorbing teeth healed
+   after Ca(OH)2 then GP (...)`; the second `RCT` in the open-apex sentence dropped.
+2. `luxation · avulsion` was sourced to Fuss 2003 alone; the Fuss abstract names no injury type. Source added
+   (Patel 2022 full text; Abbott 2016 abstract) in meta.json claim 1 and row 1 above.
+3. The drawn repair ("crater is lined, not refilled") had no source of its own in meta.json claim 8. Added Trope et
+   al. 1995 (dogs, abstract) there and, with Lin 2022, in row 8 above.
+4. meta.json claims 7 and 10 and this file said the IADT quotes rested on the research stage only. They are now
+   re-read (see above); wording updated, and claim 7 also names Bourguignon 2020 sect. 13.2.
+5. meta.json claim 8 abbreviated a three-author paper as "Fuss Z et al." and claim 5 a four-author paper as
+   "Lin S et al."; both now list the authors as in PubMed.
+
+Checked and left as is
+- On-screen author-year shorthand `Patel 2022 (review)` for a four-author paper: journal now in the caption; adding
+  "et al." would shrink the 24 px line to under 23 px for no gain in accuracy.
+- Caption Refs use first-author shorthand (`Fuss 2003`, `Fouad 2020`, `Andreasen 1995`, `Patel 2022`); the full
+  author lists are in meta.json claims.
+- Primary texts not read: Andreasen & Hjørting-Hansen 1966 (not cited on screen; the bowl shape is cited via Patel
+  2022) and the 1981 printing of Andreasen, J Endod 7:294-301 (cited on screen for the tubule theory; it has no
+  PubMed abstract, so the claim rests on the abstract of its 2021 reprint in the same journal, PMID 33975756).

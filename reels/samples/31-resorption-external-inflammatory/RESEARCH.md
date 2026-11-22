@@ -99,7 +99,7 @@ Confidence = how safely the statement can go on screen as worded in column 1.
 | Trope M. Root resorption due to dental trauma. Endodontic Topics 2002;1:79-100 (doi 10.1034/j.1601-1546.2002.10106.x) | Not indexed in PubMed; citation details confirmed via Crossref only; content not read. |
 | Tronstad L et al. J Endod 1981;7:17-21 (PMID 6938618), pH in dental tissues after Ca(OH)2 | No abstract. Use Nerwich 1993 (R8). |
 | Hammarström L et al. Endod Dent Traumatol 1986;2:184-9 (PMID 3466784; PubMed misspells the first author "Massarstrom") | No abstract. |
-| "EIR in 5-8% of luxations and 30% of replantations" (attributed in Patel 2022 to Crona-Larsson 1991) and Andreasen FM & Pedersen 1985 percentages (6% extrusion, 3% lateral luxation, 38% intrusion) | Crona-Larsson abstract (PMID 1810713) reports only "external root resorptions" in 17% of 171 teeth; Andreasen & Pedersen 1985 (PMID 3867505) has no abstract. Use I1-I4 instead. |
+| "EIR in 5-8% of luxations and 30% of replantations" (attributed in Patel 2022 to Crona-Larsson 1991) and Andreasen FM & Pedersen 1985 percentages (6% extrusion, 3% lateral luxation, 38% intrusion) | Crona-Larsson abstract (PMID 1810713) reports only "external root resorptions" in 17% of 171 teeth; Andreasen FM, Pedersen BV. Endod Dent Traumatol 1985;1:207-20 (PMID 3867505) has no abstract. Use I1-I4 instead. |
 | Any resorption RATE (mm/week, "root gone in X weeks") | None found. Timer must be labelled schematic. |
 | "Wider tubules in young teeth" as the reason it is faster | Textbook explanation; no primary source verified here. Kristerson & Andreasen (Int J Oral Surg 1984;13:313-23, PMID 6434451, monkeys) only speculate that thicker cementum protects mature teeth. |
 | IADT 2012 avulsion guideline text ("7-10 days") and AAE trauma guideline text | Not retrievable here. (Trope M, Dent Clin North Am 1995;39:93-112, PMID 7890110, abstract: closed apex "Endodontics should be initiated after 7 to 10 days" — verified.) |
@@ -451,3 +451,26 @@ citing Fouad 2020 (confirmed — do not copy); all IADT 2020 quotes (R1-R4, M6b,
 **Still unverified (unchanged status):** primary text of Andreasen & Hjørting-Hansen 1966 (both papers), Andreasen
 1985, Tronstad 1988, Cvek 1973, Tronstad 1981, Hammarström 1986, Andreasen FM & Pedersen 1985 (no PubMed abstracts);
 Trope 2002 Endodontic Topics (content); ESE 2023 position statement specifics; AAE/AAOMR 2025 Update wording.
+
+---
+
+## Citation audit (third pass, 2026-11-22)
+
+Scope: every citation on screen, in meta.json and in NOTES.md, and the sources of this brief behind them.
+
+- According to PubMed, metadata and abstracts re-pulled for PMIDs 12848710, 6942086, 33975756, 6933704, 7641622,
+  1521505, 26923450, 35559593, 35229320, 32460393, 32475015, 35605161, 5225449, 5225450, 7641628, 9655059, 6943905,
+  11307251, 12196225, 29866405, 24565654, 19208008, 3867505, 3466784: author, year, journal, volume, pages and PMID
+  agree with this brief, and the quoted abstract sentences and numbers are in the abstracts (rows M1, M1b, M2, M3, M4,
+  M6, M8, T1, T2, T5, T7, I1, R5, R6).
+- The remaining PMIDs of the reference list were matched with the PubMed citation matcher (journal, year, volume,
+  first page, first author): every one resolves to the PMID given here. Their abstracts were not re-read in this
+  pass; none of them supports an on-screen claim.
+- PMC full text: Lin 2022 (PMC9546147) read in full; Patel 2022 (PMC9790676) and Abbott & Lin 2022 (PMC9543863)
+  searched for each sentence quoted in M5, M6c, T3, R7, (c)6, (d) and the "not verified" table - all found as quoted.
+- IADT 2020: the text of both AAPD Reference Manual reprints was extracted and read. Fouad et al. sections 10 and
+  11.1 and Bourguignon et al. sections 13.1-13.3 contain the sentences quoted in M6b, T4, R1-R4 verbatim, under those
+  section numbers.
+- Result: no bibliographic error and no unsupported on-screen claim. One completion made above: volume and pages of
+  Andreasen FM & Pedersen 1985 added. Changes outside this file (caption Refs line, two added claim sources) are
+  listed in NOTES.md, "Citation audit".

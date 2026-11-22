@@ -585,7 +585,9 @@ function drawCaption(t) {
     txt(ctx, name, x0, yb, F.head, COL.amber, 'left', '1px');
     arrowR(ctx, x0 + wn + 22, yb - 22, 40, COL.amber);
     txt(ctx, how, x0 + wn + 86, yb, F.head, '#fff6e0', 'left', '1px');
-    if (extra && shift > 0.01) { ctx.globalAlpha = a * shift; txt(ctx, extra, x0 + wn + 86 + wh + 26, yb, F.head, COL.green, 'left', '1px'); }
+    // the extra words light up only once the headline has slid far enough left for them to sit inside the glass
+    const xe = x0 + wn + 86 + wh + 26, ea = extra ? shift * clamp((GL.x + GL.w - 24 - (xe + we - 26)) / 40) : 0;
+    if (ea > 0.003) { ctx.globalAlpha = a * ea; txt(ctx, extra, xe, yb, F.head, COL.green, 'left', '1px'); }
     ctx.restore();
   };
   const sub = (a, parts) => { if (a <= 0.003) return; ctx.save(); ctx.globalAlpha = a; ctx.shadowColor = `rgba(255,150,40,${0.55 * a})`; ctx.shadowBlur = 10; rich(ctx, parts, cxm, GL.y + 122, F.sub); ctx.restore(); };

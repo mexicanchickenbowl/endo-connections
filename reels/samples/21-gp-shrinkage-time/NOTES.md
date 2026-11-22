@@ -18,7 +18,7 @@ lift, the stopwatch stops at ">24 h" and the paper runs blank.
 | t | Chart | Cutaway / stopwatch | Reading card |
 |---|---|---|---|
 | 0–0.7 | Blank paper, pens lower (0.25–0.55) | GP glowing, no gap, no gap label; crown pressed 0.5–0.7 | 0.8 typing starts |
-| 0.7–5.2 | Minutes segment 0–10 min (300 px). Blue falls 75→37 °C, red drops. "1.0–2.3% linear" prints under the red trace as the paper passes the pen. Stamp COOLING 4.3 | Glow fades, gap opens, "gap exaggerated" fades in with it | 0.8–5.9 "1.0–2.3 % linear shrinkage / in 10 min · 75→37 °C" |
+| 0.7–5.2 | Minutes segment 0–10 min (300 px). Blue falls 75→37 °C, red drops. "1.0–2.3% linear" prints under the red trace as the paper passes the pen. Stamp COOLING 4.3 | Glow fades, gap opens, "gap exaggerated" fades in with it | 0.8–5.85 "1.0–2.3 % linear shrinkage / in 10 min · 75→37 °C" |
 | 5.2–6.0 | Paper stops, mark 1, light note "CHART SPEED CHANGED" | read-out 10 min | |
 | 6.0–11.0 | Hours segment to 24 h (346 px). Blue flat, red creeps and flattens by 10 h. Bracket 8.2 + "45 min–10 h" 8.5, stamp CRYSTALLIZING? 9.86 | Gap widens slowly | 6.1–10.9 "Keeps shrinking for 45 min–10 h / held at 37 °C" |
 | 11.0–12.1 | Stamp STABLE 11.1, mark 2 at 11.5, pens lift 11.7–12.0 | read-out 24 h | 11.3 "Then stable to 24 h." (out 15.3) |
@@ -26,7 +26,7 @@ lift, the stopwatch stops at ">24 h" and the paper runs blank.
 | 15.35–19.6 | Whole record stays visible; paper shaded 20 % 15.5–18.9 so the eye goes to the card | New card: sealer film, plugger compacts warm GP, cools with a hairline gap ("illustration") | 15.7–19.6 "Compact it warm. Use sealer. (in vitro)" |
 | 19.6–20.6 | Text and annotations fade (19.6–19.85), fast paper feed (motion-blurred, up to 26 sub-samples), pens and stopwatch reset | Card back to start | loops into frame 0 |
 
-Reading times, fully visible vs `Kit.readSecs`: caption 1 4.4 s (3.8), caption 2 4.1 s (3.8), caption 3 3.7 s (2.3),
+Reading times, fully visible vs `Kit.readSecs`: caption 1 4.3 s (3.8), caption 2 4.1 s (3.8), caption 3 3.7 s (2.3),
 payoff 3.3 s (2.9; payoff scene 3.9 s). Must-read words: about 50 (title 7, captions 29, chart print/stamps/notes 14).
 Diagram labels (legend, ruler, scale plate, card labels) add about 28.
 
@@ -125,6 +125,27 @@ Deviations from the review, with reasons
 
 Checks: stills in `_stills/fix1`, `_stills/fix` (10 frames, `--safe`), `_stills/fix2`; frames pulled from the final MP4
 in `_stills/fix-mp4`; ffprobe: h264 1080x1920, 30 fps, 618 frames, 20.6 s.
+
+## Final QA (fresh-eyes pass)
+Checked 23 stills with `--safe` (`_stills/final-qa`), 12 transition stills (`_stills/final-qa2`), the caption
+changeover (`_stills/final-qa3`) and frames pulled from the final MP4 (`_stills/final-qa-mp4`). No clipped, overlapping
+or sub-30 px must-read text; nothing must-read in the no-go zones; hook readable from frame 0; payoff fully visible
+about 3.3 s; poster (19.2 s) reads inside the 3:4 crop. Citations on screen and in meta.json re-fetched from PubMed
+(PMIDs 24767571, 9587286, 2599657, 4524837, 11307452, 19026888, 6985547, 2639948, 3856822): all match.
+
+Defects found and fixed
+- Loop pop: the CHART SPEED knob ended on "cm/h" (0°) but frame 0 shows "cm/min" (−52°). It now turns back to
+  cm/min during the reset (19.9–20.4 s), so the last frame equals the first.
+- Caption ghosting at 6.10–6.15 s: caption 1 was still fading (20 → 0 %) while caption 2 typed its first letters on
+  the same line. Caption 1 now ends at 5.85 s and is gone by 6.10 s (fully visible 4.3 s, `Kit.readSecs` 3.8 s).
+- meta.json caption: the 24-h contraction is attributed to Goodman's thesis alone (it is not in the Schilder 1985
+  PubMed abstract) and the Refs line now lists "Goodman 1973, Marlin 1971, BU theses"; Schilder 1985 stays for the
+  inferred crystallization. 699 characters. The Wu 2000 source in the claims list is now a full citation.
+
+Left as is (judged not defects): the motion-blurred ruler labels show a faint comb for a frame or two at the start of
+the fast feed (19.85–19.95 s); card headers are 24 px fine print.
+
+Final render: ffprobe h264 1080x1920, 30 fps, 618 frames, 20.6 s = `REEL.duration`.
 
 ## Known weaknesses
 - Phase stamps land near the end of each phase (COOLING 4.3 s, CRYSTALLIZING? 9.9 s), because they need recorded

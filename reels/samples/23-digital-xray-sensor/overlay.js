@@ -114,8 +114,7 @@ export function drawOverlay(ctx, t, A) {
       { segs: [['X-ray', AMBER], ARROW, ['visible light', GREEN]], a: li(T.scint), font: F },
       { segs: [['CsI or Gd oxysulfide', MUTE]], a: li(T.scint + 0.35), font: Fm, lh: 38 }] });
     callout(ctx, { idx: '03', name: 'Fiber-optic plate', y: 746, anchor: A.fop, a: nm(2), on: foc(T.fop, T.cmos), lines: [
-      { segs: [['guides the light,', INK]], a: li(T.fop), font: F },
-      { segs: [['less image noise', INK]], a: li(T.fop + 0.12), font: F, lh: 38 }] });
+      { segs: [['guides light, less noise', INK]], a: li(T.fop), font: F }] });
     callout(ctx, { idx: '04', name: 'CMOS chip', y: 900, anchor: A.chip, a: nm(3), on: foc(T.cmos, T.adc), lines: [
       { segs: [['light', GREEN], ARROW, ['charge', BLUE]], a: li(T.cmos), font: F },
       { segs: [['a transistor at', INK]], a: li(T.cmos2), font: F, lh: 38 },
@@ -132,12 +131,12 @@ export function drawOverlay(ctx, t, A) {
   if (pa > 0.004) {
     const steps = [
       { n: '1', t0: T.pspExpose[0], t1: T.pspScan[0] - 0.1, l1: [['X-rays', AMBER], ARROW], l2: [['trapped electrons', BLUE]] },
-      { n: '2', t0: T.pspScan[0] - 0.1, t1: T.eraseLabel, l1: [['red laser', RED], ARROW], l2: [['blue-violet light', VIOLET]] },
-      { n: '3', t0: T.eraseLabel, t1: T.pspOut + 0.3, l1: [['bright light', INK]], l2: [['erases the plate', INK]] },
+      { n: '2', t0: T.pspScan[0] - 0.1, t1: T.pspScan[1], l1: [['red laser', RED], ARROW], l2: [['blue-violet light', VIOLET]] },
+      { n: '3', t0: T.eraseLabel, t1: T.pspOut + 0.3, l1: [['bright light erases', INK]], l2: [] },
     ];
     steps.forEach((s, i) => {
       const a = seg(t, s.t0 - 0.1, s.t0 + 0.3) * pa; if (a <= 0.004) return;
-      const on = lerp(0.55, 1, env(t, s.t0 - 0.2, s.t1 + 0.15, 0.25, 0.3)), y = 470 + i * 132, sl = 8 * (1 - ease.out(a / pa));
+      const on = lerp(0.62, 1, env(t, s.t0 - 0.2, s.t1 + 0.15, 0.25, 0.3)), y = 470 + i * 132, sl = 8 * (1 - ease.out(a / pa));
       ctx.globalAlpha = a * on; ctx.strokeStyle = INK; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(X0 + 21, y - 11, 21, 0, 7); ctx.stroke();
       ctx.fillStyle = INK; ctx.font = `600 26px ${SG}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(s.n, X0 + 21, y - 10);
       rich(ctx, s.l1, X0 + 60 + sl, y, `500 32px ${IN}`, a * on); rich(ctx, s.l2, X0 + 60 + sl, y + 42, `500 32px ${IN}`, a * on);
@@ -147,10 +146,10 @@ export function drawOverlay(ctx, t, A) {
       { segs: [['fluorohalide', MUTE]], a: seg(t, T.pspTitle + 0.4, T.pspTitle + 0.8), font: `400 30px ${IN}`, lh: 38 }] });
     const ma = env(t, T.pspScan[0] + 0.15, T.pspOut - 0.9, 0.35, 0.3) * pa;
     if (ma > 0.004) {
-      const tx = Math.min(1012, A.pmt[0] + 70), ty = A.pmt[1] - 78;
-      ctx.globalAlpha = ma * 0.8; ctx.strokeStyle = INK; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(tx - 232, ty + 14); ctx.lineTo(A.pmt[0] - 6, ty + 14); ctx.lineTo(A.pmt[0], A.pmt[1] - 4); ctx.stroke();
+      const tx = 1012, ty = A.pmt[1] - 112, tw = 222;
+      ctx.globalAlpha = ma * 0.8; ctx.strokeStyle = INK; ctx.lineWidth = 1.6; ctx.lineJoin = 'round'; ctx.beginPath(); ctx.moveTo(tx - tw, ty + 14); ctx.lineTo(A.pmt[0] + 4, ty + 14); ctx.lineTo(A.pmt[0], A.pmt[1] - 4); ctx.stroke();
       ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(A.pmt[0], A.pmt[1], 8.5, 0, 7); ctx.fill(); ctx.fillStyle = INK; ctx.beginPath(); ctx.arc(A.pmt[0], A.pmt[1], 4.6, 0, 7); ctx.fill();
-      ctx.globalAlpha = ma; ctx.font = `600 32px ${SG}`; ctx.textAlign = 'right'; ctx.textBaseline = 'alphabetic'; ctx.fillStyle = INK; ctx.fillText('photomultiplier', tx, ty);
+      ctx.globalAlpha = ma; ctx.font = `600 30px ${SG}`; ctx.textAlign = 'right'; ctx.textBaseline = 'alphabetic'; ctx.fillStyle = INK; ctx.fillText('photomultiplier', tx, ty);
     }
   }
 

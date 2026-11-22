@@ -12,7 +12,7 @@
     },
     {
       "claim": "No infection -> new cementum in weeks (clock has no numerals and sweeps under a third of a turn; narrative-review time frame)",
-      "source": "Lin S et al. Dent Traumatol 2022;38:253-266 (PMID 35559593) - full text ('cementoid-like tissue ... about 4 weeks'); Abbott & Lin 2022 (PMID 35605161), section 6.1 ('will not persist', 'a few weeks')"
+      "source": "Lin S, Moreinos D, Kaufman AY, Abbott PV. Dent Traumatol 2022;38:253-266 (PMID 35559593) - full text ('cementoid-like tissue ... about 4 weeks'); Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, section 6.1 ('will not persist', 'a few weeks')"
     },
     {
       "claim": "Pressure keeps clasts working (labels: ortho force, impacted tooth)",
@@ -24,19 +24,19 @@
     },
     {
       "claim": "No root canal treatment. Pulp is not the cause.",
-      "source": "Patel et al. Int Endod J 2022 (PMID 35229320) - Table 1 and text (no signs of endodontic disease; managed by eliminating the etiological factor); Abbott & Lin 2022 (PMID 35605161) - full text ('Orthodontic resorption itself does not cause pulp pathosis')"
+      "source": "Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text, Table 1 and external surface resorption section (no signs of endodontic disease; pulp tests normal; managed by eliminating the etiological factor); Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, sections 6.1, 6.5, 6.6 (surface: no management indicated; pressure: clinically normal pulp; 'Orthodontic resorption itself does not cause pulp pathosis')"
     },
     {
       "claim": "Radiograph icon, surface: usually nothing",
-      "source": "Abbott & Lin. Dent Traumatol 2022 (PMID 35605161) - full text, section 6.1"
+      "source": "Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, section 6.1 ('will not usually be evident')"
     },
     {
       "claim": "Radiograph icon, pressure (orthodontic): blunted apex",
-      "source": "Abbott & Lin 2022 (PMID 35605161), section 6.6; Patel et al. 2022 (PMID 35229320)"
+      "source": "Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, section 6.6 ('shortened and blunted with rounded apices'); Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text ('flattening or blunting of the root apices')"
     },
     {
       "claim": "Remove the cause. (printed under the PRESSURE panel only; surface resorption needs no management)",
-      "source": "Fuss et al. 2003 (PMID 12848710) - abstract (removal of the pressure is the treatment of choice); Patel et al. 2022 (PMID 35229320); Abbott & Lin 2022, section 6.1 (surface: no management indicated)"
+      "source": "Fuss Z et al. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract (removal of the pressure is the treatment of choice); Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text (managed by eliminating the etiological factor); Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, section 6.1 (surface: no management indicated)"
     },
     {
       "claim": "Toy model / schematic: cell size, amount of root loss and timing are exaggerated, not to scale (labelled on every sheet)",

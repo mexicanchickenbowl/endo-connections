@@ -1,0 +1,51 @@
+{
+  "id": "23",
+  "slug": "23-digital-xray-sensor",
+  "title": "From X-ray to pixel: inside a digital sensor",
+  "style": "Exploded 3-D teardown",
+  "topic": "How a digital intraoral sensor turns X-ray photons into gray-level pixels, layer by layer, and how a PSP plate does it differently.",
+  "duration": 24.0,
+  "claims": [
+    {
+      "claim": "Layer stack of a solid-state sensor: housing, scintillator, fiber-optic plate, CMOS chip, read-out electronics + ADC (schematic model of one sensor design, not to scale)",
+      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen), Fig. 4-3 caption (manufacturer-supplied figure). Not every sensor has a fiber-optic plate"
+    },
+    {
+      "claim": "Scintillator: X-ray -> visible light; CsI or Gd oxysulfide",
+      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen); materials: Farman TT et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2005;99:608-13 (PMID 15829886), abstract"
+    },
+    {
+      "claim": "Fiber-optic plate: guides light, less noise",
+      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen), Fig. 4-3 / 4-4 captions (couples the scintillator to the chip 'to reduce image noise'); textbook wording from a manufacturer figure, no PubMed-indexed dental measurement found"
+    },
+    {
+      "claim": "CMOS chip: light -> charge; a transistor at every pixel",
+      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen) ('charge in each pixel proportional to the exposure'; 'each pixel is... directly connected to a transistor'); physics support: Arvanitis et al., Med Phys 2007;34:4612-25 (PMID 18196789), abstract"
+    },
+    {
+      "claim": "Read-out + ADC: charge -> number, 8-16 bit",
+      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen) (analog-to-digital conversion; detectors capture 8, 10, 12 or 16 bits)"
+    },
+    {
+      "claim": "Image: number -> gray level. Toy model / schematic: 36 x 27 charge wells and a procedurally drawn periapical; more exposure = fuller well = darker pixel; well heights and the row-by-row build-up are illustrative",
+      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen) (charge packets proportional to exposure; display convention); no measured values shown"
+    },
+    {
+      "claim": "PSP plate (Eu-doped barium fluorohalide): X-rays -> trapped electrons",
+      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen); Leblans et al., Materials (Basel) 2011;4:1034-86 (PMID 28879966), PMC full text (medical computed-radiography review)"
+    },
+    {
+      "claim": "Red laser -> blue-violet light -> photomultiplier (schematic scanner)",
+      "source": "Leblans et al., Materials (Basel) 2011;4:1034-86 (PMID 28879966), PMC full text; White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen); IAEA Diagnostic Radiology Physics handbook 2014, Ch. 7 (handbook)"
+    },
+    {
+      "claim": "Bright light erases (the plate, before reuse)",
+      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen); Leblans et al. 2011 (PMID 28879966), full text"
+    },
+    {
+      "claim": "End card. Sensor (CMOS, CCD): instant image, rigid. PSP plate: thin, film-sized, wide latitude, needs a scanner",
+      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen) (rapid image availability, sensor bulk, film-like handling of plates); Kamburoglu et al., Imaging Sci Dent 2022;52:93-101 (PMID 35387105), PMC full text (CMOS 'bulky and rigid'); 'wide' latitude, in vitro: Berkhout et al., Dentomaxillofac Radiol 2004;33:1-5 (PMID 15140814), abstract, and Borg et al., Dentomaxillofac Radiol 2000;29:70-5 (PMID 10808218), abstract. Not claimed: 'wider than sensors' (Marinho-Vieira et al., Dentomaxillofac Radiol 2023;52:20220370, PMID 36988093, abstract)"
+    }
+  ],
+  "caption": "From X-ray to pixel: a digital X-ray sensor, taken apart.\nA scintillator (CsI or Gd oxysulfide) turns X-rays into light. In many sensors a fiber-optic plate carries it to the CMOS chip, where each pixel stores charge. The ADC turns charge into a number, shown as a gray level.\nPSP plates trap electrons instead: red laser in, blue-violet light out, then erase with bright light. Latitude is wide, but not always wider than today's sensors.\nSchematic animation.\nRefs: White & Pharoah, Oral Radiology 7e (textbook); Farman 2005, OOOOE; Leblans 2011, Materials; Berkhout 2004 and Marinho-Vieira 2023, DMFR.\n#endodontics #oralradiology #dentalradiography #digitalradiography #endoresident #boardreview"
+}

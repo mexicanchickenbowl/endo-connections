@@ -634,6 +634,12 @@ arrangements drawn for *Enterococcus*, *Pseudoramibacter* and *Olsenella* are te
 abstracts. The cards therefore print only the abstract-level word, and badge the nine anaerobes "ANAEROBE"
 (not "obligate").
 
+*Citation audit (2026-11-22):* the built cards did not follow this paragraph: *Parvimonas* read "small cocci",
+*Porphyromonas*, *Olsenella* and *Prevotella* "short rods", and *Tannerella* "fusiform rods". PubMed searches for an
+abstract stating "short rods" / "small cocci" for these organisms found none, so `cards.js` now prints "cocci",
+"rods" and "fusiform", the words that are in the abstracts above. All twelve records in this table were retrieved
+again; author, journal, year, volume, pages, PMID and the quoted phrase match in each.
+
 ## (j) Review pass (2026-11-22): quotes re-read by the builder
 
 No fact changed. Two statements used in NOTES.md and meta.json were re-read in the full text of Rôças IN, Siqueira JF Jr. J Clin Microbiol 2012;50:1721-4 (PMID 22403423, [DOI](https://doi.org/10.1128/JCM.00531-12)):
@@ -643,3 +649,54 @@ No fact changed. Two statements used in NOTES.md and meta.json were re-read in t
 | Who the "29 treated teeth" are | "All the root canal-treated teeth were asymptomatic, showed radiographic evidence of apical periodontitis, and had had endodontic therapy completed more than 2 years earlier. All teeth were coronally restored ... The termini of the root canal fillings ranged from 0 to 4 mm short of the radiographic apex." 42 teeth selected; "Samples from 29 root canal-treated teeth were available for qPCR analysis." |
 | *E. faecalis* by qPCR | "detected by qPCR in 11/29 (38%) cases"; "in only 1 case did this species comprise >10% of the community (91%)"; "in only one case was it the main component of the community." |
 | Gram-negative anaerobes in treated teeth | Checkerboard, 42 teeth: "*Fusobacterium nucleatum* subspecies *nucleatum* (10/42 [24%])", second after *Propionibacterium acnes* (22/42). The reel's right-hand hand shows no Gram-negative card; NOTES.md lists this under "What is schematic". |
+
+## (k) Citation audit (2026-11-22, independent auditor)
+
+According to PubMed, every record below says what this brief quotes from it. Scope: every citation on screen, in
+meta.json, in NOTES.md and in this file.
+
+**Bibliographic check (first author, journal, year, volume, first page, PMID).**
+- The 12 papers cited in meta.json and the 12 in section (i): full PubMed records retrieved; all fields match.
+- The other 65 PubMed-indexed references of sections (a) and (g): matched through PubMed's citation matcher
+  (journal + year + volume + first page + first author returns the PMID written here in all 65 cases; a deliberately
+  wrong control citation returned no match). Their abstract-level quotes were not re-read in this audit; they are
+  background and none is on screen or in the caption.
+- Result: no wrong author, year, journal, volume, page or PMID anywhere. Shivanand 2026 (PMID 42339027) and
+  Park 2024 (PMID 38768706) exist as cited.
+
+**Claim check for what is on screen or in the caption.**
+
+| On-screen / caption statement | Source | Read as | Result |
+|---|---|---|---|
+| "10–20 taxa per canal · molecular studies" | Siqueira & Rôças 2009, J Oral Microbiol (PMID 21523208) | full text (PMC3077003, PubMed tool) | Verbatim: "a mean of 10–20 species/phylotypes have been found per canal ... as revealed by molecular biology studies"; Table 1 "No. taxa/case 10–20" |
+| "1–5 taxa per canal · adequately treated · culture + PCR" | same; Siqueira et al. 2016, PLoS One (PMID 27689802) | full text of both (PMC3077003, PMC5045198) | 2009: "Root canals with apparently adequate treatment usually contain 1–5 species"; Table 1 "Adequate treatment: 1–5". 2016: "1 to 2 by culture, and 1 to 5 by early-generation molecular methods" |
+| PRIMARY / PERSISTENT / SECONDARY definitions | Siqueira & Rôças 2009 | full text | Verbatim as in rows 1.1–1.3 |
+| Genus names and Gram color of the ten primary cards | Siqueira & Rôças 2009 | full text | All ten genera are in the review's gram-negative / gram-positive sentence for primary infections |
+| Right-hand cards (*E. faecalis*, *Streptococcus*, *Pseudoramibacter*, *Candida*) | Siqueira & Rôças 2009, Table 1, treated teeth | full text | All four listed |
+| "qPCR, 29 treated teeth: found in 11, dominant in 1" | Rôças & Siqueira 2012, J Clin Microbiol (PMID 22403423) | full text (PMC3347098 article page downloaded and searched; the PubMed tool returns no XML for this publisher) | "Samples from 29 root canal-treated teeth were available for qPCR analysis"; "detected by qPCR in 11/29 (38%) cases"; "in only 1 case did this species comprise >10% of the community (91%)"; "in only one case was it the main component of the community". Inclusion criteria as quoted in section (j) |
+| "Often found" (24–77 %) | Stuart et al. 2006, J Endod (PMID 16427453) | abstract | "ranges from 24% to 77%" |
+| "mostly obligate anaerobes", "Gram − and +" | Figdor & Sundqvist 2007 (PMID 17546861); Byström & Sundqvist 1981 (PMID 6947391) | abstracts | "approximately equal proportions of Gram-positive and Gram-negative species, dominated by obligate anaerobes"; "88% of the strains were anaerobic" (17 teeth) |
+| "more facultatives", "mostly Gram +" | Pinheiro et al. 2003 (PMID 12656508); Molander et al. 1998 (PMID 9823122); Siqueira & Rôças 2009 Table 1 | abstracts; full text | 57.4 % facultative and 83.3 % Gram-positive; 69 % of identified strains facultative; "Gram-positive facultatives" |
+| "sometimes yeast" | Siqueira & Rôças 2009; Mergoni et al. 2018 (PMID 30241680); Persoon et al. 2017 (PMID 27987307) | full text; abstracts | "in root canal-treated teeth in up to 18% of the cases"; 8.20 % pooled (57 studies); 7.5 % pooled, type of infection "no factor influencing the prevalence" |
+| Treatment leaves a smaller, mostly Gram-positive remainder | Siqueira & Rôças 2008, J Endod (PMID 18928835); Siqueira & Rôças 2009 | abstract; full text | "gram-positive bacteria are the most dominant"; "a substantial reduction in species richness and abundance" |
+| "sequencing finds more taxa in both" | Siqueira et al. 2016; Santos et al. 2011 (new, below); Manoil et al. 2020 (PMID 31950679) | full text; full text; abstract | Treated: "NGS studies have found a substantially larger bacterial richness per tooth", mean 116 OTUs. Primary: mean 71 OTUs per chronic case, 114 per acute case, diversity "much higher than previously reported". Manoil: "All infection types are associated with a highly diverse microbiota" |
+
+**Problems found and what was done**
+1. Card fine print used size adjectives that no cited abstract contains ("short rods" ×3, "small cocci", and
+   "fusiform rods" where the abstract says "fusiform bacterium"). No PubMed abstract supporting them was found.
+   Softened on screen to "rods", "cocci", "fusiform"; video re-rendered. See the note under section (i).
+2. "Sequencing finds more taxa in both" leaned, for primary infections, on the Manoil 2020 abstract, which says
+   the microbiota is "highly diverse" in all infection types but does not make the comparison with culture / PCR
+   counts. A directly supporting primary-infection source was added (reference 79). Manoil stays as the
+   systematic review covering both.
+3. Two figures quoted in NOTES.md from the full text of Rôças & Siqueira 2008 (range 2 to 45 taxa per canal;
+   culture mean 2.6 to 5.4) could not be re-opened in this audit: the PubMed tool returns no XML for PMC2576597
+   and the PMC page answered with a captcha. The abstract and the 2009 review (full text) confirm the same study's
+   lesion-size means (12 / 16 / 20 taxa) and "even more than 40 taxa" in some canals. Both figures are off screen
+   and out of the caption; NOTES.md now says how far each was verified. Rows 2.7, 2.8 and correction 13 above
+   rest on the fact-check stage's reading for those two figures.
+
+**Reference added**
+79. Santos AL, Siqueira JF Jr, Rôças IN, Jesus EC, Rosado AS, Tiedje JM. Comparing the bacterial diversity of acute and chronic dental root canal infections. PLoS One 2011;6:e28088. PMID 22132218, PMC3221700. [DOI](https://doi.org/10.1371/journal.pone.0028088) (full text read: 17 single-rooted teeth with carious lesions, necrotic pulps and apical periodontitis, 8 chronic and 9 acute; 454 pyrosequencing; "The mean number of OTUs at the 3% dissimilarity level present per acute case was 114 (range, 56 to 225) compared to 71 OTUs (range, 42 to 104) in chronic cases"; abstract: "The overall diversity of endodontic infections as revealed by the pyrosequencing technique was much higher than previously reported for endodontic infections." OTUs are not species.)
+
+DOI links for the papers whose records were opened in this audit: [Siqueira & Rôças 2009](https://doi.org/10.3402/jom.v1i0.2009) · [Figdor & Sundqvist 2007](https://doi.org/10.1111/j.1834-7819.2007.tb00524.x) · [Siqueira & Rôças 2008](https://doi.org/10.1016/j.joen.2008.07.028) · [Siqueira 2016](https://doi.org/10.1371/journal.pone.0162887) · [Rôças & Siqueira 2012](https://doi.org/10.1128/JCM.00531-12) · [Stuart 2006](https://doi.org/10.1016/j.joen.2005.10.049) · [Byström & Sundqvist 1981](https://doi.org/10.1111/j.1600-0722.1981.tb01689.x) · [Pinheiro 2003](https://doi.org/10.1046/j.1365-2591.2003.00603.x) · Molander 1998 (PMID 9823122, no DOI in PubMed) · [Mergoni 2018](https://doi.org/10.1016/j.joen.2018.07.016) · [Persoon 2017](https://doi.org/10.1111/iej.12730) · [Manoil 2020](https://doi.org/10.1002/prca.201900060) · [Rôças & Siqueira 2008](https://doi.org/10.1128/JCM.00431-08) · [Santos 2011](https://doi.org/10.1371/journal.pone.0028088); the twelve card abstracts carry their DOI links in section (i).

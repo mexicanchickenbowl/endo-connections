@@ -24,10 +24,10 @@ Poster: t = 20.4 (complete summary card).
 ## On-screen claims and sources
 All sources were checked by the research and fact-check stages (RESEARCH.md); the review round added caption-only sources (below).
 1. Small localized injury -> small, shallow resorption of cementum; self-limiting. Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161), full text section 6.1.
-2. No infection -> does not persist; repaired by new cementum ("cementoid-like tissue ... about 4 weeks": Lin S et al. Dent Traumatol 2022;38:253-266, PMID 35559593, full text; "a few weeks": Abbott & Lin 2022). No timed human study, so the clock has no numerals. Source line: "Lin; Abbott & Lin, Dent Traumatol 2022" (companion Part 1 / Part 2).
+2. No infection -> does not persist; repaired by new cementum ("cementoid-like tissue ... about 4 weeks": Lin S et al. Dent Traumatol 2022;38:253-266, PMID 35559593, full text; "a few weeks": Abbott & Lin 2022). No timed human study, so the clock has no numerals. Source line: "Lin et al.; Abbott & Lin, Dent Traumatol 2022" (companion Part 1 / Part 2; Part 1 has four authors: Lin S, Moreinos D, Kaufman AY, Abbott PV).
 3. Pressure is the stimulus that keeps resorption going (orthodontic treatment, impacted tooth, tumor). Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82 (PMID 12848710), abstract.
 4. Pressure removed -> resorption stops, cemental repair follows; resorption is irreversible (root length does not return). Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320), full text (relevant sections) + abstract.
-5. "No root canal treatment. Pulp is not the cause." Patel et al. 2022, Table 1 and text (no signs of endodontic disease; managed by eliminating the etiological factor); Abbott & Lin 2022 ("Orthodontic resorption itself does not cause pulp pathosis"). The literal "endodontic therapy is not indicated" is the AAE Communique 2021 (web article, not cited on screen).
+5. "No root canal treatment. Pulp is not the cause." Patel et al. 2022, Table 1 and text (no signs of endodontic disease; managed by eliminating the etiological factor); Abbott & Lin 2022 ("Orthodontic resorption itself does not cause pulp pathosis"). Neither review contains the literal words "no root canal treatment": the end-card line is the conclusion from "no signs of endodontic disease" + "managed by elimination of the aetiological factor" (Patel) and "no indication for any management" / "clinically normal pulp" (Abbott & Lin, sections 6.1 and 6.5). The literal "As pulpal disease does not cause PR, endodontic therapy is not indicated in its management" is Blicher B, "Differentiating Resorption", AAE Communique, 5 Jan 2021 (web article, not peer-reviewed, not cited on screen).
 6. Surface resorption: usually not evident on a radiograph. Abbott & Lin 2022, section 6.1.
 7. Orthodontic: shortened, blunted, rounded apex. Abbott & Lin 2022 section 6.6; Patel et al. 2022.
 8. "Remove the cause." sits under the PRESSURE panel only: removal of the pressure is the treatment of choice (Fuss 2003, abstract; Patel 2022). Surface resorption: "no indication for any management" (Abbott & Lin 2022, 6.1), so nothing is printed under that panel.
@@ -61,6 +61,7 @@ Small text is teal only so misregistration never blurs it. Files: index.html, ri
 - v1: built; three QA passes (tooth and canine redrawn, enamel knock-out clipped, grain reduced, wire shortened, label chips).
 - v2: review changes (below).
 - Final QA: no change to the reel or the video; meta.json topic and caption brought to the SPEC limits (details in the "Final QA" section at the end).
+- Citation audit: every citation verified on PubMed, no wrong reference found; sheet 1 source line "Lin;" -> "Lin et al.;", video re-rendered; meta.json claim sources completed (details in the "Citation audit" section).
 
 ## Review changes (v2)
 Science
@@ -68,11 +69,11 @@ Science
 - "Remove the cause." moved under the PRESSURE panel only (two-line pink chip, right column); caption states the split (surface: no treatment; pressure: remove the pressure).
 - Impacted tooth now slides completely out of the picture after "Pressure off" (was: retreated a little and stayed beside the defect).
 - Caption: "not instantly" now cites Winter 2009 and Cheng 2009; "not always" cites Falahat 2008 with its denominator; Lin 2022 (Part 1) added to Refs; naming-differences line added; "Schematic animation" line now gives the typical shortening (Samandara 2019); "blunted apex is the typical sign, not the only form".
-- Sheet 1 source line is now "Lin; Abbott & Lin, Dent Traumatol 2022".
+- Sheet 1 source line is now "Lin; Abbott & Lin, Dent Traumatol 2022" (changed to "Lin et al.; ..." by the citation audit, see below).
 - Clock: 4 quarter marks only, sweep limited to under a third of a turn; label on a knocked-out chip.
 - Repair: the deepest lacuna is refilled to 70% only, leaving a slight concavity (Lin 2022: contour "may only be partially restored").
 - "Pressure keeps them working" -> "Pressure keeps clasts working".
-- Not applied: the reviewer's phrase "Patel 2022 and the AAE Glossary call all of these external surface resorption" is used for Patel only. The Glossary entry as quoted in Lin 2022 defines external surface resorption as a physiologic process repaired by cementum and does not mention pressure, and the Glossary PDF itself was not opened.
+- Not applied: the reviewer's phrase "Patel 2022 and the AAE Glossary call all of these external surface resorption" is used for Patel only. The Glossary entry as quoted in Lin 2022 defines external surface resorption as a physiologic process repaired by cementum and does not mention pressure, and the Glossary PDF itself was not opened. (Citation audit: Lin 2022 does say, in its own words, that the AAE term external surface resorption "includes resorption due to a tumor, an impacted tooth, etc." and its Table 2 lists pressure and orthodontic resorption as analogous terms. That is Lin's reading of the Glossary, not the Glossary's wording, so the attribution to Patel only stands.)
 Design
 - End card held longer without lengthening the reel: sheets 1 and 2 start 0.8 s earlier (injury at 1.2 s; S1E 7.7, S2E 16.3). Card complete from 16.85 to 21.55 s (4.7 s, was 2.95 s); finding labels and the action chip print with the card; only the pink apex ring animates.
 - Gauge removed from the end card; "X-ray:" prefixes dropped; source line shortened to "Abbott & Lin 2022 · Patel et al. 2022" with "schematic · not to scale" on the same row; halftone circle moved to the lower left of the card as a counterweight.
@@ -99,6 +100,29 @@ Checked 40 stills (t = 0 to 21.95 s, with the safe-area overlay), the rendered v
   the naming differences, the Samandara 2019 mean, Winter 2009.
 - meta.json, defect 2: the topic was 151 characters (SPEC: 140 or fewer). Now 124.
 - Left as is (taste level): the "E" of PRESSURE touches the edge of the halftone circle by about 5 px; it stays fully legible.
+
+## Citation audit (independent, PubMed, after the final QA)
+Scope: the four on-screen source lines, every meta.json claim source, the caption Refs line, the sources named in this file and
+the reference list of RESEARCH.md. Details and the claim-by-claim quote table are in RESEARCH.md section (k).
+- Verified on PubMed (metadata + abstract; first author, year, journal, volume, pages and PMID belong to one paper, and the paper
+  says what is attributed to it): PMID 35605161, 35559593, 12848710, 35229320, 19732664, 18298199, 19465737, 11138644, 21366625,
+  39536681, 29771300. PMC full text re-read for Lin 2022 (whole article), Abbott & Lin 2022 (sections 6.1, 6.5, 6.6) and Patel
+  2022 (Table 1 and the external surface resorption section): every quote used for an on-screen claim is there. The other 53
+  references in RESEARCH.md matched their PMIDs in the PubMed citation matcher. AAE Communique page re-fetched (Blicher, 5 Jan 2021).
+- Result: no wrong or garbled reference, no number attached to the wrong paper, no textbook cited as a paper.
+- Fixed, on screen: sheet 1 source line "Lin; Abbott & Lin, Dent Traumatol 2022" -> "Lin et al.; Abbott & Lin, Dent Traumatol 2022"
+  (Part 1 has four authors; the bare "Lin;" read as a sole author or a garbled author list, and the other sheets use "et al.").
+  One string in reel.js; the line ends at x = 567, 107 px clear of "schematic · not to scale". Checked on stills
+  (_stills/audit, t = 1.9 to 19 s, safe overlay) and on a frame taken from the new video.
+- Fixed, meta.json: the sources of claims 2 and 5-8 were short forms without volume and pages; each now gives journal, year,
+  volume, pages, PMID and what was read. Caption unchanged (693 characters).
+- Fixed, this file: claim 5 now says that "No root canal treatment" is a conclusion from Patel 2022 and Abbott & Lin 2022, not a
+  quotation, and names the AAE Communique (Blicher, 5 Jan 2021) as the literal source; note added on how Lin 2022 reads the AAE
+  Glossary term (review changes, "Not applied").
+- Left as is: the end-card line "Abbott & Lin 2022 · Patel et al. 2022" carries no journal abbreviations (no room on the row);
+  both journals are printed on sheets 1 and 2 and in the caption.
+- Video re-rendered once after the edit: 1080x1920, h264 yuv420p, 30 fps, 660 frames, ffprobe duration 22.000 s, no render
+  errors; poster re-written (t = 20.4, unchanged content).
 
 ### v2 long caption (2048 characters, over the gallery limit; kept for reference or for a pinned comment)
 Two root resorptions that stop when the cause stops.

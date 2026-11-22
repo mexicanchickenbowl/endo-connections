@@ -7,16 +7,16 @@
   "duration": 24.0,
   "claims": [
     {
+      "claim": "Primary deck: Gram-negative and Gram-positive genera mixed, nine anaerobes and one facultative Streptococcus (genus names, Gram color, anaerobe/facultative badges)",
+      "source": "Genus lists and Gram: Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (doi:10.3402/jom.v1i0.2009; PMID 21523208; full text); mix dominated by obligate anaerobes: Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-51 (PMID 17546861; abstract); per-genus oxygen tolerance and shape word: one PubMed abstract per card, listed in RESEARCH.md section (i) (abstracts only; each card prints the abstract's own word)"
+    },
+    {
       "claim": "PRIMARY (untreated necrotic pulp): 10-20 taxa per canal (molecular studies)",
       "source": "Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (doi:10.3402/jom.v1i0.2009; PMID 21523208; full text), text and Table 1; a review-level range of study means ('a mean of 10-20 species/phylotypes'), not the range of single canals"
     },
     {
-      "claim": "Primary deck: Gram-negative and Gram-positive genera mixed, nine anaerobes and one facultative Streptococcus (genus names, Gram color, anaerobe/facultative badges)",
-      "source": "Genus lists and Gram: Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (doi:10.3402/jom.v1i0.2009; PMID 21523208; full text); mix dominated by obligate anaerobes: Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-51 (PMID 17546861; abstract); per-genus oxygen tolerance and shape: abstracts listed in RESEARCH.md section (i)"
-    },
-    {
       "claim": "TREATMENT removes most of the deck; what is left is mostly Gram-positive (two violet cards cross the line, labelled PERSISTENT; one unnamed card from off the table, labelled SECONDARY)",
-      "source": "Siqueira JF Jr & Rôças IN, J Endod 2008;34:1291-1301.e3 (PMID 18928835; abstract); no number shown"
+      "source": "Mostly Gram-positive after instrumentation/medication: Siqueira JF Jr & Rôças IN, J Endod 2008;34:1291-1301.e3 (PMID 18928835; abstract: 'gram-positive bacteria are the most dominant'); fewer species and cells after treatment: Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (PMID 21523208; full text); no number shown"
     },
     {
       "claim": "PERSISTENT / SECONDARY (previously treated tooth): 1-5 taxa per canal (adequately treated; culture + PCR)",
@@ -40,7 +40,7 @@
     },
     {
       "claim": "Sequencing finds more taxa in both",
-      "source": "Treated teeth: Siqueira JF Jr et al., PLoS One 2016;11:e0162887 (PMID 27689802; full text); primary and treated: Manoil D et al., Proteomics Clin Appl 2020;14:e1900060 (PMID 31950679; abstract)"
+      "source": "Treated teeth: Siqueira JF Jr et al., PLoS One 2016;11:e0162887 (PMID 27689802; full text: mean 116 OTUs per root apex, 'substantially larger bacterial richness per tooth'); primary: Santos AL et al., PLoS One 2011;6:e28088 (PMID 22132218; full text: mean 71 OTUs per chronic case, 'much higher than previously reported'); both types 'highly diverse' by sequencing: Manoil D et al., Proteomics Clin Appl 2020;14:e1900060 (PMID 31950679; abstract). OTUs are not species"
     },
     {
       "claim": "Which cards are dealt, how many survive the sweep, card order, the all-Gram-positive right-hand hand and the pip meters",

@@ -326,7 +326,7 @@
     // no state word while the needle is falling
     if (t < 3.5) gauge(cause, act, t < 2.1 ? '' : 'working', seg(t, 2.1, 2.35, ease.out));
     else gauge(cause, act, t < 4.0 ? '' : 'stopped', seg(t, 4.0, 4.25, ease.out));
-    sourceLine(t, 1.7, 99, 'Lin; Abbott & Lin, Dent Traumatol 2022');
+    sourceLine(t, 1.7, 99, 'Lin et al.; Abbott & Lin, Dent Traumatol 2022');
     schematic();
   }
 
