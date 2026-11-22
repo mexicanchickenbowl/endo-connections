@@ -1,0 +1,318 @@
+<title>Endo Reel Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a screening-room contact sheet of 9:16 posters; tapping one opens a viewer with the rating panel beside (desktop) or below (phone). */
+:root {
+  --ground: #f3f1ec;          /* paper */
+  --panel: #ffffff;
+  --ink: #1c1d20;
+  --muted: #676a71;
+  --line: #dedbd3;
+  --gp: #c8603a;              /* gutta-percha orange: the accent */
+  --gp-soft: #f6e2d8;
+  --good: #2f7d5b;
+  --warn: #a86b12;
+  --bad: #a23b3b;
+  --scrim: rgba(18, 19, 22, .92);
+  --f-display: "Fraunces", "Source Serif 4", Georgia, serif;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --ground: #141518; --panel: #1d1f23; --ink: #ecebe7; --muted: #a2a5ad; --line: #30333a;
+  --gp: #ec8a63; --gp-soft: #3a2620; --good: #5cc496; --warn: #e0a64a; --bad: #e07a7a; --scrim: rgba(8, 9, 11, .94); color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --ground: #141518; --panel: #1d1f23; --ink: #ecebe7; --muted: #a2a5ad; --line: #30333a;
+  --gp: #ec8a63; --gp-soft: #3a2620; --good: #5cc496; --warn: #e0a64a; --bad: #e07a7a; --scrim: rgba(8, 9, 11, .94); color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--ink); font: 15px/1.5 var(--f-body); }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+header.top { display: grid; gap: 10px; margin-bottom: 22px; }
+.eyebrow { font: 500 12px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--gp); }
+h1 { font: 700 clamp(30px, 6vw, 46px)/1.05 var(--f-display); margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+.lede { color: var(--muted); max-width: 62ch; margin: 0; }
+.bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin: 18px 0 16px; }
+.progress { display: flex; gap: 10px; align-items: center; font: 500 13px var(--f-mono); color: var(--muted); }
+.meter { width: 140px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: var(--gp); transition: width .3s; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--panel); }
+.seg button { border: 0; background: none; color: var(--muted); font: 500 13px var(--f-body); padding: 7px 12px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--ground); }
+.status { font: 12px var(--f-mono); color: var(--muted); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 18px 14px; }
+@media (max-width: 420px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 10px; } }
+.card { display: grid; gap: 7px; text-align: left; border: 0; padding: 0; background: none; color: inherit; cursor: pointer; font: inherit; min-width: 0; }
+.thumb { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 10px; overflow: hidden; background: #000; box-shadow: 0 1px 0 var(--line); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s; }
+.card:hover .thumb img { transform: scale(1.03); }
+.card:focus-visible { outline: 3px solid var(--gp); outline-offset: 3px; border-radius: 10px; }
+.num { position: absolute; left: 8px; top: 8px; font: 500 12px var(--f-mono); background: rgba(0,0,0,.62); color: #fff; padding: 3px 7px; border-radius: 6px; }
+.dur { position: absolute; right: 8px; bottom: 8px; font: 500 11px var(--f-mono); background: rgba(0,0,0,.62); color: #fff; padding: 2px 6px; border-radius: 5px; }
+.verdict-flag { position: absolute; right: 8px; top: 8px; font: 600 11px var(--f-body); padding: 3px 7px; border-radius: 6px; color: #fff; }
+.verdict-flag.series { background: var(--good); } .verdict-flag.maybe { background: var(--warn); } .verdict-flag.pass { background: var(--bad); }
+.ctitle { font: 600 14px/1.25 var(--f-body); text-wrap: balance; }
+.cstyle { font: 12px/1.3 var(--f-mono); color: var(--muted); }
+.cstars { font-size: 14px; letter-spacing: 1px; color: var(--gp); min-height: 1em; }
+.rank { font: 700 13px var(--f-mono); color: var(--gp); margin-right: 4px; }
+
+section.overall { margin-top: 40px; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); display: grid; gap: 10px; }
+section.overall h2 { font: 700 22px var(--f-display); margin: 0; }
+textarea { width: 100%; min-height: 92px; resize: vertical; border: 1px solid var(--line); border-radius: 8px; background: var(--ground); color: var(--ink); font: 14px/1.45 var(--f-body); padding: 10px 12px; }
+textarea:focus-visible, button:focus-visible { outline: 2px solid var(--gp); outline-offset: 2px; }
+.saved { font: 12px var(--f-mono); color: var(--muted); min-height: 1em; }
+
+/* viewer */
+.viewer { position: fixed; inset: 0; z-index: 50; background: var(--scrim); display: grid; grid-template-columns: minmax(0, 1fr) 380px; padding: calc(env(safe-area-inset-top, 0px) + 16px) max(16px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 16px) max(16px, env(safe-area-inset-left, 0px)); gap: 20px; }
+.stagebox { min-height: 0; display: flex; align-items: center; justify-content: center; position: relative; }
+.stagebox video { height: 100%; max-height: calc(100dvh - 32px); max-width: 100%; aspect-ratio: 9 / 16; background: #000; border-radius: 12px; }
+.side { background: var(--panel); color: var(--ink); border-radius: 14px; padding: 18px; overflow-y: auto; display: grid; align-content: start; gap: 14px; min-width: 0; }
+.side h2 { font: 700 24px/1.12 var(--f-display); margin: 0; text-wrap: balance; }
+.side .meta { font: 12px/1.45 var(--f-mono); color: var(--muted); }
+.side .topic { margin: 0; color: var(--muted); font-size: 14px; }
+.lbl { font: 500 11px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.stars { display: flex; gap: 4px; }
+.stars button { width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 8px; background: var(--ground); color: var(--muted); font-size: 22px; cursor: pointer; line-height: 1; }
+.stars button.on { background: var(--gp); border-color: var(--gp); color: #fff; }
+.verdicts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.verdicts button { border: 1px solid var(--line); border-radius: 8px; background: var(--ground); color: var(--ink); font: 600 13px var(--f-body); padding: 10px 6px; cursor: pointer; }
+.verdicts button[aria-pressed="true"].series { background: var(--good); border-color: var(--good); color: #fff; }
+.verdicts button[aria-pressed="true"].maybe { background: var(--warn); border-color: var(--warn); color: #fff; }
+.verdicts button[aria-pressed="true"].pass { background: var(--bad); border-color: var(--bad); color: #fff; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button { border: 1px solid var(--line); border-radius: 999px; background: none; color: var(--ink); font: 13px var(--f-body); padding: 6px 11px; cursor: pointer; }
+.chips button[aria-pressed="true"] { background: var(--gp-soft); border-color: var(--gp); color: var(--ink); }
+.nav { display: flex; gap: 8px; justify-content: space-between; }
+.nav button { flex: 1; border: 1px solid var(--line); border-radius: 8px; background: var(--ground); color: var(--ink); font: 600 13px var(--f-body); padding: 10px; cursor: pointer; }
+.close { position: absolute; top: 4px; left: 4px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(0,0,0,.6); color: #fff; font-size: 22px; cursor: pointer; }
+.facts { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+@media (max-width: 860px) {
+  .viewer { grid-template-columns: 1fr; grid-template-rows: auto auto; overflow-y: auto; align-content: start; }
+  .stagebox video { height: 62dvh; max-height: 62dvh; }
+  .side { overflow: visible; }
+}
+@media (prefers-reduced-motion: reduce) { .thumb img, .meter i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">@natebrooksendo · sample reels</div>
+    <h1>Endo Reel Lab</h1>
+    <p class="lede">Twenty silent explainers, each in a different visual style. Watch each one, rate it, and tag what works. Your ratings save as you go and Claude reads them to shape the series.</p>
+  </header>
+  <div class="bar">
+    <div class="progress"><div class="meter" aria-hidden="true"><i id="meterFill"></i></div><span id="progressText">0 of 0 rated</span></div>
+    <div class="seg" role="group" aria-label="Order">
+      <button id="sortNum" aria-pressed="true">Numbered</button>
+      <button id="sortRank" aria-pressed="false">My ranking</button>
+    </div>
+  </div>
+  <div class="status" id="status" aria-live="polite"></div>
+  <div class="grid" id="grid"></div>
+
+  <section class="overall">
+    <h2>Overall direction</h2>
+    <label class="lbl" for="overallNote">Which styles, topics or lengths should the series lean into?</label>
+    <textarea id="overallNote" placeholder="e.g. More like 06 and 13; keep under 20 s; bigger labels…"></textarea>
+    <div class="saved" id="overallSaved"></div>
+  </section>
+</div>
+
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-labelledby="vTitle">
+  <div class="stagebox">
+    <button class="close" id="vClose" aria-label="Close">×</button>
+    <video id="vVideo" playsinline muted loop controls preload="metadata"></video>
+  </div>
+  <div class="side">
+    <div class="meta" id="vMeta"></div>
+    <h2 id="vTitle"></h2>
+    <p class="topic" id="vTopic"></p>
+    <div class="lbl">Rating</div>
+    <div class="stars" id="vStars" role="group" aria-label="Rating out of 5"></div>
+    <div class="lbl">For the series?</div>
+    <div class="verdicts" id="vVerdicts" role="group" aria-label="Verdict">
+      <button class="series" data-v="series" aria-pressed="false">Yes</button>
+      <button class="maybe" data-v="maybe" aria-pressed="false">Maybe</button>
+      <button class="pass" data-v="pass" aria-pressed="false">Pass</button>
+    </div>
+    <div class="lbl">Tags</div>
+    <div class="chips" id="vTags"></div>
+    <label class="lbl" for="vNote">Notes</label>
+    <textarea id="vNote" placeholder="What to keep, change or fix"></textarea>
+    <div class="saved" id="vSaved"></div>
+    <details>
+      <summary class="lbl" style="cursor:pointer">On-screen claims &amp; sources</summary>
+      <ul class="facts" id="vFacts"></ul>
+    </details>
+    <div class="nav">
+      <button id="vPrev">← Previous</button>
+      <button id="vNext">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const TAGS = ['Love the style', 'Love the topic', 'Great motion', 'Too fast', 'Too slow', 'Too much text', 'Text too small', 'Accuracy concern', 'Use for Stories'];
+  const $ = (id) => document.getElementById(id);
+  let reels = [];
+  const ratings = {};           // id -> {stars, verdict, tags, note}
+  let db = null, order = 'num', current = -1, saveTimers = {};
+  const blank = () => ({ stars: 0, verdict: null, tags: [], note: '' });
+
+  function status(msg) { $('status').textContent = msg || ''; }
+  function starsText(n) { return n ? '★'.repeat(n) + '☆'.repeat(5 - n) : ''; }
+  function score(r) { const v = { series: 3, maybe: 1, pass: -2 }[r.verdict] || 0; return (r.stars || 0) * 10 + v; }
+
+  function sorted() {
+    const list = reels.map((r, i) => ({ r, i }));
+    if (order === 'rank') list.sort((a, b) => score(ratings[b.r.id] || blank()) - score(ratings[a.r.id] || blank()) || a.i - b.i);
+    return list;
+  }
+
+  function renderGrid() {
+    const g = $('grid'); g.textContent = '';
+    const rankedIds = order === 'rank' ? sorted().filter(x => (ratings[x.r.id] || {}).stars).map(x => x.r.id) : [];
+    for (const { r, i } of sorted()) {
+      const rt = ratings[r.id] || blank();
+      const b = document.createElement('button'); b.className = 'card'; b.type = 'button';
+      b.setAttribute('aria-label', `${r.id} ${r.title}`);
+      const th = document.createElement('div'); th.className = 'thumb';
+      const img = document.createElement('img'); img.src = r.poster; img.alt = ''; img.loading = 'lazy'; th.appendChild(img);
+      const n = document.createElement('span'); n.className = 'num'; n.textContent = r.id; th.appendChild(n);
+      const d = document.createElement('span'); d.className = 'dur'; d.textContent = Math.round(r.duration) + ' s'; th.appendChild(d);
+      if (rt.verdict) { const v = document.createElement('span'); v.className = 'verdict-flag ' + rt.verdict; v.textContent = { series: 'Yes', maybe: 'Maybe', pass: 'Pass' }[rt.verdict]; th.appendChild(v); }
+      const t = document.createElement('div'); t.className = 'ctitle';
+      const ri = rankedIds.indexOf(r.id);
+      if (ri >= 0) { const rk = document.createElement('span'); rk.className = 'rank'; rk.textContent = '#' + (ri + 1); t.appendChild(rk); }
+      t.appendChild(document.createTextNode(r.title));
+      const s = document.createElement('div'); s.className = 'cstyle'; s.textContent = r.style;
+      const st = document.createElement('div'); st.className = 'cstars'; st.textContent = starsText(rt.stars);
+      b.append(th, t, s, st);
+      b.addEventListener('click', () => open(i));
+      g.appendChild(b);
+    }
+    const rated = reels.filter(r => (ratings[r.id] || {}).stars).length;
+    $('progressText').textContent = `${rated} of ${reels.length} rated`;
+    $('meterFill').style.width = reels.length ? (100 * rated / reels.length) + '%' : '0';
+  }
+
+  function renderSide() {
+    const r = reels[current]; if (!r) return;
+    const rt = ratings[r.id] || blank();
+    $('vMeta').textContent = `${r.id} / ${String(reels.length).padStart(2, '0')} · ${r.style} · ${Math.round(r.duration)} s`;
+    $('vTitle').textContent = r.title;
+    $('vTopic').textContent = r.topic;
+    const sb = $('vStars'); sb.textContent = '';
+    for (let k = 1; k <= 5; k++) {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = '★';
+      b.className = k <= rt.stars ? 'on' : ''; b.setAttribute('aria-label', `${k} star${k > 1 ? 's' : ''}`);
+      b.setAttribute('aria-pressed', String(k === rt.stars));
+      b.addEventListener('click', () => change(r.id, { stars: rt.stars === k ? 0 : k }));
+      sb.appendChild(b);
+    }
+    for (const b of $('vVerdicts').children) b.setAttribute('aria-pressed', String(rt.verdict === b.dataset.v));
+    const tg = $('vTags'); tg.textContent = '';
+    for (const tag of TAGS) {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = tag;
+      const on = (rt.tags || []).includes(tag); b.setAttribute('aria-pressed', String(on));
+      b.addEventListener('click', () => { const tags = new Set(rt.tags || []); on ? tags.delete(tag) : tags.add(tag); change(r.id, { tags: [...tags] }); });
+      tg.appendChild(b);
+    }
+    if (document.activeElement !== $('vNote')) $('vNote').value = rt.note || '';
+    const f = $('vFacts'); f.textContent = '';
+    for (const c of r.claims || []) { const li = document.createElement('li'); li.textContent = `${c.claim} — ${c.source}`; f.appendChild(li); }
+  }
+
+  function open(i) {
+    current = (i + reels.length) % reels.length;
+    const r = reels[current], v = $('vVideo');
+    $('viewer').hidden = false; document.body.style.overflow = 'hidden';
+    v.poster = r.poster; v.src = r.video; v.currentTime = 0;
+    v.play().catch(() => {});
+    $('vSaved').textContent = '';
+    renderSide();
+  }
+  function close() { $('viewer').hidden = true; document.body.style.overflow = ''; const v = $('vVideo'); v.pause(); v.removeAttribute('src'); v.load(); renderGrid(); }
+
+  function change(id, patch) {
+    ratings[id] = { ...(ratings[id] || blank()), ...patch };
+    renderSide(); if ($('viewer').hidden) renderGrid();
+    queueSave(id, patch.note !== undefined ? 700 : 0);
+  }
+  function queueSave(id, delay) {
+    clearTimeout(saveTimers[id]);
+    saveTimers[id] = setTimeout(() => save(id), delay);
+  }
+  const inflight = {};
+  async function save(id) {
+    if (!db) { $('vSaved').textContent = 'Not saved: storage is unavailable in this view.'; return; }
+    if (inflight[id]) { inflight[id].again = true; return; }
+    inflight[id] = { again: false };
+    try {
+      const r = ratings[id];
+      await db.doc('ratings/' + id).set({ stars: r.stars || 0, verdict: r.verdict || null, tags: r.tags || [], note: r.note || '', updatedAt: new Date().toISOString() });
+      if (reels[current] && reels[current].id === id) $('vSaved').textContent = 'Saved';
+    } catch (e) {
+      $('vSaved').textContent = e && e.code === 'invalid_argument' ? 'You can view these but not save ratings.' : 'Could not save. Try again in a moment.';
+    } finally {
+      const again = inflight[id].again; delete inflight[id];
+      if (again) save(id);
+    }
+  }
+
+  // overall note
+  let overallTimer = null, overallBusy = false, overallAgain = false;
+  async function saveOverall() {
+    if (!db) return;
+    if (overallBusy) { overallAgain = true; return; }
+    overallBusy = true;
+    try { await db.doc('meta/overall').set({ note: $('overallNote').value, updatedAt: new Date().toISOString() }); $('overallSaved').textContent = 'Saved'; }
+    catch (e) { $('overallSaved').textContent = 'Could not save.'; }
+    finally { overallBusy = false; if (overallAgain) { overallAgain = false; saveOverall(); } }
+  }
+  $('overallNote').addEventListener('input', () => { $('overallSaved').textContent = ''; clearTimeout(overallTimer); overallTimer = setTimeout(saveOverall, 800); });
+
+  // events
+  $('vClose').addEventListener('click', close);
+  $('vPrev').addEventListener('click', () => open(current - 1));
+  $('vNext').addEventListener('click', () => open(current + 1));
+  for (const b of $('vVerdicts').children) b.addEventListener('click', () => { const r = reels[current]; const rt = ratings[r.id] || blank(); change(r.id, { verdict: rt.verdict === b.dataset.v ? null : b.dataset.v }); });
+  $('vNote').addEventListener('input', (e) => { const r = reels[current]; ratings[r.id] = { ...(ratings[r.id] || blank()), note: e.target.value }; $('vSaved').textContent = ''; queueSave(r.id, 700); });
+  addEventListener('keydown', (e) => {
+    if ($('viewer').hidden || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') open(current + 1);
+    if (e.key === 'ArrowLeft') open(current - 1);
+    if (/^[0-5]$/.test(e.key)) change(reels[current].id, { stars: +e.key });
+  });
+  $('sortNum').addEventListener('click', () => { order = 'num'; $('sortNum').setAttribute('aria-pressed', 'true'); $('sortRank').setAttribute('aria-pressed', 'false'); renderGrid(); });
+  $('sortRank').addEventListener('click', () => { order = 'rank'; $('sortRank').setAttribute('aria-pressed', 'true'); $('sortNum').setAttribute('aria-pressed', 'false'); renderGrid(); });
+
+  // boot
+  fetch('reels.json').then(r => r.json()).then(list => { reels = list; renderGrid(); }).catch(() => status('Could not load the reel list.'));
+
+  (async () => {
+    try { db = window.claude && window.claude.use ? await window.claude.use('db') : null; } catch (e) { db = null; }
+    if (!db) { status('Ratings are not saved in this view.'); return; }
+    status('Loading your ratings…');
+    let loaded = false;
+    const timer = setTimeout(() => { if (!loaded) status('Your saved ratings cannot be reached yet.'); }, 10000);
+    db.collection('ratings').onSnapshot((snap) => {
+      for (const d of snap.docs) {
+        const v = d.data() || {};
+        if (saveTimers[d.id] && inflight[d.id]) continue;
+        if (reels[current] && reels[current].id === d.id && document.activeElement === $('vNote')) { ratings[d.id] = { ...v, note: ratings[d.id] ? ratings[d.id].note : v.note }; continue; }
+        ratings[d.id] = { stars: v.stars || 0, verdict: v.verdict || null, tags: v.tags || [], note: v.note || '' };
+      }
+      if (!snap.metadata.fromCache) { loaded = true; clearTimeout(timer); status(''); }
+      renderGrid(); if (!$('viewer').hidden) renderSide();
+    }, () => { clearTimeout(timer); status('Saved ratings could not be loaded.'); });
+    db.doc('meta/overall').get().then((d) => { if (d.exists && document.activeElement !== $('overallNote')) $('overallNote').value = (d.data() || {}).note || ''; }).catch(() => {});
+  })();
+})();
+</script>
