@@ -1,12 +1,13 @@
 /*
  * Sample 23 — 2-D layer: studio backdrop, title, tidy teardown call-outs with thin leader lines, end card.
- * All positions in 1080 x 1920 px. Must-read text >= 30 px; fine print 24-26 px. Pure function of t.
+ * All positions in 1080 x 1920 px. Must-read text >= 30 px (function lines 34 px); fine print 24-26 px. Pure function of t.
  */
 import { T } from './timeline.js';
 const { seg, env, ease, clamp, lerp } = Kit;
 const W = 1080, H = 1920;
-const INK = '#14171c', MUTE = '#5b6370', AMBER = '#c26400', GREEN = '#0a9451', BLUE = '#1565d8', RED = '#d02a22', VIOLET = '#5a43e6';
-const SG = '"Space Grotesk", sans-serif', IN = 'Inter, sans-serif';
+const INK = '#14171c', MUTE = '#5b6370', DARK = '#3a414c', AMBER = '#c26400', GREEN = '#0a9451', BLUE = '#1565d8', RED = '#d02a22', VIOLET = '#5a43e6';
+const SG = '"Space Grotesk", sans-serif', IN = 'Inter, sans-serif', PLEX = '"IBM Plex Sans", Inter, sans-serif';
+const FN = `500 34px ${IN}`;                                // function lines (must-read)
 const X0 = 64, XE = 416;                                    // label column: left edge, elbow of the leader lines
 
 /* ---------- backdrop (drawn once) ---------- */
@@ -25,9 +26,9 @@ export function drawBackground(ctx) {
 }
 
 /* ---------- text helpers ---------- */
-function rich(ctx, segs, x, y, font, a) {            // [[text, color], ...] on one baseline
-  ctx.font = font; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; let cx = x;
-  for (const [txt, col] of segs) { ctx.fillStyle = col || INK; ctx.globalAlpha = a; ctx.fillText(txt, cx, y); cx += ctx.measureText(txt).width; }
+function rich(ctx, segs, x, y, font, a) {            // [[text, color, font?], ...] on one baseline
+  ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; let cx = x;
+  for (const [txt, col, f] of segs) { ctx.font = f || font; ctx.fillStyle = col || INK; ctx.globalAlpha = a; ctx.fillText(txt, cx, y); cx += ctx.measureText(txt).width; }
   return cx - x;
 }
 function spaced(ctx, txt, x, y, font, color, a, ls = 3, align = 'left') {
@@ -44,6 +45,7 @@ function pathPart(ctx, pts, u) {                     // stroke the first fractio
 /**
  * teardown call-out: index + hairline that runs to the part, name under the line, function lines below.
  * c: { idx, name, y, anchor:[x,y], a (0..1 appear), on (0..1 emphasis), lines:[{segs, a, font?, lh?}], size?, tag? }
+ * Focus is signalled by the leader line and its terminal dot; text never drops below 85% ink (legibility on a phone).
  */
 function callout(ctx, c) {
   if (c.a <= 0.004) return;
@@ -63,31 +65,34 @@ function callout(ctx, c) {
   }
   // name
   const ns = c.size || 38;
-  ctx.globalAlpha = a * lerp(0.72, 1, on); ctx.fillStyle = INK; ctx.font = `600 ${ns}px ${SG}`; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+  ctx.globalAlpha = a * lerp(0.85, 1, on); ctx.fillStyle = INK; ctx.font = `600 ${ns}px ${SG}`; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
   ctx.fillText(c.name, X0, c.y + ns + 8 - 6 * (1 - a));
-  if (c.tag) { const nw = ctx.measureText(c.name).width; ctx.font = `500 26px ${IN}`; ctx.fillStyle = MUTE; ctx.fillText(c.tag, X0 + nw + 14, c.y + ns + 8); }
+  if (c.tag) { const nw = ctx.measureText(c.name).width; ctx.font = `500 30px ${IN}`; ctx.fillStyle = DARK; ctx.fillText(c.tag, X0 + nw + 14, c.y + ns + 8); }
   // function lines
   let yy = c.y + ns + 8;
   for (const ln of c.lines || []) {
-    yy += ln.lh || 40; if (ln.a <= 0.004) continue;
-    rich(ctx, ln.segs, X0 + 8 * (1 - ease.out(ln.a)), yy, ln.font || `500 30px ${IN}`, a * ln.a * lerp(0.6, 1, on));
+    yy += ln.lh || 44; if (ln.a <= 0.004) continue;
+    rich(ctx, ln.segs, X0 + 8 * (1 - ease.out(ln.a)), yy, ln.font || FN, a * ln.a * lerp(0.85, 1, on));
   }
   ctx.restore();
 }
 
 const ARROW = [' → ', MUTE];
+const TRANS = 'transistors per pixel';
 
 export function drawOverlay(ctx, t, A) {
   ctx.save();
   const loopIn = seg(t, T.loop[0] + 0.3, T.loop[1] - 0.08, ease.smooth);
 
   /* ---------- header: kicker, schematic note, handle ---------- */
+  const big = env(t, T.refine[0], T.labelsOut + 0.1, 0.4, 0.3);        // summary / cover frame: the kicker becomes the headline
   const kick = [
-    ['DIGITAL INTRAORAL X-RAY SENSOR', Math.max(1 - seg(t, T.sensorOut[0], T.sensorOut[0] + 0.35), loopIn)],
+    ['DIGITAL INTRAORAL X-RAY SENSOR', Math.max(1 - seg(t, T.sensorOut[0], T.sensorOut[0] + 0.35), loopIn) * (1 - big)],
     ['PHOSPHOR PLATE (PSP) + SCANNER', env(t, T.pspTitle - 0.15, T.pspOut + 0.2, 0.35, 0.35)],
-    ['TWO DETECTORS, SIDE BY SIDE', env(t, T.endText[0], T.endText[1], 0.4, 0.35)],
+    ['TWO DETECTORS', env(t, T.endText[0], T.endText[1], 0.4, 0.35)],
   ];
   for (const [txt, a] of kick) if (a > 0.004) spaced(ctx, txt, X0, 272, `600 24px ${SG}`, MUTE, a, 2.6);
+  if (big > 0.004) spaced(ctx, 'DIGITAL INTRAORAL X-RAY SENSOR', X0, 388 + 6 * (1 - ease.out(big)), `700 36px ${SG}`, INK, big, 1.2);
   ctx.globalAlpha = 1; ctx.font = `400 26px ${IN}`; ctx.fillStyle = MUTE; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
   ctx.fillText('schematic · not to scale', X0, 310);
   ctx.textAlign = 'right'; ctx.font = `500 26px ${IN}`; ctx.globalAlpha = 0.8; ctx.fillText('@natebrooksendo', 1016, 272);
@@ -108,43 +113,41 @@ export function drawOverlay(ctx, t, A) {
     const all = Math.max(1 - seg(t, T.scint - 0.2, T.scint + 0.1), seg(t, T.refine[0], T.refine[1]));          // everything at full ink before the first beat and for the summary frame
     const foc = (a, b) => Math.max(all, env(t, a - 0.15, b + 0.15, 0.3, 0.3));
     const li = (t0) => seg(t, t0, t0 + 0.35);
-    const F = `500 30px ${IN}`, Fm = `400 30px ${IN}`;
-    callout(ctx, { idx: '01', name: 'Housing', y: 462, anchor: A.lid, a: nm(0), on: all });
-    callout(ctx, { idx: '02', name: 'Scintillator', y: 592, anchor: A.scint, a: nm(1), on: foc(T.scint, T.fop), lines: [
-      { segs: [['X-ray', AMBER], ARROW, ['visible light', GREEN]], a: li(T.scint), font: F },
-      { segs: [['CsI or Gd oxysulfide', MUTE]], a: li(T.scint + 0.35), font: Fm, lh: 38 }] });
-    callout(ctx, { idx: '03', name: 'Fiber-optic plate', y: 746, anchor: A.fop, a: nm(2), on: foc(T.fop, T.cmos), lines: [
-      { segs: [['guides light, less noise', INK]], a: li(T.fop), font: F }] });
-    callout(ctx, { idx: '04', name: 'CMOS chip', y: 900, anchor: A.chip, a: nm(3), on: foc(T.cmos, T.adc), lines: [
-      { segs: [['light', GREEN], ARROW, ['charge', BLUE]], a: li(T.cmos), font: F },
-      { segs: [['a transistor at', INK]], a: li(T.cmos2), font: F, lh: 38 },
-      { segs: [['every pixel', INK]], a: li(T.cmos2 + 0.1), font: F, lh: 38 }] });
-    callout(ctx, { idx: '05', name: 'Read-out + ADC', y: 1090, anchor: A.pcb, a: nm(4), on: foc(T.adc, T.refine[0]), lines: [
-      { segs: [['charge', BLUE], ARROW, ['number', INK]], a: li(T.adc), font: F },
-      { segs: [['8–16 bit', MUTE]], a: li(T.adc + 0.3), font: F, lh: 38 }] });
-    callout(ctx, { idx: '06', name: 'Image', y: 1296, anchor: A.mon, a: seg(t, T.img - 0.5, T.img - 0.05) * out, on: foc(T.img, T.refine[0]), lines: [
-      { segs: [['number', INK], ARROW, ['gray level', MUTE]], a: li(T.img), font: F }] });
+    // every block: >= 56 px of air between its last baseline and the next rule
+    callout(ctx, { idx: '01', name: 'Housing', y: 446, anchor: A.lid, a: nm(0), on: all });
+    callout(ctx, { idx: '02', name: 'Scintillator', y: 556, anchor: A.scint, a: nm(1), on: foc(T.scint, T.fop), lines: [
+      { segs: [['X-ray', AMBER], ARROW, ['visible light', GREEN]], a: li(T.scint) },
+      { segs: [['CsI', DARK, `500 34px ${PLEX}`], [' or Gd oxysulfide', DARK]], a: li(T.scint + 0.35) }] });      // Plex has a serifed capital I: reads CsI, not Csl
+    callout(ctx, { idx: '03', name: 'Fiber-optic plate', y: 748, anchor: A.fop, a: nm(2), on: foc(T.fop, T.cmos), lines: [
+      { segs: [['guides light', INK]], a: li(T.fop) }] });
+    callout(ctx, { idx: '04', name: 'CMOS chip', y: 896, anchor: A.chip, a: nm(3), on: foc(T.cmos, T.adc), lines: [
+      { segs: [['light', GREEN], ARROW, ['charge', BLUE]], a: li(T.cmos) },
+      { segs: [[TRANS, INK]], a: li(T.cmos2) }] });
+    callout(ctx, { idx: '05', name: 'Read-out + ADC', y: 1088, anchor: A.pcb, a: nm(4), on: foc(T.adc, T.refine[0]), lines: [
+      { segs: [['charge', BLUE], ARROW, ['number', INK]], a: li(T.adc) },
+      { segs: [['8–16 bit', DARK]], a: li(T.adc + 0.3) }] });
+    callout(ctx, { idx: '06', name: 'Image', y: 1282, anchor: A.mon, a: seg(t, T.img - 0.5, T.img - 0.05) * out, on: foc(T.img, T.refine[0]), lines: [
+      { segs: [['number', INK], ARROW, ['gray level', MUTE]], a: li(T.img) }] });
   }
 
   /* ---------- PSP: plate call-out, numbered steps, photomultiplier tag ---------- */
   const pa = env(t, T.pspTitle, T.pspOut + 0.25, 0.4, 0.35);
   if (pa > 0.004) {
     const steps = [
-      { n: '1', t0: T.pspExpose[0], t1: T.pspScan[0] - 0.1, l1: [['X-rays', AMBER], ARROW], l2: [['trapped electrons', BLUE]] },
-      { n: '2', t0: T.pspScan[0] - 0.1, t1: T.pspScan[1], l1: [['red laser', RED], ARROW], l2: [['blue-violet light', VIOLET]] },
-      { n: '3', t0: T.eraseLabel, t1: T.pspOut + 0.3, l1: [['bright light erases', INK]], l2: [] },
+      { n: '1', t0: T.pspExpose[0], t1: T.carriageIn[0], l1: [['X-rays', AMBER], ARROW], l2: [['trapped electrons', BLUE]] },
+      { n: '2', t0: T.pspScan[0] - 0.15, t1: T.pspOut + 0.5, l1: [['red laser', RED], ARROW], l2: [['blue-violet light', VIOLET]] },
     ];
     steps.forEach((s, i) => {
       const a = seg(t, s.t0 - 0.1, s.t0 + 0.3) * pa; if (a <= 0.004) return;
-      const on = lerp(0.62, 1, env(t, s.t0 - 0.2, s.t1 + 0.15, 0.25, 0.3)), y = 470 + i * 132, sl = 8 * (1 - ease.out(a / pa));
-      ctx.globalAlpha = a * on; ctx.strokeStyle = INK; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(X0 + 21, y - 11, 21, 0, 7); ctx.stroke();
-      ctx.fillStyle = INK; ctx.font = `600 26px ${SG}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(s.n, X0 + 21, y - 10);
-      rich(ctx, s.l1, X0 + 60 + sl, y, `500 32px ${IN}`, a * on); rich(ctx, s.l2, X0 + 60 + sl, y + 42, `500 32px ${IN}`, a * on);
+      const on = lerp(0.85, 1, env(t, s.t0 - 0.2, s.t1 + 0.15, 0.25, 0.3)), y = 480 + i * 146, sl = 8 * (1 - ease.out(a / pa));
+      ctx.globalAlpha = a * on; ctx.strokeStyle = INK; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(X0 + 21, y - 12, 21, 0, 7); ctx.stroke();
+      ctx.fillStyle = INK; ctx.font = `600 26px ${SG}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(s.n, X0 + 21, y - 11);
+      rich(ctx, s.l1, X0 + 60 + sl, y, FN, a * on); rich(ctx, s.l2, X0 + 60 + sl, y + 44, FN, a * on);
     });
     callout(ctx, { idx: '', name: 'PSP plate', y: 968, anchor: A.plate, a: pa, on: 1, size: 40, lines: [
-      { segs: [['Eu-doped barium', MUTE]], a: seg(t, T.pspTitle + 0.3, T.pspTitle + 0.7), font: `400 30px ${IN}` },
-      { segs: [['fluorohalide', MUTE]], a: seg(t, T.pspTitle + 0.4, T.pspTitle + 0.8), font: `400 30px ${IN}`, lh: 38 }] });
-    const ma = env(t, T.pspScan[0] + 0.15, T.pspOut - 0.9, 0.35, 0.3) * pa;
+      { segs: [['Eu-doped barium', DARK]], a: seg(t, T.pspTitle + 0.3, T.pspTitle + 0.7) },
+      { segs: [['fluorohalide', DARK]], a: seg(t, T.pspTitle + 0.4, T.pspTitle + 0.8), lh: 42 }] });
+    const ma = env(t, T.pspScan[0] + 0.15, T.pspOut + 0.25, 0.35, 0.3) * pa;
     if (ma > 0.004) {
       const tx = 1012, ty = A.pmt[1] - 112, tw = 222;
       ctx.globalAlpha = ma * 0.8; ctx.strokeStyle = INK; ctx.lineWidth = 1.6; ctx.lineJoin = 'round'; ctx.beginPath(); ctx.moveTo(tx - tw, ty + 14); ctx.lineTo(A.pmt[0] + 4, ty + 14); ctx.lineTo(A.pmt[0], A.pmt[1] - 4); ctx.stroke();
@@ -156,18 +159,18 @@ export function drawOverlay(ctx, t, A) {
   /* ---------- end card ---------- */
   const ea = env(t, T.endText[0], T.endText[1], 0.45, 0.35);
   if (ea > 0.004) {
-    const F = `500 34px ${IN}`, li = (d) => seg(t, T.endText[0] + d, T.endText[0] + d + 0.4);
-    callout(ctx, { idx: 'A', name: 'Sensor', tag: 'CMOS · CCD', y: 520, anchor: A.lid, a: ea, on: 1, size: 48, lines: [
-      { segs: [['instant image', INK]], a: li(0.15), font: F, lh: 50 }, { segs: [['rigid', INK]], a: li(0.3), font: F, lh: 44 }] });
-    callout(ctx, { idx: 'B', name: 'PSP plate', y: 1010, anchor: A.plate, a: ea, on: 1, size: 48, lines: [
-      { segs: [['thin, film-sized', INK]], a: li(0.45), font: F, lh: 50 }, { segs: [['wide latitude', INK]], a: li(0.6), font: F, lh: 44 }, { segs: [['needs a scanner', INK]], a: li(0.75), font: F, lh: 44 }] });
+    const li = (d) => seg(t, T.endText[0] + d, T.endText[0] + d + 0.3);
+    callout(ctx, { idx: 'A', name: 'Sensor', tag: 'CMOS · CCD', y: 550, anchor: A.lid, a: ea, on: 1, size: 48, lines: [
+      { segs: [['image in seconds', INK]], a: li(0.05), lh: 50 }, { segs: [['rigid', INK]], a: li(0.12) }] });
+    callout(ctx, { idx: 'B', name: 'PSP plate', y: 1030, anchor: A.plate, a: ea, on: 1, size: 48, lines: [
+      { segs: [['thin, film-sized', INK]], a: li(0.2), lh: 50 }, { segs: [['wide latitude', INK]], a: li(0.27) }, { segs: [['needs a scanner', INK]], a: li(0.35) }] });
   }
 
   /* ---------- one source line per scene (two short rows, bottom of the label column) ---------- */
   const src = [
-    [['White & Pharoah,', 'Oral Radiology 7e (textbook)'], env(t, T.names + 0.4, T.labelsOut + 0.3, 0.4, 0.35)],
+    [['White & Pharoah 7e (textbook)', 'Farman TT 2005, OOOOE'], env(t, T.names + 0.4, T.labelsOut + 0.3, 0.4, 0.35)],
     [['White & Pharoah 7e (textbook)', 'Leblans 2011, Materials'], env(t, T.pspTitle + 0.2, T.pspOut + 0.25, 0.4, 0.35)],
-    [['White & Pharoah 7e (textbook)', 'Berkhout 2004, DMFR'], ea],
+    [['White & Pharoah 7e (textbook)', 'Berkhout 2004, DMFR (in vitro)'], ea],
   ];
   ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.font = `400 24px ${IN}`; ctx.fillStyle = MUTE;
   for (const [rows, a] of src) if (a > 0.004) { ctx.globalAlpha = a * 0.95; ctx.fillText(rows[0], X0, 1532); ctx.fillText(rows[1], X0, 1564); }

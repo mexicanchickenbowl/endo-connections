@@ -8,44 +8,40 @@
   "claims": [
     {
       "claim": "Layer stack of a solid-state sensor: housing, scintillator, fiber-optic plate, CMOS chip, read-out electronics + ADC (schematic model of one sensor design, not to scale)",
-      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen), Fig. 4-3 caption (manufacturer-supplied figure). Not every sensor has a fiber-optic plate"
+      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen), Fig. 4-3 caption (manufacturer-supplied figure). Not every sensor has a fiber-optic plate (W&P: scintillator 'coated directly on the CCD surface or coupled to the surface by fiberoptics')"
     },
     {
       "claim": "Scintillator: X-ray -> visible light; CsI or Gd oxysulfide",
-      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen); materials: Farman TT et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2005;99:608-13 (PMID 15829886), abstract"
+      "source": "Function: White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction). Materials: Farman TT et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2005;99:608-13 (PMID 15829886), abstract (thallium-doped CsI and terbium-doped gadolinium oxysulfide screens on an intraoral CCD). Board note: the W&P 7e solid-state paragraph prints 'gadolinium oxybromide compounds... or cesium iodide'"
     },
     {
-      "claim": "Fiber-optic plate: guides light, less noise",
-      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen), Fig. 4-3 / 4-4 captions (couples the scintillator to the chip 'to reduce image noise'); textbook wording from a manufacturer figure, no PubMed-indexed dental measurement found"
+      "claim": "Fiber-optic plate: guides light",
+      "source": "White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction), Fig. 4-3 / 4-4 captions (fiber-optics couple the scintillator to the chip)"
     },
     {
-      "claim": "CMOS chip: light -> charge; a transistor at every pixel",
-      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen) ('charge in each pixel proportional to the exposure'; 'each pixel is... directly connected to a transistor'); physics support: Arvanitis et al., Med Phys 2007;34:4612-25 (PMID 18196789), abstract"
+      "claim": "CMOS chip: light -> charge; transistors per pixel",
+      "source": "White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) ('charge in each pixel proportional to the exposure'; 'each pixel is... directly connected to a transistor'); plural per Arvanitis et al., Med Phys 2007;34:4612-25 (PMID 18196789), abstract ('standard three transistor CMOS active pixel sensor', bench mammography detector)"
     },
     {
       "claim": "Read-out + ADC: charge -> number, 8-16 bit",
-      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen) (analog-to-digital conversion; detectors capture 8, 10, 12 or 16 bits)"
+      "source": "White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) (analog-to-digital conversion; 'Current digital detectors capture data at 8, 10, 12, or 16 bits')"
     },
     {
       "claim": "Image: number -> gray level. Toy model / schematic: 36 x 27 charge wells and a procedurally drawn periapical; more exposure = fuller well = darker pixel; well heights and the row-by-row build-up are illustrative",
-      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen) (charge packets proportional to exposure; display convention); no measured values shown"
+      "source": "White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) (charge packets proportional to exposure; display convention); no measured values shown"
     },
     {
       "claim": "PSP plate (Eu-doped barium fluorohalide): X-rays -> trapped electrons",
-      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen); Leblans et al., Materials (Basel) 2011;4:1034-86 (PMID 28879966), PMC full text (medical computed-radiography review)"
+      "source": "White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) ('europium-doped' barium fluorohalide; trapped electrons = latent image); Leblans et al., Materials (Basel) 2011;4:1034-86 (PMID 28879966), PMC full text (medical computed-radiography review)"
     },
     {
-      "claim": "Red laser -> blue-violet light -> photomultiplier (schematic scanner)",
-      "source": "Leblans et al., Materials (Basel) 2011;4:1034-86 (PMID 28879966), PMC full text; White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen); IAEA Diagnostic Radiology Physics handbook 2014, Ch. 7 (handbook)"
+      "claim": "Red laser -> blue-violet light -> photomultiplier (schematic scanner; exposure and read-out drawn as two separate steps)",
+      "source": "Leblans et al., Materials (Basel) 2011;4:1034-86 (PMID 28879966), PMC full text ('blue photons', 390 nm); IAEA, Diagnostic Radiology Physics handbook 2014, Ch. 7 ('usually blue'); White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) (red laser, fiber-optics to a photomultiplier tube). Board note: W&P 7e prints 'green spectrum between 300 and 500 nm' for the emitted light"
     },
     {
-      "claim": "Bright light erases (the plate, before reuse)",
-      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen); Leblans et al. 2011 (PMID 28879966), full text"
-    },
-    {
-      "claim": "End card. Sensor (CMOS, CCD): instant image, rigid. PSP plate: thin, film-sized, wide latitude, needs a scanner",
-      "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen) (rapid image availability, sensor bulk, film-like handling of plates); Kamburoglu et al., Imaging Sci Dent 2022;52:93-101 (PMID 35387105), PMC full text (CMOS 'bulky and rigid'); 'wide' latitude, in vitro: Berkhout et al., Dentomaxillofac Radiol 2004;33:1-5 (PMID 15140814), abstract, and Borg et al., Dentomaxillofac Radiol 2000;29:70-5 (PMID 10808218), abstract. Not claimed: 'wider than sensors' (Marinho-Vieira et al., Dentomaxillofac Radiol 2023;52:20220370, PMID 36988093, abstract)"
+      "claim": "End card. Sensor (CMOS, CCD): image in seconds, rigid. PSP plate: thin, film-sized, wide latitude (source line says in vitro), needs a scanner",
+      "source": "Kamburoğlu et al., Imaging Sci Dent 2022;52:93-101 (PMID 35387105), PMC full text ('available to view in a matter of seconds after the exposure'; CMOS 'bulky and rigid'; plates 'the same shape and dimensions of conventional films'; 'thinner nature of PSP sensors'); White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) (rapid image availability, film-like handling of plates, laser scanner). 'Wide latitude', in vitro: Berkhout et al., Dentomaxillofac Radiol 2004;33:1-5 (PMID 15140814), abstract (also warns of unnecessarily high dose); Borg et al., Dentomaxillofac Radiol 2000;29:70-5 (PMID 10808218), abstract. Deliberately not 'wider than sensors': Farman & Farman, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2005;99:485-9 (PMID 15772598); Marinho-Vieira et al., Dentomaxillofac Radiol 2023;52:20220370 (PMID 36988093), abstracts"
     }
   ],
-  "caption": "From X-ray to pixel: a digital X-ray sensor, taken apart.\nA scintillator (CsI or Gd oxysulfide) turns X-rays into light. In many sensors a fiber-optic plate carries it to the CMOS chip, where each pixel stores charge. The ADC turns charge into a number, shown as a gray level.\nPSP plates trap electrons instead: red laser in, blue-violet light out, then erase with bright light. Latitude is wide, but not always wider than today's sensors.\nSchematic animation.\nRefs: White & Pharoah, Oral Radiology 7e (textbook); Farman 2005, OOOOE; Leblans 2011, Materials; Berkhout 2004 and Marinho-Vieira 2023, DMFR.\n#endodontics #oralradiology #dentalradiography #digitalradiography #endoresident #boardreview"
+  "caption": "From X-ray to pixel: a sensor, taken apart.\nA scintillator (CsI or Gd oxysulfide) turns X-rays into light. In some sensors a fiber-optic plate guides it to the CMOS chip, where each pixel stores charge. The ADC turns charge into a number, shown as gray.\nPSP plates trap electrons: red laser in, blue-violet light out, bright light erases. Latitude is wide in vitro (can hide overexposure), not always wider than today's sensors.\nBoards: W&P 7e says \"Gd oxybromide\" and \"green\" PSP light.\nSchematic animation.\nRefs: White & Pharoah 7e (textbook); Farman TT 2005, OOOOE; Leblans 2011, Materials; Berkhout 2004, Marinho-Vieira 2023, DMFR.\n#endodontics #oralradiology #endoresident #boardreview #xray"
 }

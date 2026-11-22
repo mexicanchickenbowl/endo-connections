@@ -46,8 +46,8 @@ const CAM = [
   [T.sensorOut[0], 23, 25, 95, 700, 790, 3.6, 0],
   [T.pspIn[1], 22, 32, 101, 728, 800, 1.4, 1],
   [T.family[0], 19.5, 32, 101, 728, 800, 1.4, 0],
-  [T.family[1], 19, 25, 104, 735, 865, 3.4, 1],               // end card: closed sensor above, plate below
-  [T.loop[0], 17, 25, 104, 735, 865, 3.4, 0],
+  [T.family[1], 19, 25, 104, 735, 895, 3.4, 1],               // end card: closed sensor above, plate below
+  [T.loop[0], 17, 25, 104, 735, 895, 3.4, 0],
   [T.loop[1], 40, 30, 150, 540, 1085, 0.5, 1],
 ];
 function camAt(t) {
@@ -155,7 +155,6 @@ function makeCable(mat, radius = 0.055) {
       mesh.geometry.dispose(); mesh.geometry = new THREE.TubeGeometry(curve, 84, radius, 8, false);
       return curve;
     },
-    draw(u) { mesh.geometry.setDrawRange(0, Math.round(clamp(u) * 84) * 48); },      // show the first fraction u (from end A)
   };
 }
 function polyAt(P, s, out) {            // point at arc length s along a polyline of Vector3
@@ -470,8 +469,8 @@ export function buildScene(glc) {
     const scanP = seg(t, T.pspScan[0], T.pspScan[1]);
     const zScan = lerp(-AD / 2 - 0.08, AD / 2 + 0.08, scanP);
     // the read-out carriage (laser, light guide, photomultiplier) is out of frame during the exposure: two places, two steps
-    const carX = -15 * (1 - io(seg(t, T.carriageIn[0], T.carriageIn[1]))), zc = zScan - 0.34;
-    car.position.set(carX, 0, zc); car.visible = carX > -14.9;
+    const carX = 15 * (1 - io(seg(t, T.carriageIn[0], T.carriageIn[1]))), zc = zScan - 0.34;     // enters from the right, clear of the label column
+    car.position.set(carX, 0, zc); car.visible = carX < 14.9;
     const beamOn = Kit.env(t, T.pspScan[0], T.pspScan[1], 0.12, 0.1);
     const xSpot = -AW / 2 + AW * (0.5 - 0.5 * Math.cos(Math.PI * scanP * 5));
     slotMat.color.setHex(0x3a3f4a).lerp(new THREE.Color(0x7a5cff), beamOn);
@@ -485,33 +484,37 @@ export function buildScene(glc) {
       scanLine.position.set(px, PLATE_TOP + 0.004, zScan);
     }
     // plate: on the bed, then lifted and tilted toward the camera for the end card, then out
-    // (1) it lifts off the bed while the scanner slides away, (2) it rises to float level under the sensor: thin, flat, rigid
-    const lift = io(seg(t, T.family[0], T.family[0] + 0.35)), pe = io(seg(t, T.family[0] + 0.25, T.family[1])), pOut = io(seg(t, T.loop[0], T.loop[0] + 0.5));
+    // (1) the scanner slides out from under it, (2) it rises to float level under the sensor: thin, flat, rigid
+    const lift = seg(t, T.family[0] + 0.15, T.family[0] + 0.45), pe = io(seg(t, T.family[0] + 0.3, T.family[1])), pOut = io(seg(t, T.loop[0], T.loop[0] + 0.5));
     const rock = Math.sin((t - T.family[1]) * 1.25);
-    plate.position.set(pxIn + 16 * pOut, lerp(lerp(0.14, 0.55, lift), PLATE_END_Y, pe), 0);
+    plate.position.set(pxIn + 16 * pOut, lerp(0.14, PLATE_END_Y, pe), 0);
     plate.rotation.set((9 + 4.5 * rock) * DEG * pe, 0, 0); plate.visible = pxIn > -15.9 && pOut < 0.999;
     sheenMat.opacity = 0.5 * pe * (1 - pOut); sheenTex.offset.x = 0.42 * rock;
 
     /* ghost teeth */
     let gO, gx, gy;
     if (t < 10) { gO = 1 - seg(t, T.ghostOut[0], T.ghostOut[1]); gx = sx; gy = sy + Y.lid + LAY.lid.h + 0.7 + 0.2 * eLid; }
-    else if (t < 20) { gO = seg(t, T.pspIn[1] - 0.3, T.pspExpose[0]) * (1 - seg(t, T.pspExpose[1] + 0.05, T.pspExpose[1] + 0.4)); gx = px; gy = 1.6; }
+    else if (t < 20) { gO = seg(t, T.pspIn[1] - 0.3, T.pspExpose[0]) * (1 - seg(t, T.pspExpose[1], T.pspExpose[1] + 0.25)); gx = px; gy = 1.6; }
     else { gO = seg(t, T.loop[0] + 0.3, T.loop[1] - 0.1); gx = sx; gy = sy + Y.lid + LAY.lid.h + 0.7; }
     ghost.visible = gO > 0.01; ghost.position.set(gx, gy, 0);
     gMat.body.opacity = G_OP.body * gO; gMat.enamel.opacity = G_OP.enamel * gO; gMat.pulp.opacity = G_OP.pulp * gO;
 
     /* cables */
+    // One cable always leads from the screen to whatever detector feeds it, so there is never a loose end:
+    // the sensor pulls it off to the right as it leaves, and the scanner carriage later brings it back in from the right.
     const cA = tA.set(sx + BOSS.x, sy + BOSS.y, BOSS.z);
     let cB;
-    if (t < T.family[0] - 0.15) cB = v3.set(monBase.x + sx, 0, monBase.z);
+    if (t < T.family[0] - 0.15) cB = v3.set(monBase.x, 0, monBase.z);
     else { const w = io(seg(t, T.loop[0], T.loop[0] + 0.6)); cB = v3.set(lerp(sx + 11, FWD.x * 23.45, w), 0, lerp(2.4, FWD.z * 23.45, w)); }
     const sCurve = sensorCable.set(cA, DIRX, cB);
-    sensorCable.mesh.visible = sx < 14.9;
-    // scanner cable: drawn on from the carriage to the screen once the carriage has arrived (no loose end), leaves with the rig
-    const cab = seg(t, T.carriageIn[1] - 0.15, T.carriageIn[1] + 0.15);
-    pspCable.mesh.visible = psp.visible && cab > 0; pspCable.mesh.position.x = pxOut;
+    sensorCable.mesh.visible = t < T.sensorOut[1] || t >= T.family[0];
+    pspCable.mesh.visible = t >= T.sensorOut[1] && t < T.family[1] && pxOut > -15.9; pspCable.mesh.position.x = pxOut;
     let pCurve = null;
-    if (pspCable.mesh.visible) { pCurve = pspCable.set(tP.set(2.35, BAR_Y + 0.13, zc), DIRX, v3.set(monBase.x, 0, monBase.z)); pspCable.draw(cab); }
+    if (pspCable.mesh.visible) {
+      const h = seg(t, T.sensorOut[1], T.carriageIn[0], ease.smooth);                // off screen: from where the sensor went to the parked carriage
+      tP.set(lerp(15 + BOSS.x, carX + 2.35, h), lerp(BOSS.y, BAR_Y + 0.13, h), lerp(BOSS.z, zc, h));
+      pCurve = pspCable.set(tP, DIRX, v3.set(monBase.x, 0, monBase.z));
+    }
 
     /* charge wells (bars), transistor overlay, row select */
     const m = bars.instanceMatrix.array; let any = false;

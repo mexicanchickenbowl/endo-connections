@@ -453,3 +453,19 @@ in the acknowledgments).
   Møystad 2010, Marinho-Vieira 2022 / 2023: abstract level only.
 - The fiber-optic plate's X-ray-shielding role; CsI:Tl emission color; 15 µm / 33 lp/mm sensors; thickness in mm;
   "CMOS has replaced CCD". All remain off screen.
+
+## Review-round addendum (builder, 2026-11-22)
+No verified fact changed. Changes to what the reel states, and one re-verification:
+- **Re-read (PubMed, PMC full text):** Kamburoğlu K et al., Imaging Sci Dent 2022;52:93-101, PMID 35387105,
+  PMC8967495, https://doi.org/10.5624/isd.20210241. Quotes confirmed: "the radiographic images are available to view
+  in a matter of seconds after the exposure"; CMOS detectors "are bulky and rigid"; PSP plates "have the same shape
+  and dimensions of conventional films, but… are more rigid than film"; Discussion, on Farrier et al.: "the thinner
+  nature of PSP sensors, which enabled easier detector positioning". Used for end-card "image in seconds", "rigid",
+  "thin, film-sized".
+- On screen now: "transistors per pixel" (was "a transistor at every pixel"), "guides light" (was "guides light, less
+  noise"), "image in seconds" (was "instant image"); erase step removed from the screen (caption only); source rows
+  "Farman TT 2005, OOOOE" and "Berkhout 2004, DMFR (in vitro)".
+- Caption now carries the two places where the board textbook's wording differs from the reel (items 18 and
+  correction 6 above: W&P 7e "green spectrum between 300 and 500 nm"; solid-state paragraph "gadolinium oxybromide").
+  Both were read only in an online reproduction of the 7th edition; check against the printed edition before posting.
+

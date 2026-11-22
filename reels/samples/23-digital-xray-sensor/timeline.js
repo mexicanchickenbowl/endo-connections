@@ -4,9 +4,9 @@ export const AW = 3.4, AD = 2.55;         // active area in world units (4:3), s
 
 export const T = {
   dur: 24.0,
-  hook: [0, 2.05],                        // intact sensor, title (title fades 1.75-2.1)
+  hook: [0, 1.95],                        // intact sensor, title (title fades 1.65-2.0)
   explode: [1.55, 3.15],                  // layers separate, camera pulls back to the teardown view
-  names: 2.45,                            // layer names stagger in from here
+  names: 2.4,                             // layer names stagger in from here
   scint: 3.4,                             // 02 expands; flashes in the scintillator
   fop: 4.6,                               // 03 expands; light is shown crossing the fiber-optic plate
   cmos: 5.8,                              // 04 expands; light reaches the chip, wells start to fill

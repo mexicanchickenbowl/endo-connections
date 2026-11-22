@@ -9,7 +9,7 @@ const { W, H, clamp, lerp, seg, ease, rng, hash } = Kit;
 const { canvas, ctx: CTX0 } = Kit.createCanvas();
 let ctx = CTX0; // swapped to an offscreen context while the lifted pulp layer is composited
 const TAU = Math.PI * 2;
-const DUR = 22;
+const DUR = 22.4;
 const io = ease.inOut, sm = ease.smooth;
 const softBack = (x) => { if (x <= 0) return 0; if (x >= 1) return 1; const c1 = 0.95, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
 const sstep = (a, b, x) => sm(clamp((x - a) / (b - a)));
@@ -20,9 +20,9 @@ const T = {
   cam1: [2.15, 2.9], lift1: [2.3, 2.8], necro: [2.4, 3.1], tabA: 2.7, tabB: 2.95, plus: 3.35, reqOut: 6.25, lower1: [5.9, 6.3],
   cam2: [6.3, 7.05], peel: [6.75, 7.55], tabC: 7.05, cellsIn: 7.9, grow: [8.25, 10.6], tabD: 8.35, mechOut: 10.75,
   cam3: [10.8, 11.6], lift2: [11.3, 11.7], pull: [11.7, 12.5], e1: 11.6, cut: [12.3, 12.7], e2: 12.3, drop: 12.5, e3: 12.95,
-  inset: 13.1, ring: 13.4, gp: [13.6, 13.9], cem: [13.9, 14.3], treatOut: 15.9,
-  cam4: [16.0, 16.75], film: [16.15, 16.7], head: 16.35, s1: 16.7, s2: 17.4, s3: 18.1,
-  shiftOn: [18.7, 19.4], shiftOff: [20.2, 20.8], endOut: 21.35, camR: [21.3, 21.7], xfade: [21.7, 22.0],
+  inset: 13.1, ring: 13.4, gp: [13.6, 13.9], cem: [13.9, 14.3], treatOut: 16.3,
+  cam4: [16.4, 17.15], film: [16.55, 17.1], head: 16.75, s1: 17.1, s2: 17.8, s3: 18.5,
+  shiftOn: [19.1, 19.8], shiftOff: [20.6, 21.2], endOut: 21.75, camR: [21.7, 22.1], xfade: [22.1, 22.4],
 };
 
 /* ------------------------------------------------------------------ palette */
@@ -770,8 +770,8 @@ const FINE = [
   [0, 'schematic · not to scale'],
   [2.75, 'schematic · Abbott & Lin 2022, Dent Traumatol'],
   [6.7, 'schematic · Patel et al. 2022, Int Endod J'],
-  [16.3, 'schematic · Patel 2022, Int Endod J; Thomas 2014, ISRN Dent'],
-  [21.38, 'schematic · not to scale'], // flips back before the loop cross-fade starts
+  [16.7, 'schematic · Patel 2022, Int Endod J; Thomas 2014, ISRN Dent'],
+  [21.78, 'schematic · not to scale'], // flips back before the loop cross-fade starts
 ];
 const TAG_Y = 284, TITLE_Y = 416, SUB_TXT = 'dead pulp above, live pulp below';
 function drawFurniture(t) {
@@ -871,7 +871,7 @@ function render(t) {
 window.REEL = {
   title: 'Internal inflammatory root resorption',
   duration: DUR,
-  poster: 19.8,
+  poster: 20.2,
   canvas,
   fonts: ['900 92px Fraunces', '800 60px Fraunces', '800 46px Fraunces', '800 36px Fraunces', 'italic 600 42px Fraunces', 'italic 600 40px Fraunces',
     '900 38px Nunito', '900 36px Nunito', '900 27px Nunito', '800 38px Nunito', '800 34px Nunito', '800 30px Nunito', '800 27px Nunito', '700 30px Nunito', '700 26px Nunito', '600 24px Nunito'],

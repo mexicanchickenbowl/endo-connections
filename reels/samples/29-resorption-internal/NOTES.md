@@ -1,6 +1,6 @@
 # 29 — Internal inflammatory root resorption · layered papercraft / shadowbox
 
-Resorption series 1/5. Silent, 22.0 s, 1080x1920, one 2D canvas (`index.html` + `reel.js`), deterministic `render(t)`.
+Resorption series 1/5. Silent, 22.4 s, 1080x1920, one 2D canvas (`index.html` + `reel.js`), deterministic `render(t)`.
 Evidence brief: `RESEARCH.md` (researched + independently fact-checked). Only its section (b) "recommended on-screen
 facts" is on screen, with its wording constraints and its "Do not claim" list. No number is shown.
 
@@ -24,15 +24,15 @@ a dashed ghost of the old root outline stays behind.
 | 2.15–6.3 | Two requirements | Camera pans (layers parallax); pulp layer lifts off the dentin (2.3–2.8, down again 5.9–6.3); necrotic front runs down the coronal pulp to the junction (2.4–3.1), microbe confetti appears; tabs slide in at 2.7 and 2.95, `+` on a paper disc at 3.35 | `NECROTIC, INFECTED PULP — the stimulus` + `VITAL PULP — the blood supply` |
 | 6.3–8.2 | The entry | Zoom to mid-root; predentin strips come off both walls (6.75–7.55); bare dentin edge glints; small teal cells travel up from the apical vessels | `PREDENTIN LOST → DENTIN EXPOSED` (tab at 7.05) |
 | 7.9–10.75 | Clastic cells | Three mirrored pairs of multinucleated cells settle (7.9–8.5) and nibble; canal balloons to the dashed line (8.25–10.6); coral granulation tissue with thread vessels fills it | `ODONTOCLASTS — resorb the dentin` (tab at 8.35) |
-| 10.8–15.9 | Treatment | Zoom out; pulp layer lifted and pulled out by its tab (11.3–12.5); threads snap back (12.3–12.7); cells curl and drop (12.5–13.3); defect stays the same size. Inset card (13.1, after the cells have gone), zoomed on the perforated wall: coral ring marks the perforation and pulses once (13.4), gutta-percha in the apical canal (13.6, unlabeled), calcium silicate cement dropped into the defect and the perforation (13.9), flush with the root surface | `PULP OUT` → `BLOOD SUPPLY CUT` → `RESORPTION STOPS` · `CBCT: PERFORATED?` `CALCIUM SILICATE CEMENT (e.g. MTA)` |
-| 16.0–21.35 | Recognition card (all three signs on screen 18.1–21.35, fully settled 18.55) | Film card slides over the tooth in register (16.15); header 16.35; sign tabs at 16.7 / 17.4 / 18.1, each with its call-out on the film: 1 = two equal coral arrows, 2 = coral tracing of the canal walls that ends in a stop mark at the lesion margin, 3 = chip with a paper double arrow on the film's top edge. Only after tab 3 has landed: the film image slides 54 px (18.7–19.4, back 20.2–20.8), a dashed ghost of the old root outline stays, the oval stays on the canal | `Internal resorption` · `classic X-ray signs` · `1 Symmetric, well-defined ballooning` · `2 Canal outline lost in the lesion` · `3 Cone shift: stays on canal` |
-| 21.3–22.0 | Loop | Tabs slide out left, film card slides out right as a rigid card (21.35–21.7), fine print flips back (21.38), camera returns to the hook framing (21.3–21.7); then a 0.3 s cross-fade (21.7–22.0) that only brings the pulp and the title back over a coinciding tooth outline | — |
+| 10.8–16.3 | Treatment | Zoom out; pulp layer lifted and pulled out by its tab (11.3–12.5); threads snap back (12.3–12.7); cells curl and drop (12.5–13.3); defect stays the same size. Inset card (13.1, after the cells have gone), zoomed on the perforated wall: coral ring marks the perforation and pulses once (13.4), gutta-percha in the apical canal (13.6, unlabeled), calcium silicate cement dropped into the defect and the perforation (13.9), flush with the root surface | `PULP OUT` → `BLOOD SUPPLY CUT` → `RESORPTION STOPS` · `CBCT: PERFORATED?` `CALCIUM SILICATE CEMENT (e.g. MTA)` |
+| 16.4–21.75 | Recognition card (all three signs on screen 18.5–21.75, fully settled 18.95) | Film card slides over the tooth in register (16.55); header 16.75; sign tabs at 17.1 / 17.8 / 18.5, each with its call-out on the film: 1 = two equal coral arrows, 2 = coral tracing of the canal walls that ends in a stop mark at the lesion margin, 3 = chip with a paper double arrow on the film's top edge. Only after tab 3 has landed: the film image slides 54 px (19.1–19.8, back 20.6–21.2), a dashed ghost of the old root outline stays, the oval stays on the canal | `Internal resorption` · `classic X-ray signs` · `1 Symmetric, well-defined ballooning` · `2 Canal outline lost in the lesion` · `3 Cone shift: stays on canal` |
+| 21.7–22.4 | Loop | Tabs slide out left, film card slides out right as a rigid card (21.75–22.1), fine print flips back (21.78), camera returns to the hook framing (21.7–22.1); then a 0.3 s cross-fade (22.1–22.4) that only brings the pulp and the title back over a coinciding tooth outline | — |
 
 Must-read words: 59 (hook 8, requirements 10, entry 4, cells 4, treatment 7, perforation inset 7, recognition card 19,
 of which 2 are the topic repeated in the header for the cover). Not counted: corner tag, handle, fine-print label,
 the numerals 1-3. All must-read text is >= 30 px (tabs 36-42 px, sign lines 38 px, header 60 px + 34 px, inset labels
 30 px and header 36 px, title 108 px); tag 27 px, handle 26 px, fine print 24 px.
-Poster = 19.8 s (complete recognition card with the film image shifted and the ghost outline visible); the header
+Poster = 20.2 s (complete recognition card with the film image shifted and the ghost outline visible); the header
 names the topic at 60 px so the grid cover reads "Internal resorption".
 
 Storyboard decision: the radiograph card is merged with the end card (after the treatment beat) instead of appearing
@@ -112,6 +112,17 @@ transient phase); "Root canal treatment removes both"; the rare replacement type
   predentin tab follows the moving wall, tube-head icon replaced by a plan-view cone-shift card, peel strips no
   longer cross, end-card exit moved ahead of the loop cross-fade, reading times of tabs lengthened.
 - v2: independent review (science + design) applied — see "Review changes".
+- v3 (Final QA): fresh-eyes pass over 24 + 25 stills with the safe-area overlay (t = 0, every scene, every transition,
+  the loop frames) and the rendered mp4. No clipped, overlapping or sub-30 px must-read text, nothing must-read in
+  the no-go zones (film mount ends x 958; fine print ends y 1573), no missing glyphs, no ghosted text at the loop.
+  Citations re-pulled from PubMed (PMIDs 35229320, 35605161, 24944822, 24348560, 19627378, 32161869, 20630282):
+  authors, journal, year, volume and pages match the on-screen lines and meta.json.
+  One defect fixed: the perforation inset (7 must-read words, `Kit.readSecs` = 2.9 s) was fully on screen for only
+  about 2.5 s (13.5–16.02). The treatment beat now holds 0.4 s longer (`treatOut` 15.9 -> 16.3) and everything after
+  it is shifted by the same 0.4 s, unchanged otherwise: recognition card 16.4–21.75, sign tabs 17.1 / 17.8 / 18.5,
+  cone shift 19.1–19.8 (back 20.6–21.2), loop 21.7–22.4, fine-print flips 16.7 and 21.78, poster 20.2 s (same frame
+  as before). Duration 22.0 -> 22.4 s. The times quoted in "Review changes (v2)" below are the pre-shift values.
+  Video re-rendered once; meta.json duration updated.
 
 ## Review changes (v2)
 Science

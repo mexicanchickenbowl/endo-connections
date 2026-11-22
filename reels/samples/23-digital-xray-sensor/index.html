@@ -33,12 +33,13 @@ window.REEL = {
   duration: T.dur,
   poster: T.poster,
   canvas: out,
-  fonts: ['700 112px "Space Grotesk"', '600 38px "Space Grotesk"', '500 26px "Space Grotesk"', '400 30px Inter', '500 30px Inter', '600 30px Inter'],
+  fonts: ['700 112px "Space Grotesk"', '700 36px "Space Grotesk"', '600 38px "Space Grotesk"', '400 26px Inter', '500 34px Inter', '500 34px "IBM Plex Sans"'],
   setup() { S = buildScene(glc); window.__S = S; },
   render(t) {
     t = Kit.clamp(t, 0, T.dur - 1e-4);
     let skip3d = false; calls++;
     if (warming && calls > 1) { if (Math.abs(t - warmK * 0.25) < 1e-6) { skip3d = true; warmK++; } else warming = false; }
+    if (window.__SKIP3D) skip3d = true;                       // debug switch (text-only passes)
     const A = S.update(t, skip3d);
     drawBackground(ctx);
     ctx.drawImage(glc, 0, 0);
