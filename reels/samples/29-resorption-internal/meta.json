@@ -24,7 +24,7 @@
     },
     {
       "claim": "Odontoclasts resorb the dentin; the canal balloons into a symmetric oval continuous with the canal (schematic: cell number, size, route, mid-root site)",
-      "source": "Patel et al. 2022 (PMID 35229320) - review full text; Patel et al. 2010 (PMID 20630282) - abstract"
+      "source": "Patel et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text (odontoclasts; \"symmetrical oval- or circular-shaped extension of the root canal\"); Patel et al. J Endod 2010;36:1107-21 (PMID 20630282) - abstract (clastic destruction of dentin only, not the shape)"
     },
     {
       "claim": "Pulp out -> blood supply cut -> resorption stops (defect stays; schematic of root canal treatment; expert consensus, no trial)",
@@ -32,11 +32,11 @@
     },
     {
       "claim": "CBCT: perforated? Calcium silicate cement (e.g. MTA) in the defect and the perforation (case-report level; the picture also shows an unlabeled gutta-percha fill apical to it)",
-      "source": "Patel et al. 2022 (PMID 35229320) - review full text; Patel S et al. Int Endod J 2009;42:831-8 (PMID 19627378) - abstract"
+      "source": "Patel et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text (CBCT shows extent and any perforation; calcium silicate cement repair; hybrid fill); a perforation may be undetectable on conventional radiographs (CBCT case report): Bhuva B, Barnes JJ, Patel S. Int Endod J 2011;44:777-86 (PMID 21371054) - abstract; CBCT vs periapical accuracy for internal resorption (5 teeth, perforation not assessed): Patel S et al. Int Endod J 2009;42:831-8 (PMID 19627378) - abstract"
     },
     {
       "claim": "Classic X-ray sign 1: symmetric, well-defined ballooning",
-      "source": "Patel et al. 2022 (PMID 35229320), after Gartner et al. 1976 (not read); Thomas P et al. ISRN Dent 2014;2014:759326 (PMID 24944822) - review full texts"
+      "source": "Patel et al. 2022 (PMID 35229320), after Gartner AH et al. J Endod 1976;2:329-34 (PMID 1069086; no abstract, not read); Thomas P et al. ISRN Dent 2014;2014:759326 (PMID 24944822) - review full texts"
     },
     {
       "claim": "Classic X-ray sign 2: canal outline lost in the lesion",
