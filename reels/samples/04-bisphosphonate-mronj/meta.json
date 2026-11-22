@@ -1,0 +1,51 @@
+{
+  "id": "04",
+  "slug": "04-bisphosphonate-mronj",
+  "title": "Bisphosphonates & MRONJ: extract or endo?",
+  "style": "Swiss Bauhaus poster",
+  "topic": "How bisphosphonates bind bone and disable osteoclasts, why extraction sockets risk MRONJ, and why non-surgical RCT is preferred.",
+  "duration": 30.0,
+  "claims": [
+    {
+      "claim": "P–C–P bisphosphonates hook onto bone mineral (phosphonates grip Ca²⁺ on hydroxyapatite), most where bone remodels",
+      "source": "Russell et al., Osteoporos Int 2008;19:733–59 (PMID 18214569); Drake et al., Mayo Clin Proc 2008;83:1032–45 (PMID 18775204)"
+    },
+    {
+      "claim": "N side chain → potent nitrogen-containing BP (N-BP)",
+      "source": "Rogers et al., Bone 2011;49:34–41 (PMID 21111853)"
+    },
+    {
+      "claim": "Osteoclast resorbs and swallows the released drug; N-BPs block FPP synthase in the mevalonate pathway",
+      "source": "Rogers et al., Bone 2011;49:34–41 (PMID 21111853); Russell et al., Osteoporos Int 2008;19:733–59 (PMID 18214569)"
+    },
+    {
+      "claim": "Collapse → loss of function, then apoptosis",
+      "source": "Rogers et al., Bone 2011;49:34–41 (PMID 21111853); Halasy-Nagy et al., Bone 2001;29:553–9 (PMID 11728926)"
+    },
+    {
+      "claim": "Turnover slows: remodelling suppressed ~60–90%, not stopped (bar is a toy model)",
+      "source": "Toy model / schematic bar; range from Recker et al., J Bone Miner Res 2008;23:6–16 (PMID 17892374) and Chavassieux et al., J Clin Invest 1997;100:1475–80 (PMID 9294113)"
+    },
+    {
+      "claim": "10+ years retained in bone (estimated half-life, alendronate; retention ≠ lasting effect)",
+      "source": "Khan et al., J Bone Miner Res 1997;12:1700–7 (PMID 9333131)"
+    },
+    {
+      "claim": "MRONJ after extraction: 1.6–14.8% in cancer patients on BPs (most estimates 1–5%)",
+      "source": "Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956)"
+    },
+    {
+      "claim": "MRONJ after extraction: 0–0.15% in osteoporosis patients on BPs",
+      "source": "Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956)"
+    },
+    {
+      "claim": "Non-surgical RCT: no socket, treats the infection; MRONJ risk unknown, likely low, rare case reports",
+      "source": "Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956); Sarathy et al., J Endod 2005;31:759–63 (PMID 16186759); Moinzadeh et al., Int Endod J 2013;46:391–8 (PMID 23137312)"
+    },
+    {
+      "claim": "Restorable tooth → ENDO: cancer-dose IV BP or denosumab, strongly prefer non-surgical RCT; osteoporosis on BPs, risk very low; avoid apical surgery and over-instrumentation, careful clamp",
+      "source": "AAE Position Statement, Endodontic Implications of Bisphosphonate-Associated Osteonecrosis of the Jaws, 2010 (not in PubMed); Ruggiero et al., J Oral Maxillofac Surg 2022;80:920–43 (PMID 35300956); Moinzadeh et al., Int Endod J 2013;46:391–8 (PMID 23137312)"
+    }
+  ],
+  "caption": "Patient on a bisphosphonate: extract or endo?\n\nBPs bind bone mineral, get swallowed by resorbing osteoclasts and switch them off. Remodelling slows (not stops) and the drug stays in bone for years.\nAAOMS 2022, MRONJ after extraction: 1.6–14.8% in cancer pts on BPs vs 0–0.15% in osteoporosis pts.\nRestorable tooth + cancer-dose IV BP or denosumab: strongly prefer non-surgical RCT and minimise bone trauma. Never pause the drug without the prescriber.\n\nRefs: Ruggiero 2022, J Oral Maxillofac Surg; Rogers 2011, Bone; AAE Position Statement 2010.\nAnimation is schematic; the rate bar is a toy model.\n\n#endodontics #endo #dentistry #MRONJ #bisphosphonates #rootcanal #dentalresident"
+}

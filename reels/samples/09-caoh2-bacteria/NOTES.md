@@ -109,6 +109,14 @@ All sources were verified on PubMed (abstract and metadata).
 - v1–v3: first builds. Retimed captions, ROI 0 added, takeaway moved to the bottom, deep pH made conservative.
 - v4: grain and drift changes for bitrate (104 MB → 21.9 MB).
 - v5: review changes (below).
+- **Final QA (v5.1).** Two glitches in ROI 0 (3.35–6.4 s) were fixed; no other changes to timing, wording or science.
+  - The guard meant to keep released ions out of the inset header did not work for near-vertical angles (`atan2(-0.45, cos a)` with cos a ≈ 0 stays near −90°). From about 5.4 s, one OH⁻ ion sat on top of "schematic" in the "ROI 0 · paste · schematic" header. The clamp now really limits sin a to −0.45.
+  - The Ca²⁺ / OH⁻ labels followed "the outermost released ion", so they jumped between ions. At 5.07 s, OH⁻ jumped about 150 px from top-right to bottom-right, and at 5.58 s Ca²⁺ popped in at full opacity. Each label is now tied to one fixed anchor ion (the leftmost-ending Ca²⁺ and the rightmost-ending lower OH⁻) and fades in over 0.3 s. OH⁻ appears at about 4.9 s and Ca²⁺ at about 5.4 s, in the same places where they used to settle.
+  - Checked and left as is:
+    - Survivor-bracket membership is stable frame to frame. The only change is the intended ROI 2 hand-off at 21.07 s.
+    - Every on-screen number matches the PubMed abstracts (Evans 2002, McHugh 2004, Nerwich 1993, Haapasalo 2000, Haapasalo & Ørstavik 1987, Mohammadi & Dummer 2011, Siqueira & Lopes 1999, Parmar 2011).
+    - The poster (26.9 s) reads inside the 3:4 crop.
+  - Gallery metadata is in `meta.json`.
 
 ## Review changes (v5, after independent science + design review)
 **Science**

@@ -1,0 +1,47 @@
+{
+  "id": "11",
+  "slug": "11-heat-plugger-gp",
+  "title": "Heat plugger: how far does GP soften?",
+  "style": "Simulated thermal camera",
+  "topic": "GP hits flow temp (≥60 °C) only ~1 mm past a hot plugger tip; apical GP and root surface barely warm. Downpack ~3–5 mm short of WL.",
+  "duration": 24.0,
+  "claims": [
+    {
+      "claim": "Dial 200 °C, model tip 150 °C: real heat-carrier tips run below the dial",
+      "source": "Atmeh AR et al., Int Endod J 2020;53:698-708 (PMID 31955442)"
+    },
+    {
+      "claim": "GP reaches flow temp (≥60 °C) only ~1 mm past the plugger tip (model: 0.8 mm)",
+      "source": "Yu Y et al., J Dent Sci 2023;18:9-16 (PMID 36643252); Briseño Marroquín B et al., J Endod 2015;41:79-82 (PMID 25134732)"
+    },
+    {
+      "claim": "Model heat held 1.8 s at depth (simplified; no separation burst)",
+      "source": "Toy model / schematic: axisymmetric heat-diffusion model tuned at 3 ex vivo anchor points (see NOTES.md)"
+    },
+    {
+      "claim": "2 mm past the tip (plugger at WL−4 mm): only ~4 °C warmer",
+      "source": "Villegas JC et al., Int Endod J 2005;38:218-22 (PMID 15810971)"
+    },
+    {
+      "claim": "Root surface usually under +10 °C at a 200 °C dial (ex vivo)",
+      "source": "Sweatman TL et al., J Endod 2001;27:512-5 (PMID 11501588); Lee FS et al., J Endod 1998;24:617-20 (PMID 9922753)"
+    },
+    {
+      "claim": "Over +10 °C reported in thin roots and in a thermocouple/IR premolar study",
+      "source": "Lipski M, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2005;99:505-10 (PMID 15772602); Mc Cullagh JJ et al., Int Endod J 2000;33:326-32 (PMID 11307207)"
+    },
+    {
+      "claim": "+10 °C limit (47 °C): 47 °C for 1 min impairs bone formation (rabbit)",
+      "source": "Eriksson RA, Albrektsson T, J Oral Maxillofac Surg 1984;42:705-11 (PMID 6593442); Eriksson AR, Albrektsson T, J Prosthet Dent 1983;50:101-7 (PMID 6576145)"
+    },
+    {
+      "claim": "Below the tip: softened ~1 mm, warm 41–55 °C at 1–2 mm (model), compacted near body temp beyond 2 mm",
+      "source": "Toy model / schematic peaks, anchored to Yu 2023 (PMID 36643252) and Villegas 2005 (PMID 15810971)"
+    },
+    {
+      "claim": "Downpack to ~3–5 mm short of WL (ex vivo adaptation data)",
+      "source": "Smith RS et al., J Endod 2000;26:668-72 (PMID 11469298); Guess GM et al., J Endod 2003;29:509-12 (PMID 12929697); Zhang C et al., Int Endod J 2011;44:1041-6 (PMID 21906086)"
+    }
+  ],
+  "caption": "How far past the plugger tip does gutta-percha actually soften?\n\nSimulated IR view of a continuous-wave downpack (plugger at WL−4 mm):\n• GP reaches flow temp (≥60 °C) only ~1 mm past the tip.\n• 2 mm past the tip: only ~4 °C warmer (ex vivo canal-wall data).\n• Root surface usually stays under +10 °C at a 200 °C dial ex vivo, but thin roots can exceed it.\n• Ex vivo adaptation data favour a downpack ~3–5 mm short of WL.\n\nRefs: Yu 2023 J Dent Sci; Briseño Marroquín 2015 J Endod; Villegas 2005 Int Endod J; Sweatman 2001 J Endod\nSchematic toy heat model, not real thermal footage.\n\n#endodontics #endo #dentistry #rootcanal #obturation #guttapercha #warmvertical #dentalstudent"
+}

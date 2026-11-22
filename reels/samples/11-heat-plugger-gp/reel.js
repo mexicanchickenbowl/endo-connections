@@ -461,7 +461,7 @@
     ctx.save(); ctx.globalAlpha = a;
     ctx.fillStyle = 'rgba(8,3,19,0.80)'; rr(x, y, w, 134, 8); ctx.fill();
     ctx.strokeStyle = color; ctx.globalAlpha = a * 0.6; ctx.lineWidth = 1.5; ctx.stroke(); ctx.globalAlpha = a;
-    txt(label, x + 14, y + 32, 28, COL.dim, 'left', 0);
+    txt(label, x + 14, y + 33, 30, COL.dim, 'left', 0);
     txt(big, x + 14, y + 80, 42, color);
     txt(small, x + 14, y + 118, 30, COL.white);
     ctx.restore();
@@ -620,7 +620,7 @@
     txt('Heat stays local.', 100, y + 128, 66, COL.white);
     rich([['Downpack to ~', COL.white], ['3–5 mm', COL.cyan], [' short of WL.', COL.white]], 100, y + 196, 50);
     txt('Ex vivo adaptation: Smith 2000 · Guess 2003 J Endod · Zhang 2011 IEJ', 100, y + 242, 23, COL.fine);
-    txt('Apical GP: +4 ± 1 °C at 2 mm past the tip (Villegas 2005)', 100, y + 272, 23, COL.faint);
+    txt('Apical canal wall: +4 ± 1 °C at 2 mm past the tip (Villegas 2005)', 100, y + 272, 23, COL.faint);
     ctx.restore();
   }
   function takeawayMarks(v, a, wTip) {
@@ -647,9 +647,9 @@
     brk(y2 + 4, yW, 'rgba(255,255,255,0.8)');
     ftxt('softened', tx, (yT + y1) / 2 - 2, 30, COL.cyan, 'right');
     ftxt('~1 mm', tx, (yT + y1) / 2 + 28, 30, COL.cyan, 'right');
-    ftxt('warm', tx, (y1 + y2) / 2 - 14, 28, COL.amber, 'right');
-    ftxt(`${Math.round(AX2)}–${Math.round(AX1)} °C`, tx, (y1 + y2) / 2 + 14, 28, COL.amber, 'right');
-    ftxt('(model)', tx, (y1 + y2) / 2 + 42, 26, COL.amber, 'right');
+    ftxt('warm', tx, (y1 + y2) / 2 - 16, 30, COL.amber, 'right');
+    ftxt(`${Math.round(AX2)}–${Math.round(AX1)} °C`, tx, (y1 + y2) / 2 + 14, 30, COL.amber, 'right');
+    ftxt('(model)', tx, (y1 + y2) / 2 + 43, 26, COL.amber, 'right');
     const ym = (y2 + yW) / 2;
     ftxt('compacted', tx, ym - 16, 30, COL.white, 'right');
     ftxt('near body', tx, ym + 18, 30, COL.white, 'right');
@@ -695,7 +695,7 @@
     leader(x + 8, yT - 40, sx(v, -0.3), yT + 4, 'rgba(255,255,255,0.7)', false);
     ftxt(on ? '● HEAT ON' : 'HEAT OFF', x, yT - 150, 34, on ? COL.red : COL.dim, 'right');
     ftxt('dial 200 °C', x, yT - 112, 30, COL.white, 'right');
-    ftxt('model tip 150 °C', x, yT - 78, 28, COL.dim, 'right');
+    ftxt('model tip 150 °C', x, yT - 77, 30, COL.dim, 'right');
     ftxt('tip to WL', x, yT - 30, 30, COL.dim, 'right');
     ftxt(`${Math.max(P.wEnd, wTip).toFixed(1)} mm`, x, yT + 14, 40, COL.hot, 'right');
     ctx.restore();
@@ -747,7 +747,7 @@
       const val = liveVal(SP2, t, 2);
       ctx.save(); ctx.globalAlpha = s2a; ctx.strokeStyle = 'rgba(255,143,143,0.8)'; ctx.lineWidth = 2;
       ctx.beginPath(); ctx.moveTo(X - 10, Y + 28); ctx.lineTo(160, Y + 84); ctx.stroke(); ctx.restore();
-      readoutBox(64, Y + 84, 344, 'Sp2 · SURFACE (model)', `+${(val - 37).toFixed(1)} °C`, `${val.toFixed(1)} °C`, s2a, COL.pink);
+      readoutBox(64, Y + 84, 362, 'Sp2 · SURFACE (model)', `+${(val - 37).toFixed(1)} °C`, `${val.toFixed(1)} °C`, s2a, COL.pink);
     }
     takeawayMarks(v, seg(t, TL.s5[0] + 0.3, TL.s5[0] + 1.0, ease.out) * (1 - seg(t, TL.offA, TL.offA + 0.3)), wTip);
 

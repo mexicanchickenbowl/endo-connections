@@ -146,7 +146,7 @@ All 17 must/should issues were applied, plus every nit. New timeline: **DUR 29.5
 2. **HSP90 is now an escort, not a "lets go" event** (should).
    - Step ② reads **"Binds and activates GR / glucocorticoid receptor + HSP90 chaperone"**.
    - The HSP90 protomers stay on GR through binding and travel with it to the nuclear pore. They are released at the pore mouth and drift back into the cytoplasm.
-   - Fine print 5.5–11.2 s: "Newer model: HSP90 escorts GR to the nuclear pore (Echeverría 2009)".
+   - Fine print 5.5–12.3 s (extended in Final QA): "Newer model: HSP90 escorts GR to the nuclear pore (Echeverría 2009)".
    - Sources:
      - Echeverría PC et al. Mol Cell Biol 2009;29:4788-97, PMID 19581287, doi:10.1128/MCB.00649-09. The hsp90 heterocomplex interacts with Nup62/importin β, and hsp90-cross-linked GR still translocates, "suggesting that GR could pass through the pore in its untransformed state".
      - Vandevyver S et al. Traffic 2012;13:364-74, PMID 21951602, doi:10.1111/j.1600-0854.2011.01288.x. "Originally, it was believed that nuclear import of GR is initiated by dissociation of the chaperone complex in the cytoplasm. However, several studies show that the chaperone machinery is required".
@@ -247,3 +247,12 @@ All 17 must/should issues were applied, plus every nit. New timeline: **DUR 29.5
 | Takeaway | 5.9 s | 3.53 s |
 | Endodontic line | 4.6 s | 4.44 s |
 
+
+## Final QA (fresh-eyes review)
+- **Checked:** 21 `--safe` stills (t = 0, 0.5, 1 … 28.5, 29.45) plus transition frames (5.4, 11.0, 12.2, 12.5, 15.8, 18.8, 19.3, 22.6, 22.75, 29.2). No clipped or overlapping must-read text, no tofu/NaN, nothing readable in the red zones. The hook title reads from frame 0, the payoff panel holds 24.8–29.0 s, and the blot wipe lands exactly on the t = 0 frame. The poster (t = 18.5 s, enlarged nucleus with every switch set) reads inside the 3:4 crop.
+- **Science re-check:** each on-screen claim matches the sources above. The Alajlan 2024 abstract (PMID 38490301) and the Zanjir 2020 abstract (PMID 32668310) were re-read on PubMed: 29 trials, 2303 participants, less pain at 6/12/24 h, moderate certainty; postoperative corticosteroids did not significantly reduce pain vs placebo. No wording change needed.
+- **Defect fixed (fine-print line at y = 1560):** each switch between the default line and a per-step caveat was a 0.3 s cross-dissolve, so two strings were superimposed (seen at 11.0 and 12.5 s). In the gaps between adjacent caveats (≈15.8, 19.3 and 22.6 s) the default "Schematic · not to scale…" line also flashed back for a moment.
+  - The swaps are now sequential: the default fades out before a caveat fades in, and back in after it.
+  - The default line ends at 18.9 s. From then on a caveat, or the panel's own "(simplified)" caption and the sources line, covers it.
+  - The HSP90 caveat now runs to 12.3 s, matching the end of caption ③, so the default no longer flashes in the 11.2–12.4 s gap.
+- Video re-rendered once after the fix and checked with ffprobe.

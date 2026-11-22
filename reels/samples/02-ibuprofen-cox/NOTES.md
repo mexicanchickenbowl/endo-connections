@@ -95,6 +95,7 @@ Persistent: `@natebrooksendo` (bottom left, 26 px, from frame 0) and "schematic 
 - v1: initial build (flat pastel assembly line, tooth hook, meter, takeaway card).
 - v2: QA fixes above; final render.
 - v3: independent science + design review applied (see "Review changes" above); stills re-checked with `--safe`; video re-rendered.
+- Final QA: 16 `--safe` stills + targeted transition stills (0, 1.2, 1.7, 2.2, 2.5, 5.0, 5.4, 11.1, 12.4, 12.9, 13.45, 16.95, 21.8, 21.95 s, plus mid-beat checks). No clipped/overlapping text, nothing must-read in the no-go zones, hook full at frame 0, card held 3.8 s, last frame matches frame 0 (PSNR 45 dB). All on-screen claims checked against the sources above (PMIDs re-verified on PubMed). One defect fixed: the card's `†` (U+2020) is also in Nunito's latin-ext subset, which Kit's font preload never loads, so the first render that drew it used a fallback glyph (an isolated still at 18.5 s differed from the video frame; render output depended on render history). `setup()` now preloads the 700/800 faces for `†` before measuring the rationale line. Video re-rendered: 22.000 s, 660 frames; poster unchanged (t = 1.2 s hook). Added `meta.json` for the gallery.
 
 ## Review changes (v3, after independent science + design review)
 Science

@@ -602,10 +602,10 @@
     if (!st.heat) chev(50.5, Vm(50.5), -1, -0.006, COL.amor, sm((50 - st.T) / 2));
 
     // direct labels on the curves
-    const labA = (s, T, V, c, a, sz = 36) => txt(s, X(T), Y(V) - 26, font(700, sz), c, 'center', a);
+    const labA = (s, T, V, c, a, sz = 36, dy = 26, ko = false) => (ko ? txtBg : txt)(s, X(T), Y(V) - dy, font(700, sz), c, 'center', a);
     labA('β', 27.5, Vb(27.5), COL.beta, seg(t, 0.25, 0.6));
-    labA('α', 51, Va(51), COL.alpha, st.heat ? sm((st.T - 48.5) / 1.5) : 1);
-    labA('amorphous', 65.2, Vm(65.2), COL.amorText, st.heat ? sm((st.T - 60) / 2) : 1, 32);
+    // final QA: 'amorphous' sits left of / above the 70 °C peak so the dot never covers it
+    labA('amorphous', 62, Vm(62), COL.amorText, st.heat ? sm((st.T - 60) / 2) : 1, 32, 34);
 
     // shrinkage bracket: its lower end tracks the dot as it cools
     const shA = seg(t, 12.6, 13.2, ease.out);
@@ -622,6 +622,8 @@
       txtBg('on cooling', xb - 16, ym + 16, font(400, 30), COL.ink2, 'right', shA);
       txtBg('exaggerated', xb - 16, ym + 50, fontI(400, 30), COL.ink3, 'right', shA);
     }
+    // α label drawn after the bracket guide, on a white knock-out, so the moving dashed guide passes behind it
+    labA('α', 51, Va(51), COL.alpha, st.heat ? sm((st.T - 48.5) / 1.5) : 1, 36, 26, true);
     // dotted tail: shrinkage continues for minutes–hours after it reaches body temperature (Lee et al. 1997)
     const tailA = seg(t, 14.7, 15.2);
     if (tailA > 0 && !st.heat) {

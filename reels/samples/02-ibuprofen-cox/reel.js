@@ -1032,7 +1032,10 @@
     poster: 1.2,
     canvas,
     fonts: ['900 78px Nunito', '800 32px Nunito', '700 44px Nunito', '600 24px Nunito'],
-    setup() {
+    async setup() {
+      // '†' (U+2020) is also covered by Nunito's latin-ext subset, which Kit's preload text doesn't touch: load it up front
+      // so the first frame that draws it (and the width measurement below) never uses a fallback glyph
+      await Promise.all(['800 40px Nunito', '700 26px Nunito'].map((f) => document.fonts.load(f, '†').catch(() => {})));
       buildBg();
       // fit the rationale line inside the card
       ctx = mainCtx; while (CARD_RAT_SIZE > 34 && richWidth('-> one rationale for dosing *before treatment*†', CARD_RAT_SIZE, 800) > 800) CARD_RAT_SIZE -= 1;

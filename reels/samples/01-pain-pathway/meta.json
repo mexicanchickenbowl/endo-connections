@@ -1,0 +1,51 @@
+{
+  "id": "01",
+  "slug": "01-pain-pathway",
+  "title": "Pain pathway: tooth → brain",
+  "style": "Neon neuro",
+  "topic": "Why cold can give a sharp first pain and a dull second pain: Aδ vs C pulpal fibers, their relay to cortex, and convergence.",
+  "duration": 29.6,
+  "claims": [
+    {
+      "claim": "Two pulpal fibers, two speeds: Aδ myelinated (~5–30 m/s), C unmyelinated (~0.5–2 m/s)",
+      "source": "Jyväsjärvi & Kniffki, J Physiol 1987;391:193-207 (PMID 3443945); Nair, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 1995;80:710-9 (PMID 8680980)"
+    },
+    {
+      "claim": "C fibers fire only if the stimulus reaches the pulp proper",
+      "source": "Närhi et al., Proc Finn Dent Soc 1992;88 Suppl 1:507-16 (PMID 1508908); Närhi et al., Arch Oral Biol 1994;39 Suppl:23S-30S (PMID 7702462)"
+    },
+    {
+      "claim": "10 ms vs 150 ms to brainstem, SLOW-MO ×440 / ~×15",
+      "source": "Toy model / schematic: 15 cm first-order path ÷ 15 and 1 m/s (representative speeds from Jyväsjärvi & Kniffki, J Physiol 1987;391:193-207 (PMID 3443945)); labelled 'toy model' on screen"
+    },
+    {
+      "claim": "Trigeminal ganglion: cell bodies, no synapse; synapse 1 in subnucleus caudalis (main pain relay), then crosses the midline",
+      "source": "Byers & Närhi, Crit Rev Oral Biol Med 1999;10:4-39 (PMID 10759425); Sessle, Crit Rev Oral Biol Med 2000;11:57-91 (PMID 10682901); Sessle et al., Pain 1986;27:219-35 (PMID 3797017)"
+    },
+    {
+      "claim": "Synapse 2 in VPM thalamus → S1 face area; 1st pain is sharp, brief, well-localized",
+      "source": "Nair, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 1995;80:710-9 (PMID 8680980); Ploner et al., PNAS 2002;99:12444-8 (PMID 12209003)"
+    },
+    {
+      "claim": "In real teeth the dull pain lags by seconds, mostly the time for cold to reach the pulp",
+      "source": "Jyväsjärvi & Kniffki, J Physiol 1987;391:193-207 (PMID 3443945); Mengel et al., Pain 1993;55:159-69 (PMID 8309707)"
+    },
+    {
+      "claim": "2nd pain is dull, aching, poorly localized; linked to S2 + cingulate",
+      "source": "Nair, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 1995;80:710-9 (PMID 8680980); Ploner et al., PNAS 2002;99:12444-8 (PMID 12209003)"
+    },
+    {
+      "claim": "Partly diffuse because many inputs (teeth, skin, jaw muscle) converge on one caudalis neuron (animal data)",
+      "source": "Sessle et al., Pain 1986;27:219-35 (PMID 3797017)"
+    },
+    {
+      "claim": "Aδ: dentin stimuli (cold, air, probe); C: likely the ache of pulpitis; inflammation also sensitizes A fibers",
+      "source": "Närhi et al., Arch Oral Biol 1994;39 Suppl:23S-30S (PMID 7702462); Närhi et al., Proc Finn Dent Soc 1992;88 Suppl 1:507-16 (PMID 1508908)"
+    },
+    {
+      "claim": "Convergence in caudalis helps explain referred pain",
+      "source": "Sessle et al., Pain 1986;27:219-35 (PMID 3797017); Basbaum et al., Cell 2009;139:267-84 (PMID 19837031)"
+    }
+  ],
+  "caption": "Sharp or dull? Two pulpal fibers, two speeds.\n\nAδ (myelinated, fast): brief, sharp, better-localized pain from dentin stimuli (cold, air, probe).\nC (unmyelinated, slow): fire only once the stimulus reaches the pulp; likely the dull, diffuse ache of pulpitis. In real teeth the lag is seconds, mostly heat reaching the pulp.\nInflammation sensitizes A fibers too: pain quality is a clue, not a diagnosis.\nConvergence in caudalis helps explain referred pain (animal data).\n\nRefs: Nair 1995, OOOOE · Jyväsjärvi 1987, J Physiol · Mengel 1993, Pain · Sessle 1986, Pain\nSchematic animation; speeds are a toy model.\n\n#endodontics #endo #dentistry #dentalpain #pulpitis #endoresident"
+}

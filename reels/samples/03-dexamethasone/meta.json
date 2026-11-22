@@ -1,0 +1,51 @@
+{
+  "id": "03",
+  "slug": "03-dexamethasone",
+  "title": "How dexamethasone turns down inflammation",
+  "style": "Antique atlas plate",
+  "topic": "How dexamethasone binds GR, turns anti-inflammatory genes up and inflammatory genes down, acting upstream of NSAIDs.",
+  "duration": 29.5,
+  "claims": [
+    {
+      "claim": "Lipophilic dexamethasone slips through the cell membrane to reach cytosolic GR",
+      "source": "Cain & Cidlowski, Nat Rev Immunol 2017;17:233-47 (PMID 28192415)"
+    },
+    {
+      "claim": "Dex binds and activates GR; HSP90 chaperone escorts GR to the nuclear pore (newer model)",
+      "source": "Pratt & Toft, Endocr Rev 1997;18:306-60 (PMID 9183567); Echeverría et al., Mol Cell Biol 2009;29:4788-97 (PMID 19581287)"
+    },
+    {
+      "claim": "The drug–receptor complex enters the nucleus",
+      "source": "Vandevyver et al., Endocrinology 2013;154:993-1007 (PMID 23384835)"
+    },
+    {
+      "claim": "GR dimer on GREs turns anti-inflammatory genes up (annexin A1, MKP-1)",
+      "source": "Cain & Cidlowski, Nat Rev Immunol 2017;17:233-47 (PMID 28192415); Abraham et al., J Exp Med 2006;203:1883-9 (PMID 16880258)"
+    },
+    {
+      "claim": "Tethering NF-κB/AP-1 (plus MKP-1) turns COX-2, IL-1β, TNF-α and IL-6 down",
+      "source": "Ray & Prefontaine, PNAS 1994;91:752-6 (PMID 8290595); Abraham et al., J Exp Med 2006;203:1883-9 (PMID 16880258)"
+    },
+    {
+      "claim": "Mediator output falls over hours, not minutes (watch sweep illustrative)",
+      "source": "Lösel & Wehling, Nat Rev Mol Cell Biol 2003;4:46-56 (PMID 12511868); timings on screen are schematic"
+    },
+    {
+      "claim": "Steroid blocks cPLA₂ step, partly via annexin A1",
+      "source": "Croxtall et al., Biochem Pharmacol 1996;52:351-6 (PMID 8694860)"
+    },
+    {
+      "claim": "Steroid: less COX-2 made (COX-1 unaffected); NSAID blocks COX-1 & COX-2 enzyme activity",
+      "source": "Masferrer et al., PNAS 1994;91:3228-32 (PMID 8159730); Vane, Nat New Biol 1971;231:232-5 (PMID 5284360)"
+    },
+    {
+      "claim": "In endodontics, oral/injected steroids reduced post-op pain vs control at 6–24 h (29 RCTs, moderate certainty)",
+      "source": "Alajlan et al., J Endod 2024;50:724-34 (PMID 38490301)"
+    },
+    {
+      "claim": "Not a clinical ranking: steroids given only after treatment did not beat placebo for post-op pain",
+      "source": "Zanjir et al., J Endod 2020;46:1387-402 (PMID 32668310)"
+    }
+  ],
+  "caption": "Why does dexamethasone's anti-inflammatory effect build over hours? It works on gene expression.\n\nDex enters the cell, binds the glucocorticoid receptor and enters the nucleus.\nIt turns anti-inflammatory genes up (annexin A1, MKP-1) and NF-κB/AP-1-driven genes down (COX-2, IL-1β, TNF-α, IL-6).\nSo it acts upstream of where NSAIDs block COX (mechanism, not a clinical ranking).\nIn endo RCTs, systemic steroids cut post-op pain at 6–24 h (moderate certainty); post-op-only dosing didn't beat placebo.\n\nRefs: Cain 2017, Nat Rev Immunol · Alajlan 2024, J Endod · Zanjir 2020, J Endod\nSchematic animation; timings illustrative.\n\n#endodontics #endo #dentistry #dexamethasone #corticosteroids #endoresident"
+}

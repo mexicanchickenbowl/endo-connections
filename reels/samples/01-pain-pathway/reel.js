@@ -574,7 +574,7 @@
   ];
   const TAGS = [
     { a: 2.85, b: 5.08, s: 'intense cold stimulus', at: [351, 1176], off: [0, -120], col: WH },
-    { a: 4.7, b: 7.22, s: 'inferior alveolar n. (V3)', at: [523, 1052], off: [-250, -40], col: DIM },
+    { a: 4.7, b: 7.22, s: 'inf. alveolar n. (V3)', at: [523, 1052], off: [-250, -40], col: DIM }, // short enough that the Aδ racer pill (5.8–6.0 s) passes clear of it
     { a: 11.0, b: 13.25, s: 'S1 face area', at: [611, 770], off: [-290, -70], col: CY },
     { a: 18.3, b: 20.55, s: 'S2 + cingulate', at: [540, 816], off: [-250, -60], col: MG },
     { a: 22.8, b: 24.79, s: 'which tooth?', at: [372, 1160], off: [-40, -190], col: VI },

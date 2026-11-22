@@ -1,0 +1,51 @@
+{
+  "id": "12",
+  "slug": "12-gp-phases",
+  "title": "Why warm GP shrinks: β → α → melt → β",
+  "style": "Clean journal figure",
+  "topic": "How gutta-percha's β→α→amorphous phase changes on heating, and recrystallisation on cooling, make warm GP shrink.",
+  "duration": 22.0,
+  "claims": [
+    {
+      "claim": "As supplied, most GP cones are β phase",
+      "source": "Combe et al., Int Endod J 2001;34:447-51 (PMID 11556511)"
+    },
+    {
+      "claim": "Cones ≈ 8–22 % GP polymer, mostly ZnO filler",
+      "source": "Friedman et al., J Endod 1977;3:304-8 (PMID 268405); Liao et al., Int Endod J 2021;54:2125-32 (PMID 34420210)"
+    },
+    {
+      "claim": "~42–49 °C: β converts to α",
+      "source": "Schilder, Goodman & Aldrich, Oral Surg Oral Med Oral Pathol 1974;38:109-14 (PMID 4525950); ranges vary by brand (Liao et al., Int Endod J 2021;54:2125-32, PMID 34420210)"
+    },
+    {
+      "claim": "~53–59 °C: amorphous melt that flows under pressure (melt peak ≈60 °C by DSC)",
+      "source": "Schilder et al., Oral Surg Oral Med Oral Pathol 1974;38:109-14 (PMID 4525950); Liao et al., Int Endod J 2021;54:2125-32 (PMID 34420210)"
+    },
+    {
+      "claim": "Heating in the canal is local; apical GP stays ≲45 °C",
+      "source": "Goodman et al., Oral Surg Oral Med Oral Pathol 1981;51:544-51 (PMID 6941146); Schilder et al., Oral Surg Oral Med Oral Pathol 1985;59:285-96 (PMID 3856822)"
+    },
+    {
+      "claim": "Cooling rate picks the crystal: very slow (~0.5 °C/h) → α, normal cooling → β; recrystallisation is slow and product-dependent",
+      "source": "Liao et al., Int Endod J 2021;54:2125-32 (PMID 34420210, citing Bunn 1942); Hsu et al., J Dent Sci 2020;15:28-33 (PMID 32256997)"
+    },
+    {
+      "claim": "GP shrinks on cooling as it recrystallises (bracket marked 'exaggerated')",
+      "source": "Schilder et al., Oral Surg Oral Med Oral Pathol 1985;59:285-96 (PMID 3856822); Lottanti et al., J Endod 2014;40:721-4 (PMID 24767571)"
+    },
+    {
+      "claim": "At body temperature it keeps shrinking for minutes–hours",
+      "source": "Lee et al., J Endod 1997;23:579-82 (PMID 9587286)"
+    },
+    {
+      "claim": "Compact while it cools: in warm techniques, held plugger pressure helps compensate for shrinkage",
+      "source": "Hsu et al., J Dent Sci 2020;15:28-33 (PMID 32256997); Lottanti et al., J Endod 2014;40:721-4 (PMID 24767571)"
+    },
+    {
+      "claim": "Volume curve, chain packing and canal view are schematic, not to scale, time compressed",
+      "source": "Toy model / schematic: arbitrary volume units with a broken axis, toy chain drawings, canal gap exaggerated ~10×, 22 → 70 → 37 °C anchors illustrative"
+    }
+  ],
+  "caption": "Why does warm gutta-percha shrink? Follow its phases.\n\nMost cones are β phase as supplied. Heat to ~42–49 °C and β converts to α; at ~53–59 °C it melts (amorphous) and flows under pressure.\nOn cooling it recrystallises (normal cooling gives β; only very slow cooling gives α) and contracts. It can keep shrinking for minutes–hours.\nFor warm techniques: keep plugger pressure on while it cools. Apical GP stays cooler (≲45 °C).\n\nRefs: Schilder 1974/1985, Oral Surg; Lee 1997, J Endod; Lottanti 2014, J Endod; Hsu 2020, J Dent Sci.\nAnimation is schematic and not to scale; ranges vary by brand.\n\n#endodontics #endo #dentistry #guttapercha #obturation #dentalmaterials #rootcanal #dentalstudent"
+}

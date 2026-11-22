@@ -866,14 +866,16 @@ function drawCaptions(t) {
   // fine print
   // per-step caveats replace the default line (fine print, not required reading)
   const notes = [
-    [5.5, 11.2, 'Newer model: HSP90 escorts GR to the nuclear pore (Echeverría 2009)'],
+    [5.5, 12.3, 'Newer model: HSP90 escorts GR to the nuclear pore (Echeverría 2009)'],
     [12.4, 15.75, 'Both arms contribute · one GRE drawn for two genes · schematic'],
     [15.85, 19.2, 'MKP-1, GILZ and mRNA decay also turn these genes down · schematic'],
     [19.4, 22.6, 'Timings illustrative · rapid non-genomic effects also exist (not shown)'],
   ];
-  let other = 0;
-  for (const [a, b, str] of notes) { const na = env(t, a, b, 0.3, 0.3); other = Math.max(other, na); text(str, 64, 1560, { size: 23, italic: true, color: COL.sepia, alpha: na * 0.9 }); }
-  const fa = seg(t, 1.0, 1.5) * (1 - seg(t, 22.6, 22.9)) * (1 - other);
+  // sequential swaps: the default line fades out before a note fades in (and back after it), so two
+  // lines never overlap and the default never flashes in the short gaps between adjacent notes
+  let cover = 0;
+  for (const [a, b, str] of notes) { const na = env(t, a, b, 0.3, 0.3); cover = Math.max(cover, env(t, a - 0.35, b + 0.35, 0.3, 0.3)); text(str, 64, 1560, { size: 23, italic: true, color: COL.sepia, alpha: na * 0.9 }); }
+  const fa = seg(t, 1.0, 1.5) * (1 - seg(t, 18.6, 18.9)) * (1 - cover);
   text('Schematic · not to scale · timings simplified', 64, 1560, { size: 23, italic: true, color: COL.sepia, alpha: fa * 0.9 });
   const sa = seg(t, 24.4, 24.9);
   text('Cain & Cidlowski, Nat Rev Immunol 2017 · Barnes, Br J Pharmacol 2006 · Abraham, J Exp Med 2006', 64, 1560, { size: 22, italic: true, color: COL.sepia, alpha: sa * 0.95 });

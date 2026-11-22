@@ -1,0 +1,51 @@
+{
+  "id": "10",
+  "slug": "10-biofilm-succession",
+  "title": "Root canal takeover: anaerobes win over time",
+  "style": "8-bit pixel game",
+  "topic": "How a sealed, infected canal shifts from facultative to obligate-anaerobe dominance over ~3 years (Fabricius 1982 monkey model).",
+  "duration": 26.0,
+  "claims": [
+    {
+      "claim": "Study model: pulps mechanically devitalized, open to the mouth ~1 week, then sealed; initial samples at day 7 after sealing (16 canals, 2 monkeys) and final samples at day 90, 180 and 1060 (one monkey per time point); 3 monkeys, 24 canals, quantitative culture",
+      "source": "Fabricius L et al., Scand J Dent Res 1982;90:134-144 (PMID 6951255)"
+    },
+    {
+      "claim": "Facultatives lead early",
+      "source": "Sundqvist G, J Endod 1992;18:427-430 (PMID 9796509); Fabricius L et al., Scand J Dent Res 1982;90:134-144 (PMID 6951255; lower facultative proportion in final samples); Möller AJ et al., Scand J Dent Res 1981;89:475-484 (PMID 6951246). Inferred from the shift toward anaerobes over time; no abstract reports the day-7 composition, so the early bar share is illustrative"
+    },
+    {
+      "claim": "O₂ gets used up / runs out, then obligate anaerobes rise (apical flora the most anaerobic)",
+      "source": "Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-S51 (PMID 17546861); Narayanan LL & Vaishnavi C, J Conserv Dent 2010;13:233-239 (PMID 21217951); Sundqvist G, J Endod 1992;18:427-430 (PMID 9796509); Siqueira JF Jr & Rôças IN, J Oral Microbiol 2009;1 (PMID 21523208, doi:10.3402/jom.v1i0.2009). Canal O₂ not measured: O₂ meter is a toy model"
+    },
+    {
+      "claim": "Peptides from broken-down tissue feed the canal flora",
+      "source": "Sundqvist G, Oral Surg Oral Med Oral Pathol 1994;78:522-530 (PMID 7800383)"
+    },
+    {
+      "claim": "Bacteria form biofilm on the canal walls (descriptive tag)",
+      "source": "Siqueira JF Jr & Rôças IN, Int Endod J 2022;55 Suppl 3:512-530 (PMID 34958494); Ricucci D & Siqueira JF Jr, J Endod 2010;36:1277-1288 (PMID 20647081); Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-S51 (PMID 17546861)"
+    },
+    {
+      "claim": "Obligate anaerobes 85-98% of cells in apical samples, day 90-1060 (shown as a range)",
+      "source": "Fabricius L et al., Scand J Dent Res 1982;90:134-144 (PMID 6951255)"
+    },
+    {
+      "claim": "Periapical exudate enters through the foramen as a nutrient source",
+      "source": "Sundqvist G, J Endod 1992;18:427-430 (PMID 9796509; 'nutritional supply'); Sundqvist G & Figdor D, Life as an endodontic pathogen, Endod Topics 2003;6:3-28, doi:10.1111/j.1601-1546.2003.00054.x (not PubMed-indexed; bibliographic record verified via Crossref, full text not checked)"
+    },
+    {
+      "claim": "Over time, obligate anaerobes take over in sealed, untreated canals",
+      "source": "Fabricius L et al., Scand J Dent Res 1982;90:134-144 (PMID 6951255); Sundqvist G, J Endod 1992;18:427-430 (PMID 9796509); Ferreira FB et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2006;102:564-570 (PMID 16997126); Siqueira JF Jr & Rôças IN, Int Endod J 2022;55 Suppl 3:512-530 (PMID 34958494)"
+    },
+    {
+      "claim": "Why: O₂ used up, peptide food, species interactions",
+      "source": "Figdor D & Sundqvist G, Aust Dent J 2007;52(1 Suppl):S38-S51 (PMID 17546861; 'anaerobiosis, nutrition and competition with other species'); Sundqvist G, Oral Surg Oral Med Oral Pathol 1994;78:522-530 (PMID 7800383); Sundqvist G, Oral Microbiol Immunol 1992;7:257-262 (PMID 1494447); Fabricius L et al., Scand J Dent Res 1982;90:200-206 (PMID 7051261)"
+    },
+    {
+      "claim": "Share-of-cells bar before Day 90, sprite counts, O₂ meter and 9:1 unit chart",
+      "source": "Toy model / schematic: labelled on screen 'SHARE OF CELLS · ILLUSTRATIVE', 'NOT TO SCALE · TIME COMPRESSED', 'SCHEMATIC BAR', 'ILLUSTRATIVE 9:1'"
+    }
+  ],
+  "caption": "Who wins as a root canal infection ages?\n\nClassic monkey model: pulps devitalized, left open ~1 week, then sealed. Facultatives lead early; as O₂ is used up, obligate anaerobes take over.\nFinal apical samples (day 90-1060): 85-98% of cultured cells were obligate anaerobes.\nDrivers: low O₂, peptide food, species interactions. Scope: sealed, untreated canals (3 monkeys, 24 canals, culture).\n\nRefs: Fabricius 1982, Scand J Dent Res; Sundqvist 1992, J Endod; Siqueira & Rôças 2022, Int Endod J\nAnimation is schematic: counts, early bar shares and the O₂ meter are illustrative; time compressed.\n\n#endodontics #endo #dentistry #rootcanal #microbiology #biofilm #endoresident"
+}

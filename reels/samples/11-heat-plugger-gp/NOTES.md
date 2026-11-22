@@ -166,3 +166,18 @@ Design:
 - Nits: "tip" label at the right end of the tip line; all in-field labels haloed; "bone" now has a leader; GP display offset 0.7 → 1.8;
   0.37 s power-down scan line (black-to-black loop); clock shows "STBY" until heat-on; poster moved to 6.95 s (HEAT ON);
   S3 kicker "SPOT METER Sp1 · IN GP".
+
+## Final QA (fresh-eyes pass)
+- Stills checked with the safe-area overlay at 0, 0.25, 0.75, 2.25, 2.45, 2.6, 2.75, 2.95, 3.3, 3.75, 4.1, 5.25, 6.75, 7.3, 8.25,
+  9.5, 9.75, 11.25, 12.75, 13.8, 14.25, 15.75, 17.25, 18.75, 19.0, 19.5, 20.25, 21.75, 23.62, 23.8, 23.95 s; no console errors,
+  no tofu/fallback glyph problems (≥, ±, –, −, ñ, í, ● all render), nothing readable in the no-go zones, hook readable at t = 0,
+  takeaway fully visible 19.3–23.6 s, black-to-black loop. All on-screen sources re-checked against PubMed abstracts.
+- **Science fix**: takeaway source line "Apical GP: +4 ± 1 °C at 2 mm past the tip (Villegas 2005)" → "Apical canal wall: …".
+  Villegas 2005 measured with thermocouples in holes in the canal wall of a split-tooth model, not inside the GP (the S3 source
+  line already said so; the takeaway line now matches).
+- **Legibility fixes** (SPEC minimum 30 px for must-read text): spot-meter readout labels ("Sp1 · GP (model)", "Sp2 · SURFACE
+  (model)") 28 → 30 px (Sp2 box widened 344 → 362 px to fit); plunge tag "model tip 150 °C" 28 → 30 px; takeaway bracket
+  "warm" / "41–55 °C" 28 → 30 px (line positions nudged). "(model)" qualifiers, HUD chips and chart ticks stay at 26 px as fine print.
+- Not changed (judged acceptable): the in-field plunge tag crosses the thin crown/root outline for ~1.5 s (haloed, readable);
+  the "heat plugger (room temp)" label is still fading out for ~0.25 s after HEAT ON (model tip ≤ ~47 °C at that moment).
+- Video re-rendered once; poster stays at 6.95 s (HEAT ON, isotherm + 0.8 mm reading + S2 claim, all inside the 3:4 crop).

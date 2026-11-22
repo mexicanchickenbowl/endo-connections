@@ -247,3 +247,20 @@ at 37 °C shrinkage continued for 45 min–10 h; the final volume was still +5.5
 | 12.5–15.6 | 12.72–15.40 **Shrinkage.** It contracts as it cools. | Gradual recrystallisation (ring at 42.75 °C, ~13.7 s); bracket "shrinks / on cooling / exaggerated" tracks the dot; dotted tail "keeps shrinking / for minutes–hours" | (dimmed) | Recrystallisation front rises; dashed "no pressure" ghost with inward arrows |
 | 15.7–21.6 | **Compact while it cools.** + "Warm techniques: held pressure helps compensate." | (dimmed) dot at 37 °C above the β line | (dimmed) fork boxes | *adapted* (from 16.9) |
 | 21.6–22.0 | — | Traces, dot and readout fade | Fork merges into the single β box | Plugger lifts out, cone resets, *solid* |
+
+## Change log: Final QA (fresh-eyes review)
+Stills were rendered across the whole timeline with `--safe` (`_stills/final-qa`, fixes checked in `_stills/final-qa-fix`).
+All on-screen PMIDs were re-checked on PubMed (4525950, 11556511, 34420210, 32256997, 24767571, 9587286, 3856822,
+6941146, 268405).
+- **Fixed: the dot covered the "amorphous" label at the 70 °C peak** (about 7.6–8.8 s; the white dot sat on "…us").
+  The label now sits at T = 62 and is raised to 34 px above the curve. It clears the peak dot by about 12 px and the
+  cooling dot's path, and stays below the "53–59 °C" band label.
+- **Fixed: the dashed shrink-bracket guide line ran through the "α" curve label** (about 13.6–14.4 s, as the dot crossed
+  α's height). The α label is now drawn after the bracket guide, on a white knock-out like the bracket labels. It sits
+  in the gap between the bands, so the knock-out never cuts a band tint.
+- Checked and left alone: hook readable at t = 0 · takeaway fully visible 15.7–21.6 s · the last frame matches frame 0 ·
+  no tofu glyphs (≈, ≲, β, α, °, – all render) · all must-read text inside the safe area (the second fine-print line's
+  descenders end at y ≈ 1579) · captions ≤ x 960 · claims match the sources above.
+- Video re-rendered: `reels/out/12-gp-phases.mp4` is 22.000 s, 660 frames, 1080×1920 at 30 fps. The poster stays at
+  t = 15.3 s (the full hysteresis loop + shrink bracket, the fork, held pressure with the no-pressure ghost; the title
+  is inside the 3:4 crop).

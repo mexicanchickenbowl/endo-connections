@@ -331,7 +331,8 @@
       const cl = Math.min(seg(t, a + 0.3, a + 0.8), 1 - seg(t, a + 2.45, a + 2.75));
       if (cl > 0) {
         ctx.save(); ctx.globalAlpha = 0.45 * cl; ctx.strokeStyle = COL.ink; ctx.lineWidth = 2.5; ctx.setLineDash([7, 9]);
-        ctx.beginPath(); ctx.arc(AX, 872, 205, 0, Math.PI * 2); ctx.stroke();
+        // circle breaks (−50°…−18°) where the "N side chain" tag sits, so the dashes never run through the text
+        ctx.beginPath(); ctx.arc(AX, 872, 205, -0.31, Math.PI * 2 - 0.88); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(300, 872); ctx.lineTo(780, 872); ctx.moveTo(AX, 660); ctx.lineTo(AX, 1084); ctx.stroke();
         ctx.restore();
       }
@@ -353,7 +354,7 @@
     // magnified inset (opens after everything has landed): both phosphonates grip calcium on hydroxyapatite
     const ig = ease.outBack(seg(t, a + 3.65, a + 4.05)) * (1 - ease.in(seg(t, b - 0.4, b - 0.05)));
     if (ig > 0) {
-      const cxI = AX, cyI = 878, rI = 165, sY = cyI + 44, s = 56;
+      const cxI = AX, cyI = 878, rI = 165, sY = cyI + 60, s = 56;   // +60 keeps the N bead inside the ring
       const hx0 = MOLS[0].x, hy0 = restY(S_SM);
       // magnifier cone towards the hero molecule on the surface
       ctx.save(); ctx.globalAlpha *= clamp(ig); ctx.strokeStyle = COL.ink; ctx.lineWidth = 2; ctx.setLineDash([5, 6]);
@@ -768,7 +769,7 @@
     const bandP = ease.outQuint(seg(t, a + 0.55, a + 0.95));
     if (bandP > 0) rect(0, 900, R * bandP, 146, COL.ink);
     mtext('MINIMISE BONE TRAUMA', M, 946, { size: 30, weight: 800, ls: 2, color: COL.ochre, p: P(t, a + 0.65, 0.4) });
-    mtext('No apical surgery, no over-instrumentation,', M, 990, { size: 32, weight: 600, color: c, p: P(t, a + 0.75, 0.45) });
+    mtext('Avoid apical surgery and over-instrumentation;', M, 990, { size: 32, weight: 600, color: c, p: P(t, a + 0.75, 0.45) });
     mtext('careful clamp.', M, 1030, { size: 32, weight: 600, color: c, p: P(t, a + 0.82, 0.45) });
     ctx.restore();
   }

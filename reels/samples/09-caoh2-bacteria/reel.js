@@ -617,9 +617,18 @@
       const edgeOh = p.kind === 'oh' && (Math.abs(p.y) > 60 || Math.abs(p.x) > 125);
       if (!(edgeCa && R() < 0.8) && !(edgeOh && R() < 0.62)) continue;
       let a = Math.atan2(p.y * 0.6, p.x) + (R() - 0.5) * 0.6;
-      if (Math.sin(a) < -0.45) a = Math.atan2(-0.45, Math.cos(a)); // keep released ions clear of the inset header
+      if (Math.sin(a) < -0.45) a = Math.atan2(-0.45, (Math.cos(a) < 0 ? -1 : 1) * Math.sqrt(1 - 0.45 * 0.45)); // keep released ions clear of the inset header
       p.rel = { ts: 3.3 + R() * 2.4, dist: 90 + R() * 60, a };
     }
+    // one fixed anchor ion per label (leftmost-ending Ca2+, rightmost-ending lower OH-) so labels never jump between ions
+    const fx = (p) => p.x + Math.cos(p.rel.a) * p.rel.dist;
+    let aCa = null, aOh = null;
+    for (const p of LAT) if (p.rel) {
+      if (p.kind === 'ca' && (!aCa || fx(p) < fx(aCa))) aCa = p;
+      if (p.kind === 'oh' && p.y > 0 && (!aOh || fx(p) > fx(aOh))) aOh = p;
+    }
+    if (aCa) aCa.lbl = 'ca';
+    if (aOh) aOh.lbl = 'oh';
   }
   function drawInset0(t, te) {
     const A = TL.ins0A, B = TL.ins0B;
@@ -668,7 +677,7 @@
         rel = seg(te, p.rel.ts, p.rel.ts + 1.6, ease.out);
         x += Math.cos(p.rel.a) * p.rel.dist * rel + 3 * noise1(t + p.x, 58) * rel;
         y += Math.sin(p.rel.a) * p.rel.dist * rel * 0.8 + 3 * noise1(t + p.y, 59) * rel;
-        if (rel > 0.6) { if (p.kind === 'ca' && (!lblPos.ca || x < lblPos.ca[0])) lblPos.ca = [x, y]; if (p.kind === 'oh' && (!lblPos.oh || x > lblPos.oh[0])) lblPos.oh = [x, y]; }
+        if (p.lbl) lblPos[p.lbl] = [x, y, seg(te, p.rel.ts + 0.25, p.rel.ts + 0.55)];
       }
       const s = p.kind === 'ca' ? 50 : 38;
       ctx.globalAlpha = o * (p.kind === 'ca' ? 0.8 : 0.75 + 0.25 * rel);
@@ -679,7 +688,7 @@
     ctx.globalAlpha = o;
     rich('ROI 0 · paste · schematic', X0 + 18, Y0 + 36, { size: 22, mono: true, color: PAL.dim });
     rich('Ca(OH)_{2} solid', CX, CY - 78, { size: 30, weight: 600, color: '#fff', align: 'center', outline: 5 });
-    const lbl = (k, txt, col) => { const q = lblPos[k]; if (!q) return; rich(txt, clamp(q[0], X0 + 60, X0 + IW - 60), clamp(q[1] + 46, Y0 + 96, Y0 + IH - 84), { size: 30, weight: 600, mono: true, color: col, align: 'center', outline: 5, alpha: seg(te, 4.3, 4.7) }); };
+    const lbl = (k, txt, col) => { const q = lblPos[k]; if (!q || q[2] <= 0) return; rich(txt, clamp(q[0], X0 + 60, X0 + IW - 60), clamp(q[1] + 46, Y0 + 96, Y0 + IH - 84), { size: 30, weight: 600, mono: true, color: col, align: 'center', outline: 5, alpha: q[2] }); };
     lbl('ca', 'Ca^{2+}', PAL.lil); lbl('oh', 'OH^{−}', PAL.cy);
     // pH readout
     const cp = canalPH(te);
