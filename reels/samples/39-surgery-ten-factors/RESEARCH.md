@@ -7,7 +7,7 @@ root-end filling"**, book pp. 694–699 (the list itself is on pp. 695 and 699).
 
 ## What was read, and how
 
-- File: Google Drive id `1TU2gQQNG7nmbMveweMldfkVGIU6zMLte`, "Ch. 17 Evaluation of outcomes.pdf" (60 PDF pages, ClinicalKey download).
+- File: the resident's own copy, "Ch. 17 Evaluation of outcomes.pdf" (60 PDF pages).
 - The Drive text extraction (268 k characters) was read for the whole surgical section (text lines 2700–3140 of the
   extraction = book pp. 694–699) and searched across the whole chapter for every factor keyword. It was **not truncated**.
 - The text layer garbles math symbols (`=` → `#`, `≤` → `+`, `>` → `$`/`%`, `<` → `&`). To remove any doubt the two

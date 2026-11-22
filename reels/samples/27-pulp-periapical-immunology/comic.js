@@ -27,7 +27,7 @@
   };
   const PEN = {};
   Object.keys(INK).forEach((k) => (PEN[k] = '#f8f2e4'));
-  Object.assign(PEN, { K: '#4f8bcb', K2: '#7fa9d8', K1: '#cfdfee', K0: '#e6edf0', paper: INK.paper });
+  Object.assign(PEN, { K: '#3a76bb', K2: '#6a9ad2', K1: '#c3d7ec', K0: '#e2eaf0', paper: INK.paper });
   const P = Object.assign({}, INK);
   function mode(pen) { pencil = !!pen; Object.assign(P, pencil ? PEN : INK); }
   function use(ctx) { c = ctx; }
@@ -143,7 +143,7 @@
   }
 
   // ---------- ink ----------
-  function st(lw, col) { c.lineWidth = pencil ? Math.max(2.4, lw * 0.62) : lw; c.strokeStyle = col || P.K; c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke(); }
+  function st(lw, col) { c.lineWidth = pencil ? Math.max(3.3, lw * 0.8) : lw; c.strokeStyle = col || P.K; c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke(); }
   function stRaw(lw, col) { c.lineWidth = lw; c.strokeStyle = col || P.K; c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke(); }
   function fl(col) { c.fillStyle = col; c.fill(); }
   function fp(pat) { if (pat) { c.fillStyle = pat; c.fill(); } }
@@ -209,7 +209,7 @@
     lines.forEach((ln, i) => {
       const yy = i * lh, xx = o.indent ? o.indent[i] || 0 : 0;
       if (!pencil) { c.lineWidth = ow; c.strokeStyle = P.K; c.fillStyle = P.K; c.strokeText(ln, xx + size * 0.055, yy + size * 0.07); }
-      c.lineWidth = pencil ? 3 : ow; c.strokeStyle = P.K; c.strokeText(ln, xx, yy);
+      c.lineWidth = pencil ? 4 : ow; c.strokeStyle = P.K; c.strokeText(ln, xx, yy);
       c.fillStyle = o.fill || P.Y; c.fillText(ln, xx, yy);
     });
     try { c.letterSpacing = '0px'; } catch (e) { /* */ }
@@ -343,7 +343,7 @@
     const k = o.s == null ? 1 : o.s; if (k <= 0.02) return;
     c.save(); c.translate(x, y); c.rotate(rot); c.scale(k, k);
     const p = () => { c.beginPath(); c.moveTo(0, s * 0.95); c.lineTo(0, 0); c.lineTo(-s * 0.62, -s * 0.72); c.moveTo(0, 0); c.lineTo(s * 0.62, -s * 0.72); };
-    p(); st(s * 0.44); if (!pencil) { p(); stRaw(s * 0.17, o.col || P.C); }
+    if (pencil) { p(); stRaw(3.3, P.K); } else { p(); st(s * 0.44); p(); stRaw(s * 0.17, o.col || P.C); }
     c.restore();
   }
   function rbc(x, y, r, rot = 0) { ell(x, y, r, r * 0.62, rot); fl(P.R); st(2.6); ell(x, y, r * 0.45, r * 0.24, rot); fl(P.R1); }

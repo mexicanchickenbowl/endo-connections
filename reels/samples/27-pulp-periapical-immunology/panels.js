@@ -18,15 +18,23 @@
   const qb = (p0, pc, p1, s) => { const m = 1 - s; return [m * m * p0[0] + 2 * m * s * pc[0] + s * s * p1[0], m * m * p0[1] + 2 * m * s * pc[1] + s * s * p1[1], Math.atan2(2 * m * (pc[1] - p0[1]) + 2 * s * (p1[1] - pc[1]), 2 * m * (pc[0] - p0[0]) + 2 * s * (p1[0] - pc[0]))]; };
   const pop = (lt, t0, d = 0.35) => ease.outBack(seg(lt, t0, t0 + d));
 
-  /** bone: cream base, key-dot shading, marrow spaces, osteocyte lacunae */
+  /** bone: cream base, key-dot shading, marrow spaces of mixed size and shape, lamellar (trabecular) lines, osteocyte lacunae */
   function boneFill(pathFn, marrow, seed, lw = 5.5) {
     X.shape(pathFn, P.Y0, { lw: 0 });
     c.save(); pathFn(); c.clip();
     X.htGrad('K', 11, 0.785, 0, 0, PW, PH + 200, (x, y) => 0.035 + 0.11 * (0.5 + 0.5 * noise1(x / 120 + y / 160, seed)));
-    for (const m of marrow) X.shape(() => X.blob(m[0], m[1], m[2], { n: 9, amp: 0.26, seed: seed + m[0] }), P.P0, { pat: H('R', 1), lw: 3.6 });
+    // [x, y, r, stretch, rot]: every marrow space gets its own size, elongation and tilt
+    const ms = marrow.map((m, k) => { const h1 = hash(k, seed, 11), h2 = hash(k, seed, 12); return [m[0], m[1], m[2] * (0.58 + 0.8 * h1), 1 + 0.5 * h2, hash(k, seed, 13) * 3.14]; });
+    ms.forEach((m, k) => {                                      // lamellae hugging the marrow spaces
+      for (let q = 0; q < 2; q++) {
+        const a0 = hash(k, seed, 14 + q) * TAU, sp = 1.1 + 1.3 * hash(k, seed, 16 + q), R = m[2] * (1.42 + 0.34 * q);
+        c.beginPath(); c.ellipse(m[0], m[1], R * m[3], R / m[3], m[4], a0, a0 + sp); X.st(2.6, P.K2);
+      }
+    });
+    for (const m of ms) X.shape(() => { c.save(); c.translate(m[0], m[1]); c.rotate(m[4]); X.blob(0, 0, m[2], { n: 10, amp: 0.24, seed: seed + m[0], sx: m[3], sy: 1 / m[3] }); c.restore(); }, P.P0, { pat: H('R', 1), lw: 3.6 });
     for (let k = 0; k < 90; k++) {
       const x = hash(k, seed, 1) * PW, y = hash(k, seed, 2) * (PH + 100);
-      if (marrow.some((m) => Math.hypot(m[0] - x, m[1] - y) < m[2] + 16)) continue;
+      if (ms.some((m) => Math.hypot(m[0] - x, m[1] - y) < m[2] * m[3] + 16)) continue;
       X.ell(x, y, 6.5, 2.8, hash(k, seed, 3) * 3.14); X.fl(P.K);
     }
     c.restore();
@@ -56,7 +64,10 @@
     const yc = (x) => 132 + 24 * noise1(x / 55, 9);
     const wall = (i, sg, y0, y1, n = 16) => { const a = []; for (let k = 0; k <= n; k++) { const y = lerp(y0, y1, k / n); a.push([tx(i, y) + (sg * LUM) / 2, y]); } return a; };
     const pw = (i, y) => lerp(26, 11, clamp((ODT + 4 - y) / (ODT + 4 - tipY(i)))) / 2;      // half-width of the process
-    const actT = (i, k) => 0.82 + 0.075 * ((i * 3 + k * 4) % 7);
+    // one receptor per process (drawn large); they light one after another, the first four with a flash
+    const ORD = [4, 0, 2, 5, 1, 6, 3];
+    const actT = (i) => 0.8 + 0.15 * ORD[i];
+    const recY = (i) => tipY(i) + 74 + (i % 2) * 64, recS = (i) => (i % 2 || i === 6 ? -1 : 1);   // the last one faces inward so it is not cropped
 
     function bg() {
       c.fillStyle = P.Y1; c.fillRect(0, 0, PW, PRE);
@@ -81,6 +92,7 @@
       X.shape(car, P.BR, { pat: H('K', 2), lw: 5 });
       for (let k = 0; k < 46; k++) {
         const x = 20 + hash(k, 11) * 860, y = 16 + hash(k, 12) * (yc(x) - 44), a = hash(k, 13) * 3.14;
+        if (x < 432) continue;                                     // keep the header clear
         if (k % 3) X.cocci(x, y, 2 + (k % 3), a, 8.5); else X.rod(x, y, 34, 13, a);
       }
     }
@@ -104,16 +116,19 @@
       X.shape(() => X.ell(cx, bot - 84 - (i % 2) * 22, 30, 42), P.B, { lw: 3.5 });
       X.circle(cx + 8, bot - 92 - (i % 2) * 22, 7); X.fl(P.B1);
     }
+    /** receptor glyph: a horseshoe on a short stalk, open toward the tubule fluid; yellow (the caption's TLR chip) once lit */
     function receptor(px, py, sg, lit, flash, rot) {
-      const cx = px + sg * 19;
-      if (lit > 0.02 && !X.isPencil()) {
-        if (flash > 0.04) { c.save(); c.globalAlpha = Math.min(1, flash * 1.6); X.focusLines(cx, py, 40, 40 + 34 * flash + 14, 9, 3 + rot * 10, P.K, 3.2); c.restore(); }
-        X.burst(cx, py, (25 + 13 * flash) * lit, (12.5 + 4 * flash) * lit, 8, { rot, lw: 3.2 });
+      const R = 14.5, cx = px + sg * (R + 13);
+      if (flash > 0.04 && !X.isPencil()) {
+        c.save(); c.globalAlpha = Math.min(1, flash * 1.6); X.focusLines(cx, py, 46, 46 + 40 * flash + 14, 10, 3 + rot * 10, P.K, 3.2); c.restore();
+        const g = Math.min(1, flash * 2.5); X.burst(cx, py, (36 + 16 * flash) * g, (19 + 6 * flash) * g, 8, { rot, lw: 3.2, fill: P.white });
       }
-      c.beginPath(); c.moveTo(px - sg * 2, py); c.lineTo(px + sg * 10, py);
-      if (sg > 0) { c.moveTo(cx, py + 9); c.arc(cx, py, 9, Math.PI / 2, Math.PI * 1.5); } else { c.moveTo(cx, py - 9); c.arc(cx, py, 9, -Math.PI / 2, Math.PI / 2); }
-      X.st(8.5);
-      if (lit > 0.5 && !X.isPencil()) X.stRaw(3.4, P.white);
+      const path = () => {
+        c.beginPath(); c.moveTo(px - sg * 2, py); c.lineTo(px + sg * 13, py);
+        if (sg > 0) { c.moveTo(cx, py + R); c.arc(cx, py, R, Math.PI / 2, Math.PI * 1.5); } else { c.moveTo(cx, py - R); c.arc(cx, py, R, -Math.PI / 2, Math.PI / 2); }
+      };
+      if (X.isPencil()) { path(); X.stRaw(3.3, P.K); return; }
+      path(); X.stRaw(15, P.K); path(); X.stRaw(8.6, Kit.rgba(Kit.mix(INK.white, INK.Y, lit)));
     }
 
     function fg(lt) {
@@ -128,16 +143,16 @@
       }
       for (let i = 0; i < N; i++) odonto(i, alarm);
       // receptors on the processes + bacterial products arriving
-      for (let i = 0; i < N; i++) for (let k = 0; k < 2; k++) {
-        const yr = tipY(i) + 58 + k * 88, sg = (k ? -1 : 1) * (i % 2 ? -1 : 1), ta = actT(i, k), px = tx(i, yr) + sg * pw(i, yr);
-        const lit = seg(lt, ta, ta + 0.12), flash = lit * (1 - seg(lt, ta + 0.1, ta + 0.6));
-        receptor(px, yr, sg, lit, flash, 0.2 + 0.3 * hash(i, k, 5));
+      for (let i = 0; i < N; i++) {
+        const yr = recY(i), sg = recS(i), ta = actT(i), px = tx(i, yr) + sg * pw(i, yr);
+        const lit = seg(lt, ta, ta + 0.12), flash = ORD[i] < 4 ? lit * (1 - seg(lt, ta + 0.12, ta + 0.62)) : 0;
         for (let w = 0; w < 4; w++) {
-          const arrive = w < 3 ? ta + 0.42 * w : 2.45 + 0.1 * k, cap = w < 3 ? 1 : 0.3 + 0.45 * hash(i, k, 7);
+          const arrive = w < 3 ? ta + 0.42 * w : 2.5, cap = w < 3 ? 1 : 0.3 + 0.45 * hash(i, 1, 7);
           const u = Math.min(seg(lt, arrive - 0.55, arrive), cap); if (u <= 0 || u >= 1) continue;
           const y = lerp(250 + 8 * w, yr, u), x = tx(i, y) + sg * (LUM / 2 - 9) * ease.out(Math.min(1, u * 3));
           X.circle(x, y, 5.5); X.fl(P.M); X.st(2);
         }
+        receptor(px, yr, sg, lit, flash, 0.2 + 0.3 * hash(i, 1, 5));
       }
       // odontoblasts answer: signal dots released toward the pulp
       for (let i = 0; i < N; i++) for (let k = 0; k < 5; k++) {
@@ -146,7 +161,7 @@
         X.circle(x, y, 6.5 * Math.min(1, u * 5)); X.fl(P.C); X.st(2.4);
       }
     }
-    return { bg, fg, head: (lt) => X.sfx(['SENSE!'], 62, 138, 124, { s: pop(lt, 0.05) }) };
+    return { bg, fg, head: (lt) => X.sfx(['SENSE!'], 62, 138, 124, { s: pop(lt, -0.7) }) };   // pops while the panel is inked on the page view
   })();
 
   // =====================================================================================
@@ -351,8 +366,14 @@
     const canal = () => { c.beginPath(); c.moveTo(578, -10); c.bezierCurveTo(584, 120, 592, 230, 597, 313); c.lineTo(623, 313); c.bezierCurveTo(628, 230, 636, 120, 642, -10); c.closePath(); };
     const lesion = () => { c.beginPath(); const n = 140; for (let i = 0; i <= n; i++) { const a = (i / n) * TAU, sc = 1 - 0.04 * Math.abs(Math.sin(a * 9)) + 0.03 * noise1(a * 2.2, 4), x = LC[0] + Math.cos(a) * RX * sc, y = LC[1] + Math.sin(a) * RY * sc; if (i) c.lineTo(x, y); else c.moveTo(x, y); } c.closePath(); };
     const marrow = [[60, 250, 30], [46, 960, 38], [176, 1030, 44], [424, 1070, 42], [654, 1050, 44], [846, 980, 40], [866, 250, 28], [330, 1190, 48], [566, 1206, 44], [786, 1190, 48], [118, 1170, 42]];
-    const LK = [[598, 338], [626, 346], [606, 372], [584, 366], [634, 380], [612, 402]];
-    const PL = [[246, 752, -0.5], [484, 772, 0.15], [736, 742, 0.6]];
+    // layout (schematic). Antibodies appear only beside the plasma cells that make them and docked on leaked bacteria.
+    const NA = [22, 67, 113, 158], NR = 150;                                 // neutrophil arc below the foramen
+    const LK = [[563, 347, 2.2], [610, 367, 0], [657, 347, 0.9]];            // leaked bacteria, one antibody each
+    const PL = [[246, 752, -0.5], [484, 772, 0.15], [736, 742, 0.6]];        // plasma cells
+    const TR = [[306, 694, -0.55], [566, 742, 0.95], [700, 676, -0.35]];     // one antibody resting just outside each plasma cell
+    const FC = [[450, 610], [505, 560], [690, 590]];                         // flight control points (corridors between cells)
+    const MAC = [[392, 468, 56, 3], [604, 566, 58, 7], [772, 492, 52, 9]];
+    const LY = [[212, 508, 'T'], [322, 598, 'T'], [408, 668, 'T'], [154, 642, 'B'], [790, 628, 'B']];
     function bg() {
       boneFill(() => { c.beginPath(); c.rect(-10, -10, PW + 20, PH + 20); }, marrow, 14, 0);
       X.shape(() => { c.beginPath(); c.moveTo(416, -10); c.bezierCurveTo(430, 132, 498, 258, 575, 312); c.lineTo(645, 312); c.bezierCurveTo(722, 258, 790, 132, 804, -10); c.closePath(); }, P.C0, { lw: 5 });
@@ -373,39 +394,40 @@
     function fg(lt) {
       const ph = lt * 1.4;
       // bacteria and fragments leak through the foramen
-      LK.forEach((p, k) => { const a = seg(lt, 0.06 + 0.07 * k, 0.4 + 0.07 * k); if (a <= 0) return; const e = ease.out(a), x = lerp(F[0], p[0], e), y = lerp(F[1] + 4, p[1], e); if (k % 2) X.rod(x, y, 24, 10.5, k, { s: e }); else X.cocci(x, y, 2, k * 1.1, 7.2, { s: e }); });
-      for (let k = 0; k < 7; k++) { const a = seg(lt, 0.2 + 0.05 * k, 0.6 + 0.05 * k); if (a > 0) { X.circle(F[0] + (hash(k, 95) - 0.5) * 90 * a, F[1] + 26 + hash(k, 96) * 90 * a, 4.2); X.fl(P.M); X.st(1.8); } }
+      [[601, 327, 1.3], [621, 333, 0.4]].forEach((p, k) => X.cocci(p[0], p[1], 1, p[2], 6, { s: ease.out(seg(lt, 0.05 + 0.1 * k, 0.4 + 0.1 * k)), lw: 2.3 }));
+      LK.forEach((p, k) => { const a = seg(lt, 0.06 + 0.1 * k, 0.5 + 0.1 * k); if (a <= 0) return; const e = ease.out(a), x = lerp(F[0], p[0], e), y = lerp(F[1] + 4, p[1], e); if (k === 1) X.rod(x, y, 26, 11.5, p[2], { s: e }); else X.cocci(x, y, 2, p[2], 7.6, { s: e }); });
       // neutrophils mass below the foramen
-      [14, 44, 74, 106, 136, 166].forEach((deg, k) => {
-        const a = (deg * Math.PI) / 180, u = seg(lt, 0.3 + 0.08 * k, 0.9 + 0.08 * k); if (u <= 0) return;
-        const R = lerp(340, 134, ease.outBack(u)), x = F[0] + Math.cos(a) * R, y = F[1] + Math.sin(a) * R;
+      NA.forEach((deg, k) => {
+        const a = (deg * Math.PI) / 180, u = seg(lt, 0.3 + 0.1 * k, 0.9 + 0.1 * k); if (u <= 0) return;
+        const R = lerp(340, NR, ease.outBack(u)), x = F[0] + Math.cos(a) * R, y = F[1] + Math.sin(a) * R;
         if (u < 0.8) X.speedLines(x + Math.cos(a) * 30, y + Math.sin(a) * 30, a + Math.PI, 56 * Math.sin(Math.PI * u), 3, 11, 3.6);
-        X.neutrophil(x, y, 30, { seed: k + 1, ph, s: ease.out(seg(u, 0, 0.25)), eat: k === 2 || k === 4 ? Math.round(seg(lt, 2.5, 2.8)) : 0 });
+        X.neutrophil(x, y, 30, { seed: k + 1, ph, s: ease.out(seg(u, 0, 0.25)) });
       });
       // macrophages
-      [[392, 468, 56, 3], [600, 556, 60, 7], [772, 492, 52, 9]].forEach((m, k) => {
+      MAC.forEach((m, k) => {
         const u = seg(lt, 0.85 + 0.15 * k, 1.5 + 0.15 * k); if (u <= 0) return;
         const e = ease.out(u), dx = m[0] - F[0], dy = m[1] - F[1], d = Math.hypot(dx, dy);
         X.macrophage(m[0] + (dx / d) * 230 * (1 - e), m[1] + (dy / d) * 230 * (1 - e), m[2], { seed: m[3], ph, s: ease.out(seg(u, 0, 0.3)), vac: seg(lt, 2.0 + 0.2 * k, 2.8 + 0.2 * k) * (k === 1 ? 3 : 2) });
       });
       // lymphocytes
-      [[215, 512, 'T'], [300, 640, 'T'], [470, 688, 'T'], [732, 652, 'T'], [158, 644, 'B'], [628, 716, 'B']].forEach((p, k) => { const a = seg(lt, 1.3 + 0.09 * k, 1.65 + 0.09 * k); if (a > 0) X.lymphocyte(p[0], p[1], 31, p[2], { s: ease.outBack(a) }); });
+      LY.forEach((p, k) => { const a = seg(lt, 1.3 + 0.09 * k, 1.65 + 0.09 * k); if (a > 0) X.lymphocyte(p[0], p[1], 31, p[2], { s: ease.outBack(a) }); });
       // plasma cells
       PL.forEach((p, k) => { const a = seg(lt, 1.7 + 0.12 * k, 2.1 + 0.12 * k); if (a > 0) X.plasma(p[0], p[1], 40, { rot: p[2], s: ease.outBack(a) }); });
-      // antibodies leave the plasma cells and tag what leaks out
-      for (let j = 0; j < 3; j++) for (let k = 0; k < 4; k++) {
-        const idx = j * 4 + k, t0 = 2.15 + 0.16 * k + 0.07 * j, stick = k < 2, tgt = stick ? LK[j * 2 + k] : LK[(idx * 5 + j) % 6];
-        const u = Math.min(seg(lt, t0, t0 + 1.0), stick ? 1 : 0.3 + 0.45 * hash(idx, 61)); if (u <= 0) continue;
-        const p0 = [PL[j][0] + 20 * Math.cos(PL[j][2]), PL[j][1] - 34];
-        let ox = tgt[0] - F[0], oy = tgt[1] - (F[1] + 40); const od = Math.hypot(ox, oy) || 1; ox /= od; oy /= od;
-        const p1 = [tgt[0] + ox * 27, tgt[1] + oy * 27], dx = p1[0] - p0[0], dy = p1[1] - p0[1], d = Math.hypot(dx, dy);
-        const pc = [(p0[0] + p1[0]) / 2 - (dy / d) * 130 * (hash(idx, 64) - 0.5), (p0[1] + p1[1]) / 2 + (dx / d) * 130 * (hash(idx, 64) - 0.5)];
-        const e = ease.inOut(u), q = qb(p0, pc, p1, e), rot = stick ? lerp(q[2], Math.atan2(-oy, -ox), seg(e, 0.6, 1)) : q[2];
-        X.antibody(q[0], q[1], 19, rot + Math.PI / 2, { s: ease.out(seg(u, 0, 0.12)) });
+      // antibodies: one stays beside each plasma cell, one flies off and docks (arms first) on a leaked bacterium
+      for (let j = 0; j < 3; j++) {
+        const p0 = [PL[j][0] + 20 * Math.cos(PL[j][2]), PL[j][1] - 30];
+        const ur = ease.out(seg(lt, 2.1 + 0.1 * j, 2.5 + 0.1 * j));
+        if (ur > 0) X.antibody(lerp(p0[0], TR[j][0], ur), lerp(p0[1], TR[j][1], ur), 22, TR[j][2], { s: Math.min(1, ur * 2.5) });
+        const t0 = 2.3 + 0.14 * j, u = seg(lt, t0, t0 + 0.85); if (u <= 0) continue;
+        const tg = LK[j]; let ox = tg[0] - F[0], oy = tg[1] - (F[1] + 10); const od = Math.hypot(ox, oy) || 1; ox /= od; oy /= od;
+        const p1 = [tg[0] + ox * 35, tg[1] + oy * 35], e = ease.inOut(u), q = qb(p0, FC[j], p1, e);
+        const fin = Math.atan2(-oy, -ox); let d = fin - q[2]; d = Math.atan2(Math.sin(d), Math.cos(d));
+        X.antibody(q[0], q[1], 25, q[2] + d * seg(e, 0.55, 1) + Math.PI / 2, { s: ease.out(seg(u, 0, 0.15)) });
       }
-      tag('mostly IgG', 610, 866, pop(lt, 2.5), { ptr: [-112, -72] });
     }
-    return { bg, fg, head: (lt) => X.sfx(['HOLD THE', 'LINE!'], 54, 128, 108, { s: pop(lt, 0.05), indent: [0, 8] }) };
+    /** label drawn by the page only while the camera is close (too small to read on the whole page) */
+    function over(lt) { tag('mostly IgG', 650, 836, pop(lt, 2.7), { ptr: [-72, -76] }); }
+    return { bg, fg, over, head: (lt) => X.sfx(['HOLD THE', 'LINE!'], 54, 118, 96, { s: pop(lt, 0.05), indent: [0, 8] }) };
   })();
 
   // =====================================================================================
@@ -479,12 +501,13 @@
     const TS = 1.1, TY = 30, FY = (897 + TY) * TS;           // foramen y in panel space
     const T = (f) => { c.save(); c.translate(450, 0); c.scale(TS, TS); c.translate(-450, TY); f(); c.restore(); };
     const marrow = [[92, 612, 44], [180, 772, 36], [812, 600, 42], [742, 752, 38], [84, 905, 48], [824, 892, 50], [150, 1080, 44], [760, 1070, 44]];
-    const LCY = FY + 34, LR = 152;
+    const LCY = FY + 34, LR = 152, FT0 = 0.32, FT1 = 1.17;   // the file goes in right after the panel lands
     const lesion = () => { c.beginPath(); const n = 110; for (let i = 0; i <= n; i++) { const a = (i / n) * TAU, sc = 1 - 0.06 * Math.abs(Math.sin(a * 7)), x = 450 + Math.cos(a) * LR * sc, y = LCY + Math.sin(a) * LR * 0.96 * sc; if (i) c.lineTo(x, y); else c.moveTo(x, y); } c.closePath(); };
     function bg() {
-      c.fillStyle = P.C0; c.fillRect(0, 0, PW, 620);
-      X.htGrad('C', 11, 0.32, 0, 0, PW, 600, (x, y) => clamp(0.44 - y / 720, 0, 0.44));
-      X.focusLines(450, 380, 300, 1200, 30, 7, P.white, 1.5);
+      // a warm burst behind the tooth (panel 3 has the blue sky): the key colour of the takeaway banner
+      c.fillStyle = P.Y; c.fillRect(0, 0, PW, 620);
+      X.htGrad('R', 11, 0.32, 0, 0, PW, 620, (x, y) => clamp(0.05 + Math.hypot(x - 450, y - 420) / 1500, 0, 0.42));
+      X.focusLines(450, 420, 250, 1200, 26, 7, P.white, 3.4);
       T(() => jawBG(marrow, 37));
       // the lesion: inflammatory tissue where bone used to be
       X.shape(lesion, P.M0, { pat: H('M', 2), lw: 6 });
@@ -492,7 +515,7 @@
     }
     function fg(lt) {
       const ph = lt * 1.4;
-      const yt = lerp(-60, 968, ease.inOut(seg(lt, 1.55, 2.5))), tipT = yt / TS - TY;
+      const yt = lerp(-60, 968, ease.inOut(seg(lt, FT0, FT1))), tipT = yt / TS - TY;
       // canal contents: necrotic debris + bacteria; the file removes most (not all) of what it reaches
       T(() => {
         c.save(); TOOTH.pulp(); c.clip();
@@ -518,10 +541,10 @@
         X.shape(() => X.ell(450, yt - 742, 27, 10), P.C, { lw: 4 });
         X.shape(() => { c.beginPath(); c.roundRect(408, yt - 904, 84, 126, 16); }, P.Y, { sh: [6, 8], lw: 5 });
         for (let k = 0; k < 4; k++) { c.beginPath(); c.moveTo(416, yt - 884 + k * 28); c.lineTo(484, yt - 884 + k * 28); X.st(3.5); }
-        const u = seg(lt, 1.55, 2.5); if (u > 0.05 && u < 0.97) for (let q = -1; q <= 1; q += 2) { c.beginPath(); c.moveTo(450 + q * 62, yt - 900); c.lineTo(450 + q * 62, yt - 900 - 120 * Math.sin(Math.PI * u)); X.st(4.5); }
+        const u = seg(lt, FT0, FT1); if (u > 0.05 && u < 0.97) for (let q = -1; q <= 1; q += 2) { c.beginPath(); c.moveTo(450 + q * 62, yt - 900); c.lineTo(450 + q * 62, yt - 900 - 120 * Math.sin(Math.PI * u)); X.st(4.5); }
       }
     }
-    return { bg, fg, head: (lt) => X.sfx(['STANDOFF'], 46, 128, 94, { s: pop(lt, 0.25), fill: P.Y }) };
+    return { bg, fg, head: (lt) => X.sfx(['STANDOFF'], 46, 128, 94, { s: pop(lt, 0.1), fill: P.white }) };
   })();
 
   // =====================================================================================
@@ -531,13 +554,15 @@
   function init() { initSeeds(); }
   /** draw panel i (0..5) at local time lt into ctx (already transformed to panel space). pen = blue-line rough */
   function render(i, ctx, lt, pen) {
-    const p = panels[i]; lt = clamp(lt, 0, dur[i]);
+    const p = panels[i], lh = Math.min(lt, dur[i]); lt = clamp(lt, 0, dur[i]);   // headers may start before the local clock
     if (!pen && !bgCache[i]) { const cv = document.createElement('canvas'); cv.width = PW; cv.height = PH; setC(cv.getContext('2d')); X.mode(false); p.bg(); bgCache[i] = cv; }
     setC(ctx); X.mode(!!pen);
     ctx.save(); ctx.beginPath(); ctx.rect(0, 0, PW, PH); ctx.clip();
     if (pen) p.bg(); else ctx.drawImage(bgCache[i], 0, 0);
-    p.fg(lt); p.head(lt);
+    p.fg(lt); p.head(lh);
     ctx.restore(); X.mode(false);
   }
-  window.Panels = { PW, PH, dur, init, render };
+  /** labels that only belong to the close-up (panel space, ink mode) */
+  function overlay(i, ctx, lt) { const p = panels[i]; if (!p.over) return; setC(ctx); X.mode(false); p.over(clamp(lt, 0, dur[i])); }
+  window.Panels = { PW, PH, dur, init, render, overlay };
 })();

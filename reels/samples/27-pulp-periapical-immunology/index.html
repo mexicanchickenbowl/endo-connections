@@ -16,35 +16,39 @@
  * panel by panel and pulls back to the whole page. Page space = final screen space (1080 x 1920).
  * Everything is a pure function of t.
  */
-const { canvas, ctx } = Kit.createCanvas();
+const { canvas, ctx: mainCtx } = Kit.createCanvas();
+let ctx = mainCtx;                                           // swapped to an offscreen layer while a box fades (see faded())
 const { clamp, lerp, seg, ease, W, H } = Kit;
 const X = Comic, INK = Comic.INK, PW = Panels.PW, PH = Panels.PH;
 
 // ---------- page layout ----------
 const GW = 308, S0 = GW / PW, GH = PH * S0;                 // a panel on the page: 308 x 440
-const GX = [64, 386, 708], GY = [412, 866];
+const GX = [64, 386, 708], GY = [432, 886];
 const RECT = [0, 1, 2, 3, 4, 5].map((i) => ({ x: GX[i % 3], y: GY[(i / 3) | 0] }));
 const ZC = 1 / S0;                                          // close-up zoom: one panel pixel = one screen pixel
 const CX = 90, CY = 252;                                    // where a panel's corner sits on screen in close-up
 const PAGE = { x: 0, y: 0, w: 1080 };
 const CLOSE = RECT.map((r) => ({ x: r.x - CX / ZC, y: r.y - CY / ZC, w: 1080 / ZC }));
-const MAST = { x: 64, y: 232, w: 952, h: 120, strip: 46 };
-const BAN = { x: 64, y: 1320, w: 952, h: 226 };
+const MAST = { x: 64, y: 252, w: 952, h: 120, strip: 46 };  // top border inside the 3:4 grid crop (y 240)
+const BAN = { x: 64, y: 1340, w: 952, h: 206 };              // footnote under it ends at y 1579
 
 // ---------- timeline ----------
-const D = 25.8;
+const D = 25.1;
 const MOVES = [
-  { t0: 1.10, t1: 1.75, a: PAGE, b: CLOSE[0], zoom: true },
-  { t0: 4.30, t1: 4.85, a: CLOSE[0], b: CLOSE[1], dip: 0.06 },
-  { t0: 8.45, t1: 9.00, a: CLOSE[1], b: CLOSE[2], dip: 0.06 },
-  { t0: 12.20, t1: 12.90, a: CLOSE[2], b: CLOSE[3], dip: 0.42 },
-  { t0: 16.40, t1: 16.95, a: CLOSE[3], b: CLOSE[4], dip: 0.06 },
-  { t0: 20.15, t1: 21.10, a: CLOSE[4], b: PAGE, zoom: true },
+  { t0: 0.75, t1: 1.35, a: PAGE, b: CLOSE[0], zoom: true },
+  { t0: 3.77, t1: 4.30, a: CLOSE[0], b: CLOSE[1], dip: 0.06 },
+  { t0: 7.62, t1: 8.15, a: CLOSE[1], b: CLOSE[2], dip: 0.06 },
+  { t0: 11.15, t1: 11.70, a: CLOSE[2], b: CLOSE[3], dip: 0.3 },
+  { t0: 15.32, t1: 15.85, a: CLOSE[3], b: CLOSE[4], dip: 0.06 },
+  { t0: 18.87, t1: 19.77, a: CLOSE[4], b: PAGE, zoom: true },
 ];
-const ARR = [1.52, 4.62, 8.77, 12.65, 16.72, 21.0];         // local clock of each panel starts here
-const TB = 20.85, TL = [21.25, 21.95, 22.55];               // banner drop, takeaway lines
-const penU = (t) => seg(t, D - 0.42, D - 0.05);            // inks fade back to blue pencil for the loop
-const textOut = (t) => seg(t, D - 0.52, D - 0.32);
+const ARR = [1.12, 4.07, 7.92, 11.47, 15.62, 19.62];        // local clock of each panel starts here
+const INKT = [0.42, 4.07, 7.92, 11.47, 15.62];              // ink wipe: panel 1 is inked on the page view, before the dive
+const TB = 19.55, TL = [19.95, 20.50, 20.95];               // banner drop, takeaway lines (line 3 lands after the file is in)
+const TPC = 21.3;                                           // page captions come up once the takeaway is complete
+const textOut = (t) => seg(t, D - 0.48, D - 0.28);          // all lettering leaves before the loop
+const banOut = (t) => seg(t, D - 0.42, D - 0.18);           // banner slides back off
+const wipeOut = (i, t) => { const a = D - 0.36 + 0.03 * (i % 3) + 0.02 * ((i / 3) | 0); return seg(t, a, a + 0.26); };   // inks wiped back to blue pencil
 
 function view(t) {
   let v = PAGE;
@@ -62,13 +66,21 @@ function view(t) {
 // ---------- captions ----------
 // rich text: plain strings and [text, chipInk, tOn] phrases (chip = colour key of the cell, lit when it enters)
 const CAPS = [
-  { rich: [['Odontoblasts', 'C1', 0.2], ' sense ', ['bacteria', 'M1', 0.2], ': ', ['TLR2, TLR4', 'Y', 0.85], '.'], src: 'Veerayutthwilai 2007, Oral Microbiol Immunol' },
-  { rich: [['Dendritic cells', 'G1', 0.25], ' sample. Then ', ['T cells', 'C1', 1.0], ', ', ['macrophages', 'P1', 1.4], ', ', ['neutrophils', 'Y1', 1.9], '.'], src: 'Farges 2015, Mediators Inflamm (review)' },
-  { rich: ['No immune access. A protected ', ['bacterial reservoir', 'M1', 1.0], '.'], src: 'Graves 2011, J Oral Microbiol (review)' },
-  { rich: [['Macrophages', 'P1', 0.95], ', ', ['T', 'C1', 1.35], ' + ', ['B cells', 'B1', 1.6], ', ', ['plasma cells', 'B1', 1.8], ', antibodies.'], src: 'Stashenko 1992, J Endod · schematic' },
-  { rich: ['…switch on ', ['osteoclasts', 'R1', 1.5], '. Bone resorbs.'],
-    page: [['IL-1', 'C1'], ', ', ['TNF', 'M1'], ', ', ['PGE2', 'Y'], ', ', ['RANKL', 'K'], ' switch on ', ['osteoclasts', 'R1'], '. Bone resorbs.'],
-    src: 'Graves 2011, J Oral Microbiol (review) · schematic' },
+  { rich: [['Odontoblasts', 'C1', 0.2], ' sense ', ['bacteria', 'M1', 0.2], ': ', ['TLR2, TLR4', 'Y', 0.85], '.'],
+    page: [['Odontoblasts', 'C1'], ' sense: ', ['TLR2, TLR4', 'Y']],
+    src: 'Veerayutthwilai 2007, Oral Microbiol Immunol' },
+  { rich: [['Dendritic cells', 'G1', 0.25], ' sample. Then ', ['T cells', 'C1', 1.0], ', ', ['macrophages', 'P1', 1.4], ', ', ['neutrophils', 'Y1', 1.9], '.'],
+    page: [['Dendritic', 'G1'], ', ', ['T cells', 'C1'], ', ', ['macrophages', 'P1'], ', ', ['neutrophils', 'Y1']],
+    src: 'Farges 2015, Mediators Inflamm (review)' },
+  { rich: ['No immune access. A protected ', ['bacterial reservoir', 'M1', 1.0], '.'],
+    page: ['No immune access'],
+    src: 'Graves 2011, J Oral Microbiol (review) \u00b7 schematic' },
+  { rich: [['Macrophages', 'P1', 0.95], ', ', ['T', 'C1', 1.35], ' + ', ['B cells', 'B1', 1.6], ', ', ['plasma cells', 'B1', 1.8], '.'],
+    page: [['Macrophages', 'P1'], ', ', ['T', 'C1'], ' + ', ['B', 'B1'], ', ', ['plasma cells', 'B1']],
+    src: 'Stashenko 1992, J Endod \u00b7 IgG: Matthews & Mason 1983' },
+  { rich: [['Osteoclasts', 'R1', 1.5], ' resorb bone.'],
+    page: [['IL-1', 'C1'], ' ', ['TNF', 'M1'], ' ', ['PGE2', 'Y'], ' ', ['RANKL', 'K'], ' switch on ', ['osteoclasts', 'R1']],
+    src: 'Graves 2011, J Oral Microbiol (review) \u00b7 schematic' },
 ];
 const layCache = {};
 function richLayout(rich, font, maxW) {
@@ -110,31 +122,41 @@ function box(x, y, w, h, o = {}) {
   ctx.fillStyle = o.fill || INK.white; ctx.fillRect(x, y, w, h);
   ctx.lineWidth = o.lw || 5; ctx.strokeStyle = INK.K; ctx.lineJoin = 'miter'; ctx.strokeRect(x, y, w, h);
 }
+/**
+ * Draw `fn` under transform `tf` at opacity `alpha`. When alpha < 1 the drawing goes to an offscreen layer that is
+ * composited once, so a box's drop ink never shows through its half-transparent fill.
+ */
+let layer = null, lctx = null;
+function faded(alpha, tf, fn) {
+  if (alpha <= 0.004) return;
+  if (alpha >= 0.996) { ctx.setTransform(...tf); ctx.globalAlpha = 1; fn(); return; }
+  const main = ctx; lctx.setTransform(1, 0, 0, 1, 0, 0); lctx.globalAlpha = 1; lctx.clearRect(0, 0, W, H);
+  ctx = lctx; X.use(ctx); ctx.setTransform(...tf); fn();
+  ctx = main; X.use(ctx); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = alpha; ctx.drawImage(layer, 0, 0); ctx.globalAlpha = 1;
+}
 /** close-up caption (panel space): 48 px lettering in a box that hugs the text + one footnote source line */
 function capClose(i, t, alpha) {
   const cap = CAPS[i], fs = 48, lh = 60, padX = 26, bx = 32, lt = t - ARR[i];
   const lines = richLayout(cap.rich, `700 ${fs}px "Comic Neue"`, PW - 64 - padX * 2);
   const tw = Math.max(...lines.map((l) => l[l.length - 1].x + l[l.length - 1].w)), bw = Math.max(430, tw + padX * 2 + 4);
   const bh = lines.length * lh + 30, by = 1192 - bh, s = lerp(0.9, 1, ease.outBack(alpha));
-  ctx.save(); ctx.globalAlpha = alpha; ctx.translate(bx, 1192); ctx.scale(s, s); ctx.translate(-bx, -1192);
+  ctx.save(); ctx.translate(bx, 1192); ctx.scale(s, s); ctx.translate(-bx, -1192);
   box(bx, by, bw, bh, { drop: 8 });
   ctx.font = `700 ${fs}px "Comic Neue"`;
   richDraw(lines, bx + padX, by + 17 + fs * 0.82, fs, lh, (tk) => seg(lt, tk.t, tk.t + 0.22));
   ctx.font = '700 24px "Comic Neue"'; const txt = '* ' + cap.src, fw = ctx.measureText(txt).width + 26;
   box(bx, 1206, fw, 38, { drop: 4, lw: 3, fill: INK.paper });
-  ctx.fillStyle = INK.K; ctx.textBaseline = 'middle'; ctx.fillText(txt, bx + 13, 1226);
+  ctx.fillStyle = INK.K; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(txt, bx + 13, 1226);
   ctx.restore();
 }
-/** page caption (page space): the same line re-lettered at 30 px so the whole page stays readable */
-function capPage(i, alpha) {
-  const cap = CAPS[i], r = RECT[i], fs = 30, lh = 35, padX = 9, bx = r.x + 5, bw = GW - 10;
+/** page caption (page space): a shorter line re-lettered at 30 px so the whole page stays readable */
+function capPage(i) {
+  const cap = CAPS[i], r = RECT[i], fs = 30, lh = 35, padX = 8, bx = r.x + 4, bw = GW - 8;
   const lines = richLayout(cap.page || cap.rich, `700 ${fs}px "Comic Neue"`, bw - padX * 2);
   const bh = lines.length * lh + 15, by = r.y + GH + 5 - bh;
-  ctx.save(); ctx.globalAlpha = alpha;
   box(bx, by, bw, bh, { drop: 4, lw: 3 });
   ctx.font = `700 ${fs}px "Comic Neue"`;
   richDraw(lines, bx + padX, by + 7 + fs * 0.84, fs, lh, () => 1);
-  ctx.restore();
 }
 
 // ---------- page furniture ----------
@@ -158,8 +180,8 @@ function furniture() {                                       // printer's marks 
   ctx.beginPath(); ctx.arc(1000, 1628, 11, 0, 7); ctx.moveTo(982, 1628); ctx.lineTo(1018, 1628); ctx.moveTo(1000, 1610); ctx.lineTo(1000, 1646); ctx.stroke();
   ctx.fillStyle = INK.K2; ctx.font = '700 20px "Comic Neue"'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText('No. 27 · PROOF', 320, 1628);
 }
-function masthead() {
-  const m = MAST;
+function masthead(Z) {
+  const m = MAST, sa = clamp((1.9 - Z) / 0.5);              // the strip's lettering is page-view only (it would be cropped in close-up)
   ctx.fillStyle = INK.K; ctx.fillRect(m.x + 7, m.y + 8, m.w, m.h + m.strip);
   ctx.fillStyle = INK.M; ctx.fillRect(m.x, m.y, m.w, m.h);
   ctx.save(); ctx.beginPath(); ctx.rect(m.x, m.y, m.w, m.h); ctx.clip();
@@ -169,30 +191,36 @@ function masthead() {
   ctx.lineWidth = 5; ctx.strokeStyle = INK.K; ctx.lineJoin = 'miter'; ctx.strokeRect(m.x, m.y, m.w, m.h);
   X.sfx(['THE TOOTH FIGHTS BACK!'], 540, m.y + 96, mastFS, { align: 'center', rot: -0.012, ow: 0.15 });
   ctx.fillStyle = INK.white; ctx.fillRect(m.x, m.y + m.h, m.w, m.strip); ctx.lineWidth = 5; ctx.strokeStyle = INK.K; ctx.strokeRect(m.x, m.y + m.h, m.w, m.strip);
+  if (sa <= 0.01) return;
+  ctx.save(); ctx.globalAlpha = sa;
   ctx.fillStyle = INK.K; ctx.textBaseline = 'middle'; ctx.textAlign = 'left'; ctx.font = '700 30px "Comic Neue"'; ctx.fillText('PULP + PERIAPICAL IMMUNOLOGY', m.x + 16, m.y + m.h + 24);
   ctx.textAlign = 'right'; ctx.font = '700 26px "Comic Neue"'; ctx.fillText('@natebrooksendo', m.x + m.w - 16, m.y + m.h + 24);
+  ctx.restore();
 }
-function banner(t) {
-  const b = BAN, PB = '#5a93cf';
+function banner(t, tf) {
+  const b = BAN, PB = '#3a76bb';
   // blue-pencil placeholder with lettering guides
-  ctx.lineWidth = 2; ctx.strokeStyle = PB; ctx.setLineDash([10, 7]); ctx.strokeRect(b.x, b.y, b.w, b.h);
-  ctx.beginPath(); [58, 110, 150, 200].forEach((dy) => { ctx.moveTo(b.x + 22, b.y + dy); ctx.lineTo(b.x + 700, b.y + dy); }); ctx.globalAlpha = 0.6; ctx.stroke(); ctx.globalAlpha = 1; ctx.setLineDash([]);
-  const u = seg(t, TB, TB + 0.42), out = penU(t); if (u <= 0 || out >= 1) return;
-  ctx.save(); ctx.globalAlpha = (1 - out) * clamp(u * 3); ctx.translate(0, (1 - ease.outBack(u)) * 170);
-  box(b.x, b.y, b.w, b.h, { fill: INK.Y, drop: 8 });
-  ctx.save(); ctx.beginPath(); ctx.rect(b.x, b.y, b.w, b.h); ctx.clip();
-  X.use(ctx); X.htGrad('R', 9, 0.32, b.x + 520, b.y, b.x + b.w, b.y + b.h, (x, y) => clamp((x - (b.x + 560)) / 760 + (y - b.y) / 1400, 0, 0.5));
-  ctx.restore();
-  ctx.lineWidth = 5; ctx.strokeStyle = INK.K; ctx.strokeRect(b.x, b.y, b.w, b.h);
-  const to = 1 - textOut(t);
-  const L = ['The lesion contains the infection.', 'It can’t reach the canal.'];
-  ctx.font = '700 43px "Comic Neue"'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.fillStyle = INK.K;
-  L.forEach((s, i) => { const a = seg(t, TL[i], TL[i] + 0.22); if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a * to; ctx.fillText(s, b.x + 28 - 18 * (1 - ease.out(a)), b.y + 60 + i * 53); ctx.restore(); });
-  const a3 = seg(t, TL[2], TL[2] + 0.3);
-  if (a3 > 0) { ctx.save(); ctx.globalAlpha *= clamp(a3 * 2) * to; X.sfx(['TREATMENT CAN.'], b.x + 30, b.y + 200, 76, { fill: INK.white, rot: -0.018, s: lerp(1.25, 1, ease.out(a3)) }); ctx.restore(); }
-  ctx.restore();
+  ctx.lineWidth = 2.6; ctx.strokeStyle = PB; ctx.setLineDash([10, 7]); ctx.strokeRect(b.x, b.y, b.w, b.h);
+  ctx.beginPath(); [52, 102, 140, 186].forEach((dy) => { ctx.moveTo(b.x + 22, b.y + dy); ctx.lineTo(b.x + 700, b.y + dy); }); ctx.globalAlpha = 0.6; ctx.stroke(); ctx.globalAlpha = 1; ctx.setLineDash([]);
+  const u = seg(t, TB, TB + 0.42), out = banOut(t); if (u <= 0 || out >= 1) return;
+  const to = 1 - textOut(t), dy = (1 - ease.outBack(u)) * 170 + ease.in(out) * 210;       // drops in, slides back off for the loop
+  faded(clamp(u * 3) * clamp((1 - out) * 2.5), tf, () => {
+    ctx.save(); ctx.translate(0, dy);
+    box(b.x, b.y, b.w, b.h, { fill: INK.Y, drop: 8 });
+    ctx.save(); ctx.beginPath(); ctx.rect(b.x, b.y, b.w, b.h); ctx.clip();
+    X.use(ctx); X.htGrad('R', 9, 0.32, b.x + 520, b.y, b.x + b.w, b.y + b.h, (x, y) => clamp((x - (b.x + 560)) / 760 + (y - b.y) / 1400, 0, 0.5));
+    ctx.restore();
+    ctx.lineWidth = 5; ctx.strokeStyle = INK.K; ctx.strokeRect(b.x, b.y, b.w, b.h);
+    const L = ['The lesion contains the infection.', 'It can\u2019t reach the canal.'];
+    ctx.font = '700 43px "Comic Neue"'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.fillStyle = INK.K;
+    L.forEach((s, i) => { const a = seg(t, TL[i], TL[i] + 0.22); if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a * to; ctx.fillText(s, b.x + 28 - 18 * (1 - ease.out(a)), b.y + 54 + i * 50); ctx.restore(); });
+    const a3 = seg(t, TL[2], TL[2] + 0.3);
+    if (a3 > 0) { ctx.save(); ctx.globalAlpha *= clamp(a3 * 2) * to; X.sfx(['TREATMENT CAN.'], b.x + 30, b.y + 183, 74, { fill: INK.white, rot: -0.018, s: lerp(1.25, 1, ease.out(a3)) }); ctx.restore(); }
+    ctx.restore();
+  });
+  ctx.setTransform(...tf);
   const af = seg(t, TL[0], TL[0] + 0.3) * (1 - textOut(t));
-  if (af > 0) { ctx.save(); ctx.globalAlpha = af * 0.85; ctx.fillStyle = INK.K; ctx.font = '700 23px "Comic Neue"'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText('* Nair 2004, Crit Rev Oral Biol Med · largely rodent-model data · schematic', b.x + 4, b.y + b.h + 21); ctx.restore(); }
+  if (af > 0) { ctx.save(); ctx.globalAlpha = af * 0.85; ctx.fillStyle = INK.K; ctx.font = '700 23px "Comic Neue"'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText('* Nair 2004, Crit Rev Oral Biol Med \u00b7 human + rodent data \u00b7 schematic', b.x + 4, b.y + b.h + 21); ctx.restore(); }
 }
 
 // ---------- panels on the page ----------
@@ -200,36 +228,47 @@ function inkPanel(i, t) {                                    // panel space, cli
   const lt = t - ARR[i];
   if (lt < Panels.dur[i]) Panels.render(i, ctx, lt, false); else ctx.drawImage(FINAL[i], 0, 0);
 }
+/** diagonal wipe clip in panel space: the part left (or right) of the slanted line through xw */
+function wipeClip(xw, left) {
+  ctx.beginPath();
+  if (left) { ctx.moveTo(-20, 0); ctx.lineTo(xw + 170, 0); ctx.lineTo(xw - 170, PH); ctx.lineTo(-20, PH); }
+  else { ctx.moveTo(xw + 170, 0); ctx.lineTo(PW + 20, 0); ctx.lineTo(PW + 20, PH); ctx.lineTo(xw - 170, PH); }
+  ctx.closePath(); ctx.clip();
+}
+function wipeEdge(xw) { ctx.beginPath(); ctx.moveTo(xw + 170, 0); ctx.lineTo(xw - 170, PH); ctx.lineWidth = 12; ctx.strokeStyle = INK.K; ctx.stroke(); }
 function drawPanel(i, t, cam) {
   const k = cam.Z * S0, r = RECT[i], ox = r.x * cam.Z + cam.tx, oy = r.y * cam.Z + cam.ty;
   if (ox > W + 500 * cam.Z || oy > H + 40 || ox + PW * k < -40 || oy + PH * k < -40) return;
-  const pen = penU(t), frame = (x0) => { ctx.setTransform(k, 0, 0, k, x0, oy); };
+  const frame = (x0) => { ctx.setTransform(k, 0, 0, k, x0, oy); };
   const border = () => { ctx.lineWidth = 9; ctx.strokeStyle = INK.K; ctx.lineJoin = 'miter'; ctx.strokeRect(0, 0, PW, PH); };
+  // loop: the inks are wiped back to blue pencil, left to right (the reverse of the inking wipe)
+  const outU = wipeOut(i, t), xo = outU > 0 ? lerp(-220, PW + 220, ease.inOut(outU)) : 0;
   ctx.save(); ctx.imageSmoothingQuality = 'high';
   if (i === 5) {
     // panel 6 slides in from the right and snaps into its slot over the pencil rough
     frame(ox); ctx.drawImage(PENCIL[i], 0, 0, PW, PH); border();
     const s = seg(t, ARR[5] - 0.18, ARR[5] + 0.3);
-    if (s > 0) {
+    if (s > 0 && outU < 1) {
       const x1 = ox + (1 - ease.outBack(s)) * 430 * cam.Z;
       frame(x1); ctx.globalAlpha = 1 - seg(s, 0.75, 1); ctx.fillStyle = INK.K; ctx.fillRect(16, 18, PW, PH); ctx.globalAlpha = 1;
-      ctx.save(); ctx.beginPath(); ctx.rect(0, 0, PW, PH); ctx.clip(); inkPanel(i, t);
-      if (pen > 0) { ctx.globalAlpha = pen; ctx.drawImage(PENCIL[i], 0, 0, PW, PH); ctx.globalAlpha = 1; }
+      ctx.save(); ctx.beginPath(); ctx.rect(0, 0, PW, PH); ctx.clip();
+      if (outU > 0) { ctx.save(); wipeClip(xo, false); }
+      inkPanel(i, t);
+      if (outU > 0) { ctx.restore(); wipeEdge(xo); }
       ctx.restore(); border();
     }
     ctx.restore(); return;
   }
-  const inkU = seg(t, ARR[i] - 0.16, ARR[i] + 0.2);
+  const inkU = seg(t, INKT[i] - 0.16, INKT[i] + 0.2);
   frame(ox);
   ctx.save(); ctx.beginPath(); ctx.rect(0, 0, PW, PH); ctx.clip();
-  if (inkU < 1) ctx.drawImage(PENCIL[i], 0, 0, PW, PH);
-  if (inkU > 0) {
-    let xw = 0;
-    if (inkU < 1) { xw = lerp(-220, PW + 220, ease.inOut(inkU)); ctx.save(); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(xw + 170, 0); ctx.lineTo(xw - 170, PH); ctx.lineTo(0, PH); ctx.closePath(); ctx.clip(); }
+  if (inkU < 1 || outU > 0) ctx.drawImage(PENCIL[i], 0, 0, PW, PH);
+  if (inkU > 0 && outU < 1) {
+    const part = inkU < 1 || outU > 0, xw = inkU < 1 ? lerp(-220, PW + 220, ease.inOut(inkU)) : xo;
+    if (part) { ctx.save(); wipeClip(xw, inkU < 1); }
     inkPanel(i, t);
-    if (inkU < 1) { ctx.restore(); ctx.beginPath(); ctx.moveTo(xw + 170, 0); ctx.lineTo(xw - 170, PH); ctx.lineWidth = 12; ctx.strokeStyle = INK.K; ctx.stroke(); }
+    if (part) { ctx.restore(); wipeEdge(xw); }
   }
-  if (pen > 0 && inkU > 0) { ctx.globalAlpha = pen; ctx.drawImage(PENCIL[i], 0, 0, PW, PH); ctx.globalAlpha = 1; }
   ctx.restore();
   border();
   ctx.restore();
@@ -248,37 +287,44 @@ function roundels(t) {
 
 function render(t) {
   t = clamp(t, 0, D);
+  ctx = mainCtx;
   const v = view(t), Z = W / v.w, cam = { Z, tx: -v.x * Z, ty: -v.y * Z };
-  const world = () => ctx.setTransform(Z, 0, 0, Z, cam.tx, cam.ty);
+  const WT = [Z, 0, 0, Z, cam.tx, cam.ty], world = () => ctx.setTransform(...WT);
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
   ctx.drawImage(paper, 0, 0);
   X.use(ctx); X.mode(false);
-  world(); furniture(); masthead(); banner(t);
+  world(); furniture(); masthead(Z); banner(t, WT);
   for (let i = 0; i < 6; i++) drawPanel(i, t, cam);
-  // captions: close-up lettering lives in panel space, page lettering in page space; they cross-fade with the zoom
   const k = Z * S0;
+  // label that belongs to the close-up only ('mostly IgG' would be 11 px on the whole page)
+  const aT = clamp((Z - 1.75) / 0.5);
+  if (aT > 0.004 && t > ARR[3]) faded(aT, [k, 0, 0, k, RECT[3].x * Z + cam.tx, RECT[3].y * Z + cam.ty], () => Panels.overlay(3, ctx, t - ARR[3]));
+  X.use(ctx); X.mode(false);
+  // close-up lettering lives in panel space and leaves with the camera; the page lettering (30 px) comes up
+  // only after the takeaway is complete, so the two never overlap
   for (let i = 0; i < 5; i++) {
-    const aC = seg(t, ARR[i] + 0.12, ARR[i] + 0.36) * clamp((k - 0.74) / 0.18);
-    if (aC > 0.01) { ctx.setTransform(k, 0, 0, k, RECT[i].x * Z + cam.tx, RECT[i].y * Z + cam.ty); capClose(i, t, aC); }
-    const aP = (t > ARR[i] + 0.2 ? 1 : 0) * clamp((1.75 - Z) / 0.5) * (1 - textOut(t));
-    if (aP > 0.01) { world(); capPage(i, aP); }
+    const aC = seg(t, ARR[i], ARR[i] + 0.2) * clamp((k - 0.74) / 0.18) * (1 - seg(t, MOVES[i + 1].t0, MOVES[i + 1].t0 + 0.25));
+    faded(aC, [k, 0, 0, k, RECT[i].x * Z + cam.tx, RECT[i].y * Z + cam.ty], () => capClose(i, t, aC));
   }
+  const aP = seg(t, TPC, TPC + 0.3) * clamp((1.75 - Z) / 0.5) * (1 - textOut(t));
+  faded(aP, WT, () => { for (let i = 0; i < 5; i++) capPage(i); });
   world(); ctx.globalAlpha = 1; roundels(t);
   // handle in the gutter under the panel while reading close up (on the page it sits in the masthead strip)
   ctx.setTransform(1, 0, 0, 1, 0, 0);
-  const ah = clamp((Z - 2.3) / 0.5);
+  const ah = clamp((Z - 2.82) / 0.08);                         // only while the camera rests on a panel
   if (ah > 0) { ctx.globalAlpha = ah * 0.8; ctx.fillStyle = INK.K; ctx.font = '700 24px "Comic Neue"'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('@natebrooksendo', W / 2, CY + PH + 21); ctx.globalAlpha = 1; }
 }
 
 window.REEL = {
   title: 'The tooth fights back',
   duration: D,
-  poster: D - 0.8,
+  poster: D - 1.1,
   canvas,
-  fonts: ['400 100px Bangers', '700 46px "Comic Neue"', '700 30px "Comic Neue"'],
+  fonts: ['400 100px Bangers', '700 48px "Comic Neue"', '700 30px "Comic Neue"', '700 24px "Comic Neue"'],
   setup() {
     Panels.init();
     paper = makePaper();
+    layer = document.createElement('canvas'); layer.width = W; layer.height = H; lctx = layer.getContext('2d');
     // fit the masthead title to the box
     ctx.save(); ctx.font = '400 100px Bangers'; try { ctx.letterSpacing = '3.5px'; } catch (e) { /* */ }
     const w = ctx.measureText('THE TOOTH FIGHTS BACK!').width; try { ctx.letterSpacing = '0px'; } catch (e) { /* */ } ctx.restore();

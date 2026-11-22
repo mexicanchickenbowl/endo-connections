@@ -7,9 +7,9 @@ separate outcome (sibling reel 41) and is deliberately not mentioned on screen.
 
 1. **Textbook chapter** — Yuan-Ling Ng and Kishor Gulabivala, "Evaluation of Outcomes", chapter 17 (Part III, Advanced
    Clinical Topics, starts p. 652) of Cohen's Pathways of the Pulp. Read from the resident's Google Drive PDF
-   (file id `1TU2gQQNG7nmbMveweMldfkVGIU6zMLte`, "Ch. 17 Evaluation of outcomes.pdf").
+   "Ch. 17 Evaluation of outcomes.pdf").
    - What the PDF text itself confirms: chapter number 17, title "Evaluation of Outcomes", authors "YUAN-LING NG and
-     KISHOR GULABIVALA", Part III, first page 652, Elsevier copyright (ClinicalKey download).
+     KISHOR GULABIVALA", Part III, first page 652, Elsevier copyright.
    - What it does not state: the book title and the edition number are not printed in the extracted text. Chapter 17 /
      p. 652 / Part III matches the 12th edition (in the 11th edition this chapter was chapter 11), so "12th ed." is
      taken from the resident's brief and is consistent with, but not printed in, the PDF.

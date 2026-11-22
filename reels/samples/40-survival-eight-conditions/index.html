@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>40 · Eight conditions associated with better tooth survival — celestial star chart</title>
+<link rel="stylesheet" href="../../vendor/fonts/fonts.css">
+<script src="../../lib/kit.js"></script>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+const { canvas, ctx } = Kit.createCanvas();
+const { seg, ease, clamp, lerp, W, H } = Kit;
+const TAU = Math.PI * 2;
+const C = { gold: '#ecc974', goldHi: '#fcecb8', goldLo: '#b98d3c', cream: '#f8f0da', red: '#ee7c5c' };
+const gold = (a = 1) => `rgba(236,201,116,${a})`;
+const goldHi = (a = 1) => `rgba(252,236,184,${a})`;
+const cream = (a = 1) => `rgba(248,240,218,${a})`;
+</script>
+<script src="pictos.js"></script>
+<script>
+/*
+ * Reel 40 — CELESTIAL STAR CHART. Eight stars are plotted one at a time and joined into a tooth-shaped constellation;
+ * each star is one of the eight conditions the chapter lists as associated with better tooth survival after root canal
+ * treatment (Ng & Gulabivala, Cohen's Pathways of the Pulp, ch. 17). Content and sources: RESEARCH.md / NOTES.md.
+ * Everything is a pure function of t (single 2D canvas).
+ */
+
+// ------------------------------------------------------------------ content
+const ITEMS = [
+  { lines: ['Nonmolar tooth'], list: ['Nonmolar tooth'] },
+  { lines: ['Mesial and distal', 'adjacent teeth present'], list: ['Mesial and distal adjacent teeth present'] },
+  { lines: ['Not distal-most', 'in the arch'], list: ['Not distal-most in the arch'] },
+  { lines: ['Molar with a', 'cast restoration'], list: ['Molar with a cast restoration'] },
+  { lines: ['No cast post', 'and core needed'], list: ['No cast post and core needed'] },
+  { lines: ['Not a fixed-prosthesis', 'abutment'], list: ['Not a fixed-prosthesis abutment'] },
+  { lines: ['No preoperative deep probing', 'defect, pain, sinus tract,', 'or perforation'], list: ['No preoperative deep probing defect,', 'pain, sinus tract, or perforation'] },
+  { lines: ['Canal terminus patency,', 'no root-filling extrusion'], list: ['Canal terminus patency,', 'no root-filling extrusion'] },
+];
+const SOURCE = 'Ng & Gulabivala, in Cohen’s Pathways of the Pulp, 12th ed., ch. 17 · Ng et al., Int Endod J 2011';
+
+// ------------------------------------------------------------------ timeline
+const T0 = 0.7, TR = 0.45;
+{
+  let tt = T0;
+  ITEMS.forEach((it, i) => {
+    it.n = i + 1;
+    it.t0 = tt;                                   // line starts drawing towards this star
+    it.lit = tt + 0.2;                            // star ignites
+    it.on = tt + TR;                              // caption fully visible from here ...
+    it.hold = Math.max(Kit.readSecs(it.lines.join(' ')), 1.7) + 0.03;
+    it.off = it.on + it.hold;                     // ... to here
+    tt = it.off;
+  });
+}
+const SUM0 = ITEMS[7].off;                        // summary transition starts
+const SUM1 = SUM0 + 0.85;                         // summary fully on
+const DUR = 30;
+const WRAP = DUR - 0.55;                          // fade back to the empty chart for a clean loop
+
+// ------------------------------------------------------------------ geometry
+const PL = { x0: 56, x1: 1024, y0: 506, yB: 1272, yS: 986 };          // chart plate (bottom: build / summary)
+const VIEW_B = { x: 540, y: 892, s: 1 }, VIEW_S = { x: 540, y: 752, s: 0.64 };
+// constellation vertices on the tooth outline (local px): cusp, fossa, cusp, cervical, apex, furcation, apex, cervical
+const P = [[-140, -290], [0, -232], [140, -290], [150, -78], [112, 300], [0, -2], [-112, 300], [-150, -78]];
+const NUM_OFF = [[-64, -12], [0, -60], [64, -12], [66, 6], [66, 8], [0, 94], [-66, 8], [-66, 6]];
+const MED = { x: 186, y: 1128, r: 106 };                              // pictogram medallion (build phase)
+const MINI = [[132, 758], [252, 758], [132, 878], [252, 878], [828, 758], [948, 758], [828, 878], [948, 878]];
+const DIAL = { x: 902, y: 620, r: 66 };
+const ROSE = { x: 152, y: 616, r: 52 };
+
+// ------------------------------------------------------------------ fonts
+const F = {
+  pf: (px, w = 700) => `${w} ${px}px "Playfair Display"`,
+  lb: (px, w = 400) => `${w} ${px}px "Libre Baskerville"`,
+  num: (px) => `700 ${px}px "Libre Baskerville"`,
+  gi: (px, w = 500) => `italic ${w} ${px}px "EB Garamond"`,
+  g: (px, w = 500) => `${w} ${px}px "EB Garamond"`,
+};
+function txt(s, x, y, font, color, align = 'left', ls = 0) {
+  ctx.font = font; ctx.fillStyle = color; ctx.textAlign = align; ctx.textBaseline = 'alphabetic';
+  ctx.letterSpacing = ls + 'px';
+  ctx.fillText(s, align === 'center' ? x + ls / 2 : x, y);
+  ctx.letterSpacing = '0px';
+}
+function tw(s, font, ls = 0) { ctx.font = font; ctx.letterSpacing = ls + 'px'; const w = ctx.measureText(s).width; ctx.letterSpacing = '0px'; return w; }
+function foil(y, px) {                                                // gold-foil gradient for a text line with baseline y
+  const g = ctx.createLinearGradient(0, y - px * 0.78, 0, y + px * 0.08);
+  g.addColorStop(0, '#fff3c8'); g.addColorStop(0.38, '#f3d384'); g.addColorStop(0.62, '#d2a44a'); g.addColorStop(0.8, '#e8c56e'); g.addColorStop(1, '#fbe6a6');
+  return g;
+}
+
+// ------------------------------------------------------------------ static sky (built once)
+let SKY, FAR = [];
+function fbm(x, y, s) { return 0.55 * Kit.noise2(x, y, s) + 0.28 * Kit.noise2(x * 2.1, y * 2.1, s + 7) + 0.17 * Kit.noise2(x * 4.3, y * 4.3, s + 13); }
+function buildSky() {
+  SKY = document.createElement('canvas'); SKY.width = W; SKY.height = H;
+  const g = SKY.getContext('2d');
+  const rg = g.createRadialGradient(540, 860, 60, 540, 900, 1260);
+  rg.addColorStop(0, '#1d2876'); rg.addColorStop(0.4, '#121a52'); rg.addColorStop(0.75, '#0a0f34'); rg.addColorStop(1, '#04061a');
+  g.fillStyle = rg; g.fillRect(0, 0, W, H);
+  // nebula / milky band, low-res noise upscaled
+  const nw = 135, nh = 240, n = document.createElement('canvas'); n.width = nw; n.height = nh;
+  const ng = n.getContext('2d'), id = ng.createImageData(nw, nh);
+  for (let y = 0; y < nh; y++) for (let x = 0; x < nw; x++) {
+    const f = clamp(0.5 + 0.5 * fbm(x / 26, y / 26, 3));
+    const d = (x * 0.92 - y * 0.42 + 30) / 46, band = Math.exp(-d * d);
+    const hue = clamp(0.5 + 0.5 * Kit.noise2(x / 40, y / 40, 21));
+    const a = clamp(f * f * 0.34 + band * (0.25 + 0.75 * f) * 0.46);
+    const c = Kit.mix([96, 88, 214], [70, 136, 226], hue), i = (y * nw + x) * 4;
+    id.data[i] = c[0]; id.data[i + 1] = c[1]; id.data[i + 2] = c[2]; id.data[i + 3] = a * 255;
+  }
+  ng.putImageData(id, 0, 0);
+  g.globalAlpha = 0.5; g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high'; g.drawImage(n, 0, 0, W, H); g.globalAlpha = 1;
+  // star dust
+  const r = Kit.rng(4040);
+  for (let i = 0; i < 2600; i++) {
+    const x = r() * W, y = r() * H, d = (x * 0.92 - y * 0.42 + 240) / 370, band = Math.exp(-d * d);
+    if (r() > 0.25 + 0.75 * band) continue;
+    g.fillStyle = `rgba(214,222,255,${0.05 + r() * 0.2})`; const s = r() < 0.85 ? 1 : 1.6; g.fillRect(x, y, s, s);
+  }
+  // vignette
+  const vg = g.createRadialGradient(540, 930, 520, 540, 930, 1240);
+  vg.addColorStop(0, 'rgba(2,3,14,0)'); vg.addColorStop(1, 'rgba(2,3,14,0.72)');
+  g.fillStyle = vg; g.fillRect(0, 0, W, H);
+  // drifting stars: three parallax depths
+  const r2 = Kit.rng(808);
+  const counts = [170, 84, 30];
+  counts.forEach((cnt, L) => { for (let i = 0; i < cnt; i++) FAR.push({ L, x: -40 + r2() * (W + 80), y: -40 + r2() * (H + 80), r: [0.7, 1.15, 1.8][L] * (0.75 + 0.6 * r2()), a: [0.34, 0.5, 0.7][L] * (0.6 + 0.4 * r2()), k: 2 + Math.floor(r2() * 5), ph: r2() * TAU, warm: r2() < 0.3 }); });
+}
+function drawFar(t) {
+  const ph = TAU * t / DUR;
+  for (const s of FAR) {
+    const A = [5, 13, 24][s.L];
+    const x = s.x + A * Math.cos(ph), y = s.y + A * 0.62 * Math.sin(ph);
+    const a = s.a * (0.78 + 0.22 * Math.sin(s.k * ph + s.ph));
+    ctx.fillStyle = s.warm ? `rgba(255,236,190,${a})` : `rgba(220,228,255,${a})`;
+    ctx.beginPath(); ctx.arc(x, y, s.r, 0, TAU); ctx.fill();
+    if (s.L === 2 && s.r > 2) {
+      ctx.strokeStyle = s.warm ? `rgba(255,236,190,${a * 0.5})` : `rgba(220,228,255,${a * 0.5})`; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x - s.r * 3.4, y); ctx.lineTo(x + s.r * 3.4, y); ctx.moveTo(x, y - s.r * 3.4); ctx.lineTo(x, y + s.r * 3.4); ctx.stroke();
+    }
+  }
+}
+
+// ------------------------------------------------------------------ small drawing helpers
+function line(x0, y0, x1, y1, col, lw, cap = 'round') { ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineCap = cap; ctx.stroke(); }
+function ring(x, y, r, col, lw) { ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.stroke(); }
+function diamond(x, y, r, col) { ctx.beginPath(); ctx.moveTo(x, y - r); ctx.lineTo(x + r * 0.62, y); ctx.lineTo(x, y + r); ctx.lineTo(x - r * 0.62, y); ctx.closePath(); ctx.fillStyle = col; ctx.fill(); }
+/** eight-pointed atlas star: four long rays, four short */
+function starPath(x, y, r, rot = 0, inner = 0.2, short = 0.56) {
+  ctx.beginPath();
+  for (let i = 0; i < 16; i++) {
+    const a = rot + (i * TAU) / 16 - Math.PI / 2;
+    const rr = i % 2 ? r * inner : (i % 4 === 0 ? r : r * short);
+    ctx[i ? 'lineTo' : 'moveTo'](x + rr * Math.cos(a), y + rr * Math.sin(a));
+  }
+  ctx.closePath();
+}
+function glow(x, y, r, a, warm = true) {
+  if (a <= 0.003) return;
+  const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+  const c = warm ? '255,226,150' : '200,214,255';
+  g.addColorStop(0, `rgba(${c},${0.55 * a})`); g.addColorStop(0.3, `rgba(${c},${0.2 * a})`); g.addColorStop(1, `rgba(${c},0)`);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill();
+}
+
+// ------------------------------------------------------------------ title block (steady for the whole reel)
+function drawTitle() {
+  const cx = 540;
+  // L1
+  const f1 = F.pf(44, 600), w1 = tw('EIGHT CONDITIONS', f1, 9);
+  ctx.fillStyle = foil(290, 44); txt('EIGHT CONDITIONS', cx, 290, f1, ctx.fillStyle, 'center', 9);
+  for (const sgn of [-1, 1]) {
+    const xa = cx + sgn * (w1 / 2 + 26), xb = cx + sgn * 462;
+    line(xa + sgn * 22, 275, xb, 275, gold(0.7), 1.6, 'butt'); line(xa + sgn * 22, 281, xb - sgn * 40, 281, gold(0.4), 1, 'butt');
+    starPath(xa, 275, 13, 0, 0.22, 0.5); ctx.fillStyle = C.gold; ctx.fill();
+    diamond(xb, 275, 6, C.gold);
+  }
+  // L2
+  txt('associated with better', cx, 340, F.gi(42, 500), cream(0.96), 'center');
+  // L3
+  ctx.fillStyle = foil(424, 88); txt('TOOTH SURVIVAL', cx, 424, F.pf(88, 700), ctx.fillStyle, 'center', 5);
+  // L4
+  const a = 'after root canal treatment', b = 'associations, not guarantees', f4 = F.gi(33, 500), f4b = F.gi(33, 600);
+  const wa = tw(a, f4), wb = tw(b, f4b), gap = 44, x0 = cx - (wa + gap + wb) / 2;
+  txt(a, x0, 476, f4, cream(0.92));
+  diamond(x0 + wa + gap / 2, 466, 5.5, C.gold);
+  txt(b, x0 + wa + gap, 476, f4b, C.goldHi);
+}
+
+// ------------------------------------------------------------------ chart plate: border, graduated scale, grid
+function drawPlate(t, yb, view) {
+  const { x0, x1, y0 } = PL;
+  // inner sky tint
+  ctx.save();
+  ctx.beginPath(); ctx.rect(x0, y0, x1 - x0, yb - y0); ctx.clip();
+  const pg = ctx.createRadialGradient(view.x, view.y, 20, view.x, view.y, 620);
+  pg.addColorStop(0, 'rgba(58,74,178,0.30)'); pg.addColorStop(0.6, 'rgba(30,40,120,0.12)'); pg.addColorStop(1, 'rgba(8,10,40,0.20)');
+  ctx.fillStyle = pg; ctx.fillRect(x0, y0, x1 - x0, yb - y0);
+  // coordinate circles + hour lines
+  const s = view.s;
+  for (let k = 3; k <= 8; k++) {
+    ctx.beginPath(); ctx.arc(view.x, view.y, 104 * k * s, 0, TAU);
+    ctx.setLineDash(k % 2 ? [] : [3, 9]); ctx.strokeStyle = gold(k % 2 ? 0.14 : 0.2); ctx.lineWidth = 1.1; ctx.stroke();
+  }
+  ctx.setLineDash([]);
+  for (let i = 0; i < 12; i++) {
+    const a = (i * TAU) / 12 + 0.26;
+    line(view.x + 312 * s * Math.cos(a), view.y + 312 * s * Math.sin(a), view.x + 760 * Math.cos(a), view.y + 760 * Math.sin(a), gold(0.1), 1, 'butt');
+  }
+  // graduated ring
+  const R = 416 * s;
+  ctx.beginPath();
+  for (let i = 0; i < 180; i++) {
+    const a = (i * TAU) / 180, l = i % 15 === 0 ? 15 : i % 5 === 0 ? 9 : 5;
+    ctx.moveTo(view.x + R * Math.cos(a), view.y + R * Math.sin(a)); ctx.lineTo(view.x + (R + l * s) * Math.cos(a), view.y + (R + l * s) * Math.sin(a));
+  }
+  ctx.strokeStyle = gold(0.3); ctx.lineWidth = 1; ctx.stroke();
+  // ecliptic
+  ctx.save(); ctx.translate(view.x, view.y); ctx.rotate(-0.34); ctx.beginPath(); ctx.ellipse(0, 0, 470 * s, 168 * s, 0, 0, TAU);
+  ctx.setLineDash([12, 8]); ctx.strokeStyle = gold(0.22); ctx.lineWidth = 1.3; ctx.stroke(); ctx.restore();
+  ctx.setLineDash([]);
+  ctx.restore();
+
+  // border: double rule with a graduated scale between
+  ctx.strokeStyle = gold(0.95); ctx.lineWidth = 2.6; ctx.strokeRect(x0, y0, x1 - x0, yb - y0);
+  ctx.strokeStyle = gold(0.6); ctx.lineWidth = 1; ctx.strokeRect(x0 + 13, y0 + 13, x1 - x0 - 26, yb - y0 - 26);
+  ctx.beginPath();
+  let i = 0;
+  for (let x = x0 + 24; x <= x1 - 24; x += 11, i++) { const l = i % 5 === 0 ? 9 : 5; ctx.moveTo(x, y0 + 2); ctx.lineTo(x, y0 + 2 + l); ctx.moveTo(x, yb - 2); ctx.lineTo(x, yb - 2 - l); }
+  i = 0;
+  for (let y = y0 + 24; y <= yb - 24; y += 11, i++) { const l = i % 5 === 0 ? 9 : 5; ctx.moveTo(x0 + 2, y); ctx.lineTo(x0 + 2 + l, y); ctx.moveTo(x1 - 2, y); ctx.lineTo(x1 - 2 - l, y); }
+  ctx.strokeStyle = gold(0.62); ctx.lineWidth = 1; ctx.stroke();
+  for (const [x, y] of [[x0, y0], [x1, y0], [x0, yb], [x1, yb]]) {                 // corner bosses
+    ctx.fillStyle = '#0b1140'; ctx.fillRect(x - 12, y - 12, 24, 24);
+    ctx.strokeStyle = gold(0.95); ctx.lineWidth = 2; ctx.strokeRect(x - 12, y - 12, 24, 24);
+    starPath(x, y, 10, 0, 0.26, 0.5); ctx.fillStyle = C.gold; ctx.fill();
+  }
+}
+
+// ------------------------------------------------------------------ compass rose + counter dial
+function drawRose(t) {
+  const { x, y, r } = ROSE;
+  ring(x, y, r, gold(0.55), 1.4); ring(x, y, r - 7, gold(0.3), 1);
+  ctx.beginPath();
+  for (let i = 0; i < 32; i++) { const a = (i * TAU) / 32, l = i % 4 === 0 ? 7 : 4; ctx.moveTo(x + (r - 7) * Math.cos(a), y + (r - 7) * Math.sin(a)); ctx.lineTo(x + (r - 7 + l) * Math.cos(a), y + (r - 7 + l) * Math.sin(a)); }
+  ctx.strokeStyle = gold(0.5); ctx.lineWidth = 1; ctx.stroke();
+  starPath(x, y, r - 11, 0, 0.16, 0.6);
+  ctx.fillStyle = 'rgba(236,201,116,0.2)'; ctx.fill(); ctx.strokeStyle = gold(0.85); ctx.lineWidth = 1.4; ctx.lineJoin = 'miter'; ctx.stroke();
+  ctx.beginPath();                                                     // half-shaded rays, engraver style
+  for (let i = 0; i < 4; i++) { const a = (i * TAU) / 4 - Math.PI / 2, a2 = a + TAU / 16; ctx.moveTo(x, y); ctx.lineTo(x + (r - 11) * Math.cos(a), y + (r - 11) * Math.sin(a)); ctx.lineTo(x + (r - 11) * 0.16 * Math.cos(a2), y + (r - 11) * 0.16 * Math.sin(a2)); ctx.closePath(); }
+  ctx.fillStyle = gold(0.75); ctx.fill();
+  ctx.beginPath(); ctx.arc(x, y, 3.2, 0, TAU); ctx.fillStyle = '#0b1140'; ctx.fill();
+}
+function drawDial(t, nLit, litU, numA = 1, pipA = 1) {
+  const { x, y, r } = DIAL;
+  ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = 'rgba(9,13,48,0.82)'; ctx.fill();
+  ring(x, y, r, gold(0.9), 2); ring(x, y, r - 6, gold(0.4), 1);
+  for (let i = 0; i < 8; i++) {                                         // eight pips around the rim
+    const a = -Math.PI / 2 + (i * TAU) / 8 + TAU / 16, px = x + (r + 15) * Math.cos(a), py = y + (r + 15) * Math.sin(a);
+    const on = (i < nLit - 1 ? 1 : i === nLit - 1 ? litU : 0) * pipA;
+    if (on < 1) ring(px, py, 3.4, gold(0.6 * (1 - on)), 1.3);
+    if (on > 0) { glow(px, py, 16, 0.7 * on); starPath(px, py, 5 + 5.5 * on, 0, 0.3, 0.55); ctx.fillStyle = goldHi(0.4 + 0.6 * on); ctx.fill(); }
+  }
+  const big = String(nLit), fb = F.num(60), fs = F.lb(32, 400);
+  const wb = tw(big, fb), ws = tw('/ 8', fs), gap = 9, x0 = x - (wb + gap + ws) / 2;
+  ctx.save(); ctx.globalAlpha = numA; ctx.fillStyle = foil(y + 21, 60); txt(big, x0, y + 21, fb, ctx.fillStyle); ctx.restore();
+  txt('/ 8', x0 + wb + gap, y + 19, fs, cream(0.95));
+}
+
+// ------------------------------------------------------------------ armillary sphere (decoration, build phase)
+const ARM = { x: 884, y: 986, r: 74 };
+function drawArmillary(t, a) {
+  if (a <= 0.004) return;
+  const { x, y, r } = ARM, ph = TAU * t / DUR;
+  ctx.save(); ctx.globalAlpha = a; ctx.lineCap = 'round';
+  // stand
+  line(x, y + r, x, y + r + 26, gold(0.8), 2.2);
+  ctx.beginPath(); ctx.moveTo(x - 30, y + r + 40); ctx.quadraticCurveTo(x, y + r + 16, x + 30, y + r + 40); ctx.closePath(); ctx.fillStyle = gold(0.28); ctx.fill(); ctx.strokeStyle = gold(0.8); ctx.lineWidth = 1.4; ctx.stroke();
+  line(x - 38, y + r + 40, x + 38, y + r + 40, gold(0.8), 2);
+  // rings
+  ring(x, y, r, gold(0.9), 2); ring(x, y, r - 5, gold(0.5), 1);
+  ctx.save(); ctx.translate(x, y); ctx.rotate(-0.41);
+  ctx.strokeStyle = gold(0.8); ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.ellipse(0, 0, r - 5, (r - 5) * 0.3, 0, 0, TAU); ctx.stroke();                 // equator
+  ctx.beginPath(); ctx.ellipse(0, -(r - 5) * 0.52, (r - 5) * 0.85, (r - 5) * 0.2, 0, 0, TAU); ctx.strokeStyle = gold(0.45); ctx.lineWidth = 1; ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(0, (r - 5) * 0.52, (r - 5) * 0.85, (r - 5) * 0.2, 0, 0, TAU); ctx.stroke();
+  for (const o of [0, Math.PI / 2]) {                                                                  // slowly turning meridians
+    const c = Math.abs(Math.cos(ph + o + 0.5));
+    ctx.beginPath(); ctx.ellipse(0, 0, Math.max(1.2, (r - 5) * c), r - 5, 0, 0, TAU); ctx.strokeStyle = gold(0.3 + 0.4 * c); ctx.lineWidth = 1.3; ctx.stroke();
+  }
+  line(0, -(r + 15), 0, r + 15, gold(0.85), 1.6);                                                     // axis
+  for (const s of [-1, 1]) { ctx.beginPath(); ctx.arc(0, s * (r + 17), 3.4, 0, TAU); ctx.fillStyle = C.gold; ctx.fill(); }
+  ctx.restore();
+  ctx.save(); ctx.translate(x, y); ctx.rotate(0.2);
+  ctx.beginPath(); ctx.ellipse(0, 0, r - 5, (r - 5) * 0.34, 0, 0, TAU); ctx.setLineDash([5, 5]); ctx.strokeStyle = gold(0.6); ctx.lineWidth = 1.2; ctx.stroke(); ctx.setLineDash([]);   // ecliptic band
+  ctx.restore();
+  ctx.beginPath(); ctx.arc(x, y, 7.5, 0, TAU); const g = ctx.createRadialGradient(x - 2, y - 2, 0, x, y, 8); g.addColorStop(0, '#fff3c8'); g.addColorStop(1, '#c79a3f'); ctx.fillStyle = g; ctx.fill();
+  ctx.restore();
+}
+
+// ------------------------------------------------------------------ engraved tooth figure behind the constellation
+function toothFigure(ox = 0, oy = 0, begin = true) {
+  if (begin) ctx.beginPath();
+  const M = (x, y) => ctx.moveTo(x + ox, y + oy), B = (a, b, c, d, e, f) => ctx.bezierCurveTo(a + ox, b + oy, c + ox, d + oy, e + ox, f + oy), Q = (a, b, c, d) => ctx.quadraticCurveTo(a + ox, b + oy, c + ox, d + oy);
+  M(-150, -78);
+  B(-176, -112, -196, -190, -180, -252); Q(-170, -288, -140, -290);       // mesial wall, cusp
+  B(-98, -292, -52, -262, 0, -232); B(52, -262, 98, -292, 140, -290);     // occlusal table, central fossa
+  Q(170, -288, 180, -252); B(196, -190, 176, -112, 150, -78);             // distal cusp, wall, cervical line
+  B(158, 20, 150, 190, 121, 290); Q(114, 304, 105, 294);                  // distal root, apex
+  B(84, 225, 62, 70, 0, -2);                                              // up to the furcation
+  B(-62, 70, -84, 225, -105, 294); Q(-114, 304, -121, 290);
+  B(-150, 190, -158, 20, -150, -78);
+  ctx.closePath();
+}
+function drawFigure(view, a) {
+  if (a <= 0.004) return;
+  ctx.save(); ctx.translate(view.x, view.y); ctx.scale(view.s, view.s); ctx.globalAlpha = a;
+  toothFigure(); ctx.fillStyle = 'rgba(132,150,240,0.2)'; ctx.fill();
+  // engraver's shading: hatch only a rim along the lower-right edges
+  ctx.save(); toothFigure(); ctx.clip();
+  toothFigure(); toothFigure(-30, -10, false); ctx.clip('evenodd');
+  ctx.beginPath(); for (let d = -700; d <= 700; d += 8) { ctx.moveTo(d - 330, 330); ctx.lineTo(d + 330, -330); }
+  ctx.strokeStyle = gold(0.85); ctx.lineWidth = 1.2; ctx.stroke();
+  ctx.restore();
+  ctx.save(); toothFigure(); ctx.clip();
+  toothFigure(); toothFigure(-13, -5, false); ctx.clip('evenodd');
+  ctx.beginPath(); for (let d = -700; d <= 700; d += 8) { ctx.moveTo(d + 330, 330); ctx.lineTo(d - 330, -330); }
+  ctx.strokeStyle = gold(0.7); ctx.lineWidth = 1.1; ctx.stroke();
+  ctx.restore();
+  toothFigure(); ctx.strokeStyle = gold(1); ctx.lineWidth = 2.2; ctx.lineJoin = 'round'; ctx.stroke();
+  // cervical line, pulp chamber and canals (dotted)
+  ctx.beginPath(); ctx.moveTo(-150, -78); ctx.bezierCurveTo(-90, -58, 90, -58, 150, -78); ctx.strokeStyle = gold(0.75); ctx.lineWidth = 1.3; ctx.stroke();
+  ctx.setLineDash([2, 7]); ctx.lineCap = 'round'; ctx.strokeStyle = gold(1); ctx.lineWidth = 1.9;
+  ctx.beginPath();
+  ctx.moveTo(-84, -196); ctx.bezierCurveTo(-52, -160, 52, -160, 84, -196);
+  ctx.bezierCurveTo(96, -150, 84, -100, 90, -50); ctx.bezierCurveTo(104, 60, 114, 190, 112, 290);
+  ctx.moveTo(-84, -196); ctx.bezierCurveTo(-96, -150, -84, -100, -90, -50); ctx.bezierCurveTo(-104, 60, -114, 190, -112, 290);
+  ctx.moveTo(-62, -64); ctx.bezierCurveTo(-30, -84, 30, -84, 62, -64);
+  ctx.stroke(); ctx.setLineDash([]);
+  ctx.restore();
+}
+
+// ------------------------------------------------------------------ constellation
+const toScreen = (view, p) => [view.x + p[0] * view.s, view.y + p[1] * view.s];
+function drawEdge(view, a, b, u, alpha) {                               // gold line from star a to star b, drawn by u
+  if (u <= 0 || alpha <= 0) return;
+  const A = toScreen(view, P[a]), B = toScreen(view, P[b]);
+  const dx = B[0] - A[0], dy = B[1] - A[1], L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, gap = 25 * (0.55 + 0.45 * view.s);
+  const x0 = A[0] + ux * gap, y0 = A[1] + uy * gap, len = (L - 2 * gap) * u;
+  line(x0, y0, x0 + ux * len, y0 + uy * len, `rgba(255,226,150,${0.18 * alpha})`, 7, 'round');
+  line(x0, y0, x0 + ux * len, y0 + uy * len, goldHi(0.95 * alpha), 2.3, 'round');
+  if (u < 1) { glow(x0 + ux * len, y0 + uy * len, 20, 0.9 * alpha); }
+}
+function drawStar(view, i, t, lit, cur, alpha) {
+  const [x, y] = toScreen(view, P[i]), sc = 0.6 + 0.4 * view.s;
+  if (lit <= 0) {                                                       // plotted position, not yet charted
+    ring(x, y, 7 * sc, gold(0.55 * alpha), 1.4); ctx.beginPath(); ctx.arc(x, y, 1.8, 0, TAU); ctx.fillStyle = gold(0.7 * alpha); ctx.fill();
+    line(x - 13 * sc, y, x - 9 * sc, y, gold(0.4 * alpha), 1); line(x + 9 * sc, y, x + 13 * sc, y, gold(0.4 * alpha), 1);
+    line(x, y - 13 * sc, x, y - 9 * sc, gold(0.4 * alpha), 1); line(x, y + 9 * sc, x, y + 13 * sc, gold(0.4 * alpha), 1);
+    return;
+  }
+  const pop = ease.outBack(clamp(lit)), breathe = 0.5 + 0.5 * Math.sin(TAU * (t * 0.55 + i * 0.13));
+  const r = (19 + 7 * cur) * sc * pop;
+  const rip = seg(t, ITEMS[i].lit, ITEMS[i].lit + 0.9, ease.out);        // one soft ripple on ignition
+  if (rip > 0 && rip < 1) ring(x, y, (12 + 62 * rip) * sc, goldHi(0.5 * (1 - rip) * alpha), 1.6);
+  glow(x, y, (44 + 34 * cur + 6 * breathe * cur) * sc, (0.55 + 0.4 * cur) * alpha * clamp(lit));
+  ctx.save(); ctx.globalAlpha = alpha;
+  if (cur > 0.01) {                                                      // slow turning rays on the current star
+    ctx.save(); ctx.translate(x, y); ctx.rotate(t * 0.22);
+    ctx.beginPath(); for (let k = 0; k < 8; k++) { const a = (k * TAU) / 8 + TAU / 16; ctx.moveTo(31 * sc * Math.cos(a), 31 * sc * Math.sin(a)); ctx.lineTo((42 + 3 * breathe) * sc * Math.cos(a), (42 + 3 * breathe) * sc * Math.sin(a)); }
+    ctx.strokeStyle = goldHi(0.7 * cur); ctx.lineWidth = 1.6; ctx.lineCap = 'round'; ctx.stroke(); ctx.restore();
+  }
+  starPath(x, y, r, 0, 0.2, 0.55);
+  const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, '#fffdf2'); g.addColorStop(0.35, '#fde9ad'); g.addColorStop(1, '#e2b659');
+  ctx.fillStyle = g; ctx.fill();
+  ctx.beginPath(); ctx.arc(x, y, 2.6 * sc, 0, TAU); ctx.fillStyle = '#ffffff'; ctx.fill();
+  ctx.restore();
+}
+function drawNumeral(view, i, a, cur) {
+  if (a <= 0.004) return;
+  const [x, y] = toScreen(view, P[i]), k = 0.55 + 0.45 * view.s, px = lerp(38, 52, (view.s - 0.64) / 0.36);
+  const nx = x + NUM_OFF[i][0] * k, ny = y + NUM_OFF[i][1] * k + px * 0.35;
+  ctx.save(); ctx.globalAlpha = a * (0.82 + 0.18 * cur);
+  ctx.fillStyle = foil(ny, px); txt(String(i + 1), nx, ny, F.num(px), ctx.fillStyle, 'center');
+  ctx.restore();
+}
+
+// ------------------------------------------------------------------ medallions
+function drawMedallion(x, y, r, a, t, fillA = 0.9) {
+  if (a <= 0.004) return;
+  ctx.save(); ctx.globalAlpha = a;
+  ctx.beginPath(); ctx.arc(x, y, r, 0, TAU);
+  const g = ctx.createRadialGradient(x, y - r * 0.3, r * 0.1, x, y, r); g.addColorStop(0, `rgba(30,40,118,${fillA})`); g.addColorStop(1, `rgba(7,10,40,${fillA})`);
+  ctx.fillStyle = g; ctx.fill();
+  ring(x, y, r, gold(0.95), r > 80 ? 2.4 : 1.8); ring(x, y, r - (r > 80 ? 8 : 5), gold(0.45), 1);
+  if (r > 80) {
+    ctx.beginPath();
+    for (let i = 0; i < 72; i++) { const a2 = (i * TAU) / 72 + t * 0.05, l = i % 6 === 0 ? 8 : 4; ctx.moveTo(x + (r - 8) * Math.cos(a2), y + (r - 8) * Math.sin(a2)); ctx.lineTo(x + (r - 8 + l) * Math.cos(a2), y + (r - 8 + l) * Math.sin(a2)); }
+    ctx.strokeStyle = gold(0.6); ctx.lineWidth = 1; ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ------------------------------------------------------------------ caption (build) and catalog list (summary)
+const CAP = { numX: 140, textX: 248, maxW: 700, yMid: 1410 };
+function fitLines(lines, maxW, start, min) { let px = start; for (; px > min; px -= 1) { const f = F.lb(px, 400); if (lines.every((l) => tw(l, f) <= maxW)) break; } return px; }
+function drawCaption(it, a) {
+  if (a <= 0.004) return;
+  ctx.save(); ctx.globalAlpha = a;
+  const slide = (1 - a) * 14;
+  // numeral
+  ctx.fillStyle = foil(1468, 160); txt(String(it.n), CAP.numX, 1468, F.num(160), ctx.fillStyle, 'center');
+  // rule
+  line(224, 1326, 224, 1494, gold(0.75), 1.6, 'butt'); diamond(224, 1410, 7, C.gold); diamond(224, 1322, 4, C.gold); diamond(224, 1498, 4, C.gold);
+  // name
+  const px = it.px || (it.px = fitLines(it.lines, CAP.maxW, 56, 40)), lh = px * 1.3;
+  const y0 = CAP.yMid - ((it.lines.length - 1) * lh) / 2 + px * 0.34;
+  it.lines.forEach((l, i) => txt(l, CAP.textX + slide, y0 + i * lh, F.lb(px, 400), C.cream));
+  ctx.restore();
+}
+const LIST = { numX: 100, textX: 142, y0: 1012, single: 55, extra: 45 };
+{ let y = LIST.y0; ITEMS.forEach((it) => { it.ly = y; y += LIST.single + (it.list.length - 1) * LIST.extra; }); }
+function drawList(t, aAll) {
+  ITEMS.forEach((it, i) => {
+    const a = aAll * seg(t, SUM0 + 0.46 + 0.026 * i, SUM0 + 0.66 + 0.026 * i, ease.out);
+    if (a <= 0.004) return;
+    ctx.save(); ctx.globalAlpha = a;
+    const yb = it.ly + 40, dx = (1 - a) * 18;
+    ctx.fillStyle = foil(yb + 1, 40); txt(String(it.n), LIST.numX + dx, yb + 1, F.num(40), ctx.fillStyle, 'center');
+    it.list.forEach((l, j) => txt(l, LIST.textX + dx, yb + j * LIST.extra, F.lb(36, 400), C.cream));
+    ctx.restore();
+  });
+}
+function drawSource() {
+  let px = 24; while (px > 20 && tw(SOURCE, F.g(px, 400)) > 880) px -= 0.5;
+  txt(SOURCE, 70, 1569, F.g(px, 400), 'rgba(226,222,236,0.86)');
+}
+
+// ------------------------------------------------------------------ frame
+function render(t) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+  ctx.drawImage(SKY, 0, 0);
+  drawFar(t);
+
+  // phase values
+  const wrap = seg(t, WRAP + 0.15, DUR, ease.inOut);                           // 0 → 1 over the loop tail
+  const sum = seg(t, SUM0 + 0.04, SUM0 + 0.56, ease.inOut) * (1 - wrap);       // plate folds up for the catalog
+  const yb = lerp(PL.yB, PL.yS, sum);
+  const view = { x: lerp(VIEW_B.x, VIEW_S.x, sum), y: lerp(VIEW_B.y, VIEW_S.y, sum), s: lerp(VIEW_B.s, VIEW_S.s, sum) };
+  const chartA = 1 - seg(t, WRAP + 0.05, WRAP + 0.4);                          // constellation fades for the loop
+  let nLit = 0, litU = 1;
+  ITEMS.forEach((it) => { if (t >= it.lit) { nLit = it.n; litU = seg(t, it.lit, it.lit + 0.35, ease.out); } });
+  if (t >= WRAP) { litU = 1; }
+
+  drawTitle();
+  drawPlate(t, yb, view);
+  drawRose(t);
+
+  // engraved figure grows clearer as the constellation fills in
+  const figA = 0.13 + 0.2 * chartA * ITEMS.reduce((s, it) => s + seg(t, it.lit, it.lit + 0.6) / 8, 0);
+  drawFigure(view, figA);
+
+  // edges
+  for (let i = 1; i < 8; i++) drawEdge(view, i - 1, i, seg(t, ITEMS[i].t0, ITEMS[i].t0 + 0.3, ease.inOut), chartA);
+  drawEdge(view, 7, 0, seg(t, ITEMS[7].lit + 0.45, ITEMS[7].lit + 0.95, ease.inOut), chartA);   // the outline closes
+  // shimmer travelling round the finished outline
+  if (t > SUM1 && chartA > 0) {
+    const q = ((t - SUM1) * 0.42) % 1, e = Math.floor(q * 8), f = q * 8 - e;
+    const A = toScreen(view, P[e]), B = toScreen(view, P[(e + 1) % 8]);
+    glow(lerp(A[0], B[0], f), lerp(A[1], B[1], f), 26, 0.75 * chartA * Math.min(1, (t - SUM1) * 2) * (1 - seg(t, WRAP - 0.4, WRAP)));
+  }
+  // stars + numerals
+  ITEMS.forEach((it, i) => {
+    const lit = t >= it.lit ? seg(t, it.lit, it.lit + 0.4) : 0;
+    const cur = seg(t, it.lit, it.lit + 0.3) * (1 - seg(t, it.off, it.off + 0.3));
+    if (lit > 0 && chartA < 1) drawStar(view, i, t, 0, 0, 1 - chartA);   // placeholder returns under the fading star
+    drawStar(view, i, t, lit, cur, lit > 0 ? chartA : 1);
+    drawNumeral(view, i, seg(t, it.lit + 0.05, it.lit + 0.35) * chartA, cur);
+  });
+
+  // armillary sphere keeps the right of the chart company until the catalog arrives
+  drawArmillary(t, 0.55 * (1 - seg(t, SUM0, SUM0 + 0.3)) + 0.55 * seg(t, WRAP + 0.25, DUR));
+
+  // counter
+  drawDial(t, t >= WRAP + 0.4 ? 0 : nLit, t >= WRAP ? 1 : litU, t < WRAP ? 1 : t < WRAP + 0.4 ? 1 - seg(t, WRAP + 0.05, WRAP + 0.3) : seg(t, WRAP + 0.4, DUR - 0.03), chartA);
+
+  // pictogram medallion (build phase)
+  const medA = seg(t, ITEMS[0].lit, ITEMS[0].lit + 0.3) * (1 - seg(t, SUM0, SUM0 + 0.3));
+  if (medA > 0) {
+    drawMedallion(MED.x, MED.y, MED.r, medA, t);
+    ITEMS.forEach((it) => {
+      const a = seg(t, it.on - 0.28, it.on, ease.out) * (1 - seg(t, it.off, it.off + 0.17));
+      if (a <= 0.004) return;
+      ctx.save(); ctx.beginPath(); ctx.arc(MED.x, MED.y, MED.r - 10, 0, TAU); ctx.clip();
+      PIC.draw(it.n, MED.x, MED.y, (0.94 + 0.06 * a) * 1.14, a * medA, 1);
+      ctx.restore();
+    });
+  }
+  // summary: eight small medallions flank the constellation
+  if (t > SUM0) {
+    ITEMS.forEach((it, i) => {
+      const a = seg(t, SUM0 + 0.4 + 0.03 * i, SUM0 + 0.64 + 0.03 * i, ease.out) * chartA;
+      if (a <= 0.004) return;
+      const [x, y] = MINI[i], r = 52;
+      drawMedallion(x, y, r, a, t, 0.8);
+      ctx.save(); ctx.beginPath(); ctx.arc(x, y, r - 5, 0, TAU); ctx.clip();
+      PIC.draw(it.n, x, y, 0.5, a, 1.45);
+      ctx.restore();
+      ctx.save(); ctx.globalAlpha = a;                                   // numeral tag
+      ctx.beginPath(); ctx.arc(x - 38, y - 38, 19, 0, TAU); ctx.fillStyle = '#0a0f3a'; ctx.fill(); ring(x - 38, y - 38, 19, gold(0.95), 1.6);
+      ctx.fillStyle = foil(y - 27, 30); txt(String(it.n), x - 38, y - 27, F.num(30), ctx.fillStyle, 'center');
+      ctx.restore();
+    });
+  }
+
+  // handle, engraver's-signature style, inside the plate
+  txt('@natebrooksendo', 950, yb - 30, F.gi(27, 500), gold(0.82), 'right');
+
+  // caption for the current star
+  ITEMS.forEach((it) => drawCaption(it, seg(t, it.on - 0.28, it.on, ease.out) * (1 - seg(t, it.off, it.off + 0.17))));
+  // catalog of all eight
+  if (t > SUM0) drawList(t, 1 - seg(t, WRAP, WRAP + 0.2));
+
+  drawSource();
+}
+
+window.REEL = {
+  title: 'Eight conditions associated with better tooth survival',
+  duration: DUR,
+  poster: 28,
+  canvas,
+  fonts: [
+    '700 88px "Playfair Display"', '600 44px "Playfair Display"',
+    '400 40px "Libre Baskerville"', '700 60px "Libre Baskerville"',
+    'italic 500 40px "EB Garamond"', 'italic 600 33px "EB Garamond"', '400 24px "EB Garamond"',
+  ],
+  setup() { buildSky(); },
+  render,
+};
+Kit.boot(REEL);
+</script>
+</body>
+</html>

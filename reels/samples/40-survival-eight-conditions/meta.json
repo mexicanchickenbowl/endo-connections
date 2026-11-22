@@ -1,0 +1,47 @@
+{
+  "id": "40",
+  "slug": "40-survival-eight-conditions",
+  "title": "8 conditions linked to better tooth survival",
+  "style": "Celestial star chart",
+  "topic": "The eight conditions Ng & Gulabivala list as associated with better tooth survival after root canal treatment (survival, not healing).",
+  "duration": 30.0,
+  "claims": [
+    {
+      "claim": "1 · Nonmolar tooth (associated with better tooth survival after root canal treatment; associations, not guarantees)",
+      "source": "Ng & Gulabivala, 'Evaluation of Outcomes', ch. 17 in Cohen's Pathways of the Pulp, 12th ed., survival summary list + Fig. 17.27 (pooled OR 1.4, 95% CI 1.1-1.6); chapter text read. Underlying: Ng, Mann & Gulabivala, Int Endod J 2010;43:171-89 (PMID 20158529); abstract"
+    },
+    {
+      "claim": "2 · Mesial and distal adjacent teeth present",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list + Fig. 17.28 (pooled OR 2.6, 95% CI 1.8-3.7); chapter text read. Ng, Mann & Gulabivala, Int Endod J 2011;44:610-25 (PMID 21366627): 'proximal contacts with both mesial and distal adjacent teeth'; abstract"
+    },
+    {
+      "claim": "3 · Not distal-most in the arch",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list; chapter text read. Ng et al., Int Endod J 2011;44:610-25 (PMID 21366627): 'terminal location of the tooth'; abstract"
+    },
+    {
+      "claim": "4 · Molar with a cast restoration",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list 'Teeth (molar) with cast restorations after treatment' + Fig. 17.29 (cast vs plastic, pooled OR 3.5, 95% CI 2.6-4.7); chapter text read. Ng et al. 2011 (PMID 21366627): cast vs temporary restoration, not limited to molars; abstract"
+    },
+    {
+      "claim": "5 · No cast post and core needed",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list; chapter text read. Ng et al., Int Endod J 2011;44:610-25 (PMID 21366627): 'presence of cast post and core'; abstract"
+    },
+    {
+      "claim": "6 · Not a fixed-prosthesis abutment",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list; chapter text read (body text: in Ng 2011 the abutment sample, n = 94, was too small to reach significance). Ng, Mann & Gulabivala, Int Endod J 2010;43:171-89 (PMID 20158529): not an abutment for removable or fixed prosthesis; abstract"
+    },
+    {
+      "claim": "7 · No preoperative deep probing defect, pain, sinus tract, or perforation",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list; chapter text read. Ng et al., Int Endod J 2011;44:610-25 (PMID 21366627): 'narrow but deep periodontal probing depth; pain; discharging sinus; and iatrogenic perforation (for 2°RCTx cases only)'; abstract"
+    },
+    {
+      "claim": "8 · Canal terminus patency, no root-filling extrusion",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list; chapter text read. Ng et al., Int Endod J 2011;44:610-25 (PMID 21366627): patency HR 0.3 in the first 22 months; gutta-percha extrusion HR 3.0 beyond 22 months; abstract"
+    },
+    {
+      "claim": "Schematic: the tooth-shaped constellation, star positions and pictograms are illustration only",
+      "source": "Design device; star positions carry no anatomical meaning (see NOTES.md)"
+    }
+  ],
+  "caption": "Board review: 8 conditions associated with better tooth survival after root canal treatment.\nA study summary of one list in Ng & Gulabivala's outcomes chapter (Cohen's Pathways of the Pulp, 12th ed., ch. 17).\nSurvival = the tooth stays in the mouth. This is not the periapical healing list.\nAssociations from cohort data, not guarantees. The abutment item rests mostly on pooled data; cast restoration is listed for molars, and the authors caution against crowning every tooth.\nSchematic animation.\nRefs: Ng & Gulabivala, Cohen's Pathways of the Pulp 12th ed.; Ng 2010, Ng 2011, Int Endod J.\n#endodontics #rootcanal #boardreview #endoresident #dentistry #toothsurvival"
+}
