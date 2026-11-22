@@ -122,7 +122,7 @@
   function sourceLine(t, tin, tout, s) {
     const b = seg(t, tin, tin + 0.3, ease.out), a = seg(t, tout - 0.25, tout, ease.in);
     if (b <= 0 || a >= 1) return;
-    T.save(); T.beginPath(); T.rect(40 + 620 * a, 1544, 620 * (b - a), 36); T.clip();
+    T.save(); T.beginPath(); T.rect(40 + 930 * a, 1544, 930 * (b - a), 36); T.clip();
     txt(T, s, 64, 1570, FG(500, 24)); T.restore();
   }
   const schematic = (x = 950, y = 1570) => txt(T, 'schematic · not to scale', x, y, FG(500, 24), { align: 'right' });
@@ -415,7 +415,7 @@
     /* bone */
     T.save(); T.beginPath(); T.rect(0, Y0, W, crest - Y0); T.clip();
     T.fillStyle = PAT.Tbone; T.fillRect(0, Y0, W, crest - Y0);
-    for (const m of [[120, 700, 74, 30, 0.2], [262, 868, 62, 26, -0.3], [96, 910, 50, 24, 0.1], [300, 668, 46, 22, -0.1], [900, 906, 84, 28, 0.12], [716, 930, 0, 0, 0], [1010, 760, 44, 30, 0.5]]) {
+    for (const m of [[120, 700, 74, 30, 0.2], [262, 868, 62, 26, -0.3], [96, 910, 50, 24, 0.1], [300, 668, 46, 22, -0.1], [884, 878, 72, 24, 0.12], [1010, 760, 44, 30, 0.5]]) {
       if (!m[2]) continue;
       ko(T, (c) => { c.beginPath(); c.ellipse(m[0], m[1], m[2], m[3], m[4], 0, TAU); c.fill(); });
       ink(T); T.lineWidth = 5; T.beginPath(); T.ellipse(m[0], m[1], m[2], m[3], m[4], 0, TAU); T.stroke();
@@ -449,10 +449,10 @@
     /* ghost of the original root where it has been lost (dashed, dark) */
     if (st.blunt > 0.04 || st.scoop > 0.04) for (const c of [T, P]) {
       c.save();
-      const reg = new Path2D();
-      reg.rect(cx - 90, Y0, 180, (gt.cy - gt.vb + 2) - Y0);
-      if (st.scoop > 0.04) reg.rect(cx + 8, gt.cy - gt.vq - gt.hq + 8, 90, 2 * gt.hq - 16);
-      c.clip(reg);
+      const lost = new Path2D();
+      lost.rect(cx - 90, Y0, 180, (gt.cy - gt.vb + 2) - Y0);
+      if (st.scoop > 0.04) lost.rect(cx + 8, gt.cy - gt.vq - gt.hq + 8, 90, 2 * gt.hq - 16);
+      c.clip(lost);
       const out = new Path2D(); out.rect(0, Y0, W, Y1 - Y0); out.addPath(gt.root); c.clip(out, 'evenodd');
       ink(c); c.lineWidth = 4.5; c.lineCap = 'butt'; c.setLineDash([11, 9]); c.stroke(g0.root); c.restore();
     }
