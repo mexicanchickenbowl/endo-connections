@@ -15,12 +15,12 @@
     silk: '#f1f6ec', gold: '#edbd52', goldHi: '#fff3c4', goldDim: '#84713a',
     pink: '#ff7cc4', cyan: '#62e2ff',
     lcdInk: [22, 36, 26], chipInk: '#d5dbd6',
-    blood: '#e5484b', saline: '#a6deff', naocl: '#e7f07a',
+    saline: '#9ccbff', naocl: '#f4f59c',
   };
 
   // ------------------------------------------------------------------ geometry
   const CX = 540;
-  const TIP_PARK = 1130, TIP_A = 1185, TIP_B = 1265, FORAMEN = 1372, FILE_L = 517, PX_MM = 45;
+  const TIP_PARK = 1130, TIP_A = 1185, TIP_B = 1286, FORAMEN = 1372, FILE_L = 517, PX_MM = 45;
   const LCD = { x: 64, y: 456, w: 406, h: 246 };
   const SCO = { x: 640, y: 456, w: 376, h: 246 };
   const CHIP = { x: 690, y: 748, w: 304, h: 256 };
@@ -261,8 +261,8 @@
   // ------------------------------------------------------------------ timeline + toy model
   const D = 24;
   const HEAD = [
-    { a: -1, b: 3.2, l: [[['HOW DOES AN APEX', 0]], [['LOCATOR ', 0], ['FIND THE END?', 1]]] },
-    { a: 3.32, b: 7.25, l: [[['THE PATIENT', 0]], [['IS THE ', 0], ['CIRCUIT', 1]]] },
+    { a: -1, b: 3.45, l: [[['HOW DOES AN APEX', 0]], [['LOCATOR ', 0], ['FIND THE END?', 1]]] },
+    { a: 3.55, b: 7.25, l: [[['THE PATIENT', 0]], [['IS THE ', 0], ['CIRCUIT', 1]]] },
     { a: 7.4, b: 10.8, l: [[['2 AC SIGNALS,', 0]], [['1 ', 0], ['RATIO', 1]]] },
     { a: 10.95, b: 14.1, l: [[['FLUID SHIFTS BOTH:', 0]], [['RATIO BARELY MOVES', 1]]] },
     { a: 14.25, b: 17.15, l: [[['LAST ~1 mm:', 0]], [['RATIO DROPS', 1]]] },
@@ -270,17 +270,23 @@
     { a: 23.55, b: 99, l: [[['HOW DOES AN APEX', 0]], [['LOCATOR ', 0], ['FIND THE END?', 1]]] },
   ];
   const SOURCES = [
-    { a: 3.55, b: 7.2, s: 'Nekoofar et al., Int Endod J 2006' },
+    { a: 3.75, b: 7.2, s: 'Nekoofar et al., Int Endod J 2006' },
     { a: 7.6, b: 10.8, s: 'Kobayashi & Suda 1994 \u00b7 Oishi et al. 2002, J Endod' },
     { a: 11.15, b: 14.1, s: 'Kobayashi & Suda, J Endod 1994' },
-    { a: 14.45, b: 17.15, s: 'Rambo et al., Biomed Eng Online 2010 \u00b7 in vivo, 21 canals' },
-    { a: 17.5, b: 18.95, s: 'Ounsi & Naaman, Int Endod J 1999 \u00b7 Rambo et al. 2010' },
+    { a: 14.45, b: 17.15, s: 'Rambo et al., Biomed Eng Online 2010 \u00b7 in vivo, 7\u201321 canals' },
+    { a: 17.5, b: 18.95, s: 'Ounsi & Naaman 1999, Int Endod J (in vitro) \u00b7 Martins 2014' },
     { a: 19.1, b: 23.3, s: 'Root ZX II instructions \u00b7 St\u00f6ber 2011, De-Deus 2023, J Endod' },
   ];
-  /** toy quotient vs distance from the foramen (mm, schematic). Shape follows Rambo 2010, Table 2: slow sag, cliff in the last 0.5 mm. Never shown as digits. */
-  const qOf = (d) => 0.455 + 0.165 * (1 - Math.exp(-Math.max(d, 0) / 0.17)) + 0.035 * Math.min(Math.max(d, 0), 3);
-  // schematic gains: NaOCl is the most conductive irrigant (Shin et al., Restor Dent Endod 2012); the blood step is illustrative
-  const FLUIDS = [P.blood, P.saline, P.naocl], FLUID_GAIN = [1, 0.88, 0.64];
+  /**
+   * toy quotient vs distance from the foramen (mm, schematic). Shape follows Rambo 2010, Table 2 (8 kHz / 0.5 kHz):
+   * of the total fall from -3 mm to 0, about 15% happens from -3 to -1 mm, 10% from -1 to -0.5 mm and 75% in the last 0.5 mm.
+   * Never shown as digits.
+   */
+  const Q0 = 0.455, QN = 0.665;                                // toy set point and coronal plateau
+  const qOf = (d) => Q0 + 0.165 * (1 - Math.exp(-Math.max(d, 0) / 0.2)) + 0.015 * Math.min(Math.max(d, 0), 3);
+  const qn = (q) => clamp((q - Q0) / (QN - Q0));               // 0 at the set point, 1 on the plateau
+  // schematic gains: NaOCl is more conductive than saline (Shin et al., Restor Dent Endod 2012)
+  const FLUIDS = [P.saline, P.naocl], FLUID_GAIN = [1, 0.75];
 
   function state(t) {
     const io = ease.inOut, s = { t };
@@ -289,29 +295,31 @@
     s.rst = rst; s.txo = txo;
     s.power = seg(t, 0.2, 1.5, io) * rst;
     let tip = TIP_PARK;
-    tip = lerp(tip, TIP_A, seg(t, 3.3, 4.2, io));
+    tip = lerp(tip, TIP_A, seg(t, 1.7, 3.1, io));          // the file goes in under the title
     tip = lerp(tip, TIP_B, seg(t, 9.0, 10.7, io));
     tip = lerp(tip, FORAMEN, seg(t, 14.2, 16.4, io));
     s.tip = lerp(TIP_PARK, tip, rst); s.d = (FORAMEN - s.tip) / PX_MM; s.q = qOf(s.d);
     s.eLead = seg(t, 3.2, 3.8) * rst; s.eCanal = seg(t, 3.8, 4.2) * rst; s.ePour = seg(t, 4.2, 4.9, io) * rst;
     s.clip = seg(t, 4.7, 5.2, io) * rst; s.eRet = seg(t, 5.2, 5.7) * rst; s.loop = seg(t, 5.6, 6.0) * rst;
     s.rc = seg(t, 6.25, 7.0, ease.out) * (1 - seg(t, 16.7, 17.1));
-    s.acA = seg(t, 7.4, 7.9) * rst; s.acB = seg(t, 8.0, 8.5) * rst; s.freq = seg(t, 8.3, 8.6) * txo;
+    // loop: APEX and the AC stage go out first (with the text), then rst retracts the file and de-energises the board
+    s.acA = seg(t, 7.4, 7.9) * txo; s.acB = seg(t, 8.0, 8.5) * txo; s.freq = seg(t, 8.3, 8.6) * txo;
     s.rat = seg(t, 8.6, 9.1) * rst;
-    s.f = (seg(t, 11.6, 12.0, io) + seg(t, 12.6, 13.0, io)) * rst;             // fluid index 0..2
-    s.jump = env(t, 10.95, 16.9, 0.35, 0.35);
-    s.apex = seg(t, 16.3, 16.4) * rst;
-    s.ring = seg(t, 17.0, 17.5) * txo; s.tag = seg(t, 17.75, 18.1) * txo; s.stat = seg(t, 18.3, 18.65) * txo; s.xray = seg(t, 19.9, 20.25) * txo;
+    s.f = seg(t, 12.4, 12.9, io) * rst;                         // fluid index 0..1: one switch, after the headline has been read
+    s.jump = env(t, 10.95, 14.1, 0.35, 0.3);
+    s.hold = env(t, 12.25, 13.75, 0.25, 0.4);                   // "the ratio did not move" bracket on the LCD bar
+    s.apex = seg(t, 16.3, 16.4) * txo;
+    s.era = t < 5.6 ? -1 : t < 7.4 ? 0 : t < 8.6 ? 1 : 2;       // history strip: DC, AC, ratio
+    s.ring = seg(t, 17.0, 17.5) * txo; s.tag = seg(t, 17.75, 18.1) * txo; s.stat = seg(t, 18.3, 18.65) * txo; s.xray = seg(t, 19.7, 20.05) * txo;
     s.div = 1 - seg(t, 18.0, 18.3) + seg(t, 23.45, 23.8);
     // fluid colour + gain
-    const fi = Math.min(1, Math.floor(s.f)), fu = s.f - fi;
-    s.fluid = mix(FLUIDS[fi], FLUIDS[fi + 1], fu); s.gain = lerp(FLUID_GAIN[fi], FLUID_GAIN[fi + 1], fu);
-    // the two potentials (schematic, arbitrary units)
-    const z = 0.62 + 0.38 * clamp(s.d / 5.33);
-    s.aLo = z * s.gain; s.aHi = s.aLo * (s.q / 0.725) * 0.86;
-    s.refLo = z; s.refHi = z * (s.q / 0.725) * 0.86; s.refA = env(t, 11.3, 14.1, 0.3, 0.3);   // 'before' marks while the fluid changes
+    s.fluid = mix(FLUIDS[0], FLUIDS[1], s.f); s.gain = lerp(FLUID_GAIN[0], FLUID_GAIN[1], s.f);
+    // the two potentials (schematic, arbitrary units). Floor kept high so the slow trace stays readable at the foramen.
+    const z = 0.8 + 0.2 * clamp(s.d / 4.2);
+    s.aLo = z * s.gain; s.aHi = s.aLo * (s.q / QN) * 0.86;
+    s.refLo = z; s.refHi = z * (s.q / QN) * 0.86; s.refA = env(t, 12.2, 14.1, 0.3, 0.3);      // 'before' marks while the fluid changes
     // LCD bar: linear in the quotient
-    s.bar = clamp(2 + (0.725 - s.q) / 0.27 * 13, 0, 15) * s.rat;
+    s.bar = clamp(2 + (1 - qn(s.q)) * 13, 0, 15) * s.rat;
     return s;
   }
 
