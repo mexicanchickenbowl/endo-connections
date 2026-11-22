@@ -1,0 +1,51 @@
+{
+  "id": "28",
+  "slug": "28-la-medical-conditions",
+  "title": "Before you inject: LA safety card",
+  "style": "Airline safety card",
+  "topic": "Eight medical conditions and drugs that change the local anesthetic or vasoconstrictor choice, as limit / avoid / OK pictograms.",
+  "duration": 25.0,
+  "claims": [
+    {
+      "claim": "Significant heart disease: LIMIT epinephrine to about 0.04 mg, about 2 cartridges of 1:100,000 (amber = limit; a cited convention, no time base shown)",
+      "source": "Becker DE & Reed KL, Anesth Prog 2012;59(2):90-101 (PMID 22822998; full text); cartridge arithmetic: Lignospan label (DailyMed) and Tolas AG et al., J Am Dent Assoc 1982;104:41-3 (PMID 6948029)"
+    },
+    {
+      "claim": "Non-selective beta-blocker: epinephrine is amber, not red: small dose, aspirate, recheck BP before the next cartridge",
+      "source": "Hersh EV & Giannakopoulos H, Dent Clin North Am 2010;54(4):687-96 (PMID 20831932; abstract); Becker DE, Anesth Prog 2011;58(1):31-41 (PMID 21410363; full text); Becker & Reed 2012 (PMID 22822998)"
+    },
+    {
+      "claim": "Tricyclic antidepressant: epinephrine at low dose (amber); avoid levonordefrin (red; a label-level precaution, contested)",
+      "source": "Yagiela JA et al., Oral Surg Oral Med Oral Pathol 1985;59(6):565-71 (PMID 3892411; dogs); Boakes AJ et al., Br Med J 1973;1(5849):311-5 (PMID 4685619; volunteers); mepivacaine-levonordefrin (Carbocaine) label; contested by Becker DE, Anesth Prog 2008;55(3):89-99 (PMID 18788844: 'not contraindicated ... used cautiously')"
+    },
+    {
+      "claim": "Recent cocaine use: no vasoconstrictor (epinephrine and levonordefrin both red; no hour figure)",
+      "source": "Yagiela JA, J Am Dent Assoc 1999;130(5):701-9 (PMID 10332135; abstract: cocaine intoxication); Brand HS et al., Br Dent J 2008;204(7):365-9 (PMID 18408681; abstract: postpone 6-24 h)"
+    },
+    {
+      "claim": "Uncontrolled hyperthyroidism: avoid epinephrine (red)",
+      "source": "Little JW, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2006;101(3):276-84 (PMID 16504858; abstract states the risk of hypertensive crisis, 'avoid' is the conventional inference); interaction evidence rated weak by Yagiela 1999 (PMID 10332135)"
+    },
+    {
+      "claim": "Methemoglobinemia risk: avoid both prilocaine and benzocaine (red)",
+      "source": "Guay J, Anesth Analg 2009;108(3):837-45 (PMID 19224791; abstract); Citanest Plain Dental label (DailyMed: contraindicated in congenital or idiopathic methemoglobinemia); Trapp L & Will J, Dent Clin North Am 2010;54(4):665-75 (PMID 20831930)"
+    },
+    {
+      "claim": "Sulfite allergy: the vasoconstrictor cartridge carries sulfite (red); use plain anesthetic (green)",
+      "source": "Naftalin LW & Yagiela JA, Dent Clin North Am 2002;46(4):733-46 (PMID 12436828; abstract); Becker & Reed 2012 (PMID 22822998; full text); Septocaine label (DailyMed)"
+    },
+    {
+      "claim": "Pregnancy: lidocaine with or without epinephrine is considered safe (green)",
+      "source": "ACOG Committee Opinion No. 569, Obstet Gynecol 2013;122(2 Pt 1):417-22 (PMID 23969828; reaffirmed; opinion PDF); ADA Oral Health Topic 'Pregnancy'; Hagai A et al., J Am Dent Assoc 2015;146(8):572-80 (PMID 26227642)"
+    },
+    {
+      "claim": "Fine print: conventional precautions, not trial-proven limits; check current references",
+      "source": "Becker & Reed 2012 (PMID 22822998: maximum vasopressor doses not established); Guimaraes CC et al., BMJ Open 2021;11(7):e044357 (PMID 34266837: low to very low certainty)"
+    },
+    {
+      "claim": "Toy model / schematic: pictograms only (neutral cartridges with no color code, dashed 'about two' cartridge, 'recent' clock, radiating thyroid, red drop turning brown, SO3 chip)",
+      "source": "Schematic; brown drop after Guay J, Anesth Analg 2009 (PMID 19224791): 'Chocolate-colored blood suggests methemoglobinemia but other colors may be found'"
+    }
+  ],
+  "caption": "Before you inject: 8 histories that change the cartridge.\n\nAmber = limit, red = avoid, green = OK.\nHeart disease: ~0.04 mg epi (~2 cartridges of 1:100,000) is convention, not a proven cap.\nBeta-blockers, tricyclics: epi isn't contraindicated; small doses, recheck BP. Avoiding levonordefrin: a label precaution.\nPregnancy: lidocaine ± epi is considered safe (ACOG).\n\nRefs: Becker & Reed 2012, Becker 2008 & 2011 Anesth Prog; Hersh 2010 DCNA; Yagiela 1985 OOOO; Yagiela 1999 JADA; Brand 2008 BDJ; Little 2006 OOOOE; Guay 2009 Anesth Analg; Naftalin 2002 DCNA; ACOG CO 569; FDA labels.\nSchematic pictograms; check current references.\n\n#endodontics #localanesthesia #dentistry #endoresident #boardprep"
+}

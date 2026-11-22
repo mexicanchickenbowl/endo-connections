@@ -18,7 +18,7 @@
   };
   const DUR = 24;
   // scene starts
-  const TB = 2.3, TC = 5.3, TC2 = 8.0, TD = 10.7, TE1 = 13.3, TE2 = 16.5, TEND = 19.7;
+  const TB = 2.3, TC = 5.5, TC2 = 8.0, TD = 10.6, TE1 = 13.2, TE2 = 16.2, TEND = 19.2;
 
   // ---------- small helpers ----------
   function kf(t, keys, e) {
@@ -65,16 +65,18 @@
   const LP = { ax: LX.ax, sag: LX.pa, cor: LX.cor, v3: LX.v3, pa: LX.sag };
   function rect(name, t) {
     const s1 = seg(t, TC - 0.15, TC + 0.75, ease.inOut), s2 = seg(t, TE2 - 0.1, TE2 + 0.7, ease.inOut);
+    const s3 = seg(t, DUR - 0.28, DUR - 0.03, ease.inOut);     // panes are black by then: slide back to the opening grid for the loop
     const a = LG[name], b = LX[name], c = LP[name];
     const r = [0, 0, 0, 0];
-    for (let i = 0; i < 4; i++) r[i] = lerp(lerp(a[i], b[i], s1), c[i], s2);
+    for (let i = 0; i < 4; i++) r[i] = lerp(lerp(lerp(a[i], b[i], s1), c[i], s2), a[i], s3);
     return { x: Math.round(r[0]), y: Math.round(r[1]), w: Math.round(r[2]), h: Math.round(r[3]) };
   }
 
   // ---------- time → model state ----------
-  function lesionP(t) { return 0.17 * seg(t, 2.8, TC, ease.smooth) + 0.83 * seg(t, TC, 14.3, (u) => 1 - Math.pow(1 - u, 1.55)); }
-  function repairQ(t) { return 0.78 * seg(t, TD + 0.15, TE1, ease.smooth) + 0.22 * seg(t, TE1, 15.3, ease.smooth); }
-  const sliceZ = (t) => kf(t, [[2.4, 7.4], [4.1, V.PZ], [5.4, V.PZ], [6.9, 2.4], [11.0, 2.4], [11.9, 1.2], [12.9, 2.4]]);
+  function lesionP(t) { return 0.17 * seg(t, 2.8, TC, ease.smooth) + 0.83 * seg(t, TC, 14.0, (u) => 1 - Math.pow(1 - u, 2.6)); }
+  function repairQ(t) { return 0.78 * seg(t, TD + 0.15, TE1, ease.smooth) + 0.22 * seg(t, TE1, 15.0, ease.smooth); }
+  const HOME_Z = 1.9;   // axial 'home' slice: just below the alveolar crest, 1 mm apical to the portal
+  const sliceZ = (t) => kf(t, [[0.2, 11.2], [4.1, V.PZ], [6.6, V.PZ], [7.9, HOME_Z], [10.9, HOME_Z], [11.8, V.PZ], [12.0, V.PZ], [12.9, HOME_Z]]);
 
   // ---------- offscreen buffers (cached by parameter key) ----------
   const OFF = {};
@@ -106,24 +108,29 @@
   function clipPane(r) { ctx.save(); ctx.beginPath(); ctx.rect(r.x, r.y, r.w, r.h); ctx.clip(); }
   function paneFrame(r, label, color, readout, a) {
     ctx.save(); ctx.globalAlpha = a;
-    // label backing gradient
-    const g = ctx.createLinearGradient(0, r.y, 0, r.y + 62); g.addColorStop(0, 'rgba(0,0,0,0.78)'); g.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = g; ctx.fillRect(r.x, r.y, r.w, 62);
-    ctx.fillStyle = color; ctx.fillRect(r.x + 14, r.y + 17, 13, 13);
-    txt(label, r.x + 36, r.y + 37, `500 30px ${MONO}`, color, 'left', 0.96, 0.5);
-    if (readout) txt(readout, r.x + r.w - 12, r.y + 33, `400 22px ${MONO}`, C.dim, 'right', 0.95);
+    const lw = widthOf(label, `500 30px ${MONO}`, 0.5);
+    ctx.fillStyle = 'rgba(4,6,9,0.84)'; ctx.beginPath(); ctx.roundRect(r.x + 2, r.y + 3, lw + 50, 46, [0, 0, 10, 0]); ctx.fill();
+    ctx.fillStyle = color; ctx.fillRect(r.x + 14, r.y + 18, 13, 13);
+    txt(label, r.x + 36, r.y + 37, `500 30px ${MONO}`, color, 'left', 0.98, 0.5);
+    if (readout) {
+      const rw = widthOf(readout, `400 22px ${MONO}`);
+      ctx.fillStyle = 'rgba(4,6,9,0.8)'; ctx.beginPath(); ctx.roundRect(r.x + r.w - rw - 24, r.y + 3, rw + 22, 40, [0, 0, 0, 10]); ctx.fill();
+      txt(readout, r.x + r.w - 12, r.y + 32, `400 22px ${MONO}`, C.sub, 'right', 0.95);
+    }
     ctx.restore();
     ctx.save(); ctx.strokeStyle = C.line2; ctx.lineWidth = 2; ctx.strokeRect(r.x + 1, r.y + 1, r.w - 2, r.h - 2);
     ctx.globalAlpha = 0.9; ctx.fillStyle = color; ctx.fillRect(r.x, r.y, r.w, 3);
     ctx.restore();
   }
-  function orient(r, l, rt, tp, bt, a) {
+  /** orientation letters. corner = true puts the left/right letters in the bottom corners (long-axis panes) */
+  function orient(r, l, rt, tp, bt, a, corner, aBottom) {
     const f = `500 22px ${MONO}`;
-    ctx.save(); ctx.globalAlpha = a * 0.8; ctx.shadowColor = '#000'; ctx.shadowBlur = 6;
-    if (l) txt(l, r.x + 12, r.y + r.h / 2 + 8, f, C.dim, 'left');
-    if (rt) txt(rt, r.x + r.w - 12, r.y + r.h / 2 + 8, f, C.dim, 'right');
-    if (tp) txt(tp, r.x + r.w / 2, r.y + 30, f, C.dim, 'center');
-    if (bt) txt(bt, r.x + r.w / 2, r.y + r.h - 12, f, C.dim, 'center');
+    ctx.save(); ctx.globalAlpha = a * 0.9; ctx.shadowColor = '#000'; ctx.shadowBlur = 8;
+    const ly = corner ? r.y + r.h - 14 : r.y + r.h / 2 + 38;
+    if (l) txt(l, r.x + 12, ly, f, C.sub, 'left');
+    if (rt) txt(rt, r.x + r.w - 12, ly, f, C.sub, 'right');
+    if (tp) txt(tp, r.x + r.w / 2 + 20, r.y + 34, f, C.sub, 'center');
+    if (bt) { ctx.globalAlpha = a * 0.9 * (aBottom == null ? 1 : aBottom); txt(bt, r.x + r.w / 2 + 20, r.y + r.h - 12, f, C.sub, 'center'); }
     ctx.restore();
   }
   /** crosshair: one vertical + one horizontal reference line with a gap around the centre */
@@ -156,8 +163,9 @@
   // =====================================================================================================
   function render(t) {
     const p = lesionP(t), q = repairQ(t), zs = sliceZ(t);
-    const boot = (k) => seg(t, 0.05 + 0.07 * k, 0.6 + 0.07 * k, ease.out) * (1 - seg(t, DUR - 0.45, DUR - 0.05, ease.inOut));
-    const tint = 0.82, front = 1 - seg(t, 14.0, 15.0);
+    const boot = (k) => seg(t, 0.05 + 0.07 * k, 0.6 + 0.07 * k, ease.out);
+    const endFade = seg(t, DUR - 0.5, DUR - 0.28, ease.inOut);
+    const tint = 0.82, front = 1 - seg(t, 13.7, 14.7);
 
     // ---- workspace ----
     ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
@@ -168,9 +176,9 @@
     const a1 = TC - 0.15, a2 = TC + 0.75;
     const vAx = { cu: 0, cv: 0, ppm: kf(t, [[2.4, 26.5], [4.2, 46], [a1, 46], [a2, 64]]) };
     const vSag = {
-      cu: kf(t, [[2.4, 0], [4.2, -0.5], [a1, -0.5], [a2, -0.2], [TE1, -0.2], [TE1 + 0.9, 0.9], [TE2 - 0.1, 0.9], [TE2 + 0.7, 0]]),
-      cv: kf(t, [[2.4, 3.5], [4.2, 0.9], [a1, 0.9], [a2, 1.3], [TE1, 1.3], [TE1 + 0.9, 4.5], [TE2 - 0.1, 4.5], [TE2 + 0.7, 1.2]]),
-      ppm: kf(t, [[2.4, 16.2], [4.2, 40], [a1, 40], [a2, 37], [TE1, 37], [TE1 + 0.9, 23.8], [TE2 - 0.1, 23.8], [TE2 + 0.7, 30]]),
+      cu: kf(t, [[2.4, 0], [4.2, -1.25], [a1, -1.25], [a2, -0.2], [TE1, -0.2], [TE1 + 0.8, 0.9], [TE2 - 0.1, 0.9], [TE2 + 0.7, 0]]),
+      cv: kf(t, [[2.4, 3.5], [4.2, 0.35], [a1, 0.35], [a2, 1.3], [TE1, 1.3], [TE1 + 0.8, 4.5], [TE2 - 0.1, 4.5], [TE2 + 0.7, 1.2]]),
+      ppm: kf(t, [[2.4, 16.2], [4.2, 46], [a1, 46], [a2, 37], [TE1, 37], [TE1 + 0.8, 23.8], [TE2 - 0.1, 23.8], [TE2 + 0.7, 30]]),
     };
     const vCor = { cu: 0, cv: kf(t, [[2.4, 3.5], [4.2, 1.0], [a1, 1.0], [a2, 1.2]]), ppm: kf(t, [[2.4, 14.2], [4.2, 30], [a1, 30], [a2, 29]]) };
     const v3 = { cz: kf(t, [[2.4, 3.0], [4.2, 1.6], [a1, 1.6], [a2, 1.0]]), ppm: kf(t, [[2.4, 15.4], [4.2, 22], [a1, 22], [a2, 19.5]]) };
@@ -186,7 +194,7 @@
     mpr('cor', 2, rCor, vCor, 0, p, q, tint, front, boot(2));
     clipPane(rCor);
     cross(rCor, PX(rCor, vCor, 0), PY(rCor, vCor, zs), C.yellow, C.cyan, 4.3 * vCor.ppm, 0.34 * rCor.h, boot(2));
-    orient(rCor, 'B', 'L', null, null, boot(2));
+    orient(rCor, 'B', 'L', null, null, boot(2), true);
     ctx.restore();
     paneFrame(rCor, 'CORONAL', C.magenta, null, 1);
 
@@ -202,6 +210,8 @@
       const la = boot(3) * seg(t, 3.2, 4.0);
       ctx.save(); ctx.globalAlpha = la;
       const ly = r3.y + r3.h - 18;
+      const lg = ctx.createLinearGradient(0, r3.y + r3.h - 60, 0, r3.y + r3.h); lg.addColorStop(0, 'rgba(4,6,9,0)'); lg.addColorStop(0.6, 'rgba(4,6,9,0.82)');
+      ctx.fillStyle = lg; ctx.fillRect(r3.x, r3.y + r3.h - 60, r3.w, 60);
       ctx.fillStyle = C.orange; ctx.beginPath(); ctx.arc(r3.x + 22, ly - 7, 6, 0, 7); ctx.fill();
       txt('lesion', r3.x + 34, ly, `400 22px ${MONO}`, C.sub);
       ctx.fillStyle = C.mint; ctx.beginPath(); ctx.arc(r3.x + 138, ly - 7, 6, 0, 7); ctx.fill();
@@ -215,7 +225,7 @@
     mpr('sag', 1, rSag, vSag, 0, p, q, tint, front, boot(1));
     clipPane(rSag);
     cross(rSag, PX(rSag, vSag, 0), PY(rSag, vSag, zs), C.magenta, C.cyan, 3.6 * vSag.ppm, 0.36 * rSag.h, boot(1) * (1 - 0.6 * seg(t, TE1, TE1 + 0.6) * (1 - seg(t, TE2, TE2 + 0.6))));
-    orient(rSag, 'M', 'D', null, null, boot(1));
+    orient(rSag, 'M', 'D', null, null, boot(1), true);
     drawSagAnnotations(t, rSag, vSag, p);
     ctx.restore();
     paneFrame(rSag, 'SAGITTAL', C.yellow, null, 1);
@@ -224,7 +234,7 @@
     {
       const RS = 2, bw = Math.ceil(rPa.w / RS), bh = Math.ceil(rPa.h / RS);
       const o = off('pa', bw, bh);
-      const ov = seg(t, TE2 + 1.5, TE2 + 2.2, ease.smooth);
+      const ov = seg(t, TE2 + 1.35, TE2 + 2.0, ease.smooth);
       const key = [vPa.cv.toFixed(4), vPa.ppm.toFixed(3), p.toFixed(4), q.toFixed(4), ov.toFixed(3)].join('|');
       if (o.key !== key) { V.updatePA(p, q); V.renderPA(o.img.data, bw, bh, vPa.cu, vPa.cv, RS / vPa.ppm, ov, 5); o.x.putImageData(o.img, 0, 0); o.key = key; }
       blit(o, rPa, RS, boot(4));
@@ -232,6 +242,8 @@
       drawPaAnnotations(t, rPa, vPa, ov);
       ctx.restore();
       paneFrame(rPa, 'PERIAPICAL', C.text, '2-D', 1);
+      const pk = fade(t, TE2 + 0.5, TE2 + 1.7, 0.3, 0.8);
+      if (pk > 0) { ctx.save(); ctx.strokeStyle = Kit.rgba('#ffffff', 0.85 * pk); ctx.lineWidth = 4; ctx.shadowColor = '#fff'; ctx.shadowBlur = 18 * pk; ctx.strokeRect(rPa.x + 2, rPa.y + 2, rPa.w - 4, rPa.h - 4); ctx.restore(); }
     }
 
     // ---- AXIAL (plane z = zs) ----
@@ -240,12 +252,20 @@
     {
       const g = Math.min(0.42 * Math.min(rAx.w, rAx.h), 4.6 * vAx.ppm);
       cross(rAx, PX(rAx, vAx, 0), PY(rAx, vAx, 0), C.magenta, C.yellow, g, g, boot(0));
-      orient(rAx, 'M', 'D', 'B', 'L', boot(0));
+      orient(rAx, 'M', 'D', 'B', 'L', boot(0), false, 1 - seg(t, TC2, TC2 + 0.4));
       drawAxAnnotations(t, rAx, vAx, zs, p);
     }
     ctx.restore();
     paneFrame(rAx, 'AXIAL', C.cyan, sliceNo(zs), 1);
+    txt('zoom ×' + (vAx.ppm / 26.5).toFixed(1), rAx.x + rAx.w - 12, rAx.y + rAx.h - 14, `400 22px ${MONO}`, C.sub, 'right', 0.85 * boot(0));
 
+    if (endFade > 0) {
+      ctx.save(); ctx.fillStyle = Kit.rgba('#000000', endFade);
+      for (const r of [rCor, r3, rSag, rPa, rAx]) ctx.fillRect(r.x, r.y, r.w, r.h);
+      ctx.restore();
+      paneFrame(rCor, 'CORONAL', C.magenta, null, 1); paneFrame(r3, '3-D', C.sub, null, 1); paneFrame(rSag, 'SAGITTAL', C.yellow, null, 1);
+      paneFrame(rPa, 'PERIAPICAL', C.text, '2-D', 1); paneFrame(rAx, 'AXIAL', C.cyan, sliceNo(zs), 1);
+    }
     drawCaptions(t);
     drawDock(t, p, q);
     drawEnd(t);
@@ -272,8 +292,8 @@
     ctx.moveTo(901, 193); ctx.lineTo(917, 177); ctx.moveTo(946, 192); ctx.lineTo(955, 177); ctx.lineTo(964, 192); ctx.rect(993, 178, 16, 14); ctx.stroke();
     ctx.restore();
     // series tag + handle (inside the safe area)
-    ctx.fillStyle = C.orange; ctx.fillRect(64, 250, 14, 14);
-    txt('RESORPTION 5/5 · EXTERNAL CERVICAL', 90, 268, `500 28px ${MONO}`, '#c9d5e1', 'left', 1, 0.6);
+    ctx.fillStyle = C.orange; ctx.fillRect(64, 249, 15, 15);
+    txt('RESORPTION 5/5 · EXTERNAL CERVICAL', 90, 269, `500 30px ${MONO}`, '#c9d5e1', 'left', 1, 0.3);
     txt('@natebrooksendo', 1016, 268, `400 25px ${MONO}`, C.dim, 'right');
     ctx.fillStyle = C.line; ctx.fillRect(64, 290, 952, 2);
     // status bar (decorative, under the Instagram footer)
@@ -286,7 +306,7 @@
 
   // ---------- captions (top zone) ----------
   function head(t, a, b, num, title, size, yOff) {
-    const al = fade(t, a, b); if (al <= 0) return;
+    const al = fade(t, a, b, 0.2, 0.2); if (al <= 0) return;
     const y = 366 + (yOff || 0);
     ctx.save(); ctx.globalAlpha = al;
     let x = 64;
@@ -300,28 +320,27 @@
     txt(title, x, y, f, C.text);
     ctx.restore();
   }
-  function sub(t, a, b, arr) { const al = fade(t, a, b); if (al > 0) runs(arr, 64, 434, 38, 'left', al); }
+  function sub(t, a, b, arr) { const al = fade(t, a, b, 0.2, 0.2); if (al > 0) runs(arr, 64, 434, 38, 'left', al); }
   function drawCaptions(t) {
+    const F = 0.2;
     // title: present at t = 0 and again on the end card, so the loop is seamless
-    const titleA = Math.max(1 - seg(t, TB - 0.3, TB - 0.05), seg(t, TEND + 0.1, TEND + 0.4));
+    const titleA = Math.max(1 - seg(t, TB - F, TB), seg(t, TEND + F, TEND + 2 * F));
     if (titleA > 0) { ctx.save(); ctx.globalAlpha = titleA; txt('External cervical resorption', 64, 368, `600 62px ${SANS}`, C.text); ctx.restore(); }
-    sub(t, 0.1, TB - 0.05, [{ t: 'What the ' }, { t: 'periapical', c: C.text, w: 600 }, { t: ' misses' }]);
+    sub(t, 0.1, TB, [{ t: 'What the ' }, { t: 'periapical', c: C.text, w: 600 }, { t: ' misses' }]);
     // 1 · initiation
-    head(t, TB + 0.1, TC - 0.05, '1', 'Initiation');
-    sub(t, TB + 0.1, TC - 0.05, [{ t: 'Entry', c: C.orange, w: 600 }, { t: ' just below the ' }, { t: 'epithelial attachment', c: C.blue, w: 600 }]);
+    head(t, TB, TC, '1', 'Initiation');
+    sub(t, TB, TC, [{ t: 'Entry', c: C.orange, w: 600 }, { t: ' just below the ' }, { t: 'epithelial attachment', c: C.blue, w: 600 }]);
     // 2 · resorption
-    head(t, TC + 0.1, TD - 0.05, '2', 'Resorption');
-    sub(t, TC + 0.1, TC2 - 0.1, [{ t: 'It spreads ' }, { t: 'around the canal', c: C.orange, w: 600 }]);
-    sub(t, TC2 + 0.1, TD - 0.05, [{ t: 'Pulp ' }, { t: 'walled off', c: C.mint, w: 600 }, { t: ' — until late' }]);
+    head(t, TC, TD, '2', 'Resorption');
+    sub(t, TC, TC2, [{ t: 'Spreads ' }, { t: 'around the canal', c: C.orange, w: 600 }]);
+    sub(t, TC2, TD, [{ t: 'Pulp ' }, { t: 'walled off', c: C.mint, w: 600 }, { t: ' — until late' }]);
     // 3 · repair
-    head(t, TD + 0.1, TE1 - 0.05, '3', 'Repair');
-    sub(t, TD + 0.1, TE1 - 0.05, [{ t: 'Bone-like tissue', c: C.ivory, w: 600 }, { t: ' grows in' }]);
+    head(t, TD, TE1, '3', 'Repair');
+    sub(t, TD, TE1, [{ t: 'Bone-like tissue', c: C.ivory, w: 600 }, { t: ' grows in' }]);
     // classification
-    head(t, TE1 + 0.1, TE2 - 0.05, null, 'Patel 3-D classification', 58);
-    sub(t, TE1 + 0.1, TE2 - 0.05, [{ t: 'read off the CBCT, axis by axis', c: C.dim }]);
+    head(t, TE1, TE2, null, 'Patel 3-D classification', 62, 26);
     // 2-D vs 3-D
-    head(t, TE2 + 0.1, TEND - 0.05, null, 'The periapical underestimates it', 58);
-    sub(t, TE2 + 0.1, TEND - 0.05, [{ t: 'Canal outline', c: C.blue, w: 600 }, { t: ' often still traceable' }]);
+    head(t, TE2, TEND + F, null, 'The periapical underestimates it', 60, 26);
   }
 
   // ---------- axial annotations ----------
@@ -354,44 +373,57 @@
     if (sh > 0) {
       const ca = V.canalA(zs) * v.ppm, cb = V.canalB(zs) * v.ppm, ts = V.TS * v.ppm;
       const pulse = 0.5 + 0.5 * Math.sin(t * 3.2);
-      const kick = fade(t, TE1 + 2.5, TE1 + 3.1, 0.2, 0.4);
+      const kick = fade(t, TE1 + 2.3, TE1 + 2.9, 0.2, 0.4);
       ctx.save(); ctx.globalAlpha = sh;
       ctx.beginPath(); ctx.ellipse(cx, cy, ca + ts, cb + ts, 0, 0, Math.PI * 2); ctx.ellipse(cx, cy, ca + 1, cb + 1, 0, 0, Math.PI * 2, true);
       ctx.fillStyle = Kit.rgba(C.mint, 0.22 + 0.10 * pulse + 0.3 * kick); ctx.fill();
       ctx.shadowColor = C.mint; ctx.shadowBlur = 10 + 8 * pulse + 16 * kick; ctx.strokeStyle = C.mint; ctx.lineWidth = 2.5;
       ctx.beginPath(); ctx.ellipse(cx, cy, ca + ts + 1, cb + ts + 1, 0, 0, Math.PI * 2); ctx.stroke();
       ctx.restore();
-      // label chip + leader
-      const ca2 = seg(t, TC2 + 0.25, TC2 + 0.7, ease.out);
-      if (ca2 > 0) {
-        const bx = r.x + 16, by = r.y + r.h - 16;
-        const box = chip(bx, by, [{ t: 'resorption-resistant sheet', f: `600 30px ${SANS}`, c: C.mint }, { t: 'avg ≈ 0.2 mm · ex vivo', f: `400 30px ${SANS}`, c: C.text }], { bottom: true, alpha: ca2, stroke: Kit.rgba(C.mint, 0.5) });
-        const ang = 2.25, dx = -Math.cos(ang), dy = Math.sin(ang);   // point on the sheet, lingual-distal side (no lesion there)
-        const Rr = 1 / Math.sqrt((dx / (ca + ts * 0.5)) * (dx / (ca + ts * 0.5)) + (dy / (cb + ts * 0.5)) * (dy / (cb + ts * 0.5)));
-        const sx = cx + Rr * dx, sy = cy + Rr * dy, ex = box.x + box.w - 40, ey = box.y;
-        ctx.save(); ctx.globalAlpha = ca2; ctx.strokeStyle = C.mint; ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.moveTo(ex, ey); ctx.lineTo(lerp(ex, sx, ca2), lerp(ey, sy, ca2)); ctx.stroke();
-        ctx.fillStyle = C.mint; ctx.beginPath(); ctx.arc(sx, sy, 5, 0, 7); ctx.fill();
-        ctx.restore();
-      }
     }
-    // angle tool (classification scene → end)
-    const an = seg(t, TE1 + 1.6, TE1 + 2.45, ease.inOut);
+    // angle tool (classification scene → end): shaded sector + two rays + small arc at the vertex
+    const an = seg(t, TE1 + 1.45, TE1 + 2.25, ease.inOut);
     if (an > 0) {
-      const sp = spread(zs, 1);
-      const R = (Math.max(V.outerA(zs), V.outerB(zs)) + 0.5) * v.ppm;
-      const a0 = Math.PI + sp.bucc, a1 = a0 - (sp.bucc + sp.ling) * an;      // sweep from the buccal end round to the lingual end
-      ctx.save(); ctx.strokeStyle = C.orange; ctx.lineWidth = 4; ctx.shadowColor = '#000'; ctx.shadowBlur = 6;
-      ctx.beginPath(); ctx.arc(cx, cy, R, a1, a0, false); ctx.stroke();
-      ctx.lineWidth = 2; ctx.setLineDash([8, 7]);
-      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a0) * (R + 10), cy + Math.sin(a0) * (R + 10)); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a1) * (R + 10), cy + Math.sin(a1) * (R + 10)); ctx.stroke();
-      ctx.setLineDash([]); ctx.fillStyle = C.orange; ctx.beginPath(); ctx.arc(cx, cy, 5, 0, 7); ctx.fill();
+      const sp = spread(zs, 1), tot = sp.bucc + sp.ling;
+      const a0 = Math.PI + sp.bucc, a1 = a0 - tot * an;      // sweep from the buccal end round (through mesial) to the lingual end
+      const oa = V.outerA(zs), ob = V.outerB(zs);
+      const rootR = (ang) => V.superR(oa, ob, Math.abs(Math.cos(ang)), Math.abs(Math.sin(ang))) * v.ppm;
+      ctx.save();
+      // sector, clipped to the root outline
+      ctx.beginPath(); ctx.moveTo(cx, cy);
+      for (let i = 0; i <= 80; i++) { const ang = lerp(a0, a1, i / 80), R = rootR(ang) + 5; ctx.lineTo(cx + Math.cos(ang) * R, cy + Math.sin(ang) * R); }
+      ctx.closePath(); ctx.fillStyle = Kit.rgba(C.orange, 0.13); ctx.fill();
+      ctx.beginPath();
+      for (let i = 0; i <= 80; i++) { const ang = lerp(a0, a1, i / 80), R = rootR(ang) + 5; if (i) ctx.lineTo(cx + Math.cos(ang) * R, cy + Math.sin(ang) * R); else ctx.moveTo(cx + Math.cos(ang) * R, cy + Math.sin(ang) * R); }
+      ctx.strokeStyle = Kit.rgba(C.orange, 0.9); ctx.lineWidth = 3; ctx.shadowColor = '#000'; ctx.shadowBlur = 5; ctx.stroke();
+      // rays
+      ctx.lineWidth = 2.5; ctx.setLineDash([9, 6]); ctx.strokeStyle = '#ffd9b5';
+      ctx.beginPath();
+      for (const ang of [a0, a1]) { const R = rootR(ang) + 22; ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(ang) * R, cy + Math.sin(ang) * R); }
+      ctx.stroke(); ctx.setLineDash([]);
+      // small arc at the vertex (inside the canal)
+      ctx.strokeStyle = C.orange; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(cx, cy, 36, a1, a0, false); ctx.stroke();
+      ctx.fillStyle = C.orange; ctx.beginPath(); ctx.arc(cx, cy, 5.5, 0, 7); ctx.fill();
       ctx.restore();
-      const deg = Math.round((sp.bucc + sp.ling) * an * 180 / Math.PI);
+      const deg = Math.round(tot * an * 180 / Math.PI);
       chip(r.x + 16, r.y + 70, [{ t: '≈ ' + deg + '°', f: `600 34px ${MONO}`, c: C.orange }], { alpha: Math.min(1, an * 4), lh: 42, stroke: Kit.rgba(C.orange, 0.55) });
     }
+    // sheet label chip + leader (drawn after the tools so nothing crosses the text)
+    const ca2 = seg(t, TC2 + 0.25, TC2 + 0.7, ease.out);
+    if (ca2 > 0) {
+      const ca = V.canalA(zs) * v.ppm, cb = V.canalB(zs) * v.ppm, ts = V.TS * v.ppm;
+      const bx = r.x + 16, by = r.y + r.h - 16;
+      const ang = 2.25, dx = -Math.cos(ang), dy = Math.sin(ang);   // point on the sheet, lingual-distal side
+      const Rr = 1 / Math.sqrt((dx / (ca + ts * 0.5)) * (dx / (ca + ts * 0.5)) + (dy / (cb + ts * 0.5)) * (dy / (cb + ts * 0.5)));
+      const sx = cx + Rr * dx, sy = cy + Rr * dy, ex = bx + 352, ey = by - 86;
+      ctx.save(); ctx.globalAlpha = ca2; ctx.strokeStyle = C.mint; ctx.lineWidth = 2.5; ctx.shadowColor = '#000'; ctx.shadowBlur = 5;
+      ctx.beginPath(); ctx.moveTo(ex, ey); ctx.lineTo(lerp(ex, sx, ca2), lerp(ey, sy, ca2)); ctx.stroke();
+      ctx.fillStyle = C.mint; ctx.beginPath(); ctx.arc(sx, sy, 5.5, 0, 7); ctx.fill();
+      ctx.restore();
+      chip(bx, by, [{ t: 'resorption-resistant sheet', f: `600 30px ${SANS}`, c: C.mint }, { t: 'avg ≈ 0.2 mm · ex vivo', f: `400 30px ${SANS}`, c: C.text }], { bottom: true, alpha: ca2, stroke: Kit.rgba(C.mint, 0.5) });
+    }
     // class badge
-    const cb2 = seg(t, TE1 + 3.0, TE1 + 3.3, ease.out);
+    const cb2 = seg(t, TE1 + 2.75, TE1 + 3.0, ease.out);
     if (cb2 > 0) chip(r.x + r.w - 14, r.y + 46, [{ t: 'Patel 2Cp', f: `600 30px ${MONO}`, c: C.text }], { right: true, alpha: cb2, lh: 40, stroke: Kit.rgba(C.orange, 0.7) });
   }
 
@@ -406,7 +438,13 @@
       ctx.stroke();
       ctx.lineWidth = 3;
       for (const z of [-0.72, -0.06]) { const x = PX(r, v, -V.outerA(z)) - 8, y = PY(r, v, z); ctx.beginPath(); ctx.moveTo(x - 9, y); ctx.lineTo(x + 5, y); ctx.stroke(); }
+      // leader + label
+      const bxm = PX(r, v, -V.outerA(-0.4)) - 14, bym = PY(r, v, -0.4);
+      const lx = r.x + 16, ly = r.y + 62;
+      ctx.shadowBlur = 4; ctx.shadowColor = '#000'; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(bxm, bym); ctx.lineTo(lx + 120, ly + 50); ctx.stroke();
       ctx.restore();
+      chip(lx, ly, [{ t: 'epithelial attachment', f: `600 30px ${SANS}`, c: C.blue }], { alpha: ba, lh: 40, stroke: Kit.rgba(C.blue, 0.5) });
     }
     const pm = fade(t, 3.9, TC + 0.5, 0.3, 0.4);
     if (pm > 0) ringMark(PX(r, v, -V.outerA(V.PZ)), PY(r, v, V.PZ), t + 0.4, pm, C.orange);
@@ -420,13 +458,13 @@
       ctx.stroke(); ctx.restore();
     }
     // height ruler (classification scene)
-    const ru = fade(t, TE1 + 0.75, TE2 + 0.05, 0.35, 0.25);
+    const ru = fade(t, TE1 + 0.6, TE2 + 0.0, 0.3, 0.25);
     if (ru > 0) {
       const hh = height(1);
-      const L = V.ROOT_LEN, zc = 1.48;
+      const L = V.ROOT_LEN, zc = 1.32;      // zc = alveolar crest at the mesial root surface
       const bounds = [-0.1, zc, L / 3, 2 * L / 3, L], zone = hh.zmax <= zc ? 0 : hh.zmax <= L / 3 ? 1 : hh.zmax <= 2 * L / 3 ? 2 : 3;
       const xr = PX(r, v, 4.25);
-      const lit = seg(t, TE1 + 1.3, TE1 + 1.55);
+      const lit = seg(t, TE1 + 1.2, TE1 + 1.4);
       ctx.save(); ctx.globalAlpha = ru; ctx.strokeStyle = '#dfe7ef'; ctx.lineWidth = 2.5; ctx.shadowColor = '#000'; ctx.shadowBlur = 6;
       ctx.beginPath(); ctx.moveTo(xr, PY(r, v, bounds[0])); ctx.lineTo(xr, PY(r, v, bounds[4]));
       for (const b of bounds) { ctx.moveTo(xr - 12, PY(r, v, b)); ctx.lineTo(xr + 12, PY(r, v, b)); }
@@ -438,12 +476,13 @@
       for (let i = 0; i < 4; i++) {
         const ym = (PY(r, v, bounds[i]) + PY(r, v, bounds[i + 1])) / 2, on = i === zone ? lit : 0;
         ctx.save(); ctx.globalAlpha = ru;
+        rr(xr + 18, ym - 21, 40, 42, 7); ctx.fillStyle = 'rgba(5,8,11,0.8)'; ctx.fill();
         if (on > 0) { rr(xr + 18, ym - 21, 40, 42, 7); ctx.fillStyle = Kit.rgba(C.orange, on); ctx.fill(); }
         txt(String(i + 1), xr + 38, ym + 11, `600 30px ${MONO}`, on > 0.5 ? '#170a02' : '#dfe7ef', 'center');
         ctx.restore();
       }
       // deepest point of the lesion → ruler
-      const dl = seg(t, TE1 + 0.95, TE1 + 1.4, ease.out);
+      const dl = seg(t, TE1 + 0.8, TE1 + 1.2, ease.out);
       if (dl > 0) {
         const y = PY(r, v, hh.zmax), x0 = PX(r, v, -(V.canalA(hh.zmax) + V.TS + 0.5));
         ctx.save(); ctx.globalAlpha = ru; ctx.strokeStyle = C.orange; ctx.lineWidth = 3; ctx.setLineDash([9, 6]);
@@ -457,7 +496,7 @@
   // ---------- periapical annotations ----------
   function drawPaAnnotations(t, r, v, ov) {
     // trace of the canal outline through the lesion
-    const tr = seg(t, TE2 + 0.75, TE2 + 1.5, ease.inOut);
+    const tr = seg(t, TE2 + 0.7, TE2 + 1.35, ease.inOut);
     if (tr > 0) {
       ctx.save(); ctx.strokeStyle = C.blue; ctx.lineWidth = 2.5; ctx.setLineDash([7, 6]); ctx.shadowColor = '#000'; ctx.shadowBlur = 5;
       for (const sgn of [-1, 1]) {
@@ -468,12 +507,22 @@
       }
       ctx.restore();
     }
+    const cc = seg(t, TE2 + 1.0, TE2 + 1.4, ease.out);
+    if (cc > 0) {
+      const bx = r.x + 14, by = r.y + r.h - 78;
+      const tx = PX(r, v, V.canalA(5.4) + 0.1), ty = PY(r, v, 5.4);
+      ctx.save(); ctx.globalAlpha = cc; ctx.strokeStyle = C.blue; ctx.lineWidth = 2.5; ctx.shadowColor = '#000'; ctx.shadowBlur = 5;
+      ctx.beginPath(); ctx.moveTo(bx + 150, by - 84); ctx.lineTo(tx, ty); ctx.stroke();
+      ctx.fillStyle = C.blue; ctx.beginPath(); ctx.arc(tx, ty, 5, 0, 7); ctx.fill();
+      ctx.restore();
+      chip(bx, by, [{ t: 'canal outline', f: `600 30px ${SANS}`, c: C.blue }, { t: 'often still traceable', f: `400 30px ${SANS}`, c: C.text }], { bottom: true, alpha: cc, stroke: Kit.rgba(C.blue, 0.5) });
+    }
     if (ov > 0) {
       ctx.save(); ctx.globalAlpha = ov;
-      const g = ctx.createLinearGradient(0, r.y + r.h - 56, 0, r.y + r.h); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,0.8)');
-      ctx.fillStyle = g; ctx.fillRect(r.x, r.y + r.h - 56, r.w, 56);
-      ctx.fillStyle = C.orange; ctx.fillRect(r.x + 14, r.y + r.h - 30, 14, 14);
-      txt('extent on CBCT', r.x + 36, r.y + r.h - 16, `400 24px ${MONO}`, C.text);
+      const g = ctx.createLinearGradient(0, r.y + r.h - 70, 0, r.y + r.h); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.5, 'rgba(0,0,0,0.78)'); g.addColorStop(1, 'rgba(0,0,0,0.88)');
+      ctx.fillStyle = g; ctx.fillRect(r.x, r.y + r.h - 70, r.w, 70);
+      ctx.strokeStyle = C.orange; ctx.lineWidth = 3; ctx.strokeRect(r.x + 15, r.y + r.h - 34, 16, 16);
+      txt('extent on CBCT', r.x + 42, r.y + r.h - 16, `500 30px ${SANS}`, C.text);
       ctx.restore();
     }
   }
@@ -482,7 +531,7 @@
   const ROWS = [1358, 1406, 1454];
   function drawDock(t, p, q) {
     // stage timeline (scenes 1-3)
-    const ga = fade(t, TB + 0.15, TE1 - 0.05, 0.35, 0.3);
+    const ga = fade(t, 0.25, TE1 + 0.1, 0.5, 0.25);
     if (ga > 0) {
       const lx = 300, x1 = 944, T0 = 2.8, T1 = TE1;
       const tm = (tt) => lx + (x1 - lx) * clamp((tt - T0) / (T1 - T0));
@@ -494,7 +543,7 @@
       ctx.save(); ctx.globalAlpha = ga;
       lanes.forEach((L, i) => {
         const y = ROWS[i], on = seg(t, L.a - 0.1, L.a + 0.25);
-        const la = 0.36 + 0.64 * on;
+        const la = 0.4 + 0.6 * on;
         txt(L.n, 64, y + 11, `600 30px ${MONO}`, L.c, 'left', la);
         txt(L.name, 96, y + 11, `500 30px ${SANS}`, C.text, 'left', la);
         ctx.fillStyle = C.line; rr(lx, y - 3, x1 - lx, 6, 3); ctx.fill();
@@ -507,21 +556,22 @@
       });
       // playhead
       const xp = tm(t);
+      ctx.globalAlpha = ga * seg(t, 2.6, 3.0);
       ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(xp, ROWS[0] - 24); ctx.lineTo(xp, ROWS[2] + 24); ctx.stroke();
       ctx.restore();
     }
     // Patel 3-D classification strip
-    const sa = fade(t, TE1 + 0.15, TEND + 0.1, 0.35, 0.3);
+    const sa = fade(t, TE1 + 0.05, TEND + 0.25, 0.3, 0.25);
     if (sa > 0) {
       const rowsDef = [
-        { label: 'HEIGHT', chips: ['1', '2', '3', '4'], on: 1, at: TE1 + 1.4, min: 58 },
-        { label: 'SPREAD', chips: ['A ≤90°', 'B ≤180°', 'C ≤270°', 'D >270°'], on: 2, at: TE1 + 2.45 },
-        { label: 'PROXIMITY', chips: ['d dentin only', 'p probable pulp involvement'], on: 1, at: TE1 + 2.9 },
+        { label: 'HEIGHT', chips: ['1', '2', '3', '4'], on: 1, at: TE1 + 1.25, min: 58 },
+        { label: 'SPREAD', chips: ['A ≤90°', 'B ≤180°', 'C ≤270°', 'D >270°'], on: 2, at: TE1 + 2.25 },
+        { label: 'PROXIMITY', chips: ['d dentin only', 'p probable pulp involvement'], on: 1, at: TE1 + 2.6 },
       ];
       ctx.save(); ctx.globalAlpha = sa;
       rowsDef.forEach((R, i) => {
         const y = ROWS[i];
-        txt(R.label, 64, y + 10, `500 28px ${MONO}`, C.dim, 'left', 1, 0.5);
+        txt(R.label, 64, y + 11, `500 30px ${MONO}`, C.dim, 'left', 1, 0);
         let x = 246;
         R.chips.forEach((c, j) => {
           const f = `500 30px ${SANS}`, w = Math.max(R.min || 0, widthOf(c, f) + 26);
@@ -534,45 +584,45 @@
         });
       });
       // running result
-      const parts = [['2', TE1 + 1.4], ['C', TE1 + 2.45], ['p', TE1 + 2.9]];
-      txt('CLASS', 600, ROWS[0] + 10, `500 28px ${MONO}`, C.dim, 'left', 1, 0.5);
+      const parts = [['2', TE1 + 1.25], ['C', TE1 + 2.25], ['p', TE1 + 2.6]];
+      txt('CLASS', 596, ROWS[0] + 11, `500 30px ${MONO}`, C.dim, 'left', 1, 0);
       let x = 706;
       for (const [ch, at] of parts) { const on = seg(t, at, at + 0.25, ease.out); txt(on > 0.5 ? ch : '·', x, ROWS[0] + 15, `600 46px ${MONO}`, on > 0.5 ? C.orange : C.dimmer, 'left'); x += 30; }
       ctx.restore();
     }
     // one small source line per scene
     const src = [
-      [TB + 0.15, TC - 0.05, 'Mavridou et al., J Endod 2016'],
-      [TC + 0.1, TC2 - 0.1, 'Mavridou et al., J Endod 2016 · Patel et al., Int Endod J 2022'],
-      [TC2 + 0.1, TD - 0.05, 'Mavridou et al., J Endod 2016 · Heithersay, Quintessence Int 1999'],
-      [TD + 0.1, TE1 - 0.05, 'Mavridou et al., J Endod 2016 · proposed 3-stage model'],
-      [TE1 + 0.15, TE2 - 0.05, 'Patel et al., Int Endod J 2018'],
-      [TE2 + 0.1, TEND - 0.05, 'Patel K et al., J Endod 2016 · Heithersay, Quintessence Int 1999'],
+      [TB, TC, 'Mavridou et al., J Endod 2016'],
+      [TC, TC2, 'Mavridou et al., J Endod 2016 · Patel et al., Int Endod J 2022'],
+      [TC2, TD, 'Mavridou et al., J Endod 2016 · Heithersay, Quintessence Int 1999'],
+      [TD, TE1, 'Mavridou et al., J Endod 2016 · proposed 3-stage model'],
+      [TE1, TE2, 'Patel et al., Int Endod J 2018;51:206'],
+      [TE2, TEND + 0.2, 'Patel K et al., J Endod 2016 · Heithersay, Quintessence Int 1999'],
     ];
-    for (const [a, b, s] of src) { const al = fade(t, a, b); if (al > 0) txt(s, 64, 1516, `400 25px ${SANS}`, C.dim, 'left', al); }
+    for (const [a, b, s] of src) { const al = fade(t, a, b, 0.2, 0.2); if (al > 0) txt(s, 64, 1516, `400 25px ${SANS}`, C.dim, 'left', al); }
     txt('SCHEMATIC · not a patient scan · not to scale', 64, 1558, `400 24px ${MONO}`, C.dim, 'left', 0.95);
   }
 
   // ---------- end card ----------
   function drawEnd(t) {
-    const a = seg(t, TEND + 0.1, TEND + 0.5, ease.out) * (1 - seg(t, DUR - 0.5, DUR - 0.12, ease.inOut));
+    const a = seg(t, TEND + 0.1, TEND + 0.45, ease.out) * (1 - seg(t, DUR - 0.5, DUR - 0.3, ease.inOut));
     if (a <= 0) return;
-    const x = 56, y = 1050, w = 968, h = 444;
+    const x = 48, y = 1050, w = 984, h = 444;
     ctx.save(); ctx.globalAlpha = a;
-    rr(x, y, w, h, 4); ctx.fillStyle = 'rgba(8,11,15,0.97)'; ctx.fill(); ctx.strokeStyle = C.line2; ctx.lineWidth = 2; ctx.stroke();
+    rr(x, y, w, h, 4); ctx.fillStyle = '#080b0f'; ctx.fill(); ctx.strokeStyle = C.line2; ctx.lineWidth = 2; ctx.stroke();
     ctx.fillStyle = C.cyan; ctx.fillRect(x, y, w, 3);
-    txt('TAKE-HOME', x + 28, y + 50, `500 28px ${MONO}`, C.cyan, 'left', 1, 1.5);
+    txt('TAKE-HOME', x + 36, y + 52, `500 30px ${MONO}`, C.cyan, 'left', 1, 1.5);
     const lines = ['Recognize it early', 'Consider CBCT before you treat', 'Treatment depends on extent'];
     lines.forEach((s, i) => {
-      const li = seg(t, TEND + 0.35 + i * 0.3, TEND + 0.75 + i * 0.3, ease.out);
+      const li = seg(t, TEND + 0.3 + i * 0.22, TEND + 0.65 + i * 0.22, ease.out);
       const yy = y + 134 + i * 100, dx = (1 - li) * 26;
       ctx.save(); ctx.globalAlpha = a * li;
-      rr(x + 28 + dx, yy - 44, 52, 56, 9); ctx.strokeStyle = C.orange; ctx.lineWidth = 3; ctx.stroke();
-      txt(String(i + 1), x + 54 + dx, yy - 3, `600 36px ${MONO}`, C.orange, 'center');
-      txt(s, x + 104 + dx, yy, `600 50px ${SANS}`, C.text);
+      rr(x + 36 + dx, yy - 44, 52, 56, 9); ctx.strokeStyle = C.orange; ctx.lineWidth = 3; ctx.stroke();
+      txt(String(i + 1), x + 62 + dx, yy - 3, `600 36px ${MONO}`, C.orange, 'center');
+      txt(s, x + 112 + dx, yy, `600 50px ${SANS}`, C.text);
       ctx.restore();
     });
-    txt('Patel et al., Int Endod J 2018 · Patel K et al., J Endod 2016', x + 28, y + h - 26, `400 25px ${SANS}`, C.dim, 'left');
+    txt('Patel et al., Int Endod J 2018;51:1224 · Patel K et al., J Endod 2016', x + 36, y + h - 26, `400 25px ${SANS}`, C.dim, 'left');
     ctx.restore();
   }
 

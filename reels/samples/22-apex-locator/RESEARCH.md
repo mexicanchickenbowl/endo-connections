@@ -505,3 +505,26 @@ P1-P4, P6, D2, D3, D5, D6, the "confirm with a radiograph" qualifier, and the DO
 **Still unverified (keep off screen):** Sunada's 6.5 kΩ and 40 µA; any Root ZX quotient value (0.67 / 0.72); the
 content of Suzuki 1942; Kuttler 1955 and Dummer 1984 primaries (no abstracts); any tooth capacitance value; any
 ESE/AAE guideline statement on apex locators.
+
+---
+
+## Builder addendum (2026-11-22, build stage)
+
+Nothing in sections (a)-(g) was changed. Two things were done while building the reel:
+
+1. **Re-check of the five mechanism abstracts.** According to PubMed, the abstracts of Kobayashi & Suda 1994
+   (PMID 7996080, [DOI](https://doi.org/10.1016/S0099-2399(06)80053-1)), Oishi et al. 2002 (PMID 12026919,
+   [DOI](https://doi.org/10.1097/00004770-200205000-00003)), Nekoofar et al. 2006 (PMID 16872454,
+   [DOI](https://doi.org/10.1111/j.1365-2591.2006.01131.x)), Rambo et al. 2010 (PMID 20819212,
+   [DOI](https://doi.org/10.1186/1475-925X-9-46)) and Pilot & Pitts 1997 (PMID 9487844,
+   [DOI](https://doi.org/10.1016/S0099-2399(97)80341-X)) read as quoted in Tables 1-2. No change.
+2. **One fact added for the fluid beat** (the scope traces shrink as the jumper moves BLOOD -> SALINE -> NaOCl; the
+   sizes are schematic and unlabelled):
+
+| # | Fact | Exact source | What the source literally reports | Verified from | Confidence |
+|---|---|---|---|---|---|
+| B1 | 5.25% NaOCl had the highest conductivity of the five irrigants tested (more conductive than saline) | Shin HS, Yang WK, Kim MR, Ko HJ, Cho KM, Park SH, Kim JW. Restor Dent Endod 2012;37(3):149-154. PMID 23431125, PMCID PMC3569399. [DOI](https://doi.org/10.5395/rde.2012.37.3.149) | Conductivity tester, five irrigants (saline, 5.25% NaOCl, 2% chlorhexidine liquid, 2% chlorhexidine gel, RC-Prep): "5.25% NaOCl had the highest electrical conductivity, whereas 2% chlorhexidine gel and RC-Prep gel had the lowest". Main experiment: Root ZX in teeth with a simulated perforation (in vitro, 20 teeth). | abstract | High for the ordering NaOCl > saline; no values in the abstract |
+| B2 | In vitro, Root ZX Mini and iPex II accuracy was not significantly affected by irrigants of differing conductivity | Yahya EM, Alchalabi AS, Alkhalidi EF. J Int Soc Prev Community Dent 2024;14(3):211-217. PMID 39055293. [DOI](https://doi.org/10.4103/jispcd.jispcd_192_23) | 70 premolars in an alginate model, seven canal conditions including dry; neither device (P = 0.088) nor irrigant (P = 0.099) significantly affected accuracy. | abstract | Medium (in vitro; consistent with L5, not used on screen) |
+
+   Not sourced: the relative conductivity of blood versus saline. The reel draws only a small blood-to-saline step and
+   NOTES.md marks it as illustrative. A PubMed query for apex locator + irrigant conductivity + blood returned nothing.

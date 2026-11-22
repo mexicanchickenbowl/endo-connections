@@ -1,0 +1,51 @@
+{
+  "id": "22",
+  "slug": "22-apex-locator",
+  "title": "How an apex locator finds the end",
+  "style": "Printed circuit board",
+  "topic": "The patient completes the circuit; ratio-type locators compare two AC signals, and that ratio drops sharply near the foramen.",
+  "duration": 24.0,
+  "claims": [
+    {
+      "claim": "The patient is the circuit: file, canal fluid, foramen, periodontal tissues, lip clip; dentin = insulator (drawn as a schematic)",
+      "source": "Nekoofar et al., Int Endod J 2006;39:595-609 (PMID 16872454), abstract; lip electrode: Nasiri & Wrbas, Saudi Dent J 2022;34:11-20 (PMID 35068894), full text"
+    },
+    {
+      "claim": "Toy model / schematic: canal column drawn as a resistor that shortens as the file advances, root wall drawn as a capacitor; no component values",
+      "source": "Nekoofar et al., Int Endod J 2006;39:595-609 (PMID 16872454), abstract; Meredith & Gulabivala, Endod Dent Traumatol 1997;13:126-131 (PMID 9550026), abstract"
+    },
+    {
+      "claim": "2 AC signals, 1 ratio; Root ZX: 0.4 + 8 kHz",
+      "source": "Ratio method: Kobayashi & Suda, J Endod 1994;20:111-114 (PMID 7996080), abstract; Root ZX frequencies: Oishi et al., J Endod 2002;28:361-364 (PMID 12026919), abstract"
+    },
+    {
+      "claim": "Fluid (blood, saline, NaOCl) shifts both signals; the ratio barely moves. Toy model / schematic: wave sizes are illustrative",
+      "source": "Kobayashi & Suda, J Endod 1994;20:111-114 (PMID 7996080), abstract: quotient 'only negligibly influenced by the electrolyte'; 5.25% NaOCl had the highest conductivity of five irrigants tested: Shin et al., Restor Dent Endod 2012;37:149-154 (PMID 23431125), abstract"
+    },
+    {
+      "claim": "Last ~1 mm: the ratio drops (in vivo, 21 canals). Toy model / schematic: curve shape only, no values",
+      "source": "Rambo et al., Biomed Eng Online 2010;9:46 (PMID 20819212), full text (Table 2)"
+    },
+    {
+      "claim": "It senses the foramen region",
+      "source": "Ounsi & Naaman, Int Endod J 1999;32:120-123 (PMID 10371907), in vitro, abstract; Rambo et al., Biomed Eng Online 2010;9:46 (PMID 20819212), full text"
+    },
+    {
+      "claim": "Scale: not millimeters",
+      "source": "J. Morita ROOT ZX II operation instructions (manufacturer document, not a PubMed source): 'The numerals on the meter gauge do not represent millimeters'"
+    },
+    {
+      "claim": "Root ZX, in vivo: ~70-100% within ±0.5 mm; small studies, not pooled",
+      "source": "Range of 16 in vivo abstracts, 1996-2023 (landmark = foramen or constriction): lowest 72%, Stöber et al., J Endod 2011;37:608-610 (PMID 21496657); highest 100%, Vieyra et al., Int Endod J 2010;43:16-20 (PMID 20002800) and De-Deus et al., J Endod 2023;49:487-495 (PMID 36848949); full list in NOTES.md"
+    },
+    {
+      "claim": "Confirm with a radiograph",
+      "source": "Martins et al., J Endod 2014;40:759-777 (PMID 24862702), systematic review, abstract; J. Morita ROOT ZX II operation instructions"
+    },
+    {
+      "claim": "History strip: 1918 Custer and 1962 Sunada (direct current), then AC impedance, then the 1994 ratio method",
+      "source": "Custer, Dent Regist 1918;72:420-425 (PMID 33703181), full text; Sunada, J Dent Res 1962;41:375-387 (not in PubMed; record and secondary full text only); Nasiri & Wrbas, Saudi Dent J 2022;34:11-20 (PMID 35068894); Kobayashi & Suda, J Endod 1994;20:111-114 (PMID 7996080)"
+    }
+  ],
+  "caption": "How does an apex locator find the end?\nThe patient is the circuit: file > canal fluid > foramen > PDL > lip clip. Dentin insulates.\nRatio-method units (Root ZX: 0.4 + 8 kHz) compare two AC signals. Conductive fluid shifts both, so the ratio barely moves; it drops in the last ~1 mm.\nIt senses the foramen region; display marks are not mm (manufacturer). Root ZX in vivo: ~70-100% within ±0.5 mm (small studies, not pooled). Confirm with a radiograph.\nSchematic animation.\nRefs: Nekoofar 2006, Ounsi 1999, Vieyra 2010 Int Endod J; Kobayashi 1994, Oishi 2002, Stöber 2011, De-Deus 2023, Martins 2014 J Endod; Rambo 2010 Biomed Eng Online.\n#endodontics #apexlocator #workinglength #rootcanal #dentistry"
+}

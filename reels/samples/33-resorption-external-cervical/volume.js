@@ -150,7 +150,7 @@
           if (nSd > dMax) dMax = nSd;
           // --- bone ---
           const cs = Math.cos(Math.PI * x / SP);
-          const crest = 1.4 + 0.75 * cs * cs;           // scalloped margin: higher between the teeth, lower over the roots
+          const crest = 1.25 + 0.65 * cs * cs;           // scalloped margin: higher between the teeth, lower over the roots
           const yb = -(4.75 + 0.10 * z), yl = 4.95 + 0.20 * z;
           const dLat = Math.min(ya - yb, yl - ya), dCr = z - crest;
           const sdB0 = smin(smin(dCr, ya - yb, 0.9), yl - ya, 0.9);
@@ -300,7 +300,7 @@
               const act = les * (1 - rep) * tint;
               tr = 96 * act; tg = 34 * act; tb = -6 * act;
               if (front > 0.001) { const dd = (pA - av) / FW; const f = m * Math.exp(-dd * dd) * front * (dd > -1.2 ? 1 : 0); tr += 92 * f; tg += 52 * f; tb += 6 * f; }
-              if (rep > 0.003) { const rr2 = rep * les * tint; tr += 26 * rr2; tg += 20 * rr2; tb += 4 * rr2; }
+              if (rep > 0.003) { const rr2 = rep * les * tint; tr += 44 * rr2; tg += 33 * rr2; tb += 2 * rr2; }
             }
           }
         }
@@ -449,10 +449,13 @@
             const facing = Math.abs(nx * Dx + ny * Dy + nz * Dz);
             const df = Math.max(0, nx * Lx + ny * Ly + nz * Lz);
             const en = z < -0.15 ? 1 : 0;
-            let aS = 0.12 + 0.66 * Math.pow(1 - facing, 2.2) + en * 0.10;
+            const hx = Lx - Dx, hy = Ly - Dy, hz = Lz - Dz, hl = Math.hypot(hx, hy, hz) || 1;
+            const spec = Math.pow(Math.max(0, (nx * hx + ny * hy + nz * hz) / hl), 28);
+            let aS = 0.16 + 0.62 * Math.pow(1 - facing, 2.2) + en * 0.17 + 0.5 * spec;
             if (aS > 0.9) aS = 0.9;
-            const sv = 0.5 + 0.8 * df;
-            const sr = (en ? 214 : 186) * sv, sg = (en ? 230 : 208) * sv, sb = (en ? 244 : 230) * sv;
+            const rim = Math.pow(1 - facing, 3);
+            const sv = 0.66 + 0.5 * df;
+            const sr = Math.min(255, (en ? 226 : 196) * sv + 70 * rim + 120 * spec), sg = Math.min(255, (en ? 238 : 216) * sv + 70 * rim + 120 * spec), sb = Math.min(255, (en ? 250 : 236) * sv + 70 * rim + 120 * spec);
             cr = cr + (sr - cr) * aS; cg = cg + (sg - cg) * aS; cb = cb + (sb - cb) * aS;
           }
         }
@@ -521,9 +524,9 @@
         if (ov > 0.001) {
           const c = bil(cnt, fx, fz);
           if (c > 0.01) {
-            const mk = sstep(0.03, 0.22, c);
+            const mk = sstep(0.02, 0.30, c);
             const edge = mk * (1 - mk) * 4;
-            const k2 = ov * (0.26 * mk + 0.75 * edge);
+            const k2 = Math.min(1, ov * (0.10 * mk + 1.25 * edge));
             r += (255 - r) * k2; gg += (138 - gg) * k2; b += (40 - b) * k2;
           }
         }

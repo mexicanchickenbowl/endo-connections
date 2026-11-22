@@ -68,7 +68,7 @@ fact-check are marked **[FC]**; the full list is in the **Fact-check log** at th
 | 29 | First dental CCD sensor: RadioVisioGraphy, 1987 | Mouyen F et al., Oral Surg Oral Med Oral Pathol 1989;68:238-42, PMID 2780024, [doi](https://doi.org/10.1016/0030-4220(89)90200-4); White & Pharoah 7th ed. | Mouyen: RVG "a unit based on the charged coupled device… uses considerably reduced levels of radiation… resolution is slightly lower than that with silver halide emulsion films". W&P: "The charge-coupled device (CCD), introduced to dentistry in 1987". **[FC]** The year is the textbook's; the Mouyen abstract gives no year. Kamburoğlu 2022 (introduction, full text) dates the invention of RadioVisioGraphy to 1984, so write "introduced 1987", never "invented 1987". | abstract + textbook | high for "introduced 1987" (textbook); caption-level only |
 | 30 | PSP reached dentistry in 1994 | Hildebolt CF, Couture RA, Whiting BR, Dent Clin North Am 2000;44:273-97, PMID 10740769 (no DOI in PubMed) | "Photostimulable phosphor radiography… became available in dentistry in 1994." | abstract | high |
 | 31 | CCD vs CMOS: similar perceived image quality | Kitagawa H, Scheetz JP, Farman AG, Dentomaxillofac Radiol 2003;32:408-11, PMID 15070845, [doi](https://doi.org/10.1259/dmfr/19990417) | Schick CMOS vs its CCD predecessor, cadaver maxilla, 9 dentists: "perceived to produce radiographic images of similar overall quality" (CMOS better for cortical bone and root apices; CCD better for root canal space). | abstract | medium (one manufacturer, 2003) |
-| 32 | More bits / more lp/mm did not improve caries detection | Wenzel A, Haiter-Neto F, Gotfredsen E, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2007;103:418-22, PMID 17321456, [doi](https://doi.org/10.1016/j.tripleo.2006.05.016) | 80 extracted teeth, histology validation: "Caries diagnostic accuracy seems to be little influenced by an increase in spatial resolution and bit depth from 8-bit to 12- or 16-bit within digital radiographic system brands." **[FC]** Systems: two PSP scanners (Digora Optime, VistaScan) and one CCD (Dixi2); 160 approximal surfaces, 6% dentinal lesions. Not a flat "no effect": one within-brand contrast was significant (VistaScan 8-bit max-resolution had higher sensitivity than its two high-resolution modes, P = .003). Say "little influence", not "no influence". | abstract | high (for small approximal caries, in vitro; "little", not "none") |
+| 32 | More bits / more lp/mm did not improve caries detection | Wenzel A, Haiter-Neto F, Gotfredsen E, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2007;103:418-22, PMID 17321456, [doi](https://doi.org/10.1016/j.tripleo.2006.05.016) | 80 extracted teeth, histology validation: "Caries diagnostic accuracy seems to be little influenced by an increase in spatial resolution and bit depth from 8-bit to 12- or 16-bit within digital radiographic system brands." **[FC]** Systems: two PSP scanners (Digora Optime, VistaScan) and one solid-state sensor (Dixi2; its type is not stated in the abstract); 160 approximal surfaces, 6% dentinal lesions. Not a flat "no effect": one within-brand contrast was significant (VistaScan 8-bit max-resolution had higher sensitivity than its two high-resolution modes, P = .003). Say "little influence", not "no influence". | abstract | high (for small approximal caries, in vitro; "little", not "none") |
 | 33 | PSP plates wear: scratches | Bedard A, Davis TD, Angelopoulos C, J Contemp Dent Pract 2004;5:57-69, PMID 15150634 (no DOI in PubMed); Wenzel & Møystad 2010 | Bedard (in vitro, 140 plates, one system): "95% of our plates were rendered non-diagnostic after only 50 uses." | abstract | low-medium (single 2004 study; do not generalize the number) |
 | 34 | 15 µm pixels / "33 lp/mm" sensors | manufacturer specifications only | Not found in PubMed-indexed literature in this session. | NOT VERIFIED | — (leave off screen) |
 | 35 | Sensor / plate thickness in mm | Al-Rawi W, Teich S, Compend Contin Educ Dent 2013;34:e76-83, PMID 24568289 measured it, but the abstract gives no numbers | Abstract: eight CMOS sensors compared for thickness, active area etc.; "a lack of standardization exists"; "active imaging area was smaller compared with conventional films". | NOT VERIFIED (numbers) | — (no thickness numbers on screen) |
@@ -90,7 +90,7 @@ fact-check are marked **[FC]**; the full list is in the **Fact-check log** at th
 5. **[FC — softened] "Pixels as small as ≈ 20 µm → ≈ 25 lp/mm in theory; measured is lower."**
    "≈ 20 µm" is the small end of the textbook range (< 20–70 µm), verified for specific sensors (19.5 µm: Farman &
    Farman 1999, Kamburoğlu 2022; 20 µm: Dashpuntsag 2017), so do not write it as if every sensor had 20 µm pixels:
-   use "as small as ≈ 20 µm" or "e.g. ≈ 20 µm". "25 lp/mm" is pixel arithmetic (1 / 2 × pixel), always labeled
+   use "as small as ≈ 20 µm" or "e.g. ≈ 20 µm". "25 lp/mm" is pixel arithmetic (1 / (2 × pixel size)), always labeled
    "in theory". "Measured is lower" = Brüllmann 2013 (four of five sensors 9.9–18.8 LP/mm at 10% contrast, bench
    test). If space is short, keep only "pixels as small as ≈ 20 µm".
 6. **[FC — softened] "PSP plate (Eu-doped barium fluorohalide): trapped electrons store the image → red laser scan →
@@ -165,9 +165,9 @@ automatic per patient; PSP latitude is wide, but whether it beats today's sensor
    2000; Berkhout 2004; IAEA handbook) and was wider than film and the CCD sensors of 1996–2004 in vitro (Borg
    1996; Berkhout 2004). It is not exclusive to PSP: some CMOS sensors had exposure ranges as wide as PSP (Farman
    & Farman 2005). For contemporary systems the evidence is split within one research group: gray-value analysis
-   found PSP systems "had a broader dynamic range" (Marinho-Vieira 2022), but the observer study on the same
-   images concluded PSP systems "may not necessarily have a wider range than sensor-based systems" (Marinho-Vieira
-   2023). The wide PSP latitude can also hide over-exposure (Berkhout 2004).
+   found PSP systems "had a broader dynamic range" (Marinho-Vieira 2022), but the companion observer study
+   ("part 2") concluded PSP systems "may not necessarily have a wider range than sensor-based systems"
+   (Marinho-Vieira 2023). The wide PSP latitude can also hide over-exposure (Berkhout 2004).
 9. **Dose vs film: no percentage on screen.** ADA 2024 says digital "allows for lower patient radiation exposure"
    and that the reduction "varies"; "high-speed film can provide a dose reduction similar to digital imaging". The
    systematic review (Wenzel & Møystad 2010) concludes "a dose reduction may not be obtained" in practice (more
@@ -221,9 +221,10 @@ automatic per patient; PSP latitude is wide, but whether it beats today's sensor
   with F-speed film, so it says nothing about "sensor vs film"; the ratios are my arithmetic from the abstract.
 - **[FC — new] Latitude: is PSP really wider than a sensor?** The classic answer (yes) comes from in vitro work on
   1996–2004 hardware (Borg 1996; Borg 2000; Berkhout 2004) and the 2010 systematic review that summarized it.
-  Farman & Farman 2005 already found two CMOS sensors with exposure ranges as wide as PSP. For contemporary systems
-  one group reported a broader dynamic range for PSP by gray-value analysis (Marinho-Vieira 2022) but, with
-  observers judging the same radiographs, that "PSP-based systems may not necessarily have a wider range than
+  Farman & Farman 2005 already found two solid-state sensors (RVG 6000, labeled CMOS in the abstract, and RVG 5000)
+  with exposure ranges as wide as PSP. For contemporary systems
+  one group reported a broader dynamic range for PSP by gray-value analysis (Marinho-Vieira 2022) but, in the
+  companion observer study, that "PSP-based systems may not necessarily have a wider range than
   sensor-based systems" (Marinho-Vieira 2023). All of this is ex vivo. On screen: "wide latitude", no comparison.
 - **Resolution numbers.** lp/mm depends on the test object, the contrast criterion (visual vs 10% contrast), scan
   mode (PSP) and software filters. Systems "varied greatly in latitude, 'optimal' exposure, and image quality"
@@ -382,3 +383,73 @@ Suggested hashtags: #endodontics #oralradiology #dentalradiography #digitalradio
 - Not obtainable in full text: van der Stelt 2005 and 2021, Sanderink & Miles 2000, Hildebolt 2000, Udupa 2013,
   Farman & Farman 2005, Vandenberghe 2010 (Eur Radiol 20:2637, PMID 20544352), Mol & Yoon 2015 (J Calif Dent Assoc
   43:503, PMID 26820007) — statements from these are abstract-level only or not used.
+
+---
+
+## Fact-check log (independent re-verification, 2026-11-22)
+
+**Method.** Based on articles retrieved from PubMed: metadata and abstracts were pulled again for all 37 PMIDs cited
+above, plus 4 papers found during the check. PMC full text was re-read through PubMed for Leblans 2011
+(PMC5448636), Dashpuntsag 2017 (PMC5401743) and Kamburoğlu 2022 (PMC8967495). PMC returned no full text for Shah
+2014 and for the two Marinho-Vieira papers; Shah's sentence was located in the downloaded PMC page, the
+Marinho-Vieira papers are abstract-level. Every textbook, IAEA-handbook and ADA 2024 quotation was located by text
+search in the copies in `_scratch/dl/`. The textbook is still known only through the online reproduction of the
+7th edition (first part of Ch. 4); the printed book and the 8th / 9th editions were not seen. The researcher's
+quotations were not taken on trust.
+
+**Result in one paragraph.** No wrong PMID, first author, year, journal, volume or page was found, and every
+quoted number matched its source. The problems were of three other kinds: (1) one recommended on-screen claim
+rested on evidence from 1996–2004 hardware and is questioned by 2022–2023 work that the brief had missed (PSP
+"wider" latitude); (2) caveats sitting in the same abstract or the same textbook paragraph had been left out
+(fading, Brüllmann's 29.52 value, Jørgensen's film-vs-plate result, Wenzel 2007's significant contrast, the
+Akdeniz 2006 results/conclusion mismatch); (3) medical computed-radiography figures and manufacturer-supplied
+wording were presented without saying what kind of source they come from.
+
+### Changes made
+
+| # | Where | Problem found | Change |
+|---|---|---|---|
+| 1 | Row 22, on-screen item 8, storyline end card, correction 8, controversies, do-not-claim | "PSP: wider exposure latitude" was supported only by in vitro studies of 1996–2004 CCD / early CMOS sensors. Missed: Marinho-Vieira 2022 (PMID 34860568, [doi](https://doi.org/10.1259/dmfr.20210404)) — PSP "broader dynamic range" by gray values — and Marinho-Vieira 2023 (PMID 36988093, [doi](https://doi.org/10.1259/dmfr.20220370)) — "PSP-based systems may not necessarily have a wider range than sensor-based systems". Farman & Farman 2005 already showed two solid-state sensors (RVG 6000 and RVG 5000) matching PSP. | Comparative removed from the recommended list: on screen "wide latitude", not "wider". Row 22 retitled and confidence split (high for "wide", medium / contested for "wider than sensors"). End-card source line changed from Borg & Gröndahl 1996 to Berkhout 2004. Borg 2000 (PMID 10808218, [doi](https://doi.org/10.1038/sj/dmfr/4600501)) added as further support for "wide". Unqualified comparison moved to "Do not claim". |
+| 2 | Row 21, on-screen item 7, controversies | Selective quotation: the textbook paragraph that gives "23% after 30 minutes and 30% after 1 hour" continues "early loss of charge does not typically result in clinically meaningful image deterioration… Adequately exposed images may be stored for 12 to 24 hours and retain acceptable image quality". | Caveat added to row 21 and to the fading controversy; "Scan promptly — the latent image fades" kept (the textbook does say "processed as soon as possible"), but any fading percentage or deadline moved to "Do not claim". |
+| 3 | Controversies (PSP fading) | Akdeniz & Gröndahl 2006 was summarized as "significant gray-level change at ≥ 30 min". The abstract's Results say the half-hour scan was *not* significantly different from the immediate scan; only longer delays were. Its Conclusion says "half an hour or longer". | Re-worded to "significant change at delays beyond 30 min" and the internal inconsistency stated. Denominators added for Akdeniz 2005 (15 plates) and Nascimento 2016 (40 teeth; only the ROC area differed at 4 h). |
+| 4 | Row 12, correction 4, do-not-claim | Brüllmann 2013: the 29.52 LP/mm value lies beyond the 2.5–20 LP/mm test pattern and above the ≈ 25–26 lp/mm ceiling of a ≈ 20 µm pixel, i.e. it contradicts the abstract's own conclusion for that sensor. The brief quoted the range as "9.9–29.5". | Range restated as 9.9–18.8 LP/mm for four of five sensors; 29.52 flagged as an extrapolated curve-fit value never to be quoted. |
+| 5 | Row 10, on-screen item 5, storyline, correction 3 | "Pixels ≈ 20 µm" read as a general property; the textbook range is "< 20 to 70 µm" and only specific sensors were verified at 19.5–20 µm. | Wording changed to "as small as ≈ 20 µm". Two more peer-reviewed specification quotes added (Kamburoğlu 2022: 19.5 µm, "theoretical resolution of 25.6 lp/mm"; Dashpuntsag 2017 Table 1: 0.02 mm). Unqualified "sensor pixels are 20 µm" moved to "Do not claim". |
+| 6 | Row 15, on-screen item 6 | "BaFBr:Eu²⁺" presented as the dental plate's composition. The dental textbook names only "europium-doped barium fluorohalide" ("iodine, chlorine, or bromine"); the exact formula comes from medical CR sources (Leblans, IAEA). | On-screen wording softened to "Eu-doped barium fluorohalide" (formula only with "typically"). Confidence split. |
+| 7 | Rows 18 and 20, correction 12, new correction 16 | Leblans 2011 is a medical computed-radiography review by Agfa HealthCare authors with no dental content; its 390 nm, "roughly 50%" and "10–25% in the first hour" were listed without that qualifier. The IAEA handbook says only that read-out "yields only a fraction of the stored signal". | Source type stated; numbers restricted to caption level and added to "Do not claim" as dental measurements. All Leblans quotations themselves were confirmed in the PMC full text. |
+| 8 | Correction 5 | "Some PSP scanners read at 14 bit and output 8 bit": incomplete. Dashpuntsag 2017 Table 1: Digora Optime (PSP) 14 → 8 bit, **Megadixel (CCD) 14 → 8 bit**, VistaScan (PSP) 16 → 16 bit. | Detail corrected; not a PSP-only feature. |
+| 9 | Row 24, on-screen item 8, storyline, new correction 15 | Brief and storyline implied a film-like, flexible plate. Kamburoğlu 2022 (full text): plates "have the same shape and dimensions of conventional films, but… are more rigid than film". | "Flexible" removed; "thin, film-sized"; builder told not to animate bending. Clinical denominators added (58 patients, 1,044 radiographs, 167 s vs 234 s per nine radiographs, same manufacturer, round collimation). |
+| 10 | Row 25, controversies | Jørgensen & Wenzel 2012 cited only for "rounded sensor = film". The same abstract: film and that sensor were significantly less uncomfortable than the phosphor plate. | Added; "PSP is as comfortable as film" moved to "Do not claim". |
+| 11 | Row 32 | Wenzel 2007 summarized as "did not improve caries detection". Abstract: accuracy "little influenced", with one significant within-brand sensitivity difference (P = .003); systems were two PSP scanners and one solid-state sensor; 160 surfaces, 6% dentinal lesions. | Re-worded to "little influence"; denominators added; flat "no difference" moved to "Do not claim". |
+| 12 | Row 27, controversies (dose) | Ludlow 2008 numbers lacked the denominator and were used for "collimation matters more than receptor choice", although the study measured no solid-state sensor and grouped PSP with F-speed film. | "18-image adult full-mouth series" added (from the ADA 2024 table that reprints the values); phantom study stated; sentence re-worded to what the abstract supports (about 4.9-fold for collimation vs 2.3-fold for D-speed → PSP / F-speed, my arithmetic). |
+| 13 | Row 29, correction 13 | "First dental CCD sensor… 1987": the Mouyen abstract gives no year; the year is the textbook's ("introduced to dentistry in 1987"). Kamburoğlu 2022 dates the invention to 1984. | Wording fixed to "introduced 1987 (textbook)"; "invented 1987" moved to "Do not claim". |
+| 14 | Correction 14 | Scintillator color was supported by "Arvanitis 2007 quotes the chip's quantum efficiency 'at 530 nm' for CsI:Tl coupling" — the abstract does not link 530 nm to CsI:Tl emission. | Re-sourced: Gd₂O₂S:Tb green emission is stated in the IAEA handbook (Ch. 7); CsI:Tl green is marked as not stated in any source read. No color word or wavelength on screen. |
+| 15 | Row 3 | DQE figures (22% vs 10%) given without spatial frequency and attributed loosely to both Farman TT papers. | Frequencies added (2 and 1 cycles/mm; experimental ceramic 62% at 5 cycles/mm); numbers attributed to the 2006 paper only; caption-level. |
+| 16 | Row 4, legend, on-screen item 2 | "Cuts noise" comes from a manufacturer-supplied figure caption reproduced in the textbook; a PubMed search found no dental paper measuring the fiber-optic plate's effect. | Source type stated; confidence lowered to medium-high; "not every sensor has one" kept. |
+| 17 | Row 36 | Couture & Hildebolt 2002 called "a dental PSP system"; the abstract does not name the system. | Softened. |
+| 18 | Row 9 | 8-bit display and 60 / 30 gray levels are unreferenced 2014 textbook statements about "conventional computer monitors". | Marked as textbook quote, caption-only. |
+| 19 | Legend | "9th (Lam & Mallya, 2024)": Elsevier pages give November 2024 and February 2025 release dates. | Year removed; note added. |
+| 20 | Controversies (schematic) | "Real read-out… takes a fraction of a second" had no source for intraoral sensors. | Replaced by the sourced "available to view in a matter of seconds" (Kamburoğlu 2022). |
+| 21 | Section (g) | Reference list lacked the papers now needed for the latitude and handling statements. | Marinho-Vieira 2022 and 2023, Kamburoğlu 2022 and Borg 2000 added; Borg & Gröndahl 1996 restricted to its actual comparison. |
+
+### Checked and left unchanged (source says what the brief says)
+
+Rows 1, 2, 5–8, 13, 14, 16, 17, 19, 26, 28, 30, 31, 33–35 (rows 11 and 23 were also correct as written and only
+gained an added source); corrections 1, 2, 6, 7, 9–11; the Nejaim 2016, Shah 2014, Sanderink & Miles 2000, Udupa 2013, Şenel 2010, Ang 2006, Nair 2007,
+Vandenberghe 2010 and Mol & Yoon 2015 citations. Specific numbers re-confirmed in the abstracts: 19.5 µm, > 20
+lp/mm and 25:1 (Farman & Farman 1999); 9.9 / 10.3 / 13.9 / 18.8 / 29.52 LP/mm (Brüllmann 2013); 18 detectors and
+20 lp/mm (Farman & Farman 2005); 11.7 lp/mm, 40 students (Künzel 2003); 0.52, 0.13, 0.35, 1.21 and 1.16 s
+(Berkhout 2004); 32.5 / 42.8 / 48.4 radiographs per week, 73% response, "50-80%" and "less than 25%" (Berkhout
+2003); 34.9 / 170.7 / 388 µSv (Ludlow 2008); 58 patients, 4.57 vs 4.48 (Kamburoğlu 2022); 60 patients (Jørgensen
+2012); 44.1% and 2100 radiographs (Çalışkan 2017); 140 plates, 95% after 50 uses (Bedard 2004); 3.2 orders of
+magnitude (Couture 2002); 14.3 and 26.3 lp/mm (Nejaim 2016); 1994 (Hildebolt 2000); ADA 2024 recommendations
+3.1.1.1 and 3.1.2 and the "more than 40%" sentence (the only published correction to that article concerns a name
+in the acknowledgments).
+
+### Still not independently verifiable
+
+- The printed White & Pharoah page (any edition) and the paywalled sections "Detector latitude" and "Detector
+  sensitivity"; the textbook's own 25 lp/mm example.
+- Full texts of Farman & Farman 1999 and 2005, Brüllmann 2013, Borg 1996 / 2000, Berkhout 2003 / 2004, Wenzel &
+  Møystad 2010, Marinho-Vieira 2022 / 2023: abstract level only.
+- The fiber-optic plate's X-ray-shielding role; CsI:Tl emission color; 15 µm / 33 lp/mm sensors; thickness in mm;
+  "CMOS has replaced CCD". All remain off screen.

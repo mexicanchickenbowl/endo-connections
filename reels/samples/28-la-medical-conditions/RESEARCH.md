@@ -501,3 +501,25 @@ numeric facts, and (iv) items that are textbook-only but were worded as verified
 
 PubMed is the source of the bibliographic data and abstracts above; DOIs are given with each PMID in this log and
 in section (g).
+
+---
+
+## (i) Build-stage addendum (2026-11-22, reel builder)
+
+One visual fact used by the reel was not in sections (a)-(h) and was verified on PubMed before use:
+
+| Fact as shown | Exact source | What the source literally reports | Verified | Confidence |
+|---|---|---|---|---|
+| Panel 6 pictogram: a red blood drop turning chocolate brown (no words on screen) | Guay J. Methemoglobinemia related to local anesthetics: a summary of 242 episodes. Anesth Analg 2009;108(3):837-45. PMID 19224791, https://doi.org/10.1213/ane.0b013e318187c4b1 | Abstract: "Chocolate-colored blood suggests methemoglobinemia but other colors may be found." | A (PubMed abstract re-read by the builder) | High for "suggests"; the drop is a pictogram, not a diagnostic claim |
+
+Wording decisions taken at build time, all inside the limits of sections (b) and (e):
+
+- Panel 6 strip reads "AVOID BOTH" because the two items above it are labelled "PRILOCAINE" and "BENZOCAINE" and each
+  carries its own red sign (same content as "NO PRILOCAINE - NO BENZOCAINE", fewer words).
+- Panel 8 strip reads "CONSIDERED SAFE" (the wording section (e) asks for) under a "LIDOCAINE" and a "LIDO + EPI"
+  cartridge, each with a green check (same content as "LIDOCAINE +/- EPI: OK").
+- Panel 1 prints "1:100,000" on the two counted cartridges and "LIMIT EPI ~0.04 mg / ~2 CARTRIDGES" on the strip; no
+  time base ("per appointment" / "per 30 min") is shown.
+- Methamphetamine, pheochromocytoma, liver disease, atypical cholinesterase, MAOIs and malignant hyperthermia are
+  not on screen (caption / NOTES only).
+

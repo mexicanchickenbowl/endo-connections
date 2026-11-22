@@ -6,8 +6,10 @@
 'use strict';
 (() => {
   const { canvas, ctx } = Kit.createCanvas();
-  const { seg, ease, clamp, lerp, W, H, hash, noise1, noise2 } = Kit;
+  const { seg, ease, clamp, lerp, W, H, noise1, noise2 } = Kit;
   const TAU = Math.PI * 2, RAD = Math.PI / 180;
+  /** decorrelated hash -> [0,1) (Kit.hash is too regular for small consecutive integers) */
+  const rnd = (a, b = 0, c = 0) => { const v = Math.sin(a * 127.1 + b * 311.7 + c * 74.7 + 0.5) * 43758.5453123; return v - Math.floor(v); };
 
   // ------------------------------------------------------------------ palette / type
   const C = {
@@ -23,7 +25,7 @@
   const bc = (w, px) => `${w} ${px}px "Barlow Condensed"`;
 
   // ------------------------------------------------------------------ timeline
-  const DUR = 21.4, WD = 0.56;
+  const DUR = 21.9, WD = 0.56;
   const S = { eq: 1.9, cut: 5.9, fix: 12.4, end: 17.3 };
   const LIT = [6.8, 8.2, 9.6];           // timer rows light up
   const T_STRIP = 10.7;                  // IADT quote strip
@@ -114,8 +116,8 @@
     fg.addColorStop(0, '#171717'); fg.addColorStop(0.5, '#0D0D0D'); fg.addColorStop(1, '#151515');
     b.fillStyle = fg; b.fillRect(0, 0, W, H);
     for (let i = 0; i < 300; i++) {            // brushed-steel hairlines on the frame
-      b.fillStyle = `rgba(255,255,255,${(0.01 + 0.022 * hash(i, 12)).toFixed(3)})`;
-      b.fillRect(0, Math.floor(hash(i, 11) * H), W, 1 + Math.round(hash(i, 13)));
+      b.fillStyle = `rgba(255,255,255,${(0.01 + 0.022 * rnd(i, 12)).toFixed(3)})`;
+      b.fillRect(0, Math.floor(rnd(i, 11) * H), W, 1 + Math.round(rnd(i, 13)));
     }
     // sign face
     b.save();
@@ -139,9 +141,9 @@
     // a few scuffs
     b.lineCap = 'round';
     for (let i = 0; i < 46; i++) {
-      const x = FACE.x + hash(i, 21) * FACE.w, y = FACE.y + hash(i, 22) * FACE.h, len = 30 + 150 * hash(i, 23), a = (hash(i, 24) - 0.5) * 0.5;
-      b.strokeStyle = hash(i, 25) > 0.5 ? 'rgba(120,76,0,0.07)' : 'rgba(255,255,235,0.12)';
-      b.lineWidth = 1 + 1.5 * hash(i, 26);
+      const x = FACE.x + rnd(i, 21) * FACE.w, y = FACE.y + rnd(i, 22) * FACE.h, len = 30 + 150 * rnd(i, 23), a = (rnd(i, 24) - 0.5) * 0.5;
+      b.strokeStyle = rnd(i, 25) > 0.5 ? 'rgba(120,76,0,0.07)' : 'rgba(255,255,235,0.12)';
+      b.lineWidth = 1 + 1.5 * rnd(i, 26);
       b.beginPath(); b.moveTo(x, y); b.lineTo(x + Math.cos(a) * len, y + Math.sin(a) * len); b.stroke();
     }
     b.restore();
@@ -174,7 +176,7 @@
       ctx.closePath(); ctx.fill();
     }
     const g = ctx.createLinearGradient(x0, 0, x1, 0);
-    g.addColorStop(0, 'rgba(0,0,0,0.35)'); g.addColorStop(0.25, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,0.3)');
+    g.addColorStop(0, 'rgba(0,0,0,0.45)'); g.addColorStop(0.3, 'rgba(0,0,0,0.12)'); g.addColorStop(1, 'rgba(0,0,0,0.42)');
     ctx.fillStyle = g; ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
     ctx.restore();
   }
@@ -190,18 +192,20 @@
   }
 
   // ------------------------------------------------------------------ pictograms
-  function toothPath(c, x, y, s) {      // local box 100 x 220 (crown up, apex down)
+  function toothPath(c, x, y, s) {      // incisor silhouette, local box 100 x 220 (incisal edge up, apex down)
     const X = (a) => x + a * s, Y = (b) => y + b * s;
     c.beginPath();
-    c.moveTo(X(18), Y(8));
-    c.bezierCurveTo(X(30), Y(-3), X(70), Y(-3), X(82), Y(8));
-    c.bezierCurveTo(X(95), Y(22), X(97), Y(54), X(88), Y(76));
-    c.bezierCurveTo(X(84), Y(88), X(82), Y(98), X(80), Y(112));
-    c.bezierCurveTo(X(76), Y(152), X(66), Y(198), X(55), Y(216));
+    c.moveTo(X(12), Y(9));
+    c.quadraticCurveTo(X(12), Y(0), X(21.5), Y(0));
+    c.lineTo(X(78.5), Y(0));
+    c.quadraticCurveTo(X(88), Y(0), X(88), Y(9));
+    c.bezierCurveTo(X(94), Y(31), X(92), Y(59), X(80), Y(83));
+    c.bezierCurveTo(X(77.5), Y(89), X(76.5), Y(95), X(76), Y(101));
+    c.bezierCurveTo(X(74), Y(147), X(65), Y(198), X(55), Y(216));
     c.bezierCurveTo(X(52), Y(221), X(48), Y(221), X(45), Y(216));
-    c.bezierCurveTo(X(34), Y(198), X(24), Y(152), X(20), Y(112));
-    c.bezierCurveTo(X(18), Y(98), X(16), Y(88), X(12), Y(76));
-    c.bezierCurveTo(X(3), Y(54), X(5), Y(22), X(18), Y(8));
+    c.bezierCurveTo(X(35), Y(198), X(26), Y(147), X(24), Y(101));
+    c.bezierCurveTo(X(23.5), Y(95), X(22.5), Y(89), X(20), Y(83));
+    c.bezierCurveTo(X(8), Y(59), X(6), Y(31), X(12), Y(9));
     c.closePath();
   }
   function canalPath(c, x, y, s, wf = 1, access = false) {
@@ -210,64 +214,86 @@
     if (access) {
       c.moveTo(X(50 - 6.5 * wf), Y(-8)); c.lineTo(X(50 + 6.5 * wf), Y(-8)); c.lineTo(X(50 + 8 * wf), Y(46));
     } else {
-      c.moveTo(X(50), Y(34));
-      c.bezierCurveTo(X(50 + 12 * wf), Y(34), X(50 + 12.5 * wf), Y(52), X(50 + 10.5 * wf), Y(72));
+      c.moveTo(X(50), Y(30));
+      c.bezierCurveTo(X(50 + 12 * wf), Y(30), X(50 + 12.5 * wf), Y(50), X(50 + 10.5 * wf), Y(72));
     }
     if (access) c.lineTo(X(50 + 10.5 * wf), Y(72));
-    c.bezierCurveTo(X(50 + 8 * wf), Y(112), X(50 + 5 * wf), Y(172), X(50 + 2 * wf), Y(206));
-    c.lineTo(X(50 - 2 * wf), Y(206));
-    c.bezierCurveTo(X(50 - 5 * wf), Y(172), X(50 - 8 * wf), Y(112), X(50 - 10.5 * wf), Y(72));
-    if (access) { c.lineTo(X(50 - 8 * wf), Y(46)); } else c.bezierCurveTo(X(50 - 12.5 * wf), Y(52), X(50 - 12 * wf), Y(34), X(50), Y(34));
+    c.bezierCurveTo(X(50 + 7 * wf), Y(112), X(50 + 4.4 * wf), Y(172), X(50 + 1.8 * wf), Y(206));
+    c.lineTo(X(50 - 1.8 * wf), Y(206));
+    c.bezierCurveTo(X(50 - 4.4 * wf), Y(172), X(50 - 7 * wf), Y(112), X(50 - 10.5 * wf), Y(72));
+    if (access) { c.lineTo(X(50 - 8 * wf), Y(46)); } else c.bezierCurveTo(X(50 - 12.5 * wf), Y(50), X(50 - 12 * wf), Y(30), X(50), Y(30));
     c.closePath();
   }
-  /** root with bowl-shaped bites + red clastic cells (result / hook pictogram) */
+  function cejLine(x, y, s, color) {     // cervical line: separates crown from root
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = 3.2 * s; ctx.lineCap = 'butt';
+    ctx.beginPath(); ctx.moveTo(x + 18.5 * s, y + 82 * s); ctx.quadraticCurveTo(x + 50 * s, y + 100 * s, x + 81.5 * s, y + 82 * s); ctx.stroke(); ctx.restore();
+  }
+  /** tooth in its (hatched) bony socket; bowl-shaped lacunae eat root AND bone; red clastic cells (hook / result pictogram) */
   function pictoResorbed(cx, cy, hpx, t, bg, grow = 1) {
-    const s = hpx / 220, x = cx - 50 * s, y = cy - 110 * s;
+    const s = hpx / 220, x = cx - 50 * s, y = cy - 110 * s, X = (a) => x + a * s, Y = (b) => y + b * s;
+    const bx0 = -42, bx1 = 142, by0 = 104, by1 = 233;
+    // alveolar bone: hazard-hatched block with the socket (PDL space) cut out
+    ctx.save();
+    rrect(ctx, X(bx0), Y(by0), (bx1 - bx0) * s, (by1 - by0) * s, [0, 0, 7 * s, 7 * s]); ctx.clip();
+    ctx.strokeStyle = C.K; ctx.lineWidth = 5 * s; ctx.lineCap = 'butt';
+    for (let k = -14; k < 22; k++) { const xx = X(bx0 + k * 11.5); ctx.beginPath(); ctx.moveTo(xx, Y(by1 + 2)); ctx.lineTo(xx + (by1 - by0 + 4) * s, Y(by0 - 2)); ctx.stroke(); }
+    ctx.fillStyle = C.K; ctx.fillRect(X(bx0), Y(by0), (bx1 - bx0) * s, 5 * s);
+    toothPath(ctx, x, y, s); ctx.strokeStyle = bg; ctx.lineWidth = 15 * s; ctx.lineJoin = 'round'; ctx.stroke();
+    ctx.restore();
     toothPath(ctx, x, y, s); ctx.fillStyle = C.K; ctx.fill();
-    const bites = [[80, 126, 14.5, 0], [71.5, 164, 12, 0.3], [21, 145, 13.5, 0.15], [32.5, 183, 9.5, 0.45]];
+    cejLine(x, y, s, bg);
+    const bites = [[80.5, 131, 18, 0], [73.5, 172, 14, 0.3], [20.5, 150, 16.5, 0.15], [29.5, 189, 11.5, 0.45]];
     const gs = bites.map((b) => clamp((grow - b[3] * 0.55) / (1 - b[3] * 0.55)));
-    bites.forEach(([bx, by, br], i) => { ctx.fillStyle = bg; circle(ctx, x + bx * s, y + by * s, br * s * (0.3 + 0.7 * gs[i])); ctx.fill(); });
+    bites.forEach(([bx, by, br], i) => { ctx.fillStyle = bg; circle(ctx, X(bx), Y(by), br * s * (0.3 + 0.7 * gs[i])); ctx.fill(); });
     bites.forEach(([bx, by, br], i) => {
-      const dir = bx > 50 ? 1 : -1, pul = 1 + 0.07 * Math.sin(t * 5.2 + i * 1.9);
-      const cr = br * s * 0.56 * pul * (0.55 + 0.45 * gs[i]);
-      const px = x + (bx + dir * 3) * s, py = y + by * s;
+      const pul = 1 + 0.07 * Math.sin(t * 5.2 + i * 1.9), cr = br * s * 0.56 * pul * (0.55 + 0.45 * gs[i]), px = X(bx), py = Y(by);
       circle(ctx, px, py, cr); ctx.fillStyle = C.R; ctx.fill();
-      ctx.lineWidth = Math.max(1.6, s * 1.25); ctx.strokeStyle = C.K; ctx.stroke();
+      ctx.lineWidth = Math.max(1.5, s * 1.3); ctx.strokeStyle = C.K; ctx.stroke();
       ctx.fillStyle = '#3A0A0E';
       circle(ctx, px - cr * 0.3, py - cr * 0.2, cr * 0.2); ctx.fill();
       circle(ctx, px + cr * 0.26, py + cr * 0.24, cr * 0.2); ctx.fill();
     });
   }
-  /** root with a denuded (red) strip of surface + impact rays */
+  /** displaced tooth with denuded (red) strips of root surface + impact rays */
   function pictoDamaged(cx, cy, hpx, t, bg, u = 1) {
-    const s = hpx / 220, x = cx - 50 * s, y = cy - 110 * s, X = (a) => x + a * s, Y = (b) => y + b * s;
+    const s = hpx / 220;
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(-9 * RAD);
+    const x = -50 * s, y = -110 * s, X = (a) => x + a * s, Y = (b) => y + b * s;
     toothPath(ctx, x, y, s); ctx.fillStyle = C.K; ctx.fill();
-    ctx.beginPath(); ctx.moveTo(X(81.5), Y(108));
-    ctx.bezierCurveTo(X(80), Y(130), X(77.5), Y(152), X(71.5), Y(178));
-    [[65, 171], [70, 162], [62.5, 153], [69, 144], [63, 135], [70.5, 127], [65.5, 118], [74, 111]].forEach(([a, b]) => ctx.lineTo(X(a), Y(b)));
-    ctx.closePath(); ctx.fillStyle = C.R; ctx.fill();
-    const ox = 92, oy = 143, k = 0.78 + 0.22 * u + 0.05 * Math.sin(t * 4);
-    [[-36, 26], [0, 34], [36, 26]].forEach(([deg, len]) => {
-      const a = deg * RAD, ca = Math.cos(a), sa = Math.sin(a), r0 = 2, r1 = 2 + len * k, wv = 5.4;
+    cejLine(x, y, s, bg);
+    ctx.fillStyle = C.R;
+    ctx.beginPath(); ctx.moveTo(X(77), Y(104));
+    ctx.bezierCurveTo(X(76.5), Y(128), X(74), Y(152), X(68.5), Y(180));
+    [[60, 173], [65.5, 163], [57.5, 154], [64.5, 145], [58, 136], [66, 127], [60.5, 118], [69.5, 110]].forEach(([a, b]) => ctx.lineTo(X(a), Y(b)));
+    ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(X(28.5), Y(160));
+    ctx.bezierCurveTo(X(31.5), Y(180), X(36), Y(197), X(42), Y(211));
+    [[46.5, 204], [42, 196], [46, 188], [39.5, 181], [43, 173], [36.5, 166]].forEach(([a, b]) => ctx.lineTo(X(a), Y(b)));
+    ctx.closePath(); ctx.fill();
+    const ox = 88, oy = 142, k = 0.8 + 0.2 * u + 0.05 * Math.sin(t * 4);
+    [[-38, 30], [0, 42], [38, 30]].forEach(([deg, len]) => {
+      const a = deg * RAD, ca = Math.cos(a), sa = Math.sin(a), r0 = 3, r1 = 3 + len * k, wv = 6.4;
       ctx.beginPath(); ctx.moveTo(X(ox + r0 * ca), Y(oy + r0 * sa));
       ctx.lineTo(X(ox + r1 * ca - wv * sa), Y(oy + r1 * sa + wv * ca)); ctx.lineTo(X(ox + r1 * ca + wv * sa), Y(oy + r1 * sa - wv * ca));
       ctx.closePath(); ctx.fillStyle = C.K; ctx.fill();
     });
+    ctx.restore();
   }
   /** tooth whose canal is full of red microbes */
   function pictoInfected(cx, cy, hpx, t, bg) {
     const s = hpx / 220, x = cx - 50 * s, y = cy - 110 * s, X = (a) => x + a * s, Y = (b) => y + b * s;
     toothPath(ctx, x, y, s); ctx.fillStyle = C.K; ctx.fill();
-    canalPath(ctx, x, y, s, 1.75); ctx.fillStyle = bg; ctx.fill();
-    const ms = [[50, 45, 0], [42, 57, 1], [58, 58, 0], [49, 68, 1], [56, 80, 0], [44, 82, 0], [51, 96, 1], [46, 112, 0], [54, 122, 1], [49, 138, 0], [51.5, 154, 1], [49.5, 170, 0], [50, 186, 0]];
+    cejLine(x, y, s, bg);
+    canalPath(ctx, x, y, s, 1.8); ctx.fillStyle = bg; ctx.fill();
+    const ms = [[50, 41, 0], [41, 52, 1], [59, 53, 0], [49, 64, 1], [57, 76, 0], [43, 78, 0], [51, 92, 1], [46, 108, 0], [54, 119, 1], [49, 135, 0], [51.5, 151, 1], [49.5, 168, 0], [50, 185, 0]];
     ctx.lineCap = 'round';
     ms.forEach(([a, b, kind], i) => {
-      const jx = 1.6 * noise1(t * 1.3 + i * 3.1, 3), jy = 1.6 * noise1(t * 1.3 + i * 5.3, 4), k = lerp(1, 0.5, clamp((b - 44) / 142));
+      const jx = 1.6 * noise1(t * 1.3 + i * 3.1, 3), jy = 1.6 * noise1(t * 1.3 + i * 5.3, 4), k = lerp(1, 0.5, clamp((b - 41) / 144));
       const px = X(a + jx * k), py = Y(b + jy);
       ctx.fillStyle = C.R; ctx.strokeStyle = C.R;
-      if (kind === 0) { circle(ctx, px, py, 4.3 * s * k); ctx.fill(); } else {
-        const an = hash(i, 9) * Math.PI + 0.4 * noise1(t * 0.9 + i, 6), dx = Math.cos(an) * 4.4 * s * k, dy = Math.sin(an) * 4.4 * s * k;
-        ctx.lineWidth = 5.4 * s * k; ctx.beginPath(); ctx.moveTo(px - dx, py - dy); ctx.lineTo(px + dx, py + dy); ctx.stroke();
+      if (kind === 0) { circle(ctx, px, py, 4.4 * s * k); ctx.fill(); } else {
+        const an = rnd(i, 9) * Math.PI + 0.4 * noise1(t * 0.9 + i, 6), dx = Math.cos(an) * 4.6 * s * k, dy = Math.sin(an) * 4.6 * s * k;
+        ctx.lineWidth = 5.6 * s * k; ctx.beginPath(); ctx.moveTo(px - dx, py - dy); ctx.lineTo(px + dx, py + dy); ctx.stroke();
       }
     });
   }
@@ -304,6 +330,7 @@
     ctx.fillStyle = g; circle(ctx, cx, cy, R * 0.94); ctx.fill();
     const hpx = R * 1.16, s = hpx / 220, x = cx - 50 * s, y = cy - 110 * s + 31 * s, X = (a) => x + a * s, Y = (b) => y + b * s;
     toothPath(ctx, x, y, s); ctx.fillStyle = C.WH; ctx.fill();
+    cejLine(x, y, s, C.B);
     canalPath(ctx, x, y, s, 1.7, true); ctx.fillStyle = C.B; ctx.fill();
     const bob = 5 * Math.sin(t * 2.4);
     ctx.lineCap = 'round'; ctx.strokeStyle = C.WH; ctx.lineWidth = 3.4 * s;
@@ -318,7 +345,7 @@
   function sceneHook(th) {
     const cx = COL.cx, top = 318, side = 770, h = side * 0.8660254;
     triSign(cx, top, side, { edge: C.WH });
-    const grow = 0.55 + 0.45 * seg(th, 0.1, 1.4, ease.out);
+    const grow = 0.7 + 0.3 * seg(th, 0.1, 1.3, ease.out);
     pictoResorbed(cx, top + h * 0.615, 332, th, C.Y, grow);
     const by = top + h + 34, barH = 92;
     plate(COL.x0, by, COL.w, barH, { r: 10 });
@@ -387,22 +414,24 @@
   const xbF = (y) => xsF(y) + CEMW + PDLW + 5 * Math.sin(y / 70 + 1.0);
   const NY = 156, YS = [], XC = [], XS = [], XBS = [], XE0 = [], XE1 = [];
   for (let i = 0; i < NY; i++) { const y = DA.y0 + ((DA.y1 - DA.y0) * i) / (NY - 1); YS.push(y); XC.push(xcF(y)); XS.push(xsF(y)); XBS.push(xbF(y)); XE0.push(DA.x0 - 6); XE1.push(DA.x1 + 6); }
-  const D = new Float32Array(NY), E = new Float32Array(NY), XR = new Float32Array(NY), XB = new Float32Array(NY), PL = new Float32Array(NY), LA = new Float32Array(NY), LB = new Float32Array(NY), LN = new Float32Array(NY);
-  const PATCH = [622, 808];
-  const RLOBE = [{ yc: 682, h0: 44, h1: 128, d1: 212, lag: 0 }, { yc: 774, h0: 38, h1: 100, d1: 158, lag: 0.07 }, { yc: 724, h0: 28, h1: 72, d1: 238, lag: 0.2 }];
-  const BLOBE = [{ yc: 672, h0: 50, h1: 138, d1: 150, lag: 0.06 }, { yc: 782, h0: 44, h1: 118, d1: 124, lag: 0.12 }];
+  const D = new Float32Array(NY), DS = new Float32Array(NY), TMP = new Float32Array(NY), E = new Float32Array(NY), XR = new Float32Array(NY), XB = new Float32Array(NY), PL = new Float32Array(NY), LA = new Float32Array(NY), LB = new Float32Array(NY), LN = new Float32Array(NY);
+  const PATCH = [626, 816];
+  // two bowl-shaped craters in the root, two facing ones in the bone (depths / growth are schematic)
+  const RLOBE = [{ yc: 668, h0: 46, h1: 106, d1: 178, lag: 0 }, { yc: 792, h0: 40, h1: 90, d1: 132, lag: 0.07 }];
+  const BLOBE = [{ yc: 652, h0: 50, h1: 112, d1: 118, lag: 0.06 }, { yc: 780, h0: 44, h1: 104, d1: 136, lag: 0.12 }];
+  const SCP = 30;   // Howship-lacuna scallop pitch (px)
   function lobeDepth(L, y, G) {
     const g = clamp((G - L.lag) / (1 - L.lag)); if (g <= 0) return 0;
     const h = lerp(L.h0, L.h1, Math.pow(g, 0.8)), u = (y - L.yc) / h; if (Math.abs(u) >= 1) return 0;
-    return L.d1 * Math.pow(g, 1.05) * Math.pow(1 - u * u, 0.6);
+    return L.d1 * Math.pow(g, 1.05) * Math.pow(1 - u * u, 0.74);
   }
-  const scallop = (d, y) => (d > 3 ? d + 3.4 * Math.abs(Math.sin(y * 0.2 + 1.3)) * Math.min(1, d / 40) : d);
+  const scallop = (d, y, ph) => (d > 5 ? d + 4.5 * Math.abs(Math.sin((Math.PI * (y - ph)) / SCP)) * Math.min(1, (d - 5) / 40) : d);
   function Dfn(y, G) {
     let d = 0; for (const L of RLOBE) d = Math.max(d, lobeDepth(L, y, G));
     if (y > PATCH[0] && y < PATCH[1]) { const e = Math.min(y - PATCH[0], PATCH[1] - y); d = Math.max(d, Math.min(1, e / 9) * (4.6 + 2.4 * noise1(y * 0.11, 7))); }
-    return scallop(d, y);
+    return scallop(d, y, 634);
   }
-  function Efn(y, G) { let d = 0; for (const L of BLOBE) d = Math.max(d, lobeDepth(L, y, G)); return scallop(d, y + 40); }
+  function Efn(y, G) { let d = 0; for (const L of BLOBE) d = Math.max(d, lobeDepth(L, y, G)); return scallop(d, y, 624); }
   function atY(arr, y) { const f = clamp((y - DA.y0) / (DA.y1 - DA.y0)) * (NY - 1), i = Math.min(NY - 2, Math.floor(f)); return lerp(arr[i], arr[i + 1], f - i); }
   function band(xa, xb, a = 0, b = NY - 1) {
     ctx.beginPath();
@@ -415,22 +444,27 @@
   const TUBS = [];
   for (let yj = DA.y0 - 6; yj < DA.y1 + 36; yj += 12.4) { const p0 = [xcF(yj) + 1, yj], p3 = [xsF(yj - 16), yj - 16]; TUBS.push({ p0, p1: [p0[0] + 105, yj + 9], p2: [p3[0] - 115, yj - 27], p3, yj, yEnd: yj - 16 }); }
   function bez(T, s) { const m = 1 - s, a = m * m * m, b = 3 * m * m * s, c = 3 * m * s * s, d = s * s * s; return [a * T.p0[0] + b * T.p1[0] + c * T.p2[0] + d * T.p3[0], a * T.p0[1] + b * T.p1[1] + c * T.p2[1] + d * T.p3[1]]; }
-  const MIC = []; for (let i = 0; i < 70; i++) MIC.push({ x: 90 + hash(i, 31) * 122, y: DA.y0 + 14 + hash(i, 32) * (DA.y1 - DA.y0 - 28), kind: i % 3, a: hash(i, 33) * TAU, s: 0.8 + 0.5 * hash(i, 34) });
-  const MARROW = []; for (let i = 0; i < 22; i++) MARROW.push({ x: 694 + hash(i, 41) * 250, y: DA.y0 + hash(i, 42) * (DA.y1 - DA.y0), rx: 16 + 22 * hash(i, 43), ry: 10 + 16 * hash(i, 44), a: (hash(i, 45) - 0.5) * 1.6 });
-  const LDOT = []; for (let i = 0; i < 150; i++) LDOT.push({ x: 330 + hash(i, 51) * 560, y: 500 + hash(i, 52) * 440, r: 2.2 + 2 * hash(i, 53) });
-  const RCELL = [{ y: 722, t0: 6.0 }, { y: 662, t0: 6.25 }, { y: 784, t0: 6.5 }, { y: 604, t0: 9.7 }, { y: 842, t0: 10.3 }];
-  const BCELL = [{ y: 676, t0: 6.4 }, { y: 778, t0: 6.9 }, { y: 728, t0: 9.9 }, { y: 610, t0: 10.7 }];
+  const MIC = []; for (let i = 0; i < 84; i++) MIC.push({ x: 92 + rnd(i, 31) * 118, y: DA.y0 + 14 + rnd(i, 32) * (DA.y1 - DA.y0 - 28), kind: i % 3, a: rnd(i, 33) * TAU, s: 0.8 + 0.5 * rnd(i, 34) });
+  const MARROW = []; for (let i = 0; i < 22; i++) MARROW.push({ x: 694 + rnd(i, 41) * 250, y: DA.y0 + rnd(i, 42) * (DA.y1 - DA.y0), rx: 16 + 22 * rnd(i, 43), ry: 10 + 16 * rnd(i, 44), a: (rnd(i, 45) - 0.5) * 1.6 });
+  const LDOT = []; for (let i = 0; i < 150; i++) LDOT.push({ x: 330 + rnd(i, 51) * 560, y: 500 + rnd(i, 52) * 440, r: 2.2 + 2 * rnd(i, 53) });
+  // clastic cells: lobe index, position along the bowl (u = offset / half-height), arrival time
+  const RCELL = [{ L: 0, u: -0.04, t0: 6.0 }, { L: 1, u: 0.02, t0: 6.3 }, { L: 0, u: 0.46, t0: 9.0 }, { L: 0, u: -0.54, t0: 9.8 }, { L: 1, u: 0.55, t0: 10.3 }];
+  const BCELL = [{ L: 0, u: 0.0, t0: 6.4 }, { L: 1, u: 0.06, t0: 6.9 }, { L: 1, u: 0.56, t0: 8.9 }, { L: 0, u: -0.52, t0: 9.9 }];
+  const lobeH = (L, G) => lerp(L.h0, L.h1, Math.pow(clamp((G - L.lag) / (1 - L.lag)), 0.8));
 
-  function clast(x, y, ang, sc, alpha, seed, t, mirror) {
-    if (alpha <= 0.01 || sc <= 0.01) return;
-    ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.scale(mirror ? -sc : sc, sc); ctx.globalAlpha *= alpha;
-    ctx.beginPath(); ctx.moveTo(0, -30);
-    ctx.bezierCurveTo(20, -35, 35, -19, 35, 0); ctx.bezierCurveTo(35, 19, 20, 35, 0, 30);
-    for (let i = 0; i < 6; i++) { const y0 = 30 - i * 10, y1 = 30 - (i + 1) * 10, w = 5.5 + 2.2 * Math.sin(t * 5 + i * 1.7 + seed); ctx.quadraticCurveTo(-w, (y0 + y1) / 2, 0, y1); }
+  /** multinucleated clastic cell: dome sitting on the front `arr` at height y, ruffled border toward the tissue */
+  function clast(arr, y, dir, sc, alpha, seed, t, shift = 0) {
+    if (alpha <= 0.01 || sc <= 0.05) return;
+    const x = atY(arr, y), sl = (atY(arr, y + 7) - atY(arr, y - 7)) / 14;
+    ctx.save(); ctx.globalAlpha *= alpha;
+    ctx.translate(x, y); ctx.rotate(-Math.atan(sl)); ctx.scale(dir * sc, sc); ctx.translate(1 + shift, 0);
+    ctx.beginPath(); ctx.moveTo(0, -27);
+    ctx.bezierCurveTo(19, -31, 32, -18, 32, 0); ctx.bezierCurveTo(32, 18, 19, 31, 0, 27);
+    for (let i = 0; i < 6; i++) { const y0 = 27 - i * 9, y1 = y0 - 9, w = 4.4 + 1.6 * Math.sin(t * 5 + i * 1.7 + seed); ctx.quadraticCurveTo(-w, (y0 + y1) / 2, 0, y1); }
     ctx.closePath();
     ctx.fillStyle = C.R; ctx.fill(); ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.strokeStyle = C.K; ctx.stroke();
     ctx.fillStyle = '#3A0A0E';
-    [[13, -15], [19, 1], [12, 16]].forEach(([nx, ny]) => { circle(ctx, nx, ny, 5.2); ctx.fill(); });
+    [[12, -13.5], [17.5, 0.5], [11.5, 14]].forEach(([nx, ny]) => { circle(ctx, nx, ny, 5); ctx.fill(); });
     ctx.restore();
   }
   function leader(x0, y0, x1, y1) {
@@ -453,30 +487,39 @@
     txt('Ca(OH)', x0, y, f, color); txt('2', x0 + wa + 1, y + px * 0.17, fs, color);
   }
   function locator(x, y) {     // where on the tooth this cutaway sits
-    const w = 122, h = 150;
+    const w = 124, h = 152;
     ctx.fillStyle = C.K; rrect(ctx, x, y, w, h, 8); ctx.fill();
-    const s = 0.56, tx = x + w / 2 - 50 * s - 8, ty = y + 14;
-    // socket (bone) either side of the root
-    ctx.fillStyle = '#5b574e';
-    ctx.beginPath(); ctx.moveTo(x + 8, ty + 100 * s); ctx.lineTo(tx + 12 * s, ty + 100 * s); ctx.lineTo(tx + 42 * s, ty + 226 * s); ctx.lineTo(x + 8, ty + 226 * s); ctx.closePath(); ctx.fill();
-    ctx.beginPath(); ctx.moveTo(x + w - 8, ty + 100 * s); ctx.lineTo(tx + 88 * s, ty + 100 * s); ctx.lineTo(tx + 58 * s, ty + 226 * s); ctx.lineTo(x + w - 8, ty + 226 * s); ctx.closePath(); ctx.fill();
+    const s = 0.57, tx = x + w / 2 - 50 * s - 10, ty = y + 13;
+    ctx.save(); rrect(ctx, x + 8, ty + 100 * s, w - 16, 126 * s, [0, 0, 4, 4]); ctx.clip();
+    ctx.fillStyle = '#77726a'; ctx.fillRect(x, y, w, h);
+    toothPath(ctx, tx, ty, s); ctx.strokeStyle = C.K; ctx.lineWidth = 9 * s; ctx.stroke();
+    ctx.restore();
     toothPath(ctx, tx, ty, s); ctx.fillStyle = C.Y; ctx.fill();
-    canalPath(ctx, tx, ty, s, 1.3); ctx.fillStyle = C.K; ctx.fill();
-    ctx.strokeStyle = C.RB; ctx.lineWidth = 4; ctx.strokeRect(tx + 44 * s, ty + 128 * s, 50 * s, 44 * s);
+    canalPath(ctx, tx, ty, s, 1.4); ctx.fillStyle = C.K; ctx.fill();
+    ctx.strokeStyle = C.WH; ctx.lineWidth = 7; ctx.strokeRect(tx + 44 * s, ty + 124 * s, 56 * s, 50 * s);
+    ctx.strokeStyle = C.R; ctx.lineWidth = 4; ctx.strokeRect(tx + 44 * s, ty + 124 * s, 56 * s, 50 * s);
   }
 
   function sceneCut(t) {
     const G = Math.pow(clamp((t - 5.85) / (T_GEND - 5.85)), 1.2);
     const sweepU = seg(t, T_SWEEP[0], T_SWEEP[1]);
     const yf = lerp(DA.y0 - 8, DA.y1 + 8, sweepU);
-    const lining = seg(t, 14.2, 15.5, ease.inOut);
-    const rp = seg(t, 14.4, 16.5, ease.inOut);
-    const la = seg(G, 0, 0.1) * (1 - seg(t, 14.3, 16.0, ease.inOut));
+    const lining = seg(t, 14.1, 15.1, ease.inOut);
+    const rp = seg(t, 14.2, 15.9, ease.inOut);
+    const la = seg(G, 0, 0.1) * (1 - seg(t, 14.2, 15.5, ease.inOut));
+    for (let i = 0; i < NY; i++) { D[i] = Dfn(YS[i], G); E[i] = Efn(YS[i], G); }
+    // repair target for the bone front: offset curve of the (lined) root surface, so the re-formed PDL space
+    // has a uniform width and follows the crater contour (the defect is lined, not refilled)
+    for (let i = 0; i < NY; i++) { const m = clamp(D[i] / 8); XR[i] = XS[i] - D[i]; TMP[i] = lerp(XS[i] + CEMW, XR[i] + LINW, m); }
+    const dyS = YS[1] - YS[0], KO = Math.ceil(PDLW / dyS);
     for (let i = 0; i < NY; i++) {
-      const y = YS[i], d = Dfn(y, G), e = Efn(y, G), m = clamp(d / 8);
-      D[i] = d; E[i] = e; XR[i] = XS[i] - d;
-      const tgt = XR[i] + lerp(CEMW, LINW, m) + (XBS[i] - XS[i] - CEMW);
-      XB[i] = lerp(XBS[i] + e, tgt, rp);
+      let mx = -1e9;
+      for (let k = -KO; k <= KO; k++) { const j = clamp(i + k, 0, NY - 1), dy = k * dyS; if (Math.abs(dy) < PDLW) mx = Math.max(mx, TMP[j] + Math.sqrt(PDLW * PDLW - dy * dy)); }
+      DS[i] = mx + (XBS[i] - XS[i] - CEMW - PDLW);
+    }
+    for (let i = 0; i < NY; i++) {
+      const d = D[i], e = E[i], m = clamp(d / 8);
+      XB[i] = lerp(XBS[i] + e, DS[i], rp);
       LN[i] = XR[i] + LINW * lining * m;
       PL[i] = lerp(XS[i] + CEMW, LN[i], m);
       const act = d > 0.01 || e > 0.5, mid = (PL[i] + XB[i]) / 2;
@@ -494,7 +537,7 @@
     // PDL fibers
     ctx.lineCap = 'round'; ctx.lineWidth = 2.2;
     for (let y = DA.y0 + 8; y < DA.y1 + 14; y += 13) {
-      const xl = atY(PL, y), xr = atY(XB, y - 12), wdt = xr - xl, a = 1 - seg(wdt, 78, 112);
+      const xl = atY(PL, y), xr = atY(XB, y - 12), wdt = xr - xl, a = 1 - seg(wdt, 96, 150);
       if (a <= 0.01) continue;
       ctx.strokeStyle = `rgba(171,167,157,${a.toFixed(3)})`;
       ctx.beginPath(); ctx.moveTo(xl + 2, y); ctx.lineTo(xr - 3, y - 12); ctx.stroke();
@@ -514,6 +557,12 @@
     ctx.save(); band(XC, XR); ctx.fillStyle = C.DEN; ctx.fill(); ctx.clip();
     ctx.strokeStyle = C.TUB; ctx.lineWidth = 1.7;
     for (const T of TUBS) { ctx.beginPath(); ctx.moveTo(T.p0[0], T.p0[1]); ctx.bezierCurveTo(T.p1[0], T.p1[1], T.p2[0], T.p2[1], T.p3[0], T.p3[1]); ctx.stroke(); }
+    const flowA = 1 - seg(t, T_SWEEP[1], T_SWEEP[1] + 0.8);
+    if (flowA > 0.01) for (const T of TUBS) {
+      const open = T.yEnd > DA.y0 && T.yEnd < DA.y1 ? clamp(atY(D, T.yEnd) / 6) : 0; if (open <= 0.01) continue;
+      ctx.strokeStyle = `rgba(211,31,42,${(0.3 * open * flowA).toFixed(3)})`; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(T.p0[0], T.p0[1]); ctx.bezierCurveTo(T.p1[0], T.p1[1], T.p2[0], T.p2[1], T.p3[0], T.p3[1]); ctx.stroke();
+    }
     ctx.restore();
     // cementum (intact runs) + new cementum-like lining of the crater
     ctx.fillStyle = C.CEM;
@@ -524,7 +573,12 @@
       ctx.closePath(); ctx.fill();
     }
     const crater = runs((i) => D[i] > 0.01);
-    if (lining > 0.01) for (const [a, b] of crater) { band(XR, LN, a, b); ctx.fillStyle = C.CEM; ctx.fill(); }
+    if (lining > 0.01) {
+      ctx.save(); band(XR, XE1); ctx.clip();
+      ctx.strokeStyle = C.CEM; ctx.lineWidth = 2 * LINW * lining; ctx.lineJoin = 'round'; ctx.lineCap = 'butt';
+      for (const [a, b] of crater) { ctx.beginPath(); for (let i = a; i <= b; i++) ctx.lineTo(XR[i], YS[i]); ctx.stroke(); }
+      ctx.restore();
+    }
     // resorbing root front
     ctx.strokeStyle = C.K; ctx.lineWidth = 3.5; ctx.lineJoin = 'round';
     for (const [a, b] of crater) { ctx.beginPath(); for (let i = a; i <= b; i++) ctx.lineTo(XR[i], YS[i]); ctx.stroke(); }
@@ -532,7 +586,7 @@
     ctx.save(); band(XE0, XC); ctx.fillStyle = '#191919'; ctx.fill(); ctx.clip();
     if (sweepU < 1) {
       ctx.fillStyle = '#3d3d3d';
-      for (let i = 0; i < 40; i++) { const x = 84 + hash(i, 61) * 140, y = DA.y0 + hash(i, 62) * (DA.y1 - DA.y0); ctx.fillRect(x, y, 3 + 5 * hash(i, 63), 3 + 4 * hash(i, 64)); }
+      for (let i = 0; i < 40; i++) { const x = 84 + rnd(i, 61) * 140, y = DA.y0 + rnd(i, 62) * (DA.y1 - DA.y0); ctx.fillRect(x, y, 3 + 5 * rnd(i, 63), 3 + 4 * rnd(i, 64)); }
       ctx.fillStyle = C.RB; ctx.strokeStyle = C.RB; ctx.lineCap = 'round';
       for (let i = 0; i < MIC.length; i++) {
         const mcb = MIC[i]; if (mcb.y < yf - 6) continue;
@@ -548,26 +602,32 @@
       ctx.save(); ctx.beginPath(); ctx.rect(DA.x0 - 6, DA.y0 - 10, 260, yf - (DA.y0 - 10)); ctx.clip();
       ctx.fillStyle = C.BL; ctx.fillRect(DA.x0 - 6, DA.y0 - 10, 260, DA.y1 - DA.y0 + 20);
       ctx.fillStyle = 'rgba(11,90,169,0.22)';
-      for (let gy = DA.y0 + 6; gy < DA.y1; gy += 21) for (let gx = 84; gx < 240; gx += 21) { const k = (gx * 7 + gy * 13) | 0; circle(ctx, gx + 9 * hash(k, 71), gy + 9 * hash(k, 72), 2 + 1.8 * hash(k, 73)); ctx.fill(); }
+      for (let gy = DA.y0 + 6; gy < DA.y1; gy += 21) for (let gx = 84; gx < 240; gx += 21) { const k = (gx * 7 + gy * 13) | 0; circle(ctx, gx + 9 * rnd(k, 71), gy + 9 * rnd(k, 72), 2 + 1.8 * rnd(k, 73)); ctx.fill(); }
       ctx.restore();
       if (sweepU < 1) { ctx.fillStyle = C.B; ctx.fillRect(DA.x0 - 6, yf - 5, 260, 10); ctx.fillStyle = 'rgba(255,255,255,0.85)'; ctx.fillRect(DA.x0 - 6, yf - 10, 260, 4); }
     }
     ctx.restore();
     ctx.strokeStyle = C.K; ctx.lineWidth = 3.5; ctx.beginPath(); for (let i = 0; i < NY; i++) ctx.lineTo(XC[i], YS[i]); ctx.stroke();
+    // brief highlight of the denuded patch (links back to "damaged root surface")
+    const hl = Math.min(seg(t, 5.95, 6.25), 1 - seg(t, 7.0, 7.6));
+    if (hl > 0.01) {
+      ctx.save(); ctx.globalAlpha = hl; ctx.strokeStyle = C.R; ctx.lineWidth = 5; ctx.setLineDash([14, 9]); ctx.lineDashOffset = -t * 30;
+      rrect(ctx, atY(XS, 716) - 22, PATCH[0] - 16, CEMW + 44, PATCH[1] - PATCH[0] + 32, 12); ctx.stroke(); ctx.restore();
+    }
     // toxin particles in the tubules (schematic)
     for (let j = 0; j < TUBS.length; j++) {
       const T = TUBS[j], inside = T.yEnd > DA.y0 && T.yEnd < DA.y1, open = inside ? clamp(atY(D, T.yEnd) / 6) : 0;
       const tCut = T_SWEEP[0] + (T_SWEEP[1] - T_SWEEP[0]) * clamp((T.yj - DA.y0) / (DA.y1 - DA.y0));
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 4; k++) {
         if (k > 0 && open <= 0.01) continue;
-        const v = 0.4 + 0.12 * hash(j, k, 1), s = (t * v + hash(j, k, 2)) % 1, te = t - s / v;
+        const v = 0.4 + 0.12 * rnd(j, k, 1), s = (t * v + rnd(j, k, 2)) % 1, te = t - s / v;
         if (te > tCut) continue;
         const [px, py] = bez(T, s), xf = atY(XR, py);
         let aOpen = clamp(s / 0.07); if (px > xf) aOpen *= 1 - clamp((px - xf) / 52);
-        const aClosed = 0.5 * clamp(s / 0.07) * (1 - seg(s, 0.76, 0.97));
+        const aClosed = 0.42 * clamp(s / 0.07) * (1 - seg(s, 0.76, 0.97));
         const a = k === 0 ? lerp(aClosed, aOpen, open) : aOpen * open;
         if (a <= 0.02) continue;
-        ctx.globalAlpha = a; ctx.fillStyle = C.R; circle(ctx, px, py, lerp(3.3, 4.7, open)); ctx.fill();
+        ctx.globalAlpha = a; ctx.fillStyle = C.R; circle(ctx, px, py, lerp(3.1, 4.9, open)); ctx.fill();
       }
     }
     ctx.globalAlpha = 1;
@@ -575,19 +635,17 @@
     RCELL.forEach((c, i) => {
       const u = pu(t, c.t0, 0.5), lv = seg(t, 13.45 + i * 0.07, 14.15 + i * 0.07, ease.inOut);
       if (u <= 0 || lv >= 1) return;
-      const sl = clamp((atY(XR, c.y + 6) - atY(XR, c.y - 6)) / 12, -1.1, 1.1);
-      const sc = (0.9 + 0.04 * Math.sin(t * 3 + i)) * ease.outBack(u) * (1 - 0.45 * lv);
-      clast(atY(XR, c.y) + 2 + 30 * lv, c.y, -Math.atan(sl), sc, clamp(u * 2) * (1 - lv), i * 2.1, t, false);
+      const L = RLOBE[c.L], y = L.yc + c.u * lobeH(L, G);
+      clast(XR, y, 1, 0.92 * (1 + 0.04 * Math.sin(t * 3 + i)) * ease.outBack(u) * (1 - 0.4 * lv), clamp(u * 2) * (1 - lv), i * 2.1, t, 36 * lv);
     });
     BCELL.forEach((c, i) => {
       const u = pu(t, c.t0, 0.5), lv = seg(t, 13.5 + i * 0.07, 14.2 + i * 0.07, ease.inOut);
       if (u <= 0 || lv >= 1) return;
-      const sl = clamp((atY(XB, c.y + 6) - atY(XB, c.y - 6)) / 12, -1.1, 1.1);
-      const sc = (0.9 + 0.04 * Math.sin(t * 3 + i + 2)) * ease.outBack(u) * (1 - 0.45 * lv);
-      clast(atY(XB, c.y) - 2 - 30 * lv, c.y, -Math.atan(sl), sc, clamp(u * 2) * (1 - lv), i * 1.3 + 4, t, true);
+      const L = BLOBE[c.L], y = L.yc + c.u * lobeH(L, G);
+      clast(XB, y, -1, 0.92 * (1 + 0.04 * Math.sin(t * 3 + i + 2)) * ease.outBack(u) * (1 - 0.4 * lv), clamp(u * 2) * (1 - lv), i * 1.3 + 4, t, 36 * lv);
     });
     // locator + schematic note
-    locator(806, 334);
+    locator(804, 398);
     txt('SCHEMATIC · NOT TO SCALE', DA.x1 - 16, DA.y1 - 16, bc(600, 24), 'rgba(19,19,19,0.78)', 'right', 0.8);
     // fix: blue mandatory header drops in
     const hU = seg(t, S.fix + 0.05, S.fix + 0.4, ease.out);
@@ -613,19 +671,19 @@
     const aRB = seg(t, 8.8, 9.15) * (1 - seg(t, 13.3, 13.7));
     if (aRB > 0) {
       ctx.save(); ctx.globalAlpha = aRB; const ly = 962 + 12 * (1 - ease.out(aRB)), f = bc(700, 36), w = tw('ROOT + BONE RESORB', f, 0.8) + 32, lx = 648 - w / 2;
-      leader(lx + 44, ly + 6, atY(XR, 806) + 5, 806); leader(lx + w - 44, ly + 6, atY(XB, 826) - 5, 826);
+      leader(lx + 44, ly + 6, atY(XR, 842) + 6, 842); leader(lx + w - 44, ly + 6, atY(XB, 852) - 6, 852);
       callout('ROOT + BONE RESORB', lx, ly); ctx.restore();
     }
     // lock-out tag
     const uT = pu(t, T_TAG, 0.4);
-    if (uT > 0) stamp(uT, 410, 706, () => {
-      ctx.save(); ctx.translate(410, 706); ctx.rotate(-5 * RAD);
-      const f = anton(46), w = tw('STIMULUS CUT', f, 1) + 104, h = 92;
+    if (uT > 0) stamp(uT, 292, 752, () => {
+      ctx.save(); ctx.translate(292, 752); ctx.rotate(4 * RAD);
+      const f = anton(44), w = tw('STIMULUS CUT', f, 1) + 100, h = 88;
       ctx.save(); ctx.shadowColor = 'rgba(0,0,0,0.4)'; ctx.shadowBlur = 14; ctx.shadowOffsetY = 6;
       ctx.fillStyle = C.R; rrect(ctx, -w / 2, -h / 2, w, h, 10); ctx.fill(); ctx.restore();
       ctx.strokeStyle = C.WH; ctx.lineWidth = 3; rrect(ctx, -w / 2 + 7, -h / 2 + 7, w - 14, h - 14, 6); ctx.stroke();
       ctx.fillStyle = C.WH; circle(ctx, -w / 2 + 40, 0, 15); ctx.fill(); ctx.fillStyle = C.K; circle(ctx, -w / 2 + 40, 0, 8); ctx.fill();
-      ctx.strokeStyle = C.K; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-w / 2 + 40, 0); ctx.quadraticCurveTo(-w / 2 - 10, -34, -w / 2 - 44, -22); ctx.stroke();
+      ctx.strokeStyle = C.K; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-w / 2 + 40, 0); ctx.quadraticCurveTo(-w / 2 + 34, -74, -w / 2 + 6, -92); ctx.stroke();
       txt('STIMULUS CUT', -w / 2 + 70, 17, f, C.WH, 'left', 1);
       ctx.restore();
     }, 1.5);
@@ -635,9 +693,9 @@
     const flip = (sy, fn) => { ctx.save(); ctx.translate(0, pcy); ctx.scale(1, Math.max(0.002, sy)); ctx.translate(0, -pcy); fn(); ctx.restore(); };
     if (fu < 0.5) flip(1 - ease.in(fu * 2), () => timerPlate(t)); else flip(ease.out((fu - 0.5) * 2), () => statPlate(t));
     // source line (one per beat)
-    const aS1 = seg(t, 6.9, 7.3) * (1 - seg(t, T_FLIP[0] - 0.1, T_FLIP[0] + 0.15)), aS2 = seg(t, T_FLIP[1], T_FLIP[1] + 0.35);
+    const aS1 = seg(t, 6.3, 6.7) * (1 - seg(t, T_FLIP[0] - 0.1, T_FLIP[0] + 0.15)), aS2 = seg(t, T_FLIP[1], T_FLIP[1] + 0.35);
     const srcLine = (s, a) => { if (a <= 0) return; const px = fit(s, (p) => bc(500, p), COL.w - 8, 26, 0.2); ctx.save(); ctx.globalAlpha = a; txt(s, COL.x0 + 4, 1540, bc(500, px), 'rgba(19,19,19,0.86)', 'left', 0.2); ctx.restore(); };
-    srcLine('Timeline: Andreasen 1980 Swed Dent J (monkey) · Andreasen et al. 1995 Endod Dent Traumatol', aS1);
+    srcLine('Tubule pathway: Andreasen 1981 J Endod — a theory from monkey histology', aS1);
     srcLine('Cvek 1992 Endod Dent Traumatol · luxated non-vital incisors · calcium hydroxide, then GP · radiographic', aS2);
   }
 
@@ -648,7 +706,7 @@
   function timerPlate(t) {
     plate(TP.x, TP.y, TP.w, TP.h, { r: 16 });
     // dial
-    const cx = TP.x + 146, cy = TP.y + 146, R = 106, ang = handAng(t);
+    const cx = TP.x + 146, cy = TP.y + 132, R = 98, ang = handAng(t);
     ctx.fillStyle = '#0A0A0A'; circle(ctx, cx, cy, R); ctx.fill();
     ctx.strokeStyle = C.Y; ctx.lineWidth = 7; circle(ctx, cx, cy, R); ctx.stroke();
     if (ang > 0.5) {
@@ -671,11 +729,12 @@
     ctx.lineCap = 'round'; ctx.strokeStyle = C.WH; ctx.lineWidth = 7;
     ctx.beginPath(); ctx.moveTo(cx - Math.cos(ha) * 16, cy - Math.sin(ha) * 16); ctx.lineTo(cx + Math.cos(ha) * (R - 16), cy + Math.sin(ha) * (R - 16)); ctx.stroke();
     ctx.fillStyle = C.Y; circle(ctx, cx, cy, 13); ctx.fill(); ctx.fillStyle = C.K; circle(ctx, cx, cy, 5); ctx.fill();
+    txt('AFTER REPLANTATION', cx, TP.y + 266, bc(600, 23), 'rgba(255,204,0,0.92)', 'center', 1.2);
     txt('TIMELINE SCHEMATIC', cx, TP.y + 292, bc(600, 23), 'rgba(255,255,255,0.72)', 'center', 1.2);
     // rows
-    const rows = [['BY WEEK 1', 'on histology (monkey)'], ['~1 MONTH', 'usually on X-ray'], ['MONTHS', 'untreated: root can be lost']];
+    const rows = [['BY WEEK 1', 'histology (monkey)', 'Andreasen 1980', 'Swed Dent J'], ['~1 MONTH', 'usually on X-ray', 'Andreasen et al. 1995', 'Endod Dent Traumatol'], ['MONTHS', 'untreated: root can be lost', 'Patel et al. 2022', 'Int Endod J (review)']];
     const rx = TP.x + 306;
-    rows.forEach(([lab, cap], k) => {
+    rows.forEach(([lab, cap, c1, c2], k) => {
       const y0 = TP.y + 18 + k * 91, u = seg(t, LIT[k], LIT[k] + 0.35, ease.out), glow = seg(t, LIT[k], LIT[k] + 0.12) * (1 - seg(t, LIT[k] + 0.12, LIT[k] + 0.7));
       if (glow > 0) { ctx.fillStyle = `rgba(255,204,0,${(0.2 * glow).toFixed(3)})`; rrect(ctx, rx - 12, y0, TP.x + TP.w - 14 - (rx - 12), 86, 8); ctx.fill(); }
       // lamp
@@ -687,10 +746,23 @@
         const w = tw(lab, lf, 1) + 26; ctx.fillStyle = C.R; ctx.globalAlpha = u; rrect(ctx, rx + 34, y0 + 2, w, 50, 6); ctx.fill(); ctx.globalAlpha = 1;
         txt(lab, rx + 47, y0 + 44, lf, C.WH, 'left', 1);
       } else txt(lab, rx + 36, y0 + 44, lf, u > 0 ? C.Y : '#565656', 'left', 1);
-      if (u > 0) { ctx.save(); ctx.globalAlpha = u; txt(cap, rx + 36 + 10 * (1 - u), y0 + 80, bc(600, 33), '#F3F1EA', 'left', 0.4); ctx.restore(); }
+      if (u > 0) {
+        ctx.save(); ctx.globalAlpha = u; txt(cap, rx + 36 + 10 * (1 - u), y0 + 80, bc(600, 33), '#F3F1EA', 'left', 0.4);
+        const cxr = TP.x + TP.w - 26, cf = bc(500, 23);
+        txt(c1, cxr, y0 + 32, cf, 'rgba(255,255,255,0.64)', 'right', 0.3); txt(c2, cxr, y0 + 58, cf, 'rgba(255,255,255,0.64)', 'right', 0.3);
+        ctx.restore();
+      }
     });
-    // IADT quote strip
+    // IADT quote strip (slot is hatched until it arrives)
     const su = seg(t, T_STRIP, T_STRIP + 0.4, ease.out);
+    {
+      const sx = TP.x + 14, sy = TP.y + 300, sw = TP.w - 28, sh = 62;
+      ctx.save(); rrect(ctx, sx, sy, sw, sh, 8); ctx.clip();
+      ctx.fillStyle = '#0c0c0c'; ctx.fillRect(sx, sy, sw, sh);
+      ctx.fillStyle = '#2b2b2b';
+      for (let x = sx - sh; x < sx + sw + sh; x += 44) { ctx.beginPath(); ctx.moveTo(x, sy + sh); ctx.lineTo(x + 22, sy + sh); ctx.lineTo(x + 22 + sh, sy); ctx.lineTo(x + sh, sy); ctx.closePath(); ctx.fill(); }
+      ctx.restore();
+    }
     if (su > 0) {
       const sx = TP.x + 14, sy = TP.y + 300, sw = TP.w - 28, sh = 62;
       ctx.save(); ctx.beginPath(); ctx.rect(sx, sy, sw * su, sh); ctx.clip();
@@ -706,12 +778,12 @@
   // ---- outcome plate
   function statPlate(t) {
     plate(TP.x, TP.y, TP.w, TP.h, { r: 16 });
-    const u = seg(t, T_FLIP[1] - 0.1, T_FLIP[1] + 0.55, ease.out), big = Math.round(97 * u) + '%', bf = anton(190);
+    const big = '97%', bf = anton(190);
     const x0 = TP.x + 36, by = TP.y + 36 + capH(bf);
     txt(big, x0, by, bf, C.Y, 'left', 0);
     const bx = x0 + tw('97%', bf) + 34;
-    txt('HEALED', bx, TP.y + 36 + capH(anton(86)), anton(86), C.WH, 'left', 2);
-    txt('192 of 197 resorbing teeth', bx, by - 4, bc(600, 40), '#F3F1EA', 'left', 0.3);
+    txt('HEALED', bx, TP.y + 36 + capH(anton(98)), anton(98), C.WH, 'left', 2);
+    txt('192 of 197 resorbing teeth', bx, by - 2, bc(600, 43), '#F3F1EA', 'left', 0.3);
     // 197-lamp matrix
     const cols = 50, mx0 = TP.x + 40, mx1 = TP.x + TP.w - 40, pitch = (mx1 - mx0) / (cols - 1), my0 = by + 40;
     const lit = Math.round(192 * seg(t, T_FLIP[1], T_FLIP[1] + 1.1, ease.out));
@@ -732,29 +804,27 @@
   function sceneEnd(t) {
     const cx = COL.cx, t0 = S.end + WD / 2 - 0.12;
     // mini equation recap (pictograms only): no infected canal -> no inflammatory resorption
-    const my = 392, r = 60, xs_ = [cx - 232, cx - 54, cx + 152], uS = seg(t, t0 + 0.55, t0 + 0.95, ease.inOut), uS2 = seg(t, t0 + 0.8, t0 + 1.2, ease.inOut);
-    diamondSign(xs_[0], my, r, { shadow: false }); pictoDamaged(xs_[0] - 3, my + 1, 66, t, C.WH, 1);
-    diamondSign(xs_[1], my, r, { shadow: false }); pictoInfected(xs_[1], my + 1, 66, t, C.WH);
-    ctx.fillStyle = C.K; ctx.fillRect(cx - 143 - 17, my - 5, 34, 10); ctx.fillRect(cx - 143 - 5, my - 17, 10, 34);
-    ctx.fillRect(cx + 34, my - 13, 34, 9); ctx.fillRect(cx + 34, my + 4, 34, 9);
-    ctx.save(); ctx.globalAlpha = 1 - 0.45 * uS2;
-    triSign(xs_[2], my - 62, 132, { edge: C.WH, shadow: false, edgeW: 3, fill: uS2 > 0.5 ? '#E9DFAE' : C.Y }); pictoResorbed(xs_[2], my + 8, 62, t, uS2 > 0.5 ? '#E9DFAE' : C.Y, 1);
-    ctx.restore();
+    const my = 390, r = 64, xs_ = [cx - 240, cx - 52, cx + 164], uS = seg(t, t0 + 0.55, t0 + 0.95, ease.inOut), uS2 = seg(t, t0 + 0.8, t0 + 1.2, ease.inOut);
+    diamondSign(xs_[0], my, r, { shadow: false }); pictoDamaged(xs_[0] - 3, my + 1, 70, t, C.WH, 1);
+    diamondSign(xs_[1], my, r, { shadow: false }); pictoInfected(xs_[1], my + 1, 70, t, C.WH);
+    ctx.fillStyle = C.K; ctx.fillRect(cx - 146 - 18, my - 5.5, 36, 11); ctx.fillRect(cx - 146 - 5.5, my - 18, 11, 36);
+    ctx.fillRect(cx + 38, my - 14, 36, 10); ctx.fillRect(cx + 38, my + 4, 36, 10);
+    triSign(xs_[2], my - 66, 140, { edge: C.WH, shadow: false, edgeW: 3 }); pictoResorbed(xs_[2], my + 9, 60, t, C.Y, 1);
     const slash = (x, u, len) => {
       if (u <= 0) return; ctx.save(); ctx.lineCap = 'round';
       const x0 = x + len, y0 = my - len, x1 = lerp(x0, x - len, u), y1 = lerp(y0, my + len, u);
       ctx.strokeStyle = C.WH; ctx.lineWidth = 19; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
       ctx.strokeStyle = C.B; ctx.lineWidth = 11; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke(); ctx.restore();
     };
-    slash(xs_[1], uS, 50); slash(xs_[2], uS2, 46);
+    slash(xs_[1], uS, 53); slash(xs_[2], uS2, 49);
     // mandatory sign
-    const sy = 700, R = 208;
+    const sy = 712, R = 226;
     mandSign(cx, sy, R, t);
     // title
     const p1 = fit('TREAT THE CANAL', anton, COL.w - 6, 150), c1 = capH(anton(p1)), b1 = sy + R + 38 + c1;
     txt('TREAT THE CANAL', cx, b1, anton(p1), C.K, 'center');
     // EARLY block with dial
-    const ey = b1 + 24, eh = 138, ef = anton(118), ew = tw('EARLY', ef, 4), bw = ew + 190, ex = cx - bw / 2;
+    const ey = b1 + 26, eh = 138, ef = anton(118), ew = tw('EARLY', ef, 4), bw = ew + 190, ex = cx - bw / 2;
     ctx.save(); ctx.shadowColor = 'rgba(40,24,0,0.35)'; ctx.shadowBlur = 16; ctx.shadowOffsetY = 6;
     ctx.fillStyle = C.R; rrect(ctx, ex, ey, bw, eh, 12); ctx.fill(); ctx.restore();
     ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.lineWidth = 3; rrect(ctx, ex + 8, ey + 8, bw - 16, eh - 16, 7); ctx.stroke();
@@ -767,16 +837,16 @@
     ctx.fillStyle = C.K; circle(ctx, dcx, dcy, 5); ctx.fill(); ctx.fillRect(dcx - 6, dcy - dR - 9, 12, 9);
     txt('EARLY', ex + 138, ey + (eh + capH(ef)) / 2, ef, C.WH, 'left', 4);
     // guideline plate
-    const gy = ey + eh + 28, gh = 150;
+    const gy = ey + eh + 28, gh = 158;
     plate(COL.x0, gy, COL.w, gh, { r: 14, rivets: false });
     txt('REPLANTED MATURE TOOTH', COL.x0 + 30, gy + 52, bc(700, 38), C.Y, 'left', 1.6);
-    const p2 = fit('START RCT WITHIN 2 WEEKS', anton, COL.w - 60, 70, 1);
-    txt('START RCT WITHIN 2 WEEKS', COL.x0 + 30, gy + 124, anton(p2), C.WH, 'left', 1);
+    const p2 = fit('START RCT WITHIN 2 WEEKS', anton, COL.w - 60, 72, 1);
+    txt('START RCT WITHIN 2 WEEKS', COL.x0 + 30, gy + 134, anton(p2), C.WH, 'left', 1);
     const cf = bc(700, 30), cw = tw('IADT 2020', cf, 1) + 28;
-    ctx.fillStyle = C.Y; rrect(ctx, COL.x1 - 22 - cw, gy + 18, cw, 44, 6); ctx.fill();
-    txt('IADT 2020', COL.x1 - 22 - cw + 14, gy + 51, cf, C.K, 'left', 1);
+    ctx.fillStyle = C.Y; rrect(ctx, COL.x1 - 22 - cw, gy + 16, cw, 44, 6); ctx.fill();
+    txt('IADT 2020', COL.x1 - 22 - cw + 14, gy + 49, cf, C.K, 'left', 1);
     const src = 'Fouad et al. 2020 Dent Traumatol (IADT avulsion guideline) · mature = closed apex';
-    txt(src, COL.x0 + 4, gy + gh + 40, bc(500, fit(src, (p) => bc(500, p), COL.w - 8, 26, 0.2)), 'rgba(19,19,19,0.86)', 'left', 0.2);
+    txt(src, COL.x0 + 4, gy + gh + 38, bc(500, fit(src, (p) => bc(500, p), COL.w - 8, 26, 0.2)), 'rgba(19,19,19,0.86)', 'left', 0.2);
   }
 
   // ------------------------------------------------------------------ scene plumbing + hazard-tape wipe
@@ -821,7 +891,7 @@
   window.REEL = {
     title: 'External inflammatory resorption',
     duration: DUR,
-    poster: 19.6,
+    poster: 19.8,
     canvas,
     fonts: ['400 120px Anton', '500 26px "Barlow Condensed"', '600 34px "Barlow Condensed"', '700 36px "Barlow Condensed"'],
     setup() { buildBase(); },
