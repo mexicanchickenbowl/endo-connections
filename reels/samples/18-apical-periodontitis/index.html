@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>18 · Apical periodontitis — when can the X-ray see it?</title>
+<link rel="stylesheet" href="../../vendor/fonts/fonts.css">
+<script src="../../lib/kit.js"></script>
+</head>
+<body>
+<div id="stage"></div>
+<script src="art.js"></script>
+<script>
+/* Sample 18 — RADIOGRAPH style.
+   A periapical film (inverted density: radiopaque = white) is "time-lapsed" exposure by exposure while an
+   H&E-style inset shows the cellular mechanism and a CBCT-style cross-section explains why the
+   2-D film often stays quiet until the cortex is involved. Everything is a pure function of t. */
+const { canvas, ctx } = Kit.createCanvas();
+const { seg, ease, clamp, lerp, W, H, hash } = Kit;
+
+// ---------------------------------------------------------------- layout
+const FILM = { x: 100, y: 476, w: 840, h: 636, r: 30 };
+const PANEL = { x: 100, y: 1190, w: 840, h: 384, r: 24 };
+const IND = { y: 1151, bigY: 1420 };
+const AMBER = '#ffb547';
+const SANS = '"IBM Plex Sans", "DejaVu Sans", sans-serif';
+const MONO = '"IBM Plex Mono", "DejaVu Sans Mono", monospace';
+
+// ---------------------------------------------------------------- timeline (s)
+const DUR = 28;
+const S = { s1: 3.85, s2: 7.05, s3: 13.6, s4: 18.0, s5: 21.6, loop: 27.3 };
+const STEP = [7.3, 8.55, 9.8, 11.05, 12.3];         // H&E cascade steps
+const MOVE = 6.0;                                    // film settles, inset opens
+const RW = { a: 22.0, b: 23.0 };                     // takeaway: film rewinds to a "normal PA" state
+const TL_HOLD = 16.3;                                // ...which is the lesion state at t = 16.3 (hidden, PA normal)
+const SCAN1 = [13.45, 13.95], SCAN2 = [21.45, 21.95]; // CT scan-line panel transitions
+const BAR_T0 = 23.1;                                 // chart bars grow after the rewind
+const loopU = (t) => seg(t, 27.3, 27.9, ease.inOut);
+
+/** lesion-state clock: real time, then rewound in the takeaway, then back to 0 for the loop */
+function tlAt(t) {
+  if (t <= RW.a) return t;
+  const back = lerp(RW.a, TL_HOLD, seg(t, RW.a, RW.b, ease.inOut));
+  return lerp(back, 0, seg(t, 27.3, 27.9, ease.inOut));
+}
+/** exposure index (unitless; timing schematic) */
+function expAt(u) {
+  if (u < 3.9) return 1;
+  if (u < S.s2) return lerp(1, 2, seg(u, 3.9, S.s2));
+  if (u < S.s3) return lerp(2, 5, seg(u, S.s2, S.s3));
+  if (u < S.s4) return lerp(5, 8, seg(u, S.s3, S.s4));
+  return lerp(8, 10, seg(u, S.s4, 20.4));
+}
+/** true extent of periapical bone loss, film px (~17 px/mm at the drawn scale; schematic).
+    Stays small (≈2 mm across) while confined to cancellous bone, grows once the cortex is involved. */
+function rTrue(u) {
+  if (u < STEP[4] + 0.2) return 0;
+  if (u < S.s3) return lerp(0, 6, seg(u, STEP[4] + 0.2, S.s3, ease.inOut));
+  if (u < S.s4) return lerp(6, 18, seg(u, S.s3, S.s4 - 0.3, ease.inOut));
+  return lerp(18, 40, seg(u, S.s4, S.s4 + 1.4, ease.out));
+}
+const visAt = (u) => seg(u, 18.5, 19.6, ease.inOut);        // clear radiolucency (cortex involved)
+const subtleAt = (u) => seg(u, 16.4, 17.6, ease.inOut);     // early signs: PDL widening, lamina dura break
+const toggleK = (u) => ease.outBack(seg(u, 19.1, 19.6));
+/** cross-section lesion radius (panel px); buccal cortex sits ~52 px from the apex */
+const rxOf = (R) => (R <= 18 ? R * 2.55 : 45.9 + (R - 18) * 0.88);
+function zoomAt(t) {
+  const hook = 0.06 * seg(t, 0.9, 3.85, ease.inOut) * (1 - seg(t, MOVE, MOVE + 0.6, ease.inOut));
+  const pay = 0.08 * seg(t, 19.2, 20.2, ease.inOut) * (1 - seg(t, RW.a, RW.b, ease.inOut));
+  return 1 + hook + pay;
+}
+
+let A; // prebuilt art (art.js)
+let film, fctx;
+let F = { x: FILM.x, y: FILM.y, s: 1 }, Z = 1, ST = null;
+// film placement: larger + centred during the hook, then settles to make room for the inset
+function filmXform(t, L) {
+  const m = seg(t, MOVE, MOVE + 0.6, ease.inOut) * (1 - L);
+  return { x: lerp(58, FILM.x, m), y: lerp(560, FILM.y, m), s: lerp(1.1, 1, m) };
+}
+
+window.REEL = {
+  title: 'Apical periodontitis — when can the X-ray see it?',
+  duration: DUR,
+  poster: 16.0,
+  canvas,
+  fonts: ['700 60px "IBM Plex Sans"', '600 30px "IBM Plex Sans"', '500 38px "IBM Plex Sans"', '400 22px "IBM Plex Sans"', '400 26px "IBM Plex Sans"',
+    '500 30px "IBM Plex Mono"', '600 34px "IBM Plex Mono"', '600 30px "IBM Plex Mono"', '600 32px "IBM Plex Mono"', '500 22px "IBM Plex Mono"'],
+  async setup() {
+    A = Art.build(FILM, PANEL);
+    film = document.createElement('canvas'); film.width = FILM.w; film.height = FILM.h;
+    fctx = film.getContext('2d');
+  },
+  render(t) {
+    t = clamp(t, 0, DUR);
+    const L = loopU(t), u = tlAt(t);
+    F = filmXform(t, L); Z = zoomAt(t);
+    ST = { u, R: rTrue(u), vis: visAt(u), subtle: subtleAt(u), exp: expAt(u) };
+    ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1; ctx.filter = 'none';
+    ctx.drawImage(A.bg, 0, 0);
+    drawFilm(t, L);
+    drawFilmOverlays(t, L);
+    drawPanels(t, L);
+    drawIndicator(t, L);
+    drawCaptions(t);
+  },
+};
+
+// ================================================================= FILM
+function devAt(t, L) { return lerp(lerp(0.3, 1, ease.out(seg(t, 0, 0.9))), 0.3, L); }
+/** film-local -> screen (includes the content push-in about the 45 apex) */
+const zx = (x) => A.apex.x + (x - A.apex.x) * Z, zy = (y) => A.apex.y + (y - A.apex.y) * Z;
+const fx = (x) => F.x + zx(x) * F.s, fy = (y) => F.y + zy(y) * F.s;
+function contentXform(c) { c.translate(F.x, F.y); c.scale(F.s, F.s); c.translate(A.apex.x, A.apex.y); c.scale(Z, Z); c.translate(-A.apex.x, -A.apex.y); }
+
+function drawFilm(t, L) {
+  const f = fctx;
+  f.globalCompositeOperation = 'source-over'; f.globalAlpha = 1; f.filter = 'none';
+  Art.composeBone(f, ST);
+  f.drawImage(A.filmTeeth, 0, 0);
+  // film grain: a new pattern for every exposure
+  const ex = Math.floor(ST.exp + 1e-4);
+  const ox = Math.floor(hash(ex, 3) * 60), oy = Math.floor(hash(ex, 9) * 60);
+  f.globalCompositeOperation = 'overlay'; f.globalAlpha = 0.26;
+  f.drawImage(A.grain, -ox, -oy);
+  f.globalCompositeOperation = 'source-over'; f.globalAlpha = 1;
+  f.drawImage(A.vignette, 0, 0);
+  const dev = devAt(t, L);
+  if (dev < 0.999) { f.fillStyle = `rgba(5,6,7,${(1 - dev).toFixed(3)})`; f.fillRect(0, 0, FILM.w, FILM.h); }
+
+  // blit with a soft lightbox glow + rounded film corners
+  const c = ctx;
+  c.save();
+  c.translate(F.x, F.y); c.scale(F.s, F.s);
+  c.save();
+  c.shadowColor = 'rgba(190,210,230,0.16)'; c.shadowBlur = 70;
+  c.beginPath(); c.roundRect(0, 0, FILM.w, FILM.h, FILM.r); c.fillStyle = '#050607'; c.fill();
+  c.restore();
+  c.save(); c.beginPath(); c.roundRect(0, 0, FILM.w, FILM.h, FILM.r); c.clip();
+  c.translate(A.apex.x, A.apex.y); c.scale(Z, Z); c.translate(-A.apex.x, -A.apex.y);
+  c.drawImage(film, 0, 0); c.restore();
+  c.beginPath(); c.roundRect(0.5, 0.5, FILM.w - 1, FILM.h - 1, FILM.r);
+  c.strokeStyle = 'rgba(220,232,240,0.22)'; c.lineWidth = 1.5; c.stroke();
+
+  // DICOM-style corner text, exposure stamp, R marker, embossed dot, handle
+  const a = clamp(0.35 + 0.65 * dev);
+  c.save(); c.globalAlpha = a;
+  c.shadowColor = 'rgba(0,0,0,0.85)'; c.shadowBlur = 6;
+  text(c, 'PA · 45 (#29)', 28, 58, `500 28px ${MONO}`, 'rgba(232,238,242,0.92)', 'left', 1, 2);
+  const tick = ex > 1 ? 1 - seg(ST.exp % 1, 0, 0.18) : 0;
+  c.font = `600 34px ${MONO}`; c.letterSpacing = '3px';
+  const exS = 'EXP ' + String(ex).padStart(2, '0'), exW = c.measureText(exS).width;
+  c.letterSpacing = '0px';
+  text(c, exS, FILM.w - 28, 58, `600 34px ${MONO}`, Kit.rgba(Kit.mix('#e8eef2', AMBER, 0.55 * tick), 0.95), 'right', 1, 3);
+  text(c, 'TIME-LAPSE · SCHEMATIC', FILM.w - 28 - exW - 18, 55, `500 22px ${MONO}`, 'rgba(232,238,242,0.62)', 'right', 1, 1);
+  // rewind indicator (takeaway rewind + loop)
+  const rw = Math.max(Math.min(seg(t, RW.a - 0.1, RW.a + 0.15), 1 - seg(t, RW.b - 0.1, RW.b + 0.15)),
+    Math.min(seg(t, 27.2, 27.35), 1 - seg(t, 27.7, 27.85)));
+  if (rw > 0.01) {
+    c.save(); c.globalAlpha *= rw;
+    c.font = `600 24px ${MONO}`; c.letterSpacing = '2px';
+    const rwW = c.measureText('REWIND').width;
+    c.shadowColor = 'transparent';
+    c.beginPath(); c.roundRect(FILM.w - 28 - rwW - 52, 70, rwW + 62, 34, 8); c.fillStyle = 'rgba(8,9,11,0.82)'; c.fill();
+    text(c, 'REWIND', FILM.w - 28, 94, `600 24px ${MONO}`, AMBER, 'right', 1, 2);
+    const tx = FILM.w - 28 - rwW - 14;
+    c.fillStyle = AMBER;
+    for (const dx of [0, 15]) { c.beginPath(); c.moveTo(tx - dx, 77); c.lineTo(tx - dx, 95); c.lineTo(tx - dx - 15, 86); c.closePath(); c.fill(); }
+    c.restore();
+  }
+  text(c, '@natebrooksendo', 30, 94, `500 22px ${MONO}`, 'rgba(236,240,244,0.72)', 'left', 1, 1);
+  c.restore();
+  // lead "R" marker (radiopaque -> white) + embossed orientation dot
+  c.save(); c.globalAlpha = a;
+  const mx = 26, my = FILM.h - 70;
+  c.beginPath(); c.roundRect(mx, my, 42, 44, 6); c.fillStyle = 'rgba(10,12,14,0.6)'; c.fill();
+  c.strokeStyle = 'rgba(245,248,250,0.92)'; c.lineWidth = 2.5; c.stroke();
+  text(c, 'R', mx + 21, my + 33, `700 30px ${SANS}`, 'rgba(248,250,252,0.97)', 'center');
+  const dx = mx + 70, dy = my + 22;
+  const dg = c.createRadialGradient(dx - 3, dy - 3, 1, dx, dy, 10);
+  dg.addColorStop(0, 'rgba(255,255,255,0.75)'); dg.addColorStop(0.55, 'rgba(170,180,190,0.35)'); dg.addColorStop(1, 'rgba(0,0,0,0.5)');
+  c.beginPath(); c.arc(dx, dy, 9, 0, Math.PI * 2); c.fillStyle = dg; c.fill();
+  c.restore();
+  c.restore();
+}
+
+const BOX = 76; // half-size of the zoom box around the apex
+/** callout pill anchor (relative to the apex on screen) */
+const CALL = { dx: 110, dy: 96 };
+
+function drawFilmOverlays(t, L) {
+  const c = ctx, ap = A.apex;
+  const ax = fx(ap.x), ay = fy(ap.y), k = F.s * Z;
+  const visReal = t < S.s5 ? ST.vis : 1;
+  c.save();
+  c.beginPath(); c.roundRect(F.x, F.y, FILM.w * F.s, FILM.h * F.s, FILM.r * F.s); c.clip();
+  // --- hook: pulsing corner ticks where the lesion will form
+  const tk = seg(t, 1.2, 1.7) * (1 - seg(t, 3.85, 4.3)) * (1 - L);
+  if (tk > 0.01) {
+    const hb = BOX * F.s, tl = 16 * F.s;
+    c.save(); c.globalAlpha = tk * (0.34 + 0.1 * Math.sin(t * 3.9));
+    c.strokeStyle = AMBER; c.lineWidth = 5;
+    for (const [sx, sy] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+      c.beginPath(); c.moveTo(ax + sx * hb, ay + sy * hb - sy * tl); c.lineTo(ax + sx * hb, ay + sy * hb); c.lineTo(ax + sx * hb - sx * tl, ay + sy * hb); c.stroke();
+    }
+    c.restore();
+  }
+  // --- infected canal: amber tint creeping down the canal of 45
+  const inf = seg(t, 3.95, 4.95, ease.inOut);
+  const infA = (t < S.s3 ? 0.5 : lerp(0.5, 0.28, seg(t, S.s3, S.s3 + 0.6))) * (1 - seg(t, S.s5, S.s5 + 0.6)) * (1 - L);
+  if (inf > 0 && infA > 0.01) {
+    c.save(); contentXform(c);
+    const top = A.pulpTop - 10, yCut = lerp(top, ap.y + 4, inf);
+    c.beginPath(); c.rect(0, 0, FILM.w, yCut); c.clip();
+    c.beginPath(); Art.crPath(c, A.t45.pulp); c.fillStyle = Kit.rgba(AMBER, infA); c.fill();
+    c.restore();
+  }
+  // --- bacteria: a biofilm cluster at the canal terminus (they stay intraradicular)
+  const bac = seg(t, 4.5, 4.9) * (1 - visReal) * (1 - L);
+  if (bac > 0.01) {
+    c.save(); contentXform(c);
+    for (let i = 0; i < 8; i++) {
+      const rr = 3.6 * Math.sqrt(hash(i, 5)), ang = Math.PI * (1 + hash(i, 4));    // upper half: inside the foramen
+      const x = ap.x + Math.cos(ang) * rr * 0.7, y = ap.y - 1 + Math.sin(ang) * rr;
+      const pulse = 0.8 + 0.2 * Math.sin(t * 4 + i);
+      c.beginPath(); c.arc(x, y, 1.9 + hash(i, 6) * 0.6, 0, Math.PI * 2);
+      c.fillStyle = Kit.rgba('#ffd27a', bac * pulse); c.fill();
+      c.strokeStyle = `rgba(40,24,0,${0.6 * bac})`; c.lineWidth = 0.6; c.stroke();
+    }
+    c.restore();
+    const ringA = bac * (1 - seg(t, 6.8, 7.2));
+    if (ringA > 0.01) {
+      const ring = (t * 0.9) % 1;
+      c.beginPath(); c.arc(ax, ay, (8 + ring * 22) * F.s, 0, Math.PI * 2);
+      c.strokeStyle = Kit.rgba(AMBER, ringA * 0.55 * (1 - ring)); c.lineWidth = 2; c.stroke();
+    }
+  }
+  // --- zoom box (opens the inset) + leader lines that only exist while the inset unfolds
+  const zb = Math.min(seg(t, MOVE + 0.35, MOVE + 0.65, ease.out), 1 - visReal) * (1 - L);
+  if (zb > 0.01) {
+    const s = lerp(0.6, 1, seg(t, MOVE + 0.35, MOVE + 0.65, ease.out)), hb = BOX * s;
+    c.save(); c.globalAlpha = zb;
+    c.strokeStyle = AMBER; c.lineWidth = 2.5;
+    c.strokeRect(ax - hb, ay - hb, hb * 2, hb * 2);
+    c.lineWidth = 5;
+    for (const [sx, sy] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+      c.beginPath(); c.moveTo(ax + sx * hb, ay + sy * hb - sy * 16); c.lineTo(ax + sx * hb, ay + sy * hb); c.lineTo(ax + sx * hb - sx * 16, ay + sy * hb); c.stroke();
+    }
+    c.restore();
+  }
+  c.restore();
+  const lu = seg(t, MOVE + 0.45, MOVE + 0.9, ease.out) * (1 - seg(t, 7.2, 7.6)) * (1 - L);
+  if (lu > 0.01) {
+    const hb = BOX;
+    c.save(); c.globalAlpha = 0.75 * Math.min(1, lu * 3) * (1 - seg(t, 7.2, 7.6));
+    c.strokeStyle = AMBER; c.lineWidth = 2; c.setLineDash([7, 7]);
+    const p = seg(t, MOVE + 0.45, MOVE + 0.9, ease.out), tx1 = PANEL.x + 2, tx2 = PANEL.x + PANEL.w - 2, ty = PANEL.y;
+    c.beginPath();
+    c.moveTo(ax - hb, ay + hb); c.lineTo(lerp(ax - hb, tx1, p), lerp(ay + hb, ty, p));
+    c.moveTo(ax + hb, ay + hb); c.lineTo(lerp(ax + hb, tx2, p), lerp(ay + hb, ty, p));
+    c.stroke(); c.setLineDash([]);
+    c.restore();
+  }
+
+  // --- true extent of bone loss (dashed) vs what the film shows
+  const R = ST.R * k, cy = ay + 5 * k;
+  const de = t < S.s5 ? Math.min(seg(t, S.s3 + 0.2, S.s3 + 0.6), 1 - ST.vis) * (1 - L)
+    : seg(t, RW.b - 0.15, RW.b + 0.2) * (1 - seg(t, 27.15, 27.45));
+  if (de > 0.01 && R > 2) {
+    c.save(); c.globalAlpha = de;
+    c.beginPath(); Art.blobPath(c, ax, cy, R, 11, 0.86);
+    c.setLineDash([8, 6]); c.lineDashOffset = -t * 12;
+    c.strokeStyle = AMBER; c.lineWidth = 3; c.stroke(); c.setLineDash([]);
+    c.restore();
+  }
+  const lx = ax + CALL.dx, ly = ay + CALL.dy;
+  const edge = [ax + R * 0.74, cy + R * 0.55];
+  // S1: foramen
+  const lb = Math.min(seg(t, 4.5, 4.7), 1 - seg(t, 5.85, 6.0)) * (1 - L);
+  if (lb > 0.01) calloutLabel(c, 'foramen', ax + 3 * k, ay + 1 * k, lx, ly, lb);
+  // S3: hidden loss, then the early, subtle sign
+  const l1 = Math.min(seg(t, 13.9, 14.2), 1 - seg(t, 16.4, 16.7));
+  if (l1 > 0.01) calloutLabel(c, 'bone already lost', edge[0], edge[1], lx, ly, l1);
+  const l3 = Math.min(seg(t, 16.7, 17.0), 1 - seg(t, 18.75, 19.0));
+  if (l3 > 0.01) calloutLabel(c, 'PDL widening (subtle)', fx(ap.x + 14), fy(ap.y - 22), lx, ly, l3, '#e8eef2');
+  // S4: the radiolucency
+  const l2 = Math.min(seg(t, 19.4, 19.7), 1 - seg(t, S.s5 - 0.25, S.s5));
+  if (l2 > 0.01) calloutLabel(c, 'radiolucency', edge[0], edge[1], lx, ly, l2, '#ffffff');
+  // takeaway: the PA looks normal, the lesion is there
+  const l4 = Math.min(seg(t, RW.b, RW.b + 0.3), 1 - seg(t, 27.0, 27.3));
+  if (l4 > 0.01) calloutLabel(c, 'lesion present', edge[0], edge[1], lx, ly, l4);
+}
+
+/** small label on a dark pill with a leader line from (px,py) to the label anchor (lx,ly) */
+function calloutLabel(c, s, px, py, lx, ly, a, col = AMBER) {
+  c.save(); c.globalAlpha = a;
+  c.font = `600 30px ${SANS}`;
+  const w = c.measureText(s).width + 28;
+  c.strokeStyle = col; c.lineWidth = 2;
+  c.beginPath(); c.moveTo(px, py); c.lineTo(lx, ly - 4); c.stroke();
+  c.beginPath(); c.arc(px, py, 4, 0, Math.PI * 2); c.fillStyle = col; c.fill();
+  c.beginPath(); c.roundRect(lx - 6, ly - 4, w, 48, 10); c.fillStyle = 'rgba(8,9,11,0.84)'; c.fill();
+  c.strokeStyle = Kit.rgba(col, 0.6); c.lineWidth = 1.5; c.stroke();
+  c.fillStyle = col; c.textBaseline = 'alphabetic'; c.fillText(s, lx + 8, ly + 31);
+  c.restore();
+}
+
+// ================================================================= INDICATOR
+function drawIndicator(t, L) {
+  const m = seg(t, MOVE, MOVE + 0.6, ease.inOut) * (1 - L);
+  const cy = lerp(IND.bigY, IND.y, m), sc = lerp(1.2, 1, m);
+  const k = t < RW.a ? toggleK(ST.u) : 1 - ease.inOut(seg(t, 22.4, 22.9));     // knob: 0 = NO, 1 = YES
+  const c = ctx, yes = clamp(k);
+  c.save();
+  c.translate(520, cy); c.scale(sc, sc);
+  c.font = `600 30px ${MONO}`; c.letterSpacing = '1px';
+  const label = 'CLEAR ON 2-D PA?';
+  const lw = c.measureText(label).width;
+  const tw = 210, th = 56, gap = 26;
+  const x0 = -(lw + gap + tw) / 2;
+  c.textBaseline = 'middle'; c.fillStyle = '#dfe5ea'; c.textAlign = 'left';
+  c.fillText(label, x0, 2);
+  c.letterSpacing = '0px';
+  const px = x0 + lw + gap;
+  c.beginPath(); c.roundRect(px, -th / 2, tw, th, th / 2); c.fillStyle = '#16191d'; c.fill();
+  c.strokeStyle = Kit.rgba(Kit.mix('#4a5058', AMBER, yes), 0.9); c.lineWidth = 2; c.stroke();
+  // one pulse ring when it flips
+  const pr = seg(t, 19.35, 20.25);
+  if (pr > 0 && pr < 1) {
+    c.beginPath(); c.roundRect(px - 14 * pr, -th / 2 - 14 * pr, tw + 28 * pr, th + 28 * pr, th / 2 + 14 * pr);
+    c.strokeStyle = Kit.rgba(AMBER, 0.6 * (1 - pr)); c.lineWidth = 3; c.stroke();
+  }
+  // "still no" nudge during the catch
+  const nudge = seg(t, 15.0, 16.2);
+  if (nudge > 0 && nudge < 1) {
+    c.beginPath(); c.roundRect(px - 10 * nudge, -th / 2 - 10 * nudge, tw / 2 + 20 * nudge, th + 20 * nudge, th / 2 + 10 * nudge);
+    c.strokeStyle = `rgba(230,236,240,${0.45 * (1 - nudge)})`; c.lineWidth = 2.5; c.stroke();
+  }
+  const kw = tw / 2 - 6, kx = px + 3 + k * (tw / 2);
+  c.beginPath(); c.roundRect(kx, -th / 2 + 3, kw, th - 6, (th - 6) / 2);
+  c.fillStyle = Kit.rgba(Kit.mix('#59606a', AMBER, yes)); c.fill();
+  c.font = `600 32px ${MONO}`; c.textAlign = 'center';
+  c.fillStyle = Kit.rgba(Kit.mix('#ffffff', '#5f666e', yes)); c.fillText('NO', px + tw / 4 + 1, 2);
+  c.fillStyle = Kit.rgba(Kit.mix('#6a7179', '#1c1306', yes)); c.fillText('YES', px + (3 * tw) / 4 - 1, 2);
+  c.restore();
+}
+
+// ================================================================= PANELS
+function drawPanels(t, L) {
+  const c = ctx, P = PANEL;
+  const s1 = seg(t, SCAN1[0], SCAN1[1], ease.inOut), s2 = seg(t, SCAN2[0], SCAN2[1], ease.inOut);
+  const y1 = P.y + s1 * P.h, y2 = P.y + s2 * P.h;
+  const out = seg(t, 27.2, 27.55);
+  // H&E strip: unfolds out of the zoom box, then is wiped by the scan line
+  const open = seg(t, MOVE + 0.5, MOVE + 1.1, ease.out);
+  if (open > 0 && s1 < 1) {
+    const ax = fx(A.apex.x);
+    const x = lerp(ax - BOX, P.x, open), y = P.y;
+    const w = lerp(BOX * 2, P.w, open), h = lerp(BOX * 1.2, P.h, open);
+    const al = clamp(open * 1.6);
+    c.save(); c.globalAlpha = al;
+    c.beginPath(); c.roundRect(x, y, w, h, lerp(4, P.r, open)); c.clip();
+    if (s1 > 0) { c.beginPath(); c.rect(P.x, y1, P.w, P.y + P.h - y1); c.clip(); }
+    c.translate(P.x, P.y);
+    Art.drawHE(c, t, STEP);
+    c.restore();
+    frame(c, x, y, w, h, lerp(4, P.r, open), al * (1 - s1), 'rgba(255,240,246,0.9)');
+  }
+  // CBCT-style cross-section
+  if (s1 > 0 && s2 < 1) {
+    const top = s2 > 0 ? y2 : P.y;
+    c.save();
+    c.beginPath(); c.roundRect(P.x, P.y, P.w, P.h, P.r); c.clip();
+    c.beginPath(); c.rect(P.x, top, P.w, y1 - top); c.clip();
+    c.translate(P.x, P.y);
+    Art.drawXsec(c, t, {
+      rx: rxOf(ST.R), vis: ST.vis,
+      labX: seg(t, 14.0, 14.3), labCanc: seg(t, 14.8, 15.1), labCortex: seg(t, S.s4, S.s4 + 0.3), foot: seg(t, S.s4 + 0.3, S.s4 + 0.7),
+    });
+    c.restore();
+  }
+  // chart (takeaway support)
+  if (s2 > 0 && out < 1) {
+    c.save(); c.globalAlpha = 1 - out;
+    c.beginPath(); c.roundRect(P.x, P.y, P.w, P.h, P.r); c.clip();
+    c.beginPath(); c.rect(P.x, P.y, P.w, y2 - P.y); c.clip();
+    c.translate(P.x, P.y);
+    Art.drawChart(c, t, BAR_T0);
+    c.restore();
+  }
+  if (s1 > 0) frame(c, P.x, P.y, P.w, P.h, P.r, s1 * (1 - out), 'rgba(220,232,240,0.35)');
+  scanLine(c, y1, s1); scanLine(c, y2, s2);
+}
+function scanLine(c, y, s) {
+  if (s <= 0 || s >= 1) return;
+  const a = Math.sin(Math.PI * clamp(s * 1.25));
+  c.save();
+  c.beginPath(); c.roundRect(PANEL.x, PANEL.y, PANEL.w, PANEL.h, PANEL.r); c.clip();
+  const g = c.createLinearGradient(0, y - 46, 0, y);
+  g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(1, `rgba(220,235,245,${0.18 * a})`);
+  c.fillStyle = g; c.fillRect(PANEL.x, y - 46, PANEL.w, 46);
+  c.shadowColor = 'rgba(255,255,255,0.9)'; c.shadowBlur = 12;
+  c.fillStyle = `rgba(255,255,255,${0.95 * a})`; c.fillRect(PANEL.x, y - 1, PANEL.w, 2);
+  c.restore();
+}
+function frame(c, x, y, w, h, r, a, col) {
+  if (a <= 0.01) return;
+  c.save(); c.globalAlpha = a;
+  c.beginPath(); c.roundRect(x + 1, y + 1, w - 2, h - 2, r); c.strokeStyle = col; c.lineWidth = 2; c.stroke();
+  c.restore();
+}
+
+// ================================================================= CAPTIONS
+const HOOK = { k: 'APICAL PERIODONTITIS · TIME-LAPSE', l: ['A lesion is growing.', 'Can the X-ray see it?'], fine: 'Schematic · not to scale · timing illustrative' };
+const CAPS = [
+  { a: -9, b: S.s1, ...HOOK },
+  { a: S.s1, b: S.s2, k: '01 · INFECTION', l: ['Necrotic pulp:', 'bacteria reach the apex'], fine: 'No bacteria, no lesion (germ-free rats): Kakehashi et al. 1965' },
+  { a: S.s2, b: S.s3, k: '02 · HOST RESPONSE', l: ['The immune response', 'drives bone resorption'], fine: 'After Stashenko et al. 1992, 1998 · Nair 2004 · Kawashima et al. 2007' },
+  { a: S.s3, b: S.s4, k: '03 · THE CATCH', l: ['Bone is being lost…'], sub: '…but the PA can still look normal.', subAt: S.s3 + 0.8, fine: 'Lesion in cancellous bone · not to scale (schematic)' },
+  { a: S.s4, b: S.s5, k: '04 · CORTEX INVOLVED', l: ['Much clearer once the', 'cortex is involved.'], fine: 'Classic cadaver study (bur-made defects): Bender & Seltzer 1961' },
+  { a: S.s5, b: S.loop, k: 'TAKEAWAY', l: ["A normal PA doesn't", 'mean no lesion.'], fine: 'PA stays first-line; limited-FOV CBCT if signs are contradictory (AAE/AAOMR 2015)' },
+  { a: S.loop, b: 99, ...HOOK },
+];
+function drawCaptions(t) {
+  const c = ctx;
+  for (const cap of CAPS) {
+    const fin = cap.a < 0 ? 1 : seg(t, cap.a - 0.15, cap.a + 0.25, ease.smooth);
+    const fout = cap.b > 90 ? 0 : seg(t, cap.b - 0.3, cap.b, ease.in);
+    const a = Math.min(fin, 1 - fout);
+    if (a <= 0.001) continue;
+    c.save(); c.globalAlpha = a;
+    text(c, cap.k, 100, 276, `500 30px ${MONO}`, AMBER, 'left', 1, 4);                 // kicker: cross-dissolve in place
+    c.translate(0, (1 - fin) * 16 - fout * 10);
+    c.font = `700 60px ${SANS}`; c.fillStyle = '#f3f5f7'; c.textAlign = 'left'; c.textBaseline = 'alphabetic';
+    cap.l.forEach((ln, i) => c.fillText(ln, 98, 344 + i * 68));
+    if (cap.sub) text(c, cap.sub, 100, 412, `500 38px ${SANS}`, '#c3cad1', 'left', seg(t, cap.subAt, cap.subAt + 0.3, ease.out));
+    if (cap.fine) text(c, cap.fine, 100, 445, `400 22px ${SANS}`, '#8f989f', 'left');
+    c.restore();
+  }
+}
+
+function text(c, s, x, y, font, color, align = 'left', alpha = 1, ls = 0) {
+  c.save(); c.font = font; c.fillStyle = color; c.textAlign = align; c.textBaseline = 'alphabetic';
+  c.globalAlpha *= alpha; if (ls) c.letterSpacing = ls + 'px';
+  c.fillText(s, x, y); c.restore();
+}
+
+Kit.boot(REEL);
+</script>
+</body>
+</html>
