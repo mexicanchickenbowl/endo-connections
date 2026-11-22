@@ -633,7 +633,7 @@
     [T.ph1[0], T.s3out, 'Toy model: Henderson–Hasselbalch, pKa 7.9 (with pKa 7.7: 33% vs 6%). Abscess pus pH 6.0–7.3 (Nekoofar, IEJ 2009). Inflamed tissue: ~0.5 pH fall, more buffering (rat; Punnia-Moorthy 1987/88); in-vivo role debated.'],
     [T.far + 0.4, T.farOut + 0.2, 'Schematic, not to scale. An IANB deposits solution near the mandibular foramen, away from the inflamed pulp (Hargreaves & Keiser, Endod Topics 2002; see also Drum et al., JADA 2017).'],
     [T.list[0], T.w3[0], 'Proposed mechanisms; largely lab/animal data. Renton 2005; Wells 2007; Warren 2008 (human pulp) · TTX-R ~4× less sensitive to tonic lidocaine block (rat DRG; Roy & Narahashi 1992) · Wallace 1985; Modaresi 2008 (cat) · Byers 1990 (rat); Rodd & Boissonade 2001 (human carious teeth)'],
-    [T.lip + 0.2, DUR + 1, 'Fowler et al., J Endod 2016: n = 375, symptomatic irreversible pulpitis; success = no/mild pain on access. Supplemental success varies: buccal articaine ~42–58%, intraosseous ~88% (Fowler 2016; Matthews 2009; Nusstein 1998). Pre-op NSAID may also help (Pulikkotil, IEJ 2018).'],
+    [T.lip + 0.2, DUR + 1, 'Fowler et al., J Endod 2016: n = 375, symptomatic irreversible pulpitis; success = no/mild pain on access & instrumentation. Supplemental success varies: buccal articaine ~42–58%, intraosseous ~88% (Fowler 2016; Matthews 2009; Nusstein 1998). Pre-op NSAID may also help (Pulikkotil, IEJ 2018).'],
   ];
   function footer(t, color) {
     for (const [a, b, text] of FOOT) {
