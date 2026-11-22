@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>10 · Root canal takeover (pixel art)</title>
+<link rel="stylesheet" href="../../vendor/fonts/fonts.css">
+<script src="../../lib/kit.js"></script>
+<script src="microfont.js"></script>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+/*
+ * SAMPLE 10 — Biofilm succession in an infected root canal, as an 8-bit "time-lapse game".
+ * Everything is drawn into a 180x320 indexed-colour pixel buffer, then scaled x6 (no smoothing) to 1080x1920.
+ * render(t) is a pure function of t. Randomness: Kit.rng / Kit.hash / Kit.noise only.
+ */
+(() => {
+const { seg, ease, clamp, lerp, hash, noise1, noise2, rng } = Kit;
+const GW = 180, GH = 320, SC = 6, DUR = 26;
+const CX = 90;                                  // tooth axis (grid px)
+
+// ---------------------------------------------------------------- canvases
+const { canvas, ctx } = Kit.createCanvas();
+const low = document.createElement('canvas'); low.width = GW; low.height = GH;
+const lctx = low.getContext('2d');
+const img = lctx.createImageData(GW, GH);
+const buf = new Uint32Array(img.data.buffer);
+const base = new Uint32Array(GW * GH);
+let overlay = null;
+
+// ---------------------------------------------------------------- palette (one fixed retro palette)
+const HEX = {
+  void: '#07060f', ink: '#0d0b1e', night: '#14112b', navy: '#1d1940', indigo: '#2a2552', violet: '#41347a',
+  purple: '#7c4bb8', magenta: '#c45ee0', orchid: '#f3aef3',
+  pink: '#ff8fa3', rose: '#c25a78', red: '#d8364e', maroon: '#8c2a3c', brown: '#6b4430', umber: '#3e2a24', soot: '#170d11',
+  orange: '#ff9a2e', yellow: '#ffd84a', cream: '#fff4c8',
+  enamelHi: '#ffffff', enamel: '#ece8da', enamelSh: '#bdb9cc',
+  dentinHi: '#ebe0be', dentin: '#d3c39b', dentinSh: '#a8956d', dentinDk: '#7a6a50', cementum: '#b8a57c',
+  cyan: '#5fe3f0', teal: '#2496b4', deepteal: '#164a63', ice: '#d8fbff',
+  green: '#86e65e', dkgreen: '#2f9a4a',
+  grey: '#8c8fae', greyDk: '#5b5d7c', greyHi: '#d4d6ea', white: '#ffffff',
+  gumHi: '#f59aa8', gum: '#de5f7a', gumDk: '#a53d5c',
+  bone: '#352e58', bone2: '#4a4174', bone3: '#615a8e', marrow: '#1f1a3b', lam: '#8079ab', pdl: '#0e0b1f',
+  anox: '#1a1330', oxic: '#16506a', lesion: '#100d20',
+};
+const C = {};
+for (const k in HEX) { const [r, g, b] = Kit.hex(HEX[k]); C[k] = (0xff000000 | (b << 16) | (g << 8) | r) >>> 0; }
+
+// ---------------------------------------------------------------- pixel primitives
+const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+const bay = (x, y) => (BAYER[((y & 3) << 2) + (x & 3)] + 0.5) / 16;
+function px(x, y, c) { if (x < 0 || y < 0 || x >= GW || y >= GH) return; buf[y * GW + x] = c; }
+function rect(x, y, w, h, c) {
+  x = Math.round(x); y = Math.round(y);
+  const x0 = Math.max(0, x), y0 = Math.max(0, y), x1 = Math.min(GW, x + w), y1 = Math.min(GH, y + h);
+  for (let j = y0; j < y1; j++) { const o = j * GW; for (let i = x0; i < x1; i++) buf[o + i] = c; }
+}
+function dline(x0, y0, x1, y1, c, dotted) { // pixel line (Bresenham)
+  x0 |= 0; y0 |= 0; x1 |= 0; y1 |= 0;
+  const dx = Math.abs(x1 - x0), dy = -Math.abs(y1 - y0), sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1;
+  let err = dx + dy, n = 0;
+  for (;;) { if (!dotted || (n & 1) === 0) px(x0, y0, c); n++; if (x0 === x1 && y0 === y1) break; const e2 = 2 * err; if (e2 >= dy) { err += dy; x0 += sx; } if (e2 <= dx) { err += dx; y0 += sy; } }
+}
+
+// ---------------------------------------------------------------- text: Press Start 2P rasterised + thresholded (crisp)
+const tcan = document.createElement('canvas'); tcan.width = 300; tcan.height = 40;
+const tctx = tcan.getContext('2d', { willReadFrequently: true });
+const maskCache = new Map();
+const GLYPH_OVERRIDE = { '8': ['.#####..', '##...##.', '##...##.', '.#####..', '##...##.', '##...##.', '.#####..', '........'] };
+const calib = {};
+function calibrate(size) {
+  tctx.clearRect(0, 0, tcan.width, tcan.height);
+  tctx.font = `${size}px "Press Start 2P"`; tctx.textBaseline = 'alphabetic'; tctx.fillStyle = '#fff';
+  tctx.fillText('H', 0, size * 2);
+  const d = tctx.getImageData(0, 0, size * 2, size * 3).data;
+  let top = 99;
+  for (let y = 0; y < size * 3; y++) for (let x = 0; x < size * 2; x++) if (d[(y * size * 2 + x) * 4 + 3] > 100) { top = Math.min(top, y); }
+  calib[size] = size * 2 - top;   // baseline offset so that the cap top lands on row 0
+}
+function textMask(str, size) {
+  const key = size + '|' + str; let m = maskCache.get(key); if (m) return m;
+  if (calib[size] == null) calibrate(size);
+  tctx.clearRect(0, 0, tcan.width, tcan.height);
+  tctx.font = `${size}px "Press Start 2P"`; tctx.textBaseline = 'alphabetic'; tctx.fillStyle = '#fff';
+  const adv = Math.round(tctx.measureText(str).width);
+  const w = Math.max(1, adv), h = size + 2;
+  tctx.fillText(str, 0, calib[size]);
+  const d = tctx.getImageData(0, 0, w, h).data;
+  const bits = new Uint8Array(w * h);
+  for (let i = 0; i < w * h; i++) bits[i] = d[i * 4 + 3] >= 110 ? 1 : 0;
+  // the font's stylised '8' reads like an 'S' at this size: stamp a plain 8 into its monospace cell
+  const k = size / 8;
+  for (let c = 0; c < str.length; c++) {
+    const g = GLYPH_OVERRIDE[str[c]]; if (!g) continue;
+    for (let j = 0; j < 8 * k && j < h; j++) for (let i = 0; i < 8 * k; i++) {
+      const X = c * 8 * k + i; if (X >= w) continue;
+      bits[j * w + X] = g[Math.floor(j / k)][Math.floor(i / k)] === '#' ? 1 : 0;
+    }
+  }
+  m = { w, h, adv, bits }; maskCache.set(key, m); return m;
+}
+function blitMask(m, x, y, c) { for (let j = 0; j < m.h; j++) for (let i = 0; i < m.w; i++) if (m.bits[j * m.w + i]) px(x + i, y + j, c); }
+/** Press Start 2P text. '₂' is drawn as a pixel subscript. Returns width. y = cap top. */
+function ptext(str, x, y, color, o = {}) {
+  const size = o.size || 8, k = size / 8;
+  const parts = String(str).split('₂');
+  const masks = parts.map((p) => (p ? textMask(p, size) : null));
+  let w = 0; masks.forEach((m, i) => { if (m) w += m.adv; if (i < parts.length - 1) w += 4 * k; });
+  let cx = o.align === 'center' ? Math.round(x - w / 2) : o.align === 'right' ? Math.round(x - w) : Math.round(x);
+  for (let i = 0; i < parts.length; i++) {
+    const m = masks[i];
+    if (m) { if (o.shadow != null) blitMask(m, cx + k, y + k, o.shadow); blitMask(m, cx, y, color); cx += m.adv; }
+    if (i < parts.length - 1) {
+      if (o.shadow != null) mtext('2', cx + k, y + 3 * k + k, o.shadow, { scale: k });
+      mtext('2', cx, y + 3 * k, color, { scale: k }); cx += 4 * k;
+    }
+  }
+  return w;
+}
+// micro font (3x5 bitmap, defined in microfont.js) ------------------------------------------------
+const MF = window.MICROFONT;
+function mwidth(str, scale = 1) { let w = 0; for (const ch of String(str)) { const g = MF[ch] || MF['?']; w += g[0].length + 1; } return Math.max(0, w - 1) * scale; }
+function mtext(str, x, y, c, o = {}) {
+  const s = o.scale || 1; const w = mwidth(str, s);
+  let cx = o.align === 'center' ? Math.round(x - w / 2) : o.align === 'right' ? Math.round(x - w) : Math.round(x);
+  if (o.shadow != null) mtext(str, cx + s, y + s, o.shadow, { scale: s });
+  for (const ch of String(str)) {
+    const g = MF[ch] || MF['?'], sub = ch === '₂' ? s : 0;   // '₂' = a '2' dropped one pixel
+    for (let j = 0; j < g.length; j++) for (let i = 0; i < g[j].length; i++) if (g[j][i] === '#') rect(cx + i * s, y + j * s + sub, s, s, c);
+    cx += (g[0].length + 1) * s;
+  }
+  return w;
+}
+
+// ---------------------------------------------------------------- sprites
+const SPR = {
+  FA: { rows: ['WY', 'YO'] },
+  FB: { rows: ['WYWY', 'YOYO'] },
+  FC: { rows: ['WYWYWY', 'YOYOYO'] },
+  FD: { rows: ['WY....', 'YOWY..', '..YOWY', '....YO'] },
+  AR: { rows: ['PHHMP', 'VMMPV'] },
+  AF: { rows: ['.PHHMP.', 'VMMMMPV'] },
+  AS: { frames: [['H.H.H.H.', '.M.M.M.M'], ['.H.H.H.H', 'M.M.M.M.']] },
+  AC: { rows: ['PHP', 'VMV'] },
+  // shape does NOT encode O2 tolerance: facultative rods (e.g. coliforms) and anaerobic cocci (e.g. Parvimonas) exist
+  FR: { rows: ['OWWYO', 'OYYOO'] },             // facultative rod
+  AK: { rows: ['HMHM', 'MPMP'] },               // anaerobic diplococcus
+  // generic-key icons (1 hi, 2 main, 3 dark, 4 darkest) drawn in either colour
+  BR: { rows: ['.3111123.', '312222234', '322222334', '.4333344.'] },   // big rod
+  BC: { rows: ['.12..12.', '12231223', '22332233', '.33..33.'] },       // big diplococcus
+  LG: { rows: ['.12...31112.', '1223.3122223', '2233.3222233', '.33...43334.'] }, // legend: coccus + rod, same colour
+  STAR: { rows: ['...Y...', '..YYY..', 'YYYYYYY', '.YYYYY.', '..YYY..', '.YY.YY.', 'YY...YY'] },
+};
+for (const k in SPR) { const s = SPR[k]; const r = s.rows || s.frames[0]; s.w = r[0].length; s.h = r.length; }
+const PAL_F = { W: C.cream, Y: C.yellow, O: C.orange };
+const PAL_A = { H: C.orchid, M: C.magenta, P: C.purple, V: C.violet };
+const P4F = { 1: C.cream, 2: C.yellow, 3: C.orange, 4: C.orange };
+const P4A = { 1: C.orchid, 2: C.magenta, 3: C.purple, 4: C.violet };
+const PAL_STAR = { Y: C.yellow };
+function drawSprite(name, x, y, frame, pal, clipFn, scale = 1, shadow = null) {
+  const s = SPR[name]; const rows = s.frames ? s.frames[frame % s.frames.length] : s.rows;
+  if (shadow != null) { const sp = {}; for (const k in pal) sp[k] = shadow; drawSprite(name, x + 1, y + 1, frame, sp, clipFn, scale); }
+  for (let j = 0; j < rows.length; j++) for (let i = 0; i < rows[j].length; i++) {
+    const k = rows[j][i]; if (k === '.') continue;
+    const X = x + i * scale, Y = y + j * scale;
+    if (clipFn && !clipFn(X, Y)) continue;
+    if (scale === 1) px(X, Y, pal[k]); else rect(X, Y, scale, scale, pal[k]);
+  }
+}
+
+// ---------------------------------------------------------------- tooth geometry (grid px)
+const CROWN_TOP = 112, CEJ = 148, APEX = 215;
+function crownTop(x) { const ax = Math.abs(x + 0.5 - CX); if (ax <= 20) return 112 + 3 * (1 + Math.cos(Math.PI * ax / 20)); return 112 + Math.pow((ax - 20) / 22, 2) * 12; }
+function crownHalf(y) { return y <= 131 ? 44 : 44 - 11 * Math.pow((y - 131) / 17, 2); }
+function rootHalf(y) { const u = clamp((y - 148) / 66); let h = 33 - 25 * Math.pow(u, 1.7); if (y > 205) h *= Math.sqrt(Math.max(0, 1 - Math.pow((y - 205) / 10.5, 2))); return h; }
+function toothHalf(y) { return y <= CEJ ? crownHalf(y) : rootHalf(y); }
+function isTooth(x, y) {
+  const dx = Math.abs(x + 0.5 - CX);
+  if (y >= CROWN_TOP && y <= CEJ) return y >= crownTop(x) && dx <= crownHalf(y);
+  if (y > CEJ && y <= 216) return dx <= rootHalf(y);
+  return false;
+}
+function isPulpGeom(x, y) {
+  const dx = Math.abs(x + 0.5 - CX);
+  if (y >= 121 && y < 126) { const hw = lerp(2.5, 4.6, (y - 121) / 5); return Math.abs(dx - 12) <= hw; }   // blunt horns
+  let h;
+  if (y < 126) return false;
+  if (y <= 142) h = y === 126 ? 18 : y === 127 ? 19 : 20;
+  else if (y <= 148) h = lerp(20, 13, (y - 142) / 6);
+  else if (y <= 214) h = lerp(13, 1.3, Math.pow((y - 148) / 66, 0.9));
+  else if (y === 215) h = 1.2;
+  else return false;
+  return dx <= h;
+}
+const LES_X = 78;                                // access opening (study model: mechanical exposure) above the mesial horn
+function lesionHalf(y) { return lerp(6.5, 3, clamp((y - 115) / 10)); }
+
+// precomputed fields
+const toothM = new Uint8Array(GW * GH), pulpM = new Uint8Array(GW * GH), lesM = new Float32Array(GW * GH).fill(-1);
+const distIn = new Uint8Array(GW * GH), distOut = new Uint8Array(GW * GH), wallD = new Uint8Array(GW * GH);
+let pulpList = [];
+const canalRow = {}; // y -> {l, r}
+function chebDistance(mask, invert, maxD) { // distance (chebyshev) from pixels where mask!=invert to the nearest opposite pixel
+  const out = new Uint8Array(GW * GH).fill(maxD);
+  for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) {
+    const i = y * GW + x; const inside = invert ? !mask[i] : !!mask[i]; if (!inside) { out[i] = 0; continue; }
+    let best = maxD;
+    for (let d = 1; d < maxD && best === maxD; d++) {
+      for (let j = -d; j <= d && best === maxD; j++) for (let k = -d; k <= d; k++) {
+        if (Math.max(Math.abs(j), Math.abs(k)) !== d) continue;
+        const X = x + k, Y = y + j; if (X < 0 || Y < 0 || X >= GW || Y >= GH) { best = d; break; }
+        const v = invert ? !mask[Y * GW + X] : !!mask[Y * GW + X]; if (!v) { best = d; break; }
+      }
+    }
+    out[i] = best;
+  }
+  return out;
+}
+function boneTop(x) { const ax = Math.abs(x + 0.5 - CX); return 156 + clamp((ax - 33) / 50) * 6; }
+function gumTop(x) { const ax = Math.abs(x + 0.5 - CX); return 142 + clamp((ax - 33) / 45) * 9; }
+
+function buildGeometry() {
+  for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) {
+    const i = y * GW + x;
+    if (isTooth(x, y)) toothM[i] = 1;
+    if (isPulpGeom(x, y)) { pulpM[i] = 1; toothM[i] = 1; }
+  }
+  // lesion (carious exposure) mask with normalised depth
+  for (let y = 112; y <= 125; y++) for (let x = 66; x < 92; x++) {
+    const i = y * GW + x; if (!toothM[i] || pulpM[i]) continue;
+    const top = crownTop(x); if (y < Math.floor(top)) continue;
+    if (Math.abs(x + 0.5 - LES_X) <= lesionHalf(y)) lesM[i] = clamp((y - top) / (125 - 115));
+  }
+  const d1 = chebDistance(toothM, false, 8); distIn.set(d1);
+  const d2 = chebDistance(toothM, true, 8); distOut.set(d2);
+  const d3 = chebDistance(pulpM, false, 9); wallD.set(d3);
+  for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) {
+    const i = y * GW + x; if (!pulpM[i]) continue;
+    const r = canalRow[y] || (canalRow[y] = { l: x, r: x }); r.l = Math.min(r.l, x); r.r = Math.max(r.r, x);
+  }
+  for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) {
+    const i = y * GW + x; if (!pulpM[i]) continue;
+    const s = clamp((y - 119) / (215 - 119));
+    const tn = (noise2(x * 0.33, y * 0.33, 3) * 0.6 + noise2(x * 0.9, y * 0.9, 4) * 0.4 + 1) / 2;
+    const row = canalRow[y]; const mid = (row.l + row.r + 1) / 2;
+    pulpList.push({ i, x, y, s, w: wallD[i], tn, n2: noise2(x * 0.5, y * 0.5, 5), n3: noise1(y * 0.5, 9), vessel: y > 128 && Math.abs(x + 0.5 - mid) < 0.6, b: bay(x, y), h: hash(x, y, 77) });
+  }
+}
+
+// ---------------------------------------------------------------- static background (bone, gum, tooth hard tissue)
+function paintBase() {
+  const prev = buf.slice(0);
+  for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) {
+    const i = y * GW + x; const b = bay(x, y); let c;
+    if (toothM[i]) {
+      const half = toothHalf(y), sh = (x + 0.5 - CX) / Math.max(4, half);
+      if (pulpM[i]) c = C.anox;
+      else if (y <= CEJ && distIn[i] <= (y < 138 ? 4 : y < 147 ? Math.round(lerp(4, 1, (y - 138) / 9)) : 0)) { // enamel
+        c = C.enamel;
+        if (sh > 0.42 && b < (sh - 0.42) * 2.2) c = C.enamelSh;
+        if (sh < -0.15 && distIn[i] <= 2 && y < 128 && b < 0.6) c = C.enamelHi;
+        if (distIn[i] === 1 && sh > 0.75) c = C.enamelSh;
+      } else { // dentin / cementum
+        c = C.dentin;
+        if (sh < -0.5 && b < (-0.5 - sh) * 2.4) c = C.dentinHi;
+        if (sh > 0.3 && b < (sh - 0.3) * 1.6) c = C.dentinSh;
+        if (sh > 0.82 && b < (sh - 0.82) * 4) c = C.dentinDk;
+        if (y > CEJ && distIn[i] === 1) c = C.cementum;
+        // predentin rim around the pulp
+        let nearPulp = false;
+        for (let j = -1; j <= 1 && !nearPulp; j++) for (let k = -1; k <= 1; k++) if (pulpM[(y + j) * GW + x + k]) { nearPulp = true; break; }
+        if (nearPulp) c = C.dentinSh;
+        // dentino-enamel junction hint
+        if (y <= CEJ - 3 && distIn[i] === (y < 138 ? 5 : 0)) c = C.dentinHi;
+      }
+    } else {
+      const gT = gumTop(x), bT = boneTop(x), dT = distOut[i];
+      if (y >= bT) {
+        if (y > CEJ + 4 && dT === 1) c = C.pdl;
+        else if (y > CEJ + 7 && dT === 2) c = C.lam;
+        else {
+          const n = noise2(x * 0.21, y * 0.21, 7) * 0.7 + noise2(x * 0.55, y * 0.55, 8) * 0.3;
+          if (n < -0.22) c = C.marrow;
+          else { const u = (n + 0.22) / 1.0; c = b < u * 0.9 ? C.bone2 : C.bone; if (n > 0.38 && b < 0.35) c = C.bone3; if (n < -0.12 && b < 0.5) c = C.marrow; }
+        }
+        // fade deep bone into the frame bottom
+        const fade = clamp((y - 262) / 40); if (b < fade) c = C.ink;
+      } else if (y >= gT) {
+        const n = noise2(x * 0.3, y * 0.4, 12);
+        c = b < 0.55 + 0.3 * n ? C.gum : C.gumDk;
+        if (y - gT < 1.2) c = C.gumHi;
+        if (dT === 1 && y < CEJ + 3) c = C.soot;            // gingival sulcus
+      } else { // oral cavity background
+        const g = 1 - Math.hypot((x - 90) * 0.9, (y - 128) * 1.1) / 110;
+        c = b < clamp(g) * 0.7 ? C.navy : C.night;
+        if (y < 40 && b < (40 - y) / 40) c = C.ink;
+        if (hash(x, y, 31) < 0.006 && y > 20) c = C.indigo;
+      }
+    }
+    base[i] = c;
+  }
+  buf.set(prev);
+}
+
+// ---------------------------------------------------------------- timeline
+// Scene time τ = real time − SHIFT (the title holds 0.4 s longer); every scene time below is in τ.
+const SHIFT = 0.4;
+const T = { open0: 3.1, open1: 3.9, nec0: 3.3, nec1: 6.3, seal0: 6.5, seal1: 6.8, L2: 7.3, L3: 11.5, L4: 15.7, LATE: 17.05, END: 20.0 };
+const level = (t) => (t < T.L2 ? 1 : t < T.L3 ? 2 : t < T.L4 ? 3 : 4);
+const O2 = (t) => (t < 7.6 ? 1 : t < 11.8 ? lerp(1, 0.45, seg(t, 7.6, 11.4, ease.inOut)) : lerp(0.45, 0, seg(t, 11.8, 13.8, ease.inOut)));
+const oxy = (s, t) => clamp(O2(t) * 1.35 - s * 0.85 + 0.05);
+const dissolve = (t) => 0.55 * seg(t, 8.0, 14.5, ease.inOut) + 0.05 * seg(t, 16, 19.6);   // capped at 0.6: necrotic debris stays
+const bfT = (t) => 3.3 * seg(t, 15.9, 19.4, ease.out);          // biofilm: Level 4 only
+const rLes = (t) => 10 * seg(t, 16.0, 19.6, ease.inOut);        // periapical lesion: Level 4 only
+const necFront = (t) => lerp(-0.08, 1.12, seg(t, T.nec0, T.nec1, ease.inOut));
+const lesionGrow = (t) => lerp(-0.02, 1.0, seg(t, T.open0, T.open1, ease.inOut));
+// population (schematic counts; facultative vs obligate anaerobes). Facultatives are not killed by the loss of O2:
+// they persist (coronally) and lose SHARE as obligate anaerobes multiply around them.
+const F_T = 30, A_T = 95;
+function Fcount(t) {
+  if (t < 4.6) return 0;
+  if (t < 6.3) return 12 * seg(t, 4.6, 6.3);
+  if (t < 8.0) return 12;
+  if (t < 12.4) return 12 + 18 * seg(t, 8.0, 11.3, ease.inOut);
+  if (t < 16.4) return 30 - 12 * seg(t, 12.4, 15.6, ease.inOut);
+  return 18 - 8 * seg(t, 16.4, 19.6, ease.inOut);
+}
+function Acount(t) {
+  return 3 * seg(t, 5.0, 6.3) + 13 * seg(t, 8.3, 11.3, ease.inOut) + 48 * seg(t, 12.4, 15.6, ease.inOut) + 31 * seg(t, 16.6, 19.6, ease.inOut);
+}
+function dayValue(t) {
+  if (t < T.seal1 + 0.05) return null;
+  if (t < 7.35) return 0;
+  if (t < 11.55) return Math.round(7 * seg(t, 7.35, 8.0, ease.out));
+  if (t < 15.75) return Math.round(lerp(7, 90, seg(t, 11.55, 12.4, ease.inOut)));
+  return Math.round(lerp(90, 1060, seg(t, 15.75, 16.9, ease.inOut)));
+}
+const rolling = (t) => (t > 7.35 && t < 8.0) || (t > 11.55 && t < 12.4) || (t > 15.75 && t < 16.9);
+
+const DIALOG = [
+  { t0: 4.25, l1: 'PULP DEVITALIZED', l2: 'MICROBES MOVE IN' },
+  { t0: 8.65, l1: 'FACULTATIVES', l2: 'LEAD EARLY' },
+  { t0: 13.3, l1: 'O₂ RUNS OUT', l2: 'ANAEROBES RISE' },
+  { t0: T.LATE, l1: 'OBLIGATE ANAEROBES', l2: '85-98% (APICAL)', key: true },
+];
+const BAN_LEN = 1.75;
+const BANNERS = [
+  { t0: 2.95, sub: 'LEVEL 1', big: 'EXPOSED' },
+  { t0: 7.35, sub: 'LEVEL 2', big: 'DAY 7' },
+  { t0: 11.55, sub: 'LEVEL 3', big: 'DAY 90' },
+  { t0: 15.75, sub: 'LEVEL 4', big: 'DAY 1060' },
+];
+const TAGS = [
+  { t0: 4.9, t1: 6.45, text: 'O₂', col: 'cyan', x: 99, y: 103 },
+  { t0: 6.8, t1: 8.9, text: 'SEALED · STUDY MODEL', col: 'greyHi', x: 90, y: 104, align: 'center' },
+  { t0: 9.0, t1: 11.45, text: 'O₂ GETS USED UP', col: 'cyan', x: 90, y: 103, align: 'center' },
+  { t0: 13.9, t1: 15.65, text: 'PEPTIDES', col: 'green', x: 6, y: 136, to: [76, 140] },
+  { t0: 16.85, t1: 18.45, text: 'BIOFILM', col: 'orchid', x: 118, y: 186, to: [94, 188] },
+  { t0: 18.35, t1: 19.95, text: 'EXUDATE', col: 'pink', x: 6, y: 203, to: [89, 211] },
+];
+// entry swarm "homes" in the mouth, beside the crown (2x sprites), alternating left/right
+const HOMES = [[4, 110], [138, 110], [24, 111], [158, 111], [10, 118], [146, 118], [30, 119], [136, 126], [4, 126], [156, 127], [22, 127], [142, 134], [10, 134], [160, 134], [30, 134]];
+
+// ---------------------------------------------------------------- sprite populations (deterministic slots)
+let slotsF = [], slotsA = [], bubbles = [], pellets = [], scaleK = 1;
+function sampleSlots(n, variants, seed, margin, pref) {
+  const R = rng(seed), occ = new Uint8Array(GW * GH), out = [];
+  for (let tries = 0; tries < 60000 && out.length < n; tries++) {
+    const p = pulpList[Math.floor(R() * pulpList.length)];
+    const v = variants[Math.floor(R() * variants.length)];
+    const sp = SPR[v]; const x0 = p.x - (sp.w >> 1), y0 = p.y - (sp.h >> 1);
+    if (pref && R() > pref(p)) continue;
+    let ok = true;
+    for (let j = -margin; j < sp.h + margin && ok; j++) for (let i = -margin; i < sp.w + margin; i++) {
+      const X = x0 + i, Y = y0 + j, k = Y * GW + X;
+      const inside = j >= 0 && j < sp.h && i >= 0 && i < sp.w;
+      if (inside && !pulpM[k]) { ok = false; break; }
+      if (occ[k]) { ok = false; break; }
+    }
+    if (!ok) continue;
+    for (let j = 0; j < sp.h; j++) for (let i = 0; i < sp.w; i++) occ[(y0 + j) * GW + x0 + i] = 1;
+    const ci = (y0 + (sp.h >> 1)) * GW + x0 + (sp.w >> 1);
+    out.push({ x: x0, y: y0, v, s: clamp((y0 - 119) / 96), wall: wallD[ci], seed: out.length * 13 + seed });
+  }
+  return out;
+}
+function birthDeath(slots, countFn, k) {
+  const dt = 1 / 240;
+  slots.forEach((sl) => { sl.born = Infinity; sl.died = Infinity; });
+  let prev = 0;
+  for (let t = 0; t <= DUR; t += dt) {
+    const c = countFn(t) * k;
+    slots.forEach((sl, r) => {
+      if (sl.born === Infinity && c >= r + 1) sl.born = t;
+      else if (sl.born !== Infinity && sl.died === Infinity && c < r + 1 - 1e-6 && t > sl.born + 0.1) sl.died = t;
+    });
+    prev = c;
+  }
+}
+function buildPopulations() {
+  const R = rng(4242);
+  let F = sampleSlots(F_T, ['FA', 'FB', 'FB', 'FC', 'FD', 'FR', 'FR'], 11, 1);
+  let A = sampleSlots(A_T, ['AR', 'AR', 'AF', 'AS', 'AS', 'AC', 'AK', 'AK'], 23, 1);
+  scaleK = Math.min(1, F.length / F_T, A.length / A_T);
+  F.forEach((s) => (s.key = s.s + 0.3 * R())); F.sort((a, b) => a.key - b.key);       // coronal first (apical ones lose out first)
+  A.forEach((s) => (s.key = -(s.s + 0.3 * R()))); A.sort((a, b) => a.key - b.key);    // apical first
+  birthDeath(F, Fcount, scaleK); birthDeath(A, Acount, scaleK);
+  const setup = (arr, entryUntil) => arr.forEach((sl, r) => {
+    sl.entry = sl.born <= entryUntil;
+    // nearest earlier slot = parent (binary-fission animation)
+    let best = null, bd = 1e9;
+    for (let q = 0; q < r; q++) { const d = (arr[q].x - sl.x) ** 2 + (arr[q].y - sl.y) ** 2; if (d < bd) { bd = d; best = arr[q]; } }
+    sl.px = best ? best.x : sl.x; sl.py = best ? best.y : sl.y;
+  });
+  setup(F, 6.4); setup(A, 6.4);
+  // swarm homes, assigned in order of entry
+  const entr = F.concat(A).filter((s) => s.entry).sort((a, b) => a.born - b.born);
+  entr.forEach((sl, i) => { const h = HOMES[i % HOMES.length]; sl.hx = h[0]; sl.hy = h[1]; });
+  slotsF = F; slotsA = A;
+  // O2 "bubbles" in the canal
+  const RB = rng(99);
+  for (let k = 0; k < 46; k++) { const p = pulpList[Math.floor(RB() * pulpList.length)]; bubbles.push({ x: p.x, y: p.y, s: p.s, h: RB(), ph: RB() * 10 }); }
+  // peptide pellets released by tissue breakdown
+  const RP = rng(1234);
+  for (let k = 0; k < 36; k++) {
+    let p; do { p = pulpList[Math.floor(RP() * pulpList.length)]; } while (p.w < 2);
+    const ta = 9.0 + RP() * 6.0; const te = Math.min(19.9, ta + 2.5 + RP() * 5.0);
+    pellets.push({ x: p.x, y: p.y, ta, te });
+  }
+  // a cluster where the PEPTIDES tag points
+  const near = pulpList.filter((p) => p.w >= 2 && Math.hypot(p.x - 76, p.y - 140) <= 4.5);
+  for (let k = 0; k < 10; k++) {
+    const p = near[Math.floor(RP() * near.length)];
+    pellets.push({ x: p.x, y: p.y, ta: 10 + RP() * 3, te: Math.min(19.9, 16 + RP() * 3) });
+  }
+}
+const inPulp = (x, y) => x >= 0 && y >= 0 && x < GW && y < GH && pulpM[y * GW + x] === 1;
+
+// ---------------------------------------------------------------- scene drawing
+function drawPeriapical(t) {
+  const r = rLes(t); if (r <= 0.2) return;
+  const ax = 90, ay = 217;
+  for (let y = Math.floor(ay - r - 3); y <= ay + r + 3; y++) for (let x = Math.floor(ax - r - 4); x <= ax + r + 4; x++) {
+    const i = y * GW + x; if (toothM[i] || y < boneTop(x)) continue;
+    const d = Math.hypot(x + 0.5 - ax, (y + 0.5 - ay) * 1.15);
+    const thr = r * (1 + 0.2 * noise2(x * 0.35, y * 0.35, 11));
+    if (d < thr - 1.3) buf[i] = bay(x, y) < 0.8 ? C.lesion : C.marrow;
+    else if (d < thr) buf[i] = bay(x, y) < 0.5 ? C.maroon : C.lesion;
+  }
+}
+function drawCanal(t) {
+  const dis = dissolve(t), nf = necFront(t), T_bf = bfT(t);
+  const wrap92 = (v) => ((v % 92) + 92) % 92;
+  const pulseY = 126 + wrap92(t * 42), pulse2 = 126 + wrap92(t * 42 + 46);
+  for (let k = 0; k < pulpList.length; k++) {
+    const p = pulpList[k];
+    // lumen tint: oxygenated (teal) vs anoxic (deep purple), ordered-dithered
+    let c = p.b < oxy(p.s, t) ? C.oxic : C.anox;
+    // pulp tissue (vital -> necrotic -> broken down)
+    if (p.tn > dis) {
+      const front = nf + 0.06 * p.n3;
+      if (p.s > front) { // vital
+        c = p.b < 0.32 + 0.22 * p.n2 ? C.pink : C.red;
+        if (p.vessel) c = Math.abs(p.y - pulseY) < 2 || Math.abs(p.y - pulse2) < 2 ? C.pink : C.maroon;
+      } else if (p.s > front - 0.05) c = C.maroon;
+      else { c = p.b < 0.45 + 0.3 * p.n2 ? C.brown : C.umber; if (p.vessel && p.b < 0.5) c = C.umber; }
+    }
+    // biofilm on the canal walls
+    if (T_bf > 0) {
+      const thick = T_bf * (0.75 + 0.5 * (noise1(p.y * 0.35 + p.x * 0.1, 21) + 1) / 2);
+      if (p.w <= thick) {
+        c = p.b < 0.55 ? C.violet : C.indigo;
+        if (p.w > thick - 1) c = p.b < 0.6 ? C.purple : C.violet;
+        if (p.h < 0.1) c = C.magenta;
+        else if (p.h > 0.97 && p.s < 0.35) c = C.yellow;
+      }
+    }
+    buf[p.i] = c;
+  }
+}
+function drawLesion(t) {   // mechanical access opening (study model), drilled down into the mesial horn — not caries
+  const g = lesionGrow(t);
+  for (let y = 112; y <= 125; y++) for (let x = 66; x < 92; x++) {
+    const i = y * GW + x, d = lesM[i]; if (d < 0) continue;
+    if (d > g) continue;
+    // rim = opening pixel next to sound tissue = cut dentin/enamel wall
+    let rim = false; for (const [a, b] of [[1, 0], [-1, 0], [0, 1]]) { const j = (y + b) * GW + x + a; if (lesM[j] < 0 && !pulpM[j]) rim = true; }
+    buf[i] = rim ? C.dentinDk : C.soot;
+  }
+}
+function drawSeal(t) {
+  if (t < T.seal0) return;
+  const landY = Math.round(crownTop(LES_X)) - 3;
+  const u = seg(t, T.seal0, T.seal1, ease.in);
+  let y = Math.round(lerp(92, landY, u));
+  let squash = t > T.seal1 && t < T.seal1 + 0.12 ? 1 : 0;
+  const x0 = LES_X - 7, w = 15, h = 5 - squash;
+  y += squash;
+  rect(x0 + 1, y, w - 2, 1, C.greyHi);
+  rect(x0, y + 1, w, h - 2, C.grey);
+  rect(x0, y + 1, 1, h - 2, C.greyHi);
+  rect(x0 + w - 1, y + 1, 1, h - 2, C.greyDk);
+  rect(x0 + 1, y + h - 1, w - 2, 1, C.greyDk);
+  if (t >= T.seal1) { // fill the lesion mouth under the block
+    for (let yy = y + h; yy <= landY + 7; yy++) for (let xx = x0 + 1; xx < x0 + w - 1; xx++) if (lesM[yy * GW + xx] >= 0 && lesM[yy * GW + xx] < 0.45) px(xx, yy, bay(xx, yy) < 0.5 ? C.grey : C.greyDk);
+  }
+}
+function pathPoint(pts, u) { // polyline by arc length -> [x, y, segment index]
+  let L = 0; const seglen = []; for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seglen.push(l); L += l; }
+  let d = u * L; for (let i = 0; i < seglen.length; i++) { if (d <= seglen[i] || i === seglen.length - 1) { const v = seglen[i] ? clamp(d / seglen[i]) : 0; return [lerp(pts[i][0], pts[i + 1][0], v), lerp(pts[i][1], pts[i + 1][1], v), i]; } d -= seglen[i]; }
+  return [pts[pts.length - 1][0], pts[pts.length - 1][1], pts.length - 2];
+}
+const lesTop = () => [LES_X - 1, Math.round(crownTop(LES_X)) - 1];
+function drawPellets(t) {   // peptide "food" pellets: 2x2 with a dark corner
+  for (const p of pellets) {
+    if (t < p.ta || t >= p.te) continue;
+    if (inPulp(p.x, p.y)) px(p.x, p.y, C.green); if (inPulp(p.x + 1, p.y)) px(p.x + 1, p.y, C.green);
+    if (inPulp(p.x, p.y + 1)) px(p.x, p.y + 1, C.green); if (inPulp(p.x + 1, p.y + 1)) px(p.x + 1, p.y + 1, C.dkgreen);
+  }
+  // periapical exudate seeping in through the apical foramen (Level 4, with the lesion)
+  if (t > 16.2 && t < T.END) {
+    for (let k = 0; k < 16; k++) {
+      const tk = 16.2 + k * 0.24; const age = t - tk; if (age < 0 || age > 1.7) continue;
+      const u = ease.out(age / 1.7);
+      const y = Math.round(215 - u * 26), x = 90 + Math.round(noise1(k * 3.1 + age * 2, 5) * 2.2) - (k & 1);
+      if (inPulp(x, y)) px(x, y, C.pink); if (inPulp(x, y + 1)) px(x, y + 1, C.rose);
+    }
+  }
+}
+function drawBubbles(t) {
+  if (t < 3.9) return;
+  const tq = Math.floor(t * 6) / 6;   // retro 6 fps jitter
+  for (const b of bubbles) {
+    if (t < 4.3 + b.s * 2.6) continue;
+    if (b.h > oxy(b.s, t) * 0.85) continue;
+    const x = b.x + Math.round(noise1(tq * 0.8 + b.ph, 41) * 1.2), y = b.y + Math.round(noise1(tq * 0.8 + b.ph, 42) * 1.2);
+    const pts = [[x, y, C.ice], [x + 1, y, C.cyan], [x, y + 1, C.cyan], [x + 1, y + 1, C.teal]];
+    for (const [X, Y, c] of pts) if (inPulp(X, Y)) px(X, Y, c);
+  }
+  // incoming stream while the pulp is open to the mouth (all inside before the seal drops)
+  for (let k = 0; k < 13; k++) {
+    const tk = 3.9 + k * 0.18; const age = t - tk; if (age < 0 || age > 0.9) continue;
+    const mx = 96 + Math.round(hash(k, 3) * 24), my = 103 + Math.round(hash(k, 4) * 6);
+    const lt = lesTop();
+    const [x, y] = pathPoint([[mx, my], lt, [LES_X - 1, 124], [80 + Math.round(hash(k, 5) * 20) - 10, 130 + Math.round(hash(k, 6) * 10)]], ease.inOut(age / 0.9));
+    const X = Math.round(x), Y = Math.round(y);
+    px(X, Y, C.ice); px(X + 1, Y, C.cyan); px(X, Y + 1, C.cyan); px(X + 1, Y + 1, C.teal);
+  }
+}
+function drawPop(t) {
+  const fast = rolling(t) ? 3 : 1;
+  const tq = Math.floor(t * 6) / 6;   // sprites move/jitter at a retro 6 fps, not every 30 fps frame
+  const frame = Math.floor(t * 4);
+  const jit = (sl, r, amp) => [Math.round(noise1(tq * 0.9 * fast + r * 3.1, sl.seed) * amp), Math.round(noise1(tq * 0.9 * fast + r * 5.7, sl.seed + 1) * amp)];
+  const draw = (arr, isF) => arr.forEach((sl, r) => {
+    if (sl.born === Infinity) return;
+    const pal = isF ? PAL_F : PAL_A;
+    if (sl.entry) {
+      if (t < sl.born - 1.0) { // oral microbes floating beside the crown (2x so they read as bacteria)
+        const bx = sl.hx + Math.round(noise1(tq * 0.7 + sl.seed * 0.37, 61) * 2.4), by = sl.hy + Math.round(noise1(tq * 0.9 + sl.seed * 0.53, 62) * 1.4);
+        drawSprite(sl.v, bx, by, frame, pal, null, 2, C.void);
+        return;
+      }
+      if (t < sl.born) { // swim over the crown (2x), then dive through the opening (1x)
+        const u = ease.inOut(seg(t, sl.born - 1.0, sl.born));
+        const [x, y, si] = pathPoint([[sl.hx, sl.hy], [LES_X - 2, 104], lesTop(), [LES_X - 2, 124], [sl.x, sl.y]], u);
+        drawSprite(sl.v, Math.round(x), Math.round(y), frame, pal, null, si === 0 ? 2 : 1, si === 0 ? C.void : null);
+        return;
+      }
+    } else if (t < sl.born) return;
+    if (t >= sl.died) return;   // facultatives losing out simply drop out of the picture (no "dying" look)
+    let x = sl.x, y = sl.y;
+    if (!sl.entry && t < sl.born + 0.45) { const u = ease.out(seg(tq, sl.born, sl.born + 0.45)); x = Math.round(lerp(sl.px, sl.x, u)); y = Math.round(lerp(sl.py, sl.y, u)); }
+    const embedded = !isF && sl.wall <= 3 && t > 16.5;
+    const [jx, jy] = jit(sl, r, embedded ? 0.3 : 0.85);
+    drawSprite(sl.v, x + jx, y + jy, frame + r, pal, inPulp);
+  });
+  draw(slotsA, false);
+  draw(slotsF, true);    // surviving facultatives stay visible on top: they persist, they just lose share
+}
+
+// ---------------------------------------------------------------- UI
+function frameBox(x, y, w, h, fill, outer, inner) {
+  rect(x + 1, y, w - 2, 1, outer); rect(x + 1, y + h - 1, w - 2, 1, outer); rect(x, y + 1, 1, h - 2, outer); rect(x + w - 1, y + 1, 1, h - 2, outer);
+  rect(x + 1, y + 1, w - 2, h - 2, inner != null ? inner : fill); if (inner != null) rect(x + 2, y + 2, w - 4, h - 4, fill);
+}
+function tag(tg, t) {
+  const a = seg(t, tg.t0, tg.t0 + 0.2), b = 1 - seg(t, tg.t1 - 0.15, tg.t1);
+  if (a <= 0 || b <= 0) return;
+  const tw = mwidth(tg.text), w = tw + 5, h = 9;
+  let x = tg.align === 'center' ? Math.round(tg.x - w / 2) : tg.x;
+  const y = tg.y;
+  // grow-in from the left edge (stepped) for a retro feel
+  const vis = Math.round(w * Math.min(a, b));
+  const col = C[tg.col];
+  if (tg.to) dline(x + w, y + 4, tg.to[0], tg.to[1], col, true);
+  rect(x, y, vis, h, C.ink);
+  rect(x, y, vis, 1, col); rect(x, y + h - 1, vis, 1, col); rect(x, y, 1, h, col); if (vis >= w) rect(x + w - 1, y, 1, h, col);
+  if (vis >= w) mtext(tg.text, x + 3, y + 2, col);
+}
+function drawHUD(t) {
+  const dy = Math.round(-44 * (1 - seg(t, 2.62, 2.9, ease.out)));
+  if (dy <= -44) return;
+  const y0 = 38 + dy;
+  rect(4, y0, 172, 28, C.ink);
+  rect(5, y0, 170, 1, C.violet); rect(5, y0 + 27, 170, 1, C.violet); rect(4, y0 + 1, 1, 26, C.violet); rect(175, y0 + 1, 1, 26, C.violet);
+  const lv = level(t);
+  ptext('LV' + lv, 12, y0 + 5, C.yellow, { shadow: C.maroon });
+  // day counter
+  const dv = dayValue(t);
+  if (dv == null) ptext('DAY ----', 168, y0 + 5, C.grey, { align: 'right' });
+  else ptext('DAY ' + String(dv).padStart(4, '0'), 168, y0 + 5, C.white, { align: 'right', shadow: C.violet });
+  if (rolling(t)) { // fast-forward chevrons
+    const ph = Math.floor(t * 8) % 3;
+    for (let k = 0; k < 3; k++) { const c = k === ph ? C.white : C.greyDk; const x = 50 + k * 6; for (let j = 0; j < 5; j++) { const w = j < 3 ? j + 1 : 5 - j; rect(x, y0 + 6 + j, w, 1, c); } }
+  }
+  // O2 meter
+  ptext('O₂', 12, y0 + 16, C.cyan);
+  const o = O2(t), segs = Math.ceil(o * 5 - 0.02);   // reaches 0/5 once O2 has run out
+  const flash = (t >= 13.8 && t < 14.0) || (t >= 14.15 && t < 14.35);   // stepped "empty tank" cue, twice
+  for (let k = 0; k < 5; k++) {
+    const x = 32 + k * 7, y = y0 + 16;
+    if (k < segs) { rect(x, y, 6, 7, C.cyan); rect(x, y, 6, 1, C.ice); rect(x, y + 6, 6, 1, C.teal); }
+    else { rect(x, y, 6, 7, flash ? C.maroon : C.navy); rect(x, y, 6, 1, flash ? C.red : C.indigo); }
+  }
+  if (flash) { rect(31, y0 + 15, 36, 1, C.red); rect(31, y0 + 23, 36, 1, C.red); rect(31, y0 + 15, 1, 9, C.red); rect(66, y0 + 15, 1, 9, C.red); }
+  let note = 'OPEN ~1 WK (MODEL)';
+  if (t >= T.seal1) note = 'SINCE SEALING';
+  if (t >= 16.9) note = '~3 YEARS SEALED';
+  mtext(note, 168, y0 + 18, C.grey, { align: 'right' });
+}
+function drawDialog(t) {
+  if (t < 3.95 || t >= T.END) return;
+  const a = seg(t, 3.95, 4.2);   // box expands just before the first page types
+  const W = 168, x0 = 6, y0 = 72, H = 30;
+  const w = Math.max(4, Math.round(W * a)), xl = x0 + Math.round((W - w) / 2);
+  frameBox(xl, y0, w, H, C.ink, C.white, C.indigo);
+  if (a < 1) return;
+  // speaker tag = handle
+  const hw = mwidth('@NATEBROOKSENDO') + 6;
+  rect(12, y0 - 5, hw, 9, C.violet); rect(12, y0 - 5, hw, 1, C.purple);
+  mtext('@NATEBROOKSENDO', 15, y0 - 3, C.orchid);
+  let page = null; for (const d of DIALOG) if (t >= d.t0) page = d;
+  if (!page) return;
+  const n = Math.floor((t - page.t0) * 50);
+  const l1 = page.l1.slice(0, Math.min(n, page.l1.length));
+  const l2 = page.l2.slice(0, Math.max(0, n - page.l1.length));
+  if (l1) ptext(l1, 14, y0 + 7, C.white, { shadow: C.violet });
+  if (l2) ptext(l2, 14, y0 + 18, page.key ? C.orchid : C.white, { shadow: C.violet });
+  if (n > page.l1.length + page.l2.length + 4) { // ▼ prompt (1px bob)
+    const by = y0 + 23 + (Math.floor(t * 2.5) % 2);
+    rect(163, by, 5, 1, C.yellow); rect(164, by + 1, 3, 1, C.yellow); rect(165, by + 2, 1, 1, C.yellow);
+  }
+}
+function drawBanner(t) {
+  for (const b of BANNERS) {
+    const t0 = b.t0, t1 = t0 + BAN_LEN;
+    if (t < t0 || t >= t1) continue;
+    const inU = seg(t, t0, t0 + 0.16, ease.out), outU = seg(t, t1 - 0.16, t1, ease.in);
+    const off = Math.round((1 - inU) * -190 + outU * 190);
+    const y0 = 152, h = 31;
+    rect(off, y0, GW, h, C.ink);
+    rect(off, y0, GW, 1, C.yellow); rect(off, y0 + h - 1, GW, 1, C.yellow);
+    rect(off, y0 + 2, GW, 1, C.maroon); rect(off, y0 + h - 3, GW, 1, C.maroon);
+    mtext(b.sub, 90 + off, y0 + 5, C.yellow, { align: 'center' });
+    ptext(b.big, 90 + off, y0 + 12, C.white, { size: 16, align: 'center', shadow: C.purple });
+  }
+}
+function drawPanel(t) {
+  const x0 = 6, y0 = 226, W = 154, H = 37;
+  frameBox(x0, y0, W, H, C.ink, C.violet, null);
+  // legend: each colour shows a coccus AND a rod — colour = O2 tolerance, shape varies
+  drawSprite('LG', 11, 229, 0, P4F, null);
+  mtext('FACULTATIVE', 25, 229, C.yellow);
+  const aw = mwidth('OBLIGATE ANAEROBE');
+  mtext('OBLIGATE ANAEROBE', 155, 229, C.orchid, { align: 'right' });
+  drawSprite('LG', 155 - aw - 15, 229, 0, P4A, null);
+  // stacked bar
+  const bx = 11, by = 236, bw = 144, bh = 10;
+  rect(bx, by, bw, bh, C.greyHi); rect(bx + 1, by + 1, bw - 2, bh - 2, C.navy);
+  const Fc = Fcount(t), Ac = Acount(t), tot = Fc + Ac;
+  const iw = bw - 2, late = t >= T.LATE;
+  const cell = (i, j, isF) => {
+    let c = isF ? C.yellow : C.magenta;
+    if (j === 0) c = isF ? C.cream : C.orchid;
+    if (j >= bh - 3) c = isF ? C.orange : C.purple;
+    if (j === 1 && ((i + 1) % 2 === 0) && bay(i, j) < 0.3) c = isF ? C.cream : C.orchid;
+    px(bx + 1 + i, by + 1 + j, c);
+  };
+  if (late) {
+    // data, not a point value: obligate anaerobes 85-98% -> the F|A boundary lies somewhere in a hatched 2-15% zone
+    const xa = Math.round(iw * 0.02), xb = Math.round(iw * 0.15);
+    for (let i = 0; i < iw; i++) for (let j = 0; j < bh - 2; j++) cell(i, j, i < xa || (i < xb && ((i + j) & 1) === 0));
+    for (const xe of [xa, xb]) { px(bx + 1 + xe, by, C.white); px(bx + 1 + xe, by + bh - 1, C.white); }   // zone ticks on the frame
+    if (seg(t, T.LATE, T.LATE + 0.2) > 0.5) ptext('85-98%', bx + bw - 4, by + 1, C.white, { align: 'right', shadow: C.ink });
+  } else if (tot < 0.5) {
+    if (t < 3.8) mtext('NO BACTERIA YET', bx + bw / 2, by + 3, C.grey, { align: 'center' });
+    else if (Math.floor(t * 4) % 2 === 0) rect(bx + 2, by + 2, 1, bh - 4, C.white);   // blinking cursor: counting starts
+  } else {
+    const fw = Math.round(iw * Fc / tot);
+    for (let i = 0; i < iw; i++) for (let j = 0; j < bh - 2; j++) cell(i, j, i < fw);
+    if (fw > 0 && fw < iw) rect(bx + 1 + fw, by + 1, 1, bh - 2, C.ink);
+  }
+  mtext(late ? 'APICAL, DAY 90-1060 · SCHEMATIC BAR' : 'SHARE OF CELLS · ILLUSTRATIVE', 11, 249, late ? C.greyHi : C.grey);
+  mtext(late ? 'FABRICIUS SCAND J DENT RES 1982;90:134' : 'NOT TO SCALE · TIME COMPRESSED', 11, 256, C.grey);
+}
+function drawTitle(t, rt) {
+  if (t >= 2.72) return;
+  const out = seg(t, 2.4, 2.7, ease.in);
+  const dy = Math.round(-80 * out);
+  const x0 = 12, y0 = 42 + dy, W = 156, H = 62;
+  frameBox(x0, y0, W, H, C.ink, C.magenta, C.violet);
+  ptext('ROOT CANAL', 90, y0 + 8, C.yellow, { align: 'center', shadow: C.maroon });
+  // TAKEOVER letters hop in (stepped), on real time so the hook is complete by ~0.6 s
+  const word = 'TAKEOVER', size = 16, wpx = word.length * 16, sx = 90 - wpx / 2;
+  for (let i = 0; i < word.length; i++) {
+    const u = seg(rt, 0.05 + i * 0.045, 0.3 + i * 0.045);
+    if (u <= 0) continue;
+    const bounce = u < 1 ? -Math.round(Math.sin(u * Math.PI) * 4) : 0;   // small hop in place
+    ptext(word[i], sx + i * 16, y0 + 21 + bounce, C.white, { size, shadow: C.magenta });
+  }
+  mtext('WHO WINS AS AN INFECTION AGES?', 90, y0 + 49, C.greyHi, { align: 'center' });
+}
+const UNIT = ['BR', 'BC', 'BR', 'BR', 'BC', 'BR', 'BC', 'BR', 'BR', 'BR'];   // 9 anaerobes (rods + cocci) : 1 facultative (rod)
+function drawEnd(t, rt) {
+  if (t < T.END) return;
+  rect(0, 68, GW, 158, C.ink);
+  const g = seg(t, T.END, T.END + 0.25, ease.out);
+  const x0 = 8, W = 164, Hf = 150, y0 = 72;
+  const h = Math.max(2, Math.round(Hf * g)), yy = y0 + Math.round((Hf - h) / 2);
+  frameBox(x0, yy, W, h, C.ink, C.yellow, C.maroon);
+  if (g < 1) return;
+  const tt = t - T.END;
+  // LEVEL COMPLETE
+  const lc = 'LEVEL COMPLETE'; const n = Math.floor((tt - 0.25) * 40);
+  if (n > 0) ptext(lc.slice(0, Math.min(n, lc.length)), 90 - lc.length * 4, y0 + 7, C.yellow, { shadow: C.maroon });
+  if (n >= lc.length) { drawSprite('STAR', 20, y0 + 7, 0, PAL_STAR, null); drawSprite('STAR', 153, y0 + 7, 0, PAL_STAR, null); }
+  if (tt > 0.55) ptext('OVER TIME, OBLIGATE', 90, y0 + 21, C.white, { align: 'center', shadow: C.violet });
+  const word = 'ANAEROBES', sx = 90 - word.length * 8;
+  for (let i = 0; i < word.length; i++) {
+    const u = seg(tt, 0.7 + i * 0.04, 0.95 + i * 0.04); if (u <= 0) continue;
+    const bounce = u < 1 ? -Math.round(Math.sin(u * Math.PI) * 4) : 0;
+    ptext(word[i], sx + i * 16, y0 + 32 + bounce, C.magenta, { size: 16, shadow: C.violet });
+  }
+  if (tt > 1.0) ptext('TAKE OVER', 90, y0 + 52, C.white, { align: 'center', shadow: C.violet });
+  // 10-cell unit chart, illustrative 9:1 (inside the reported 85-98%); only the lone facultative bobs
+  for (let k = 0; k < 10; k++) {
+    if (tt < 1.15 + k * 0.05) continue;
+    const col = k % 5, row = Math.floor(k / 5);
+    const x = 26 + col * 27, y = y0 + 64 + row * 11 + (k === 9 ? Math.floor(rt * 1.5) % 2 : 0);
+    drawSprite(UNIT[k], x + (UNIT[k] === 'BC' ? 1 : 0), y, 0, k < 9 ? P4A : P4F, null, 2);
+  }
+  if (tt > 1.55) mtext('ILLUSTRATIVE 9:1', 90, y0 + 86, C.grey, { align: 'center' });
+  if (tt > 1.6) {
+    mtext('WHY: O₂ USED UP · PEPTIDE FOOD', 90, y0 + 96, C.cyan, { align: 'center' });
+    mtext('SPECIES INTERACTIONS', 90, y0 + 103, C.cyan, { align: 'center' });
+  }
+  if (tt > 2.0) {
+    // below grid y 183 the right-hand Reels button column begins: these lines stay at x <= 159
+    mtext('SEALED, UNTREATED CANALS', 90, y0 + 115, C.greyHi, { align: 'center' });
+    mtext('3 MONKEYS · 24 CANALS · CULTURE', 90, y0 + 122, C.grey, { align: 'center' });
+    mtext('@NATEBROOKSENDO', 90, y0 + 135, C.orchid, { align: 'center' });
+  }
+}
+// loop seam: stepped curtain closes over the last 0.3 s and re-opens over the first 0.15 s ("new game")
+function drawCurtain(rt) {
+  let u = 0;
+  if (rt >= DUR - 0.3) u = seg(rt, DUR - 0.3, DUR - 0.03);
+  else if (rt < 0.15) u = 1 - seg(rt, 0, 0.15);
+  if (u <= 0) return;
+  const half = GH / 2, h = Math.round(Math.ceil(u * 4) / 4 * half);
+  rect(0, 0, GW, h, C.void); rect(0, GH - h, GW, h, C.void);
+  if (h < half) { rect(0, h, GW, 1, C.violet); rect(0, GH - h - 1, GW, 1, C.violet); }
+}
+
+// ---------------------------------------------------------------- overlay (CRT-ish pixel grid + vignette), static
+function buildOverlay() {
+  const o = document.createElement('canvas'); o.width = 1080; o.height = 1920;
+  const g = o.getContext('2d');
+  g.fillStyle = 'rgba(0,0,0,0.20)'; for (let y = 0; y < GH; y++) g.fillRect(0, y * SC + 5, 1080, 1);
+  g.fillStyle = 'rgba(0,0,0,0.07)'; for (let x = 0; x < GW; x++) g.fillRect(x * SC + 5, 0, 1, 1920);
+  const rg = g.createRadialGradient(540, 900, 500, 540, 900, 1250);
+  rg.addColorStop(0, 'rgba(0,0,0,0)'); rg.addColorStop(1, 'rgba(0,0,0,0.42)');
+  g.fillStyle = rg; g.fillRect(0, 0, 1080, 1920);
+  overlay = o;
+}
+
+// ---------------------------------------------------------------- REEL
+window.REEL = {
+  title: 'Root canal takeover',
+  duration: DUR,
+  poster: 19.6,
+  canvas,
+  fonts: ['8px "Press Start 2P"', '16px "Press Start 2P"'],
+  async setup() {
+    calibrate(8); calibrate(16);
+    buildGeometry(); paintBase(); buildPopulations(); buildOverlay();
+  },
+  render(rt) {
+    rt = clamp(rt, 0, DUR - 1e-4);
+    const t = rt - SHIFT;   // scene time
+    buf.set(base);
+    drawPeriapical(t);
+    drawCanal(t);
+    drawLesion(t);
+    drawPellets(t);
+    drawPop(t);
+    drawBubbles(t);
+    drawSeal(t);
+    for (const tg of TAGS) tag(tg, t);
+    drawBanner(t);
+    drawPanel(t);
+    drawHUD(t);
+    drawDialog(t);
+    drawTitle(t, rt);
+    drawEnd(t, rt);
+    drawCurtain(rt);
+    lctx.putImageData(img, 0, 0);
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(low, 0, 0, GW * SC, GH * SC);
+    ctx.drawImage(overlay, 0, 0);
+  },
+};
+Kit.boot(REEL);
+})();
+</script>
+</body>
+</html>
