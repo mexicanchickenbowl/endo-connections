@@ -207,3 +207,17 @@ The lesion starts small inside cancellous bone, where the PA can still look norm
   - Stills at 20+ targeted times plus `--n 10 --safe`, with zoomed crops of the molars, apex, H&E and cross-section. No console errors.
   - Loop endpoints t=0 vs t=28: RMSE 0.0002.
   - Render: `reels/out/18-apical-periodontitis.mp4`: 28.0 s, 840 frames, 1080×1920, H.264 + silent AAC, 10.1 MB.
+
+## Final QA (fresh-eyes pass)
+- Stills at 25 times (0 → 27.95 s, `--safe`, `_stills/final-qa`) plus 7 targeted re-checks (`_stills/final-qa-fix`). No console errors, no tofu glyphs, no NaN text. Hook readable at t = 0, takeaway held 21.85–27.0 s, loop t = 27.95 ≈ t = 0.
+- **Fixed: H&E tag overlapped label ⑤.** From 12.3 s the vertical "H&E-style · schematic" tag ran into the top of the "⑤ Osteoclasts" pill by about 10 px. The tag now reads "H&E-style schematic" (13 px shorter), with 8 px padding, and is centred in the gap between pill ④ and pill ⑤. It now clears both by about 5 px (art.js `drawHE`).
+- **Fixed: callout pill overhung the film.** "PDL widening (subtle)" (17.0–18.75 s) stuck out about 12 px past the film's right edge. `calloutLabel` now shifts any pill left so it ends 12 px inside the film. The other callouts are short enough that they do not move.
+- Science re-check on PubMed:
+  - de Paula-Silva 2009: 71 / 84 / 93 %, n = 83 roots, specificity 1.0.
+  - Chang 2020: lesion size, not cortex, predicted detection.
+  - Kanagasingam 2017: PA sensitivity 0.27, CBCT 0.89.
+  - Ørstavik 1996: peak healing at 1 yr, up to 4 yrs.
+  - Gao 2010, Kawashima 2007, Stashenko 1992, Kakehashi 1965, AAE/AAOMR 2015.
+  - All on-screen wording matches its sources. No overstatement found.
+- Poster stays at 16.0 s: "THE CATCH" caption, "bone already lost", NO toggle and the cross-section, all inside the 3:4 crop.
+- Wrote `meta.json` (title, style, topic, 10 claims with PMIDs, caption). Re-rendered the video once.

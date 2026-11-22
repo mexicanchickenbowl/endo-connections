@@ -705,9 +705,11 @@
     // tag, running vertically along the right edge (inside the bone)
     c.save();
     c.font = `500 22px ${SANS}`;
-    const tag = 'H&E-style · schematic', tw = c.measureText(tag).width;
-    c.translate(w - 24, 100 + tw / 2); c.rotate(-Math.PI / 2);
-    c.beginPath(); c.roundRect(-tw / 2 - 10, -16, tw + 20, 32, 8); c.fillStyle = 'rgba(42,20,64,0.72)'; c.fill();
+    const tag = 'H&E-style schematic', tw = c.measureText(tag).width;
+    // centred in the gap between label 4 (bottom) and label 5 (top) so it never touches either pill
+    const gTop = boxes[3].y0 + boxes[3].h, gBot = boxes[4].y0;
+    c.translate(w - 24, (gTop + gBot) / 2); c.rotate(-Math.PI / 2);
+    c.beginPath(); c.roundRect(-tw / 2 - 8, -16, tw + 16, 32, 8); c.fillStyle = 'rgba(42,20,64,0.72)'; c.fill();
     c.fillStyle = '#fff'; c.textBaseline = 'middle'; c.textAlign = 'center'; c.fillText(tag, 0, 1);
     c.restore();
   }

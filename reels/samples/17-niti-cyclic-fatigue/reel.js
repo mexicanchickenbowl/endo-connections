@@ -55,7 +55,7 @@
     { t0: 6.9, t1: 10.6, size: 76, lines: ['Tighter curve, thicker file', '→ more strain'] },
     { t0: 10.6, t1: 14.45, size: 76, lines: ['Surface flaw → microcrack,', 'grows every cycle'] },
     { t0: 14.45, t1: 17.75, size: 76, lines: ['Then: sudden fracture,', 'often without warning'] },
-    { t0: 17.75, t1: 21.62, size: 92, top: 310, lines: ['EVERY TURN IN A CURVE', 'SPENDS [FATIGUE LIFE]*'], hold: true,
+    { t0: 17.75, t1: DUR, size: 92, top: 310, lines: ['EVERY TURN IN A CURVE', 'SPENDS [FATIGUE LIFE]*'], hold: true,
       sub: '*above ~0.7% strain (fatigue limit) · Cheung & Darvell IEJ 2007', subSize: 24 },
   ];
   const SOURCES = [
@@ -605,11 +605,12 @@
   const ROT_TC = Math.atan2(Math.sin(GEO.A / 2), -Math.cos(GEO.A / 2)) + Math.PI / 2;
   const ROT_FR = Math.PI * 1.5;
   function drawSection(g, t, G, a) {
-    const app = seg(t, TL.secOn, TL.secOn + 0.6, ease.out) * a;
+    const grow = seg(t, TL.secOn, TL.secOn + 0.6, ease.out);      // size follows the reveal only, not the takeaway dim
+    const app = grow * a;
     if (app <= 0) return;
     const m = seg(t, TL.morph0, TL.morph1, ease.inOut);
     const mv = seg(t, TL.mv0, TL.mv1, ease.inOut);                 // scene B (big, centred) → scene C (smaller, top)
-    const cx = lerp(836, 832, m), cy = lerp(lerp(724, 636, mv), 660, m), r = lerp(lerp(106, 86, mv), 125, m) * lerp(0.6, 1, app);
+    const cx = lerp(836, 832, m), cy = lerp(lerp(724, 636, mv), 660, m), r = lerp(lerp(106, 86, mv), 125, m) * lerp(0.6, 1, grow);
     const rot = lerp(ROT_TC, ROT_FR, m), cs = Math.cos(rot), sn = Math.sin(rot);
     const S = (lx, ly) => [cx + lx * cs - ly * sn, cy + lx * sn + ly * cs];   // inset-local → screen
     const ph = phiAt(Math.min(t, TL.frac));

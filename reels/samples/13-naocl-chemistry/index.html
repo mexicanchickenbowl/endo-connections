@@ -618,7 +618,7 @@ function sceneSapon(u) {
   });
   text('fat', -95, -112, `600 30px ${SERIF}`, COL.tis, 'center', l0);
   drawChem([['OH^-', COL.oh, l0]], 152, 2, 30, { align: 'center', weight: 600 });
-  text('glycerol', -95, -112, `600 28px ${SERIF}`, COL.ink, 'center', lp);
+  text('glycerol', -90, -112, `600 30px ${SERIF}`, COL.ink, 'center', lp);
   text('soap', 148, 44, `600 30px ${SERIF}`, COL.tis, 'center', lp);
 }
 
@@ -874,21 +874,21 @@ function chipSegs(kind, n) { return kind === 'oh' ? [['OH^-', COL.oh], [' ' + 'â
 function chipBoxes(t) {
   const L = eqLayout();
   const nOH = Math.max(1, arrived('oh', t));
-  const wOH = drawChem(chipSegs('oh', nOH), 0, 0, 28, { weight: 600, measure: true }).w + 26;
-  const wCL = drawChem(chipSegs('cl', 1), 0, 0, 28, { weight: 600, measure: true }).w + 26;
+  const wOH = drawChem(chipSegs('oh', nOH), 0, 0, 30, { weight: 600, measure: true }).w + 22;   // 30 px text (SPEC min), tighter padding keeps the
+  const wCL = drawChem(chipSegs('cl', 1), 0, 0, 30, { weight: 600, measure: true }).w + 22;    // popped chip clear of the right button column
   const cOH = (L.ext[4].x0 + L.ext[4].x1) / 2, cCL = (L.ext[6].x0 + L.ext[6].x1) / 2;
   const oh = { x0: cOH - wOH / 2, x1: cOH + wOH / 2 };
-  const x0 = Math.max(cCL - wCL / 2, oh.x1 + 14);
+  const x0 = Math.max(cCL - wCL / 2, oh.x1 + 10);
   return { oh, cl: { x0, x1: x0 + wCL } };
 }
 function drawChip(segs, box, col, pop, a) {
   if (a <= 0) return;
-  const cx = (box.x0 + box.x1) / 2, w = box.x1 - box.x0, h = 38, cy = EQ.chipY - 9, s = 1 + 0.14 * pop;
+  const cx = (box.x0 + box.x1) / 2, w = box.x1 - box.x0, h = 38, cy = EQ.chipY - 9, s = 1 + 0.08 * pop;
   ctx.save(); ctx.globalAlpha *= a; ctx.translate(cx, cy); ctx.scale(s, s);
   roundRect(-w / 2, -h / 2, w, h, 12);
   ctx.fillStyle = Kit.rgba(col, 0.08 + 0.12 * pop); ctx.fill();
   ctx.strokeStyle = Kit.rgba(col, 0.65); ctx.lineWidth = 2; ctx.stroke();
-  drawChem(segs, 0, 10, 28, { align: 'center', weight: 600 });
+  drawChem(segs, 0, 11, 30, { align: 'center', weight: 600 });
   ctx.restore();
 }
 function drawEquation(t, A) {

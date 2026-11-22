@@ -1,0 +1,21 @@
+{
+  "id": "18",
+  "slug": "18-apical-periodontitis",
+  "title": "Apical periodontitis: can the X-ray see it?",
+  "style": "Radiograph time-lapse",
+  "topic": "Periapical bone loss from canal bacteria can be under way while a 2-D PA still looks normal; CBCT and histology find more lesions.",
+  "duration": 28.0,
+  "claims": [
+    {"claim": "No bacteria, no lesion (germ-free rats): exposed pulps without bacteria did not form periapical lesions", "source": "Kakehashi et al., Oral Surg Oral Med Oral Pathol 1965;20:340-9 (PMID 14342926)"},
+    {"claim": "The immune response drives bone resorption: macrophages and T cells, then IL-1β, TNF-α and PGE₂", "source": "Stashenko et al., J Endod 1992;18:422-6 (PMID 9796508); Nair, Crit Rev Oral Biol Med 2004;15:348-81 (PMID 15574679)"},
+    {"claim": "RANKL : OPG ratio rises and osteoclasts resorb periapical bone", "source": "Kawashima et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2007;103:707-11 (PMID 17336108)"},
+    {"claim": "Bone is being lost, but the PA can still look normal (small lesion confined to cancellous bone)", "source": "Gao et al., J Endod 2010;36:1404-9 (PMID 20647106); Kanagasingam et al., Int Endod J 2017;50:417-26 (PMID 27063209)"},
+    {"claim": "Early, subtle sign on the PA: apical PDL widening / broken lamina dura", "source": "Ørstavik et al., Endod Dent Traumatol 1986;2:20-34 (PMID 3457698)"},
+    {"claim": "Much clearer once the cortex is involved (classic cadaver study, bur-made defects)", "source": "Bender & Seltzer, JADA 1961;62:152-60, reprinted J Endod 2003;29:702-6 (PMID 14651274)"},
+    {"claim": "Digital PAs: lesion size predicts detection better than cortical involvement", "source": "Chang et al., J Endod 2020;46:496-501 (PMID 32057449)"},
+    {"claim": "83 dog roots, histology as reference: AP diagnosed in 93% by histology, 84% by CBCT, 71% by PA; the gap is AP missed on PA", "source": "de Paula-Silva et al., J Endod 2009;35:1009-12 (PMID 19567324)"},
+    {"claim": "PA stays first-line; limited-FOV CBCT if signs are contradictory", "source": "AAE & AAOMR Joint Position Statement, Oral Surg Oral Med Oral Pathol Oral Radiol 2015;120:508-12 (PMID 26346911)"},
+    {"claim": "Healing also shows late on radiographs: review at ≥ 1 yr, up to 4 yrs", "source": "Ørstavik, Int Endod J 1996;29:150-5 (PMID 9206419)"}
+  ],
+  "caption": "A normal PA doesn't mean no lesion.\n\nCanal bacteria trigger the host response: immune cells, IL-1β/TNF-α/PGE₂ and a rising RANKL:OPG ratio drive osteoclastic bone loss.\nA small lesion in cancellous bone can stay quiet on a 2-D film. PDL widening may be the first hint; the radiolucency gets much clearer as it grows and reaches the cortex.\n83 dog roots vs histology: PA 71%, CBCT 84%, histology 93%.\nPA stays first-line; consider limited-FOV CBCT when signs don't add up.\n\nRefs: de Paula-Silva 2009, J Endod; Chang 2020, J Endod; AAE/AAOMR 2015 position statement\nAnimation is schematic, not to scale.\n\n#endodontics #endo #dentistry #apicalperiodontitis #CBCT #dentalradiology #rootcanal"
+}

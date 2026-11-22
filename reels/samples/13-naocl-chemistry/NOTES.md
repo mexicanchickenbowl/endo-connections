@@ -141,6 +141,14 @@ interval is implied.** The displayed C is eased over ~0.15 s so nothing on scree
   clipped. Answer box spacing.
 - v3: lens crossfade between the reactions and the depletion phase cleaned up. Final render at 24.0 s.
 - v4: independent science and design review applied (see below). Final render at 27.5 s.
+- Final QA: checked 30+ stills across the timeline (hook, every reaction, transitions, end hold, loop) with the safe-area
+  overlay. No clipping, missing glyphs or no-go-zone text was found, and all on-screen claims were checked against this file
+  (PMIDs 12238801, 35338652, 20728727, 6964523, 20812947, 30019752, 24916092 and 20850673 re-verified on PubMed). Fixed two
+  must-read labels that were below SPEC's 30 px minimum. (1) The persistent "used up" chips (OH⁻ ↓↓, free chlorine ↓) are
+  now 30 px, up from 28. To keep the popped chip clear of the right button column, chip padding went from 26 to 22, the gap
+  between chips from 14 to 10 and the arrival pop from ×1.14 to ×1.08. The static chip right edge is x ≈ 939 and the popped
+  edge is ≤ 950. (2) The in-lens "glycerol" label is now 30 px, up from 28, and was nudged 5 px right to keep its margin
+  from the lens rim. The video was re-rendered at 27.5 s with the poster still at 25.4 s. gallery `meta.json` was added.
 
 ## Review changes (v4)
 **Science**

@@ -33,7 +33,7 @@ says there was no unwinding first. The hook names this as one of two mechanisms 
 | 14.55 | | **Fracture** (N = 741, illustrative): hot frozen beat (0.2 s), burst ring (5 px, r → 122), both fracture faces bright, shank spins down and retracts 130 px, status STOP, "■ SEPARATED", the trace goes flat, dimples fill ~90 % of the face (OVERLOAD) |
 | 14.45–17.75 | **Then: sudden fracture, / often without warning** | "FRACTURE AT N = 741\*" tag (backing cleared) with "\*toy model · values illustrative" under it. Note (36 px): "no unwinding first, / unlike many torsional failures" |
 | 17.75–21.62 | **EVERY TURN IN A CURVE / SPENDS [FATIGUE LIFE]\*** (92 px; inverse block painted after the bloom) + 24 px "\*above ~0.7% strain (fatigue limit) · Cheung & Darvell IEJ 2007" | Displays dim to 70 % |
-| 21.62–21.98 | (power-off) | Screen collapses to a line, then the line shrinks toward a dot; frame 0 picks up at the same short line |
+| 21.62–21.98 | (power-off; the takeaway stays on screen and collapses with it) | Screen collapses to a line, then the line shrinks toward a dot; frame 0 picks up at the same short line |
 
 Every caption stays fully visible for at least `Kit.readSecs` (computed: hook 2.78 s vs 2.62; scene 2 2.98 vs 2.62;
 scene 3 3.18 vs 2.92; scene 4 3.33 vs 2.92; scene 5 2.78 vs 2.62; takeaway 3.55 vs 3.22).
@@ -220,6 +220,14 @@ scene 3 3.18 vs 2.92; scene 4 3.33 vs 2.92; scene 5 2.78 vs 2.62; takeaway 3.55 
   - The FRACTURE tag is now outlined for legibility.
   - Poster moved to 16.4 s.
 - v5 (independent science + design review). See "Review changes" below.
+- v6 (Final QA, fresh-eyes pass):
+  - The takeaway caption vanished at 21.63 s, a few frames before the power-off squash finished (empty caption band
+    while the screen collapsed). It is now held to the end (t1 = DUR) and collapses with the screen.
+  - The section/fractography inset shrank ~12 % and its labels slid right as the takeaway dimmed the displays (its
+    radius was scaled by the dim factor). Size now follows the reveal only; the dim affects brightness only.
+  - Re-checked on PubMed: Cheung & Darvell 2007 Part 1 abstract states "A fatigue limit was present at about 0.7%
+    strain" (PMID 17532775); other on-screen sources (PMIDs 9220735, 17511786, 17889692, 16218972, 11199711,
+    16410072, 10530246) match NOTES. Video re-rendered; gallery metadata in meta.json.
 
 ## Review changes
 Science:

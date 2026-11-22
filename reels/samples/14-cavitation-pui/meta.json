@@ -1,0 +1,51 @@
+{
+  "id": "14",
+  "slug": "14-cavitation-pui",
+  "title": "Ultrasonic activation: streaming vs cavitation",
+  "style": "Simulated high-speed shadowgraph",
+  "topic": "How an ultrasonic file moves irrigant: steady acoustic streaming is always on; transient cavitation adds bubbles, but only in patches.",
+  "duration": 19.5,
+  "claims": [
+    {
+      "claim": "Ultrasonic files used for irrigant activation oscillate at ~30 kHz",
+      "source": "Boutsioukis et al., Int Endod J 2022;55:938-949 (PMID 35762040); Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652)"
+    },
+    {
+      "claim": "Low power (tip amplitude ≈ 25 µm, illustrative): acoustic streaming, tracers loop in steady eddies (mean-flow pattern schematic)",
+      "source": "Boutsioukis et al., Int Endod J 2022;55:938-949 (PMID 35762040); Malki et al., J Endod 2012;38:657-661 (PMID 22515896)"
+    },
+    {
+      "claim": "Cavitation is detectable even at low power settings",
+      "source": "Macedo et al., Ultrason Sonochem 2014;21:324-335 (PMID 23735893)"
+    },
+    {
+      "claim": "High power (≈ 75 µm, illustrative): streaming speeds up; bubbles grow, then implode (soft tip cloud, crisp antinode collapses)",
+      "source": "Macedo et al., Ultrason Sonochem 2014;21:324-335 (PMID 23735893); steady jet speed ∝ A² per Boutsioukis et al., Int Endod J 2022;55:938-949 (PMID 35762040)"
+    },
+    {
+      "claim": "ROI ×3: near-wall bubble collapses with a re-entrant micro-jet toward the wall (schematic; not imaged in root canals)",
+      "source": "Ohl et al., Biophys J 2006;91:4285-4295 (PMID 16950843)"
+    },
+    {
+      "claim": "v = 2π·f·A ≈ 14 m/s (f = 30 kHz, A = 75 µm)",
+      "source": "Toy model / schematic: order-of-magnitude calculation, 2π × 30,000 s⁻¹ × 75 × 10⁻⁶ m = 14.1 m/s"
+    },
+    {
+      "claim": "Δp ≈ ½ρv² ≈ 100 kPa ≈ 1 atm, about the size of the pressure swing near the tip; inertial term as large or larger",
+      "source": "Toy model / schematic: Bernoulli estimate ½ × 1000 × 14.1² ≈ 100 kPa; oscillatory pressure dominates (Verhaagen et al., J Acoust Soc Am 2014;135:1717-1730, PMID 25234972)"
+    },
+    {
+      "claim": "Local pressure near the tip can reach water's vapour pressure (2–6 kPa at 20–37 °C), so bubbles form",
+      "source": "Toy model / schematic: order of magnitude only; steam-table vapour pressure 2.34 kPa (20 °C) and 6.28 kPa (37 °C)"
+    },
+    {
+      "claim": "Takeaway: streaming is always on",
+      "source": "Boutsioukis & Arias-Moliz, Int Endod J 2022;55 Suppl 3:588-612 (PMID 35338652); Verhaagen et al., J Acoust Soc Am 2014;135:1717-1730 (PMID 25234972)"
+    },
+    {
+      "claim": "Takeaway: cavitation is real, but patchy (tip · antinodes · walls · ↑ with amplitude)",
+      "source": "Macedo et al., J Endod 2014;40:580-583 (PMID 24666916); Macedo et al., Ultrason Sonochem 2014;21:324-335 (PMID 23735893); Boutsioukis et al., Int Endod J 2013;46:1046-1055 (PMID 23521118); Vyas et al., PLoS One 2016;11:e0149804 (PMID 26934340, scaler tips)"
+    }
+  ],
+  "caption": "Streaming or cavitation? A simulated 1,000,000 fps look at ultrasonically activated irrigation (UAI).\nAcoustic streaming is always on, and it speeds up as tip amplitude rises.\nCavitation is real but patchy: tip cloud, antinodes, near the walls, more with amplitude.\nThe wall micro-jet is general bubble physics, not yet imaged inside a root canal. And UAI has not been shown to improve healing vs syringe irrigation (Căpută 2019).\nRefs: Macedo 2014, Ultrason Sonochem; Boutsioukis 2022, Int Endod J; Ohl 2006, Biophys J; Căpută 2019, J Endod\nSchematic animation, values illustrative.\n#endodontics #endo #dentistry #rootcanal #irrigation #ultrasonicactivation #endoresident"
+}

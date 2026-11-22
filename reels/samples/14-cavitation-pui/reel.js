@@ -920,8 +920,12 @@
       if (t < TL.loop) drawTakeaway(seg(t, TL.take, TL.take + 0.25, ease.out));
       else { // loop seam: the takeaway card shrinks into the hook card in place (slide change on the same card)
         ctx.globalAlpha = 1;
-        panel(64, 352, 952, lerp(640, HOOK_H, seg(t, TL.loop, DUR - 0.05, ease.inOut)));
+        const ph = lerp(640, HOOK_H, seg(t, TL.loop, DUR - 0.05, ease.inOut));
+        panel(64, 352, 952, ph);
+        // keep the fading takeaway text inside the shrinking card (its source line used to spill below the border)
+        ctx.save(); ctx.beginPath(); ctx.rect(64, 352, 952, ph - 4); ctx.clip();
         drawTakeaway(1 - seg(t, TL.loop, TL.loop + 0.15), false);
+        ctx.restore();
         drawHook(seg(t, DUR - 0.2, DUR - 0.02), false);
       }
     },

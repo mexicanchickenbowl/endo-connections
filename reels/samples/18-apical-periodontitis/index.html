@@ -295,6 +295,8 @@ function calloutLabel(c, s, px, py, lx, ly, a, col = AMBER) {
   c.save(); c.globalAlpha = a;
   c.font = `600 30px ${SANS}`;
   const w = c.measureText(s).width + 28;
+  const maxX = F.x + FILM.w * F.s - 12;              // keep the pill inside the film's right edge
+  if (lx - 6 + w > maxX) lx = maxX - w + 6;
   c.strokeStyle = col; c.lineWidth = 2;
   c.beginPath(); c.moveTo(px, py); c.lineTo(lx, ly - 4); c.stroke();
   c.beginPath(); c.arc(px, py, 4, 0, Math.PI * 2); c.fillStyle = col; c.fill();
