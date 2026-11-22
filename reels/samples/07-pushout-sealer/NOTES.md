@@ -39,7 +39,7 @@ Compare within a study, not across studies.** and **Clinical relevance: unproven
 |---|---|---|
 | 0.00–1.66 | Title **PUSH-OUT TEST** + **What does the MPa actually measure?** at full opacity from frame 0 (persistent header, identical on every frame) · "SYSTEM READY · SPECIMEN LOADED" (decorative) | HUD panels boot (0–0.6). The root fades in and a teal scan line reveals the filled canal (0.35–1.5). Label "filled canal / sealer + gutta-percha" (1.0–2.9). Plot shows a dashed ghost of the rising curve, a pulsing "? N" where the peak will be, and **PEAK FORCE → ? MPa** |
 | 1.78–4.42 | **▸ 1 mm slice of filled root** | Root slides left. Cut planes sweep (2.0–2.75). "1 mm" dimension. Pieces separate (2.85). The slice lifts into a macro 3/4 view (3.1–4.0). DENTIN / SEALER / GP CORE leaders and a "1 mm" wall dimension (3.9–4.78). Root pieces dim to 15 % so the labels stand clear |
-| 4.66–7.60 | **▸ Push apical → coronal (toward wider end)** | Slice tumbles forward through face-on to edge-on, coronal face down (4.78–5.5). Tag **FLIPPED: APICAL UP** (4.95–7.45). Cross-fade to SECTION A–A. Jig rises. Legend, APICAL/CORONAL labels, SUPPORT JIG. Plunger jogs down (5.75–6.75, status JOG). PLUNGER "Ø < canal Ø" |
+| 4.66–7.60 | **▸ Push apical → coronal (toward wider end)** | Slice tumbles forward through face-on to edge-on, coronal face down (4.78–5.5). Tag **FLIPPED: APICAL UP** (4.95–7.45). Cross-fade to SECTION A–A. Jig rises. Legend, APICAL/CORONAL labels, SUPPORT JIG. Plunger jogs down (5.75–6.75, status JOG). PLUNGER "Ø < canal Ø" (6.3–8.9, appears once the tip has passed its leader point) |
 | 6.80 | | Contact, status RUN, amber `SIM ×10` chip |
 | 7.84–10.88 | **▸ Force climbs… then drops at debond** | Live FORCE / DISPL. readouts, "real t" in the RATE box. Curve draws with a crosshair over the ghost. F arrow. Shear glow, edge-weighted. GP indents under the plunger |
 | 8.96 | | **Peak 8.03 N** (illustrative): crack, DEBOND tag, status DEBOND, plot + FORCE brackets flash red (0.3 s), "F max 8.03 N", "debond", "failure load = peak · real curves vary" |
@@ -157,6 +157,12 @@ sequentially and never overlap.
     - Chen 2013 and Soares CJ et al., Dent Mater 2008;24(10):1405-11, PMID 18420265, doi:10.1016/j.dental.2008.03.004
       (FEA: interfacial stress is not uniform, so F/A is a nominal mean). The shear glow is drawn brighter at the
       loaded and supported edges for this reason.
+    - "Interlock" = micromechanical retention (sealer tags, wall irregularities). The line lists contributions the test
+      cannot separate; it does not rank them. Nuance: tubule-tag depth has not correlated with push-out values in
+      several studies (De-Deus G et al., Eur Endod J 2017;2(1):1-5, PMID 33403329, doi:10.5152/eej.2017.16059, AH Plus;
+      Tedesco M et al., Braz Dent J 2019;30(6):555-62, PMID 31800749, doi:10.1590/0103-6440201902766; Deniz Sungur 2016:
+      "tubule penetration has limited effect on bond strength"), so the share
+      from interlock is uncertain and may be small.
 13. **Post-debond behaviour.** In a displacement-controlled test the crosshead cannot jump. After the peak the plug moves
     only as far as the crosshead travels (0.08 mm past peak, drawn ×4 and labelled "slip exaggerated"). The plunger then
     lifts off, and the low friction tail on the curve (about 1–2 N, toy model) is what holds the partly extruded plug.
@@ -255,3 +261,21 @@ Design:
   tubules (no wood grain). The plot and FORCE brackets flash red once at debond. The F arrow fades out before the
   DEBOND tag appears. The τ box pulse was reduced to 3 % so it stays inside the viewport.
 
+
+## Final QA (fresh-eyes pass)
+- Rendered 16 evenly spaced stills plus t = 0, 21.85, 21.95 and spot times (--safe). No tofu, NaN or clipped text.
+  Everything that must be read stays inside the safe area. The readouts, plot and card stop at x 950, clear of the
+  button column. The hook reads at t = 0, the card is held 18.3–21.8 and the loop returns to the header-only frame 0.
+- Fixed: the PLUNGER / "Ø < canal Ø" leader faded in at 6.0 s while the jogging plunger tip was still above it, so the
+  dot pointed at empty space (about 85 px below the tip at 6.2 s). The label now fades in over 6.3–6.5, after the tip
+  has passed, and its tip is clamped to the shank (min(700, tipY − 12)). It is held to 8.6 (fade 8.6–8.9), so it is
+  fully visible for 2.1 s, about Kit.readSecs (2.3 s for 5 tokens). It does not touch the F arrow or the DEBOND tag.
+- Fixed: the FLIPPED: APICAL UP tag's left edge overlapped the plunger collet by about 4 px (6.3–7.45 s). The tag is
+  now right-aligned to the status chip (x = 1004 − w, w = text + 60), which leaves a 6 px gap.
+- Science: re-checked Collares 2016, Brichko 2018, Pane 2013, Moinzadeh 2015 and Goracci 2005 abstracts against the
+  on-screen wording, and re-checked the arithmetic (A = 2.734 mm², τ = 8.03 / 2.734 = 2.94 MPa). Added a source and
+  nuance note for "interlock" in item 12. No on-screen text changed.
+- Left as is (cosmetic): during the card hold, the left edges of the FORCE readout and plot labels (x 80–95) show very
+  faintly through the 0.88 overlay. The 24 px "apical/coronal" frustum labels are secondary: the section view and
+  "(radii)" line carry the meaning.
+- Video re-rendered once at the end. Poster stays at t = 9.3 s (DEBOND frame, title inside the 3:4 crop).

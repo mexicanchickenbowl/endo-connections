@@ -1,0 +1,51 @@
+{
+  "id": "05",
+  "slug": "05-fiber-post-stress",
+  "title": "Metal vs fiber post: where the stress goes",
+  "style": "FEA software UI",
+  "topic": "Stiff metal posts load the post–dentin interface, fiber posts load cervical dentin; ferrule and remaining dentin matter most.",
+  "duration": 22.0,
+  "claims": [
+    {
+      "claim": "Load case 1: 100 N at 45° on the palatal surface (model setting)",
+      "source": "Nokar S et al., J Dent (Tehran) 2018;15:69-78 (PMID 29971124); Asmussen E et al., J Prosthet Dent 2005;94:321-9 (PMID 16198168)"
+    },
+    {
+      "claim": "Elastic modulus (GPa, approx.): dentin 18–25, fiber post 20–40 (axial), gold ~90, titanium ~110, steel/zirconia ~200; metal/zirconia ≈ 4–11× dentin",
+      "source": "Kinney JH et al., Crit Rev Oral Biol Med 2003;14:13-29 (PMID 12764017); Nokar S et al., J Dent (Tehran) 2018;15:69-78 (PMID 29971124)"
+    },
+    {
+      "claim": "Metal post: peak dentin von Mises stress along the post–dentin interface",
+      "source": "Pegoretti A et al., Biomaterials 2002;23:2667-82 (PMID 12059016); Adanir N, Belli S, Eur J Dent 2007;1:67-71 (PMID 19212479)"
+    },
+    {
+      "claim": "Fiber post: peak in cervical dentin, like natural teeth",
+      "source": "Pegoretti A et al., Biomaterials 2002;23:2667-82 (PMID 12059016); Nokar S et al., J Dent (Tehran) 2018;15:69-78 (PMID 29971124)"
+    },
+    {
+      "claim": "Stress maps are schematic (not a solve), relative scale, contrast exaggerated; real FEA differences are modest and studies disagree",
+      "source": "Toy model / schematic: analytic fields shaped after Pegoretti 2002, Adanir & Belli 2007 and Nokar 2018; disagreement: Asmussen E et al., J Prosthet Dent 2005;94:321-9 (PMID 16198168), Nokar 2018 (PMID 29971124)"
+    },
+    {
+      "claim": "Lab overload: metal post → root fracture below the crest, often non-restorable; fiber post → core/cervical failure above the crest, often restorable (crack paths illustrative)",
+      "source": "Akkayan B, Gülmez T, J Prosthet Dent 2002;87:431-7 (PMID 12011860); Fokkinga WA et al., Int J Prosthodont 2004;17:476-82 (PMID 15382786)"
+    },
+    {
+      "claim": "Cast posts often fail at higher loads, but less favourably",
+      "source": "Fokkinga WA et al., Int J Prosthodont 2004;17:476-82 (PMID 15382786)"
+    },
+    {
+      "claim": "Caveat: clinical studies show similar root-fracture rates for metal and fiber posts",
+      "source": "Figueiredo FE et al., J Endod 2015;41:309-16 (PMID 25459568); Martins MD et al., J Dent 2021;112:103750 (PMID 34274439)"
+    },
+    {
+      "claim": "A post retains the core; it doesn't reinforce the root",
+      "source": "Schwartz RS, Robbins JW, J Endod 2004;30:289-301 (PMID 15107639); Naumann M et al., J Endod 2018;44:212-219 (PMID 29229457)"
+    },
+    {
+      "claim": "Ferrule + remaining dentin matter most; with a 1.5–2 mm ferrule, post type matters less; clinical evidence limited",
+      "source": "Juloski J et al., J Endod 2012;38:11-9 (PMID 22152612); Naumann M et al., J Endod 2018;44:212-219 (PMID 29229457); Martins MD et al., J Dent 2021;112:103750 (PMID 34274439)"
+    }
+  ],
+  "caption": "Metal vs fiber post: where does the stress go?\n\nFEA models: stiff metal posts (≈4–11× dentin's modulus) concentrate dentin stress along the post–dentin interface; fiber posts load cervical dentin, like a natural tooth.\nLab overload: metal → more root fractures; fiber → more restorable failures. Clinically, root-fracture rates are similar.\nA post retains the core; it doesn't reinforce the root. Ferrule + remaining dentin matter most.\n\nRefs: Pegoretti 2002, Biomaterials; Fokkinga 2004, Int J Prosthodont; Figueiredo 2015, J Endod; Juloski 2012, J Endod\nAnimation is schematic, not an FEA solve.\n\n#endodontics #endo #dentistry #fiberpost #ferrule #prosthodontics #restorativedentistry"
+}

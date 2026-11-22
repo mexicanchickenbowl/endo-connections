@@ -812,7 +812,9 @@
       ctx.restore();
       const lab = { font: `22px ${FH}`, color: C.cyan, align: 'center', alpha: sl * 0.9 };
       text(ctx, 'B', pp(-5.0, 0)[0], PY0 + 30, lab); text(ctx, 'L', pp(5.0, 0)[0], PY0 + 30, lab);
-      text(ctx, 'M', PX0, pp(0, -3.45)[1] - 8, lab); text(ctx, 'D', PX0, pp(0, 3.45)[1] + 24, lab);
+      // M / D step aside while the REV C revision clouds sit over the ridges (they would collide)
+      const labMD = { ...lab, alpha: lab.alpha * (1 - Math.min(seg(t, C0 + 0.12, C0 + 0.3), 1 - seg(t, C0 + 1.7, C0 + 1.95))) };
+      text(ctx, 'M', PX0, pp(0, -3.45)[1] - 8, labMD); text(ctx, 'D', PX0, pp(0, 3.45)[1] + 24, labMD);
     }
     ctx.restore();
 
@@ -942,7 +944,7 @@
     const br = seg(t, F0 + 0.2, F0 + 0.6, ease.inOut);
     if (br > 0) {
       ctx.save(); ctx.strokeStyle = C.mint; ctx.lineWidth = 2;
-      const bx0 = cxD - 50, by0 = lyD - 26;
+      const bx0 = cxD - 46, by0 = lyD - 26; // left edge centred in the gap between the "37%" and "211%*" labels
       rectPerim(bx0, by0, x1 - 4 - bx0, base + 6 - by0, br); ctx.restore();
     }
     ctx.restore();

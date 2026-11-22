@@ -541,7 +541,8 @@
     ctx.restore();
     const ill = fadeWin(t, crackWin(p.kind)[0], T.dialog[1], 0.3);
     if (ill < 1) text('2-D · not to scale', ox + 82, VB - 22, 22, { color: '#9aa4ae', alpha: 0.95 * (1 - ill) });
-    if (ill > 0) text('illustrative crack path', ox + 82, VB - 22, 22, { color: '#d6dde4', alpha: ill });
+    // 18 chars like "2-D · not to scale": panel B's copy must end left of x 960 (Reels button column)
+    if (ill > 0) text('illustrative crack', ox + 82, VB - 22, 22, { color: '#d6dde4', alpha: ill });
     // fixed-support symbols along the bone sides
     ctx.save(); ctx.strokeStyle = 'rgba(160,172,186,0.55)'; ctx.lineWidth = 1.5;
     for (let k = 0; k < 6; k++) {
@@ -643,15 +644,17 @@
       }
       ctx.restore();
     }
-    // label above-left of the crown on panel A (free space; no crack there), leader down to the labial collar
+    // label above-left of the crown on panel A (free space; no crack there), leader down to the labial collar.
+    // Fades out with the dialog's arrival (its box sits partly left of the dialog edge and would peek out).
+    const la = a * (1 - seg(t, T.dialog[0], T.dialog[1], ease.smooth)); if (la <= 0) return;
     const p = PANELS[0], x0 = p.x0;
     const lx = x0 + 16, ly = CT + LY(1.9), tx = x0 + LX(-2.15), ty = CT + LY(9.55);
-    ctx.save(); ctx.globalAlpha = a; ctx.strokeStyle = C.amber; ctx.lineWidth = 2;
+    ctx.save(); ctx.globalAlpha = la; ctx.strokeStyle = C.amber; ctx.lineWidth = 2;
     ctx.beginPath(); ctx.moveTo(lx + 70, ly + 14); ctx.lineTo(tx, ty); ctx.stroke();
     ctx.fillStyle = C.amber; ctx.beginPath(); ctx.arc(tx, ty, 4.5, 0, Math.PI * 2); ctx.fill();
     rrect(lx - 7, ly - 30, 148, 44, 7); ctx.fillStyle = 'rgba(10,11,13,0.9)'; ctx.fill(); ctx.stroke();
     ctx.restore();
-    text('ferrule', lx + 2, ly + 2, 32, { weight: 700, color: C.amber, alpha: a });
+    text('ferrule', lx + 2, ly + 2, 32, { weight: 700, color: C.amber, alpha: la });
   }
 
   function drawCenter(t) {

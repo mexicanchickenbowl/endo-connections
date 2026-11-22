@@ -609,9 +609,9 @@
       ln(232, y1 - 1, cx - ow - 8, y1 - 1, C.teal, 2, la); T('CORONAL', 84, y1 + 9, { font: F(600, 30), color: C.teal, alpha: la });
       arrow(150, y0 + 26, 150, y1 - 28, C.amber, 3, 14, la);
     }
-    const pa = seg(t, 6.0, 6.3) * (1 - seg(t, 8.0, 8.3));
+    const pa = seg(t, 6.3, 6.5) * (1 - seg(t, 8.6, 8.9)); // appears once the jogging plunger tip has passed y 700
     if (pa > 0) {
-      leader([[700, 640], [660, 640], [cx + rp + 2, 700]], C.teal, pa);
+      leader([[700, 640], [660, 640], [cx + rp + 2, Math.min(700, tipY - 12)]], C.teal, pa);
       T('PLUNGER', 712, 650, { font: F(600, 30), color: C.txt, alpha: pa });
       T('Ø < canal Ø', 712, 690, { font: F(500, 30), color: C.teal, alpha: pa });
     }
@@ -650,7 +650,7 @@
   function drawFlipTag(t) {
     const a = seg(t, 4.95, 5.25) * (1 - seg(t, 7.2, 7.45));
     if (a <= 0) return;
-    const fnt = F(700, 30), s = 'FLIPPED: APICAL UP', w = tw(s, fnt) + 66, x = 1000 - w, y = 560;
+    const fnt = F(700, 30), s = 'FLIPPED: APICAL UP', w = tw(s, fnt) + 60, x = 1004 - w, y = 560; // clears the plunger collet (x <= 614)
     ctx.save(); ctx.globalAlpha *= a;
     ctx.fillStyle = '#10201e'; ctx.strokeStyle = C.teal; ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(x, y, w, 46, 6); ctx.fill(); ctx.stroke();
     // flip glyph: half-turn arrow

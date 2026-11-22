@@ -1,0 +1,51 @@
+{
+  "id": "07",
+  "slug": "07-pushout-sealer",
+  "title": "Push-out test: what the MPa measures",
+  "style": "Lab instrument HUD",
+  "topic": "How a push-out test turns peak force into MPa, and why that number is a lab-specific dislodgement stress, not a clinical bond.",
+  "duration": 22.0,
+  "claims": [
+    {
+      "claim": "1 mm slice of filled root (dentin, sealer, GP core)",
+      "source": "Pane ES et al., J Endod 2013;39(5):669-73 (PMID 23611388); Sagsen B et al., Int Endod J 2011;44(12):1088-91 (PMID 21895700)"
+    },
+    {
+      "claim": "Push apical → coronal (toward wider end), plunger Ø < canal Ø",
+      "source": "Deniz Sungur D et al., Restor Dent Endod 2016;41(2):114-20 (PMID 27200279); Pane ES et al., J Endod 2013;39(5):669-73 (PMID 23611388); Chen WP et al., J Endod 2013;39(2):283-7 (PMID 23321247)"
+    },
+    {
+      "claim": "Crosshead 0.50 mm/min, shown time-lapsed (SIM ×10)",
+      "source": "Al-Haddad AY et al., Int J Biomater 2018:1731857 (PMID 30154852); load velocity affects MPa: Collares FM et al., Int Endod J 2016;49(9):836-49 (PMID 26331627)"
+    },
+    {
+      "claim": "Force climbs, then drops at debond; failure load = peak (F max 8.03 N)",
+      "source": "Failure load at the sudden drop: Al-Haddad AY et al., Int J Biomater 2018:1731857 (PMID 30154852). Curve shape and 8.03 N: Toy model / schematic, labelled 'toy model · values illustrative'"
+    },
+    {
+      "claim": "Failure modes: adhesive (sealer–dentin or sealer–GP), cohesive (within sealer, core or dentin), mixed; this specimen mixed",
+      "source": "Al-Haddad AY et al., Int J Biomater 2018:1731857 (PMID 30154852); Gesi A et al., J Endod 2005;31(11):809-13 (PMID 16249724); Ungor M et al., Int Endod J 2006;39(8):643-7 (PMID 16872459). Tiles are schematic"
+    },
+    {
+      "claim": "τ = F / A, A = canal-wall (frustum) area π(R+r)√((R−r)²+h²), nominal",
+      "source": "Geometry (lateral area of a conical frustum); simpler area approximations in use: Deniz Sungur D et al., Restor Dent Endod 2016;41(2):114-20 (PMID 27200279); Al-Haddad AY et al., Int J Biomater 2018:1731857 (PMID 30154852)"
+    },
+    {
+      "claim": "r 0.42 · R 0.45 mm, h 1.00 mm → A 2.73 mm², τ = 2.94 MPa (illustrative)",
+      "source": "Toy model / schematic: illustrative values, within reported GP + sealer ranges (Ungor M et al., Int Endod J 2006;39(8):643-7, PMID 16872459; Jainaen A et al., Int Endod J 2007;40(11):882-90, PMID 17877721; Al-Haddad AY et al., Int J Biomater 2018:1731857, PMID 30154852)"
+    },
+    {
+      "claim": "Mean shear stress to dislodge the filling: adhesion + friction + interlock",
+      "source": "Collares FM et al., Int Endod J 2016;49(9):836-49 (PMID 26331627); Goracci C et al., J Endod 2005;31(8):608-12 (PMID 16044046); Gesi A et al., J Endod 2005;31(11):809-13 (PMID 16249724)"
+    },
+    {
+      "claim": "A lab number: compare within a study, not across studies; slice thickness, root third, core, plunger size, load speed, storage and area formula all shift the MPa",
+      "source": "Brichko J et al., J Endod 2018;44(8):1237-45 (PMID 29935874); Collares FM et al., Int Endod J 2016;49(9):836-49 (PMID 26331627); Pane ES et al., J Endod 2013;39(5):669-73 (PMID 23611388)"
+    },
+    {
+      "claim": "Clinical relevance: unproven; no link to seal or outcomes shown",
+      "source": "Moinzadeh AT et al., Int Endod J 2015;48(2):193-8 (PMID 24749656)"
+    }
+  ],
+  "caption": "What does a push-out MPa actually measure?\n\nA 1 mm slice of filled root is pushed apical → coronal with a plunger narrower than the canal.\nPeak force ÷ canal-wall area = the mean shear stress to dislodge the filling: adhesion + friction + interlock, not pure sealer–dentin bond.\nSlice thickness, root third, core, plunger size and load speed all shift it, so compare within a study, not across studies. No link to seal or outcomes shown.\n\nRefs: Pane 2013, J Endod · Collares 2016, Int Endod J · Brichko 2018, J Endod · Moinzadeh 2015, Int Endod J\nSchematic animation; values illustrative (toy model).\n\n#endodontics #endo #dentistry #rootcanal #dentalmaterials #endoresident #dentalresearch"
+}

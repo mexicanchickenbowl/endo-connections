@@ -37,7 +37,7 @@ The reel walks through an FEA-style workflow, and each step carries one idea:
 | 5.4–6.9 | stress field revealed in dentin (soft front from the load point) | | |
 | 6.0 / 6.9 → 10.9 | MX A pops 6.2, MX B pops 7.1 | RESULTS · von Mises in dentin: METAL "along the post–dentin interface" (full 6.35–10.55), FIBER "cervical dentin, like natural teeth" (full 7.25–10.55; readSecs 2.6 each) | |
 | 10.8–11.3 | load ramps (label → OVERLOAD) | | LOAD CASE 2 · lab-style overload (illustrative) |
-| 11.0–11.9 | metal crack; "below crest" tag 11.7; footer "illustrative crack path" | FAILURE MODE · lab tests: ✕ ROOT FRACTURE / often non-restorable (11.7) | |
+| 11.0–11.9 | metal crack; "below crest" tag 11.7; footer "illustrative crack" | FAILURE MODE · lab tests: ✕ ROOT FRACTURE / often non-restorable (11.7) | |
 | 11.9–12.8 | fiber crack; "above crest" tag 12.6 | ✓ CORE / CERVICAL / often restorable (12.6) | |
 | 13.2–16.8 | | "Caveat — clinical studies: root-fracture rates similar" (full 13.5–16.5 = 3.0 s; readSecs 2.92) | |
 | 15.4–16.0 | ferrule collar outlined amber on both panels, "ferrule" label (panel A) | | |
@@ -60,7 +60,7 @@ All PubMed-indexed. I read the abstracts myself, and the full text where it says
 | **RESULTS · von Mises in dentin. METAL: "along the post–dentin interface"** (MX on the palatal post–dentin interface, cervical/middle third, y ≈ 12.7 mm) | Pegoretti A et al., *Biomaterials* 2002, PMID 12059016 (gold cast post: "greatest stress concentration at the post-dentin interface"); Adanir N, Belli S, *Eur J Dent* 2007;1:67-71, PMID 19212479 (labio-lingual incisor section, 45° load: steel post "greatest stress concentration at the post/dentin interface", followed by Ti, gold); Lanza A et al., *Dent Mater* 2005, PMID 16026666 (very stiff post creates tension/shear zones in dentin and at the interfaces) | No apical hotspot any more: Sorrentino R et al., *Dent Mater* 2007, PMID 17070903 found minimum stress at the apical post and root apex; Nokar 2018 found the concentrations at the cervical root and the cervical/middle-third junction. Stiff posts also concentrate stress *in the post itself* (Coelho 2009, PMID 20019417); the post is not plotted here (result scoped to dentin), which avoids the "red post = post soaks it up" misreading. |
 | **FIBER: "cervical dentin, like natural teeth"** (MX at palatal cervical dentin) | Pegoretti 2002 (glass-fibre post: field "quite similar to that of the natural tooth" except force concentration at the cervical margin); Adanir & Belli 2007 (post with modulus closest to dentin: highest stress at the cervical third); Nokar 2018 (fiber posts: higher concentration between the middle and cervical thirds) | Cervical dentin shows a high band in *both* panels (all FEA models do), just the dominant peak differs. |
 | **"Schematic, not a solve · relative scale, contrast exaggerated"**; colour bar "von Mises (schematic, relative)" | — | Real FEA differences in peak dentin stress between post materials are modest and the direction is disputed: Nokar 2018 (peak radicular-dentin stress 18.0–24.5 MPa across all 12 models; cast posts lowest); Asmussen 2005 (stresses decreased from glass fiber to titanium to zirconia). Summary dock: "Real FEA differences are modest; studies disagree." |
-| **Crack tags "below crest" / "above crest"**; footer "illustrative crack path"; chip "lab-style overload (illustrative)" | — | A linear static FEA cannot predict crack initiation or paths. The crack lines only illustrate the *location class* of lab failure modes. The metal crack now starts at the palatal cervical tension side (where FEA tensile peaks sit) and exits labially below the crest — it no longer implies an apical stress riser at the post tip. |
+| **Crack tags "below crest" / "above crest"**; footer "illustrative crack"; chip "lab-style overload (illustrative)" | — | A linear static FEA cannot predict crack initiation or paths. The crack lines only illustrate the *location class* of lab failure modes. The metal crack now starts at the palatal cervical tension side (where FEA tensile peaks sit) and exits labially below the crest — it no longer implies an apical stress riser at the post tip. |
 | **✕ ROOT FRACTURE: often non-restorable / ✓ CORE / CERVICAL: often restorable** (header "FAILURE MODE · lab tests") | Akkayan B, Gülmez T, *J Prosthet Dent* 2002, PMID 12011860; Fokkinga WA et al., *Int J Prosthodont* 2004, PMID 15382786 (FRC posts significantly more favourable / reparable failures than prefabricated and cast metal posts) | "often" and "lab tests" on purpose. |
 | **"Cast posts often fail at higher loads, but less favourably."** (fine print) | Fokkinga 2004 (custom-cast post systems: higher failure loads than prefabricated FRC; FRC more favourable failure modes) | Prevents the "fiber is stronger" misreading. Sirimai 1999 reported similar (cast strongest, all failures tooth fractures) — not re-verified here, NOTES only. |
 | **"Caveat — clinical studies: root-fracture rates similar"** | Figueiredo FE et al., *J Endod* 2015, PMID 25459568 (7 RCTs + 7 cohort studies: similar root-fracture incidence); Martins MD et al., *J Dent* 2021, PMID 34274439 (RR 0.78, 95% CI 0.41–1.49, NS; GRADE low); Wang X et al., *Quintessence Int* 2019, PMID 30600326 (4 RCTs ≥3 y, teeth with ≤2 walls: no difference in root fracture; fiber higher survival, RR 0.57, high-quality evidence for survival) | "trials" → "studies" (Figueiredo pooled RCTs and cohorts). Post type *within* a class also matters: Figueiredo found prefabricated metal posts had about twice the root-fracture incidence of cast posts, and carbon-fiber about twice that of glass-fiber — hence the panel labels "PREFAB METAL POST" / "GLASS-FIBER POST". |
@@ -93,7 +93,7 @@ Nokar 2018 discussion) — kept in NOTES only to limit on-screen text.
   linear-elastic and isotropic (fiber posts are really orthotropic).
 - **The mesh is real but meaningless**: a variable-density Poisson-disk + Delaunay triangulation (d3.Delaunay). Counts and the quality
   histogram are computed from it, but no solve runs on it. The fake "solver" progress beat was removed.
-- **The crack paths are illustrative** (in-viewport footer "illustrative crack path" during the failure beat).
+- **The crack paths are illustrative** (in-viewport footer "illustrative crack" during the failure beat).
 - **The overload ramp is visual.** No failure loads are shown; the fine print only says cast posts often fail at higher loads.
 
 ## Design rationale
@@ -124,6 +124,13 @@ Nokar 2018 discussion) — kept in NOTES only to limit on-screen text.
   footer to "~4–11×" so it holds across the dentin 18–25 GPa range. Added fiber texture to the fiber post, a bigger mini tooth with a
   ferrule bracket, and a gentle glow on the ferrule.
 - v4 (review round): see "Review changes" below.
+- Final QA (fresh-eyes pass): (1) the in-viewport footer "illustrative crack path" (23 chars) ran to x ≈ 1004 in panel B, i.e. into the
+  Reels button column (x > 960, y > 1100), so "path" would sit under the like/comment buttons; shortened to "illustrative crack"
+  (18 chars, same length as "2-D · not to scale", ends x ≈ 938) in both panels. (2) The panel-A "ferrule" label box (x 73–221) peeked
+  out 11 px left of the result dialog (x ≥ 84) from 16.7 s until the outro; it now fades out with the dialog (16.7–17.1 s). Science re-checked
+  against the abstracts (Figueiredo 2015, Martins 2021, Wang 2019, Fokkinga 2004, Akkayan 2002, Pegoretti 2002, Adanir & Belli 2007,
+  Nokar 2018, Kinney 2003, Juloski 2012, Naumann 2018, Schwartz & Robbins 2004): no on-screen claim changed. Video re-rendered (22.0 s,
+  660 frames), poster unchanged at t = 14.3 s. Gallery metadata in `meta.json`.
 
 ## Review changes (v4, after independent science + design review)
 Science

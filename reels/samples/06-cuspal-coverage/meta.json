@@ -1,0 +1,47 @@
+{
+  "id": "06",
+  "slug": "06-cuspal-coverage",
+  "title": "Why cover the cusps? Cusp flexure after RCT",
+  "style": "Blueprint engineering drawing",
+  "topic": "Losing the marginal ridges, not the endo access, is what lets cusps flex; covering the cusps splints them.",
+  "duration": 25.6,
+  "claims": [
+    {
+      "claim": "Intact tooth: marginal ridges brace the cusps (100% stiffness reference)",
+      "source": "Reeh ES, Messer HH, Douglas WH. J Endod 1989;15(11):512-6 (PMID 2639947)"
+    },
+    {
+      "claim": "Test load F = 111 N (37 N/s for 3 s), maxillary premolars, cervical strain gauges, in vitro",
+      "source": "Reeh ES, Messer HH, Douglas WH. J Endod 1989;15(11):512-6 (PMID 2639947); 111 N derived from 37 N/s × 3 s"
+    },
+    {
+      "claim": "Endo access + RCT with ridges intact: only −5% stiffness (bar B 95%)",
+      "source": "Reeh ES, Messer HH, Douglas WH. J Endod 1989;15(11):512-6 (PMID 2639947)"
+    },
+    {
+      "claim": "MOD cavity, both marginal ridges cut: −63% stiffness (bar C 37%)",
+      "source": "Reeh ES, Messer HH, Douglas WH. J Endod 1989;15(11):512-6 (PMID 2639947)"
+    },
+    {
+      "claim": "Cusps splay more as stiffness falls; delta drawn proportional to 1/stiffness, exaggerated",
+      "source": "Toy model / schematic: deflection not to scale; direction supported by Panitvisai P, Messer HH. J Endod 1995;21(2):57-61 (PMID 7714437)"
+    },
+    {
+      "claim": "Cuspal-coverage cast-gold onlay: stiffness restored, 211% of intact (separate in-vitro series)",
+      "source": "Reeh ES, Douglas WH, Messer HH. J Dent Res 1989;68(11):1540-4 (PMID 2584522)"
+    },
+    {
+      "claim": "Onlay splints the cusps (full occlusal coverage strengthens all cusps)",
+      "source": "Linn J, Messer HH. J Endod 1994;20(10):479-85 (PMID 7714419); in vitro, 36 mandibular molars, gold/amalgam overlays"
+    },
+    {
+      "claim": "6× tooth-loss rate when not crowned after RCT (adjusted HR 6.0, 95% CI 3.2-11.3; 203 teeth; retrospective, any cause, association only)",
+      "source": "Aquilino SA, Caplan DJ. J Prosthet Dent 2002;87(3):256-63 (PMID 11941351)"
+    },
+    {
+      "claim": "Posterior endo tooth with a ridge lost: cover the cusps (onlay or crown)",
+      "source": "Mannocci F et al. ESE position statement. Int Endod J 2021;54(11):1974-81 (PMID 34378217)"
+    }
+  ],
+  "caption": "Why cover the cusps after RCT? Blame the marginal ridges, not the access.\n\nIn vitro (maxillary premolars): access + RCT in an otherwise intact tooth cut cusp stiffness by only ~5%. An MOD prep cut it by ~63%.\nA cast-gold onlay took stiffness above intact (2.11×, separate series).\nClinically, teeth not crowned after RCT were lost at 6× the rate (retrospective, association only).\nPosterior tooth, ridge lost? Cover the cusps: onlay or crown.\n\nRefs: Reeh 1989 (J Endod; J Dent Res) · Linn & Messer 1994 (J Endod) · Aquilino 2002 (J Prosthet Dent) · ESE position statement (Int Endod J 2021)\nAnimation schematic; cusp deflection exaggerated.\n\n#endodontics #endo #dentistry #restorativedentistry #rootcanal #onlay #dentalstudent"
+}
