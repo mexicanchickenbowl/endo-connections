@@ -1,6 +1,6 @@
 # 29 — Internal inflammatory root resorption · layered papercraft / shadowbox
 
-Resorption series 1/5. Silent, 22.4 s, 1080x1920, one 2D canvas (`index.html` + `reel.js`), deterministic `render(t)`.
+Resorption series 1/5. Silent, 22.4 s, 54 must-read words, 1080x1920, one 2D canvas (`index.html` + `reel.js`), deterministic `render(t)`.
 Evidence brief: `RESEARCH.md` (researched + independently fact-checked). Only its section (b) "recommended on-screen
 facts" is on screen, with its wording constraints and its "Do not claim" list. No number is shown.
 
@@ -15,25 +15,27 @@ mid-root; teal paper odontoclasts gather on the bare wall and nibble the canal i
 is pulled out by a paper tab, the threads snap back, the cells curl and drop, and the hole stays exactly as large as
 it was. Labels are paper tabs with a color stripe that matches the piece they name. The radiograph is a film card
 laid over the paper tooth in register (the same cut-outs in gray paper); on the cone shift the film image slides and
-a dashed ghost of the old root outline stays behind.
+a dashed ghost of the lesion stays where it was.
 
 ## Storyboard (timings in seconds)
 | Time | Scene | What moves | Must-read text |
 |---|---|---|---|
-| 0.0–2.4 | Hook | Intact paper tooth, vessels stitched in at the apex; a 5 px dashed "cut line" draws the oval that will be lost (0.05–0.7); the dentin inside it lifts as a flap with a shadow and settles (0.6–1.5) | `Internal resorption` · `dead pulp above, live pulp below` (corner tag `RESORPTION 1/5 · INTERNAL`, `@natebrooksendo`, fine-print label persist) |
-| 2.15–6.3 | Two requirements | Camera pans (layers parallax); pulp layer lifts off the dentin (2.3–2.8, down again 5.9–6.3); necrotic front runs down the coronal pulp to the junction (2.4–3.1), microbe confetti appears; tabs slide in at 2.7 and 2.95, `+` on a paper disc at 3.35 | `NECROTIC, INFECTED PULP — the stimulus` + `VITAL PULP — the blood supply` |
-| 6.3–8.2 | The entry | Zoom to mid-root; predentin strips come off both walls (6.75–7.55); bare dentin edge glints; small teal cells travel up from the apical vessels | `PREDENTIN LOST → DENTIN EXPOSED` (tab at 7.05) |
-| 7.9–10.75 | Clastic cells | Three mirrored pairs of multinucleated cells settle (7.9–8.5) and nibble; canal balloons to the dashed line (8.25–10.6); coral granulation tissue with thread vessels fills it | `ODONTOCLASTS — resorb the dentin` (tab at 8.35) |
-| 10.8–16.3 | Treatment | Zoom out; pulp layer lifted and pulled out by its tab (11.3–12.5); threads snap back (12.3–12.7); cells curl and drop (12.5–13.3); defect stays the same size. Inset card (13.1, after the cells have gone), zoomed on the perforated wall: coral ring marks the perforation and pulses once (13.4), gutta-percha in the apical canal (13.6, unlabeled), calcium silicate cement dropped into the defect and the perforation (13.9), flush with the root surface | `PULP OUT` → `BLOOD SUPPLY CUT` → `RESORPTION STOPS` · `CBCT: PERFORATED?` `CALCIUM SILICATE CEMENT (e.g. MTA)` |
-| 16.4–21.75 | Recognition card (all three signs on screen 18.5–21.75, fully settled 18.95) | Film card slides over the tooth in register (16.55); header 16.75; sign tabs at 17.1 / 17.8 / 18.5, each with its call-out on the film: 1 = two equal coral arrows, 2 = coral tracing of the canal walls that ends in a stop mark at the lesion margin, 3 = chip with a paper double arrow on the film's top edge. Only after tab 3 has landed: the film image slides 54 px (19.1–19.8, back 20.6–21.2), a dashed ghost of the old root outline stays, the oval stays on the canal | `Internal resorption` · `classic X-ray signs` · `1 Symmetric, well-defined ballooning` · `2 Canal outline lost in the lesion` · `3 Cone shift: stays on canal` |
-| 21.7–22.4 | Loop | Tabs slide out left, film card slides out right as a rigid card (21.75–22.1), fine print flips back (21.78), camera returns to the hook framing (21.7–22.1); then a 0.3 s cross-fade (22.1–22.4) that only brings the pulp and the title back over a coinciding tooth outline | — |
+| 0.0–2.4 | Hook | Slow push-in from frame 0 (0.90 -> 0.93, layers slide); vessels stitched in at the apex; a 5 px dashed "cut line" draws the oval that will be lost (0.05–0.7); the dentin inside it lifts as a flap (12 x 20 px, deep shadow) and settles (0.6–1.5); from 1.5 the coronal pulp starts to turn gray (necrotic front, reaches the junction at 3.1) | `Internal resorption` · `necrotic pulp coronal, vital pulp apical` (corner tag `RESORPTION 1/5 · INTERNAL`, `@natebrooksendo`, fine print `inflammatory type · schematic`) |
+| 2.3–6.7 | Two requirements | Title and sub-tab slide out to the right as rigid, opaque paper (2.4–2.77); camera pans (2.3–3.05, layers parallax); pulp layer lifts off the dentin (2.45–2.95, down again 6.35–6.75); microbe confetti; tabs slide in at 2.6 and 2.85, a cream `+` on a charcoal disc at 3.3 | `NECROTIC, INFECTED PULP — the stimulus` + `VITAL PULP — the blood supply` |
+| 6.75–8.5 | The entry | Zoom to mid-root; one long mauve predentin strip per side is peeled from its coronal end, curls about 20 px off the wall and drops (left 7.2–8.0, right 7.42–8.22; opaque until the last fifth); the bare dentin edge glints white until the first clasts have landed (to 9.35); small teal cells travel up from the apical vessels | `PREDENTIN LOST → DENTIN EXPOSED` (tab at 7.45) |
+| 8.25–10.8 | Clastic cells | Three mirrored pairs of multinucleated cells settle (8.25–8.9) and nibble; canal balloons to the dashed line (8.55–10.65); coral granulation tissue with thread vessels fills it | `ODONTOCLASTS` (tab at 8.65) |
+| 10.85–16.3 | Treatment | Zoom out (10.85–11.6) while the pulp layer is lifted (10.9–11.25), then pulled out by its tab (11.25–11.95). Only then the cut: a coral paper ring lands on the vessels at the apex and pulses once (11.92–12.47) and the two 6 px red threads snap back about 130 px (12.0–12.4), leaving a gap below the apex. Cells curl and drop (12.3–13.1); defect stays the same size. Inset card (12.9), zoomed on the perforated wall: coral ring marks the perforation (13.2), gutta-percha in the apical canal (13.4, unlabeled, hatched mauve), calcium silicate cement dropped into the defect and the perforation (13.7), flush with the root surface | `RCT: PULP OUT` (11.0) → `BLOOD SUPPLY CUT` (12.0) → `RESORPTION STOPS` (12.65) · `CBCT: PERFORATED?` `CALCIUM SILICATE CEMENT (e.g. MTA)` |
+| 16.4–21.75 | Recognition card (all three signs on screen 18.35–21.75, fully settled 18.8) | Film card slides over the tooth in register (16.5); header 16.6; sign tabs at 17.05 / 17.7 / 18.35, each with its call-out on the film: 1 = two equal coral arrows, 2 = coral tracing of the canal walls that ends in a stop mark at the lesion margin, 3 = chip with a paper double arrow on the film's top edge. Only after tab 3 has landed: the whole film image slides 54 px (18.95–19.65, back 20.6–21.2); a dashed ghost of the lesion stays at its old position, the oval itself stays on the canal | `Internal resorption` · `classic X-ray signs` · `1 Symmetric, well-defined ballooning` · `2 Canal outline lost` · `3 Cone shift: stays on canal` |
+| 21.7–22.4 | Loop | Tabs slide out left, film card slides out right as a rigid card (21.75–22.1), fine print flips back (21.78), camera returns to the hook framing (21.7–22.1); then a 0.3 s cross-fade (22.1–22.4) that only brings the pulp and the title back over a coinciding tooth outline. The layer sway runs exactly two cycles per loop | — |
 
-Must-read words: 59 (hook 8, requirements 10, entry 4, cells 4, treatment 7, perforation inset 7, recognition card 19,
+Must-read words: 54 (hook 8, requirements 10, entry 4, cells 1, treatment 8, perforation inset 7, recognition card 16,
 of which 2 are the topic repeated in the header for the cover). Not counted: corner tag, handle, fine-print label,
 the numerals 1-3. All must-read text is >= 30 px (tabs 36-42 px, sign lines 38 px, header 60 px + 34 px, inset labels
-30 px and header 36 px, title 108 px); tag 27 px, handle 26 px, fine print 24 px.
-Poster = 20.2 s (complete recognition card with the film image shifted and the ghost outline visible); the header
-names the topic at 60 px so the grid cover reads "Internal resorption".
+30 px and header 36 px, title 108 px, hook sub-tab 38 px); tag 27 px, handle 26 px, fine print 24 px.
+Time fully on screen (settled) per text: hook 2.4 s; requirement tabs 3.65 / 3.45 s; entry tab 2.9 s; `ODONTOCLASTS`
+1.75 s; `RESORPTION STOPS` 3.3 s and the inset 3.05 s; header 4.7 s; all three signs together 2.95 s.
+Poster = 21.4 s (complete recognition card, the film back in register with the paper tooth, no ghost outline); the
+header names the topic at 60 px so the grid cover reads "Internal resorption".
 
 Storyboard decision: the radiograph card is merged with the end card (after the treatment beat) instead of appearing
 twice. The three recognition points then get the film demonstrating each one, and about eight words of duplicated
@@ -46,16 +48,16 @@ Aidos 2018 (PMID 32161869, PMC7006572) were read in full at the research stage.
 
 | # | On screen | Source | Verified from |
 |---|---|---|---|
-| 1 | `Internal resorption` · `dead pulp above, live pulp below` ("dead" = necrotic and infected, "live" = vital; the classic model, see 2 and 3) | Definition: Patel S, Ricucci D, Durak C, Tay F. J Endod 2010;36:1107-21. PMID 20630282: "progressive destruction of intraradicular dentin ... as a result of clastic activities". Model: Abbott PV, Lin S. Dent Traumatol 2022;38:267-85. PMID 35605161, sect. 5.2. | abstract; review full text |
+| 1 | `Internal resorption` · `necrotic pulp coronal, vital pulp apical` (coronal / apical to the lesion; "infected" follows on the next tab; the classic model, see 2 and 3); fine print `inflammatory type · schematic` | Definition: Patel S, Ricucci D, Durak C, Tay F. J Endod 2010;36:1107-21. PMID 20630282: "progressive destruction of intraradicular dentin ... as a result of clastic activities". Model: Abbott PV, Lin S. Dent Traumatol 2022;38:267-85. PMID 35605161, sect. 5.2 (and sects 5.1-5.3 for the three internal types: surface, inflammatory, replacement); Patel et al. 2022, PMID 35229320. | abstract; review full texts |
 | 2 | `NECROTIC, INFECTED PULP · the stimulus` (tab points at the coronal pulp); fine print `Abbott & Lin 2022, Dent Traumatol` | Abbott & Lin 2022, sect. 5.2 (Internal inflammatory resorption): "necrotic and infected pulp tissue coronal to the resorptive defect and in the dentin tubules". Patel et al. 2022 word it as "the necrotic pulp coronal to the resorptive lacunae" plus "bacterial stimulation of the clastic cells" (citing Tronstad 1988, not read). | review full text (PMC9543863) |
 | 3 | `VITAL PULP · the blood supply` (tab points at the apical pulp) | Abbott & Lin 2022, sect. 5.2: active resorption has inflamed pulp tissue apical to the defect; no viable blood supply -> "the dentinoclasts will not survive". Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921. PMID 35229320: "sustained by nutrients from the vital pulp tissue apical to the resorption site". | review full text |
 | 4 | `PREDENTIN LOST → DENTIN EXPOSED`; fine print `Patel et al. 2022, Int Endod J` | Patel et al. 2022: "IRR initiation is dependent on damage to the odontoblasts and (unmineralized) predentine layer exposing the underlying mineralized tissue to odontoclasts". Experimental basis is in vitro (rat osteoclasts, Wedenberg & Yumita 1990, PMID 2094599) — caption/notes only. | review full text (PMC9790676) |
-| 5 | `ODONTOCLASTS · resorb the dentin`; canal balloons into a symmetric oval continuous with the canal (picture) | Patel et al. 2022 (odontoclasts in Howship lacunae; "symmetrical oval- or circular-shaped extension of the root canal (ballooning)", citing Gartner et al. 1976, not read); Patel et al. 2010 abstract. | review full text; abstract |
-| 6 | `PULP OUT → BLOOD SUPPLY CUT → RESORPTION STOPS` | Patel et al. 2022: "Complete removal of the pulp or pulp necrosis arrests the resorptive process"; treatment is to "remove the bacteria and disinfect the root canal system, at the same time eliminating any remaining apical vital tissue, which is sustaining the resorption". Nilsson E et al. Int J Dent 2013;2013:929486. PMID 24348560: root canal treatment "removes the granulation tissue and blood supply of the clastic cells". Expert consensus + one 20-tooth series (Çalişkan & Türkün 1997, PMID 9550034); no trial. The screen shows only the blood-supply half; the caption says "Root canal treatment removes both". | review full text; abstract |
+| 5 | `ODONTOCLASTS` (the nibbling shows what they do); canal balloons into a symmetric oval continuous with the canal (picture) | Patel et al. 2022 (odontoclasts in Howship lacunae; "symmetrical oval- or circular-shaped extension of the root canal (ballooning)", citing Gartner et al. 1976, not read); Patel et al. 2010 abstract. | review full text; abstract |
+| 6 | `RCT: PULP OUT → BLOOD SUPPLY CUT → RESORPTION STOPS` (RCT = root canal treatment) | Patel et al. 2022: "Complete removal of the pulp or pulp necrosis arrests the resorptive process"; treatment is to "remove the bacteria and disinfect the root canal system, at the same time eliminating any remaining apical vital tissue, which is sustaining the resorption". Nilsson E et al. Int J Dent 2013;2013:929486. PMID 24348560: root canal treatment "removes the granulation tissue and blood supply of the clastic cells". Expert consensus + one 20-tooth series (Çalişkan & Türkün 1997, PMID 9550034); no trial. The arrow chain names only the blood-supply half; `RCT:` on the first tab and the caption ("Root canal treatment removes both") carry the rest. | review full text; abstract |
 | 7 | Inset `CBCT: PERFORATED?` · `CALCIUM SILICATE CEMENT (e.g. MTA)` (cement in the defect and the perforation; hatched gutta-percha apical to it, unlabeled) | Patel et al. 2022: CBCT confirms "extent and presence of any perforation"; perforated defect -> "bioactive hydraulic silicate cements ... should be used to repair the perforation"; "hybrid" fill with gutta-percha apical to the defect. Case-report level evidence. Perforation and CBCT: Bhuva B, Barnes JJ, Patel S. Int Endod J 2011;44:777-86, PMID 21371054 (case report; a perforation "may not be detectable using conventional radiographic techniques"). Patel S et al. Int Endod J 2009;42:831-8, PMID 19627378 supports only the accuracy of CBCT vs periapical films for detecting resorption (5 internal, 5 external cervical, 5 controls; Az 1.000 vs 0.780 for internal); its abstract does not mention perforation. The header is a question, not a recommendation. | review full text; abstracts |
-| 8 | `Internal resorption · classic X-ray signs` · `1 Symmetric, well-defined ballooning`; fine print `Patel 2022, Int Endod J; Thomas 2014, ISRN Dent` | Patel et al. 2022 (as in 5, after Gartner 1976, not read); "clearly well-defined symmetrical radiolucency ... which balloons out": Thomas P et al. ISRN Dent 2014;2014:759326, PMID 24944822; "clearly defined borders": Aidos H et al. Eur Endod J 2018;3:134-45, PMID 32161869. "Smooth" is deliberately not used. | review full texts |
-| 9 | `2 Canal outline lost in the lesion` | Thomas et al. 2014: "the pulp 'disappears' into the lesion"; Aidos et al. 2018: "no canal delineation visible radiographically in the defect"; Abbott & Lin 2022. Not in Patel 2022 and not attributed to Gartner 1976 by any source read; the on-screen line carries Thomas 2014 for this sign. | review full texts |
-| 10 | `3 Cone shift: stays on canal` (film image slides, ghost outline stays, oval stays on the canal) | Patel et al. 2022: with the parallax technique "the IRR defect will not change position in relation to the root canal"; Thomas et al. 2014: the lesion "moves with the canal". "Centered" is no longer used (it is the legend of an internal replacement case in Patel 2022 and folds sign 1 into sign 3). | review full texts |
+| 8 | `Internal resorption · classic X-ray signs` · `1 Symmetric, well-defined ballooning`; fine print `Patel et al. 2022, Int Endod J; Aidos et al. 2018, Eur Endod J` | Patel et al. 2022 (as in 5, after Gartner 1976, not read); "clearly well-defined symmetrical radiolucency ... which balloons out": Thomas P et al. ISRN Dent 2014;2014:759326, PMID 24944822; "clearly defined borders" and "a well-defined radiolucency of the root canal space": Aidos H, Diogo P, Santos JM. Eur Endod J 2018;3:134-45, PMID 32161869. "Smooth" is deliberately not used. | review full texts |
+| 9 | `2 Canal outline lost` (where: the tracing with stop marks on the film) | Aidos et al. 2018: "no canal delineation visible radiographically in the defect"; Thomas et al. 2014: "the pulp 'disappears' into the lesion"; Abbott & Lin 2022. Not in Patel 2022 and not attributed to Gartner 1976 by any source read; the on-screen line carries Aidos 2018 for this sign. | review full texts |
+| 10 | `3 Cone shift: stays on canal` (film image slides, a dashed ghost of the lesion stays, the oval stays on the canal) | Aidos et al. 2018: "IRR will not shift no matter how severe an angle at which the radiograph is taken, whereas CRR will shift from its overlaid position over the root canal space" (after Kanas & Kanas 2011, not read); Patel et al. 2022: with the parallax technique "the IRR defect will not change position in relation to the root canal"; Thomas et al. 2014: the lesion "moves with the canal". "Centered" is no longer used (it is the legend of an internal replacement case in Patel 2022 and folds sign 1 into sign 3). | review full texts |
 
 Wording guards taken from the fact-check: coronal pulp is "necrotic, infected" (not "inflamed"); "blood supply" (the
 cells' route is only animated); "well-defined" not "smooth"; "classic" heads the sign list; no prevalence, success
@@ -88,8 +90,8 @@ transient phase); "Root canal treatment removes both"; the rare replacement type
   calcium hydroxide, Patel 2022); no instrumentation/irrigation shown; the main tooth left unfilled (obturation is
   only shown in the perforation inset).
 - Perforation inset: site and shape of the perforation; only the defect and the apical canal are in view.
-- Film card: an idealized 2-D image in gray paper; the amount and direction of image shift; the bone layer sliding
-  further than the tooth (parallax flavor); the ghost outline. There is no contrast case of an external lesion moving
+- Film card: an idealized 2-D image in gray paper, in register with a bucco-lingual section (a view no periapical
+  gives); the amount and direction of image shift (root and bone slide together); the dashed ghost of the lesion. There is no contrast case of an external lesion moving
   off the canal. 2-D films cannot reliably separate internal from external cervical resorption (caption).
 
 ## Design rationale
@@ -99,11 +101,13 @@ transient phase); "Root canal treatment removes both"; the rare replacement type
   paper strips.
 - Palette: cream, coral, dusty pink, dusty mauve, teal, charcoal, with mustard only for microbes/brads.
   Color carries meaning consistently: coral = vital tissue, charcoal gray = necrotic, teal = clastic cells,
-  mauve = predentin, speckled white with a mauve cut edge = calcium silicate cement, hatched salmon = gutta-percha.
-- Parallax: each layer has a depth; pan, zoom and a slow sway move deeper layers less. The cone-shift demo uses the
+  mauve = predentin, speckled white with a mauve cut edge = calcium silicate cement, hatched mauve = gutta-percha
+  (deliberately not coral, so it cannot be read as pulp left in the canal), bright red threads = the apical vessels.
+- Parallax: each layer has a depth; pan, zoom and a slow sway (5 x 3 px, two cycles per loop) move deeper layers less; the hook pushes in from frame 0. The cone-shift demo uses the
   same trick inside the film — the oval is cut into the same sheet as the canal and cannot leave it.
 - Type: Fraunces (title, header, role lines in italic, numerals) + Nunito (labels). American spelling.
-- Layout: tooth on the right (clear of the button column), tabs in the left column inside x 64-505; film mount ends
+- Layout: tooth on the right (axis at x 725 in the wide and zoom framings, so the pulled pulp's tab clears the handle
+  pill; clear of the button column), tabs in the left column inside x 64-505; film mount ends
   at x 958; nothing must-read below y 1580 or above y 230; tag and handle sit 16 px below the top of the 3:4 crop.
 
 ## Change log
@@ -141,6 +145,9 @@ transient phase); "Root canal treatment removes both"; the rare replacement type
   resorptive lacunae" + "bacterial stimulation"; "necrotic and infected" is Abbott & Lin's phrase);
   (5) RESEARCH.md C2: the Nilsson 2013 quotation completed ("... resulting in a perforation").
 
+- v4: second independent review applied — see "Review changes (v4)" at the end. The storyboard table, word count and
+  poster time above describe v4; the times quoted in the v2/v3 entries are historical.
+
 ## Review changes (v2)
 Science
 - End-card source line now `schematic · Patel 2022, Int Endod J; Thomas 2014, ISRN Dent` (Thomas 2014 states all
@@ -176,3 +183,45 @@ Design
   title held to 2.4 s and it fades in place instead of flying through the tag.
 - Nits: both chevrons cream; tag and handle 16 px lower, title baseline 416; film moved left (mount ends x 958);
   sign tabs respaced with about 50 px gaps.
+
+## Review changes (v4, second independent review)
+All 6 "should" issues and the cheap nits applied; duration unchanged at 22.4 s; must-read words 59 -> 54.
+Science
+- Hook sub-tab `dead pulp above, live pulp below` -> `necrotic pulp coronal, vital pulp apical` (same six words; board
+  wording, independent of how the tooth is drawn). The necrotic front now starts at 1.5 s, so the line no longer sits
+  over an entirely vital pulp for the whole hook. meta.json claim 1 and table row 1 updated.
+- "Inflammatory" is now on screen: the fine print of the hook and of the loop frame reads `inflammatory type · schematic`.
+- End-card source line -> `schematic · Patel et al. 2022, Int Endod J; Aidos et al. 2018, Eur Endod J` (ends at x 872).
+  Aidos 2018 was re-read in PubMed Central (PMC7006572): it states signs 1, 2 and 3 in its own words (quotes in rows 8-10
+  and RESEARCH.md addendum). Thomas 2014 stays in meta.json claims 8-10 as corroboration. The label auto-shrinks (never
+  below 22 px) if a line would pass x 952.
+- Caption Refs now include `Aidos 2018 Eur Endod J`; paid for with "CBCT shows perforation." and "Evidence: reviews,
+  case reports." (696 characters).
+- Treatment tab `PULP OUT` -> `RCT: PULP OUT` (+1 word), so the chain is not read as "extirpation alone".
+- Film: `SHIFT.bone = SHIFT.tooth` (root and bone slide together; only the ghost carries the shift).
+Design
+- Reading time bought with words, not seconds: tab D is `ODONTOCLASTS` only, sign 2 is `Canal outline lost`. The
+  requirements pair holds 0.45 s longer (to 6.7 s) and its tabs arrive 0.1 s earlier; the time comes from the text-free
+  stretch before the treatment (the pulp is lifted during the zoom-out) and 0.2 s of canal growth. Header and film
+  arrive 0.15 s earlier, sign tabs 0.05–0.15 s earlier.
+- "Blood supply cut" is now shown, and after the pull instead of during it: pull 11.25–11.95, cut 12.0–12.4 with tab E2
+  at 12.0, cells drop from 12.3, `RESORPTION STOPS` at 12.65. Outer vessels are 6 px bright red threads (were 3.4 px
+  dark red), they retract about 130 px (were 52) with longer frays, and a coral paper ring lands on the apex and pulses
+  once as the snip.
+- Poster 20.2 -> 21.4 s (film back in register, no ghost line).
+- Hook depth: push-in 0.90 -> 0.93 from frame 0 running into the first pan; sway raised to 5 x 3 px with a period of
+  half the loop (seamless); the flap lifts 12 x 20 px with a deeper shadow.
+- Predentin: liner 11 px (was 7) in the root; the peel is one long opaque strip per side with a cut-edge highlight,
+  peeled from the coronal end, left side first, never across the midline (no more "X"); the exposed-dentin glint is
+  5.5 px and stays until the first clasts have landed.
+- `+` is a cream cross on a charcoal disc (r 37) aligned with the tabs' left text edge (no red-cross look).
+- Title and sub-tab leave as rigid, opaque paper sliding right (2.4–2.77); the first pan starts at 2.3 instead of 2.15.
+- Cone-shift ghost is the lesion oval at its pre-shift position (complete, inside the film) instead of a clipped root
+  outline.
+- Header tab is dark coral with cream type and a cream stripe (was charcoal on charcoal).
+- Gutta-percha stub in the inset is hatched mauve (was salmon, close to the pulp coral).
+- Wide and zoom camera axis 750 -> 725 so the pull tab passes left of the handle pill.
+- Paper grain: about half of the white noise is now 2 px grain (less detail thrown away by re-encoding); look unchanged.
+Not done: the reel stays at 22.4 s (0.4 s over the brief's 16-22 s target, inside SPEC's 15-25 s) because the freed time
+was given to reading holds; no contrast case for sign 3 and no obturation of the main tooth (both would add words or
+seconds; listed under "What is schematic").
