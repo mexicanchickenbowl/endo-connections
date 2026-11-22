@@ -55,7 +55,7 @@ const T_OUT = 29.55;                                                           /
 const ROW = 10.392;
 const PIN_XZ = [[-18, -3], [-6, -3], [6, -3], [18, -3], [-12, -2], [0, -2], [12, -2], [-6, -1], [6, -1], [0, 0]].map(([x, k]) => ({ x, z: k * ROW }));
 const GL_TOP = 830, GL_H = H - GL_TOP;
-const CAM = { fov: 14, pitch: 36, dist: 288, ty: 4, tz: -14 };
+const CAM = { fov: 14, pitch: 39, dist: 288, ty: 4, tz: -14.5 };
 let alley = null, PINS2D = [];
 
 /* ---------------- layout of the overhead display ---------------- */
@@ -271,7 +271,7 @@ function stateAt(t) {
     const u = (t - 0.3 - i * 0.085) / 0.8, wave = u > 0 && u < 1 ? Math.sin(Math.PI * u) ** 2 * 0.32 : 0;
     lit.push(Math.max(on * out, wave));
     act.push(Math.max(0, a));
-    spotK.push(Math.max(0, a, 0.42 * all));          // finale: every lamp on, softly
+    spotK.push(Math.max(0, a, 0.1 * all));           // finale: every lamp on, softly
   }
   return { t, lit, act, tau, spotK, n, out, all };
 }
@@ -281,7 +281,7 @@ function drawBeams(S) {
   ctx.save(); ctx.globalCompositeOperation = 'lighter';
   const lampY = HOUSE.y + HOUSE.h + 6;
   for (let i = 0; i < 10; i++) {
-    const k = 0.05 * S.lit[i] + 0.22 * S.spotK[i]; if (k < 0.004) continue;
+    const k = 0.03 * S.lit[i] + 0.11 * S.spotK[i]; if (k < 0.004) continue;
     const P = PINS2D[i], G = GROUPS[FACTORS[i].g];
     for (let j = 0; j < 4; j++) {
       const spread = 1 + j * 0.42, a = k / (j + 1.2);
@@ -297,6 +297,25 @@ function drawBeams(S) {
       const u = 1 - fl; ctx.strokeStyle = `rgba(${G.glow},${0.75 * fl * S.out})`; ctx.lineWidth = 5 * fl + 1;
       ctx.beginPath(); ctx.ellipse(P.base.x, P.base.y, P.w * (0.7 + 1.5 * u), P.w * (0.7 + 1.5 * u) * 0.58, 0, 0, 7); ctx.stroke();
     }
+  }
+  ctx.restore();
+}
+
+function drawDeckLabels(S) {
+  // which pins belong to which evidence group (left wall; the right side is Instagram's button column)
+  const a = seg(S.t, 0.9, 1.6) ; if (a <= 0) return;
+  const blocks = [
+    { g: 0, y: (PINS2D[0].top.y + PINS2D[4].base.y) / 2 - 8, head: 'BACK 7', lines: ['pooled'] },
+    { g: 1, y: (PINS2D[7].top.y + PINS2D[9].base.y) / 2 + 26, head: 'FRONT 3', lines: ['individual', 'studies'] },
+  ];
+  ctx.save(); ctx.globalAlpha = a; ctx.textBaseline = 'alphabetic';
+  for (const b of blocks) {
+    const G = GROUPS[b.g], h = 40 + b.lines.length * 32, y0 = b.y - h / 2, col = `rgb(${G.glow})`;
+    ctx.fillStyle = 'rgba(5,12,15,0.55)'; rr(ctx, 60, y0 - 12, 142, h + 22, 10); ctx.fill();
+    ctx.fillStyle = col; ctx.fillRect(60, y0 - 12 + 10, 4, h + 2);
+    ctx.font = '400 36px Anton'; ctx.fillStyle = col; draw(ctx, b.head, 76, y0 + 30);
+    ctx.font = '600 30px "Barlow Condensed"'; ctx.fillStyle = '#efe4cc';
+    b.lines.forEach((l, i) => draw(ctx, l, 76, y0 + 30 + 34 + i * 31));
   }
   ctx.restore();
 }
@@ -397,6 +416,7 @@ function render(t) {
   ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
   ctx.drawImage(BG, 0, 0);
   drawAlley(S);
+  drawDeckLabels(S);
   drawBeams(S);
   drawLampBar(S);
   ctx.drawImage(HUD, 0, 0);

@@ -39,7 +39,7 @@ canal treatment · associations, not guarantees". No causal verbs anywhere; no s
 | 8.77–11.57 | Star 4, caption full 9.22–11.57. Pictogram: molar with a solid gold full crown. | 4 · Molar with a cast restoration |
 | 11.57–14.67 | Star 5, caption full 12.02–14.67. Pictogram: cast post and core inside a tooth, struck through. | 5 · No cast post and core needed |
 | 14.67–17.16 | Star 6, caption full 15.12–17.16. Pictogram: three-unit bridge on two abutments, struck through. | 6 · Not a fixed-prosthesis abutment |
-| 17.16–21.47 | Star 7, caption full 17.61–21.47. Pictogram: periodontal probe sunk into a narrow deep defect, struck through. | 7 · No preoperative deep probing defect, pain, sinus tract, or perforation |
+| 17.16–21.47 | Star 7, caption full 17.61–21.47. Pictogram: one tooth with all four findings (probe in a narrow deep defect, pain bolt in the crown, dotted sinus tract to a stoma, track through the root wall), struck through. | 7 · No preoperative deep probing defect, pain, sinus tract, or perforation |
 | 21.47–24.57 | Star 8, caption full 21.92–24.57; the outline closes 8→1 at 22.1–22.6. Pictogram: file tip exactly at the canal terminus, nothing beyond it. | 8 · Canal terminus patency, no root-filling extrusion |
 | 24.57–25.42 | Caption and medallion fade, the plate folds up (0.5 s), eight small medallions and the catalog rows appear top to bottom. | |
 | 25.42–29.45 | **Payoff: catalog of eight**, complete and held 4.03 s; a soft glint travels round the constellation. Poster at 28.0. | the eight lines above, numbered 1 to 8 |
@@ -88,8 +88,8 @@ No numbers (odds ratios, survival percentages) are shown on screen.
 
 ## What is schematic
 - The constellation and the engraved tooth figure are decoration; star positions carry no anatomical meaning.
-- Pictograms are simplified icons, not to scale. Pictogram 7 shows only the probing defect although the item lists four
-  preoperative conditions. Pictogram 3 highlights an arbitrary non-terminal tooth. A red stroke through a pictogram
+- Pictograms are simplified icons, not to scale. Pictogram 7 shows all four preoperative findings on one tooth (probe in a narrow
+  deep defect, pain bolt, dotted sinus tract to a stoma, track through a gap in the root wall) under one "absent" stroke. Pictogram 3 highlights an arbitrary non-terminal tooth. A red stroke through a pictogram
   means "absent / not this", matching the "No ..." or "Not ..." wording of items 3, 5, 6 and 7.
 - The armillary sphere, compass rose, coordinate grid and background stars are ornament.
 
@@ -103,7 +103,7 @@ No numbers (odds ratios, survival percentages) are shown on screen.
 - Safe area: all text inside x 64–1016, y 230–1580; nothing readable in the right-hand column (x > 960, y > 1100):
   widest captions end at x 945 (item 7) and 943 (item 8), source line at x 944, handle at x 950 (measured in the page). The plate's border rule (x 56 and
   1024) is decoration and bleeds 8 px past the text margin.
-- Sizes: title 88 px; "EIGHT CONDITIONS" 44 px; subtitle lines 42 and 33 px; condition names 56 px in the caption
+- Sizes: title 88 px; "EIGHT CONDITIONS" 44 px; subtitle lines 42 and 37 px; condition names 56 px in the caption
   band (item 7 auto-fitted to 45 px) and 36 px in the catalog; star numerals 52 px (38 px in the summary);
   dial "n" 60 px and "/ 8" 32 px; medallion tags 30 px; source line 24 px; handle 27 px.
 - Deterministic: no wall-clock or random calls; background stars come from `Kit.rng`, their drift and twinkle are
@@ -117,3 +117,61 @@ No numbers (odds ratios, survival percentages) are shown on screen.
   cervical line; probe pictogram redrawn with a narrow defect; armillary sphere added on the right of the plate.
 - v3: summary sequencing fixed (plate folds before the catalog rows appear; catalog fades before the plate unfolds);
   dial pips and numeral cross-fade at the loop; the outline now closes during item 8 instead of in the summary.
+- v4 (independent review): pictogram 7 now shows all four findings of item 7; the subtitle line "after root canal
+  treatment · associations, not guarantees" enlarged from 33 to 37 px; caption and two claim sources in `meta.json`
+  revised. Timeline, wording of the eight items and layout unchanged. Video and poster re-rendered once.
+
+## Independent review
+Reviewer did not build the reel. Chapter PDF read from the resident's Drive (section "Factors Affecting Tooth Survival
+Following Root Canal Treatment" through its summary list, the figure legends 17.26 to 17.29 and the reference list);
+Ng 2010 (PMID 20158529) and Ng 2011 (PMID 21366627) abstracts re-read on PubMed.
+
+**Checked against the chapter**
+- The summary list has exactly eight bullets, in the order shown on screen. Nothing is missing, added or merged.
+- All eight on-screen statements match their bullets in meaning. Condensations: item 2 drops "both" (carried by
+  "mesial and distal ... present"), item 4 drops "after treatment", item 5 drops "for support and retention of
+  restoration", item 7 drops "periodontal", item 8 drops "during treatment". None changes the sense or strengthens it.
+- Framing: the chapter says these conditions "significantly improve tooth survival"; the screen says "associated with
+  better" and "associations, not guarantees", which is weaker than the chapter, as the resident asked. No causal verb
+  and no guarantee wording anywhere on screen.
+- Nothing about periapical healing is on screen. (The chapter notes that preoperative periapical lesions had no
+  significant influence on survival; that is correctly left out.)
+- Figure values quoted in `meta.json` (OR 1.4, 2.6, 3.5 with their CIs), the n = 94 abutment remark, the "gross
+  exaggeration" remark on crowning every tooth, and chapter refs 3, 111, 189, 191, 149, 151 all match the PDF.
+- PubMed abstracts support what `meta.json` attributes to them (Ng 2010: four pooled factors including abutment for
+  "removable or fixed prosthesis"; Ng 2011: thirteen factors, the 22-month hazard ratios for patency and extrusion).
+
+**Visual QA (16-frame safe-area sheet plus full-resolution stills at t = 0, each caption, the summary and the loop tail)**
+- Sizes: every must-read string is 30 px or more (smallest: medallion tags 30 px, dial "/ 8" 32 px, catalog 36 px,
+  star numerals 38 px in the summary). Source line 24 px and handle 27 px are fine print.
+- Safe area: no text above y 230, below y 1580 or in the right column (x > 960, y > 1100). Only the plate border and
+  its corner bosses (decoration) enter the right column.
+- No clipping, overlap or missing glyphs. In the summary the lower-right dial pip sits about 3 px above medallion 6:
+  tight, not overlapping.
+- Caption holds recomputed from `Kit.readSecs`: 1.73, 2.65, 2.35, 2.35, 2.65, 2.04, 3.86, 2.65 s, each at or above
+  its minimum; consecutive captions never overlap (fade-out ends exactly when the next fade-in starts).
+- Counter reads 0/8 at t = 0 and steps 1/8 to 8/8 with each star; numerals 1 to 8 appear once each in the caption
+  band, once each on the stars, and in the summary once each in the catalog, on the stars and on the medallion tags
+  (three consistent sets, no duplicate or missing number within a set).
+- Summary complete at 25.42 s and held to 29.45 s (4.03 s); poster (28.0 s) is that frame.
+- Loop: last frame matches the first (RMSE 1.6% between the first and last encoded frames).
+- ffprobe: 1080 x 1920, 30 fps, 900 frames, 30.000 s = `REEL.duration`.
+
+**Changed**
+1. Pictogram 7 showed only a periodontal probe for an item that lists four findings. Added a pain bolt, a dotted
+   sinus tract with stoma and a track through the root wall, on the same tooth and under the same red stroke.
+2. "after root canal treatment · associations, not guarantees" was 33 px italic EB Garamond (small x-height); now
+   37 px, spanning the same width as "TOOTH SURVIVAL".
+3. `meta.json`: caption now carries the chapter's qualifiers for items 4 (molars), 6 (fixed prosthesis; too few
+   abutments in the authors' cohort for significance) and 8 (during treatment), says "not proof of cause", and stays
+   under 700 characters. Claim 6 source now lists the chapter's own references; claim 7 source notes "of endodontic
+   origin"; the schematic claim mentions star 1.
+
+**Left as is, flagged for the resident**
+- Star 1 ("Nonmolar tooth") lights on a cusp of the molar-shaped constellation. Star positions carry no meaning and
+  the pictogram beside it is a single-rooted tooth, but a viewer could find it odd.
+- The duration is exactly 30.0 s and the summary hold is 4.03 s, so adding even one word to a caption breaks one of
+  the two limits. This is why "both" and "periodontal" were not restored.
+- Not verifiable from the PDF: the book title and "12th ed." (the PDF text carries only the chapter title, authors,
+  part and page numbers). Chapter refs 3, 111, 189 and 191 were matched in the reference list only.
+

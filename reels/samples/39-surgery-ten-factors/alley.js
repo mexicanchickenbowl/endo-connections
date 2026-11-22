@@ -146,9 +146,8 @@ export function buildAlley(o) {
   for (const s of [-1, 1]) {
     box(9.25, 0.4, geom.len, s * (geom.width / 2 + 4.625), -1.9, zc, dark(0x0d0f12, 0.35), true);          // gutter floor
     box(0.5, 2.2, geom.len, s * (geom.width / 2 + 0.25), -1.1, zc, dark(0x2a1a0e, 0.5));                   // lane edge
-    box(1.6, 22, 64, s * (geom.width / 2 + 9.25 + 0.8), 9, -10, dark(0x10262b, 0.45), true);               // kickback wall (teal enamel)
-    box(1.9, 1.0, 64, s * (geom.width / 2 + 9.25 + 0.8), 20.4, -10, dark(0xb9a37c, 0.3));                   // cream cap rail
-    box(12, 3.2, geom.len, s * (geom.width / 2 + 9.25 + 6), -0.4, zc, dark(0x1c120c, 0.4));                 // division capping
+    box(1.6, 26, geom.len, s * (geom.width / 2 + 9.25 + 0.8), 11, zc, dark(0x0f2429, 0.5), true);           // side wall (teal enamel)
+    box(0.5, 0.9, geom.len, s * (geom.width / 2 + 9.25 - 0.1), 6.5, zc, dark(0x8a7448, 0.35));              // brass pinstripe
   }
   box(70, 6, 30, 0, -5.2, geom.zFar - 15, dark(0x050607, 0.9));                                             // pit floor
   box(70, 60, 1, 0, 20, geom.zFar - 22, dark(0x0a1418, 0.95));                                              // pit curtain
@@ -190,12 +189,12 @@ export function buildAlley(o) {
     for (let i = 0; i < pins.length; i++) {
       const l = clamp(state.lit[i]);
       tmpC.copy(DARK).lerp(LIT, l); meshes[i].material.color.copy(tmpC);
-      meshes[i].material.emissiveIntensity = 0.02 + 0.2 * l;
-      pools[i].material.opacity = 0.34 * l;
+      meshes[i].material.emissiveIntensity = 0.02 + 0.12 * l;
+      pools[i].material.opacity = 0.27 * l;
     }
     key.intensity = lerp(0.6, 1.5, state.house);
     hemi.intensity = lerp(0.36, 0.6, state.house);
-    spot.intensity = 5.5 * state.spot.k;
+    spot.intensity = 3.4 * state.spot.k;
     spot.position.set(state.spot.x - 3, 86, state.spot.z + 26); spot.target.position.set(state.spot.x, 5, state.spot.z);
     // pass 1 — reflection: mirror pins + lights below the lane
     renderer.clear();
