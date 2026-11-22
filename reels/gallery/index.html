@@ -90,6 +90,9 @@ textarea:focus-visible, button:focus-visible { outline: 2px solid var(--gp); out
 .nav button { flex: 1; border: 1px solid var(--line); border-radius: 8px; background: var(--ground); color: var(--ink); font: 600 13px var(--f-body); padding: 10px; cursor: pointer; }
 .close { position: absolute; top: 4px; left: 4px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(0,0,0,.6); color: #fff; font-size: 22px; cursor: pointer; }
 .facts { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+.caption { min-height: 180px; margin-top: 8px; font-size: 13px; }
+.caprow { display: flex; gap: 10px; align-items: center; margin-top: 6px; }
+.caprow button { border: 1px solid var(--line); border-radius: 8px; background: var(--ground); color: var(--ink); font: 600 13px var(--f-body); padding: 8px 12px; cursor: pointer; }
 @media (max-width: 860px) {
   .viewer { grid-template-columns: 1fr; grid-template-rows: auto auto; overflow-y: auto; align-content: start; }
   .stagebox video { height: 62dvh; max-height: 62dvh; }
@@ -147,6 +150,11 @@ textarea:focus-visible, button:focus-visible { outline: 2px solid var(--gp); out
     <details>
       <summary class="lbl" style="cursor:pointer">On-screen claims &amp; sources</summary>
       <ul class="facts" id="vFacts"></ul>
+    </details>
+    <details id="vCapBox">
+      <summary class="lbl" style="cursor:pointer">Suggested Instagram caption</summary>
+      <textarea id="vCaption" readonly class="caption" aria-label="Suggested caption"></textarea>
+      <div class="caprow"><button type="button" id="vCopy">Copy caption</button><span class="saved" id="vCopied"></span></div>
     </details>
     <div class="nav">
       <button id="vPrev">← Previous</button>
@@ -226,6 +234,8 @@ textarea:focus-visible, button:focus-visible { outline: 2px solid var(--gp); out
     if (document.activeElement !== $('vNote')) $('vNote').value = rt.note || '';
     const f = $('vFacts'); f.textContent = '';
     for (const c of r.claims || []) { const li = document.createElement('li'); li.textContent = `${c.claim} — ${c.source}`; f.appendChild(li); }
+    $('vCapBox').hidden = !r.caption;
+    $('vCaption').value = r.caption || ''; $('vCopied').textContent = '';
   }
 
   function open(i) {
@@ -279,6 +289,11 @@ textarea:focus-visible, button:focus-visible { outline: 2px solid var(--gp); out
 
   // events
   $('vClose').addEventListener('click', close);
+  $('vCopy').addEventListener('click', async () => {
+    const ta = $('vCaption');
+    try { await navigator.clipboard.writeText(ta.value); $('vCopied').textContent = 'Copied'; }
+    catch (e) { ta.focus(); ta.select(); $('vCopied').textContent = 'Selected: press Ctrl/⌘ + C'; }
+  });
   $('vPrev').addEventListener('click', () => open(current - 1));
   $('vNext').addEventListener('click', () => open(current + 1));
   for (const b of $('vVerdicts').children) b.addEventListener('click', () => { const r = reels[current]; const rt = ratings[r.id] || blank(); change(r.id, { verdict: rt.verdict === b.dataset.v ? null : b.dataset.v }); });
