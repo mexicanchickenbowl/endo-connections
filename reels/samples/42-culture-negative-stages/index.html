@@ -40,8 +40,8 @@ const NEG = INK.teal, POS = INK.brick;
 
 // ---------------------------------------------------------------- layout
 const SX0 = 64, SX1 = 1016, RX1 = 956;       // safe area; RX1 keeps clear of the right-hand button column
-const TAG_Y0 = 240, TAG_Y1 = 286;
-const TITLE_Y = 364, SUB_Y = 406, LEG_Y = 444, RULE_Y = 478;
+const TAG_Y0 = 238, TAG_Y1 = 282;
+const TITLE_Y = 355, SUB_Y = 409, LEG_Y = 447, RULE_Y = 480;
 const ROW_T0 = 484, ROW_H = 350;
 const DON_X = 235, DON_R1 = 165, DON_R0 = 103, A0 = -Math.PI / 2;   // same size, same start angle, clockwise
 const COL_X = 432;
@@ -49,8 +49,8 @@ const TRK_X0 = 456, TRK_X1 = 900;
 const FINE_Y1 = 1549, FINE_Y2 = 1573;
 
 const F = {
-  title: '700 94px "Space Grotesk"',
-  sub: '500 34px Barlow',
+  title: '700 90px "Space Grotesk"',
+  sub: '500 36px Barlow',
   tag: '700 30px "Barlow Condensed"',
   handle: '500 24px "IBM Plex Mono"',
   legend: '600 32px Barlow',
@@ -63,7 +63,7 @@ const F = {
   hole: '600 30px "Barlow Condensed"',
   range: '500 32px "Barlow Condensed"',
   rnum: '600 30px "IBM Plex Mono"',
-  tick: '500 20px "IBM Plex Mono"',
+  tick: '500 22px "IBM Plex Mono"',
   badge: '700 30px "Space Grotesk"',
   take: '700 50px "Barlow Condensed"',
   fine: '500 24px "Barlow Condensed"',
@@ -74,13 +74,13 @@ const DUR = 26;
 const RING = [0.25, 1.35];
 const ROWS_T = [
   { lab: 1.4, sw: 1.9, swD: 1.40, pos: 3.30 },
-  { lab: 4.1, sw: 4.6, swD: 1.75, pos: 6.35 },
-  { lab: 7.0, sw: 7.5, swD: 2.05, pos: 9.55 },
+  { lab: 4.0, sw: 4.5, swD: 1.75, pos: 6.25 },
+  { lab: 6.85, sw: 7.3, swD: 2.05, pos: 9.35 },
 ];
 const POS_D = 0.5;
 const TRK_T = 10.1, TRK_STAG = 0.22;
 const TAKE1 = [16.25, 20.85], TAKE2 = [20.85, 25.7];    // envelopes (0.4 s in, 0.3 s out); never overlap
-const TITLE_OUT = [15.9, 16.25], TITLE_BACK = [25.68, 25.95];
+const TITLE_OUT = [15.9, 16.25], TITLE_BACK = [25.7, 25.95];
 const ROWS_OUT = [25.4, 25.92];
 
 // ---------------------------------------------------------------- small drawing helpers
@@ -190,23 +190,23 @@ function richLine(parts, x, y, font) {
 function drawTake(which, a, dy, t) {
   if (a <= 0) return;
   ctx.save(); ctx.globalAlpha = a; ctx.translate(0, dy);
-  ctx.fillStyle = INK.mustard; ctx.fillRect(SX0, 304, 10, 112);
-  ctx.fillStyle = INK.char; ctx.fillRect(SX0, 304, 10, 4);
+  ctx.fillStyle = INK.mustard; ctx.fillRect(SX0, 300, 10, 112);
+  ctx.fillStyle = INK.char; ctx.fillRect(SX0, 300, 10, 4);
   const x = SX0 + 30;
   if (which === 1) {
-    richLine([{ t: 'More cases test ' }, { t: 'negative', c: NEG }, { t: ' after NaOCl' }], x, 350, F.take);
-    richLine([{ t: 'and after a dressing.' }], x, 406, F.take);
+    richLine([{ t: 'More cases test ' }, { t: 'negative', c: NEG }, { t: ' after NaOCl' }], x, 346, F.take);
+    richLine([{ t: 'and after a dressing.' }], x, 402, F.take);
   } else {
     const hl = seg(t, TAKE2[0] + 0.55, TAKE2[0] + 1.15, ease.out);
-    richLine([{ t: 'But ' }, { t: 'ranges are wide', hl }, { t: ' — and' }], x, 350, F.take);
-    richLine([{ t: 'negative culture', c: NEG }, { neq: 1 }, { t: 'sterile canal.' }], x, 406, F.take);
+    richLine([{ t: 'But ' }, { t: 'ranges are wide', hl }, { t: ' — and' }], x, 346, F.take);
+    richLine([{ t: 'negative culture', c: NEG }, { neq: 1 }, { t: 'sterile canal.' }], x, 402, F.take);
   }
   ctx.restore();
 }
 function drawLegend() {
   let x = SX0 + 4;
   const entry = (kind, label) => {
-    x += tube(x, LEG_Y, 44, kind) + 14;
+    x += tube(x, LEG_Y, 48, kind) + 14;
     swatch(x, LEG_Y - 13, 26, kind); x += 26 + 12;
     txt(label, x, LEG_Y + 11, F.legend, INK.char);
     x += measure(label, F.legend) + 34;
@@ -226,7 +226,13 @@ function drawLegend() {
 function drawRow(i, t, rowsA, t2) {
   const d = DATA[i], tm = ROWS_T[i], T = ROW_T0 + i * ROW_H, cx = DON_X, cy = T + 175;
   const ringU = seg(t, RING[0] + i * 0.18, RING[1] - (2 - i) * 0.12, ease.inOut);
-  if (ringU <= 0) return;
+  // ghost ring + badge are part of the resting layout (first frame = last frame)
+  sector(cx, cy, DON_R0, DON_R1, 0, Math.PI * 2); ctx.save(); ctx.globalAlpha = 0.5; ctx.fillStyle = INK.paper2; ctx.fill('evenodd'); ctx.restore();
+  ctx.save(); ctx.translate(92, T + 44);
+  ctx.beginPath(); ctx.arc(0, 0, 25, 0, 7); ctx.fillStyle = INK.char; ctx.fill();
+  txt(d.id, 0, 11, F.badge, INK.paper, 'center');
+  ctx.restore();
+  if (ringU <= 0 || rowsA <= 0) return;
   const labA = seg(t, tm.lab, tm.lab + 0.45, ease.out);
   const p = seg(t, tm.sw, tm.sw + tm.swD, ease.inOut);                 // negative sweep 0..1
   const q = seg(t, tm.pos, tm.pos + POS_D, ease.inOut);                // positive remainder 0..1
@@ -236,7 +242,6 @@ function drawRow(i, t, rowsA, t2) {
   if (i > 0) { ctx.save(); ctx.strokeStyle = INK.char; ctx.globalAlpha *= 0.55 * ringU; ctx.lineWidth = 2; ctx.setLineDash([2, 8]); ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(COL_X, T); ctx.lineTo(COL_X + (RX1 - COL_X) * ringU, T); ctx.stroke(); ctx.restore(); }
 
   // --- donut
-  sector(cx, cy, DON_R0, DON_R1, 0, Math.PI * 2); ctx.save(); ctx.globalAlpha *= 0.5 * ringU; ctx.fillStyle = INK.paper2; ctx.fill('evenodd'); ctx.restore();
   ctx.save(); ctx.translate(1.6, 1.4);                                   // slight plate misregistration
   const aN = A0 + d.aNeg * p;
   if (p > 0) { sector(cx, cy, DON_R0, DON_R1, A0, aN); inkFill(NEG); }
@@ -265,15 +270,6 @@ function drawRow(i, t, rowsA, t2) {
     txt(String(shown), x0 + wN, cy + 22, F.num, NEG, 'right', 1, -2);
     txt('%', x0 + wN + 3, cy + 22, F.pct, NEG, 'left');
     txt('negative', cx, cy + 62, F.hole, NEG, 'center', seg(t, tm.sw + tm.swD - 0.1, tm.sw + tm.swD + 0.3));
-    ctx.restore();
-  }
-
-  // --- badge
-  const bU = seg(t, RING[0] + 0.3 + i * 0.18, RING[0] + 0.75 + i * 0.18, ease.outBack);
-  if (bU > 0) {
-    ctx.save(); ctx.translate(92, T + 44); ctx.scale(bU, bU);
-    ctx.beginPath(); ctx.arc(0, 0, 25, 0, 7); ctx.fillStyle = INK.char; ctx.fill();
-    txt(d.id, 0, 11, F.badge, INK.paper, 'center');
     ctx.restore();
   }
 
@@ -370,10 +366,8 @@ window.REEL = {
     drawLegend();
 
     const rowsA = 1 - seg(t, ROWS_OUT[0], ROWS_OUT[1], ease.inOut);
-    if (rowsA > 0) {
-      for (let i = 0; i < 3; i++) drawRow(i, t, rowsA, t);
-      ctx.save(); ctx.globalAlpha = rowsA * seg(t, 0.5, 1.2); drawFine(); ctx.restore();
-    }
+    for (let i = 0; i < 3; i++) drawRow(i, t, rowsA, t);
+    drawFine();
 
     // ink dropout / paper grain over everything (static: no boiling)
     ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';

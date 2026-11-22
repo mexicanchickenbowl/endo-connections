@@ -95,8 +95,12 @@ function richLayout(rich, font, maxW) {
     else { toks.push({ text: s[0], chip: s[1], t: s[2] || 0, sp: spaceBefore }); spaceBefore = false; }
   }
   const lines = [[]]; let x = 0;
+  const fs = parseFloat((/([\d.]+)px/.exec(font) || [0, 30])[1]), pad = fs * 0.16;   // chip padding (see richDraw)
   for (const tk of toks) {
     const w = ctx.measureText(tk.text).width; let line = lines[lines.length - 1], adv = tk.sp && line.length ? sp : 0;
+    // keep punctuation clear of a chip's outline, and neighbouring chips clear of each other
+    const prev = line[line.length - 1];
+    if (prev && prev.chip) { if (tk.chip) adv = Math.max(adv, pad * 2 + fs * 0.12); else if (!tk.sp) adv = pad + fs * 0.05; }
     if (line.length && tk.sp && x + adv + w > maxW) { line = []; lines.push(line); x = 0; adv = 0; }
     line.push({ text: tk.text, chip: tk.chip, t: tk.t, x: x + adv, w }); x += adv + w;
   }

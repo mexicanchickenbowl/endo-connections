@@ -166,3 +166,15 @@ Design
 ## Change log
 - v1 (2026-11-22): first build from the fact-checked brief.
 - v2 (2026-11-22): review fixes (see "Review changes").
+- Final QA (2026-11-22, fresh-eyes reviewer): 36 stills with the safe overlay (`_stills/final-qa`: 0 / 0.5 / 1.0 / hero
+  state of all eight panels / 19.0 / 19.7 / 21.0 / 23.4 / 24.5 / 24.95 s; `_stills/final-qa-trans`: pops, docks, fine-print
+  fade, sign roll-call, exit and loop frames) plus six frames pulled from the rendered MP4. No renderer errors. No
+  clipped, overlapping or sub-30 px must-read text; nothing must-read in the no-go zones once the card is up (≈ 0.4 s;
+  at frame 0 the header peeks from the pocket at y ≈ 1530–1610, by design, and equals the last frame, so the loop is
+  seamless with no ghosting); takeaway card held 19.6–24.26 s; poster (23.4 s) reads inside the 3:4 crop. All 16 PMIDs
+  in `meta.json` re-opened on PubMed (author, year, journal, volume, pages and the abstract statements match).
+  **No change to the reel source, so the video was not re-rendered** (`reels/out/28-la-medical-conditions.mp4`:
+  1080×1920, 30 fps, 750 frames, ffprobe 25.000 s = `REEL.duration`). `meta.json` only: the Little 2006 quotation is now
+  verbatim ("pressor ammines [sic]", it had been silently corrected to "amines" inside quotation marks); the caption
+  Refs line gives the year of the ACOG opinion ("ACOG CO 569, 2013", matching the on-screen "ACOG 2013"); caption 699
+  characters.

@@ -48,20 +48,24 @@
     } else if (k === 8) {                                       // diagonal half
       g.beginPath(); g.moveTo(x, y); g.lineTo(x + s, y); g.lineTo(x, y + s); g.closePath(); mul(ink);
       g.beginPath(); g.arc(x + s * 0.7, y + s * 0.7, s * 0.16, 0, 7); mul(ink2);
-    } else {                                                    // concentric rings
-      for (const [r, c] of [[0.46, ink], [0.3, INK.paper], [0.16, ink2]]) {
-        g.beginPath(); g.arc(x + s / 2, y + s / 2, s * r, 0, 7);
-        if (c === INK.paper) { g.fillStyle = c; g.fill(); } else mul(c);
+    } else {                                                    // 3 x 3 dot grid
+      for (let j = 0; j < 3; j++) for (let i = 0; i < 3; i++) {
+        g.beginPath(); g.arc(x + s * (0.2 + i * 0.3), y + s * (0.2 + j * 0.3), s * 0.085, 0, 7); mul((i + j) % 2 ? ink2 : ink);
       }
     }
     g.restore();
   }
 
-  function band(g, y, rows, seed) {
-    const n = 8, s = (1016 - 64) / n, inks = [INK.teal, INK.brick, INK.mustard, INK.char];
+  // hand-set tiles: [motif, ink, second ink]; inks 0 teal, 1 brick, 2 mustard, 3 charcoal
+  const TOP = [[[5, 1, 3], [0, 0, 2], [6, 2, 2], [2, 1, 2], [7, 0, 2], [3, 2, 3], [1, 0, 1], [9, 1, 0]]];
+  const BOTTOM = [
+    [[9, 0, 2], [1, 1, 3], [4, 2, 0], [5, 0, 2], [0, 1, 2], [6, 0, 0], [3, 2, 1], [7, 1, 2]],
+    [[2, 2, 0], [8, 0, 1], [5, 1, 2], [3, 0, 3], [9, 2, 1], [4, 0, 2], [8, 1, 0], [0, 2, 3]],
+  ];
+  function band(g, y, spec) {
+    const rows = spec.length, n = 8, s = (1016 - 64) / n, inks = [INK.teal, INK.brick, INK.mustard, INK.char];
     for (let r = 0; r < rows; r++) for (let i = 0; i < n; i++) {
-      const kind = Math.floor(Kit.hash(i, r, seed) * 10);
-      const a = Math.floor(Kit.hash(i, r, seed + 1) * 3), b = (a + 1 + Math.floor(Kit.hash(i, r, seed + 2) * 3)) % 4;
+      const [kind, a, b] = spec[r][i];
       tile(g, 64 + i * s, y + r * s, s, kind, inks[a], inks[b]);
     }
     g.strokeStyle = INK.char; g.lineWidth = 2.5; g.strokeRect(64, y, 1016 - 64, rows * s);
@@ -103,8 +107,8 @@
     g.fillStyle = vg; g.fillRect(0, 0, W, H);
 
     // ---------- decoration outside the reading area (top 230 px, bottom 340 px): geometric tile bands
-    band(g, 66, 1, 11);            // y 66-185
-    band(g, 1634, 2, 23);          // y 1634-1872
+    band(g, 66, TOP);               // y 66-185
+    band(g, 1634, BOTTOM);          // y 1634-1872
     // registration marks
     const reg = (x, y) => { g.save(); g.strokeStyle = INK.char; g.globalAlpha = 0.6; g.lineWidth = 1.6; g.beginPath(); g.arc(x, y, 9, 0, 7); g.moveTo(x - 15, y); g.lineTo(x + 15, y); g.moveTo(x, y - 15); g.lineTo(x, y + 15); g.stroke(); g.restore(); };
     reg(W / 2, 34); reg(W / 2, 1896);

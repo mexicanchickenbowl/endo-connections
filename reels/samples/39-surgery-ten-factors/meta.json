@@ -1,0 +1,51 @@
+{
+  "id": "39",
+  "slug": "39-surgery-ten-factors",
+  "title": "10 factors: healing after periapical surgery",
+  "style": "Retro ten-pin bowling",
+  "topic": "Ten factors a Cohen's chapter links to periapical healing after periapical surgery: 7 from pooled data, 3 from individual studies.",
+  "duration": 30.0,
+  "claims": [
+    {
+      "claim": "Lesion size: ≤5 mm vs >5 mm — small side associated with better healing",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — unpublished pooled meta-analysis cited by the chapter (ref. 130, unpublished manuscript 2014); chapter RR 1.2 (95% CI 1.1, 1.3)"
+    },
+    {
+      "claim": "Cortical plates: one involved vs both — one-plate side associated with better healing",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — unpublished pooled meta-analysis cited by the chapter (ref. 130, unpublished manuscript 2014); chapter RR 1.2 (95% CI 1.0, 1.5)"
+    },
+    {
+      "claim": "Previous surgery: absent vs present — absent associated with better healing",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — unpublished pooled meta-analysis cited by the chapter (ref. 130, unpublished manuscript 2014); chapter RR 1.2 (95% CI 1.1, 1.3)"
+    },
+    {
+      "claim": "Magnification: used vs not used — used associated with better healing",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — unpublished pooled meta-analysis cited by the chapter (ref. 130, unpublished manuscript 2014); chapter RR 1.5 (95% CI 1.3, 1.8)"
+    },
+    {
+      "claim": "Root-end bevel: minimum vs obvious — minimum associated with better healing",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — unpublished pooled meta-analysis cited by the chapter (ref. 130, unpublished manuscript 2014); chapter RR 1.3 (95% CI 1.2, 1.4)"
+    },
+    {
+      "claim": "Retro-cavity prep: ultrasonic tip vs bur — ultrasonic tip associated with better healing",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — unpublished pooled meta-analysis cited by the chapter (ref. 130, unpublished manuscript 2014); chapter RR 1.3 (95% CI 1.2, 1.4)"
+    },
+    {
+      "claim": "Retro-filling: MTA, SuperEBA or IRM vs amalgam; MTA: similar outcome to SuperEBA or IRM",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — unpublished pooled meta-analysis cited by the chapter (ref. 130, unpublished manuscript 2014); chapter RR SuperEBA and IRM vs amalgam 1.2 (1.1, 1.3); MTA vs SuperEBA 1.0 (0.99, 1.1); MTA vs IRM 1.1 (0.98, 1.1)"
+    },
+    {
+      "claim": "Pre-op signs or symptoms: absent vs present — absent associated with better healing",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — individual study cited by the chapter: Villa-Machado et al., Int Endod J 2013;46:1063-76 (PMID 23560363); chapter RR 1.2 (1.1, 1.3). Direction is not stated in the chapter; taken from the study's PubMed abstract (univariate association)"
+    },
+    {
+      "claim": "Periodontal status: endo-only lesion vs endo-perio — isolated endodontic lesion associated with better healing",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — individual study cited by the chapter: Song et al., J Endod 2013;39:1491-7 (PMID 24238435); chapter RR 2.1 (1.1, 3.8). Direction and categories are not stated in the chapter; taken from the study's PubMed abstract"
+    },
+    {
+      "claim": "Coronal restoration: satisfactory vs unsatisfactory — satisfactory associated with better healing",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — individual study cited by the chapter: Villa-Machado et al., Int Endod J 2013;46:1063-76 (PMID 23560363); chapter RR 1.6 (1.2, 2.1). Direction is not stated in the chapter; taken from the study's PubMed abstract (independent association)"
+    }
+  ],
+  "caption": "Ten pins, ten factors: what is associated with better periapical healing after periapical surgery.\n\nA study summary of the Evaluation of Outcomes chapter in Cohen's Pathways of the Pulp, for teeth with a preoperative periapical radiolucency.\nBack 7 = the chapter's pooled analysis (unpublished). Front 3 = individual studies.\nThis is healing, not tooth survival, and these are associations, not guarantees.\n\nRefs: Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17; Villa-Machado 2013, Int Endod J; Song 2013, J Endod.\n#endodontics #apicalsurgery #apicoectomy #endoresident #boardreview #dentalstudent #endo"
+}

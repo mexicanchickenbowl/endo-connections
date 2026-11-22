@@ -24,7 +24,7 @@
     },
     {
       "claim": "Uncontrolled hyperthyroidism: no vasoconstrictor (epinephrine and levonordefrin both red)",
-      "source": "Little JW, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2006;101(3):276-84 (PMID 16504858; abstract: 'epinephrine or other pressor amines can cause a hypertensive crisis in the patient with uncontrolled hyperthyroidism'; 'avoid' is the conventional inference); interaction evidence rated weak by Yagiela 1999 (PMID 10332135)"
+      "source": "Little JW, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2006;101(3):276-84 (PMID 16504858; abstract: 'epinephrine or other pressor ammines [sic] can cause a hypertensive crisis in the patient with uncontrolled hyperthyroidism'; 'avoid' is the conventional inference); interaction evidence rated weak by Yagiela 1999 (PMID 10332135)"
     },
     {
       "claim": "Methemoglobinemia risk: avoid both prilocaine and benzocaine (red)",
@@ -47,5 +47,5 @@
       "source": "Schematic; brown drop after Guay J, Anesth Analg 2009 (PMID 19224791): 'Chocolate-colored blood suggests methemoglobinemia but other colors may be found'"
     }
   ],
-  "caption": "Before you inject: 8 histories that change the cartridge.\n\nHeart disease: ~0.04 mg epi (~2 cartridges of 1:100,000) per 30 min is convention, not a proven cap.\nNon-selective beta-blockers, tricyclics: epi isn't contraindicated; small doses, aspirate, recheck BP. Avoiding levonordefrin: label precaution.\nRecent cocaine: defer elective care.\nPregnancy: lidocaine ± epi considered safe (ACOG).\n\nRefs: Becker & Reed 2012, Becker 2008 & 2011 Anesth Prog; Hersh 2010, Naftalin 2002 DCNA; Yagiela 1985 OOOO; Yagiela 1999 JADA; Brand 2008 BDJ; Little 2006 OOOOE; Guay 2009 Anesth Analg; ACOG CO 569; FDA labels.\nSchematic pictograms.\n\n#endodontics #localanesthesia #dentistry #endoresident #boardprep"
+  "caption": "Before you inject: 8 histories that change the cartridge.\n\nHeart disease: ~0.04 mg epi (~2 cartridges of 1:100,000) per 30 min is convention, not a proven cap.\nNon-selective beta-blockers, tricyclics: epi isn't contraindicated; small doses, aspirate, recheck BP. Avoiding levonordefrin: label precaution.\nRecent cocaine: defer elective care.\nPregnancy: lidocaine ± epi considered safe (ACOG).\n\nRefs: Becker & Reed 2012, Becker 2008, 2011 Anesth Prog; Hersh 2010, Naftalin 2002 DCNA; Yagiela 1985 OOOO; Yagiela 1999 JADA; Brand 2008 BDJ; Little 2006 OOOOE; Guay 2009 Anesth Analg; ACOG CO 569, 2013; FDA labels.\nSchematic pictograms.\n\n#endodontics #localanesthesia #dentistry #endoresident #boardprep"
 }
