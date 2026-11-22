@@ -1,7 +1,8 @@
 # 25 — Outcome numbers worth memorizing (NSRCT, ReTx, apical surgery) — evidence brief
 
 Research stage only (nothing built). Compiled 2026-11-22 from PubMed (abstracts read for every paper cited;
-PMC full text read for Burns 2022 and Pinto 2020). "Verified from" says exactly what was read. Anything recalled
+PMC full text read for Burns 2022 and Pinto 2020; **[CA]** Setzer 2010 full text read in the citation audit, see the
+"Citation audit" section at the end). "Verified from" says exactly what was read. Anything recalled
 from memory but not found in an abstract/full text is marked **NOT VERIFIED** and must stay off screen.
 
 **Fact-checked 2026-11-22 (independent second pass).** Every row in section (a) and every on-screen fact in
@@ -74,7 +75,7 @@ Confidence = confidence that the source says exactly this (not that the number i
 
 | # | Fact as it could appear on screen | Exact source | What the source literally reports | Verified from | Confidence |
 |---|---|---|---|---|---|
-| S1 | **Traditional root-end surgery 59% vs endodontic microsurgery 94% (pooled success)** | Setzer FC, Shah SB, Kohli MR, Karabucak B, Kim S, J Endod 2010;36(11):1757-1765, PMID 20951283, doi:10.1016/j.joen.2010.08.007 | "21 studies qualified (12 for TRS [n = 925] and 9 for EMS [n = 699]) ... 59% positive outcome for TRS (95% CI, 0.55-0.6308) and 94% for EMS (95% CI, 0.8889-0.9816) ... (P < .0005). The relative risk ratio showed that the probability of success for EMS was 1.58 times". Separate single-arm study groups, not head-to-head trials. Minimum follow-up of included studies was 6 months according to Pinto 2020 (full text) — not stated in the Setzer abstract. **[FC]** Re-read in Pinto 2020 (PMC): "such a conclusion is based on studies with a minimum follow-up period of 6-months"; Pinto also groups Setzer 2010 with "previous reviews on the short-term outcome of EMS". The Setzer abstract says "positive outcome" and gives no criteria or follow-up; the Setzer full text was not read by either reviewer. On-screen tag: "POOLED · 6 MO+" (preferred, parallel to the other rows) — record in NOTES.md that the follow-up minimum is from a secondary source. | abstract (+ secondary full text for follow-up) | high for the numbers; medium for the 6-month detail |
+| S1 | **Traditional root-end surgery 59% vs endodontic microsurgery 94% (pooled success)** | Setzer FC, Shah SB, Kohli MR, Karabucak B, Kim S, J Endod 2010;36(11):1757-1765, PMID 20951283, doi:10.1016/j.joen.2010.08.007 | "21 studies qualified (12 for TRS [n = 925] and 9 for EMS [n = 699]) ... 59% positive outcome for TRS (95% CI, 0.55-0.6308) and 94% for EMS (95% CI, 0.8889-0.9816) ... (P < .0005). The relative risk ratio showed that the probability of success for EMS was 1.58 times". Separate single-arm study groups, not head-to-head trials. **[CA]** Minimum follow-up of included studies was 6 months: Setzer full text, inclusion criterion 3, "A minimum follow-up period of 6 months" (not stated in the abstract); success = "either complete or incomplete healing (scar tissue formation)" by Rud/Molven plus no clinical signs, evaluated per tooth (criteria 4–5). Pinto 2020 (full text) reports the same minimum. **[FC]** Re-read in Pinto 2020 (PMC): "such a conclusion is based on studies with a minimum follow-up period of 6-months"; Pinto also groups Setzer 2010 with "previous reviews on the short-term outcome of EMS". The Setzer abstract says "positive outcome" and gives no criteria or follow-up; the Setzer full text was not read by the first two reviewers and was read in the citation audit **[CA]**. On-screen tag: "POOLED · 6 MO+" (preferred, parallel to the other rows). | abstract + full text (**[CA]** article PDF hosted by the AAE) | high |
 | S2 | **Microscope/endoscope vs loupes-or-nothing with the same microinstruments: 94% vs 88%** | Setzer FC, Kohli MR, Shah SB, Karabucak B, Kim S, J Endod 2012;38(1):1-10, PMID 22152611, doi:10.1016/j.joen.2011.09.021 | "88% positive outcome for CRS (95% CI, 0.8455-0.9164) and 94% for EMS ... (P < .0005) ... RR 1.07 ... statistically significant for molars (n = 193, P = .011). No significant difference ... premolar or anterior". | abstract | high |
 | S3 | Microsurgery 94% vs resin-based (Retroplast-type) surgery 82% | Kohli MR et al., J Endod 2018;44(6):923-931, PMID 29681480, doi:10.1016/j.joen.2018.02.021 | "Weighted pooled success rates for RES were 82.20% ... and 94.42% for EMS ... (P < .0005)" (3 RES studies n = 862; 11 EMS studies n = 915). | abstract | high |
 | S4 | **Modern-technique surgery: 89% success at 1 yr (pooled)** | Tsesis I et al., J Endod 2013;39(3):332-339, PMID 23402503, doi:10.1016/j.joen.2012.11.044 | "In a follow-up of 1 year postoperatively, a successful outcome was achieved in 89.0% of patients ... microscope versus an endoscope were not significantly different, but both ... significantly better outcomes than loupes. The use of MTA ... better outcomes". (Earlier version: 91.6% at >1 yr — Tsesis 2009, J Endod 35:1505-1511, PMID 19840638, which found no significant effect of magnification type or root-end material.) | abstract | high |
@@ -140,7 +141,7 @@ full text). Three tags were changed — see the "[FC]" notes under the table.
 - **Ng 2008:** every number needs a follow-up. The abstract gives the inclusion minimum ("At least 6-month
   post-operative review"); studies were published 1961–2005.
 - **Setzer 2010:** the abstract gives no follow-up at all. "6 MO+" is the inclusion minimum as reported in Pinto
-  2020 (PMC full text, re-read) — a secondary source; say so in NOTES.md. "SHORT-TERM" is Pinto's description of
+  2020 (PMC full text, re-read) and **[CA]** confirmed in the Setzer full text (inclusion criterion 3). "SHORT-TERM" is Pinto's description of
   the review, not Setzer's, and is vaguer than the tags on the other rows.
 - **Salehrabi 2010:** if there is room, "BY ENDODONTISTS" is part of what that 89% means.
 
@@ -178,8 +179,8 @@ One honest qualifier for the whole board (small, inside the safe area):
 
 1. **Column header.** "SUCCESS (strict)" fits primary RCT and retreatment (Burns 2022, Ng 2008). It does not fit the
    surgery row: Setzer 2010 reports "weighted pooled success"/"positive outcome"; in that literature incomplete
-   (scar) healing is normally counted as success (Rud/Molven classes), and this was not confirmed in the Setzer full
-   text. Use a header "SUCCESS" with a criteria tag per cell, or keep "(strict)" only on the two nonsurgical rows.
+   (scar) healing is normally counted as success (Rud/Molven classes) — **[CA]** confirmed in the Setzer full text
+   (inclusion criterion 4: "either complete or incomplete healing (scar tissue formation)"). Use a header "SUCCESS" with a criteria tag per cell, or keep "(strict)" only on the two nonsurgical rows.
 2. **Ng 2007 "about 75% strict / 85% loose".** The abstract says the pooled strict success "ranged between 68% and
    85%" (treatments completed at least 1 year before review). The 74.7% (40 studies) and 85.2% (36 studies) means
    are full-text figures, verified here only as quoted in Burns 2022 (which itself writes 85.2% in the introduction
@@ -207,8 +208,8 @@ One honest qualifier for the whole board (small, inside the safe area):
 11. **Salehrabi & Rotstein 2010.** Confirmed: 89% retained at 5 yr; 4,744 teeth; retreatments by endodontists; 4% had
     apical surgery. (The abstract also says 11% were extracted.)
 12. **Setzer 2010.** Confirmed: traditional 59% (12 studies, n = 925) vs microsurgery 94% (9 studies, n = 699),
-    RR 1.58. These are pooled single-arm groups from different eras, with follow-up as short as 6 months (per Pinto
-    2020), not randomized comparisons.
+    RR 1.58. These are pooled single-arm groups from different eras, with a minimum follow-up of 6 months (**[CA]** Setzer
+    full text; all nine microsurgery studies had at least 12 months), not randomized comparisons.
 13. **Setzer 2012 ("magnification").** Confirmed: microinstruments with loupes/no magnification 88% vs
     microscope/endoscope 94%, RR 1.07; significant for molars only.
 14. **Tsesis 2013.** Confirmed: 89.0% at 1-yr follow-up; microscope/endoscope better than loupes; MTA better. The
@@ -251,9 +252,11 @@ One honest qualifier for the whole board (small, inside the safe area):
   (Sjögren 62%; Gorni 47%).
 - **Microsurgery 94% is a short-term pooled figure.** Long-term cohorts are lower (von Arx 2012: 84% → 76% from 1 to
   5 yr; Pinto 2020: 78% in prospective cohorts vs 91% in RCTs; von Arx 2019: 81.5% at 10 yr with MTA). Cochrane 2016
-  found no RCT evidence that magnification type changes healing. **[FC]** Its minimum follow-up was 6 months (per
-  Pinto 2020), and the Setzer abstract states neither follow-up nor success criteria. Other pooled microsurgery
-  estimates are lower: 92% (Kang 2015), 89.0% at 1 yr (Tsesis 2013), 84.5% (Sabeti 2023, 19 studies). The 94% is
+  found no RCT evidence that magnification type changes healing. **[FC]** Its minimum follow-up was 6 months (**[CA]**
+  Setzer full text, inclusion criterion 3; the abstract states neither follow-up nor success criteria; the
+  Discussion says every microsurgery study had at least 12 months). Other pooled estimates for microsurgery or
+  modern-technique surgery are lower: 92% (Kang 2015), 89.0% at 1 yr (Tsesis 2013 — a "modern technique" pool
+  that also included loupes studies), 84.5% (Sabeti 2023, 19 studies selected for reporting hard-tissue defects). The 94% is
   reproduced only within the same Penn series (Kohli 2018: 94.42%). Pinto's 91% "RCT" arm is itself inflated by a
   successes-only follow-up (Song 2012), so 78% from the prospective cohorts is the more sober long-term figure.
 - **59% vs 94% is not a trial.** It compares pooled case series from different decades, operators, case selection and
@@ -300,7 +303,7 @@ Added by the fact-check **[FC]**:
 - Do not animate "75% → 82%" as an update, and do not cite 74.7% / 85.2% to Ng 2007 on screen (full text unread).
 - Do not tag Sjögren's >96% as "HEALED" or any Sjögren number as "STRICT" (criteria are not in the abstract).
 - Do not show the Ng 2008 77% or the Setzer 59% / 94% without a follow-up tag; do not call the Setzer follow-up
-  anything more specific than "6 MO+" / "minimum 6 months" (secondary source).
+  anything more specific than "6 MO+" / "minimum 6 months" (**[CA]** now confirmed in the Setzer full text).
 - Do not call Kvist & Reit 1999 "the only RCT" of surgery versus retreatment (Danin 1996 is the other).
 - Do not attach "110,766" to Lazarski's 94.44% (the rate comes from the 44,613-case subset with 2 yr+ follow-up).
 - Do not print "RCT" beside Pinto's 91%, and do not present 94% as the consensus microsurgery success rate —
@@ -497,9 +500,58 @@ Sjögren 1990, Setzer 2010, Salehrabi & Rotstein 2004/2010 — anything that dep
 
 ### Residual uncertainty (keep in NOTES.md)
 
-- Setzer 2010: success criteria and follow-up are not in the abstract; "6 MO+" rests on Pinto 2020's description.
+- Setzer 2010: success criteria and follow-up are not in the abstract; "6 MO+" rested on Pinto 2020's description
+  until the citation audit read the Setzer full text (resolved, see below).
 - Sjögren 1990: criteria and unit of analysis are not in the abstract.
 - Ng 2007's 74.7% / 85.2% means: secondary citation only.
 - Salehrabi & Rotstein 2004/2010: whether every tooth was observed for the full 8 or 5 years is not stated in the
   abstracts; "retained" is the abstract's own word and is safe.
 - Lazarski 2001: the 44,613 denominator for 94.44% is inferred from the arithmetic in the abstract.
+
+---
+
+## Citation audit (third pass, 2026-11-22) — items marked **[CA]**
+
+Scope: every citation on screen (six source flaps), in meta.json (claims and caption Refs) and in NOTES.md, plus
+the rows of this file that support an on-screen claim.
+
+Method and result:
+- **Eight records pulled again from PubMed** (PMID 35334111, 15564861, 2084204, 19133093, 20416420, 20951283,
+  32899437, 25306305): first author, co-authors, year, journal, volume, issue, pages, PMID and DOI all belong to
+  one paper each and match what is written here, in NOTES.md and in meta.json. Every on-screen figure and tag is
+  in the abstract of the paper named on its flap, except the two items below that need full text.
+- **Burns 2022, PMC9322405 full text re-read:** Table 2 total row "39 / 7432 / 85.4 / 82.0 (79.3-84.8)" (strict)
+  and "21 / 2466 / 92 / 92.6 (90.5-94.8)" (loose); Table 3 pre-operative radiolucency No 90.3 [85, 95.6] (8
+  studies, 1,098 teeth), Yes 80.3 [73.4, 87.1] (8 studies, 1,126 teeth), OR 2.75 from 11 studies; follow-up
+  "ranged from 12-months to 19 years"; Ng 2007 quoted as 74.7% / 85.2% (introduction) and 74.7% / 85.3%
+  (discussion). All as written above.
+- **Setzer 2010 full text read for the first time** (the published article PDF hosted by the AAE:
+  aae.org/specialty/wp-content/uploads/sites/2/2017/07/setzerparti.pdf; first page prints "J Endod
+  2010;36:1757–1765"; not in PMC). Inclusion criteria, quoted: "3. A minimum follow-up period of 6 months."
+  "4. Success and failure were evaluated by using the radiographic parameters and clinical assessment of Rud et
+  al or Molven et al. Radiographically, success was defined as either complete or incomplete healing (scar tissue
+  formation) and clinically by the absence of pain, swelling, percussion sensitivity, or sinus tracts. Failure
+  included uncertain healing ... or unsatisfactory healing". "5. Success and failure were evaluated per tooth."
+  Group definitions (criterion 7): TRS = burs, amalgam root-end filling, 0–4× magnification; EMS = ultrasonic
+  root-end preparation, IRM / SuperEBA / MTA, 10× or more. Exclusions include lesions over 10 mm, apico-marginal
+  defects or periodontal disease, guided tissue regeneration, re-surgery, and "Less than 6 months of follow-up".
+  Results: "Success rates, after a minimum follow-up period of 6 months for TRS and EMS"; TRS 59% (59.04%; 12
+  studies, n = 925); EMS 94% (93.52%; 9 studies, n = 699; one study with 100% success entered as 0.99).
+  Discussion: "all studies in the EMS group have a minimum follow-up period of at least 12 months". So the
+  on-screen "POOLED · 6 MO+" tag and the caption's "surgical criteria, not strict" are now verified at the
+  primary source; nothing on screen changes.
+- **Pinto 2020, PMC7558840 full text re-read:** 91.3% (453 teeth, trials), 78.4% (839 teeth, prospective
+  cohorts), follow-up 2 to 13 years, survival 79–100% calculated by the reviewers; the sentence about the 94%
+  ("such a conclusion is based on studies with a minimum follow-up period of 6-months") is there as quoted. Note
+  that Pinto spells the first author "Seltzer" in that sentence.
+- **Off-screen references in this file:** 41 further citations (journal, year, volume, first page, first author)
+  were matched to their PMIDs with PubMed's citation matcher and all 41 returned the PMID written here. Abstracts
+  re-read in this pass: Ng 2007, Kang 2015, Tsesis 2009 and 2013, Sabeti 2023, von Arx 2012 and 2019, Kohli 2018,
+  Torabinejad 2007, Iqbal & Kim 2007, Gillen 2011, Chong 2003, Azim 2016 — numbers and bibliographic details as
+  written. The DOIs and co-author lists of the other off-screen references were not re-checked in this pass.
+  Rubinstein & Kim 1999 was looked up again (citation matcher, author search): still not found on PubMed.
+
+Changes made to this file: S1 row, (b) Setzer tag note, (c) items 1 and 12, (d) microsurgery bullet, (e) Setzer
+line and the residual-uncertainty line now cite the Setzer full text; the phrase "other pooled microsurgery
+estimates" was tightened because Tsesis 2013 pooled "modern technique" studies including loupes and Sabeti 2023
+selected studies reporting hard-tissue defects. No number, author, year, journal or PMID in this file was wrong.

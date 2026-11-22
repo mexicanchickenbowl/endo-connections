@@ -24,6 +24,9 @@ Duration 24.0 s, silent. About 61 must-read words. Poster = t 1.5 s (title + cir
 2. "may unwind" / "often no warning" — hedged on purpose: most clinically fractured files showed no visible
    deformation whatever the mechanism (Spanaki-Voreadi et al., Int Endod J 2006, PMID 16507069; Peng et al., Int
    Endod J 2005, PMID 16011774). Fracture at mid-curve: Pruett et al., J Endod 1997;23:77-85 (PMID 9220735, in vitro).
+   Direct support for "often no warning" on the fatigue card: Ohri 2024, PMC full text, section 5.1 ("Fatigue failure is
+   typically linked with no macroscopic warning signs of damage"). Spanaki-Voreadi attributed its no-deformation
+   fractures to a single overload, not to fatigue, so it supports the hedge, not "fatigue = no warning".
 3. tight curve, big file — Pruett 1997 (in vitro; smaller radius, larger angle and larger instrument = fewer cycles).
    big file = fatigue in a curve only (Pruett 1997); small files fail more by torsion: in Shen 2009 (below) 34 of 48
    defects were in size 20. The source line is therefore typed on both cards and the thread reaches them from FATIGUE only.
@@ -128,3 +131,27 @@ duration 24.000 s = REEL.duration; frames match the current source, so the reel 
 - Left as is: hard cut at the loop (no ghosting); the typewriter "1" in "≥ 1 yr"; "forced" is on screen about 1.0 s
   in its own shot (it returns in the prognosis shot and on the final board); the MP4 is 55 MB (cork grain under a
   moving camera), far larger than the other reels but within Instagram limits.
+
+## Citation audit (2026-11-22)
+Scope: every source line on screen (Sattapan 2000, Pruett 1997 x2, Parashos 2004, Berutti 2004, Spili 2005, Shen 2004),
+every claims[].source and the caption Refs line in meta.json, items 1-10 above, and RESEARCH.md.
+- The 16 papers cited in NOTES.md / meta.json were pulled again from PubMed (full record + abstract): first author,
+  co-authors, year, journal, volume, pages and PMID all belong to the same paper, and each abstract carries the number
+  or statement attached to it (91.8% / 94.5%, p > 0.05, 146 + 146, follow-up at least 1 year; "complete removal" before
+  the curve, 60% at, 31% beyond, 72 teeth, "removal or complete bypassing"; 7,159 instruments, 14 endodontists,
+  "most important influence on defect rates was the operator"; 10 vs 59 blocks; #40 fewer cycles than #30, radius
+  5 -> 2 mm, angle > 30 degrees, fracture at the midpoint of curvature; 34/48 defects in size 20; 73.9%; use in more
+  than four teeth; "Guidelines ... have not been formulated"; 84 of 97; 162 of 170).
+- The two full-text-only supports were re-read in PMC: Ohri 2024 (PMC11678187: "the tip or any other part of an
+  instrument binds to the canal wall, but the handpiece keeps turning"; "plastic deformation (unwinding)"; "Fatigue
+  failure is typically linked with no macroscopic warning signs of damage") and Fan 2025 (PMC12146410: "Additional
+  contributing factors include excessive force, high rotational speed, and skipping file sizes").
+- The other 54 PMIDs in RESEARCH.md, and Parashos & Messer 2006 (cited there without a PMID), were matched against
+  PubMed by journal / year / volume / first page / first author (citation matcher) or by author + year + PMID: all
+  resolve to the cited paper.
+- Result: no wrong PMID, author, year, journal, volume or page; no number taken from a different paper; no textbook
+  cited as a paper. Nothing on screen changed, so no stills were taken and the video was NOT re-rendered (ffprobe:
+  1080 x 1920, 30 fps, 720 frames, 24.000 s; MP4 is newer than every source file).
+- One precision fix (meta.json claim 1 source, item 2 above): the source string listed Spanaki-Voreadi 2006 next to
+  "FATIGUE ... often no warning" without saying that its authors blamed overload, not fatigue. The string now says
+  which paper supports which part and names Ohri 2024 (full text) as the direct support for "often no warning".

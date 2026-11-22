@@ -21,7 +21,9 @@
   "19-hydrodynamic-theory": "24e5a41d46a039e7ce2581ed381f9b5a",
   "20-bioceramic-setting": "6d3c61588c7107a1d5765cf1bb377de3",
   "33-resorption-external-cervical": "4a4ee0ee8abe0970cf925140aa5bbaf4",
-  "34-apical-prep-working-length": "9c7bd89236e3db6f2e1ea55703ab36b0"
+  "34-apical-prep-working-length": "9c7bd89236e3db6f2e1ea55703ab36b0",
+  "35-file-separation": "a0bbf324b6a213fde071ce506c02ebcd",
+  "36-x7-file-sequence": "0bb61a039d9202d916cb48edd27b7927"
  },
  "pos": {
   "01-pain-pathway": "0ae050f62c9b82b5273d3b41f29d33db",
@@ -45,6 +47,8 @@
   "19-hydrodynamic-theory": "59a858b0854870eb36299638548b76b9",
   "20-bioceramic-setting": "85531e260c9502b9175146d200bc3f82",
   "33-resorption-external-cervical": "6071e36d4d309ad7c32616fab6bc7958",
-  "34-apical-prep-working-length": "a5035159499c2c68965c6a1165739df7"
+  "34-apical-prep-working-length": "a5035159499c2c68965c6a1165739df7",
+  "35-file-separation": "89c76283213c41854449be206bd7ecb9",
+  "36-x7-file-sequence": "1a25f24f7ed353a9a8ff6d0df657cfaa"
  }
 }

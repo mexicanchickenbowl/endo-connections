@@ -216,8 +216,8 @@ function makeStamp(lines, o = {}) {
   c.putImageData(img, 0, 0);
   return { cv, w: cv.width, h: cv.height };
 }
-function drawStamp(c, st, x, y, rot, tApp, t) {
-  const p = seg(t, tApp, tApp + 0.15, ease.out); if (p <= 0) return;
+function drawStamp(c, st, x, y, rot, tApp, t, A = 1) {
+  const p = seg(t, tApp, tApp + 0.15, ease.out) * A; if (p <= 0) return;
   c.save(); c.translate(x, y); c.rotate(rad(rot)); const k = lerp(1.28, 1, p); c.scale(k, k);
   c.globalAlpha = p * 0.94; c.globalCompositeOperation = 'multiply'; c.drawImage(st.cv, -st.w / 2, -st.h / 2); c.restore();
 }
@@ -345,7 +345,7 @@ function makeOverlay() {                // static parts that sit above the paper
   // temperature anchors (the only numbers on the scale): start of Lottanti's controlled drop, and body temperature
   c.font = F.bc(30, 700); c.textBaseline = 'alphabetic'; c.fillStyle = C.blue; c.textAlign = 'left';
   const y75 = CHY + LN.temp + TMP0, y37 = y75 + (LN.tempH - 42);
-  c.fillText('75°C', px0 + 10, y75 - 20); c.fillText('37°C', px0 + 10, y37 - 15);          // both labels sit ABOVE their blue tick, inside the temperature lane
+  c.fillText('75°C', px0 + 10, y75 - 20); c.fillText('37°C', px0 + 10, y37 - 21);          // both labels sit ABOVE their blue tick, inside the temperature lane
   c.fillRect(px0 + 2, y75 - 1.5, 18, 3); c.fillRect(px0 + 2, y37 - 1.5, 18, 3);
   c.fillStyle = C.red; c.fillRect(px0 + 2, CHY + LN.vol + VOL0 - 1.5, 18, 3);               // starting size (no scale: schematic)
   c.beginPath(); c.moveTo(px0 + 38, CHY + LN.vol + 204); c.lineTo(px0 + 38, CHY + LN.vol + 238); c.strokeStyle = C.red; c.lineWidth = 3; c.stroke();
@@ -374,25 +374,29 @@ function strokeTrace(c, fn, s1, color, lw) {
   c.lineJoin = 'round'; c.lineCap = 'round'; c.strokeStyle = color;
   c.globalAlpha = 0.16; c.lineWidth = lw + 4; c.stroke(); c.globalAlpha = 0.95; c.lineWidth = lw; c.stroke(); c.globalAlpha = 1;
 }
-function markLine(c, s, tA, t) {
-  const p = seg(t, tA, tA + 0.2, ease.out); if (p <= 0) return;
-  const y0 = LN.temp - 10, y1 = LN.ru + LN.ruH - 8; c.fillStyle = C.black; c.globalAlpha = 0.9;
+function markLine(c, s, tA, t, A = 1) {
+  const p = seg(t, tA, tA + 0.2, ease.out); if (p <= 0 || A <= 0) return;
+  const y0 = LN.temp - 10, y1 = LN.ru + LN.ruH - 8; c.fillStyle = C.black; c.globalAlpha = 0.9 * A;
   c.fillRect(s - 6.2, y0, 2.2, (y1 - y0) * p); c.fillRect(s - 1.6, y0, 2.2, (y1 - y0) * p);
-  c.beginPath(); c.moveTo(s - 11, y0 - 11); c.lineTo(s + 5, y0 - 11); c.lineTo(s - 3, y0 + 1); c.closePath(); c.fill(); c.globalAlpha = 1;
+  c.beginPath(); c.moveTo(s - 11, y0 + 2); c.lineTo(s + 5, y0 + 2); c.lineTo(s - 3, y0 + 14); c.closePath(); c.fill(); c.globalAlpha = 1;
 }
-function note(c, s, tA, t) {            // operator's typed note at a speed-change mark
+function note(c, s, tA, t, A) {         // operator's typed note at the first speed-change mark (light: it is about the chart, not the material)
   const n = Math.floor(seg(t, tA, tA + 0.42) * 19); if (n <= 0) return;
-  tw(c, 'CHART SPEED', s - 13, LN.vol + 37, 30, { bold: 1, align: 'right', reveal: n, seed: 31 });
-  tw(c, 'CHANGED', s - 13, LN.vol + 71, 30, { bold: 1, align: 'right', reveal: n - 11, seed: 32 });
+  tw(c, 'CHART SPEED', s - 16, LN.vol + 37, 30, { align: 'right', reveal: n, seed: 31, color: C.dim, alpha: A });
+  tw(c, 'CHANGED', s - 16, LN.vol + 71, 30, { align: 'right', reveal: n - 11, seed: 32, color: C.dim, alpha: A });
 }
+const POS = {};                         // stamp anchors (paper coordinates), filled in setup() once the stamp sizes are known
+const NUM = { txt: '1.0–2.3% linear', px: 30, xr: S1 - 16, y: LN.vol + 178 };
+const BRK = { txt: '45 min–10 h', px: 36, x: S1 + 9, y: LN.br + 53 };
 function drawPaper(c, S, t) {
   const off = PENX - S; let x0 = (((off % 500) + 500) % 500) - 500;
   c.globalAlpha = 1; c.globalCompositeOperation = 'source-over';
   for (let x = x0; x < PW; x += 500) c.drawImage(tile, x, 0);
   if (off + S3 + 60 < 0) return;                         // everything has scrolled off
+  const A = 1 - seg(t, EV.opOut[0], EV.opOut[1]);        // annotations fade before the fast paper feed (loop)
   c.save(); c.translate(off, 0); c.globalCompositeOperation = 'multiply';
-  // ── printed by the recorder: appears at the pen station ──
-  c.save(); c.beginPath(); c.rect(-4000, 0, 4000 + S + 3, CHH); c.clip();
+  // ── printed by the recorder: appears at the pen station (from under the scale plate) ──
+  c.save(); c.beginPath(); c.rect(-4000, 0, 4000 + S + 9, CHH); c.clip();
   const sr = Math.min(S, S2), down = seg(t, EV.penDown[0] + 0.12, EV.penDown[1]);
   if (down > 0) {
     c.fillStyle = C.blue; c.globalAlpha = 0.9 * down; c.beginPath(); c.arc(0, yTmp(0), 3.1, 0, TAU); c.fill();
@@ -405,38 +409,41 @@ function drawPaper(c, S, t) {
   // time marks
   c.fillStyle = C.black; c.globalAlpha = 0.85;
   const tick = (s, len) => c.fillRect(s - 0.9, LN.ru, 1.8, len);
-  if (t >= T.start) { for (let k = 0; k <= 10; k++) tick(23 * k, k % 5 === 0 ? 17 : 9); for (let h = 1; h <= 24; h++) tick(sHr(h), h % 5 === 0 ? 17 : 9); for (let dd = 2; dd <= 6; dd++) tick(S2 + (dd - 1) * DAYPX, 13); }
+  if (t >= T.start) { for (let k = 0; k <= 10; k++) tick(MINPX * k, k % 5 === 0 ? 17 : 9); for (let h = 1; h <= 24; h++) tick(sHr(h), h % 5 === 0 ? 17 : 9); for (let dd = 2; dd <= 6; dd++) tick(S2 + (dd - 1) * DAYPX, 13); }
   c.globalAlpha = 1;
   if (t >= T.start) {
     tw(c, '0', 5, LN.ru + 49, 30, { bold: 1, seed: 21 });
-    tw(c, '10 min', S1 - 12, LN.ru + 49, 30, { bold: 1, align: 'right', seed: 22 });
-    tw(c, '24 h', S2 - 12, LN.ru + 49, 30, { bold: 1, align: 'right', seed: 23 });
+    tw(c, '10 min', S1 - 20, LN.ru + 49, 30, { bold: 1, align: 'right', seed: 22 });
+    tw(c, '24 h', S2 - 20, LN.ru + 49, 30, { bold: 1, align: 'right', seed: 23 });
     tw(c, 'days ?', S2 + 14, LN.ru + 49, 30, { bold: 1, seed: 24 });
+    // the cooling reading, printed under the red trace as the paper passes the pen (Lottanti 2014: linear %, 10 min)
+    const nx = NUM.xr - NUM.txt.length * NUM.px * ADV, nrev = Math.floor((S + 2 - nx) / (NUM.px * ADV));
+    if (nrev > 0) tw(c, NUM.txt, nx, NUM.y, NUM.px, { bold: 1, color: C.red, reveal: nrev, seed: 43, alpha: A });
   }
-  markLine(c, S1, EV.mark1, t); markLine(c, S2, EV.mark2, t);
+  markLine(c, S1, EV.mark1, t, A); markLine(c, S2, EV.mark2, t, A);
   c.restore();
-  // ── added by the operator: stamps, typed notes, bracket ──
-  drawStamp(c, STAMP.cool, 108, LN.vol + 206, -4, EV.cool, t);
-  note(c, S1, EV.note1, t);
+  // ── added by the operator: stamps, typed note, bracket (only ever on paper that has already passed the pen) ──
+  drawStamp(c, STAMP.cool, POS.cool[0], POS.cool[1], -4, EV.cool, t, A);
+  note(c, S1, EV.note1, t, A);
   const bp = seg(t, EV.brk, EV.brk + 0.45, ease.inOut);
   if (bp > 0) {
-    const by = LN.br + 15, xe = lerp(S45, S10, bp);
-    c.strokeStyle = C.red; c.lineWidth = 3; c.lineCap = 'butt'; c.globalAlpha = 0.92;
+    const by = LN.br + 14, xe = lerp(S45, S10, bp);
+    c.strokeStyle = C.red; c.lineWidth = 3; c.lineCap = 'butt'; c.globalAlpha = 0.92 * A;
     c.beginPath(); c.moveTo(S45, by); c.lineTo(xe, by); c.moveTo(S45, by - 9); c.lineTo(S45, by + 9); if (bp >= 1) { c.moveTo(S10, by - 9); c.lineTo(S10, by + 9); } c.stroke();
-    c.lineWidth = 1.6; c.setLineDash([5, 5]); c.globalAlpha = 0.7 * seg(t, EV.brk + 0.3, EV.brk + 0.7);
+    c.lineWidth = 1.6; c.setLineDash([5, 5]); c.globalAlpha = 0.7 * A * seg(t, EV.brk + 0.3, EV.brk + 0.7);
     c.beginPath(); c.moveTo(S45, by - 12); c.lineTo(S45, yVol(S45) + 6); c.moveTo(S10, by - 12); c.lineTo(S10, yVol(S10) + 6); c.stroke(); c.setLineDash([]); c.globalAlpha = 1;
-    tw(c, '45 min–10 h', S1 + 9, LN.br + 53, 30, { bold: 1, color: C.red, reveal: Math.floor(seg(t, EV.brkLab, EV.brkLab + 0.35) * 11), seed: 41 });
+    const brev = Math.min(Math.floor(seg(t, EV.brkLab, EV.brkLab + 0.35) * BRK.txt.length), Math.floor((S - 8 - BRK.x) / (BRK.px * ADV)));
+    if (brev > 0) tw(c, BRK.txt, BRK.x, BRK.y, BRK.px, { bold: 1, color: C.red, reveal: brev, seed: 41, alpha: A });
   }
-  drawStamp(c, STAMP.cryst, 357, LN.vol + 101, 4, EV.cryst, t);
-  drawStamp(c, STAMP.stable, 538, LN.vol + 240, -3, EV.stable, t);
-  note(c, S2, EV.note2, t);
-  const hp = seg(t, EV.nodata - 0.05, EV.nodata + 0.3);
+  drawStamp(c, STAMP.cryst, POS.cryst[0], POS.cryst[1], 3, EV.cryst, t, A);
+  drawStamp(c, STAMP.stable, POS.stable[0], POS.stable[1], -3, EV.stable, t, A);
+  const hp = seg(t, EV.nodata - 0.05, EV.nodata + 0.3) * A;
   if (hp > 0) {
     c.save(); c.beginPath(); c.rect(S2 + 8, LN.temp + 2, S3 - S2 - 8, LN.tempH + LN.volH - 4); c.clip();
     c.strokeStyle = 'rgba(60,54,48,1)'; c.globalAlpha = 0.2 * hp; c.lineWidth = 1.6; c.beginPath();
     for (let k = -30; k < 24; k++) { c.moveTo(S2 + k * 15, LN.vol + LN.volH); c.lineTo(S2 + k * 15 + 380, LN.temp); } c.stroke(); c.restore();
   }
-  drawStamp(c, STAMP.nodata, (S2 + S3) / 2 - 2, LN.vol + 104, -8, EV.nodata, t);
+  drawStamp(c, STAMP.nodata, POS.nodata[0], POS.nodata[1], -5, EV.nodata, t, A);
   c.restore();
 }
 
@@ -463,13 +470,15 @@ function drawPen(y, color, lift, light) {
 }
 
 function drawChart(t, S) {
-  const Sp = paperS(Math.max(0, t - 1 / 30)), n = clamp(Math.ceil(Math.abs(S - Sp) / 5), 1, 10);
+  const Sp = paperS(Math.max(0, t - 1 / 30)), n = clamp(Math.ceil(Math.abs(S - Sp) / 4.5), 1, 26);
   if (n === 1) { drawPaper(pcx, S, t); ctx.drawImage(pc, 0, CHY); }
   else {                                                   // fast paper feed → motion blur
     for (let i = 0; i < n; i++) { pcx.save(); drawPaper(pcx, lerp(Sp, S, (i + 1) / n), t); pcx.restore(); accx.globalAlpha = 1 / (i + 1); accx.drawImage(pc, 0, 0); }
     ctx.drawImage(acc, 0, CHY);
   }
   ctx.drawImage(shade, 0, CHY);
+  const dim = 0.2 * Math.min(seg(t, 15.5, 15.9, ease.smooth), 1 - seg(t, 18.5, 18.95, ease.smooth));   // payoff: the eye should go to the canal card
+  if (dim > 0) { ctx.fillStyle = `rgba(20,26,22,${dim})`; ctx.fillRect(0, CHY, PW, CHH); }
   ctx.drawImage(overlay, 0, 0);
   // REC lamp
   const rec = Math.min(seg(t, T.start - 0.1, T.start + 0.05), 1 - seg(t, EV.lift[0], EV.lift[0] + 0.2));
@@ -485,7 +494,7 @@ function drawChart(t, S) {
 }
 
 // ───────────────────────── specimen card ─────────────────────────
-const SP = { cx: 160, yT: 44, yB: 262, lx: 424, ly: 131, lr: 94 };
+const SP = { cx: 160, yT: 44, yB: 234, lx: 424, ly: 131, lr: 94 };
 const halfW = (y) => lerp(60, 44, (y - SP.yT) / (SP.yB - SP.yT));
 const PART = (() => { const r = rng(77), a = []; for (let k = 0; k < 60; k++) a.push([r(), r(), r(), r()]); return a; })();
 function gpColors(heat) {
@@ -500,7 +509,7 @@ function dentinPath(c, sg) {
 function drawSpec(c, st) {
   const { cx, yT, yB, lx, ly, lr } = SP, B = st.mode === 'B', col = gpColors(st.heat), film = 6;
   // header
-  c.font = F.bc(22, 600); c.fillStyle = C.pre; c.textBaseline = 'alphabetic'; spaced(c, B ? 'CANAL · COMPACTION + SEALER' : 'CANAL CUTAWAY · SCHEMATIC', 548, 27, 1.6, 'right');
+  c.font = F.bc(24, 600); c.fillStyle = '#4f705d'; c.textBaseline = 'alphabetic'; spaced(c, B ? 'CANAL · COMPACTION + SEALER' : 'NO-SEALER CANAL · SCHEMATIC', 548, 28, 1.5, 'right');
   // dentin (sectioned → hatched)
   for (const sg of [-1, 1]) {
     dentinPath(c, sg); c.fillStyle = C.dentin; c.fill();
@@ -551,14 +560,14 @@ function drawSpec(c, st) {
   c.lineWidth = 1.3; c.beginPath(); c.moveTo(dx + 5, dy - 14); c.lineTo(lx - (lr + 4) * Math.cos(rad(32)), ly - (lr + 4) * Math.sin(rad(32))); c.moveTo(dx + 5, dy + 14); c.lineTo(lx - (lr + 4) * Math.cos(rad(32)), ly + (lr + 4) * Math.sin(rad(32))); c.stroke();
   // ── loupe ──
   c.save(); c.beginPath(); c.arc(lx, ly, lr, 0, TAU); c.clip();
-  const wallX = lx - 36;
+  const wallX = lx - (B ? 62 : 36);
   c.fillStyle = C.dentin; c.fillRect(lx - lr, ly - lr, wallX - (lx - lr), lr * 2);
   c.strokeStyle = C.dentinLn; c.lineWidth = 1.3; c.globalAlpha = 0.9;                       // dentinal tubules
   for (let y = ly - lr; y < ly + lr; y += 8) { c.beginPath(); c.moveTo(lx - lr, y + 7); c.bezierCurveTo(lx - lr + 20, y + 1, wallX - 22, y + 6, wallX, y); c.stroke(); }
   c.globalAlpha = 1;
-  const sw = B ? 16 : 0, gw = B ? 7 * st.g : 50 * st.g;
+  const sw = B ? 22 : 0, gw = B ? 7 * st.g : 50 * st.g;
   c.fillStyle = C.voidc; c.fillRect(wallX, ly - lr, lr * 2, lr * 2);
-  if (B) { c.fillStyle = C.sealer; c.fillRect(wallX, ly - lr, sw, lr * 2); c.fillStyle = 'rgba(92,110,124,.35)'; for (let k = 0; k < 10; k++) { c.beginPath(); c.arc(wallX + 4 + PART[k][0] * 14, ly - lr + 8 + k * 19, 1.4 + PART[k][1] * 1.6, 0, TAU); c.fill(); } c.fillStyle = C.sealerLn; c.fillRect(wallX + sw - 1, ly - lr, 1.6, lr * 2); }
+  if (B) { c.fillStyle = C.sealer; c.fillRect(wallX, ly - lr, sw, lr * 2); c.fillStyle = 'rgba(92,110,124,.35)'; for (let k = 0; k < 10; k++) { c.beginPath(); c.arc(wallX + 4 + PART[k][0] * (sw - 8), ly - lr + 8 + k * 19, 1.4 + PART[k][1] * 1.6, 0, TAU); c.fill(); } c.fillStyle = C.sealerLn; c.fillRect(wallX + sw - 1, ly - lr, 1.6, lr * 2); }
   const ge = (y) => wallX + sw + gw + (gw > 0.5 ? 2.2 * noise1(y / 13, 4) * Math.min(1, gw / 8) : 0);
   c.beginPath(); c.moveTo(ge(ly - lr), ly - lr); for (let y = ly - lr; y <= ly + lr; y += 4) c.lineTo(ge(y), y); c.lineTo(lx + lr, ly + lr); c.lineTo(lx + lr, ly - lr); c.closePath();
   const lg = c.createLinearGradient(wallX, 0, lx + lr, 0); lg.addColorStop(0, col.edge); lg.addColorStop(1, col.mid);
@@ -575,8 +584,11 @@ function drawSpec(c, st) {
   }
   if (st.heat > 0.02) { const hg = c.createRadialGradient(lx + 40, ly, 10, lx + 40, ly, 130); hg.addColorStop(0, `rgba(255,225,130,${0.4 * st.heat})`); hg.addColorStop(1, 'rgba(255,160,60,0)'); c.fillStyle = hg; c.fillRect(wallX + sw + gw, ly - lr, lr * 2, lr * 2); }
   if (B) {                                                                                  // sealer call-out
-    tw(c, 'sealer', lx - 12, ly + 9, 30, { bold: 1, seed: 51 });
-    c.strokeStyle = C.ink; c.lineWidth = 2; c.beginPath(); c.moveTo(lx - 15, ly - 1); c.lineTo(wallX + 12, ly - 1); c.stroke(); c.fillStyle = C.ink; c.beginPath(); c.arc(wallX + 11, ly - 1, 3.6, 0, TAU); c.fill();
+    const tx = lx - 26, tyy = ly + 10;                                                       // typed label strip, leader dot centered in the film
+    c.save(); c.shadowColor = 'rgba(40,25,10,.45)'; c.shadowBlur = 5; c.shadowOffsetY = 2; c.fillStyle = '#f6f0dd'; rr(c, tx - 7, ly - 19, 6 * 30 * ADV + 14, 38, 3); c.fill(); c.restore();
+    c.strokeStyle = 'rgba(37,33,28,.55)'; c.lineWidth = 1.2; rr(c, tx - 7, ly - 19, 6 * 30 * ADV + 14, 38, 3); c.stroke();
+    tw(c, 'sealer', tx, tyy, 30, { bold: 1, seed: 51 });
+    c.strokeStyle = C.ink; c.lineWidth = 2.2; c.beginPath(); c.moveTo(tx - 7, ly); c.lineTo(wallX + sw / 2, ly); c.stroke(); c.fillStyle = C.ink; c.beginPath(); c.arc(wallX + sw / 2, ly, 4, 0, TAU); c.fill();
   }
   c.restore();
   // lens rim
@@ -585,7 +597,8 @@ function drawSpec(c, st) {
   c.strokeStyle = 'rgba(30,30,25,.7)'; c.lineWidth = 1.2; c.beginPath(); c.arc(lx, ly, lr - 4.5, 0, TAU); c.stroke(); c.beginPath(); c.arc(lx, ly, lr + 4.5, 0, TAU); c.stroke();
   c.strokeStyle = 'rgba(255,255,255,.5)'; c.lineWidth = 4; c.lineCap = 'round'; c.beginPath(); c.arc(lx, ly, lr - 16, rad(205), rad(250)); c.stroke(); c.lineCap = 'butt';
   // label
-  tw(c, B ? 'schematic' : 'gap exaggerated', lx - 8, 263, 29, { bold: 1, align: 'center', seed: 52, color: C.ink });
+  if (B) tw(c, 'illustration', lx, 265, 30, { bold: 1, align: 'center', seed: 53, color: C.ink });
+  else { const la = clamp((st.g - 0.04) / 0.12); if (la > 0) tw(c, 'gap exaggerated', lx - 22, 265, 30, { bold: 1, align: 'center', seed: 52, color: C.ink, alpha: la }); }
 }
 function specState(t, S) {
   const sr = clamp(S, 0, S2);
@@ -613,25 +626,20 @@ function drawWatch(t, S) {
   const c = ctx, { cx, cy, R } = WATCH, back = seg(t, EV.reset[0] - 0.05, EV.reset[1] - 0.1, ease.inOut);
   const sc = clamp(S, 0, S3) * (1 - back);
   // crown (pressed at start and at reset)
-  const press = 5 * (Math.sin(Math.PI * seg(t, 0.8, 1.02)) + Math.sin(Math.PI * seg(t, EV.reset[0] - 0.12, EV.reset[0] + 0.1)));
+  const press = 5 * (Math.sin(Math.PI * seg(t, T.start - 0.2, T.start + 0.02)) + Math.sin(Math.PI * seg(t, EV.reset[0] - 0.12, EV.reset[0] + 0.1)));
   c.save();
   let g = c.createLinearGradient(cx - 18, 0, cx + 18, 0); g.addColorStop(0, '#5d6664'); g.addColorStop(0.35, '#e6e9e7'); g.addColorStop(1, '#6c7573');
   c.fillStyle = '#6f7876'; c.fillRect(cx - 7, cy - R - 12 + press * 0.3, 14, 14);
   c.fillStyle = g; rr(c, cx - 17, cy - R - 30 + press, 34, 20, 4); c.fill();
   c.strokeStyle = 'rgba(30,35,34,.55)'; c.lineWidth = 1.2; for (let k = -3; k <= 3; k++) { c.beginPath(); c.moveTo(cx + k * 4.6, cy - R - 28 + press); c.lineTo(cx + k * 4.6, cy - R - 12 + press); c.stroke(); }
-  // zone names along the scale (active zone printed dark)
-  const zone = sc < S1 - 0.01 ? 0 : sc < S2 - 0.01 ? 1 : 2;
-  c.font = F.bc(28, 700); c.textBaseline = 'alphabetic'; c.fillStyle = C.ink;
-  [['MIN', -72], ['HOURS', 4], ['DAYS', 77]].forEach(([s, deg], i) => { c.globalAlpha = i === zone ? 0.95 : 0.3; arcText(c, s, cx, cy, 53, deg, 1.5); });
-  c.globalAlpha = 1;
   // read-out
   let txt;
-  if (sc < S1 - 0.01) txt = Math.floor(sc / 23 + 0.02) + ' min';
+  if (sc < S1 - 0.01) txt = Math.floor(sc / MINPX + 0.02) + ' min';
   else if (sc <= S2 + 0.01) { const h = 1 / 6 + ((sc - S1) / (S2 - S1)) * (24 - 1 / 6); txt = h < 1 ? Math.floor((h * 60) / 10 + 0.01) * 10 + ' min' : Math.min(24, Math.floor(h + 0.01)) + ' h'; }
-  else txt = Math.floor(1 + (sc - S2) / DAYPX + 0.03) + ' d';
+  else txt = '>24 h';                    // nothing was observed past 24 h: no day count, and the hand stays on the 24 h tick
   tw(c, txt, cx, cy + 60, 30, { bold: 1, align: 'center', seed: 61 });
   // hand
-  c.translate(cx, cy); c.rotate(dialAng(sc));
+  c.translate(cx, cy); c.rotate(dialAng(Math.min(sc, S2)));
   c.shadowColor = 'rgba(30,22,8,.4)'; c.shadowBlur = 4; c.shadowOffsetX = 2; c.shadowOffsetY = 3;
   c.fillStyle = '#1d2a3d'; c.beginPath(); c.moveTo(-3.2, 18); c.lineTo(-1.1, -(R - 24)); c.lineTo(1.1, -(R - 24)); c.lineTo(3.2, 18); c.closePath(); c.fill();
   c.shadowColor = 'transparent'; g = c.createRadialGradient(-2, -2, 1, 0, 0, 8); g.addColorStop(0, '#f0dba0'); g.addColorStop(1, '#8a7038'); c.fillStyle = g; c.beginPath(); c.arc(0, 0, 7.5, 0, TAU); c.fill();
@@ -642,23 +650,22 @@ function drawWatch(t, S) {
 
 // ───────────────────────── captions (typed on the READING card) ─────────────────────────
 const CAPS = [
-  { a: 1.4, b: 5.75, lines: [
+  { a: 0.8, b: 5.9, lines: [
     { y: 80, px: 48, bold: 1, segs: [['1.0–2.3 %', C.red], [' linear shrinkage', C.ink]] },
-    { y: 122, px: 32, segs: [['in 10 min · 75→37 °C · in vitro', C.ink]] }],
+    { y: 126, px: 38, bold: 1, segs: [['in 10 min · 75→37 °C', C.dim]] }],
     src: 'Lottanti 2014 J Endod' },
   { a: 6.1, b: 10.9, lines: [
-    { y: 80, px: 48, bold: 1, segs: [['Keeps shrinking: ', C.ink], ['45 min–10 h', C.red]] },
-    { y: 122, px: 32, segs: [['held at 37 °C · in vitro', C.ink]] }],
-    src: 'Lee 1997 J Endod  ·  4 products  ·  mechanism inferred (Grassi 1989 J Endod)' },
+    { y: 80, px: 44, bold: 1, segs: [['Keeps shrinking for ', C.ink], ['45 min–10 h', C.red]] },
+    { y: 126, px: 38, bold: 1, segs: [['held at 37 °C', C.dim]] }],
+    src: 'Lee 1997 J Endod' },
   { a: 11.3, b: 15.3, lines: [
-    { y: 80, px: 48, bold: 1, segs: [['Then stable to 24 h.', C.ink]] },
-    { y: 122, px: 32, at: 12.6, segs: [['After 24 h: ', C.ink], ['no data found', C.red]] }],
-    src: 'Lee 1997 J Endod  ·  in vitro' },
+    { y: 94, px: 48, bold: 1, segs: [['Then stable to 24 h.', C.ink]] }],
+    src: 'Lee 1997 J Endod' },
   { a: 15.7, b: 19.6, lines: [
     { y: 78, px: 58, bold: 1, segs: [['Compact it warm.', C.ink]] },
     { y: 134, px: 58, bold: 1, segs: [['Use sealer.', C.ink]] },
-    { y: 134, px: 32, x: 440, at: 16.1, segs: [['(in vitro)', C.dim]] }],
-    src: 'Marlin 1971 thesis (publ. OOO 1973)  ·  Wu 2000 Int Endod J' },
+    { y: 134, px: 38, bold: 1, x: 440, at: 16.1, segs: [['(in vitro)', C.dim]] }],
+    src: 'Marlin 1971 BU thesis  ·  Bradshaw 1989 Int Endod J' },
 ];
 function drawCaption(t) {
   const c = ctx;
@@ -701,13 +708,22 @@ window.REEL = {
   duration: T.dur,
   poster: 19.2,
   canvas,
-  fonts: ['400 80px "Special Elite"', '700 48px "Courier Prime"', '400 32px "Courier Prime"', '700 34px "Barlow Condensed"', '600 26px "Barlow Condensed"', '500 26px "Barlow Condensed"'],
+  fonts: ['400 80px "Special Elite"', '700 48px "Courier Prime"', '400 30px "Courier Prime"', '700 34px "Barlow Condensed"', '600 26px "Barlow Condensed"', '500 26px "Barlow Condensed"'],
   setup() {
     makeTile();
     STAMP.cool = makeStamp([{ t: 'COOLING', px: 40, sp: 3 }], { seed: 2 });
-    STAMP.cryst = makeStamp([{ t: 'CRYSTALLIZING', px: 34, sp: 1.6 }], { seed: 5, pad: [13, 11] });
-    STAMP.stable = makeStamp([{ t: 'STABLE', px: 38, sp: 3 }, { t: 'IN VITRO', px: 27, sp: 2 }], { seed: 9, pad: [15, 10] });
-    STAMP.nodata = makeStamp([{ t: 'NO DATA', px: 42, sp: 2 }, { t: 'FOUND', px: 42, sp: 4 }], { seed: 13, color: C.black, double: true, pad: [18, 16], r: 4 });
+    STAMP.cryst = makeStamp([{ t: 'CRYSTALLIZING?', px: 34, sp: 1.6 }], { seed: 5, pad: [13, 11] });       // '?' = inferred mechanism
+    STAMP.stable = makeStamp([{ t: 'STABLE', px: 42, sp: 3 }], { seed: 9, pad: [13, 10] });
+    STAMP.nodata = makeStamp([{ t: 'NO DATA', px: 40, sp: 2 }, { t: 'FOUND', px: 40, sp: 4 }], { seed: 13, color: C.black, double: true, pad: [12, 13], r: 4 });
+    // anchors (stamp canvases carry an 8 px margin on every side); landing times wait until the paper under them is recorded
+    const fw = (st) => st.w - 16;
+    POS.cool = [150, LN.vol + 228];
+    POS.cryst = [S1 + 12 + fw(STAMP.cryst) / 2, LN.vol + 88];
+    POS.stable = [Math.min((S10 + S2) / 2 + 4, S2 - 12 - fw(STAMP.stable) / 2), LN.vol + 230];
+    POS.nodata = [(S2 + S3) / 2 - 1, LN.vol + 96];
+    EV.cool = Math.max(4.3, tWhenS(POS.cool[0] + fw(STAMP.cool) / 2 + 10));
+    EV.cryst = Math.max(9.0, tWhenS(POS.cryst[0] + fw(STAMP.cryst) / 2 + 12));
+    window.__GEOM = { fw: { cool: fw(STAMP.cool), cryst: fw(STAMP.cryst), stable: fw(STAMP.stable), nodata: fw(STAMP.nodata) }, POS, cool: EV.cool, cryst: EV.cryst, S45, S10, titlePx };
     makeBG(); makeOverlay();
     pc = mk(PW, CHH); pcx = pc.getContext('2d', { alpha: false });
     acc = mk(PW, CHH); accx = acc.getContext('2d', { alpha: false });

@@ -10,14 +10,15 @@
 const { canvas, ctx } = Kit.createCanvas();
 const { W, H, clamp, lerp, seg, env, ease, rng, hash, noise1 } = Kit;
 const TAU = Math.PI * 2, D2R = Math.PI / 180;
-const T = 24;
+const T = 23.4;
 
 /* ------------------------------------------------------------------ timeline */
-const SC_MA = [2.8, 7.0], SC_KV = [7.0, 14.2], SC_TS = [14.2, 18.5], END0 = 18.5;
-const TURN_MA = [3.5, 5.0], TURN_KV = [7.8, 9.4], TURN_TS = [15.5, 16.2], RESET = [23.1, 23.8];
-const BEAM = [[0.35, 13.8], [14.6, 15.4], [16.35, 17.95]];        // EXPOSE held, then two timed pulses
-const KVB = 10.4;                                                   // kVp caption: second line swaps in
-const ROW0 = 0.3, ROWD = 0.35;                                      // cheat-sheet rows: first at END0 + ROW0, then every ROWD
+const SC_MA = [2.2, 6.4], SC_KV = [6.4, 13.6], SC_TS = [13.6, 18.0], END0 = 18.0;
+const TURN_MA = [2.7, 4.2], TURN_KV = [7.2, 8.8], TURN_TS = [15.4, 16.1], RESET = [T - 0.9, T - 0.2];
+const BEAM = [[0.35, 13.2], [14.5, 15.3], [16.25, 17.85]];        // EXPOSE held, then two timed pulses
+const KVB = 9.8, KVC = 11.4;                                        // kVp scene: beat 2 (more photons), beat 3 (less contrast)
+const ROW0 = 0.25, ROWD = 0.3;                                      // cheat-sheet rows: first at END0 + ROW0, then every ROWD
+const WIG0 = 0.45, WIGD = 0.3, WIGL = 0.6;                          // hook: each knob wiggles once with its lamp
 const TURNS = [TURN_MA, TURN_KV, TURN_TS];
 const eio = ease.inOut;
 const back = (t) => seg(t, RESET[0], RESET[1], eio);
@@ -26,8 +27,8 @@ const setKV = (t) => 60 + 10 * (seg(t, TURN_KV[0], TURN_KV[1], eio) - back(t));
 const setTS = (t) => 0.10 + 0.10 * (seg(t, TURN_TS[0], TURN_TS[1], eio) - back(t));
 const beamOn = (t) => BEAM.some(([a, b]) => t >= a && t < b);
 // cheat sheet: the dark backdrop closes before the rows appear and opens only after they have faded (no ghosting)
-const cheatA = (t) => Math.min(seg(t, END0, END0 + 0.35, ease.smooth), 1 - seg(t, 23.2, 23.55, ease.smooth));
-const cheatTxt = (t) => 1 - seg(t, 22.95, 23.2, ease.smooth);
+const cheatA = (t) => Math.min(seg(t, END0, END0 + 0.35, ease.smooth), 1 - seg(t, T - 0.8, T - 0.45, ease.smooth));
+const cheatTxt = (t) => 1 - seg(t, T - 1.05, T - 0.8, ease.smooth);
 
 /* ------------------------------------------------------------------ toy spectrum (schematic) */
 const E_PTS = [10, 15, 20, 30, 40, 50, 60, 80, 100];
@@ -357,7 +358,7 @@ function scopeStatic(c) {
   c.strokeStyle = 'rgba(140,255,190,0.55)'; c.lineWidth = 2; c.beginPath(); c.moveTo(SCOPE.x0 - 6, SCOPE.base); c.lineTo(SCOPE.x0 + 80 * SCOPE.kx + 12, SCOPE.base); c.stroke();
   c.beginPath(); c.moveTo(SCOPE.x0, SCOPE.base + 4); c.lineTo(SCOPE.x0, SCOPE.base - SCOPE.hgt - 6); c.stroke();
   for (let E = 10; E <= 80; E += 10) { const xx = SCOPE.x0 + E * SCOPE.kx; c.strokeStyle = 'rgba(140,255,190,0.5)'; c.lineWidth = E % 20 ? 1.2 : 2; c.beginPath(); c.moveTo(xx, SCOPE.base); c.lineTo(xx, SCOPE.base + (E % 20 ? 5 : 9)); c.stroke(); }
-  [20, 40].forEach((E) => txt(c, String(E), SCOPE.x0 + E * SCOPE.kx, SCOPE.base + 36, '600 27px "Barlow Condensed"', 'rgba(140,255,190,0.7)', 'center', '1px'));
+  [20, 40].forEach((E) => txt(c, String(E), SCOPE.x0 + E * SCOPE.kx, SCOPE.base + 38, '600 30px "Barlow Condensed"', 'rgba(140,255,190,0.7)', 'center', '1px'));
   arrowUp(c, SCOPE.x0, SCOPE.base - SCOPE.hgt - 4, 13, 'rgba(140,255,190,0.55)');
   c.restore();
 }
@@ -378,7 +379,6 @@ function vuStatic(c) {
     c.strokeStyle = f > 0.86 ? '#c8321c' : '#2a1b10'; c.lineWidth = major ? 3 : 1.6;
     c.beginPath(); c.moveTo(px + R * Math.sin(a), py - R * Math.cos(a)); c.lineTo(px + r1 * Math.sin(a), py - r1 * Math.cos(a)); c.stroke();
   }
-  txt(c, 'kV × mA', fx + fw - 10, fy + 100, '600 22px "Barlow Condensed"', '#6e4b2a', 'right', '0.5px');
   g = c.createLinearGradient(0, fy, 0, fy + 26); g.addColorStop(0, 'rgba(0,0,0,0.28)'); g.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = g; c.fillRect(fx, fy, fw, 26);
   c.restore();
   // lower legend plate
@@ -414,12 +414,21 @@ function exposeStatic(c) {
   });
 }
 
+/* header of each knob column = [lamp] [name] [readout], laid out as one tight group centered on its knob so that a
+ * value sits next to its own name (the TIME group is right-anchored at x = 942 to stay clear of the button column) */
+function layoutHeaders(c) {
+  KNOBS.forEach((K, k) => {
+    const wn = tw(c, K.name, '700 40px Oswald', '0.5px'), winW = k === 2 ? 130 : 78, tot = 34 + 6 + wn + 16 + winW;
+    const x0 = Math.round(k === 2 ? 942 - tot : K.cx - tot / 2);
+    K.hd = { lamp: x0 + 17, name: x0 + 40, win: x0 + 40 + wn + 16, winW };
+  });
+}
 function knobStatic(c, K) {
   const { cx } = K, cy = KY;
   // header: lamp bezel, engraved name, readout window
-  jewelBezel(c, cx - 126, 1245, 12);
-  engrave(c, K.name, cx - 104, 1261, '700 40px Oswald', 'left', '0.5px');
-  glassWindow(c, cx - 4, 1216, 136, 58, 6);
+  jewelBezel(c, K.hd.lamp, 1245, 12);
+  engrave(c, K.name, K.hd.name, 1261, '700 40px Oswald', 'left', '0.5px');
+  glassWindow(c, K.hd.win, 1216, K.hd.winW, 58, 6);
   // engraved scale
   const dir = (a) => [Math.sin(a * D2R), -Math.cos(a * D2R)];
   const tick = (a, r0, r1, lw) => { const [dx, dy] = dir(a); c.lineCap = 'butt'; c.strokeStyle = 'rgba(255,255,255,0.55)'; c.lineWidth = lw; c.beginPath(); c.moveTo(cx + r0 * dx + 0.8, cy + r0 * dy + 1.2); c.lineTo(cx + r1 * dx + 0.8, cy + r1 * dy + 1.2); c.stroke(); c.strokeStyle = COL.ink; c.beginPath(); c.moveTo(cx + r0 * dx, cy + r0 * dy); c.lineTo(cx + r1 * dx, cy + r1 * dy); c.stroke(); };
@@ -442,32 +451,41 @@ function buildFace() {
   return cv;
 }
 
-/* mini radiograph + step wedge; contrast k around mid-gray */
-function buildRadiograph(k, lift) {
-  const w = 244, h = 108, cv = document.createElement('canvas'); cv.width = w; cv.height = h; const c = cv.getContext('2d');
-  const tone = (gv) => { const v = clamp(0.5 + (gv - 0.5) * k + lift), L = 255 * Math.pow(v, 1.05); return `rgb(${(L * 0.93) | 0},${(L * 0.97) | 0},${L | 0})`; };
+/* mini radiograph + step wedge. k = contrast of the OBJECT tones about a pivot just under mid-gray; the directly
+ * exposed background (gv <= 0.1) is left black at any k: raising kVp never lightens the raw-beam area. The swatch is
+ * drawn density-matched, as in textbook step-wedge figures (at unchanged mAs the real image would also be darker). */
+function buildRadiograph(k) {
+  const w = 244, h = 108, mk = () => { const cv = document.createElement('canvas'); cv.width = w; cv.height = h; return cv; };
+  const cv = mk(), c = cv.getContext('2d'), lay = mk(), l = lay.getContext('2d');
+  const tone = (gv) => { const v = gv <= 0.1 ? gv : clamp(0.45 + (gv - 0.45) * k), L = 255 * Math.pow(v, 1.05); return `rgb(${(L * 0.93) | 0},${(L * 0.97) | 0},${L | 0})`; };
   c.fillStyle = tone(0.07); c.fillRect(0, 0, w, h);
-  // bone
-  c.fillStyle = tone(0.40); c.fillRect(0, 54, 178, h - 54);
+  // soft tissue over the crest, then bone with trabeculae (drawn on a layer and blurred slightly)
+  l.fillStyle = tone(0.40); l.beginPath(); l.moveTo(0, 56); l.quadraticCurveTo(45, 51, 90, 55); l.quadraticCurveTo(135, 51, 178, 56); l.lineTo(178, h); l.lineTo(0, h); l.closePath(); l.fill();
   const r = rng(77);
-  for (let i = 0; i < 260; i++) { c.fillStyle = tone(0.30 + r() * 0.22); c.beginPath(); c.ellipse(r() * 178, 57 + r() * (h - 57), 2 + r() * 3.5, 1.5 + r() * 2.5, r() * 3, 0, TAU); c.fill(); }
-  c.fillStyle = tone(0.50); c.fillRect(0, 53, 178, 3);
+  for (let i = 0; i < 300; i++) { l.fillStyle = tone(0.28 + r() * 0.26); l.beginPath(); l.ellipse(r() * 178, 60 + r() * (h - 60), 1.6 + r() * 3.2, 1.2 + r() * 2.2, r() * 3, 0, TAU); l.fill(); }
+  l.strokeStyle = tone(0.54); l.lineWidth = 2; l.beginPath(); l.moveTo(0, 56); l.quadraticCurveTo(45, 51, 90, 55); l.quadraticCurveTo(135, 51, 178, 56); l.stroke();   // crestal cortex
   const tooth = (ox, sc) => {
-    c.save(); c.translate(ox, 0); c.scale(sc, 1);
-    const root = () => { c.beginPath(); c.moveTo(-36, 44); c.lineTo(36, 44); c.quadraticCurveTo(34, 78, 25, 101); c.quadraticCurveTo(21, 106, 17, 100); c.quadraticCurveTo(10, 78, 0, 62); c.quadraticCurveTo(-10, 78, -17, 100); c.quadraticCurveTo(-21, 106, -25, 101); c.quadraticCurveTo(-34, 78, -36, 44); c.closePath(); };
-    root(); c.lineWidth = 6; c.strokeStyle = tone(0.16); c.stroke();            // PDL space
-    root(); c.fillStyle = tone(0.64); c.fill();                               // dentin (roots)
-    c.beginPath(); c.moveTo(-38, 46); c.quadraticCurveTo(-45, 22, -37, 11); c.quadraticCurveTo(-20, 3, 0, 9); c.quadraticCurveTo(20, 3, 37, 11); c.quadraticCurveTo(45, 22, 38, 46); c.closePath(); c.fillStyle = tone(0.95); c.fill();   // enamel
-    c.beginPath(); c.moveTo(-30, 47); c.quadraticCurveTo(-34, 28, -27, 20); c.quadraticCurveTo(-14, 14, 0, 19); c.quadraticCurveTo(14, 14, 27, 20); c.quadraticCurveTo(34, 28, 30, 47); c.closePath(); c.fillStyle = tone(0.64); c.fill(); // dentin (crown)
-    c.fillStyle = tone(0.30); rr(c, -18, 30, 36, 17, 6); c.fill();            // pulp chamber
-    c.strokeStyle = tone(0.32); c.lineCap = 'round'; c.lineWidth = 3.4; c.beginPath(); c.moveTo(-13, 44); c.quadraticCurveTo(-22, 72, -21, 96); c.moveTo(13, 44); c.quadraticCurveTo(22, 72, 21, 96); c.stroke();
-    c.restore();
+    l.save(); l.translate(ox, 3); l.scale(sc, 1); l.lineJoin = 'round'; l.lineCap = 'round';
+    const root = () => { l.beginPath(); l.moveTo(-32, 44); l.lineTo(32, 44); l.bezierCurveTo(33, 68, 30, 90, 25, 100); l.quadraticCurveTo(20, 107, 15, 99); l.bezierCurveTo(11, 84, 8, 70, 0, 61); l.bezierCurveTo(-8, 70, -11, 84, -15, 99); l.quadraticCurveTo(-20, 107, -25, 100); l.bezierCurveTo(-30, 90, -33, 68, -32, 44); l.closePath(); };
+    root(); l.lineWidth = 6.5; l.strokeStyle = tone(0.56); l.stroke();        // lamina dura
+    root(); l.lineWidth = 3.4; l.strokeStyle = tone(0.17); l.stroke();        // PDL space
+    root(); l.fillStyle = tone(0.64); l.fill();                               // dentin (roots)
+    l.beginPath(); l.moveTo(-32, 47); l.bezierCurveTo(-44, 39, -46, 20, -36, 11); l.bezierCurveTo(-28, 4, -13, 5, -6, 11); l.quadraticCurveTo(0, 15, 6, 11); l.bezierCurveTo(13, 5, 28, 4, 36, 11); l.bezierCurveTo(46, 20, 44, 39, 32, 47); l.closePath(); l.fillStyle = tone(0.95); l.fill();   // enamel
+    l.beginPath(); l.moveTo(-32, 48); l.bezierCurveTo(-37, 39, -37, 27, -29, 21); l.bezierCurveTo(-22, 16, -12, 17, -6, 21); l.quadraticCurveTo(0, 24, 6, 21); l.bezierCurveTo(12, 17, 22, 16, 29, 21); l.bezierCurveTo(37, 27, 37, 39, 32, 48); l.closePath(); l.fillStyle = tone(0.64); l.fill();   // dentin (crown)
+    l.fillStyle = tone(0.30); l.beginPath(); l.moveTo(-16, 44); l.bezierCurveTo(-19, 36, -17, 29, -12, 29); l.quadraticCurveTo(-6, 33, 0, 32); l.quadraticCurveTo(6, 33, 12, 29); l.bezierCurveTo(17, 29, 19, 36, 16, 44); l.closePath(); l.fill();   // pulp chamber with horns
+    l.strokeStyle = tone(0.34); l.lineWidth = 2.8; l.beginPath(); l.moveTo(-12, 43); l.bezierCurveTo(-18, 62, -21, 80, -20, 95); l.moveTo(12, 43); l.bezierCurveTo(18, 62, 21, 80, 20, 95); l.stroke();   // canals
+    l.restore();
   };
-  c.save(); c.translate(0, 3); tooth(88, 1); tooth(-6, 0.82); tooth(182, 0.82); c.restore();
+  tooth(88, 1); tooth(-6, 0.82); tooth(182, 0.82);
+  c.save(); c.beginPath(); c.rect(0, 0, 178, h); c.clip(); c.filter = 'blur(0.9px)'; c.drawImage(lay, 0, 0); c.restore();
   c.fillStyle = tone(0.07); c.fillRect(178, 0, w - 178, h);
   // step wedge
   [0.92, 0.72, 0.52, 0.32, 0.14].forEach((gv, i) => { c.fillStyle = tone(gv); c.fillRect(192, 8 + i * 18.4, 40, 18.4); });
   c.strokeStyle = 'rgba(255,255,255,0.12)'; c.lineWidth = 1; c.strokeRect(192.5, 8.5, 39, 91);
+  // film grain (same seed in both swatches, so the crossfade does not shimmer)
+  const id = c.getImageData(0, 0, w, h), d = id.data, g = rng(123);
+  for (let i = 0; i < d.length; i += 4) { const n = (g() - 0.5) * (6 + 0.05 * d[i + 2]); d[i] = clamp(d[i] + n, 0, 255); d[i + 1] = clamp(d[i + 1] + n, 0, 255); d[i + 2] = clamp(d[i + 2] + n, 0, 255); }
+  c.putImageData(id, 0, 0);
   return cv;
 }
 
@@ -513,11 +531,11 @@ function buildBG() {
   c.save(); rr(c, STRIP.x, STRIP.y, STRIP.w, STRIP.h, 10); c.clip(); brushed(c, STRIP.x, STRIP.y, STRIP.w, STRIP.h, 71); c.restore();
   g = c.createLinearGradient(0, STRIP.y, 0, STRIP.y + STRIP.h); g.addColorStop(0, 'rgba(255,255,255,0.9)'); g.addColorStop(1, 'rgba(0,0,0,0.45)');
   c.strokeStyle = g; c.lineWidth = 2; rr(c, STRIP.x + 1, STRIP.y + 1, STRIP.w - 2, STRIP.h - 2, 9); c.stroke();
-  KNOBS.forEach((K) => knobStatic(c, K));
+  layoutHeaders(c); KNOBS.forEach((K) => knobStatic(c, K));
   [[STRIP.x + 18, STRIP.y + STRIP.h - 60], [STRIP.x + STRIP.w - 18, STRIP.y + 22], [STRIP.x + STRIP.w - 18, STRIP.y + STRIP.h - 60]].forEach(([sx, sy], i) => screw(c, sx, sy, 6.5, 0.5 + i * 1.3));
-  { const src = 'McCollough; Zink, Radiographics 1997  ·  Seibert, J Nucl Med Technol 2004  ·  EC RP136 2004  ·  values illustrative';
-    let fpx = 24; while (fpx > 22 && tw(c, src, `500 ${fpx}px "Barlow Condensed"`) > 868) fpx -= 0.5;
-    engrave(c, src, 72, 1571, `500 ${fpx}px "Barlow Condensed"`, 'left', '0px', '#2a2622'); window.__srcw = [fpx, tw(c, src, `500 ${fpx}px "Barlow Condensed"`)]; }
+  { const src = 'McCollough; Zink, Radiographics 1997  ·  Seibert, J Nucl Med Technol 2004  ·  values illustrative';
+    let fpx = 25; while (fpx > 22 && tw(c, src, `500 ${fpx}px "Barlow Condensed"`) > 868) fpx -= 0.5;
+    engrave(c, src, 72, 1561, `500 ${fpx}px "Barlow Condensed"`, 'left', '0px', '#2a2622'); window.__srcw = [fpx, tw(c, src, `500 ${fpx}px "Barlow Condensed"`)]; }
 
   // ---- bottom: louvers, feet ----
   rr(c, 108, 1640, 864, 214, 12); c.fillStyle = 'rgba(0,0,0,0.45)'; c.fill();
@@ -545,18 +563,18 @@ function drawCaption(t) {
   ctx.save(); ctx.globalCompositeOperation = 'lighter'; glow(ctx, px, GL.y + GL.h - 12, 26, '255,70,40', 0.5); ctx.restore();
   ctx.fillStyle = '#ff5a3c'; ctx.fillRect(px - 1.5, GL.y + GL.h - 24, 3, 22);
   // handle, printed like a brand line on the dial
-  txt(ctx, '@natebrooksendo', GL.x + 20, GL.y + GL.h - 9, '500 25px "Barlow Condensed"', 'rgba(255,190,96,0.78)', 'left', '1.2px');
+  const aMA = env(t, SC_MA[0] + 0.1, SC_MA[1], 0.2, 0.2), aKV = env(t, SC_KV[0] + 0.05, SC_KV[1], 0.2, 0.2), aTS = env(t, SC_TS[0] + 0.05, END0 + 0.3, 0.2, 0.2);
+  txt(ctx, '@natebrooksendo', GL.x + 20, GL.y + GL.h - 9, '500 25px "Barlow Condensed"', `rgba(255,190,96,${lerp(0.78, 0.58, Math.max(aMA, aKV, aTS))})`, 'left', '1.2px');
 
   // --- title ---
-  const aT = Math.max(1 - seg(t, SC_MA[0] - 0.2, SC_MA[0] + 0.1), seg(t, END0 + 0.25, END0 + 0.65));
+  const aT = Math.max(1 - seg(t, SC_MA[0] - 0.1, SC_MA[0] + 0.1), seg(t, END0 + 0.35, END0 + 0.7));
   if (aT > 0.003) {
     ctx.save(); ctx.globalAlpha = aT; capGlow(aT);
-    const w1 = tw(ctx, '3 KNOBS', '700 100px Oswald', '2px'), w2 = Math.max(tw(ctx, 'What does each do', '500 44px "Barlow Condensed"'), tw(ctx, 'inside the tube?', '500 44px "Barlow Condensed"'));
-    const x0 = cxm - (w1 + 36 + w2) / 2;
+    const fq = '500 60px "Barlow Condensed"', w1 = tw(ctx, '3 KNOBS', '700 100px Oswald', '2px'), w2 = tw(ctx, 'What does each do?', fq);
+    const x0 = cxm - (w1 + 40 + w2) / 2;
     txt(ctx, '3 KNOBS', x0, GL.y + 106, '700 100px Oswald', COL.amber, 'left', '2px');
     ctx.shadowBlur = 12;
-    txt(ctx, 'What does each do', x0 + w1 + 36, GL.y + 63, '500 44px "Barlow Condensed"', COL.cream);
-    txt(ctx, 'inside the tube?', x0 + w1 + 36, GL.y + 111, '500 44px "Barlow Condensed"', COL.cream);
+    txt(ctx, 'What does each do?', x0 + w1 + 40, GL.y + 99, fq, COL.cream);
     ctx.restore();
   }
   // --- scene captions: headline + one sub line ---
@@ -572,16 +590,13 @@ function drawCaption(t) {
   };
   const sub = (a, parts) => { if (a <= 0.003) return; ctx.save(); ctx.globalAlpha = a; ctx.shadowColor = `rgba(255,150,40,${0.55 * a})`; ctx.shadowBlur = 10; rich(ctx, parts, cxm, GL.y + 122, F.sub); ctx.restore(); };
   const C = COL.cream, dotc = 'rgba(243,232,205,0.55)';
-  const aMA = env(t, SC_MA[0] + 0.12, SC_MA[1], 0.3, 0.3);
   if (aMA > 0.003) { head(aMA, 'mA', 'HOW MANY'); sub(aMA, [{ t: 'more ', c: C }, { t: 'electrons', c: COL.blue }, { t: ', more ', c: C }, { t: 'photons', c: COL.green }, { t: '  ·  ', c: dotc }, { t: 'same energies', c: C }]); }
-  const aKV = env(t, SC_KV[0] + 0.05, SC_KV[1], 0.3, 0.3);
   if (aKV > 0.003) {
     const sh = seg(t, KVB, KVB + 0.45, ease.smooth);
     head(aKV, 'kVp', 'HOW HARD', '+ HOW MANY', sh);
-    sub(aKV * (1 - seg(t, KVB - 0.15, KVB + 0.1)), [{ t: 'each ', c: C }, { t: 'electron', c: COL.blue }, { t: ' hits harder', c: C }, { t: '  ·  ', c: dotc }, { t: 'max keV = kVp', c: COL.green }]);
-    sub(aKV * seg(t, KVB + 0.15, KVB + 0.45), [{ t: 'more ', c: C }, { t: 'photons', c: COL.green }, { t: '  ·  ', c: dotc }, { t: 'output ~ kVp', c: C }, { t: '2', c: C, sup: true }]);
+    sub(aKV * (1 - seg(t, KVB - 0.15, KVB + 0.1)), [{ t: 'max keV = kVp', c: COL.green }]);
+    sub(aKV * seg(t, KVB + 0.15, KVB + 0.45), [{ t: 'output ~ kVp', c: C }, { t: '2', c: C, sup: true }]);
   }
-  const aTS = env(t, SC_TS[0] + 0.05, SC_TS[1], 0.3, 0.3);
   if (aTS > 0.003) { head(aTS, 'TIME', 'HOW LONG'); sub(aTS, [{ t: 'same beam, on longer', c: C }, { t: '  ·  ', c: dotc }, { t: 'mAs = mA × s', c: COL.amberHot }]); }
   // glass sheen
   const g = ctx.createLinearGradient(GL.x, GL.y, GL.x + 420, GL.y + GL.h); g.addColorStop(0, 'rgba(255,255,255,0.07)'); g.addColorStop(0.5, 'rgba(255,255,255,0.015)'); g.addColorStop(1, 'rgba(255,255,255,0)');
@@ -683,7 +698,7 @@ function drawCheat(t) {
   const a = cheatA(t); if (a <= 0.003) return;
   const { x, y, w, h } = TW;
   ctx.save(); rr(ctx, x, y, w, h, 8); ctx.clip();
-  ctx.fillStyle = `rgba(10,7,5,${0.992 * a})`; ctx.fillRect(x, y, w, h);
+  ctx.fillStyle = `rgba(10,7,5,${a})`; ctx.fillRect(x, y, w, h);
   const g = ctx.createRadialGradient(540, y + h + 80, 40, 540, y + h, 700); g.addColorStop(0, `rgba(255,160,60,${0.10 * a})`); g.addColorStop(1, 'rgba(255,160,60,0)'); ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
   const rows = [
     { name: 'mA', how: 'HOW MANY', yb: y + 82, right: [[{ t: 'same energies', c: COL.cream }]] },
@@ -700,7 +715,7 @@ function drawCheat(t) {
     txt(ctx, R.how, x + 284, R.yb, F.head, '#fff6e0', 'left', '1px');
     ctx.shadowBlur = 10;
     if (R.plus) txt(ctx, R.plus, x + 284, R.yb + 52, '500 42px Oswald', COL.green, 'left', '0.5px');
-    R.right.forEach((parts, j) => rich(ctx, parts, x + 612, R.yb - 6 + j * 52, '600 42px "Barlow Condensed"', 'left'));
+    R.right.forEach((parts, j) => rich(ctx, parts, x + 640, R.yb - 5 + j * 53, '600 46px "Barlow Condensed"', 'left'));
     ctx.restore();
   });
   ctx.restore();
@@ -738,18 +753,21 @@ function drawImage_(t) {
   ctx.save(); rr(ctx, x + 10, y + 40, w - 20, 108, 4); ctx.clip();
   const g = ctx.createLinearGradient(x, y + 40, x + 160, y + 150); g.addColorStop(0, 'rgba(255,255,255,0.16)'); g.addColorStop(0.5, 'rgba(255,255,255,0.02)'); g.addColorStop(1, 'rgba(255,255,255,0)');
   ctx.fillStyle = g; ctx.fillRect(x + 10, y + 40, w - 20, 108); ctx.restore();
-  // legends
-  const pl = seg(t, TURN_KV[0] + 0.3, TURN_KV[0] + 1.2) * (1 - back(t)), lit = seg(pl, 0.55, 1), pulse = env(t, KVB + 1.5, KVB + 3.3, 0.5, 0.6);
+  // legends: the plate reads IMAGE until the third beat of the kVp scene, then the claim lights up (one focus at a time);
+  // 'exaggerated' is on whenever the flattened swatch is
+  const lab = seg(t, KVC, KVC + 0.45) * (1 - back(t)), lit = seg(lab, 0.45, 1), pulse = env(t, KVC + 0.1, KVC + 1.8, 0.4, 0.5);
+  const dim = seg(t, SC_KV[1] - 0.3, SC_KV[1]) * (1 - seg(t, END0 + ROW0 + ROWD, END0 + ROW0 + ROWD + 0.4));   // quiet during TIME
   const cx = x + w / 2;
-  if (pl < 0.45) txt(ctx, 'IMAGE', cx, y + 31, F.lab, `rgba(243,232,205,${0.7 * (1 - seg(pl, 0, 0.45))})`, 'center', '4px');
+  if (lab < 0.45) txt(ctx, 'IMAGE', cx, y + 31, F.lab, `rgba(243,232,205,${0.7 * (1 - seg(lab, 0, 0.45))})`, 'center', '4px');
   if (lit > 0.003) {
-    ctx.save(); ctx.globalAlpha = lit; ctx.shadowColor = `rgba(255,150,40,${0.7 + 0.3 * pulse})`; ctx.shadowBlur = 12 + 14 * pulse;
+    ctx.save(); ctx.globalAlpha = lit * lerp(1, 0.6, dim); ctx.shadowColor = `rgba(255,150,40,${(0.7 + 0.3 * pulse) * (1 - dim)})`; ctx.shadowBlur = (12 + 14 * pulse) * (1 - dim);
     const f = '600 30px "Barlow Condensed"', w1 = tw(ctx, 'kVp', f), w2 = tw(ctx, 'LESS CONTRAST', f), tot = w1 + 34 + w2, x0 = cx - tot / 2;
     txt(ctx, 'kVp', x0, y + 32, f, COL.amber, 'left'); arrowUp(ctx, x0 + w1 + 14, y + 31, 19, COL.amber);
     txt(ctx, 'LESS CONTRAST', x0 + w1 + 34, y + 32, f, '#fff6e0', 'left');
-    ctx.shadowBlur = 0; txt(ctx, 'exaggerated', cx, y + 178, '500 30px "Barlow Condensed"', 'rgba(243,232,205,0.92)', 'center', '1.5px');
     ctx.restore();
   }
+  const exA = k * lerp(0.62, 0.92, lit) * lerp(1, 0.72, dim);
+  if (exA > 0.003) txt(ctx, 'exaggerated', cx, y + 178, '500 30px "Barlow Condensed"', `rgba(243,232,205,${exA})`, 'center', '1.5px');
 }
 
 function exposeState(t) {
@@ -771,10 +789,13 @@ function drawExpose(t) {
   // LED bar (each segment = 0.02 s)
   const bx = x + 12, by = y + 98;
   for (let i = 0; i < 10; i++) {
-    const l = S.lit * clamp(S.segs - i + 0.5);
+    const l = S.lit * clamp(S.segs - i);
     rr(ctx, bx + i * 50, by, 44, 26, 4); ctx.fillStyle = Kit.rgba(Kit.mix([58, 34, 10], [255, 190, 80], l)); ctx.fill();
     if (l > 0.02) { ctx.save(); ctx.globalCompositeOperation = 'lighter'; glow(ctx, bx + i * 50 + 22, by + 13, 44, '255,150,40', 0.38 * l); ctx.restore(); rr(ctx, bx + i * 50 + 4, by + 3, 36, 8, 3); ctx.fillStyle = `rgba(255,246,214,${0.5 * l})`; ctx.fill(); }
   }
+  // peak-hold marker (VU style): where the first, 0.10 s exposure stopped; the second one visibly runs past it
+  const hold = S.lit * seg(t, BEAM[1][1] - 0.04, BEAM[1][1] + 0.12);
+  if (hold > 0.01) { ctx.save(); ctx.shadowColor = `rgba(255,236,190,${hold})`; ctx.shadowBlur = 9; ctx.fillStyle = `rgba(255,250,232,${hold})`; ctx.fillRect(bx + 245.4, by - 5, 3.2, 36); ctx.restore(); }
 }
 
 function tracePath(kv, ma, close) {
@@ -794,7 +815,7 @@ function drawScope(t) {
   ghost(env(t, TURN_MA[0], SC_MA[1] + 0.2, 0.3, 0.5), 60, 4);
   ghost(env(t, TURN_KV[0], SC_KV[1] + 0.2, 0.3, 0.5), 60, 8);
   // kVp scene, second beat: the photons gained (area between the stored 60 kVp trace and the live one)
-  const gain = env(t, KVB + 0.25, SC_KV[1] - 0.2, 0.6, 0.6);
+  const gain = env(t, KVB + 0.25, SC_KV[1] - 0.2, 0.6, 0.6) * lerp(1, 0.4, seg(t, KVC - 0.5, KVC, ease.smooth));
   if (gain > 0.003 && kv > 60.5) {
     ctx.beginPath(); ctx.moveTo(x0 + 6 * kx, base);
     for (let E = 6; E < kv; E += 0.75) ctx.lineTo(x0 + E * kx, base - specH(E, kv, ma) * hgt);
@@ -813,14 +834,16 @@ function drawScope(t) {
   ctx.strokeStyle = `rgba(222,255,236,${0.55 + 0.45 * b})`; ctx.lineWidth = 2.6; ctx.stroke();
   // end-point marker: max photon energy = kVp
   const mx = x0 + kv * kx, hi = Math.max(env(t, TURN_MA[1] + 0.1, SC_MA[1] - 0.3, 0.3, 0.4), env(t, TURN_KV[0], KVB + 0.4, 0.3, 0.5));
-  ctx.strokeStyle = `rgba(222,255,236,${0.6 + 0.4 * hi})`; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(mx, base + 2); ctx.lineTo(mx, base - 40); ctx.stroke();
+  ctx.strokeStyle = `rgba(222,255,236,${0.6 + 0.4 * hi})`; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(mx, base + 2); ctx.lineTo(mx, base - 56); ctx.stroke();
   ctx.fillStyle = '#eafff2'; ctx.beginPath(); ctx.arc(mx, base, 4.5 + 1.5 * hi, 0, TAU); ctx.fill();
   ctx.save(); ctx.globalCompositeOperation = 'lighter'; glow(ctx, mx, base, 16 + 10 * hi, '110,255,170', 0.5 + 0.4 * hi); ctx.restore();
-  ctx.save(); ctx.shadowColor = 'rgba(90,255,160,0.9)'; ctx.shadowBlur = 8 + 8 * hi;
-  const lx = Math.min(mx, cx + 108);
-  txt(ctx, 'MAX', lx, base - 83, '600 24px "Barlow Condensed"', 'rgba(170,255,205,0.9)', 'center', '3px');
-  rich(ctx, [{ t: String(Math.round(kv)), c: '#eafff2' }, { t: ' keV', c: 'rgba(200,255,224,0.9)' }], lx, base - 50, '700 32px "Barlow Condensed"');
-  ctx.restore();
+  const lx = Math.min(mx, cx + 106);
+  for (const pass of [0, 1]) {            // dark halo first (keeps the label clear of the trace), then the phosphor glow
+    ctx.save(); if (pass) { ctx.shadowColor = 'rgba(90,255,160,0.9)'; ctx.shadowBlur = 8 + 8 * hi; } else { ctx.shadowColor = 'rgba(4,13,8,0.95)'; ctx.shadowBlur = 7; ctx.lineJoin = 'round'; }
+    txt(ctx, 'MAX', lx + 1, base - 104, '600 30px "Barlow Condensed"', pass ? 'rgba(170,255,205,0.92)' : 'rgba(4,13,8,0.9)', 'center', '2px');
+    rich(ctx, [{ t: String(Math.round(kv)), c: pass ? '#eafff2' : 'rgba(4,13,8,0.9)' }, { t: ' keV', c: pass ? 'rgba(200,255,224,0.9)' : 'rgba(4,13,8,0.9)' }], lx, base - 68, '700 32px "Barlow Condensed"');
+    ctx.restore();
+  }
   ctx.restore();
   // CRT glass
   ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, TAU); ctx.clip();
@@ -832,18 +855,19 @@ function drawScope(t) {
 
 function lampLevel(k, t) {
   const sc = [SC_MA, SC_KV, SC_TS][k];
-  return Math.max(env(t, 0.95 + 0.32 * k, 1.55 + 0.32 * k, 0.1, 0.25), env(t, sc[0], sc[1], 0.2, 0.3),
-    Math.min(seg(t, END0 + ROW0 + ROWD * k, END0 + ROW0 + 0.25 + ROWD * k), 1 - seg(t, 22.95, 23.35)));
+  return Math.max(env(t, WIG0 + WIGD * k, WIG0 + WIGD * k + WIGL, 0.1, 0.25), env(t, sc[0], sc[1], 0.2, 0.3),
+    Math.min(seg(t, END0 + ROW0 + ROWD * k, END0 + ROW0 + 0.25 + ROWD * k), 1 - seg(t, T - 1.05, T - 0.65)));
 }
 function drawKnobs(t) {
   const vals = [setMA(t), setKV(t), setTS(t)], base = [4, 60, 0.10];
   const strs = [String(Math.round(vals[0])), String(Math.round(vals[1])), vals[2].toFixed(2)];
   KNOBS.forEach((K, k) => {
-    const { cx } = K, cy = KY, lit = lampLevel(k, t), aDeg = K.ang(vals[k]), a = aDeg * D2R;
-    jewel(ctx, cx - 126, 1245, 12, lit);
+    const wu = seg(t, WIG0 + WIGD * k, WIG0 + WIGD * k + WIGL), wig = 13 * Math.sin(TAU * wu) * Math.sin(Math.PI * wu);   // hook: +/-10 deg nudge
+    const { cx } = K, cy = KY, lit = lampLevel(k, t), aDeg = K.ang(vals[k]), a = (aDeg + wig) * D2R, wr = K.hd.win + K.hd.winW;
+    jewel(ctx, K.hd.lamp, 1245, 12, lit);
     // readout
-    if (k === 2) { seg7(ctx, strs[k], cx + 104, 1224, 42, 1); txt(ctx, 's', cx + 123, 1264, '600 28px "Barlow Condensed"', 'rgba(255,90,60,0.95)', 'center'); }
-    else seg7(ctx, strs[k], cx + 118, 1224, 42, 1);
+    if (k === 2) { seg7(ctx, strs[k], wr - 29, 1224, 42, 1); txt(ctx, 's', wr - 12, 1264, '600 30px "Barlow Condensed"', 'rgba(255,90,60,0.95)', 'center'); }
+    else seg7(ctx, strs[k].padStart(2, ' '), wr - 13, 1224, 42, 1);
     // change arc: from the resting setting to the current one
     const a0 = K.ang(base[k]);
     if (aDeg - a0 > 0.5) {
@@ -851,7 +875,7 @@ function drawKnobs(t) {
       ctx.strokeStyle = '#e8501c'; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(cx, cy, KR + 7.5, (a0 - 90) * D2R, (aDeg - 90) * D2R); ctx.stroke(); ctx.restore();
     }
     // warm ring while this knob is being turned
-    const turn = Math.sin(Math.PI * seg(t, TURNS[k][0] - 0.25, TURNS[k][1] + 0.45));
+    const turn = Math.max(Math.sin(Math.PI * seg(t, TURNS[k][0] - 0.25, TURNS[k][1] + 0.45)), 0.7 * Math.sin(Math.PI * wu));
     if (turn > 0.01) { ctx.save(); ctx.strokeStyle = `rgba(255,150,40,${0.5 * turn})`; ctx.lineWidth = 12; ctx.shadowColor = `rgba(255,150,40,${0.9 * turn})`; ctx.shadowBlur = 22; ctx.beginPath(); ctx.arc(cx, cy, KR + 2, 0, TAU); ctx.stroke(); ctx.restore(); }
     // shadow + skirt
     ctx.save();
@@ -892,10 +916,10 @@ function drawKnobs(t) {
 window.REEL = {
   title: 'kVp, mA, time: inside the X-ray tube head',
   duration: T,
-  poster: 21.6,
+  poster: 21.0,
   canvas,
   fonts: ['700 100px Oswald', '500 36px Oswald', '500 40px "Barlow Condensed"', '600 30px "Barlow Condensed"', '700 30px "Barlow Condensed"'],
-  setup() { buildSims(); knobFace = buildFace(); radA = buildRadiograph(1, 0); radB = buildRadiograph(0.5, 0.02); buildBG(); vig = buildVignette(); },
+  setup() { buildSims(); knobFace = buildFace(); radA = buildRadiograph(1); radB = buildRadiograph(0.5); buildBG(); vig = buildVignette(); },
   render(t) {
     t = clamp(t, 0, T);
     ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.shadowBlur = 0;

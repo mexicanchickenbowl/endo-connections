@@ -32,7 +32,8 @@ All sources were checked by the research and fact-check stages (RESEARCH.md); th
 7. Orthodontic: shortened, blunted, rounded apex. Abbott & Lin 2022 section 6.6; Patel et al. 2022.
 8. "Remove the cause." sits under the PRESSURE panel only: removal of the pressure is the treatment of choice (Fuss 2003, abstract; Patel 2022). Surface resorption: "no indication for any management" (Abbott & Lin 2022, 6.1), so nothing is printed under that panel.
 
-## Caption-only statements and their sources (all PubMed-verified, abstracts unless stated)
+## Background nuance and its sources (all PubMed-verified, abstracts unless stated)
+Since the final QA the meta.json caption is held to the 700-character limit: of the items below it keeps only "not instantly" (Cheng 2009) and "not always" (Falahat 2008), plus "advanced defects can reach the pulp" (Patel 2022; Abbott & Lin 2022, section 6.5). The rest is reference material; the v2 long caption is kept at the end of this file.
 - Arrest is not instant: resorptive activity "in some teeth" up to 10 days after force removal (Winter 2009, Eur J Orthod, PMID 19465737, intruded premolars); "root resorption continued for 4 weeks after orthodontic force stopped" (Cheng 2009, AJODO, PMID 19732664, premolars, micro-CT).
 - Not always: 7 of 32 lesions progressed in 27 followed patients (Falahat 2008, Angle Orthod, PMID 18298199).
 - Advanced pressure defects can reach the pulp: 60% of 58 resorbed lateral incisors graded "severe with pulpal involvement" (Ericson & Kurol 2000, Angle Orthod, PMID 11138644; CT, 107 referred children).
@@ -42,8 +43,8 @@ All sources were checked by the research and fact-check stages (RESEARCH.md); th
 
 ## Schematic / not literal
 - Cells, their size, number and timing; vessel-to-surface recruitment; the starburst "injury".
-- Clast size on the whole-tooth sheet and the amount of root lost (about 19% of length) are exaggerated for visibility (typical mean is under 1 mm; caption says so).
-- The stop is drawn as a wind-down of under a second; in reality the lag is days to weeks and some lesions progress - caption only.
+- Clast size on the whole-tooth sheet and the amount of root lost (about 19% of length) are exaggerated for visibility (typical pooled mean is under 1 mm on CBCT, Samandara 2019; the caption says "root loss exaggerated").
+- The stop is drawn as a wind-down of under a second; in reality the lag is days to weeks and some lesions progress - the caption says "not instantly or always".
 - The intrusion arrow is one example of orthodontic force. The impacted tooth "removed" is drawn as sliding out of the picture.
 - Radiographs are icons: pink pulp = living pulp, not radiographic density (a canal is radiolucent on a real film).
 - "schematic · not to scale" is on every sheet inside the safe area.
@@ -59,6 +60,7 @@ Small text is teal only so misregistration never blurs it. Files: index.html, ri
 ## Change log
 - v1: built; three QA passes (tooth and canine redrawn, enamel knock-out clipped, grain reduced, wire shortened, label chips).
 - v2: review changes (below).
+- Final QA: no change to the reel or the video; meta.json topic and caption brought to the SPEC limits (details in the "Final QA" section at the end).
 
 ## Review changes (v2)
 Science
@@ -80,3 +82,32 @@ Design
 - Pressure sheet redrawn: incisor crown flare reduced (cw 100, ch 190); impacted tooth is now a horizontally impacted tooth with cusp, enamel cap, dentin core, pulp and root, with its force arrow beside it and its chip against the crown; "ortho force" set in two lines inside the safe margin (x >= 135).
 - Halftone circle moved to (960, 420, r 130), clear of the title, "PRESSURE" and "canal".
 - Print grain reduced by about half in the fine-print row (y 1540-1582).
+
+## Final QA (fresh-eyes pass)
+Checked 40 stills (t = 0 to 21.95 s, with the safe-area overlay), the rendered video and the poster.
+- Reel: no defect found, no code change, no re-render. Hook readable at t = 0; all must-read text is 30 px or larger and inside
+  x 64-1016, y 230-1580 and clear of the right-hand column (rightmost low text ends at x = 950-952); captions wipe out before the
+  next one wipes in; summary card complete 16.85-21.55 s; the last frame equals the first (clean loop). Video 1080x1920, 30 fps,
+  660 frames, ffprobe duration 22.000 s = REEL.duration; it was rendered after the last source edit. Poster (t = 20.4) reads inside
+  the 3:4 crop.
+- Citations re-checked on PubMed (author order, year, volume, pages): PMID 35605161, 35559593, 12848710, 35229320, 19732664,
+  18298199, 19465737. No error.
+- meta.json, defect 1: the caption was 2048 characters (SPEC: 300-700). Rewritten to 693 characters. It keeps the three
+  clinician-level qualifiers (arrest is not instant and not universal; lost root length does not return; root canal treatment
+  only if the pulp is diseased, and advanced defects can reach it) and a Refs line that covers each of them. Dropped from the
+  caption, kept in this file: the Ericson & Kurol 60% figure, pulp testing during orthodontics (Alomari 2011; Nangia 2025),
+  the naming differences, the Samandara 2019 mean, Winter 2009.
+- meta.json, defect 2: the topic was 151 characters (SPEC: 140 or fewer). Now 124.
+- Left as is (taste level): the "E" of PRESSURE touches the edge of the halftone circle by about 5 px; it stays fully legible.
+
+### v2 long caption (2048 characters, over the gallery limit; kept for reference or for a pinned comment)
+Two root resorptions that stop when the cause stops.
+
+SURFACE: a one-off injury to cementum/PDL, shallow lacunae, new cementum within weeks if there is no infection (review-level time frame). Usually invisible on a radiograph. No treatment.
+PRESSURE (ortho force, impacted tooth, cyst/tumor): active while the pressure lasts. Remove the pressure and it arrests, though not instantly (lacunae can stay active about 10 days to 4 weeks after orthodontic force stops: Winter 2009; Cheng 2009, premolars) and not always (7 of 32 canine-related lesions progressed in 27 followed patients: Falahat 2008). Lost root length does not return. Blunted apex is the typical periapical sign of orthodontic resorption, not the only form.
+PULP: not the cause, and it usually responds normally. Root canal treatment does not treat the resorption; it is needed only if the pulp becomes diseased. Advanced pressure defects can reach the canal (60% of resorbed lateral incisors beside ectopic canines, CT, referred children: Ericson & Kurol 2000), so keep monitoring. During active orthodontics the EPT threshold rises and negative responses peak at about 2-3 months (Alomari 2011; Nangia 2025, low-certainty evidence); thermal testing appears more reliable. A non-response in braces is not by itself necrosis.
+NAMES vary: Fuss 2003 groups orthodontic and impacted-tooth/tumor resorption as pressure resorption (used here); Abbott & Lin 2022 list pressure and orthodontic resorption as separate types; Patel 2022 calls all of these external surface resorption.
+
+Refs: Lin 2022 (Part 1) and Abbott & Lin 2022 (Part 2), Dent Traumatol; Fuss 2003, Dent Traumatol; Patel 2022, Int Endod J; Ericson & Kurol 2000, Angle Orthod; Falahat 2008, Angle Orthod; Winter 2009, Eur J Orthod; Cheng 2009, AJODO; Alomari 2011, Int Endod J; Nangia 2025, Int Orthod; Samandara 2019, Eur J Orthod.
+Schematic animation: root loss exaggerated; typical orthodontic shortening averages under 1 mm on CBCT (Samandara 2019).
+#endodontics #rootresorption #orthodontics #dentaltrauma #endoresident

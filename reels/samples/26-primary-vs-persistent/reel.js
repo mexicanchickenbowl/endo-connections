@@ -10,41 +10,43 @@
   // ---------------------------------------------------------------- layout
   const LX = [64, 298], RX = [556, 790];            // card slot x (left edges) in the two columns
   const HEAD_Y = 292, SUB_Y = 330;                  // header baselines
+  const HOOK_Y = 742;                               // label baseline above the opening fans
   const PLQ_Y = 344, PLQ_H = 170, COLW = 460;
   const ROW0 = 526, STEP = 185;                     // left cascade
-  const R1Y = 526, R2Y = 828, R3Y = 1178;           // right rows
+  const R1Y = 526, R2Y = 824, R3Y = 1192;           // right rows
   const HW = 620, HH = 806, HS = HW / CW;           // hero card
   const HERO = { x: 540, y: 912 };
-  const HAND_Y = 1265;
+  const HAND_Y = 1292;
+  const HS0 = 1.0;                                  // card scale in the opening fans
   const DUR = 24;
 
   // ---------------------------------------------------------------- timeline (s)
   const T = {
-    titleIn: [0, 0.3], titleOut: [2.4, 2.65],
-    fold: [2.35, 2.68], move: [2.7, 3.1],
-    dealL: 3.1, dealDt: 0.24, fly: 0.44,            // 10 cards, last lands at 5.70
-    resL: [5.78, 6.12],
-    key: [5.85, 8.55],
-    bar: [6.75, 7.15, 8.85],                        // appears, starts sweeping, leaves
-    cross: [8.85, 9.05], crossFly: 0.7,
-    rPlq: [9.0, 9.35], tagP: 9.8,
-    dealE: 9.9, dealC: 10.35, flyR: 0.5,
-    sec: [10.95, 11.75], tagS: 11.65,
-    resR: [12.05, 12.4],
-    hero: [13.6, 14.3], heroBack: [17.9, 18.5],
-    gather: 17.9, lines: 18.6,
+    titleIn: [0, 0.3], titleOut: [2.6, 2.85],
+    fold: [2.52, 2.84], move: [2.9, 3.3],
+    dealL: 3.38, dealDt: 0.24, fly: 0.44,           // 10 cards, last lands at 5.98
+    resL: [6.04, 6.36],                             // the range, its unit and its method appear together
+    key: [3.3, 6.4],                                // legend sits on the empty right half while the deck is dealt
+    bar: [6.2, 6.6, 8.3],                           // appears, starts sweeping, leaves
+    cross: [8.3, 8.5], crossFly: 0.7,
+    rPlq: [8.45, 8.8], tagP: 9.2,
+    dealE: 9.3, dealC: 9.72, flyR: 0.5,
+    sec: [10.3, 11.05], tagS: 10.95,
+    resR: [11.35, 11.7],
+    hero: [13.3, 14.0], heroBack: [17.9, 18.5],
+    gather: 17.9, lines: 18.3,
     out: 23.2,
   };
-  const BAR_Y0 = 520, BAR_Y1 = 1660;
+  const BAR_Y0 = 552, BAR_Y1 = 1660;
   const tFlip = (row) => T.bar[1] + (T.bar[2] - T.bar[1]) * ((ROW0 + row * STEP + 92) - BAR_Y0) / (BAR_Y1 - BAR_Y0);
-  const colU = (t) => seg(t, T.move[0], T.move[1], ease.inOut) * (1 - seg(t, T.out + 0.1, T.out + 0.5, ease.inOut)); // 0 = hook layout, 1 = columns
+  const colU = (t) => seg(t, T.move[0], T.move[1] - 0.1, ease.inOut) * (1 - seg(t, T.out + 0.1, T.out + 0.5, ease.inOut)); // 0 = hook layout, 1 = columns
 
   // ---------------------------------------------------------------- poses
-  const DECK_HOOK = { L: { x: 293, y: 910 }, R: { x: 787, y: 910 } };
+  const DECK_HOOK = { L: { x: 293, y: 1068 }, R: { x: 782, y: 1068 } };
   const DECK_TOP = { L: { x: 120, y: 128 }, R: { x: 960, y: 128 } };
-  const fan = (px, py, deg) => ({ x: px + 300 * Math.sin(rad(deg)), y: py - 300 * Math.cos(rad(deg)), rot: deg, s: 0.9 });
-  const FAN_L = [-20, -10, 0, 10, 20].map((d) => fan(293, 1125, d));
-  const FAN_R = [-9, 9].map((d) => fan(787, 1125, d));
+  const fan = (px, py, deg) => ({ x: px + 300 * Math.sin(rad(deg)), y: py - 300 * Math.cos(rad(deg)), rot: deg, s: HS0 });
+  const FAN_L = [-18, -9, 0, 9, 18].map((d) => fan(293, 1283, d));
+  const FAN_R = [-9, 9].map((d) => fan(782, 1283, d));
   const jr = rng(2607);
   const L_SLOT = Array.from({ length: 10 }, (_, i) => ({ x: LX[i % 2] + CW / 2 + (jr() - 0.5) * 5, y: ROW0 + Math.floor(i / 2) * STEP + CH / 2 + (jr() - 0.5) * 4, rot: (jr() - 0.5) * 4.2 }));
   const R_SLOT = {
@@ -53,7 +55,8 @@
     sec: { x: RX[0] + CW / 2, y: R3Y + CH / 2, rot: -2.5 },
   };
   const HAND_L = Array.from({ length: 10 }, (_, h) => ({ x: 64 + CW / 2 + 26 * h, y: HAND_Y + 14 * Math.pow((h - 4.5) / 4.5, 2), rot: (h - 4.5) * 1.3 }));
-  const HAND_R = Array.from({ length: 5 }, (_, h) => ({ x: 556 + CW / 2 + 41 * h, y: HAND_Y + 12 * Math.pow((h - 2) / 2, 2), rot: (h - 2) * 2.0 }));
+  const HAND_RX = [0, 32, 64, 96, 168];             // wider last gap: the corner "?" of the unnamed card shows under the top card
+  const HAND_R = Array.from({ length: 5 }, (_, h) => ({ x: 556 + CW / 2 + HAND_RX[h], y: HAND_Y + 12 * Math.pow((h - 2) / 2, 2), rot: (h - 2) * 2.0 }));
 
   // ---------------------------------------------------------------- tracks
   function track(init) {
@@ -91,11 +94,11 @@
 
   L_KEYS.forEach((key, i) => {
     const row = Math.floor(i / 2), tl = T.dealL + i * T.dealDt, surv = key === 'pseud' || key === 'strep';
-    const tr = track(i < 5 ? { ...FAN_L[i], z: 10 + i } : { ...DECK_HOOK.L, s: 0.9, flip: 1, a: 0, z: 5 });
-    if (i < 5) tr.to(T.fold[0] + 0.02 * i, foldEnd(i), { ...DECK_HOOK.L, rot: 0, s: 0.9, flip: 1 }).set(foldEnd(i), { a: 0 });
+    const tr = track(i < 5 ? { ...FAN_L[i], z: 10 + i } : { ...DECK_HOOK.L, s: HS0, flip: 1, a: 0, z: 5 });
+    if (i < 5) tr.to(T.fold[0] + 0.02 * i, foldEnd(i), { ...DECK_HOOK.L, rot: 0, s: HS0, flip: 1 }).set(foldEnd(i), { a: 0 });
     tr.set(tl, { ...DECK_TOP.L, rot: -5, s: 0.5, flip: 1, a: 1 });
     tr.to(tl, tl + T.fly, { ...L_SLOT[i], s: 1, flip: 0, z: i }, ease.out, { arc: 1, flipWin: [0.1, 0.72], zFly: 100 + i });
-    if (!surv) tr.to(tFlip(row), tFlip(row) + 0.34, { flip: 1, dim: 0.5 }, ease.inOut, { arc: 0.45 });
+    if (!surv) tr.to(tFlip(row), tFlip(row) + 0.34, { flip: 1, dim: 0.62 }, ease.inOut, { arc: 0.45 });
     else {
       const k = key === 'pseud' ? 0 : 1, tc = T.cross[k];
       tr.to(tFlip(row), tFlip(row) + 0.4, { halo: 1 }, ease.out, { arc: 0.5 });
@@ -107,20 +110,20 @@
     const tg = T.gather + 0.1 + 0.02 * i;
     tr.to(tg, tg + 0.6, { ...hand, s: 1, flip: 0, dim: 0, z: hz }, ease.inOut, { arc: 0.5, zFly: hz });
     if (i < 5) tr.to(outT0(i), outT1(i), { ...FAN_L[i], z: 10 + i }, ease.inOut, { arc: 0.5, zFly: 500 + i });
-    else tr.to(outT0(i), outT1(i), { ...DECK_HOOK.L, rot: 0, s: 0.9, flip: 1 }, ease.inOut, { zFly: 6 }).set(outT1(i), { a: 0 });
+    else tr.to(outT0(i), outT1(i), { ...DECK_HOOK.L, rot: 0, s: HS0, flip: 1 }, ease.inOut, { zFly: 6 }).set(outT1(i), { a: 0 });
     cards.push({ key, face: key, back: 'back', tr, seed: i * 0.173 });
   });
   // duplicates of the two survivors, so the summary hand of the primary deck is complete again
   ['pseud', 'strep'].forEach((key) => {
     const h = HAND_L_ORDER.indexOf(key + '2');
-    const tr = track({ ...HAND_L[h], a: 0, z: 300 + h }).to(18.5, 18.9, { a: 1 }).to(T.out, T.out + 0.2, { a: 0 });
+    const tr = track({ ...HAND_L[h], a: 0, z: 300 + h }).to(T.gather + 0.6, T.gather + 1.0, { a: 1 }).to(T.out, T.out + 0.2, { a: 0 });
     cards.push({ key: key + '2', face: key, back: 'back', tr, seed: h * 0.21 });
   });
   { // E. faecalis (hero) and Candida: dealt from the right-hand deck
     const mkR = (key, fi, tDeal, fz) => {
       const h = HAND_R_ORDER.indexOf(key);
       const tr = track({ ...FAN_R[fi], z: 10 + fi });
-      tr.to(T.fold[0] + 0.03 * fi, T.fold[1] + 0.03 * fi, { ...DECK_HOOK.R, rot: 0, s: 0.9, flip: 1 }).set(T.fold[1] + 0.03 * fi, { a: 0 });
+      tr.to(T.fold[0] + 0.03 * fi, T.fold[1] + 0.03 * fi, { ...DECK_HOOK.R, rot: 0, s: HS0, flip: 1 }).set(T.fold[1] + 0.03 * fi, { a: 0 });
       tr.set(tDeal, { ...DECK_TOP.R, rot: 5, s: 0.5, flip: 1, a: 1 });
       tr.to(tDeal, tDeal + T.flyR, { ...R_SLOT[key], s: 1, flip: 0, z: fz }, ease.out, { arc: 1, flipWin: [0.1, 0.72], zFly: 150 + fi });
       if (key === 'efaec') {
@@ -137,7 +140,7 @@
     const tr = track({ ...OFF, flip: 1, z: 52 });
     tr.to(T.sec[0], T.sec[1], { ...R_SLOT.sec }, ease.out, { arc: 0.5, zFly: 160 });
     tr.to(T.gather + 0.2, T.gather + 0.8, { ...HAND_R[h], z: 400 + h }, ease.inOut, { arc: 0.5, zFly: 400 + h });
-    tr.to(T.out + 0.05, T.out + 0.6, { ...OFF }, ease.in, { zFly: 530 });
+    tr.to(T.out - 0.15, T.out + 0.4, { ...OFF }, ease.in);   // leaves first, from under the top card
     cards.push({ key: 'sec', face: 'backQ', back: 'backQ', tr, seed: 0.77 });
   }
   const landedL = (t) => { let n = 0; for (let i = 0; i < 10; i++) if (t >= T.dealL + i * T.dealDt + T.fly * 0.92) n++; return n; };
@@ -152,7 +155,7 @@
     if (t < T.dealE) return (t >= T.fold[1] ? 1 : 0) + (t >= T.fold[1] + 0.03 ? 1 : 0);
     return t < T.dealC ? 1 : 0;
   }
-  function deckPose(side, t) { const u = colU(t), a = DECK_HOOK[side], b = DECK_TOP[side]; return { x: lerp(a.x, b.x, u), y: lerp(a.y, b.y, u), s: lerp(0.9, 0.5, u) }; }
+  function deckPose(side, t) { const u = colU(t), a = DECK_HOOK[side], b = DECK_TOP[side]; return { x: lerp(a.x, b.x, u), y: lerp(a.y, b.y, u), s: lerp(HS0, 0.5, u) }; }
 
   // ---------------------------------------------------------------- drawing helpers
   function txt(s, x, y, font, color, o = {}) {
@@ -171,7 +174,7 @@
   function goldGrad(y0, y1) { const g = ctx.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, P.goldPale); g.addColorStop(0.55, P.gold); g.addColorStop(1, P.goldDeep); return g; }
   const F = {
     name: `700 44px ${BC}`, sub: `500 30px ${IN}`, num: `700 96px ${BC}`, unit: `600 36px ${BC}`, meth: `500 32px ${BC}`,
-    term: `700 34px ${BC}`, def: `500 32px ${BC}`, line: `600 52px ${BC}`, key: `600 34px ${IN}`, src: `500 26px ${BC}`,
+    term: `700 40px ${BC}`, def: `500 38px ${BC}`, tag: `700 36px ${BC}`, line: `600 52px ${BC}`, key: `600 34px ${IN}`, src: `500 26px ${BC}`,
     handle: `500 26px ${IN}`, note: `italic 500 24px ${IN}`,
   };
 
@@ -194,13 +197,14 @@
     const cs = Math.cos(p.flip * Math.PI), faceUp = cs >= 0, sx = Math.max(Math.abs(cs), 0.03), f = cardXf(p), sh = Cards.shadow;
     ctx.save(); ctx.globalAlpha = p.a;
     ctx.save(); ctx.translate(p.x + 5 + 14 * p.lift, p.y + 9 + 24 * p.lift); ctx.rotate(rad(p.rot)); ctx.scale(f.s * sx, f.s);
-    ctx.globalAlpha = p.a * (0.5 - 0.16 * Math.min(1, p.lift));
+    ctx.globalAlpha = p.a * (0.5 - 0.16 * Math.min(1, p.lift)) * (1 - 0.75 * Math.min(1, p.dim / 0.62));
     ctx.drawImage(sh.c, -CW / 2 - sh.pad, -CH / 2 - sh.pad, CW + sh.pad * 2, CH + sh.pad * 2); ctx.restore();
     ctx.translate(f.x, f.y); ctx.rotate(rad(p.rot)); ctx.scale(f.s * sx, f.s);
     ctx.drawImage(Cards.sprites[faceUp ? c.face : c.back], -CW / 2, -CH / 2, CW, CH);
     if (p.dim < 0.3) shimmerBand(t, c.seed, p.x, p.y, CW, CH, CR, 7, 10, faceUp ? 0.6 : 0.4);
-    const shade = (1 - Math.abs(cs)) * 0.3 + p.dim;
+    const shade = (1 - Math.abs(cs)) * 0.3 * (1 - p.dim);
     if (shade > 0.01) { rr(ctx, -CW / 2 - 0.5, -CH / 2 - 0.5, CW + 1, CH + 1, CR); ctx.fillStyle = `rgba(4,22,18,${Math.min(0.85, shade)})`; ctx.fill(); }
+    if (p.dim > 0.01) { rr(ctx, -CW / 2 - 0.5, -CH / 2 - 0.5, CW + 1, CH + 1, CR); ctx.fillStyle = `rgba(11,50,42,${Math.min(0.85, p.dim)})`; ctx.fill(); } // eliminated: sink into the felt
     if (p.halo > 0.01) {
       ctx.save(); ctx.globalAlpha = p.a * p.halo * (0.8 + 0.2 * Math.sin(t * 7));
       ctx.shadowColor = P.gold; ctx.shadowBlur = 26; ctx.strokeStyle = P.goldPale; ctx.lineWidth = 5; rr(ctx, -CW / 2 - 3, -CH / 2 - 3, CW + 6, CH + 6, CR + 3); ctx.stroke(); ctx.restore();
@@ -215,23 +219,25 @@
     for (let k = n - 1; k >= 0; k--) ctx.drawImage(Cards.sprites.back, -CW / 2 + k * 1.3, -CH / 2 + k * 3.2, CW, CH);
     ctx.restore();
   }
-  function miniCard(cx, cy, w, h, g, g2) {
+  /** tiny card icon. g2 = second Gram colour: split diagonally in half, or (corner = true) only a small corner */
+  function miniCard(cx, cy, w, h, g, g2, corner) {
     ctx.save(); ctx.translate(cx - w / 2, cy - h / 2);
     Cards.foilBorder(ctx, w, h, 7, g);
-    if (g2) { ctx.save(); rr(ctx, 0, 0, w, h, 7); ctx.clip(); ctx.beginPath(); ctx.moveTo(w, 0); ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath(); ctx.clip(); Cards.foilBorder(ctx, w, h, 7, g2); ctx.restore(); }
+    if (g2 && !corner) { ctx.save(); rr(ctx, 0, 0, w, h, 7); ctx.clip(); ctx.beginPath(); ctx.moveTo(w, 0); ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath(); ctx.clip(); Cards.foilBorder(ctx, w, h, 7, g2); ctx.restore(); }
     rr(ctx, 4.5, 4.5, w - 9, h - 9, 4); ctx.fillStyle = rgba(P.paper, 0.9); ctx.fill();
-    ctx.fillStyle = g.main; ctx.fillRect(4.5, 4.5, g2 ? (w - 9) / 2 : w - 9, 9);
-    if (g2) { ctx.fillStyle = g2.main; ctx.fillRect(w / 2, 4.5, (w - 9) / 2, 9); }
+    ctx.fillStyle = g.main; ctx.fillRect(4.5, 4.5, g2 && !corner ? (w - 9) / 2 : w - 9, 9);
+    if (g2 && !corner) { ctx.fillStyle = g2.main; ctx.fillRect(w / 2, 4.5, (w - 9) / 2, 9); }
+    if (g2 && corner) { const c = w * 0.6; ctx.save(); rr(ctx, 0, 0, w, h, 7); ctx.clip(); ctx.beginPath(); ctx.moveTo(w, h - c); ctx.lineTo(w, h); ctx.lineTo(w - c, h); ctx.closePath(); ctx.fillStyle = g2.main; ctx.fill(); ctx.restore(); }
     ctx.restore();
   }
 
   // ---------------------------------------------------------------- scene parts
   function drawDivider(t) {
-    const u = colU(t), y0 = lerp(720, 240, u), y1 = lerp(1190, 1584, u);
+    const u = colU(t), y0 = lerp(716, 240, u), y1 = lerp(1262, 1584, u);
     ctx.save(); ctx.strokeStyle = rgba(P.gold, 0.42); ctx.lineWidth = 3; ctx.setLineDash([14, 11]); ctx.lineCap = 'butt';
     const gap = seg(t, T.lines + 0.6, T.lines + 1.1) * (1 - seg(t, T.out - 0.05, T.out + 0.2));
     ctx.beginPath(); ctx.moveTo(540, y0); ctx.lineTo(540, y1); ctx.stroke(); ctx.setLineDash([]);
-    if (gap > 0.01) { ctx.save(); ctx.globalAlpha = gap; ctx.drawImage(Cards.felt, 520, 800, 40, 250, 520, 800, 40, 250); ctx.restore(); }
+    if (gap > 0.01) { ctx.save(); ctx.globalAlpha = gap; ctx.drawImage(Cards.felt, 520, 800, 40, 318, 520, 800, 40, 318); ctx.restore(); }
     for (const y of [y0 - 12, y1 + 12]) { ctx.save(); ctx.translate(540, y); ctx.rotate(Math.PI / 4); ctx.fillStyle = rgba(P.gold, 0.6); ctx.fillRect(-5, -5, 10, 10); ctx.restore(); }
     // flash where a survivor crosses the line
     [[T.cross[0], 0], [T.cross[1], 1]].forEach(([tc, k]) => {
@@ -247,24 +253,35 @@
     ctx.restore();
   }
   function drawHeaders(t) {
-    const u = colU(t);
-    const wL = measure('PRIMARY', F.name, 1.2), sL = measure('untreated necrotic pulp', F.sub);
-    const nameY = lerp(1096, HEAD_Y, u), subY = lerp(1140, SUB_Y, u);
-    txt('PRIMARY', lerp(293 - wL / 2, 64, u), nameY, F.name, P.ivory, { ls: 1.2 });
-    txt('untreated necrotic pulp', lerp(293 - sL / 2, 64, u), subY, F.sub, P.mint);
+    const late = t > 12;
+    const aH = late ? seg(t, T.out + 0.3, T.out + 0.6) : 1 - seg(t, T.move[0] - 0.05, T.move[0] + 0.15);
+    const aC = late ? 1 - seg(t, T.out, T.out + 0.25) : seg(t, T.move[1] - 0.15, T.move[1] + 0.1);
     const parts = [{ s: 'PERSISTENT ', font: F.name, color: P.ivory, ls: 1.2 }, { s: '/', font: F.name, color: P.gold, ls: 1.2 }, { s: ' SECONDARY', font: F.name, color: P.ivory, ls: 1.2 }];
-    const wR = parts.reduce((a, p) => a + measure(p.s, p.font, p.ls), 0);
-    runs(parts, lerp(787 - wR / 2, 556, u), nameY, 'left');
+    if (aH > 0.01) {
+      ctx.save(); ctx.globalAlpha = aH; ctx.translate(0, -14 * (1 - ease.out(aH)));
+      txt('PRIMARY', DECK_HOOK.L.x, HOOK_Y, F.name, P.ivory, { ls: 1.2, align: 'center' });
+      txt('untreated necrotic pulp', DECK_HOOK.L.x, HOOK_Y + 42, F.sub, P.mint, { align: 'center' });
+      runs(parts, DECK_HOOK.R.x, HOOK_Y, 'center');
+      ctx.restore();
+    }
+    if (aC > 0.01) {
+      ctx.save(); ctx.globalAlpha = aC; ctx.translate(0, 10 * (1 - ease.out(aC)));
+      txt('PRIMARY', 64, HEAD_Y, F.name, P.ivory, { ls: 1.2 });
+      txt('untreated necrotic pulp', 64, SUB_Y, F.sub, P.mint);
+      runs(parts, 556, HEAD_Y, 'left');
+      ctx.restore();
+    }
     const na = seg(t, T.move[1], T.move[1] + 0.4) * (1 - seg(t, T.out, T.out + 0.25));
     if (na > 0.01) txt('schematic decks', 524, HEAD_Y - 2, F.note, P.mint, { align: 'right', alpha: 0.75 * na });
   }
-  function drawPips(x, y, solid, range, a) {
+  function drawPips(x, y, solid, range) {
+    const pw = 18, ph = 16;
     for (let i = 0; i < 20; i++) {
-      const px = x + i * 20.8; rr(ctx, px, y, 16, 12, 3.5);
+      const px = x + i * 21; rr(ctx, px, y, pw, ph, 4);
       const s = clamp(solid - i), r = clamp(range - i);
       ctx.fillStyle = 'rgba(255,255,255,0.09)'; ctx.fill();
-      if (r > 0.01 && s < 0.99) { ctx.save(); ctx.globalAlpha *= r * 0.95; rr(ctx, px + 1, y + 1, 14, 10, 3); ctx.strokeStyle = P.gold; ctx.lineWidth = 2; ctx.stroke(); ctx.fillStyle = rgba(P.gold, 0.28); ctx.fill(); ctx.restore(); }
-      if (s > 0.01) { ctx.save(); ctx.globalAlpha *= s; rr(ctx, px, y, 16, 12, 3.5); ctx.fillStyle = goldGrad(y, y + 12); ctx.fill(); ctx.restore(); }
+      if (r > 0.01 && s < 0.99) { ctx.save(); ctx.globalAlpha *= r * 0.95; rr(ctx, px + 1, y + 1, pw - 2, ph - 2, 3.5); ctx.strokeStyle = P.gold; ctx.lineWidth = 2; ctx.stroke(); ctx.fillStyle = rgba(P.gold, 0.28); ctx.fill(); ctx.restore(); }
+      if (s > 0.01) { ctx.save(); ctx.globalAlpha *= s; rr(ctx, px, y, pw, ph, 4); ctx.fillStyle = goldGrad(y, y + ph); ctx.fill(); ctx.restore(); }
     }
   }
   function drawPlaque(side, t) {
@@ -273,24 +290,27 @@
     ctx.save(); ctx.globalAlpha = a;
     rr(ctx, x0, PLQ_Y, COLW, PLQ_H, 18); ctx.fillStyle = 'rgba(3,20,17,0.7)'; ctx.fill();
     ctx.lineWidth = 2; ctx.strokeStyle = rgba(P.gold, 0.6); ctx.stroke();
-    const by = PLQ_Y + 96, nx = x0 + 22;
+    const by = PLQ_Y + 92, nx = x0 + 21;
     ctx.font = F.num; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left'; ctx.fillStyle = goldGrad(PLQ_Y + 30, by);
-    let finalW;
+    let finalW, lab;
     if (L) {
       const n = landedL(t), u = seg(t, T.resL[0], T.resL[1], ease.out), w10 = ctx.measureText('10').width;
       finalW = ctx.measureText('10–20').width;
       if (n > 0) { const s = String(n), w = ctx.measureText(s).width, pop = 1 + 0.16 * (1 - seg(t, T.dealL + (n - 1) * T.dealDt + T.fly * 0.92, T.dealL + (n - 1) * T.dealDt + T.fly * 0.92 + 0.2, ease.out)); ctx.save(); ctx.translate(nx + w10 / 2, by - 30); ctx.scale(pop, pop); ctx.fillText(s, -w / 2, 30); ctx.restore(); }
       if (u > 0) { ctx.save(); ctx.globalAlpha *= u; ctx.fillText('–20', nx + w10 - 14 * (1 - u), by); ctx.restore(); }
-      drawPips(nx, PLQ_Y + 144, n, 20 * u, a);
+      drawPips(nx, PLQ_Y + 138, n, 20 * u); lab = seg(t, T.resL[0], T.resL[1]);
     } else {
       const n = landedR(t), u = seg(t, T.resR[0], T.resR[1], ease.out), wp = ctx.measureText('1–').width, w5 = ctx.measureText('5').width;
       finalW = ctx.measureText('1–5').width;
       if (n > 0) { const s = String(n), w = ctx.measureText(s).width, tl = R_LAND[n - 1] - 0.04, pop = 1 + 0.16 * (1 - seg(t, tl, tl + 0.2, ease.out)); ctx.save(); ctx.translate(nx + wp + w5 / 2, by - 30); ctx.scale(pop, pop); ctx.fillText(s, -w / 2, 30); ctx.restore(); }
       if (u > 0) { ctx.save(); ctx.globalAlpha *= u; ctx.fillText('1–', nx + 14 * (1 - u), by); ctx.restore(); }
-      drawPips(nx, PLQ_Y + 144, u > 0 ? lerp(n, 1, u) : n, u > 0 ? 5 : 0, a);
+      drawPips(nx, PLQ_Y + 138, u > 0 ? lerp(n, 1, u) : n, u > 0 ? 5 : 0); lab = seg(t, T.resR[0], T.resR[1]);
     }
-    txt('taxa per canal', nx + finalW + 16, by, F.unit, P.ivory);
-    txt(L ? 'molecular studies' : 'adequately treated · culture + PCR', nx, PLQ_Y + 132, F.meth, P.mint);
+    // while cards are still landing only the bare tally shows: a paused frame never pairs a transient number with the unit
+    if (lab > 0.01) {
+      txt('taxa per canal', nx + finalW + 16, by, F.unit, P.ivory, { alpha: lab });
+      txt(L ? 'molecular studies' : 'adequately treated · culture + PCR', nx, PLQ_Y + 126, F.meth, P.mint, { alpha: lab });
+    }
     ctx.restore();
   }
   function drawKey(t) {
@@ -300,7 +320,7 @@
     rr(ctx, x0, y0, w, h, 22); ctx.fillStyle = 'rgba(3,20,17,0.5)'; ctx.fill(); ctx.setLineDash([10, 8]); ctx.strokeStyle = rgba(P.gold, 0.55); ctx.lineWidth = 2; ctx.stroke(); ctx.setLineDash([]);
     const rows = [['neg', 'Gram −'], ['pos', 'Gram +'], ['an', 'anaerobe'], ['fac', 'facultative']];
     rows.forEach(([k, label], i) => {
-      const y = y0 + 62 + i * 78, ra = seg(t, T.key[0] + 0.1 + i * 0.1, T.key[0] + 0.4 + i * 0.1);
+      const y = y0 + 62 + i * 78, ra = seg(t, T.key[0] + 0.1 + i * 0.07, T.key[0] + 0.4 + i * 0.07);
       ctx.save(); ctx.globalAlpha *= ra;
       if (k === 'neg' || k === 'pos') miniCard(x0 + 64, y, 40, 52, P[k]); else Cards.o2Badge(ctx, x0 + 64, y, 23, k);
       txt(label, x0 + 112, y + 12, F.key, P.ivory); ctx.restore();
@@ -320,56 +340,53 @@
     ctx.lineWidth = 2.5; ctx.strokeStyle = P.goldDeep; ctx.stroke();
     // sieve perforations on both wings
     ctx.fillStyle = 'rgba(9,40,34,0.82)';
-    for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) { for (const sx of [x0 + 74 + i * 19 + (j ? 9.5 : 0), x0 + w - 74 - i * 19 - (j ? 9.5 : 0)]) { ctx.beginPath(); ctx.arc(sx, by - 9 + j * 18, 5.2, 0, Math.PI * 2); ctx.fill(); } }
-    // endodontic file (left) and irrigant drop (right)
-    ctx.save(); ctx.translate(x0 + 34, by); ctx.rotate(-0.5); ctx.fillStyle = P.neg.main; rr(ctx, -6, -22, 12, 15, 3); ctx.fill(); ctx.strokeStyle = '#6d6a78'; ctx.lineWidth = 2.6; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(0, -7); ctx.lineTo(0, 22); ctx.stroke(); ctx.restore();
-    ctx.save(); ctx.translate(x0 + w - 34, by + 3); ctx.beginPath(); ctx.moveTo(0, -20); ctx.bezierCurveTo(12, -4, 13, 14, 0, 14); ctx.bezierCurveTo(-13, 14, -12, -4, 0, -20); ctx.fillStyle = P.o2fac; ctx.fill(); ctx.fillStyle = 'rgba(255,255,255,0.6)'; ctx.beginPath(); ctx.ellipse(-3.5, 3, 2.4, 5, 0.3, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    for (let i = 0; i < 5; i++) for (let j = 0; j < 2; j++) { for (const sx of [x0 + 26 + i * 19 + (j ? 9.5 : 0), x0 + w - 26 - i * 19 - (j ? 9.5 : 0)]) { ctx.beginPath(); ctx.arc(sx, by - 9 + j * 18, 5.2, 0, Math.PI * 2); ctx.fill(); } }
     txt('TREATMENT', x0 + w / 2 + 3, by + 15, `700 44px ${BC}`, P.navy, { align: 'center', ls: 5 });
     ctx.restore();
   }
   function drawTags(t) {
-    const out = 1 - seg(t, T.gather - 0.1, T.gather + 0.25);
+    const out = 1 - seg(t, T.hero[0], T.hero[0] + 0.3);
     const a1 = seg(t, T.tagP, T.tagP + 0.35) * out;
     if (a1 > 0.01) {
       ctx.save(); ctx.globalAlpha = a1; ctx.translate(0, 8 * (1 - seg(t, T.tagP, T.tagP + 0.35, ease.out)));
-      const y = R2Y + CH + 12; ctx.strokeStyle = rgba(P.gold, 0.8); ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
+      const y = R2Y + CH + 10; ctx.strokeStyle = rgba(P.gold, 0.8); ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
       ctx.beginPath(); ctx.moveTo(566, y - 7); ctx.lineTo(566, y); ctx.lineTo(1006, y); ctx.lineTo(1006, y - 7); ctx.stroke();
-      runs([{ s: 'PERSISTENT:', font: F.term, color: P.gold, ls: 0.6 }, { s: '  survived treatment', font: F.def, color: P.ivory }], 566, y + 40, 'left');
+      txt('PERSISTENT', 566, y + 38, F.tag, P.gold, { ls: 0.8 });
       ctx.restore();
     }
     const a2 = seg(t, T.tagS, T.tagS + 0.35) * out;
     if (a2 > 0.01) {
       ctx.save(); ctx.globalAlpha = a2; ctx.translate(10 * (1 - seg(t, T.tagS, T.tagS + 0.35, ease.out)), 0);
-      const x = 796, y = R3Y + 74;
-      ctx.strokeStyle = rgba(P.gold, 0.8); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(x - 8, y - 30); ctx.lineTo(x - 8, y + 118); ctx.stroke();
-      txt('SECONDARY:', x + 4, y, F.term, P.gold);
-      ['got in during', 'or after', 'treatment'].forEach((s, i) => txt(s, x + 4, y + 40 + i * 38, F.def, P.ivory));
+      const x = 794, y = R3Y + CH / 2;
+      ctx.strokeStyle = rgba(P.gold, 0.8); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(x - 8, y - 30); ctx.lineTo(x - 8, y + 30); ctx.stroke();
+      txt('SECONDARY', x + 4, y + 13, F.tag, P.gold, { ls: 0.8 });
       ctx.restore();
     }
   }
   function drawEnd(t) {
     const out = 1 - seg(t, T.out - 0.05, T.out + 0.22); if (t < T.lines - 0.05 || out < 0.01) return;
-    const item = (i, fn) => { const t0 = T.lines + i * 0.16, a = seg(t, t0, t0 + 0.32) * out; if (a < 0.01) return; ctx.save(); ctx.globalAlpha = a; ctx.translate(0, 14 * (1 - seg(t, t0, t0 + 0.32, ease.out))); fn(); ctx.restore(); };
+    const item = (i, fn) => { const t0 = T.lines + i * 0.08, a = seg(t, t0, t0 + 0.32) * out; if (a < 0.01) return; ctx.save(); ctx.globalAlpha = a; ctx.translate(0, 14 * (1 - seg(t, t0, t0 + 0.32, ease.out))); fn(); ctx.restore(); };
     const LXt = 64 + 62, RXt = 556 + 62;
     item(0, () => { Cards.o2Badge(ctx, 64 + 24, 592, 22, 'an'); txt('mostly obligate', LXt, 610, F.line, P.ivory); txt('anaerobes', LXt, 668, F.line, P.ivory); });
     item(1, () => { Cards.o2Badge(ctx, 556 + 24, 592, 22, 'fac'); txt('more facultatives', RXt, 610, F.line, P.ivory); });
-    item(2, () => { miniCard(556 + 24, 674, 38, 50, P.pos); txt('mostly Gram +', RXt, 692, F.line, P.ivory); });
+    item(2, () => { miniCard(556 + 24, 674, 38, 50, P.pos, P.neg, true); txt('mostly Gram +', RXt, 692, F.line, P.ivory); });
     item(3, () => { miniCard(64 + 24, 756, 38, 50, P.neg, P.pos); txt('Gram − and +', LXt, 774, F.line, P.ivory); });
     item(4, () => { miniCard(556 + 24, 756, 38, 50, P.yst); txt('sometimes yeast', RXt, 774, F.line, P.ivory); });
     item(5, () => {
-      ctx.fillStyle = rgba(P.gold, 0.35); ctx.fillRect(64, 822, 952, 2);
-      runs([{ s: 'PERSISTENT:', font: F.term, color: P.gold, ls: 0.6 }, { s: '  survived treatment', font: F.def, color: P.ivory }], 540, 872, 'center');
-      runs([{ s: 'SECONDARY:', font: F.term, color: P.gold, ls: 0.6 }, { s: '  got in during or after treatment', font: F.def, color: P.ivory }], 540, 918, 'center');
+      ctx.fillStyle = rgba(P.gold, 0.35); ctx.fillRect(64, 818, 952, 2);
+      runs([{ s: 'PERSISTENT:', font: F.term, color: P.gold, ls: 0.6 }, { s: '  survived treatment', font: F.def, color: P.ivory }], 540, 874, 'center');
+      runs([{ s: 'SECONDARY:', font: F.term, color: P.gold, ls: 0.6 }, { s: '  got in during or after treatment', font: F.def, color: P.ivory }], 540, 926, 'center');
     });
-    item(7, () => {
-      rr(ctx, 64, 956, 952, 80, 40); ctx.fillStyle = 'rgba(3,20,17,0.72)'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = rgba(P.gold, 0.6); ctx.stroke();
-      txt('Culture + PCR picture · sequencing finds more in both', 540, 1007, `600 32px ${IN}`, P.goldPale, { align: 'center' });
+    item(6, () => {
+      rr(ctx, 64, 960, 952, 78, 39); ctx.fillStyle = 'rgba(3,20,17,0.72)'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = rgba(P.gold, 0.6); ctx.stroke();
+      runs([{ s: 'E. faecalis', font: `italic 600 36px ${IN}`, color: P.goldPale }, { s: ':  often found, rarely dominant', font: `600 36px ${IN}`, color: P.goldPale }], 540, 1012, 'center');
+      txt('sequencing finds more taxa in both', 540, 1082, `italic 500 30px ${IN}`, P.mint, { align: 'center' });
     });
   }
   function drawFine(t) {
-    const a = seg(t, T.move[1] + 0.1, T.move[1] + 0.5) * (1 - seg(t, T.out, T.out + 0.25));
-    if (a > 0.01) txt('Siqueira & Rôças, J Oral Microbiol 2009', 556, 1512, F.src, P.mint, { alpha: 0.85 * a });
-    txt('@natebrooksendo', 556, 1552, F.handle, P.ivory, { alpha: 0.62 });
+    const a = seg(t, T.resL[0], T.resL[1]) * (1 - seg(t, T.out, T.out + 0.25));
+    if (a > 0.01) txt('Siqueira & Rôças, J Oral Microbiol 2009', 556, 1520, F.src, P.mint, { alpha: 0.85 * a });
+    txt('@natebrooksendo', 556, 1558, F.handle, P.ivory, { alpha: 0.62 });
   }
   function drawTitle(t) {
     const a = seg(t, T.titleIn[0], T.titleIn[1]) * (1 - seg(t, T.titleOut[0], T.titleOut[1])); if (a < 0.01) return;
@@ -412,30 +429,27 @@
     ctx.save(); rr(ctx, ax, ay, aw, ah, 16); ctx.clip(); ctx.translate(ax, ay); heroIcon(g); ctx.restore();
     rr(ctx, ax + 1, ay + 1, aw - 2, ah - 2, 16); ctx.lineWidth = 2; ctx.strokeStyle = rgba(g.dark, 0.35); ctx.stroke();
     Cards.o2Badge(ctx, ax + aw - 56, ay + ah - 52, 38, 'fac');
-    txt('GRAM +   ·   FACULTATIVE   ·   COCCI', 42, 378, `600 30px ${BC}`, g.deep, { ls: 1.6 });
-    ctx.fillStyle = rgba(g.dark, 0.25); ctx.fillRect(42, 394, HW - 84, 2);
-    // slogan
+    // slogan (frame colour and badge already say Gram +, facultative: no type line)
     const s1 = seg(t, T.hero[1] - 0.25, T.hero[1] + 0.1), s2 = seg(t, T.hero[1] + 0.05, T.hero[1] + 0.4);
-    txt('Often found.', 40, 472 + 10 * (1 - ease.out(s1)), `700 82px ${BC}`, P.ink, { alpha: s1 });
-    txt('Rarely dominant.', 40, 550 + 10 * (1 - ease.out(s2)), `700 82px ${BC}`, g.dark, { alpha: s2 });
-    // 29 treated teeth: 11 positive, 1 dominated by E. faecalis
-    const tp = T.hero[1] + 0.3;
+    txt('Often found.', 40, 434 + 10 * (1 - ease.out(s1)), `700 82px ${BC}`, P.ink, { alpha: s1 });
+    txt('Rarely dominant.', 40, 512 + 10 * (1 - ease.out(s2)), `700 82px ${BC}`, g.dark, { alpha: s2 });
+    // 29 root-filled teeth with apical periodontitis: 11 positive, 1 dominated by E. faecalis
+    const tp = T.hero[1] + 0.25, la = seg(t, tp, tp + 0.3);
     for (let i = 0; i < 29; i++) {
-      const row = i < 15 ? 0 : 1, col = row ? i - 15 : i, px = 44 + col * 35.6, py = 574 + row * 43;
-      const found = i < 11 ? seg(t, tp + i * 0.05, tp + i * 0.05 + 0.2, ease.out) : 0;
-      const dom = i === 0 ? seg(t, tp + 0.75, tp + 1.05, ease.outBack) : 0;
-      ctx.save(); ctx.translate(px + 14, py + 17); const sc = 1 + 0.14 * found * (1 - found) * 4 + 0.16 * dom; ctx.scale(sc, sc); ctx.translate(-14, -17);
+      const row = i < 15 ? 0 : 1, col = row ? i - 15 : i, px = 44 + col * 35.6, py = 538 + row * 43;
+      const found = i < 11 ? seg(t, tp + i * 0.03, tp + i * 0.03 + 0.2, ease.out) : 0;
+      const dom = i === 0 ? seg(t, tp + 0.5, tp + 0.8, ease.outBack) : 0;
+      ctx.save(); ctx.globalAlpha *= s2; ctx.translate(px + 14, py + 17); const sc = 1 + 0.14 * found * (1 - found) * 4 + 0.16 * dom; ctx.scale(sc, sc); ctx.translate(-14, -17);
       Cards.toothPath(ctx, 0, 0, 28, 34);
       ctx.fillStyle = dom > 0.5 ? P.gold : found > 0 ? rgba(g.main, 0.25 + 0.75 * found) : '#efe9dc'; ctx.fill();
       ctx.lineWidth = 2.2; ctx.lineJoin = 'round'; ctx.strokeStyle = dom > 0.5 ? P.yst.dark : found > 0.5 ? g.deep : 'rgba(74,72,96,0.5)'; ctx.stroke();
       ctx.restore();
     }
-    const la = seg(t, tp + 0.05, tp + 0.4);
-    txt('qPCR, 29 teeth:', 44, 700, `600 30px ${IN}`, P.inkSoft, { alpha: la });
+    txt('qPCR, 29 treated teeth:', 44, 668, `600 36px ${IN}`, P.inkSoft, { alpha: la });
     ctx.save(); ctx.globalAlpha *= la;
-    const w1 = txt('found in 11, ', 44, 740, `700 30px ${IN}`, g.dark);
-    txt('dominant in 1', 44 + w1, 740, `700 30px ${IN}`, P.yst.dark); ctx.restore();
-    txt('Rôças & Siqueira, J Clin Microbiol 2012', 44, 776, `500 22px ${IN}`, P.inkSoft, { alpha: 0.9 * la });
+    const w1 = txt('found in 11, ', 44, 716, `700 40px ${IN}`, g.dark);
+    txt('dominant in 1', 44 + w1, 716, `700 40px ${IN}`, P.yst.dark); ctx.restore();
+    txt('Rôças & Siqueira, J Clin Microbiol 2012', 44, 764, `500 22px ${IN}`, P.inkSoft, { alpha: 0.9 * la });
     ctx.translate(HW / 2, HH / 2); shimmerBand(t, 0.2, 300, 400, HW, HH, 42, 17, 27, 0.6);
     ctx.restore();
   }
@@ -451,10 +465,13 @@
     for (const o of list) if (o.p.z < 800) drawCard(o.c, o.p, t);
     drawBar(t); drawTags(t); drawEnd(t); drawFine(t);
     const hu = seg(t, T.hero[0], T.hero[0] + 0.6, ease.smooth) * (1 - seg(t, T.heroBack[0], T.heroBack[0] + 0.5, ease.smooth));
-    if (hu > 0.005) { ctx.fillStyle = `rgba(3,14,12,${0.68 * hu})`; ctx.fillRect(0, 0, W, H); }
+    if (hu > 0.005) { ctx.fillStyle = `rgba(3,14,12,${0.86 * hu})`; ctx.fillRect(0, 0, W, H); }
+    // The small sprite and the live hero layout swap while the card is still small (first / last 0.1 s of the move),
+    // so the two layouts are never seen double-exposed at full size.
+    const ha = seg(t, T.hero[0], T.hero[0] + 0.1) * (1 - seg(t, T.heroBack[1] - 0.1, T.heroBack[1]));
     for (const o of list) if (o.p.z >= 800) {
-      drawCard(o.c, o.p, t);
-      drawHero(o.p, seg(t, T.hero[0] + 0.2, T.hero[1] - 0.12) * (1 - seg(t, T.heroBack[0] + 0.05, T.heroBack[0] + 0.38)), t);
+      if (ha < 0.999) drawCard(o.c, o.p, t);
+      drawHero(o.p, ha, t);
     }
     drawTitle(t);
   }
@@ -464,7 +481,7 @@
     duration: DUR,
     poster: 21.6,
     canvas,
-    fonts: [`700 172px ${BC}`, `600 52px ${BC}`, `500 32px ${BC}`, `500 30px ${IN}`, `600 32px ${IN}`, `700 30px ${IN}`, `800 22px ${IN}`, `italic 500 22px ${IN}`],
+    fonts: [`700 172px ${BC}`, `600 52px ${BC}`, `500 32px ${BC}`, `500 30px ${IN}`, `600 32px ${IN}`, `700 30px ${IN}`, `800 22px ${IN}`, `italic 500 22px ${IN}`, `italic 600 36px ${IN}`],
     setup() { Cards.build(); },
     render,
   };

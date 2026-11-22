@@ -29,13 +29,13 @@
   // ---------- wax-pencil knock-out texture ----------
   function waxTile() {
     const [c, g] = mk(160, 160); const r = rng(77);
-    for (let i = 0; i < 2600; i++) {
-      g.fillStyle = `rgba(0,0,0,${0.18 + 0.5 * r()})`;
+    for (let i = 0; i < 1150; i++) {
+      g.fillStyle = `rgba(0,0,0,${0.12 + 0.4 * r()})`;
       const s = 0.7 + r() * 1.5; g.fillRect(r() * 160, r() * 160, s, s);
     }
     g.lineCap = 'round';
-    for (let i = 0; i < 46; i++) { // streaks where the wax skipped
-      g.strokeStyle = `rgba(0,0,0,${0.12 + 0.2 * r()})`; g.lineWidth = 0.7 + r();
+    for (let i = 0; i < 26; i++) { // streaks where the wax skipped
+      g.strokeStyle = `rgba(0,0,0,${0.10 + 0.16 * r()})`; g.lineWidth = 0.7 + r();
       const x = r() * 160, y = r() * 160, l = 8 + r() * 26; g.beginPath(); g.moveTo(x, y); g.lineTo(x + l, y - l * 0.35); g.stroke();
     }
     return c;
@@ -123,7 +123,7 @@
     // glass thickness band
     g.beginPath(); g.arc(0, 0, R - 1, 0, TAU); g.arc(0, 0, RA + 1, 0, TAU, true);
     const band = g.createRadialGradient(0, 0, RA, 0, 0, R);
-    band.addColorStop(0, 'rgba(10,14,16,0.55)'); band.addColorStop(0.5, 'rgba(120,150,160,0.16)'); band.addColorStop(1, 'rgba(20,26,30,0.5)');
+    band.addColorStop(0, 'rgba(10,14,16,0.5)'); band.addColorStop(0.5, 'rgba(150,180,190,0.26)'); band.addColorStop(1, 'rgba(20,26,30,0.45)');
     g.fillStyle = band; g.fill('evenodd');
     const conic = (a0, hi, lo) => {
       const cg = g.createConicGradient(a0, 0, 0);
@@ -143,17 +143,28 @@
     g.strokeStyle = 'rgba(255,255,255,0.16)'; g.beginPath(); g.arc(0, 0, 333, 18 * DEG, 62 * DEG); g.stroke();
     g.strokeStyle = 'rgba(0,0,0,0.20)'; g.lineWidth = 2; g.beginPath(); g.arc(0, 0, 331, -160 * DEG, -100 * DEG); g.stroke();
     // soft-box reflection (two panes) — blurred
-    g.filter = 'blur(18px)';
-    g.save(); g.translate(-150, -185); g.rotate(-38 * DEG);
-    g.fillStyle = 'rgba(255,255,255,0.115)'; g.fillRect(-175, -62, 350, 124);
+    g.filter = 'blur(13px)';
+    g.save(); g.translate(-152, -188); g.rotate(-39 * DEG);
+    const sb = g.createLinearGradient(0, -60, 0, 60); sb.addColorStop(0, 'rgba(255,255,255,0.30)'); sb.addColorStop(1, 'rgba(255,255,255,0.10)');
+    g.fillStyle = sb; g.fillRect(-170, -56, 162, 112); g.fillRect(4, -56, 166, 112);
     g.restore();
     g.save(); g.translate(-232, -62); g.rotate(-64 * DEG);
-    g.fillStyle = 'rgba(255,255,255,0.06)'; g.fillRect(-70, -30, 140, 60);
+    g.fillStyle = 'rgba(255,255,255,0.11)'; g.fillRect(-70, -26, 140, 52);
     g.restore();
     g.filter = 'blur(9px)';
-    g.lineWidth = 16; g.strokeStyle = 'rgba(255,255,255,0.075)'; g.beginPath(); g.arc(0, 0, 352, 22 * DEG, 66 * DEG); g.stroke();
+    g.lineWidth = 18; g.strokeStyle = 'rgba(255,255,255,0.13)'; g.beginPath(); g.arc(0, 0, 350, 20 * DEG, 68 * DEG); g.stroke();
     g.filter = 'blur(3px)';
-    g.lineWidth = 5; g.strokeStyle = 'rgba(255,255,255,0.5)'; g.beginPath(); g.arc(0, 0, R - 13, -158 * DEG, -112 * DEG); g.stroke();
+    g.lineWidth = 6; g.strokeStyle = 'rgba(255,255,255,0.72)'; g.beginPath(); g.arc(0, 0, R - 13, -160 * DEG, -110 * DEG); g.stroke();
+    g.lineWidth = 4; g.strokeStyle = 'rgba(255,255,255,0.3)'; g.beginPath(); g.arc(0, 0, R - 13, 24 * DEG, 58 * DEG); g.stroke();
+    // crisp window reflections curving with the lid
+    g.filter = 'blur(2.5px)';
+    const cres = (r1, r2, a1, a2, al) => {
+      const gr = g.createRadialGradient(0, 0, r2, 0, 0, r1); gr.addColorStop(0, `rgba(255,255,255,${al * 0.2})`); gr.addColorStop(1, `rgba(255,255,255,${al})`);
+      g.fillStyle = gr; g.beginPath(); g.arc(0, 0, r1, a1, a2); g.arc(0, 0, r2, a2, a1, true); g.closePath(); g.fill();
+    };
+    cres(322, 270, -154 * DEG, -119 * DEG, 0.36);
+    cres(322, 270, -115.5 * DEG, -104 * DEG, 0.24);
+    cres(320, 292, 28 * DEG, 50 * DEG, 0.13);
     g.filter = 'none';
     g.restore();
     // sparkle on the rim

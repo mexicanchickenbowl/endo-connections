@@ -633,3 +633,13 @@ species of the genus named on the card. "Short" (rods), "small" (cocci), and the
 arrangements drawn for *Enterococcus*, *Pseudoramibacter* and *Olsenella* are textbook detail, not in these
 abstracts. The cards therefore print only the abstract-level word, and badge the nine anaerobes "ANAEROBE"
 (not "obligate").
+
+## (j) Review pass (2026-11-22): quotes re-read by the builder
+
+No fact changed. Two statements used in NOTES.md and meta.json were re-read in the full text of Rôças IN, Siqueira JF Jr. J Clin Microbiol 2012;50:1721-4 (PMID 22403423, [DOI](https://doi.org/10.1128/JCM.00531-12)):
+
+| Statement | What the paper says |
+|---|---|
+| Who the "29 treated teeth" are | "All the root canal-treated teeth were asymptomatic, showed radiographic evidence of apical periodontitis, and had had endodontic therapy completed more than 2 years earlier. All teeth were coronally restored ... The termini of the root canal fillings ranged from 0 to 4 mm short of the radiographic apex." 42 teeth selected; "Samples from 29 root canal-treated teeth were available for qPCR analysis." |
+| *E. faecalis* by qPCR | "detected by qPCR in 11/29 (38%) cases"; "in only 1 case did this species comprise >10% of the community (91%)"; "in only one case was it the main component of the community." |
+| Gram-negative anaerobes in treated teeth | Checkerboard, 42 teeth: "*Fusobacterium nucleatum* subspecies *nucleatum* (10/42 [24%])", second after *Propionibacterium acnes* (22/42). The reel's right-hand hand shows no Gram-negative card; NOTES.md lists this under "What is schematic". |

@@ -22,13 +22,13 @@
   const HAND = '"Patrick Hand"', MONO = '"IBM Plex Mono"';
 
   // ---------- world + camera ----------
-  const PL = [[0, 0], [1000, 0], [0, 1100], [1000, 1100]];
+  const PL = [[0, 0], [1000, 0], [0, 1060], [1000, 1060]];
   const NOMX = 540, NOMY = 880; // where the active dish sits on screen
   // [t, camX, camY, zoom, screenY of the look-at point]
   const CAMK = [
-    [0, 0, 0, 1, NOMY], [6.8, 0, 0, 1, NOMY], [7.5, 1000, 0, 1, NOMY], [10.9, 1000, 0, 1, NOMY], [11.6, 0, 1100, 1, NOMY],
-    [15.0, 0, 1100, 1, NOMY], [15.7, 1000, 1100, 1, NOMY], [18.9, 1000, 1100, 1, NOMY], [19.7, 500, 550, 0.5, 1050],
-    [23.4, 500, 550, 0.5, 1050], [24, 0, 0, 1, NOMY],
+    [0, 0, 0, 1, NOMY], [6.6, 0, 0, 1, NOMY], [7.3, 1000, 0, 1, NOMY], [11.0, 1000, 0, 1, NOMY], [11.7, 0, 1060, 1, NOMY],
+    [15.0, 0, 1060, 1, NOMY], [15.7, 1000, 1060, 1, NOMY], [18.9, 1000, 1060, 1, NOMY], [19.7, 500, 530, 0.5, 1048],
+    [23.4, 500, 530, 0.5, 1048], [24, 0, 0, 1, NOMY],
   ];
   let cam = { x: 0, y: 0, z: 1, cy: NOMY };
   function camAt(t) {
@@ -150,8 +150,8 @@
       ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + Math.cos(a) * l * 0.5 + curv * l * l, y + Math.sin(a) * l * 0.5, x + Math.cos(a) * l, y + Math.sin(a) * l); ctx.stroke();
     }
     ctx.strokeStyle = 'rgba(255,255,255,0.022)'; ctx.lineWidth = 7; // old dish ring
-    ctx.beginPath(); ctx.arc(520, 2240, 380, 0, TAU); ctx.stroke();
-    ctx.save(); ctx.translate(500, 1985); ctx.rotate(-6 * DEG); ctx.drawImage(A.pencil, -320, -45); ctx.restore();
+    ctx.beginPath(); ctx.arc(520, 2200, 380, 0, TAU); ctx.stroke();
+    ctx.save(); ctx.translate(500, 1945); ctx.rotate(-6 * DEG); ctx.drawImage(A.pencil, -320, -45); ctx.restore();
     ctx.restore();
     // overhead light pool
     const lg = ctx.createRadialGradient(470, 760, 60, 470, 760, 1250);
@@ -185,7 +185,7 @@
   function ions(t, hR, a, n, speed) { // hydroxyl ions leaving the material (schematic)
     if (a <= 0.003 || hR < 96) return;
     for (let i = 0; i < n; i++) {
-      const th = hash(i, 7) * TAU + 0.07 * Math.sin(t * 1.1 + i), f = (hash(i, 8) + t * (0.15 + 0.12 * hash(i, 9)) * speed) % 1;
+      const th = (i + 0.8 * hash(i, 7)) / n * TAU + 0.07 * Math.sin(t * 1.1 + i), f = (hash(i, 8) + t * (0.15 + 0.12 * hash(i, 9)) * speed) % 1;
       const r = 80 + f * (hR - 84), al = Math.sin(Math.PI * f) * a, x = Math.cos(th) * r, y = Math.sin(th) * r;
       ctx.fillStyle = `rgba(255,150,205,${al * 0.32})`; ctx.beginPath(); ctx.arc(x, y, 8, 0, TAU); ctx.fill();
       ctx.fillStyle = `rgba(255,244,250,${al * 0.95})`; ctx.beginPath(); ctx.arc(x, y, 3.1, 0, TAU); ctx.fill();
@@ -202,25 +202,25 @@
     halo(hR, hA * 0.82);
     drawLawn(A.lawn1, zR);
     halo(hR, hA * 0.3);
-    ions(t, hR, seg(t, 0.9, 1.7) * k, 46, 1);
+    ions(t, hR, seg(t, 0.9, 1.7) * k, 64, 1);
     ctx.drawImage(A.cementFresh, -120, -120);
   }
   function lid1(t) {
-    wax('fresh', -268, -190, 80, { color: WAXK, rot: -15 * DEG });
+    wax('fresh', -300, 204, 84, { color: WAXK, rot: -9 * DEG });
     const a = seg(t, 1.5, 1.9) * (1 - resetK(t));
     if (a > 0) {
       ctx.save(); ctx.globalAlpha *= a;
       const u = seg(t, 1.5, 2.1, ease.out);
-      arrow(64, -64, lerp(70, 152, u), lerp(-70, -152, u), WAXK, 5.5, 20);
-      wax('OH', 162, -168, 60, { color: WAXK, reveal: seg(t, 1.8, 2.2) });
-      if (t > 2.15) { ctx.strokeStyle = WAXK; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(221, -205); ctx.lineTo(239, -206); ctx.stroke(); }
+      arrow(66, -62, lerp(72, 156, u), lerp(-68, -148, u), WAXK, 5.5, 20);
+      wax('OH', 166, -164, 62, { color: WAXK, reveal: seg(t, 1.8, 2.2) });
+      if (t > 2.15) { ctx.strokeStyle = WAXK; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(227, -203); ctx.lineTo(245, -204); ctx.stroke(); }
       ctx.restore();
     }
   }
 
   // ---------- plate 2: set material, day 1 -> day 7 ----------
   function plate2(t) {
-    const u = seg(t, 8.6, 10.0, ease.inOut);
+    const u = seg(t, 8.3, 9.4, ease.inOut);
     const hR = lerp(134, 112, u), hA = lerp(0.62, 0.36, u);
     ctx.drawImage(A.agarB, -SC, -SC);
     halo(hR, hA * 0.82);
@@ -230,18 +230,19 @@
     ctx.drawImage(A.cementSet, -120, -120);
   }
   function lid2(t) {
-    wax('set', -250, -196, 80, { color: WAXK, rot: -15 * DEG });
+    wax('set', -292, 204, 84, { color: WAXK, rot: -9 * DEG });
     // where the fresh plate's zone was: a dashed grease-pencil ring
-    const u = t < 7.6 ? 0 : seg(t, 7.6, 8.5, ease.inOut);
+    const u = t < 7.4 ? 0 : seg(t, 7.4, 8.2, ease.inOut);
     if (u > 0) {
       ctx.save(); ctx.strokeStyle = WAXK; ctx.globalAlpha *= 0.8; ctx.lineWidth = 4.5; ctx.lineCap = 'round'; ctx.setLineDash([15, 13]);
       ctx.beginPath(); ctx.arc(0, 0, 190, -Math.PI / 2, -Math.PI / 2 + TAU * u); ctx.stroke(); ctx.restore();
+      wax('fresh', 118, -196, 46, { color: WAXK, rot: 24 * DEG, reveal: seg(t, 8.0, 8.4) });
     }
   }
 
   // ---------- plate 3: root slice + loupe on the tubules ----------
   const LX = 66, LY = 70, RSX = -184, RSY = -192;
-  const deadFrac = (t) => lerp(0.14 + 0.16 * seg(t, 12.3, 13.1, ease.inOut) + 0.23 * seg(t, 13.5, 14.4, ease.inOut), 0.14, resetK(t));
+  const deadFrac = (t) => lerp(0.14 + 0.16 * seg(t, 12.3, 13.0, ease.inOut) + 0.23 * seg(t, 13.3, 14.1, ease.inOut), 0.14, resetK(t));
   function plate3(t) {
     ctx.drawImage(A.agarPaper, -SC, -SC);
     ctx.drawImage(A.root, RSX - 130, RSY - 130);
@@ -292,9 +293,9 @@
   }
   function lid4(t) {
     // where the evidence sits: FRESH on the cidal half; SET slides toward the middle and stops short of "static"
-    tape(-205, 36, 196, 74, { rot: -4 * DEG, color: TAPEW, pop: pop(t, 17.0, 0.4) }, () => mono('FRESH', 0, 18, 50, 700, INK, 'center', 1));
-    const sx = lerp(-215, -62, seg(t, 17.75, 18.5, ease.inOut));
-    tape(sx, 148, 196, 74, { rot: 3 * DEG, color: TAPEY, pop: pop(t, 17.5, 0.4) }, () => mono('SET ?', 0, 18, 50, 700, INK, 'center', 1));
+    tape(-200, 30, 228, 84, { rot: -4 * DEG, color: TAPEW, pop: pop(t, 16.7, 0.4) }, () => mono('FRESH', 0, 21, 60, 700, INK, 'center', 1));
+    const sx = lerp(-205, -64, seg(t, 17.35, 18.05, ease.inOut));
+    tape(sx, 152, 228, 84, { rot: 3 * DEG, color: TAPEY, pop: pop(t, 17.15, 0.4) }, () => mono('SET ?', 0, 21, 60, 700, INK, 'center', 1));
   }
 
   const CONTENT = [plate1, plate2, plate3, plate4], LID = [lid1, lid2, lid3, lid4];
@@ -320,46 +321,48 @@
     const back = seg(t, 23.6, 23.98);           // things that are on screen at t = 0 return for the loop
     const live = t < 8 ? 1 : 0;
     // hook
-    const hk = t < 4 ? 1 - seg(t, 2.2, 2.55) : back;
+    const hk = t < 4 ? 1 - seg(t, 2.1, 2.4) : back;
     if (hk > 0) {
-      tape(540, 288, 452, 68, { rot: -1.2 * DEG, alpha: hk }, () => mono('BIOCERAMICS', 4, 17, 48, 700, INK, 'center', 7));
-      wax('bactericidal', 540, 394, 100, { align: 'center', alpha: hk });
-      wax('or bacteriostatic?', 540, 478, 100, { align: 'center', alpha: hk, color: WAXY });
+      tape(540, 274, 440, 62, { rot: -1.2 * DEG, alpha: hk }, () => mono('BIOCERAMICS', 4, 16, 46, 700, INK, 'center', 7));
+      wax('bactericidal', 540, 392, 94, { align: 'center', alpha: hk });
+      wax('or bacteriostatic?', 540, 474, 94, { align: 'center', alpha: hk, color: WAXY });
     }
     if (live) {
       // the sourced kill: fresh iRoot SP, planktonic cells, direct contact
-      waxLine([['Fresh iRoot SP: free-floating']], 540, 322, 66, { align: 'center', reveal: seg(t, 2.6, 3.3) });
-      waxLine([['E. faecalis ', WAXW], ['dead in 2 min', WAXY]], 540, 398, 66, { align: 'center', reveal: seg(t, 3.15, 3.85) });
-      fine('direct contact test · in vitro · Zhang 2009 J Endod', 540, 446, seg(t, 3.7, 4.1));
+      waxLine([['Fresh iRoot SP: free-floating']], 540, 322, 66, { align: 'center', reveal: seg(t, 2.45, 3.0) });
+      waxLine([['E. faecalis ', WAXW], ['dead in 2 min', WAXY]], 540, 398, 66, { align: 'center', reveal: seg(t, 2.9, 3.45) });
+      fine('direct contact test · in vitro · Zhang 2009 J Endod', 540, 446, seg(t, 3.4, 3.8));
     }
     // timer: mixing -> 3 h
     const du = seg(t, 1.4, 4.4, ease.inOut);
     dial(178, 1412, t < 8 ? 1 : back, t < 8 ? du : 0, [0, 1], du > 0.985 && t < 8 ? '3 h' : '0 h');
     if (live) {
       // pH readout (MTA cement, pH meter) — two measured points, no interpolation
-      tape(650, 1378, 548, 136, { rot: 1 * DEG, pop: pop(t, 1.15) }, () => {
-        mono('MTA', -250, -6, 34, 600, INK, 'left'); mono('pH', -250, 32, 34, 600, INK, 'left');
-        mono('10.2', -160, 12, 58, 700, INK, 'left');
-        mono('at mix', -92, 50, 28, 500, 'rgba(23,24,27,0.75)', 'center');
+      tape(650, 1376, 548, 172, { rot: 1 * DEG, pop: pop(t, 1.15) }, () => {
+        mono('MTA', -250, -24, 34, 600, INK, 'left'); mono('pH', -250, 14, 34, 600, INK, 'left');
+        mono('10.2', -160, -6, 58, 700, INK, 'left');
+        mono('mix', -92, 32, 28, 500, 'rgba(23,24,27,0.78)', 'center');
         const au = seg(t, 1.5, 4.4, ease.inOut);
-        if (au > 0) arrow(-8, -8, lerp(-4, 62, au), -8, INKR, 6, 20);
+        if (au > 0) arrow(-8, -26, lerp(-4, 62, au), -26, INKR, 6, 20);
         const p = pop(t, 4.4, 0.35);
-        if (p > 0) { ctx.save(); ctx.globalAlpha *= clamp(p * 2); ctx.translate(152, -8); ctx.scale(0.8 + 0.2 * p, 0.8 + 0.2 * p); mono('12.5', 0, 20, 58, 700, INKR, 'center'); ctx.restore(); mono('at 3 h', 152, 50, 28, 500, 'rgba(23,24,27,0.75)', 'center'); }
+        if (p > 0) { ctx.save(); ctx.globalAlpha *= clamp(p * 2); ctx.translate(152, -26); ctx.scale(0.8 + 0.2 * p, 0.8 + 0.2 * p); mono('12.5', 0, 20, 58, 700, INKR, 'center'); ctx.restore(); mono('3 h', 152, 32, 28, 500, 'rgba(23,24,27,0.78)', 'center'); }
+        mono('Torabinejad 1995 J Endod', 0, 70, 22, 500, 'rgba(23,24,27,0.7)', 'center');
       });
-      tape(650, 1492, 590, 44, { rot: -0.8 * DEG, color: TAPEY, pop: pop(t, 1.9) }, () => mono('pH: Torabinejad 1995 J Endod · zone schematic', 0, 8, 22, 500, INK, 'center'));
+      tape(690, 1500, 388, 44, { rot: -0.8 * DEG, color: TAPEY, pop: pop(t, 1.9) }, () => mono('halo + zone: schematic', 0, 8, 24, 500, INK, 'center'));
     }
   }
 
   function labels2(t) {
-    waxLine([['Once set: ', WAXW], ['weaker', WAXY]], 540, 368, 108, { align: 'center', reveal: seg(t, 7.45, 8.15) });
-    fine('set ProRoot MTA in water · in vitro · Farrugia 2017 Sci Rep', 540, 440, seg(t, 8.1, 8.5));
-    const du = seg(t, 8.6, 10.0, ease.inOut);
+    waxLine([['Once set: ', WAXW], ['weaker', WAXY]], 540, 368, 108, { align: 'center', reveal: seg(t, 7.25, 7.9) });
+    fine('ProRoot MTA aged in water vs E. faecalis · in vitro', 540, 440, seg(t, 7.9, 8.3));
+    const du = seg(t, 8.3, 9.4, ease.inOut);
     dial(178, 1412, 1, du, [0, 1], du > 0.985 ? 'DAY 7' : 'DAY 1');
-    tape(650, 1400, 568, 200, { rot: -0.8 * DEG, pop: pop(t, 7.55) }, () => {
-      mono('SET MTA · 1 H CONTACT · KILLED', 0, -56, 30, 600, INK, 'center');
-      const rows = [['DAY 1', 97, seg(t, 7.9, 8.6, ease.out), 0], ['DAY 7', 82, seg(t, 9.9, 10.5, ease.out), 56]];
+    tape(650, 1404, 568, 232, { rot: -0.8 * DEG, pop: pop(t, 7.35) }, () => {
+      mono('SET MTA · 1 H CONTACT · KILLED', 0, -70, 30, 600, INK, 'center');
+      mono('Farrugia 2017 Sci Rep', 0, 100, 22, 500, 'rgba(23,24,27,0.7)', 'center');
+      const rows = [['DAY 1', 97, seg(t, 7.6, 8.2, ease.out), 0], ['DAY 7', 82, seg(t, 9.3, 9.8, ease.out), 56]];
       for (const [lab, v, u, dy] of rows) {
-        const y = -8 + dy;
+        const y = -22 + dy;
         ctx.save(); ctx.globalAlpha *= lab === 'DAY 7' ? 0.35 + 0.65 * clamp(u * 3) : 1;
         mono(lab, -262, y + 12, 34, 700, INK, 'left');
         ctx.fillStyle = 'rgba(23,24,27,0.13)'; ctx.fillRect(-140, y - 14, 290, 28);
@@ -372,24 +375,24 @@
   }
 
   function labels3(t) {
-    waxLine([['In dentin tubules:']], 540, 322, 76, { align: 'center', reveal: seg(t, 11.5, 12.1) });
-    waxLine([['slow, partial kill', WAXY]], 540, 404, 76, { align: 'center', reveal: seg(t, 11.95, 12.55) });
-    fine('sealer on infected dentin · in vitro · Wang 2014 J Endod', 540, 452, seg(t, 12.5, 12.9));
-    const u = 0.5 * seg(t, 12.3, 13.1, ease.inOut) + 0.5 * seg(t, 13.5, 14.4, ease.inOut);
+    waxLine([['In dentin tubules:']], 540, 322, 76, { align: 'center', reveal: seg(t, 11.6, 12.2) });
+    waxLine([['slow, partial kill', WAXY]], 540, 404, 76, { align: 'center', reveal: seg(t, 12.0, 12.6) });
+    fine('sealer on infected dentin · in vitro · Wang 2014 J Endod', 540, 452, seg(t, 12.6, 13.0));
+    const u = 0.5 * seg(t, 12.3, 13.0, ease.inOut) + 0.5 * seg(t, 13.3, 14.1, ease.inOut);
     dial(178, 1412, 1, u, [0, 0.5, 1], u > 0.992 ? 'DAY 30' : u > 0.492 ? 'DAY 7' : 'DAY 1');
-    tape(640, 1378, 500, 92, { rot: 1.2 * DEG, pop: pop(t, 11.75) }, () => {
+    tape(640, 1378, 500, 92, { rot: 1.2 * DEG, pop: pop(t, 11.85) }, () => {
       ctx.fillStyle = '#17a045'; ctx.beginPath(); ctx.arc(-196, 0, 15, 0, TAU); ctx.fill();
       mono('LIVE', -168, 15, 42, 700, INK, 'left', 1);
       ctx.fillStyle = '#de3024'; ctx.beginPath(); ctx.arc(34, 0, 15, 0, TAU); ctx.fill();
       mono('DEAD', 62, 15, 42, 700, INK, 'left', 1);
     });
-    tape(640, 1480, 500, 44, { rot: -1 * DEG, color: TAPEY, pop: pop(t, 12.1) }, () => mono('live/dead stain · counts schematic', 0, 8, 22, 500, INK, 'center'));
+    tape(640, 1480, 500, 44, { rot: -1 * DEG, color: TAPEY, pop: pop(t, 12.2) }, () => mono('live/dead stain · counts schematic', 0, 8, 22, 500, INK, 'center'));
   }
 
   function chart(kind, u) { // tiny count-vs-time sketch on an index card
     ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
     ctx.beginPath(); ctx.moveTo(-150, -78); ctx.lineTo(-150, 62); ctx.lineTo(164, 62); ctx.stroke();
-    mono('count', -138, -66, 30, 500, INK, 'left'); mono('time', 160, 96, 30, 500, INK, 'right');
+    mono('count', -138, -66, 30, 500, INK, 'left'); arrow(120, 62, 172, 62, INK, 3, 14);
     ctx.setLineDash([6, 7]); ctx.strokeStyle = 'rgba(23,24,27,0.35)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-148, -22); ctx.lineTo(160, -22); ctx.stroke(); ctx.setLineDash([]);
     if (u <= 0) return;
     const col = kind === 'cidal' ? INKR : INKB, f = (s) => kind === 'cidal' ? -22 + 78 * (1 - Math.exp(-3.6 * s)) / (1 - Math.exp(-3.6)) : -22;
@@ -404,9 +407,9 @@
     wax('count falls', 300, 432, 78, { align: 'center', color: WAXY, reveal: seg(t, 15.9, 16.4) });
     wax('count held', 762, 432, 78, { align: 'center', color: WAXY, reveal: seg(t, 16.1, 16.6) });
     const cu = seg(t, 16.25, 18.3, ease.inOut);
-    tape(292, 1418, 392, 228, { rot: -1.2 * DEG, card: true, pop: pop(t, 15.8) }, () => chart('cidal', cu));
-    tape(724, 1418, 392, 228, { rot: 1 * DEG, card: true, pop: pop(t, 16.0) }, () => chart('static', cu));
-    fine('curves + colonies schematic', 508, 1564, seg(t, 16.4, 16.8), 'center', 22);
+    tape(292, 1408, 392, 224, { rot: -1.2 * DEG, card: true, pop: pop(t, 15.8) }, () => chart('cidal', cu));
+    tape(724, 1408, 392, 224, { rot: 1 * DEG, card: true, pop: pop(t, 16.0) }, () => chart('static', cu));
+    fine('curves + colonies schematic', 620, 1562, seg(t, 16.4, 16.8), 'center', 22);
   }
 
   function verdict(t) {
@@ -418,6 +421,7 @@
     waxLine([['Healing: ', WAXY], ['comparable', WAXW]], 78, 494, 76, { reveal: seg(t, 20.35, 20.9) });
     fine('clinical, vs other sealers · Sabeti 2024 J Endod', 82, 540, seg(t, 20.85, 21.2), 'left');
     tape(838, 404, 236, 124, { rot: 5 * DEG, color: TAPEY, pop: pop(t, 20.8) }, () => { mono('MOSTLY', 0, -8, 38, 700, INK, 'center', 1); mono('IN VITRO', 0, 38, 38, 700, INK, 'center', 1); });
+    tape(540, 1048, 800, 46, { rot: -0.5 * DEG, pop: pop(t, 21.0) }, () => mono('Zhang 2009 · Wang 2014 J Endod · Farrugia 2017 Sci Rep', 0, 8, 24, 500, INK, 'center'));
     ctx.restore();
   }
 
@@ -428,14 +432,14 @@
     ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
     drawBench();
     for (let i = 0; i < 4; i++) drawPlate(i, t);
-    if (t < 7.6 || t > 23.4) group(0, 1, () => labels1(t));
-    if (t > 6.7 && t < 11.7) group(1, 1, () => labels2(t));
-    if (t > 10.8 && t < 15.8) group(2, 1, () => labels3(t));
+    if (t < 7.4 || t > 23.4) group(0, 1, () => labels1(t));
+    if (t > 6.5 && t < 11.8) group(1, 1, () => labels2(t));
+    if (t > 10.9 && t < 15.8) group(2, 1, () => labels3(t));
     if (t > 14.9 && t < 19.4) group(3, 1 - seg(t, 18.95, 19.3), () => labels4(t));
     verdict(t);
     vignette();
     // handle, in grease pencil on the bench
-    ctx.globalAlpha = 1; wax('@natebrooksendo', 70, 1566, 34, { alpha: 0.6 });
+    ctx.globalAlpha = 1; tape(178, 1558, 246, 36, { rot: -1.5 * DEG, color: '#d9d6ca', alpha: 0.9 }, () => mono('@natebrooksendo', 0, 8, 23, 500, 'rgba(23,24,27,0.9)', 'center'));
   }
 
   window.REEL = {

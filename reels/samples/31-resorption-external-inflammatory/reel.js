@@ -29,7 +29,8 @@
   const S = { eq: 1.9, cut: 5.4, fix: 11.5, end: 17.3 };
   const LIT = [6.3, 7.6, 9.1];           // timer rows light up
   const T_RB = 8.35;                     // "root + bone resorb" callout (lands between row 2 and row 3)
-  const T_STRIP = 10.05;                 // IADT quote strip
+  const T_STRIP = 9.6;                   // IADT quote strip (0.5 s after row 3, so the quote is at full brightness for about 2 s)
+  const T_DIM = S.fix + 0.3;             // timer plate starts to dim once the blue header has dropped
   const T_GEND = 11.2;                   // crater growth ends
   const T_SWEEP = [11.7, 12.5];          // canal dressing front, coronal -> apical
   const T_TAG = 12.1;                    // "stimulus cut" lock-out tag
@@ -708,12 +709,12 @@
     const flip = (sy, fn) => { ctx.save(); ctx.translate(0, pcy); ctx.scale(1, Math.max(0.002, sy)); ctx.translate(0, -pcy); fn(); ctx.restore(); };
     const blank = (a) => { if (a <= 0.003) return; ctx.save(); ctx.globalAlpha = a; plate(TP.x, TP.y, TP.w, TP.h, { r: 16, shadow: false }); ctx.restore(); };
     // once the fix starts the (still red) timer is dimmed so the cutaway is the only live area
-    const dim = 0.66 * seg(t, S.fix, S.fix + 0.3);
+    const dim = 0.66 * seg(t, T_DIM, T_DIM + 0.3);
     if (fu < 0.25) { timerPlate(t); blank(lerp(dim, 1, fu / 0.25)); }                                   // contents fade out
     else if (fu < 0.75) flip(Math.max(0.05, fu < 0.5 ? 1 - ease.in((fu - 0.25) / 0.25) : ease.out((fu - 0.5) / 0.25)), () => plate(TP.x, TP.y, TP.w, TP.h, { r: 16 }));   // blank plate flips
     else { statPlate(t); blank(1 - seg(fu, 0.75, 1)); }                                                  // outcome fades in
     // source line (one per beat)
-    const aS1 = seg(t, S.cut + 0.4, S.cut + 0.8) * (1 - seg(t, T_FLIP[0] - 0.05, T_FLIP[0] + 0.1)) * (1 - 0.45 * seg(t, S.fix, S.fix + 0.3)), aS2 = seg(t, T_FLIP[1] - 0.1, T_FLIP[1] + 0.2);
+    const aS1 = seg(t, S.cut + 0.4, S.cut + 0.8) * (1 - seg(t, T_FLIP[0] - 0.05, T_FLIP[0] + 0.1)) * (1 - 0.45 * seg(t, T_DIM, T_DIM + 0.3)), aS2 = seg(t, T_FLIP[1] - 0.1, T_FLIP[1] + 0.2);
     const srcLine = (s, a, maxPx) => { if (a <= 0) return; const px = fit(s, (p) => bc(500, p), COL.w - 8, maxPx, 0.2); ctx.save(); ctx.globalAlpha = a; txt(s, COL.x0 + 4, 1540, bc(500, px), 'rgba(19,19,19,0.86)', 'left', 0.2); ctx.restore(); };
     srcLine('Timeline: Andreasen 1980 · Andreasen et al. 1995 · Patel 2022 (review) · Tubule theory: Andreasen 1981', aS1, 24);
     srcLine('Cvek 1992 Endod Dent Traumatol · luxated non-vital incisors · calcium hydroxide, then GP · radiographic', aS2, 26);

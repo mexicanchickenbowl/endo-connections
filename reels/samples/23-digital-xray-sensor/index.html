@@ -31,7 +31,7 @@ window.REEL = {
   poster: T.poster,
   canvas: out,
   fonts: ['700 112px "Space Grotesk"', '600 38px "Space Grotesk"', '500 26px "Space Grotesk"', '400 30px Inter', '500 30px Inter', '600 30px Inter'],
-  setup() { S = buildScene(glc); },
+  setup() { S = buildScene(glc); window.__S = S; },
   render(t) {
     t = Kit.clamp(t, 0, T.dur - 1e-4);
     const A = S.update(t);

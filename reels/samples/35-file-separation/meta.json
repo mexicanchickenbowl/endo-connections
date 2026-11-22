@@ -8,7 +8,7 @@
  "claims": [
   {
    "claim": "Two mechanisms: TORSION (tip binds, shaft turns; may unwind) and FATIGUE (flexing in a curve; often no warning)",
-   "source": "Sattapan et al., J Endod 2000;26:161-5 (PMID 11199711); Ohri et al., Materials 2024;17:6147 (PMID 39769746); Spanaki-Voreadi et al., Int Endod J 2006;39:171-8 (PMID 16507069)"
+   "source": "Two modes: Sattapan et al., J Endod 2000;26:161-5 (PMID 11199711, abstract). Definitions, unwinding, and fatigue typically without macroscopic warning signs: Ohri et al., Materials (Basel) 2024;17:6147 (PMID 39769746, PMC full text, narrative review). Fracture without visible deformation in 73.9% of failed ProTaper files, attributed by its authors to overload rather than fatigue: Spanaki-Voreadi et al., Int Endod J 2006;39:171-8 (PMID 16507069, abstract)"
   },
   {
    "claim": "Toy model / schematic: both mechanism animations and the radiograph (labelled 'schematic')",

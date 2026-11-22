@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>38 · Bioceramics and tissue — biocompatible, osteoconductive, osteoinductive?</title>
+<link rel="stylesheet" href="../../vendor/fonts/fonts.css">
+<script src="../../lib/kit.js"></script>
+</head>
+<body>
+<div id="stage"></div>
+<script src="site.js"></script>
+<script src="plots.js"></script>
+<script>
+/*
+ * Reel 38 — construction-site diorama. Five plots on one street; the camera pans right from plot to plot and wraps
+ * back to plot 0, so the last frame equals the first. The crane-hung signboard and the evidence plate are screen-fixed.
+ * Timeline constants live in plots.js (TL). All content: see NOTES.md / RESEARCH.md.
+ */
+function camX(t) {
+  const e = ease.inOut;
+  return 1080 * (seg(t, TL.pan1, TL.b2, e) + seg(t, TL.pan2, TL.b3a, e) + seg(t, TL.pan3, TL.b3b, e) + seg(t, TL.pan4, TL.end, e) + seg(t, TL.wrap, TL.dur, e));
+}
+
+// ------------------------------------------------------------------ crane-hung signboard (screen space)
+const SIGNS = [
+  { kind: 'title', tin: -0.6, tout: 1.7 },
+  { kind: 'b1', tin: 2.0, tout: 7.05 },
+  { kind: 'b2', tin: 7.35, tout: 11.45 },
+  { kind: 'b3', tin: 11.75, tout: 18.75 },
+  { kind: 'title', tin: TL.wrap, tout: 99 },
+];
+const SIGN = {
+  title: { face: C.navy, edge: C.yellow },
+  b1: { face: C.yellow, edge: C.navy, word: 'BIOCOMPATIBLE', sh: '#E9AE00', sub: ['early inflammation subsides'] },
+  b2: { face: C.yellow, edge: C.navy, word: 'OSTEOCONDUCTIVE', sh: '#E9AE00', sub: ['bone grows on the surface'] },
+  b3: { face: C.orange, edge: C.navy, word: 'OSTEOINDUCTIVE?', sh: '#E06206', sub: ['immature cells', '>', 'bone-forming cells'] },
+};
+function longText(s, x, y, font, col, shCol, n, ls) { for (let i = n; i >= 1; i--) txt(s, x + i, y + i, font, shCol, 'center', ls); txt(s, x, y, font, col, 'center', ls); }
+function drawSign(kind, yOff, ang) {
+  const S = SIGN[kind], bx = 110, by = 264, bw = 860, bh = 200;
+  ctx.save(); ctx.translate(540, -900); ctx.rotate(ang); ctx.translate(-540, 900 + yOff);
+  line(540, -1100, 540, 150, '#3A4756', 5, 'butt');
+  line(540, 190, 236, by + 4, '#3A4756', 4); line(540, 190, 844, by + 4, '#3A4756', 4);
+  fillRR(520, 138, 40, 50, 9, C.yellow); rect(520, 172, 40, 6, C.yellowD); circ(540, 158, 8, C.navy); line(540, 182, 540, 194, C.navy, 6);
+  fillRR(bx + 9, by + 12, bw, bh, 18, 'rgba(25,45,75,0.20)');
+  fillRR(bx, by, bw, bh, 18, S.face);
+  ctx.save(); rr(bx, by, bw, bh, 18); ctx.clip();
+  if (kind === 'b3') for (const x0 of [bx, bx + bw - 46]) { rect(x0, by, 46, bh, C.yellow); for (let k = -3; k < 8; k++) poly([x0 - 30, by + k * 44 + 44, x0 + 76, by + k * 44 - 10, x0 + 76, by + k * 44 + 12, x0 - 30, by + k * 44 + 66], C.navy); }
+  if (kind === 'title') {
+    txt('ARE BIOCERAMICS', 540, by + 76, F.osw5(58), '#FFFFFF', 'center', 5);
+    const px = fit('OSTEOINDUCTIVE?', 770, 106, F.osw7, 2);
+    longText('OSTEOINDUCTIVE?', 540, by + 174, F.osw7(px), C.yellow, '#121B25', 12, 2);
+  } else {
+    const px = fit(S.word, kind === 'b3' ? 690 : 790, 108, F.osw7, 2);
+    longText(S.word, 540, by + bh / 2 + px * 0.365, F.osw7(px), C.navy, S.sh, 14, 2);
+  }
+  ctx.restore();
+  strokeRR(bx + 9, by + 9, bw - 18, bh - 18, 11, S.edge, 4);
+  for (const [rx, ry] of [[bx + 22, by + 22], [bx + bw - 22, by + 22], [bx + 22, by + bh - 22], [bx + bw - 22, by + bh - 22]]) circ(rx, ry, 4.5, S.edge);
+  circ(236, by + 4, 7, '#3A4756'); circ(844, by + 4, 7, '#3A4756');
+  if (S.sub) {                                                           // hanging definition plate
+    const f = F.bc6(46); let w = 0; const ws = S.sub.map((p) => p === '>' ? 62 : tw(p, f)); ws.forEach((x) => w += x);
+    const pw = w + 64, px0 = 540 - pw / 2, py = by + bh + 18;
+    line(px0 + 40, by + bh - 2, px0 + 40, py + 4, '#3A4756', 4, 'butt'); line(px0 + pw - 40, by + bh - 2, px0 + pw - 40, py + 4, '#3A4756', 4, 'butt');
+    fillRR(px0 + 6, py + 7, pw, 66, 12, 'rgba(25,45,75,0.18)');
+    fillRR(px0, py, pw, 66, 12, C.navy); fillRR(px0 + 4, py + 4, pw - 8, 58, 8, C.paper);
+    let x = px0 + 32;
+    S.sub.forEach((p, i) => {
+      if (p === '>') { line(x + 14, py + 34, x + 44, py + 34, C.orange, 6, 'butt'); poly([x + 40, py + 22, x + 54, py + 34, x + 40, py + 46], C.orange); }
+      else txt(p, x, py + 49, f, C.navy);
+      x += ws[i];
+    });
+  }
+  ctx.restore();
+}
+function drawSigns(t) {
+  for (const s of SIGNS) {
+    const uin = seg(t, s.tin, s.tin + 0.52, ease.out), uout = seg(t, s.tout, s.tout + 0.33, ease.in);
+    if (uin <= 0 || uout >= 1) continue;
+    const tau = t - (s.tin + 0.45), ang = tau > 0 ? 0.011 * Math.exp(-2.4 * tau) * Math.sin(8 * tau) : 0;
+    drawSign(s.kind, -650 * (1 - uin) - 650 * uout, ang);
+  }
+}
+
+// ------------------------------------------------------------------ evidence plate (screen space, below the slab)
+function pill(x, y, label, kind) {
+  const w = tw(label, F.osw5(32), 2) + 82;
+  fillRR(x, y, w, 56, 10, C.yellow); rect(x + 10, y + 49, w - 20, 3, C.yellowD);
+  circ(x + 30, y + 28, 19, C.navy);
+  if (kind === 'cell') { fillRR(x + 17, y + 24, 26, 11, 4, '#FFFFFF'); rect(x + 20, y + 28, 20, 4, '#F47AA0'); }
+  else { fillRR(x + 16, y + 21, 28, 14, 3, '#FFFFFF'); circ(x + 30, y + 28, 5, '#E77FA0'); circ(x + 34, y + 27, 3, '#C65C86'); }
+  txt(label, x + 58, y + 40, F.osw5(32), C.navy, 'left', 2);
+  return w;
+}
+function src(s) { txt(s, 64, 1562, F.b5(25), '#9DB0C2'); }
+function info(t, a, b, fn) {
+  const u = Math.min(seg(t, a, a + 0.35, ease.out), 1 - seg(t, b - 0.3, b));
+  if (u <= 0) return;
+  ctx.save(); ctx.globalAlpha = u; ctx.translate(0, (1 - seg(t, a, a + 0.35, ease.out)) * 16); fn(); ctx.restore();
+}
+function drawHud(t) {
+  // plinth nameplate
+  rect(0, FACE_B, W, 46, '#2B3848'); rect(0, FACE_B, W, 3, '#3E4E61'); rect(0, FACE_B + 43, W, 3, '#1A222D');
+  txt('@natebrooksendo', 64, FACE_B + 31, F.bc6(26), '#9DB0C2', 'left', 2.5);
+  txt('SCHEMATIC · NOT TO SCALE', 950, FACE_B + 31, F.bc6(24), '#7F93A7', 'right', 2.5);
+
+  info(t, 2.7, 7.2, () => {
+    pill(64, 1368, 'ANIMAL HISTOLOGY', 'animal');
+    const u = seg(t, 3.45, 3.85, ease.out);
+    ctx.globalAlpha *= u;
+    txt('5 of 6', 64, 1524, F.osw7(92), C.yellow);
+    const x = 64 + tw('5 of 6', F.osw7(92)) + 28;
+    txt('root ends: cementum over MTA', x, 1480, F.bc6(46), '#FFFFFF');
+    txt('monkey · 5 months', x, 1526, F.bc5(40), '#C4D2DF');
+    src('Torabinejad et al. 1997, J Endod');
+  });
+  info(t, 7.95, 11.6, () => {
+    pill(64, 1368, 'ANIMAL HISTOLOGY', 'animal');
+    txt('MTA implanted in bone', 64, 1496, F.bc6(54), '#FFFFFF');
+    src('Torabinejad et al. 1998, J Endod · guinea pig');
+  });
+  info(t, 12.35, 15.2, () => {
+    pill(64, 1368, 'CELL CULTURE', 'cell');
+    txt('osteogenic markers rise', 64, 1496, F.bc6(54), '#FFFFFF');
+    src('Maeda et al. 2010; Peng et al. 2011 · J Endod');
+  });
+  info(t, 15.95, 18.9, () => {
+    pill(64, 1368, 'ANIMAL HISTOLOGY', 'animal');
+    txt('mineral deposits, no bone', 64, 1496, F.bc6(54), '#FFFFFF');
+    src('Moretton et al. 2000, J Biomed Mater Res · rat, 15–60 days');
+  });
+  info(t, 19.7, TL.wrap, () => {
+    txt('SOURCES', 64, 1398, F.osw5(28), C.yellow, 'left', 3);
+    txt('Definitions: Albrektsson & Johansson 2001, Eur Spine J', 64, 1440, F.b5(26), '#C4D2DF');
+    txt('Ectopic-site test: Barradas et al. 2011, Eur Cell Mater · Moretton et al. 2000', 64, 1478, F.b5(26), '#C4D2DF');
+    txt('Torabinejad et al. 1997, 1998 · Nair et al. 2008 · Maeda et al. 2010 · Peng et al. 2011', 64, 1516, F.b5(26), '#C4D2DF');
+  });
+}
+
+// ------------------------------------------------------------------ frame
+function render(t) {
+  t = clamp(t, 0, TL.dur);
+  const cam = camX(t);
+  ctx.globalAlpha = 1; ctx.setTransform(1, 0, 0, 1, 0, 0);
+  drawSky(); drawClouds(cam, t); drawSkyline(cam);
+  ctx.save(); ctx.translate(-cam, 0);
+  drawGround(cam);
+  for (let i = 0; i < 6; i++) {
+    const px = i * 1080;
+    if (px + 1080 + 260 < cam || px - 160 > cam + 1080) continue;
+    const Z = ZOOM[i % 5]; ZS = Z.s;
+    ctx.save(); ctx.beginPath(); ctx.rect(px, 0, 1080, BAND_B); ctx.clip();
+    ctx.translate(px - Z.xa * Z.s, G * (1 - Z.s)); ctx.scale(Z.s, Z.s);
+    PLOTS[i % 5](i === 5 ? t - TL.dur : t); flush(); ctx.restore(); ZS = 1;
+  }
+  ctx.restore();
+  drawHud(t);
+  drawSigns(t);
+}
+
+window.REEL = {
+  title: 'Bioceramics and tissue: biocompatible, osteoconductive — osteoinductive?',
+  duration: TL.dur,
+  poster: 22.2,
+  canvas,
+  fonts: ['700 100px Oswald', '500 58px Oswald', '500 40px "Barlow Condensed"', '600 46px "Barlow Condensed"', '700 40px "Barlow Condensed"', 'italic 500 36px "Barlow Condensed"', '500 25px Barlow'],
+  render,
+};
+Kit.boot(REEL);
+</script>
+</body>
+</html>

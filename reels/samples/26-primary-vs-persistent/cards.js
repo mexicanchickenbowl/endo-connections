@@ -127,19 +127,18 @@
     const gr = x.createLinearGradient(cx, cy - r, cx, cy + r);
     if (type === 'an') { gr.addColorStop(0, '#26305c'); gr.addColorStop(1, P.o2an); } else { gr.addColorStop(0, '#3cc0f2'); gr.addColorStop(1, '#1486c0'); }
     x.fillStyle = gr; x.fill();
-    x.fillStyle = '#ffffff'; x.textAlign = 'left'; x.textBaseline = 'alphabetic';
-    x.font = `800 ${r * 0.98}px ${IN}`; const wO = x.measureText('O').width;
-    x.font = `800 ${r * 0.58}px ${IN}`; const w2 = x.measureText('2').width;
-    const x0 = cx - (wO + w2) / 2 - r * 0.02;
-    x.font = `800 ${r * 0.98}px ${IN}`; x.fillText('O', x0, cy + r * 0.3);
-    x.font = `800 ${r * 0.58}px ${IN}`; x.fillText('2', x0 + wO + r * 0.02, cy + r * 0.5);
-    if (type === 'an') {
-      x.lineCap = 'round';
-      x.beginPath(); x.moveTo(cx - r * 0.66, cy + r * 0.66); x.lineTo(cx + r * 0.66, cy - r * 0.66);
-      x.lineWidth = r * 0.26; x.strokeStyle = P.o2an; x.stroke();
-      x.lineWidth = r * 0.14; x.strokeStyle = P.slash; x.stroke();
-      x.beginPath(); x.arc(cx, cy, r * 0.9, 0, Math.PI * 2); x.lineWidth = r * 0.12; x.stroke();
+    const k = type === 'an' ? 0.84 : 1;                 // anaerobe: slightly smaller letters inside the no-symbol
+    if (type === 'an') {                                 // ring + slash first, letters on top, so the "O" stays whole
+      x.lineCap = 'round'; x.strokeStyle = P.slash;
+      x.beginPath(); x.arc(cx, cy, r * 0.88, 0, Math.PI * 2); x.lineWidth = r * 0.13; x.stroke();
+      x.beginPath(); x.moveTo(cx - r * 0.62, cy + r * 0.62); x.lineTo(cx + r * 0.62, cy - r * 0.62); x.lineWidth = r * 0.13; x.stroke();
     }
+    x.fillStyle = '#ffffff'; x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+    x.font = `800 ${r * 0.98 * k}px ${IN}`; const wO = x.measureText('O').width;
+    x.font = `800 ${r * 0.58 * k}px ${IN}`; const w2 = x.measureText('2').width;
+    const x0 = cx - (wO + w2) / 2 - r * 0.02;
+    x.font = `800 ${r * 0.98 * k}px ${IN}`; x.fillText('O', x0, cy + r * 0.3 * k);
+    x.font = `800 ${r * 0.58 * k}px ${IN}`; x.fillText('2', x0 + wO + r * 0.02, cy + r * 0.5 * k);
     x.restore();
   }
   function yeastBadge(x, cx, cy, h) {
@@ -239,7 +238,11 @@
       x.fillStyle = rgba(P.gold, 0.16); x.fill();
     }
     // corner diamonds
-    [[30, 30], [CW - 30, 30], [30, CH - 30], [CW - 30, CH - 30]].forEach(([a, b]) => { x.save(); x.translate(a, b); x.rotate(Math.PI / 4); x.fillStyle = P.gold; x.fillRect(-4, -4, 8, 8); x.restore(); });
+    if (mark === '?') { // corner indices, so the card is recognisable when only a sliver shows in a fanned hand
+      x.font = `700 34px ${BC}`; x.textAlign = 'center'; x.textBaseline = 'alphabetic'; x.fillStyle = P.gold;
+      x.fillText('?', 34, 52); x.save(); x.translate(CW - 34, CH - 52); x.rotate(Math.PI); x.fillText('?', 0, 0); x.restore();
+      [[CW - 30, 30], [30, CH - 30]].forEach(([a, b]) => { x.save(); x.translate(a, b); x.rotate(Math.PI / 4); x.fillRect(-4, -4, 8, 8); x.restore(); });
+    } else [[30, 30], [CW - 30, 30], [30, CH - 30], [CW - 30, CH - 30]].forEach(([a, b]) => { x.save(); x.translate(a, b); x.rotate(Math.PI / 4); x.fillStyle = P.gold; x.fillRect(-4, -4, 8, 8); x.restore(); });
     return c;
   }
 
@@ -270,7 +273,7 @@
   }
 
   // ------------------------------------------------------------------ roster
-  // Gram stain: genus lists in Siqueira & Rôças, J Oral Microbiol 2009. Oxygen tolerance and shape: see NOTES.md.
+  // Gram stain: genus lists in Siqueira & Rôças, J Oral Microbiol 2009. Oxygen tolerance and shape: see RESEARCH.md section (i).
   const ROSTER = {
     fuso: { name: 'Fusobacterium', gram: 'neg', o2: 'an', icon: 'spindles', shape: 'spindle-shaped' },
     parvi: { name: 'Parvimonas', gram: 'pos', o2: 'an', icon: 'cocci', shape: 'small cocci' },

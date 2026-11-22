@@ -16,8 +16,8 @@ the treatment is a blue mandatory-action header plus a red lock-out tag, and the
 | 0.0–1.9 | Hook placard | Warning triangle: intact tooth in hatched bony socket at t = 0; four lacunae with red clastic cells pop in one after another (0.2–1.4, slight overshoot); `RESORPTION` gets one stamp-style punch at 0.25; chevrons shimmer | `EXTERNAL INFLAMMATORY RESORPTION`, readable from frame 0 (corner tag `RESORPTION 3/5 · EXTERNAL INFLAMMATORY` and `@natebrooksendo` persist) |
 | 1.62–2.18 | Hazard-tape wipe | diagonal tape band sweeps the placard | — |
 | 1.9–5.4 | Equation as signage | diamond 1 stamps (1.98), `+` (2.2), diamond 2 (2.28), `=` (2.48), result plate (2.56, landed by 2.96), source (3.05) | `DAMAGED ROOT SURFACE` · `luxation · avulsion` + `INFECTED CANAL` = `INFLAMMATORY RESORPTION` |
-| 5.4–11.5 | Cutaway + timer | denuded patch highlighted (5.45–7.1); red particles stream through tubules, blocked by intact cementum, escaping at the patch; clastic cells arrive and dig two bowl-shaped craters in root and two in bone; dial sweeps; one thing lands at a time: callout 5.7, row 1 6.3, row 2 7.6, callout 8.35, row 3 9.1, quote strip 10.05; gutter chevrons run at quarter speed and dimmed | `TOXINS VIA TUBULES` · `BY WEEK 1` `histology · monkey` · `~1 MONTH` `on X-ray` · `ROOT + BONE RESORB` · `MONTHS` `root can be lost` · `“VERY RAPID IN CHILDREN” — IADT 2020` |
-| 11.5–17.3 | The fix | timer plate dims to about a third (11.5–11.8); blue header drops (11.55); dressing front sweeps the canal coronal→apical (11.7–12.5); particles die out; lock-out tag stamps (12.1, settled 12.46); cells leave (12.6–13.6); plate flip 12.9–13.3 (contents fade, blank plate flips, outcome fades in; lamps fill in 0.6 s); crater gets a cementum-like lining, PDL space re-forms along the contour, bone follows (13.1–14.9); the scene is still from 14.9 to the wipe at 17.02 | `DISINFECT THE CANAL` · `Ca(OH)2` · `STIMULUS CUT` · `97% HEALED` · `192 of 197 resorbing teeth` · `5 went on to ankylosis` |
+| 5.4–11.5 | Cutaway + timer | denuded patch highlighted (5.45–7.1); red particles stream through tubules, blocked by intact cementum, escaping at the patch; clastic cells arrive and dig two bowl-shaped craters in root and two in bone; dial sweeps; one thing lands at a time: callout 5.7, row 1 6.3, row 2 7.6, callout 8.35, row 3 9.1, quote strip 9.6 (at full brightness about 9.8–11.8); gutter chevrons run at quarter speed and dimmed | `TOXINS VIA TUBULES` · `BY WEEK 1` `histology · monkey` · `~1 MONTH` `on X-ray` · `ROOT + BONE RESORB` · `MONTHS` `root can be lost` · `“VERY RAPID IN CHILDREN” — IADT 2020` |
+| 11.5–17.3 | The fix | blue header drops (11.55); timer plate dims to about a third (11.8–12.1); dressing front sweeps the canal coronal→apical (11.7–12.5); particles die out; lock-out tag stamps (12.1, settled 12.46); cells leave (12.6–13.6); plate flip 12.9–13.3 (contents fade, blank plate flips, outcome fades in; lamps fill in 0.6 s); crater gets a cementum-like lining, PDL space re-forms along the contour, bone follows (13.1–14.9); the scene is still from 14.9 to the wipe at 17.02 | `DISINFECT THE CANAL` · `Ca(OH)2` · `STIMULUS CUT` · `97% HEALED` · `192 of 197 resorbing teeth` · `5 went on to ankylosis` |
 | 17.3–21.9 | End card (fully visible 17.6–21.3) | named equation recap; blue cancel bars draw on one after the other (17.9, 18.3): no infected canal → no inflammatory resorption; file bobs in the canal; dial ticks | `DAMAGE` + `INFECTION` · `TREAT THE CANAL` `EARLY` · `REPLANTED MATURE TOOTH — START ROOT CANAL WITHIN 2 WEEKS` (`IADT 2020`) |
 | 21.34–21.9 | Loop wipe | tape band wipes the end card back to the hook's t = 0 state (no cross-fade, no ghosted text) | — |
 
@@ -91,6 +91,7 @@ Andreasen 1985, Trope 2002 or the 1966 papers directly.
   moved off the crater; denuded patch highlighted at scene start; end card enlarged; `AFTER REPLANTATION`
   qualifier added under the dial; duration 21.9 s.
 - v4 (review pass): see "Review changes".
+- v5 (Final QA): see "Final QA" at the end of this file.
 
 ## Review changes
 Applied from the independent science + design review (all "should" items and the cheap nits):
@@ -110,6 +111,7 @@ Science (caption / notes only, no new on-screen words)
 - Dial qualifier `AFTER REPLANTATION` → `AFTER TRAUMA`.
 - The caption is about 1,200 characters, over the 300–700 guide in SPEC.md, because the review asked for these
   additions in the caption instead of on screen.
+  (Superseded: Final QA cut the caption to 696 characters; the dropped lines are listed under "Final QA".)
 - Not done here: opening the two IADT PDFs to re-confirm the three quotes and their section numbers (not in PMC).
   This is a pre-posting check for a person with journal access; see "Verified from" above.
 
@@ -131,3 +133,37 @@ Design
 - Nits: lock-out tag is smaller and moved left/up, clear of the crater outline; the plate flip no longer squashes
   text (contents fade, a blank plate flips); legend is 30 px and reduced to `○ 5 went on to ankylosis`; the `=` and
   result plate of the equation arrive 0.5 s earlier (the time went to the outcome plate).
+
+## Final QA
+Fresh-eyes pass over 21 stills with the safe-area overlay (`_stills/final-qa`), the source, RESEARCH.md and meta.json.
+
+Checked and fine: no clipped, overlapping or sub-30 px must-read text; nothing must-read in the top 230 px, the bottom
+340 px or the button column (all text ends at x <= 950, lowest line at y 1540); no missing glyphs, NaN or blank frames;
+hook readable at t = 0; both tape wipes clean, no ghosted text at the loop; lamp matrix is 192 lit + 5 hollow = 197;
+end card fully visible 17.6–21.3 s; poster (19.8 s) reads inside the 3:4 crop. PubMed records re-pulled for PMIDs
+1521505, 6933704, 7641622, 12848710, 32460393, 35229320, 33975756 and 26923450: authors, years, journals, pages and
+the quoted abstract sentences all match what is on screen and in the table above.
+
+Defects found and fixed
+- The red quote strip (`“VERY RAPID IN CHILDREN” — IADT 2020`) was at full brightness for only about 1.05 s
+  (10.45–11.5) before the timer plate dimmed, under `Kit.readSecs` (2.0 s for the four quoted words). Fix: the strip
+  now lands at 9.6 (was 10.05) and the plate starts to dim at 11.8 (was 11.5), after the blue header has dropped.
+  The quote is now at full brightness for about 2 s, and `MONTHS · root can be lost` for about 2.35 s (was 2.05 s).
+  Two timing constants in `reel.js` (`T_STRIP`, new `T_DIM`); nothing else moved; duration unchanged (21.9 s).
+- meta.json caption was about 1,200 characters (schema: 300–700). Rewritten to 696 characters; every claim it still
+  makes is covered by its Refs line (Fuss 2003, Andreasen 1980, Andreasen et al. 1995, Cvek 1992, Fouad 2020).
+- meta.json claims were not in on-screen order (`ROOT + BONE RESORB` lands at 8.35 s, after the week-1 and 1-month
+  rows). Reordered; wording and sources unchanged.
+
+Nuance dropped from the caption for length (kept here; add it by hand if a longer caption is wanted)
+- Tubule pathway is a histology-based theory (Andreasen 1981 J Endod, monkeys); root and adjacent bone both resorb
+  (Abbott 2016 Aust Dent J).
+- Same Cvek cohort: cervical root fractures were frequent in immature teeth (77% to 28% by stage of root development).
+- Established resorption: start root canal treatment immediately, calcium hydroxide (Bourguignon et al. 2020 Dent
+  Traumatol, sect. 13.3).
+- The same infection-driven resorption occurs at the apex in apical periodontitis (Patel et al. 2022 Int Endod J).
+
+Left as is (judgment calls, not defects)
+- Equation scene: the seven new words are on screen for about 2.5–2.7 s before the wipe; readable, slightly brisk.
+- Still open from the review pass: the two IADT 2020 quotes and their section numbers rest on the research stage's
+  reading of the AAPD reprints (no full text in PMC). Worth one look by someone with journal access before posting.

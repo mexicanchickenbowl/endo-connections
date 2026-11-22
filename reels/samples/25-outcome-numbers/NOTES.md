@@ -228,3 +228,39 @@ meta.json: the caption had 4 hashtags (SPEC asks for 5–8). Added `#endo`; to s
 "traditional 59% vs microsurgery 94%" became "traditional 59%, microsurgery 94%" (which also drops the "vs" from a
 pair the same caption calls not head-to-head). Caption is now 698 characters; title 37, topic 125, 8 claims in
 on-screen order, duration 24.0 from ffprobe. Nothing else changed.
+
+## Citation audit
+Independent audit of every literature citation on screen (six source flaps), in meta.json (claims + caption Refs)
+and in this file, with the supporting rows of RESEARCH.md. Details and quotations are in RESEARCH.md, "Citation
+audit".
+
+Result: **no wrong author, year, journal, volume, pages, PMID or DOI, and no on-screen number that is not in the
+paper named on its flap.** `board.js` was not changed and the video was not re-rendered (720 frames, 24.000 s,
+H.264 1080×1920 30 fps, checked again with ffprobe).
+
+Checked:
+- PubMed records pulled again for PMID 35334111 (Burns 2022), 15564861 (Salehrabi & Rotstein 2004), 2084204
+  (Sjögren 1990), 19133093 (Ng 2008), 20416420 (Salehrabi & Rotstein 2010), 20951283 (Setzer 2010), 32899437
+  (Pinto 2020) and 25306305 (Torabinejad 2015): bibliographic details and abstracts match claims 1–7 as written.
+- Burns 2022 PMC full text: 39 studies / 7,432 teeth / 82.0% (79.3–84.8) strict; Table 3 90.3% vs 80.3%;
+  follow-up 12 months to 19 years. Pinto 2020 PMC full text: 91.3% trials, 78.4% prospective cohorts, 2–13 yr.
+- Off-screen papers quoted in "Residual uncertainty" (Ng 2007, Kang 2015, Tsesis 2013, Sabeti 2023, von Arx
+  2012): abstracts re-read, numbers match.
+
+Problems found and fixed (documentation only):
+1. **"6 MO+" on the Setzer cell rested on a secondary source** (Pinto 2020), and meta.json said the Setzer full
+   text "was not read". The full text was located (article PDF hosted by the AAE) and read: inclusion criterion
+   3 is "A minimum follow-up period of 6 months"; success is complete or incomplete (scar) healing by Rud/Molven
+   with no clinical signs, per tooth. The on-screen tag and the caption's "surgical criteria, not strict" are
+   therefore verified at the primary source. Updated: meta.json claim 6 source, claim 6 and "Residual
+   uncertainty" above, RESEARCH.md (S1 and related lines). No change on screen or in the caption.
+2. **Nuance recorded, not a correction:** Setzer's Discussion states that all nine microsurgery studies had at
+   least 12 months of follow-up; 6 months is the stated minimum for both groups, so "6 MO+" beside 94% is
+   accurate and conservative.
+3. **Loose wording in "Residual uncertainty":** Tsesis 2013 (89.0%) pooled "modern technique" studies that
+   included loupes, and Sabeti 2023 (84.5%) pooled studies reporting hard-tissue defects, so they are no longer
+   called "pooled microsurgery estimates" without that qualifier (here and in RESEARCH.md section d).
+
+Still abstract-only (unchanged, see "Residual uncertainty"): Sjögren 1990 (criteria, unit of analysis), Ng 2008,
+Salehrabi & Rotstein 2004 and 2010; Ng 2007's 74.7% / 85.2% only as quoted by Burns 2022 (not on screen, not in
+the caption).

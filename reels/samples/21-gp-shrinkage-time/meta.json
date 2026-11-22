@@ -7,37 +7,37 @@
   "duration": 20.6,
   "claims": [
     {
-      "claim": "Cooling: 1.0–2.3 % linear shrinkage in 10 min, 75→37 °C, in vitro (3 backfill GP brands, tabletop device)",
+      "claim": "Cooling: 1.0–2.3 % linear shrinkage (brand means 0.96–2.31 %) in 10 min, 75→37 °C, in vitro (3 backfill GP brands, tabletop device); also printed on the chart as '1.0–2.3% linear'",
       "source": "Lottanti S, Tauböck TT, Zehnder M, J Endod 2014;40:721-4 (PMID 24767571; abstract)"
     },
     {
-      "claim": "Held at 37 °C: keeps shrinking for 45 min–10 h, in vitro (4 thermosensitive GP products, dilatometer; clock start not defined in the abstract)",
-      "source": "Lee CQ et al., J Endod 1997;23:579-82 (PMID 9587286; abstract)"
+      "claim": "Held at 37 °C: keeps shrinking for 45 min–10 h (time to stabilize, range across 4 thermosensitive GP products; GP first heated to 80 °C in a dilatometer; clock start not defined in the abstract), in vitro",
+      "source": "Lee CQ, Chang Y, Cobb CM, Robinson S, Hellmuth EM, J Endod 1997;23:579-82 (PMID 9587286; abstract)"
     },
     {
-      "claim": "Stamp CRYSTALLIZING = inferred mechanism label (Lee's abstract names no mechanism)",
-      "source": "Inferred from Grassi MD et al., J Endod 1989;15:517-21 (PMID 2639948; abstract: isothermal shrinkage during crystallization) and Schilder H et al., Oral Surg Oral Med Oral Pathol 1985;59:285-96 (PMID 3856822; abstract)"
+      "claim": "Stamp 'CRYSTALLIZING?' = inferred mechanism (hence the question mark); crystallization probably starts during cooling and continues at 37 °C; Lee's abstract names no mechanism",
+      "source": "Inferred from Grassi MD et al., J Endod 1989;15:517-21 (PMID 2639948; abstract: isothermal shrinkage during crystallization) and Schilder H, Goodman A, Aldrich W, Oral Surg Oral Med Oral Pathol 1985;59:285-96 (PMID 3856822; abstract)"
     },
     {
-      "claim": "Then stable to 24 h (end of the 24-h hold), in vitro",
-      "source": "Lee CQ et al., J Endod 1997;23:579-82 (PMID 9587286; abstract)"
+      "claim": "Then stable to 24 h (stamp STABLE; end of the 24-h hold), in vitro, one study; Goodman's thesis abstract instead describes contraction continuing over a 24-h hold",
+      "source": "Lee CQ et al., J Endod 1997;23:579-82 (PMID 9587286; abstract). Contrast: Goodman AS, MScD thesis, Boston University 1973 (thesis abstract; data behind Schilder 1985, PMID 3856822)"
     },
     {
-      "claim": "After 24 h: no data found for heated GP",
-      "source": "Literature search, no study found (RESEARCH.md L4); not a claim that it was never measured"
+      "claim": "After 24 h: stamp NO DATA FOUND, ruler 'days ?', stopwatch reads '>24 h' (no volume data found for heated GP)",
+      "source": "Literature search of PubMed abstracts, no study found (RESEARCH.md L4); not a claim that it was never measured. Wong M, Peters DD, Lorton L, J Endod 1981;7:551-8 (PMID 6985547) has no abstract and was not read. Indirect long-term data point to expansion: Wu 2000 (PMID 11307452; abstract), Michaud RA et al., J Endod 2008;34:1528-32 (PMID 19026888; abstract)"
     },
     {
-      "claim": "Compact it warm (in vitro): vertical compaction of warm GP more than compensated for shrinkage on cooling",
-      "source": "Marlin J, MSD thesis, Boston University 1971 (thesis abstract only; published as Marlin J, Schilder H, Oral Surg Oral Med Oral Pathol 1973;36:872-9, PMID 4524837, paper not read)"
+      "claim": "Compact it warm (in vitro): warm vertical compaction (Schilder technique) more than compensated for shrinkage on cooling; not tested against the hours-long tail",
+      "source": "Marlin J, MSD thesis, Boston University 1971 (thesis abstract only; probably published as Marlin J, Schilder H, Oral Surg Oral Med Oral Pathol 1973;36:872-9, PMID 4524837, paper not read)"
     },
     {
-      "claim": "Use sealer (in vitro): GP without sealer leaked more than GP + sealer at 48 h",
-      "source": "Wu MK, Fan B, Wesselink PR, Int Endod J 2000;33:121-5 (PMID 11307452; abstract)"
+      "claim": "Use sealer (in vitro): the seal of injected thermoplasticized GP was enhanced by a sealer (dye penetration)",
+      "source": "Bradshaw GB, Hall A, Edmunds DH, Int Endod J 1989;22:17-20 (PMID 2599657; abstract)"
     },
     {
-      "claim": "Curves, temperature trace, time axis and canal view are schematic",
-      "source": "Toy model / schematic: curve shapes and the split between phases are drawn, not measured; the time axis is a composite of two bench experiments; canal gap exaggerated; no y-scale"
+      "claim": "Curves, temperature trace, time axis and canal views are schematic (legend: SCHEMATIC CURVES · 2 BENCH STUDIES (IN VITRO); cards: 'NO-SEALER CANAL · SCHEMATIC', 'gap exaggerated', 'illustration')",
+      "source": "Toy model / schematic: curve shapes and the split between phases are drawn, not measured; the time axis is a composite of two bench experiments; no y-scale; the canal views are illustrations (no cited study measured a wall gap)"
     }
   ],
-  "caption": "Warm gutta-percha: when does it stop shrinking?\n\nCooling 75→37 °C, backfill GP shrank 1.0–2.3 % (linear) within 10 min. In one 1997 dilatometer study, GP held at 37 °C kept shrinking for 45 min–10 h, then was stable through the 24-h hold. Past 24 h I found no data.\nBench data on free GP, not canals. In vitro, compacting warm GP more than made up for the shrinkage, and GP without sealer leaked more at 48 h.\n\nRefs: Lottanti 2014 & Lee 1997, J Endod; Marlin 1971 thesis (publ. OOO 1973); Wu 2000, Int Endod J.\nSchematic animation, composite timeline.\n\n#endodontics #endo #guttapercha #obturation #dentalmaterials #rootcanal"
+  "caption": "Warm gutta-percha: when does it stop shrinking?\n\nCooling 75→37 °C: 1.0–2.3% linear shrinkage in 10 min. At 37 °C: 45 min–10 h more by product, then stable to 24 h; Goodman's thesis (Schilder 1985): contraction through 24 h. Past 24 h: no volume data found; indirect data hint at expansion.\nBench data on free GP; crystallization inferred. In vitro, warm vertical compaction offset cooling shrinkage; injected GP sealed better with sealer. Neither covers the late tail.\n\nRefs: Lottanti 2014, Lee 1997, Grassi 1989, J Endod; Schilder 1985, OOO; Marlin 1971 BU thesis; Bradshaw 1989, Wu 2000, Int Endod J\nSchematic animation: no wall gap measured.\n\n#endodontics #endo #guttapercha #obturation #rootcanal"
 }

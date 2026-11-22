@@ -480,3 +480,14 @@ No fact in this brief changed. Abstracts re-read on PubMed for the points the re
   "Guidelines for management of intracanal separated instruments have not been formulated".
 - Gomes et al., Aust Endod J 2021;47:372-85 (PMID 33410578): use "in more than four teeth and less proficient
   operators were associated with a higher incidence of file fracture".
+
+## Citation audit (2026-11-22)
+- All PMIDs in this file (70) were re-matched on PubMed. The 16 behind on-screen claims were read as full records
+  (authors, year, journal, volume, pages, abstract); the rest were matched by journal / year / volume / first page /
+  first author or by author + year + PMID. All resolve to the cited paper; no correction was needed.
+- Added support for "often no warning" on the fatigue card (rows M7 / M9): Ohri 2024, PMC full text, section 5.1:
+  "Fatigue failure is typically linked with no macroscopic warning signs of damage, and the fracture of NiTi files has
+  been associated with no any signs of warning". Section 5.2.2 carries the torsion wording ("the tip or any other part
+  of an instrument binds to the canal wall, but the handpiece keeps turning"; "plastic deformation (unwinding)").
+- Fan 2025 (PMC12146410) re-read for "excessive force": "Additional contributing factors include excessive force, high
+  rotational speed, and skipping file sizes during root canal instrumentation."

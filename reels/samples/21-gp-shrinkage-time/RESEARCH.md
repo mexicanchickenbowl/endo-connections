@@ -443,3 +443,18 @@ crystallization (~99 %, Dong 2019)"; "Hold pressure while it cools" as evidence-
 **Still not verifiable (unchanged status):** full texts of Lee 1997, Lottanti 2014, Schilder 1974/1985 and
 Marlin & Schilder 1973; brand names in Lee 1997; seconds to reach 37 °C; share of shrinkage after 37 °C; ISO 6876
 limits; Skinner & Himel 1987; Evans & Simon 1986; Buchanan 1996; Wong 1981/1982.
+
+## Addendum after the reel review (builder)
+
+| # | Fact | Exact source | What the source literally reports | Verified from | Use |
+|---|---|---|---|---|---|
+| C8 | The seal of injected thermoplasticized GP was enhanced by a sealer (in vitro, dye penetration) | Bradshaw GB, Hall A, Edmunds DH. Int Endod J 1989;22(1):17-20. PMID 2599657. [doi:10.1111/j.1365-2591.1989.tb00500.x](https://doi.org/10.1111/j.1365-2591.1989.tb00500.x) | 120 single-rooted teeth, four operators; lateral condensation vs thermoplasticized GP with and without sealer. "The lowest leakage values were found in those canals filled with laterally condensed gutta-percha. The sealing ability of thermoplasticized gutta-percha was enhanced by the use of a sealer." | PubMed abstract (read at review-fix stage) | Now the on-screen source for "Use sealer. (in vitro)", replacing Wu 2000 (C3), whose main result runs the other way at 6 months. It measured leakage, not a gap. |
+
+- C1 (Marlin): the thesis ("Gutta-percha: physical properties as related to the Boston University technique of root
+  canal filling") and the 1973 paper ("Physical properties of gutta-percha when subjected to heat and vertical
+  condensation") have different titles; that the paper is the thesis is an inference. Cite as "Marlin 1971 BU thesis
+  (abstract)"; "probably published as" in meta.json.
+- C3 (Wu 2000) and L5 (Michaud 2008) are now used only as indirect long-term evidence pointing to expansion.
+- L4 lead still unread: Wong, Peters & Lorton, J Endod 1981;7:551-8 (PMID 6985547). Check before posting.
+- No other fact changed. The reel never converts or merges the linear % (Lottanti) with volume (Lee); the red trace
+  is labelled "GP SIZE".

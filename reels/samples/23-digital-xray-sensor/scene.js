@@ -164,7 +164,8 @@ function polyAt(P, s, out) {            // point at arc length s along a polylin
 const polyLen = (P) => { let l = 0; for (let i = 0; i < P.length - 1; i++) l += P[i].distanceTo(P[i + 1]); return l; };
 
 export function buildScene(glc) {
-  const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: true, alpha: true, preserveDrawingBuffer: true, powerPreference: 'high-performance' });
+  const QS = new URLSearchParams(location.search);
+  const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: QS.get('aa') !== '0', alpha: true, preserveDrawingBuffer: true, powerPreference: 'high-performance' });
   renderer.setPixelRatio(1); renderer.setSize(W, H, false); renderer.setClearColor(0x000000, 0);
   renderer.toneMapping = THREE.NeutralToneMapping; renderer.toneMappingExposure = 1.0;
   const scene = new THREE.Scene();
@@ -178,7 +179,8 @@ export function buildScene(glc) {
   const R = buildRadiograph();
 
   /* ---------- materials ---------- */
-  const P = (o) => new THREE.MeshPhysicalMaterial(o), S = (o) => new THREE.MeshStandardMaterial(o);
+  const S = (o) => new THREE.MeshStandardMaterial(o);
+  const P = QS.get('phys') === '0' ? (o) => { const c = { ...o }; delete c.clearcoat; delete c.clearcoatRoughness; return new THREE.MeshStandardMaterial(c); } : (o) => new THREE.MeshPhysicalMaterial(o);
   const M = {
     shell: P({ color: 0x2a2e36, roughness: 0.44, clearcoat: 0.4, clearcoatRoughness: 0.42 }),
     shellIn: S({ color: 0x17191e, roughness: 0.85 }),
