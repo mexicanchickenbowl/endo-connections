@@ -21,7 +21,7 @@ form in some tubule mouths. It ends on the mineralized diorama plus a hedged, in
 | 7.3–10.9 | **② Hydration** (chip: hours–days). Bottom-up wave: grain cores shrink, a short fuzzy C–S–H rim grows, gel strands mesh neighbouring grains, the paste tint becomes a continuous translucent lilac gel; hexagonal Ca(OH)₂ plates nucleate. | "Silicate grains hydrate: C–S–H gel + Ca(OH)₂" · icon equation C₃S/C₂S (tri-/dicalcium silicate) + H₂O → C–S–H + Ca(OH)₂ · src: Camilleri 2011 (simplified), final set ≥168 h Loushine 2011 |
 | 10.9–15.1 | **③ Ions out** (chip: from minutes). Sealer contents recede to half opacity; Ca²⁺ (green) and OH⁻ (deep blue), drawn 1.5× larger, leave the grains/plates: some escape, some wait in tubule mouths, some settle on the dentin. pH bar fills; "rising…" fades out fully, then the dashed 10–12 band and its label fade in and the knob fades away. | "Ca²⁺ and OH⁻ leach out; pH climbs" · pH card "~10–12 in lab tests (water)" + "Steps overlap: pH rises within minutes, before setting · Lee 2017" |
 | 15.1–18.9 | **④ Apatite** (chip: days–months (lab)). Camera pushes in 7 %. Orange phosphate tetrahedra rise in 8 of 11 tubules ("phosphate from tissue fluid / lab: PBS bath · route schematic"), meet the waiting Ca²⁺ in a soft mint-white burst, and shallow, uneven Ca–P plugs grow into those mouths (3 tubules stay empty); needle clusters nucleate on the surface; an irregular mint interfacial band grows. | "Phosphate + Ca²⁺ → apatite-like layer" · icon equation phosphate + Ca²⁺ + OH⁻ → apatite-like · callouts "tag-like Ca–P deposits", "apatite-like layer" · src: Han & Okiji 2013 (incl. a premixed sealer, in PBS) / Xuereb 2015 / MTA: Sarkar 2005 |
-| 18.9–24 | **Takeaway** (headline held 4.15 s). Sealer contents return to full opacity, camera eases back, a glint runs along the new mineral layer; last 0.5 s dissolves into frame 0 for the loop. | "BIOCERAMIC SEALERS · TAKEAWAY" · **Water sets it. In vitro, calcium + phosphate form apatite-like mineral.** · fine print: "Premixed sealers set slowly (days) and need dentin moisture." / "Ion release = some solubility; long-term seal effect debated." / Xuereb 2015 · Han & Okiji 2013 · Donnermeyer 2019 |
+| 18.9–24 | **Takeaway** (headline held 4.15 s). Sealer contents return to full opacity, camera eases back, a glint runs along the new mineral layer; last 0.5 s dissolves into frame 0 for the loop. | "BIOCERAMIC SEALERS · TAKEAWAY" · **Water sets it. In vitro, calcium + phosphate form apatite-like mineral.** · fine print: "Premixed sealers can take days to set and need dentin moisture." / "Ion release = some solubility; long-term seal effect debated." / two 23 px source lines: "Loushine 2011 J Endod · Xuereb 2015 J Endod" and "Han & Okiji 2013 IEJ · Donnermeyer 2019 Odontology" |
 
 Reading times (`Kit.readSecs` vs fully visible): hook title 2.32 / 3.05 s; subtitle 2.92 / 3.05; ① caption 3.22 / 3.30;
 ① chip 2.92 / 3.10; ② 2.92 / 3.00; ③ 2.92 / 3.60; pH label 2.32 / 2.40; ④ 2.62 / 3.20; phosphate callout 2.01 / 2.05;
@@ -48,24 +48,28 @@ bottom-right (now kept through the end card).
      of ready-to-use calcium silicate-based sealers."
    - Lee JK et al. Bioinorg Chem Appl 2017:2582849. PMID 28210204, doi:10.1155/2017/2582849. The premixed sealer did not
      set in a humid incubator even after one month.
-3. **"set slowly (days)" / step-2 chip "hours–days" / src "final set ≥168 h".** Loushine BA et al. J Endod 2011;37:673–677.
-   PMID 21496669, doi:10.1016/j.joen.2011.01.003: at least 168 h to final set (Gilmore). Loushine is used only for the
-   setting time. It also found that excess water reduced microhardness, so the message is "needs moisture", not "the
+3. **"can take days to set" / step-2 chip "hours–days" / src "final set ≥168 h".** Loushine BA et al. J Endod 2011;37:673–677.
+   PMID 21496669, doi:10.1016/j.joen.2011.01.003: at least 168 h to final set (Gilmore). Setting times vary by product and
+   moisture (Lee 2017 Table 3: the premixed EndoSeal MTA set in ~1223 min ≈ 20 h, EndoSequence BC Sealer had not set after a
+   month; Lee also notes other reports in which it did set), hence the hedged "can take days". Loushine is used only for the
+   setting time (step-2 source line and, since the citation audit, the end-card source line). It also found that excess water reduced microhardness, so the message is "needs moisture", not "the
    wetter the better" (not on screen).
 4. **"Silicate grains hydrate: C–S–H gel + Ca(OH)₂"; C₃S/C₂S (tri-/dicalcium silicate) + H₂O → C–S–H + Ca(OH)₂ (simplified).**
    Camilleri J. Dent Mater 2011;27:836–844. PMID 21600643; Camilleri J. Int Endod J 2007;40:462–470. PMID 17459120,
    doi:10.1111/j.1365-2591.2007.01248.x; Camilleri J, Sorrentino F, Damidot D. Dent Mater 2013;29:580–593. PMID 23537569
-   (reaction rims around the grains); Marciano MA et al. Dent Mater 2016. PMID 26727694.
+   (reaction rims around the grains); Marciano MA et al. Dent Mater 2016;32:e30–e40. PMID 26727694, doi:10.1016/j.dental.2015.11.008.
 5. **"Ca²⁺ and OH⁻ leach out; pH climbs" / "~10–12 in lab tests (water)" / "Steps overlap: pH rises within minutes, before
    setting" / step-3 chip "from minutes".**
    - Lee et al. 2017, Table 5 (distilled water): premixed sealer pH 11.64 already at 3 min, 11.6–11.8 over 24 h, while
-     the same sealer had not set after a month; EndoSeal MTA 10.4–11.3. A resin-based MTA-containing sealer in the same
+     the same sealer had not set after a month; EndoSeal MTA 10.4–10.9 fresh over 24 h (Table 5) and up to 11.3 once set
+     (Table 6, 4 weeks). A resin-based MTA-containing sealer in the same
      table stayed at pH 8.5–10.0, so the label refers to the hydraulic sealer in water. The fill end point is
      illustrative; the knob fades out once the literature band appears.
    - Candeiro GT et al. J Endod 2012;38:842–845. PMID 22595123, doi:10.1016/j.joen.2012.02.029 (raised pH and Ca²⁺ from 3 h).
    - Zhou HM et al. J Endod 2013;39:1281–1286. PMID 24041392, doi:10.1016/j.joen.2013.06.012 (alkaline at all times).
    - Caveat: Angkasuvan V et al. Clin Exp Dent Res 2022;8:900–905. PMID 35384399, doi:10.1002/cre2.573 (alkaline pH not
-     sustained at the outer root surface of obturated teeth).
+     sustained at the outer root surface of obturated teeth; sealer tested was BioRoot RCS, a powder/liquid CS sealer,
+     not a premixed one).
 6. **"Ion release = some solubility; long-term seal effect debated."** Donnermeyer 2019: bioactivity "is a consequence of
    the slight solubility of these materials … but solubility of the sealer might also compromise the quality of
    sealing". Zhou 2013: the premixed sealer had the highest solubility of the five sealers (still within ISO 6876).
@@ -88,7 +92,7 @@ bottom-right (now kept through the end card).
    - "phosphate" is used instead of "PO₄³⁻" because at tissue-fluid pH phosphate is mostly HPO₄²⁻/H₂PO₄⁻.
 8. **"In vitro" in the takeaway headline; fine print.** Xuereb 2015: "clinically, material bioactivity cannot be assumed".
    Apatite precipitating in PBS/SBF does not by itself prove bioactivity: Bohner M, Lemaitre J. Biomaterials
-   2009;30:2175–2179, doi:10.1016/j.biomaterials.2009.01.008. (Clinical context, not on screen: Sabeti et al., J Endod
+   2009;30:2175–2179. PMID 19176246, doi:10.1016/j.biomaterials.2009.01.008. (Clinical context, not on screen: Sabeti et al., J Endod
    2024;50:735–746, PMID 38548045.)
 
 ### Corrections and refinements to the brief
@@ -96,7 +100,7 @@ bottom-right (now kept through the end card).
   precipitates (Ca/P 1.6–2.0), which is not proof of stoichiometric HA.
 - "pH ~10–12" is kept, but labelled **"in lab tests (water)"**. In a tooth model the alkaline pH at the outer root surface was not sustained.
 - "Fibrous C–S–H": C–S–H is a poorly crystalline gel. The fibres and halo are a schematic way to show gel growing out of the grains.
-- Moisture: on screen "Premixed sealer: water from the dentin soaks in", "Very dry canal → may stay unset" and "set slowly (days) and need dentin moisture". "Over-wet is also bad" (Loushine: excess water reduced microhardness) is noted here, not on screen.
+- Moisture: on screen "Premixed sealer: water from the dentin soaks in", "Very dry canal → may stay unset" and "can take days to set and need dentin moisture". "Over-wet is also bad" (Loushine: excess water reduced microhardness) is noted here, not on screen.
 - Interfacial mineralization is presented as an in-vitro finding ("In vitro, …" in the headline), not as a proven clinical bond or seal.
 - In the cited experiments the phosphate came from PBS or simulated tissue fluid surrounding the specimen. Showing it
   rising up the tubules from the root-surface side is a schematic route, now labelled on screen ("lab: PBS bath · route
@@ -177,7 +181,7 @@ headline for 4.15 s.
 - Overlap of steps: pH card note "Steps overlap: pH rises within minutes, before setting · Lee 2017"; step-3 chip
   "from minutes"; the hydration wave now runs into step 3.
 - Timescales on every step chip (minutes–hours / hours–days / from minutes / days–months (lab)); step-1 chip "Very dry
-  canal → may stay unset"; end fine print "Premixed sealers set slowly (days) and need dentin moisture."
+  canal → may stay unset"; end fine print "Premixed sealers set slowly (days) and need dentin moisture." (Final QA: now "can take days to set").
 - Step-1 source → Xuereb 2015 + Antunes 2026 (verified, PMID 41364608); Loushine kept only for "final set ≥168 h" (step 2);
   "excess water reduced microhardness" noted above.
 - Solubility caveat added to the end fine print (Donnermeyer 2019; Zhou 2013; Silva Almeida 2017).
@@ -192,7 +196,7 @@ headline for 4.15 s.
 - pH result label: "rising…" fades out completely (T3+0.9…1.1) before the label fades in (T3+1.15…1.5); knob reaches its end
   point by T3+1.5; label fully visible 2.4 s (needs 2.32 s). No ghosting.
 - Step-4 caption shortened to "Phosphate + Ca²⁺ → apatite-like layer" (3.2 s visible, needs 2.62 s).
-- End card: sub-pill dropped (moisture message lives in step 1), caveats as 26 px fine print plus one 23 px citation line.
+- End card: sub-pill dropped (moisture message lives in step 1), caveats as 26 px fine print plus 23 px citation lines (one line originally; two since the citation audit).
 - Text-only colours: Ca²⁺/calcium #087a57, phosphate #b35500, OH⁻ #3a5bd9, kicker #5a3fd8; particles keep bright colours.
 - Focal point: sealer contents (grains, gel strands, plates, gel tint) dim to 50 % from T3+0.3 and restore over T5…T5+0.8;
   ions and phosphate drawn 1.5× (1.27× inside the narrow tubules); the meeting flash is a filled additive mint-white
@@ -213,3 +217,53 @@ headline for 4.15 s.
 - Plinth x margin 0.15 (was 0.3), back margin 0.22, base camera shifted 10 px left: at zoom 1 the corner stays at x ≤ 960.
 - All text below y 1100 kept at x < 960 (source lines and fine print fit to 820 px; step-4 legend centred at x 528).
 
+## Final QA (fresh-eyes pass)
+- Stills: 20 frames (`_stills/final-qa`, incl. t = 0 and 23.95) + 12 transition frames (`_stills/final-qa-tr`), all `--safe`.
+  No clipping, overlaps, tofu/fallback glyphs, NaN text or blank frames; all must-read text inside x 64–1016 / y 230–1580 and
+  x < 960 below y 1100; hook opaque at t = 0; takeaway held 4.15 s; loop dissolve lands on frame 0. Re-verified on PubMed:
+  Loushine 2011, Xuereb 2015, Antunes 2026, Lee 2017 (Table 5: BC Sealer pH 11.64 at 3 min), Han & Okiji 2013, Donnermeyer 2019,
+  Camilleri 2011, Sarkar 2005.
+- Fix (science, overstatement): end fine print "Premixed sealers set slowly (days) and need dentin moisture." →
+  "Premixed sealers can take days to set and need dentin moisture." Setting time varies by product and moisture (EndoSeal MTA
+  ~20 h in Lee 2017, which also cites reports in which BC Sealer did set), so "days" is now a possibility, not a rule.
+- Video re-rendered: 24.0 s, 720 frames, 30 fps, h264 1080×1920 + aac; poster 23.2 s (takeaway + mineralized diorama,
+  inside the 3:4 crop). No console errors.
+
+## Citation audit (2026-11-22)
+Every distinct paper cited on screen (`reel.js` source lines and fine print), in `meta.json` (claims[].source and the
+caption Refs line) and in this file was checked on PubMed. For each one I matched first author, year, journal, volume/pages
+and PMID to a single record and read the abstract (Lee 2017: full text in PMC, Tables 2, 3, 5 and 6), then checked it against
+the claim it supports.
+- **Verified, no change needed (19):** Xuereb 2015 J Endod 41:111–124 (25442723); Antunes 2026 Aust Endod J 52:168–177
+  (41364608); Camilleri 2011 Dent Mater 27:836–844 (21600643); Loushine 2011 J Endod 37:673–677 (21496669); Lee 2017
+  Bioinorg Chem Appl 2017:2582849 (28210204); Han & Okiji 2013 Int Endod J 46:808–814 (23402321); Sarkar 2005 J Endod
+  31:97–100 (15671817); Donnermeyer 2019 Odontology 107:421–436 (30554288); Camilleri 2022 Int Endod J 55 Suppl 3:710–777
+  (35167119); Camilleri 2007 Int Endod J 40:462–470 (17459120); Camilleri, Sorrentino & Damidot 2013 Dent Mater 29:580–593
+  (23537569); Marciano 2016 Dent Mater 32:e30–e40 (26727694); Candeiro 2012 J Endod 38:842–845 (22595123); Zhou 2013 J Endod
+  39:1281–1286 (24041392); Angkasuvan 2022 Clin Exp Dent Res 8:900–905 (35384399); Silva Almeida 2017 J Endod 43:527–535
+  (28216270); Han & Okiji 2011 Int Endod J 44:1081–1087 (21777256); Bohner & Lemaitre 2009 Biomaterials 30:2175–2179
+  (19176246); Sabeti 2024 J Endod 50:735–746 (38548045). There were no wrong PMIDs, years, journals or first authors, and no
+  textbooks cited as papers. Antunes 2026 and Donnermeyer 2019 were e-published a year early (Dec 2025 / Dec 2018); the print
+  year is cited, which is correct.
+- **Fixed, on screen (end card):** the fine print "Premixed sealers can take days to set…" had only Xuereb 2015, Han & Okiji
+  2013 and Donnermeyer 2019 on its source line, and none of those abstracts reports a multi-day setting time. The source for
+  it, Loushine 2011 (≥168 h, Gilmore), appeared only in step 2. The end-card citation is now two 23 px lines,
+  "Loushine 2011 J Endod · Xuereb 2015 J Endod" (y 1490) and "Han & Okiji 2013 IEJ · Donnermeyer 2019 Odontology" (y 1517).
+  It previously sat on one line squeezed to 22 px, and adding a fourth paper would have pushed it to 18 px. Checked with
+  `--safe` stills (`_stills/audit`, t = 19.6 / 21 / 23.2 / 23.75): inside x 64–1016, x < 960, clear of the handle line, and
+  the loop dissolve is unaffected. Video re-rendered.
+- **Fixed, meta.json:** claim "Ca²⁺ and OH⁻ leach out; pH ~10–12" cited only Lee 2017, which measured pH but not Ca²⁺.
+  Added Candeiro 2012 (Ca²⁺ release) and Xuereb 2015 ("all materials leached calcium").
+- **Fixed, meta.json:** takeaway claim "…form apatite-like mineral" cited only Donnermeyer 2019, which says "calcium
+  phosphate" precipitation, not apatite. Added Han & Okiji 2013 (acicular/lath-like precipitates, Ca/P 1.6–2.0, in PBS).
+- **Fixed, meta.json:** the end-card claim's source now names the on-screen source lines.
+- **Fixed, meta.json caption:** the Refs line left out four papers named on screen (Antunes 2026, Camilleri 2011,
+  Loushine 2011, Sarkar 2005), so a viewer could not look up, for example, "Loushine 2011". The Refs line now lists all eight
+  on-screen papers with journals (caption is 788 characters).
+- **Fixed, NOTES.md:** item 5 gave "EndoSeal MTA 10.4–11.3" as Lee 2017 Table 5. Table 5 (fresh, 24 h) gives 10.41–10.90,
+  and 11.29 is from Table 6 (set samples, 4 weeks). Both are now stated.
+- **Fixed, NOTES.md:** the Angkasuvan 2022 caveat now says that the sealer tested was BioRoot RCS (powder/liquid, not premixed).
+- **Completed, NOTES.md:** added the PMID for Bohner & Lemaitre 2009 (19176246) and the volume/pages/DOI for Marciano 2016.
+- **Video re-rendered once:** `reels/out/20-bioceramic-setting.mp4`, 24.0 s, 720 frames at 30 fps, h264 1080×1920 plus an aac
+  track, 6.2 MB; poster at 23.2 s. ffprobe checked and no console errors. A frame pulled from the MP4 at 23.2 s shows the
+  two-line end-card citation.

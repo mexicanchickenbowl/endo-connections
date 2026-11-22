@@ -12,7 +12,7 @@
     },
     {
       "claim": "Every turn in a curve = one tension–compression cycle at the file surface (rotating-bending)",
-      "source": "Pruett et al., J Endod 1997;23(2):77-85 (PMID 9220735); Cheung & Darvell, Int Endod J 2007;40(8):612-8 (PMID 17532775)"
+      "source": "Li et al., J Endod 2002;28(6):448-51 (PMID 12067126); Pruett et al., J Endod 1997;23(2):77-85 (PMID 9220735); Cheung & Darvell, Int Endod J 2007;40(8):612-8 (PMID 17532775)"
     },
     {
       "claim": "Peak surface strain ε ≈ d/(2R): tighter curve or thicker file → more strain",
@@ -28,7 +28,7 @@
     },
     {
       "claim": "The fatigue crack is microscopic, not visible clinically",
-      "source": "Cheung et al., Int Endod J 2005;38(11):802-9 (PMID 16218972)"
+      "source": "Cheung et al., Int Endod J 2005;38(11):802-9 (PMID 16218972); Cheung & Darvell, Int Endod J 2007;40(8):619-25 (PMID 17511786); Shen et al., J Endod 2006;32(1):61-5 (PMID 16410072)"
     },
     {
       "claim": "Fatigue life used meter and fracture at N = 741 cycles",
@@ -43,5 +43,5 @@
       "source": "Cheung & Darvell, Int Endod J 2007;40(8):612-8 (PMID 17532775)"
     }
   ],
-  "caption": "Why do NiTi rotary files snap in curved canals? One big reason: cyclic fatigue.\n\nEvery turn in a curve flips the file's outer surface between tension and compression.\nSurface strain ≈ d/(2R): a tighter curve or a thicker file means more strain per turn and fewer cycles to failure.\nA microcrack starts at a surface flaw, grows each cycle, and the file can separate with no visible unwinding first. Torsion is the other mechanism, and clinically the two often combine.\n\nRefs: Pruett 1997, J Endod; Cheung & Darvell 2007, Int Endod J; Sattapan 2000, J Endod\nAnimation is schematic; numbers are illustrative (toy model).\n\n#endodontics #endo #dentistry #rootcanal #NiTi #endoresident #dentalstudent"
+  "caption": "Why do NiTi rotary files snap in curved canals? One big reason: cyclic fatigue.\n\nEvery turn in a curve flips the file's outer surface between tension and compression.\nSurface strain ≈ d/(2R): a tighter curve or a thicker file means more strain per turn and fewer cycles to failure.\nA microcrack starts at a surface flaw, grows each cycle, and the file can separate with no visible unwinding first. Torsion is the other mechanism, and clinically the two often combine.\n\nRefs: Pruett 1997, J Endod; Cheung & Darvell 2007, Int Endod J (Parts 1-2); Shen 2006, J Endod; Sattapan 2000, J Endod\nAnimation is schematic; numbers are illustrative (toy model).\n\n#endodontics #endo #dentistry #rootcanal #NiTi #endoresident #dentalstudent"
 }

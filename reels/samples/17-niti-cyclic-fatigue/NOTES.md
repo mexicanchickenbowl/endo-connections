@@ -48,6 +48,11 @@ scene 3 3.18 vs 2.92; scene 4 3.33 vs 2.92; scene 5 2.78 vs 2.62; takeaway 3.55 
      J Endod 1997;23(2):77-85. PMID 9220735. doi:10.1016/S0099-2399(97)80250-6
    - Cheung GSP, Darvell BW. *Fatigue testing of a NiTi rotary instrument. Part 1: Strain-life relationship.*
      Int Endod J 2007;40(8):612-8. PMID 17532775. doi:10.1111/j.1365-2591.2007.01262.x ("rotational bending")
+   - Li UM, Lee BS, Shih CT, Lan WH, Lin CP. *Cyclic fatigue of endodontic nickel titanium rotary instruments:
+     static and dynamic tests.* J Endod 2002;28(6):448-51. PMID 12067126. doi:10.1097/00004770-200206000-00007.
+     Abstract states it directly: instruments rotating in curved canals "are subjected to both tensile and
+     compressive stress", localized at the point of curvature. (Added in the citation audit: the Pruett and Cheung
+     abstracts only imply the alternation via the rotating-bending set-up.)
 2. **ε ≈ d / (2R)** (written with brackets so it cannot be read as (d/2)·R; surface strain amplitude, d = file diameter at the curve, R = radius of curvature). This is the
    standard outer-fibre strain of a bent beam (ε = y/R with y = d/2). It is purely geometric, so it holds even though
    NiTi's stress–strain curve is non-linear. Cheung & Darvell 2007 (Part 1) computed each specimen's surface strain
@@ -91,7 +96,10 @@ scene 3 3.18 vs 2.92; scene 4 3.33 vs 2.92; scene 5 2.78 vs 2.62; takeaway 3.55 
    - **"microscopic, not visible clinically"** (tag beside the focus ring): Cheung GSP, Peng B, Bian Z, Shen Y,
      Darvell BW. *Defects in ProTaper S1 instruments after clinical use: fractographic examination.* Int Endod J
      2005;38(11):802-9. PMID 16218972. doi:10.1111/j.1365-2591.2005.01020.x. Low-power or lateral examination failed
-     to reveal the true failure mechanism; striations needed high-power SEM.
+     to reveal the true failure mechanism; striations needed high-power SEM. This paper examines files *after*
+     fracture, so "not visible clinically" (before fracture) is an inference, supported together with Cheung &
+     Darvell 2007 Part 2 (PMID 17511786: the fatigue region is "microscopic striations", seen by SEM) and Shen et al.
+     2006 (PMID 16410072: ProTaper "more likely to separate without warning").
 6. **"grows every cycle" / STRIATIONS / OVERLOAD (dimples) / ORIGIN** (fatigue fractography):
    - Cheung GSP, Darvell BW. *Fatigue testing of a NiTi rotary instrument. Part 2: Fractographic analysis.*
      Int Endod J 2007;40(8):619-25. PMID 17511786. doi:10.1111/j.1365-2591.2007.01256.x. Every fracture surface
@@ -116,7 +124,8 @@ scene 3 3.18 vs 2.92; scene 4 3.33 vs 2.92; scene 5 2.78 vs 2.62; takeaway 3.55 
    - Sattapan B, Nervo GJ, Palamara JE, Messer HH. *Defects in rotary NiTi files after clinical use.*
      J Endod 2000;26(3):161-5. PMID 11199711. doi:10.1097/00004770-200003000-00008. Fractures split into torsional
      (55.7 %) and flexural-fatigue (44.3 %) types. Torsional failures are associated with deformation such as
-     unwinding.
+     unwinding (this classification is in the full text; the PubMed abstract gives only the split, so Shen 2006
+     below is the direct abstract-level support for "without warning").
    - Shen Y, Cheung GS, Bian Z, Peng B. J Endod 2006;32(1):61-5. PMID 16410072. doi:10.1016/j.joen.2005.10.017.
      Flexural fatigue was behind most separations. ProTaper was "more likely to separate without warning", ProFile
      unwound more often.
@@ -145,8 +154,9 @@ scene 3 3.18 vs 2.92; scene 4 3.33 vs 2.92; scene 5 2.78 vs 2.62; takeaway 3.55 
    without crowding the focal point.
 9. Background reviews: Parashos P, Messer HH. J Endod 2006;32(11):1031-43. PMID 17055902. Plotino G et al. *A review
    of cyclic fatigue testing of NiTi rotary instruments.* J Endod 2009;35(11):1469-76. PMID 19840633. Plotino notes
-   that the reported test radii are probably overstated because of loose instrument fit, so real strains are
-   uncertain.
+   that, because instruments probably fit loosely in the test tubes/grooves, the reported curvature is likely
+   overstated (files were actually bent less severely than reported, i.e. the true radius was larger), so real
+   strains in those tests are uncertain and probably lower than the nominal geometry implies.
 
 ## What is schematic, modelled or exaggerated (all flagged on screen)
 - "schematic · not to scale" (display A): the file width is exaggerated about 2.4× relative to R. Root and canal
@@ -157,7 +167,9 @@ scene 3 3.18 vs 2.92; scene 4 3.33 vs 2.92; scene 5 2.78 vs 2.62; takeaway 3.55 
 - "values illustrative" (trace) and **"FRACTURE AT N = 741\*" / "\*toy model · values illustrative"** directly under
   the tag: the trace amplitudes follow the formula, but the cycle count at fracture (**N = 741**) is not a measured
   value. Real cycles to failure vary widely with instrument design, alloy and heat
-  treatment, environment (water and NaOCl shorten LCF life: Cheung & Darvell 2007; PMID 18037053), and test method.
+  treatment, environment (water shortens LCF life: Cheung & Darvell, Int Endod J 2007;40(8):612-8, PMID 17532775;
+  water and NaOCl: Cheung GSP, Shen Y, Darvell BW. *Effect of environment on low-cycle fatigue of a nickel-titanium
+  instrument.* J Endod 2007;33(12):1433-7, PMID 18037053, doi:10.1016/j.joen.2007.08.007), and test method.
 - "toy model" (FATIGUE LIFE USED meter): a Miner's-rule damage sum with N_f ∝ ε⁻². The exponent comes from the
   apparent fatigue-ductility exponent of about −0.45 to −0.55 reported by Cheung & Darvell 2007 (Part 1), so
   1/c ≈ −2. It is normalised so that 100 % = fracture. The crack size in the inset is a monotonic function of this
@@ -228,6 +240,32 @@ scene 3 3.18 vs 2.92; scene 4 3.33 vs 2.92; scene 5 2.78 vs 2.62; takeaway 3.55 
   - Re-checked on PubMed: Cheung & Darvell 2007 Part 1 abstract states "A fatigue limit was present at about 0.7%
     strain" (PMID 17532775); other on-screen sources (PMIDs 9220735, 17511786, 17889692, 16218972, 11199711,
     16410072, 10530246) match NOTES. Video re-rendered; gallery metadata in meta.json.
+- Citation audit (2026-11-22). Every PMID in the reel, meta.json and NOTES was fetched from PubMed and its first
+  author, year, journal, volume/pages and abstract checked against the claim it is attached to: 9220735 (Pruett
+  1997), 17532775 (Cheung & Darvell 2007 Part 1), 17511786 (Part 2), 10530246 (Haïkel 1999), 17889692 (Anderson
+  2007), 17889693 (Cheung, Shen & Darvell 2007, electropolishing), 18037053 (Cheung, Shen & Darvell 2007,
+  environment), 16218972 (Cheung 2005), 11199711 (Sattapan 2000), 16410072 (Shen 2006), 15448468 (Parashos 2004),
+  11501589 (Kuhn 2001), 17996288 (Cheung & Darvell, Dent Mater 2008), 19840633 (Plotino 2009), 17055902 (Parashos &
+  Messer 2006), 12067126 (Li 2002). All exist and match. On-screen source lines (Pruett et al. J Endod 1997;
+  Anderson J Endod 2007; Cheung & Darvell IEJ 2007; Cheung IEJ 2005; Sattapan et al. J Endod 2000; Shen et al.
+  J Endod 2006; takeaway fine print "Cheung & Darvell IEJ 2007" for the ~0.7 % fatigue limit) are correct, so the
+  reel and video were not changed. Fixes:
+  - NOTES: PMID 18037053 was credited to "Cheung & Darvell 2007"; it is Cheung, Shen & Darvell, J Endod
+    2007;33(12):1433-7 (water and NaOCl). Water alone is now credited to Part 1 (PMID 17532775).
+  - NOTES: Plotino 2009 paraphrase "reported test radii are probably overstated" could be read backwards; reworded
+    to the abstract's meaning (curvature overstated: files bent less severely than reported).
+  - "microscopic, not visible clinically": Cheung 2005 examines files after fracture, so support for "not visible
+    clinically" was indirect. Added Cheung & Darvell Part 2 (microscopic striations, PMID 17511786) and Shen 2006
+    ("separate without warning", PMID 16410072) to meta.json and NOTES; on-screen wording kept.
+  - "Every turn = one tension–compression cycle": added Li et al. J Endod 2002 (PMID 12067126), whose abstract states
+    the tensile/compressive alternation directly, to meta.json and NOTES.
+  - Sattapan 2000: noted that the unwinding/torsional classification is from the full text (abstract gives only
+    the 55.7/44.3 % split); Shen 2006 carries the abstract-level support for "without warning".
+  - Caption Refs: "Cheung & Darvell 2007, Int Endod J" is two papers, now "(Parts 1-2)"; added "Shen 2006, J Endod"
+    for the "no visible unwinding first" line.
+  - Not changed (nit): the scene-4 source line omits "et al." for Anderson (3 authors) and Cheung 2005 (5 authors).
+    Author, journal and year still identify the right papers, and adding "et al." would push the line past x 960
+    into the right-hand button column at y 1570 (it already spans x 70–937 at 24 px).
 
 ## Review changes
 Science:

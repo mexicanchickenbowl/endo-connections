@@ -46,18 +46,19 @@ The lesion starts small inside cancellous bone, where the PA can still look norm
 2. **Apical periodontitis is the host response to root-canal microbes at the apical foramen. Microbes stay mainly intraradicular** (so the film shows the bacteria cluster only inside the canal terminus). Nair PNR. *Pathogenesis of apical periodontitis and the causes of endodontic failures.* Crit Rev Oral Biol Med 2004;15:348-81. PMID 15574679. doi:10.1177/154411130401500604.
 3. **Innate and adaptive response.** Macrophages; T and B lymphocytes; plasma cells; IL-1, TNF and PGE₂ as mediators of periapical bone resorption; T-helper cells predominate in the active phase. Sources:
    - Stashenko P, Yu SM, Wang CY. *Kinetics of immune cell and bone resorptive responses to endodontic infections.* J Endod 1992;18:422-6. PMID 9796508. doi:10.1016/S0099-2399(06)80841-1. The abstract lists T, B and null lymphocytes, plasma cells, macrophages, PMNs and mast cells, and says T helper cells predominate during the active phase.
-   - Stashenko P, Teles R, D'Souza R. Crit Rev Oral Biol Med 1998;9:498-521. PMID 9825224. doi:10.1177/10454411980090040701.
+   - Stashenko P, Teles R, D'Souza R. *Periapical inflammatory responses and their modulation.* Crit Rev Oral Biol Med 1998;9:498-521. PMID 9825224. doi:10.1177/10454411980090040701. The abstract names IL-1 and prostaglandins as central mediators of periapical bone resorption, plus T- and B-cell responses.
+   - Which source carries which mediator: the Stashenko 1992 abstract names IL-1 and TNF (resorptive activity in the 15–60 kDa range); PGE₂ comes from Stashenko 1998 (prostaglandins) and the Nair 2004 review.
 4. **RANKL : OPG ↑ (RANKL+ cells mostly fibroblastic; some T cells) → osteoclastogenesis.**
    - Kawashima N et al. OOOOE 2007;103:707-11. PMID 17336108. doi:10.1016/j.tripleo.2006.11.036.
    - Belibasakis GN, Rechenberg DK, Zehnder M. Int Endod J 2013;46:99-111. PMID 22900632. doi:10.1111/j.1365-2591.2012.02105.x. The evidence is limited; the review supports a rising *ratio*, not consistently lower OPG.
 5. **"…but the PA can still look normal" (hedged) and "Much clearer once the cortex is involved".**
-   - Classic finding: Bender IB, Seltzer S. JADA 1961;62:152-60 and 708-16. These were **bur-made defects in cadaver jaws**, as the on-screen fine print says. Reprinted J Endod 2003;29:702-6 and 707-12 (PMIDs 14651274, 14651275).
+   - Classic finding: Bender IB, Seltzer S. *Roentgenographic and direct observation of experimental lesions in bone: I and II.* JADA 1961;62:152-60 and 708-16. These were **bur-made defects in cadaver jaws**, as the on-screen fine print says. PubMed does not index the 1961 JADA originals. They are verified through the J Endod 2003 reprints (titles end "I. 1961" / "II. 1961"): J Endod 2003;29:702-6 and 707-12, PMIDs 14651274 and 14651275, doi:10.1097/00004770-200311000-00005 and -00006.
    - Modern limits, on screen as a panel footer: Chang L, Umorin M, Augsburger RA, Glickman GN, Jalali P. *Periradicular lesions in cancellous bone can be detected radiographically.* J Endod 2020;46:496-501. PMID 32057449. doi:10.1016/j.joen.2019.12.013. Findings:
      - "Lesion size, not the degree of cortical involvement, significantly affected the observers' ability to accurately detect lesions."
      - Cancellous-only lesions were correctly identified 91.6 % of the time.
      - "Only lesions in cortical bone significantly increased observers' certainty". This is why the caption says *clearer*, not *visible*, and the toggle asks "CLEAR ON 2-D PA?".
    - Gao Y et al. J Endod 2010;36:1404-9. PMID 20647106. doi:10.1016/j.joen.2010.04.003. In simulated lesions confined to cancellous bone, those < 1 mm (incisor), < 2 mm (premolar) and < 3 mm (molar) could not be visualised. A 4 mm molar lesion encroaching on the cortex was still not visualised. The hidden lesion in the reel is therefore kept small (≈ 2 mm across on the film) until the cortex is reached.
-6. **Early radiographic sign: widened apical PDL space / broken lamina dura before a frank radiolucency.** Ørstavik D, Kerekes K, Eriksen HM. *The periapical index: a scoring system for radiographic assessment of apical periodontitis.* Endod Dent Traumatol 1986;2:20-34. PMID 3457698.
+6. **Early radiographic sign: widened apical PDL space / broken lamina dura before a frank radiolucency.** Ørstavik D, Kerekes K, Eriksen HM. *The periapical index: a scoring system for radiographic assessment of apical periodontitis.* Endod Dent Traumatol 1986;2:20-34. PMID 3457698. doi:10.1111/j.1600-9657.1986.tb00119.x. The PAI grades "small changes in bone structure" (2) and "changes in bone structure with some mineral loss" (3) before a "well-defined radiolucent area" (4). Its reference radiographs for the low scores show the apical PDL / lamina-dura changes drawn in the reel. PubMed has no abstract for this paper, so this support comes from the scale itself, not from an abstract.
 7. **Chart: % of 83 dog roots diagnosed with AP, histology = reference.** Histology 93 % (the disease prevalence, labelled "truth"), CBCT 84 %, PA 71 %. Source: de Paula-Silva FWG, Wu M-K, Leonardo MR, da Silva LAB, Wesselink PR. J Endod 2009;35:1009-12. PMID 19567324. doi:10.1016/j.joen.2009.04.006.
    - Sensitivity was PA 0.77 and CBCT 0.91; specificity was 1.0 for both. Because there were no PA false positives, the 22-point gap (71 → 93) is roots with AP that the PA missed, labelled "missed on PA". 71/93 ≈ 0.76 ≈ the reported sensitivity.
    - This is an experimental, high-prevalence dog sample, labelled "dog roots" on screen.
@@ -221,3 +222,25 @@ The lesion starts small inside cancellous bone, where the PA can still look norm
   - All on-screen wording matches its sources. No overstatement found.
 - Poster stays at 16.0 s: "THE CATCH" caption, "bone already lost", NO toggle and the cross-section, all inside the 3:4 crop.
 - Wrote `meta.json` (title, style, topic, 10 claims with PMIDs, caption). Re-rendered the video once.
+
+## Citation audit
+Every on-screen source line was checked on PubMed, along with every `meta.json` source and every source in this file. For each paper, the PMID, first author, year, journal, volume and pages were confirmed to point to the same real paper, and the abstract was read against the claim it supports.
+- **On screen: all 12 papers correct. No change to the reel and no re-render.**
+  - Kakehashi 1965; Stashenko 1992 and 1998; Nair 2004; Kawashima 2007.
+  - Bender & Seltzer 1961; Chang 2020; de Paula-Silva 2009 (J Endod); AAE/AAOMR 2015.
+  - Estrela 2008 (clinical); Patel 2009 (artificial defects in dry human jaws); Kanagasingam 2017 (cadaver jaw sections vs histology; e-pub 2016, print 2017); Ørstavik 1996 (IEJ).
+  - Rendered video frames at 20.5 s and 26 s show the same text as the source.
+- **Also confirmed against the abstracts:**
+  - Chart numbers 71 / 84 / 93 % and n = 83; specificity 1.0, which supports "missed on PA".
+  - Chang 2020: 91.6 % of cancellous lesions detected; lesion size, not cortical involvement, predicted detection.
+  - Gao 2010: thresholds of 1 / 2 / 3 mm, and the 4 mm molar lesion.
+  - Kanagasingam 2017: 0.27 / 0.38 / 0.89. Estrela 2008: 0.55.
+  - Kawashima 2007: RANKL/OPG peak at weeks 2–3; RANKL+ cells mostly fibroblastic.
+  - Stashenko 1992: active phase days 1–15.
+  - Ørstavik 1996: healing peaks at 1 yr; complete healing up to 4 yrs.
+  - AAE/AAOMR 2015: PA first; limited-FOV CBCT for contradictory signs.
+  - Belibasakis 2013: RANKL/OPG *ratio*.
+- **Fixed in `meta.json` claim 2 (PGE₂ attribution).** Claim 2 (IL-1β, TNF-α, PGE₂) cited only Stashenko 1992 and Nair 2004. The 1992 abstract names IL-1 and TNF but not prostaglandins. Added Stashenko et al. 1998 (PMID 9825224), which names IL-1 and prostaglandins and is already in the on-screen fine print. The mediator-to-source mapping is now written out in claim 3 above.
+- **Fixed in `meta.json` claim 5 (PAI wording).** The PAI (Ørstavik 1986) does not literally say "PDL widening". The claim now gives the scale's own grading, "small changes in bone structure" at PAI 2–3, before a well-defined radiolucency at PAI 4. Claim 6 above notes that PubMed has no abstract for this paper.
+- **Noted for Bender & Seltzer 1961.** The JADA originals (62:152-60, 708-16) are not on PubMed. They are cited through the J Endod 2003 reprints, whose PMIDs and DOIs are now in claim 5 above.
+- **Caption Refs line** (de Paula-Silva 2009, J Endod; Chang 2020, J Endod; AAE/AAOMR 2015 position statement): all correct, no change.

@@ -1004,9 +1004,10 @@
       ctx.restore();
       const sa = ease.out(seg(t, T5 + 0.5, T5 + 0.95));
       ctx.save(); ctx.globalAlpha = sa; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
-      fitLine('Premixed sealers set slowly (days) and need dentin moisture.', 540, 1418, 26, 500, C.ink2, 820);
+      fitLine('Premixed sealers can take days to set and need dentin moisture.', 540, 1418, 26, 500, C.ink2, 820);
       fitLine('Ion release = some solubility; long-term seal effect debated.', 540, 1454, 26, 500, C.ink2, 820);
-      fitLine('Xuereb 2015 J Endod · Han & Okiji 2013 IEJ · Donnermeyer 2019 Odontology', 540, 1496, 23, 500, C.ink2, 820);
+      fitLine('Loushine 2011 J Endod · Xuereb 2015 J Endod', 540, 1490, 23, 500, C.ink2, 820);
+      fitLine('Han & Okiji 2013 IEJ · Donnermeyer 2019 Odontology', 540, 1517, 23, 500, C.ink2, 820);
       ctx.restore();
     }
     // ---- handle + persistent disclaimer

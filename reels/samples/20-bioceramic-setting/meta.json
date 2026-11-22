@@ -1,0 +1,51 @@
+{
+  "id": "20",
+  "slug": "20-bioceramic-setting",
+  "title": "How a bioceramic sealer sets",
+  "style": "Isometric pastel diorama",
+  "topic": "Premixed calcium-silicate sealers set with water drawn from dentin, leach Ca²⁺/OH⁻, and in vitro grow apatite-like mineral at the wall.",
+  "duration": 24.0,
+  "claims": [
+    {
+      "claim": "Premixed sealer: water from the dentin soaks in; a very dry canal may stay unset",
+      "source": "Xuereb et al., J Endod 2015;41:111–124 (PMID 25442723); Antunes et al., Aust Endod J 2026;52:168–177 (PMID 41364608)"
+    },
+    {
+      "claim": "Silicate grains hydrate: C₃S/C₂S + H₂O → C–S–H gel + Ca(OH)₂ (simplified)",
+      "source": "Camilleri, Dent Mater 2011;27:836–844 (PMID 21600643)"
+    },
+    {
+      "claim": "Hydration takes hours–days; premixed sealer final set ≥168 h (Gilmore)",
+      "source": "Loushine et al., J Endod 2011;37:673–677 (PMID 21496669)"
+    },
+    {
+      "claim": "Ca²⁺ and OH⁻ leach out; pH ~10–12 in lab tests (water)",
+      "source": "Lee et al., Bioinorg Chem Appl 2017;2017:2582849 (PMID 28210204) for pH (Table 5, distilled water); Ca²⁺ release: Candeiro et al., J Endod 2012;38:842–845 (PMID 22595123); Xuereb et al., J Endod 2015;41:111–124 (PMID 25442723)"
+    },
+    {
+      "claim": "Steps overlap: pH rises within minutes, before setting",
+      "source": "Lee et al., Bioinorg Chem Appl 2017;2017:2582849 (PMID 28210204), Table 5: pH 11.64 at 3 min"
+    },
+    {
+      "claim": "Phosphate from tissue fluid reaches the sealer up the tubules (lab: PBS bath)",
+      "source": "Toy model / schematic: route is illustrative; in the cited studies specimens were immersed in PBS (Han & Okiji 2013)"
+    },
+    {
+      "claim": "Phosphate + Ca²⁺ → apatite-like layer and tag-like Ca–P deposits in tubules (days–months, lab)",
+      "source": "Han & Okiji, Int Endod J 2013;46:808–814 (PMID 23402321); Xuereb et al., J Endod 2015;41:111–124 (PMID 25442723); MTA: Sarkar et al., J Endod 2005;31:97–100 (PMID 15671817)"
+    },
+    {
+      "claim": "Water sets it. In vitro, calcium + phosphate form apatite-like mineral",
+      "source": "Donnermeyer et al., Odontology 2019;107:421–436 (PMID 30554288); apatite-like (acicular Ca–P precipitates, Ca/P 1.6–2.0, in PBS): Han & Okiji, Int Endod J 2013;46:808–814 (PMID 23402321)"
+    },
+    {
+      "claim": "Premixed sealers can take days to set and need dentin moisture",
+      "source": "Loushine et al., J Endod 2011;37:673–677 (PMID 21496669); Xuereb et al., J Endod 2015;41:111–124 (PMID 25442723). End-card source lines: Loushine 2011 J Endod · Xuereb 2015 J Endod / Han & Okiji 2013 IEJ · Donnermeyer 2019 Odontology"
+    },
+    {
+      "claim": "Ion release = some solubility; long-term seal effect debated",
+      "source": "Donnermeyer et al., Odontology 2019;107:421–436 (PMID 30554288)"
+    }
+  ],
+  "caption": "How does a premixed bioceramic sealer set?\nPremixed calcium-silicate sealers carry no water: they hydrate with dentin moisture, so a very dry canal can delay the set.\nHydration forms C–S–H gel + Ca(OH)₂; Ca²⁺ and OH⁻ leach out and pH reaches ~10–12 in lab tests.\nIn PBS, calcium + phosphate form apatite-like deposits at the wall and in tubules. In vitro only: clinical bioactivity is unproven, and ion release means some solubility.\nRefs: Xuereb 2015, J Endod; Antunes 2026, Aust Endod J; Camilleri 2011, Dent Mater; Loushine 2011, J Endod; Lee 2017, Bioinorg Chem Appl; Han & Okiji 2013, IEJ; Sarkar 2005, J Endod (MTA); Donnermeyer 2019, Odontology.\nSchematic animation: not to scale, time compressed.\n#endodontics #endo #dentistry #rootcanal #bioceramics #dentalmaterials #endodontist"
+}

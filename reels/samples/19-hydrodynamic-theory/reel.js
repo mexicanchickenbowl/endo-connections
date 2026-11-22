@@ -393,7 +393,8 @@
   const procCen = (X) => lerp(procC(X), 0, clamp((X - (G.PRED - 0.4)) / 2.4));
   const lumW = (X) => (X > 0 ? lerp(1.25, 1.65, P.smoothstep(0, 4, X)) : 1.25);
   const nDef = (p, bend, t) => { const w = clamp((9.0 - p.x) / 7.8); return { x: p.x - 0.42 * bend * w * w, y: p.y + 0.07 * bend * w * Math.sin(t * 8.5 + p.x * 1.3) }; };
-  const liveL = (t, c) => seg(c.z, 1.12, 1.42) * (1 - seg(t, T.pull[0], T.pull[0] + 0.25));
+  // zoom-coupled both ways (fades with plate D on the pull-back too, so the process/ending never leave an empty tubule)
+  const liveL = (t, c) => seg(c.z, 1.12, 1.42);
   function drawTubuleLife(t, c) {
     const L = liveL(t, c);
     if (L <= 0.002) return;

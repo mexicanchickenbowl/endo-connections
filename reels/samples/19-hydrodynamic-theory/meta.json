@@ -1,0 +1,51 @@
+{
+  "id": "19",
+  "slug": "19-hydrodynamic-theory",
+  "title": "Hydrodynamic theory: why cold zaps dentine",
+  "style": "Watercolour powers-of-ten",
+  "topic": "How cold pulls fluid outward through open dentinal tubules to fire pulpal A-fibres, and why occluding tubules (flow ∝ r⁴) quiets it.",
+  "duration": 24.0,
+  "claims": [
+    {
+      "claim": "Cold drinks hurt dentine exposed by gingival recession (dentine hypersensitivity)",
+      "source": "Liu X-X et al., BMC Oral Health 2020;20:220 (PMID 32762733)"
+    },
+    {
+      "claim": "Dentine is riddled with fluid-filled tubules",
+      "source": "Brännström M, Oral Surg Oral Med Oral Pathol 1966;21:517-26 (PMID 5218158); Pashley DH, J Endod 1986;12:465-74 (PMID 3465852)"
+    },
+    {
+      "claim": "Cold, air & sugar pull dentinal fluid outward",
+      "source": "Brännström M, Åström A, Int Dent J 1972;22:219-27 (PMID 4505631); Liu X-X et al., BMC Oral Health 2020;20:220 (PMID 32762733)"
+    },
+    {
+      "claim": "Heat drives inward flow, which intradental nerves respond to less",
+      "source": "Andrew D, Matthews B, J Physiol 2000;529:791-802 (PMID 11118506: all units more sensitive to outward than inward flow, cat); Lin M et al., PLoS One 2011;6:e18068 (PMID 21448459: hot → inward, cold → outward flow, citing Andrew & Matthews' in-vitro measurements)"
+    },
+    {
+      "claim": "Cold acts at the exposed surface ~2 mm away; fluid moves before the pulp cools (distance = drawn premolar's cervical dentine)",
+      "source": "Linsuwanont P et al., Arch Oral Biol 2007;52:218-27 (PMID 17109811: fluid moved before the pulp-wall temperature changed; extracted intact teeth, stimuli on enamel); 2 mm is model-specific (schematic)"
+    },
+    {
+      "claim": "Flow tugs the A-fibre ending at the pulp-dentine border → sharp pain; in root dentine, endings stay at the border",
+      "source": "Andrew D, Matthews B, J Physiol 2000;529:791-802 (PMID 11118506); Lilja J, Acta Odontol Scand 1979;37:339-46 (PMID 297429)"
+    },
+    {
+      "claim": "Poiseuille: flow ∝ r⁴, so ½ radius along the whole tubule → 1/16 the flow (radius 50 %, flow 6 %)",
+      "source": "Toy model / schematic: Hagen-Poiseuille at same pressure, laminar flow; applied to dentine by Pashley DH, J Endod 1986;12:465-74 (PMID 3465852) and Prati C, J Dent 1994;22:83-8 (PMID 8195480: small changes in functional tubule diameter greatly modify permeability, per Poiseuille-Hagen)"
+    },
+    {
+      "claim": "Sensitive dentine has ~8× more and ~2× wider open tubules",
+      "source": "Absi EG et al., J Clin Periodontol 1987;14:280-4 (PMID 3475295)"
+    },
+    {
+      "claim": "Seal the tubules, still the fluid: the logic behind tubule-occluding desensitisers",
+      "source": "Pashley DH, J Endod 1986;12:465-74 (PMID 3465852); Liu X-X et al., BMC Oral Health 2020;20:220 (PMID 32762733)"
+    },
+    {
+      "claim": "Leading model; odontoblasts may also sense cold directly via TRPC5",
+      "source": "Liu X-X et al., BMC Oral Health 2020;20:220 (PMID 32762733: hydrodynamic theory widely accepted, mechanisms still unclear); Bernal L et al., Sci Adv 2021;7:eabf5567 (PMID 33771873)"
+    }
+  ],
+  "caption": "Why does an iced drink zap a sensitive tooth?\n\nCold, air and sugar pull fluid outward through open tubules; the flow tugs A-fibre endings at the pulp–dentine border → sharp pain (hydrodynamic theory).\nPoiseuille: flow ∝ r⁴, so narrowed tubules still the fluid: the logic behind occluding desensitisers.\nLeading model, not the whole story (odontoblast TRPC5 may sense cold directly). DH is a diagnosis of exclusion: rule out caries, cracks, pulpitis.\n\nRefs: Brännström 1966, Oral Surg; Pashley 1986, J Endod; Absi 1987, J Clin Periodontol; Andrew & Matthews 2000, J Physiol; Liu 2020, BMC Oral Health; Bernal 2021, Sci Adv\nAnimation schematic, not to scale.\n\n#endodontics #endo #dentistry #dentinhypersensitivity #dentalstudent #dentaleducation"
+}
