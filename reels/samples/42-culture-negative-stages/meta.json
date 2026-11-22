@@ -4,7 +4,7 @@
   "title": "Negative cultures at 3 treatment stages",
   "style": "Mid-century textbook print",
   "topic": "Pooled share of cases with a negative canal culture after saline prep, NaOCl prep, and an interappointment dressing; ranges are wide.",
-  "duration": 26.0,
+  "duration": 27.2,
   "claims": [
     {
       "claim": "Tag: pooled from different studies, not one cohort (three snapshots, not repeated measurements)",
@@ -20,20 +20,20 @@
     },
     {
       "claim": "C · Next visit, after an active interappointment antibacterial dressing: 71% of cases culture-negative (29% positive); range 25-100%",
-      "source": "Ng Y-L & Gulabivala K, 'Evaluation of Outcomes', ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: 'on average in 71% of cases (range 25% to 100%)'; chapter text read. Gulabivala K & Ng Y-L, Int Endod J 2023;56 Suppl 2:82-115 (PMID 36710532; doi:10.1111/iej.13897): 'an average of 71% (range 25%-100%) (weighted pooled average)'; full text read. Dressings pooled are mixed (calcium hydroxide, CMCP, clindamycin, IKI, chlorhexidine, antibiotic/steroid pastes), per Table 17.9"
+      "source": "Ng Y-L & Gulabivala K, 'Evaluation of Outcomes', ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: 'on average in 71% of cases (range 25% to 100%)'; chapter text read. Gulabivala K & Ng Y-L, Int Endod J 2023;56 Suppl 2:82-115 (PMID 36710532; doi:10.1111/iej.13897): 'an average of 71% (range 25%-100%) (weighted pooled average)'; full text read. Dressings pooled are mixed (mostly calcium hydroxide; also CMCP, clindamycin, IKI, chlorhexidine, antibiotic/steroid pastes), per Table 17.9"
     },
     {
-      "claim": "Fine print: weighted pooled averages of culture studies; case = a sampled tooth or canal",
-      "source": "Both sources say 'cases'; Table 17.9 header is 'percentage of samples with bacterial presence' and its sample sizes are mostly teeth, sometimes canals; chapter text read"
+      "claim": "Fine print and key: weighted pooled averages of culture studies (diamond = pooled average, bar = study range); case = a sampled tooth or canal",
+      "source": "Review labels all three figures 'weighted pooled average'; the chapter does so for A and B and writes 'on average' for C. Both sources say 'cases'; Table 17.9 header is 'percentage of samples with bacterial presence' and its sample sizes are mostly teeth, sometimes canals; chapter text and review full text read"
     },
     {
-      "claim": "Takeaway: more cases test negative after NaOCl and after a dressing (descriptive comparison of pooled averages)",
-      "source": "Ng Y-L & Gulabivala K, 'Evaluation of Outcomes', ch. 17 in Cohen's Pathways of the Pulp, 12th ed. and Gulabivala K & Ng Y-L, Int Endod J 2023;56 Suppl 2:82-115 (PMID 36710532; doi:10.1111/iej.13897) (31% vs 52% vs 71%); both read"
+      "claim": "Takeaway: a larger share of cases test negative in NaOCl studies, and after a dressing (descriptive comparison of separately pooled averages, not one cohort followed through treatment)",
+      "source": "Ng Y-L & Gulabivala K, 'Evaluation of Outcomes', ch. 17 in Cohen's Pathways of the Pulp, 12th ed. and Gulabivala K & Ng Y-L, Int Endod J 2023;56 Suppl 2:82-115 (PMID 36710532; doi:10.1111/iej.13897) (pooled 31% vs 52% vs 71%); both read. The sources themselves write 'increased the frequency of negative cultures'; the screen keeps to the descriptive comparison"
     },
     {
       "claim": "Takeaway: ranges are wide, and a negative culture is not a sterile canal",
       "source": "Ng Y-L & Gulabivala K, 'Evaluation of Outcomes', ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: a negative culture confirmed absence of bacteria 'in the part of the root canal system that could be sampled'; chapter text read. Gulabivala K & Ng Y-L, Int Endod J 2023;56 Suppl 2:82-115 (PMID 36710532; doi:10.1111/iej.13897): '(sample-able part of the)'; full text read"
     }
   ],
-  "caption": "How often does a root canal culture come back negative? Pooled averages (Ng & Gulabivala):\nA. Instrumentation + water/saline: 31% of cases (range 0–79%)\nB. Instrumentation + NaOCl 0.5–5%: 52% (13–95%)\nC. Next visit, after an antibacterial dressing: 71% (25–100%)\nThese are proportions of cases with a negative culture, pooled from different studies, not one cohort. Negative ≠ sterile. Not a recommendation to culture.\nSeparate question, culture result and healing: pooled OR 2.1 (chapter Fig. 17.19); 1.6, 95% CI 1.4–1.9 (2023 reanalysis).\nRefs: Ng & Gulabivala, Cohen's Pathways 12e ch. 17; Gulabivala & Ng, Int Endod J 2023.\n#endodontics #endo #rootcanal #dentalresident #boardreview #dentistry"
+  "caption": "How often is a root canal culture negative? Pooled averages:\nA. Instrumentation + water/saline: 31% of cases (range 0–79%)\nB. Instrumentation + NaOCl 0.5–5%: 52% (13–95%)\nC. Next visit, after an antibacterial dressing (various agents): 71% (25–100%)\nProportions of cases with a negative culture, pooled from different studies, not one cohort. Negative ≠ sterile. Not a recommendation to culture.\nSeparate question, culture result and healing: pooled OR 2.1, 95% CI 1.5–2.9 (ch. 17, Fig. 17.19); OR 1.6, 95% CI 1.4–1.9 (2023 review, Fig. 4).\nRefs: Ng & Gulabivala, Cohen's Pathways 12e ch. 17; Gulabivala & Ng, Int Endod J 2023.\n#endodontics #rootcanal #dentalresident #boardreview #dentistry"
 }

@@ -17,12 +17,12 @@ const sstep = (a, b, x) => sm(clamp((x - a) / (b - a)));
 /* ------------------------------------------------------------------ timeline */
 const T = {
   titleOut: 2.4, guide: [0.05, 0.7], flap: [0.6, 0.95, 1.15, 1.5],
-  cam1: [2.15, 2.9], lift1: [2.3, 2.8], necro: [2.4, 3.1], tabA: 2.7, tabB: 2.95, plus: 3.35, reqOut: 6.25, lower1: [5.9, 6.3],
-  cam2: [6.3, 7.05], peel: [6.75, 7.55], tabC: 7.05, cellsIn: 7.9, grow: [8.25, 10.6], tabD: 8.35, mechOut: 10.75,
-  cam3: [10.8, 11.6], lift2: [11.3, 11.7], pull: [11.7, 12.5], e1: 11.6, cut: [12.3, 12.7], e2: 12.3, drop: 12.5, e3: 12.95,
-  inset: 13.1, ring: 13.4, gp: [13.6, 13.9], cem: [13.9, 14.3], treatOut: 16.3,
-  cam4: [16.4, 17.15], film: [16.55, 17.1], head: 16.75, s1: 17.1, s2: 17.8, s3: 18.5,
-  shiftOn: [19.1, 19.8], shiftOff: [20.6, 21.2], endOut: 21.75, camR: [21.7, 22.1], xfade: [22.1, 22.4],
+  cam1: [2.3, 3.05], lift1: [2.45, 2.95], necro: [1.5, 3.1], tabA: 2.6, tabB: 2.85, plus: 3.3, reqOut: 6.7, lower1: [6.35, 6.75],
+  cam2: [6.75, 7.5], peel: [7.2, 8.0], tabC: 7.45, cellsIn: 8.25, grow: [8.55, 10.65], tabD: 8.65, mechOut: 10.8,
+  cam3: [10.85, 11.6], lift2: [10.9, 11.25], e1: 11.0, pull: [11.25, 11.95], cut: [12.0, 12.4], e2: 12.0, drop: 12.3, e3: 12.65,
+  inset: 12.9, ring: 13.2, gp: [13.4, 13.7], cem: [13.7, 14.1], treatOut: 16.3,
+  cam4: [16.4, 17.15], film: [16.5, 17.05], head: 16.6, s1: 17.05, s2: 17.7, s3: 18.35,
+  shiftOn: [18.95, 19.65], shiftOff: [20.6, 21.2], endOut: 21.75, camR: [21.7, 22.1], xfade: [22.1, 22.4],
 };
 
 /* ------------------------------------------------------------------ palette */
@@ -31,9 +31,9 @@ const C = {
   enamel: '#fbf5e6', dentin: '#e9d6b2', cream: '#f5ead4',
   coral: '#e8745c', gran: '#d6543d', coralDk: '#b8412b', necro: '#5d5f64', mauve: '#b6727d',
   teal: '#2c9c90', tealDk: '#124b48', tealTab: '#226b67',
-  mustard: '#e4b44e', ink: '#2a2d32', inkSoft: '#5a6567', thread: '#a8322b', thread2: '#86283a',
+  mustard: '#e4b44e', ink: '#2a2d32', inkSoft: '#5a6567', thread: '#a8322b', thread2: '#86283a', vessel: '#e0503f', vessel2: '#cf3f52',
   film: '#161a1e', xbone: '#444d52', xroot: '#a6aeb0', xpdl: '#1e2429', xld: '#7d878b',
-  gp: '#f0977a', cement: '#fffdf4', pink: '#dba59c', frameTeal: '#2a7772',
+  gp: '#b6727d', cement: '#fffdf4', pink: '#dba59c', frameTeal: '#2a7772',
 };
 const P = {}; // paper patterns (built in setup)
 
@@ -42,7 +42,7 @@ function makePaper(col, seed, o = {}) {
   const g = c.getContext('2d'), [r, gg, b] = Kit.hex(col);
   const img = g.createImageData(n, n), d = img.data, amp = o.amp != null ? o.amp : 10;
   for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
-    const wn = hash(x, y, seed) - 0.5;
+    const wn = 0.42 * (hash(x, y, seed) - 0.5) + 0.5 * (hash(x >> 1, y >> 1, seed + 57) - 0.5);
     const lf = Math.sin((x / n) * TAU * 3 + seed) * Math.sin((y / n) * TAU * 2 + seed * 1.7);
     const v = wn * amp * 2 + lf * amp * 0.35, i = (y * n + x) * 4;
     d[i] = clamp(r + v, 0, 255); d[i + 1] = clamp(gg + v, 0, 255); d[i + 2] = clamp(b + v * 0.9, 0, 255); d[i + 3] = 255;
@@ -211,7 +211,7 @@ function buildGeom(st) {
   const wall = bulgeWall(g, st.bites);
   const top = Math.min(BARE[0], YC - A - 2), bot = Math.max(BARE[1], YC + A + 2), bare = st.bare;
   const inner = insetWall(wall, (y, x0) => {
-    const pd = y < 400 ? 7 : Math.min(7, x0 * 0.32);
+    const pd = y < 400 ? 7 : Math.min(7 + 4 * sstep(400, 470, y), x0 * 0.45);
     if (bare <= 0) return pd;
     return pd * (1 - bare * sstep(top - 12, top + 4, y) * (1 - sstep(bot - 4, bot + 12, y)));
   });
@@ -256,6 +256,7 @@ const GUM = (() => {
   }
   return toPath(snip(catmull(top, 5), 30, 21, 1.1, false).concat(snip(catmull(bot, 5), 36, 22, 1.2, false).reverse()));
 })();
+const RING = (() => { const p = new Path2D(); p.arc(0, 0, 40, 0, TAU); p.moveTo(31, 0); p.arc(0, 0, 31, 0, TAU, true); return p; })();
 const PULLTAB = (() => { const p = toPath(snip(rrectPts(-23, 112, 46, 124, 14), 26, 31, 0.6)); p.moveTo(8, 140); p.arc(0, 140, 8, 0, TAU); return p; })();
 const FULL = { wall: bulgeWall(1, null) };
 // outer silhouette of the tooth (film ghost, clip for the cement plug)
@@ -267,6 +268,7 @@ const FLAP = (() => {
   for (const side of [1, -1]) toPath(outer.concat(inner).map((q) => [side * q[0], q[1]]), true, p);
   return p;
 })();
+const LES_GHOST = (() => { const r = FULL.wall.filter((p) => p[1] > JN + 6 && p[1] < 2 * YC - JN - 6); return toPath(r.concat(mirror(r))); })();
 const GUIDE_R = FULL.wall.filter((p) => p[1] > JN - 2 && p[1] < 2 * YC - JN + 2).map((p) => [p[0] + 1.5, p[1]]);
 // microbes sprinkled on the necrotic coronal pulp
 const MICRO = (() => {
@@ -293,14 +295,17 @@ const TUBULES = (() => {
 const REF = { x: 750, y: 905 };
 const CAMS = {
   hook: { S: 0.9, fy: 550, ax: 540, ay: 1048 },
-  wide: { S: 0.97, fy: 550, ax: 750, ay: 905 },
-  zoom: { S: 1.5, fy: 720, ax: 750, ay: 900 },
+  wide: { S: 0.97, fy: 550, ax: 725, ay: 905 },
+  zoom: { S: 1.5, fy: 720, ax: 725, ay: 900 },
   end: { S: 1.22, fy: 700, ax: 760, ay: 900 },
 };
+const HOOK_PUSH = 0.932 / 0.9;
 const mixCam = (a, b, u) => ({ S: Math.exp(lerp(Math.log(a.S), Math.log(b.S), u)), fy: lerp(a.fy, b.fy, u), ax: lerp(a.ax, b.ax, u), ay: lerp(a.ay, b.ay, u) });
 function camAt(t) {
-  if (t < T.cam1[0]) return CAMS.hook;
-  if (t < T.cam1[1]) return mixCam(CAMS.hook, CAMS.wide, io(seg(t, T.cam1[0], T.cam1[1])));
+  // hook: slow push-in from frame 0 (ease-in only, so it runs straight into the first pan) — the layers slide from the start
+  const pu = clamp(t / T.cam1[0]), hookNow = { ...CAMS.hook, S: CAMS.hook.S * Math.pow(HOOK_PUSH, pu * pu * (3 - pu) / 2) };
+  if (t < T.cam1[0]) return hookNow;
+  if (t < T.cam1[1]) return mixCam(hookNow, CAMS.wide, io(seg(t, T.cam1[0], T.cam1[1])));
   if (t < T.cam2[0]) return CAMS.wide;
   if (t < T.cam3[0]) { const c = mixCam(CAMS.wide, CAMS.zoom, io(seg(t, T.cam2[0], T.cam2[1]))); return { ...c, S: c.S * (1 + 0.03 * seg(t, T.cam2[1], T.cam3[0])) }; }
   if (t < T.cam3[1]) return mixCam({ ...CAMS.zoom, S: CAMS.zoom.S * 1.03 }, CAMS.wide, io(seg(t, T.cam3[0], T.cam3[1])));
@@ -343,15 +348,16 @@ function stateAt(t) {
   st.pullY = -1500 * ease.in(seg(t, T.pull[0], T.pull[1]));
   st.pulp = t < T.pull[1];
   st.tab = softBack(seg(t, T.lift2[0], T.lift2[1]));
-  st.necroY = t < T.necro[0] ? 0 : lerp(150, JN + 12, io(seg(t, T.necro[0], T.necro[1])));
+  st.necroY = t < T.necro[0] ? 0 : lerp(150, JN + 12, sm(seg(t, T.necro[0], T.necro[1])));
   st.bare = sm(seg(t, T.peel[0] + 0.05, T.peel[0] + 0.55));
   st.linerA = 1 - sm(seg(t, T.pull[0] + 0.2, T.pull[1]));
   st.cut = seg(t, T.cut[0], T.cut[1]);
+  st.snip = seg(t, T.cut[0] - 0.08, T.cut[0] + 0.47);
   st.flow = 30 * Math.min(t, T.cut[0]);
-  st.guide = sm(seg(t, T.guide[0], T.guide[0] + 0.3)) * (1 - sm(seg(t, 10.0, 10.6)));
+  st.guide = sm(seg(t, T.guide[0], T.guide[0] + 0.3)) * (1 - sm(seg(t, T.grow[1] - 0.6, T.grow[1])));
   st.guideDraw = io(seg(t, T.guide[0], T.guide[1]));
   st.flap = sm(seg(t, T.flap[0], T.flap[1])) * (1 - sm(seg(t, T.flap[2], T.flap[3])));
-  st.hl = sm(seg(t, T.peel[0] + 0.2, T.peel[0] + 0.6)) * (1 - sm(seg(t, 8.1, 8.8)));
+  st.hl = sm(seg(t, T.peel[0] + 0.2, T.peel[0] + 0.6)) * (1 - sm(seg(t, T.cellsIn + 0.5, T.cellsIn + 1.1)));
   // odontoclasts (3 mirrored pairs)
   const A = lesA(st.g), B = lesB(st.g), act = sm(seg(t, T.grow[0] - 0.05, T.grow[0] + 0.35)) * (1 - sm(seg(t, T.grow[1] - 0.15, T.grow[1] + 0.3)));
   st.cells = []; st.bites = [];
@@ -396,13 +402,13 @@ function outerThreadPts(side, yEnd) {
   return pts;
 }
 function drawOuterThreads(st, t, k) {
-  const yEnd = 1104 + 52 * ease.outBack(st.cut);
+  const yEnd = 1104 + 128 * ease.outBack(st.cut);
   for (const side of [-1, 1]) {
-    const pts = outerThreadPts(side, yEnd);
-    stitch(pts, side < 0 ? C.thread : C.thread2, 3.4, [11, 7], st.flow * (side < 0 ? 1 : 0.8), k);
-    if (st.cut > 0.5) { // frayed cut end
-      const e = pts[pts.length - 1]; ctx.save(); ctx.strokeStyle = side < 0 ? C.thread : C.thread2; ctx.lineWidth = 1.6; ctx.lineCap = 'round';
-      for (const a of [-0.6, 0, 0.6]) { ctx.beginPath(); ctx.moveTo(e[0], e[1]); ctx.lineTo(e[0] + Math.sin(a + side * 0.3) * 8, e[1] - Math.cos(a) * 9); ctx.stroke(); }
+    const pts = outerThreadPts(side, yEnd), col = side < 0 ? C.vessel : C.vessel2;
+    stitch(pts, col, 6, [14, 8], st.flow * (side < 0 ? 1 : 0.8), k);
+    if (st.cut > 0.3) { // frayed cut end
+      const e = pts[pts.length - 1]; ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = 2.6; ctx.lineCap = 'round';
+      for (const a of [-0.7, 0, 0.7]) { ctx.beginPath(); ctx.moveTo(e[0], e[1]); ctx.lineTo(e[0] + Math.sin(a + side * 0.3) * 13, e[1] - Math.cos(a) * 15); ctx.stroke(); }
       ctx.restore();
     }
   }
@@ -482,14 +488,20 @@ function drawPrecursors(st, t, k) {
     ctx.restore();
   }
 }
-function drawPeel(st, t, k) { // predentin strips coming off the wall
-  for (const side of [1, -1]) for (let h = 0; h < 2; h++) {
-    const s0 = T.peel[0] + 0.1 * h + (side < 0 ? 0.06 : 0), u = ease.out(seg(t, s0, s0 + 0.8));
+function drawPeel(st, t, k) { // predentin coming off the wall: one long opaque strip per side, peeled from its coronal end (left side first), then it drops
+  const L = BARE[1] - BARE[0], n = 14, hw = 5.5;
+  for (const side of [-1, 1]) {
+    const s0 = T.peel[0] + (side > 0 ? 0.22 : 0), u = ease.out(seg(t, s0, s0 + 0.8));
     if (u <= 0 || u >= 1) continue;
-    const yH = h ? BARE[1] : BARE[0], len = (BARE[1] - BARE[0]) / 2, xH = side * (w0At(yH) - 3.5);
-    ctx.save(); ctx.translate(xH - side * (9 + 4 * h) * u, yH + (h ? 46 : 70) * u * u); ctx.rotate(side * (h ? -1 : 1) * 0.42 * Math.sin(u * 2.6)); ctx.globalAlpha *= 1 - sm(seg(u, 0.5, 1));
-    const p = new Path2D(); p.roundRect(-3.5, h ? -len : 0, 7, len, 3);
-    paper(p, P.mauve, 2 + 5 * u, { k, bevel: false });
+    const curl = Math.sin(Math.min(1, u * 1.6) * Math.PI / 2), D = 16 * curl, drop = 84 * u * u, ctr = [];
+    for (let i = 0; i <= n; i++) { const q = i / n; ctr.push([side * (w0At(BARE[1] - L * q) - hw - 4 * u - D * q * q), BARE[1] - L * q * (1 - 0.05 * curl) + drop]); }
+    const a = [], b = []; // strip of constant width around the curled center line; the free end never reaches the midline
+    for (let i = 0; i <= n; i++) {
+      const p = ctr[i], q0 = ctr[Math.max(0, i - 1)], q1 = ctr[Math.min(n, i + 1)]; let tx = q1[0] - q0[0], ty = q1[1] - q0[1]; const l = Math.hypot(tx, ty) || 1; tx /= l; ty /= l;
+      a.push([p[0] - ty * hw, p[1] + tx * hw]); b.push([p[0] + ty * hw, p[1] - tx * hw]);
+    }
+    ctx.save(); ctx.globalAlpha *= 1 - sm(seg(u, 0.8, 1));
+    paper(toPath(a.concat(b.reverse())), P.mauve, 3 + 7 * u, { k, hl: 0.55 });
     ctx.restore();
   }
 }
@@ -520,25 +532,29 @@ function drawTooth(cam, st, G, t) {
   paper(G.dentin, P.dentin, 6, { k });
   ctx.save(); ctx.clip(G.dentin); ctx.strokeStyle = 'rgba(120,84,40,0.13)'; ctx.lineWidth = 1.3; ctx.stroke(TUBULES); ctx.restore();
   if (st.hl > 0) { // freshly exposed dentin
-    ctx.save(); ctx.globalAlpha = st.hl * (0.7 + 0.3 * Math.sin(TAU * 1.1 * t)); ctx.strokeStyle = '#fffdf0'; ctx.lineWidth = 4.2; ctx.lineCap = 'round';
+    ctx.save(); ctx.globalAlpha = st.hl * (0.7 + 0.3 * Math.sin(TAU * 1.1 * t)); ctx.strokeStyle = '#fffdf0'; ctx.lineWidth = 5.5; ctx.lineCap = 'round';
     for (const side of [1, -1]) { ctx.beginPath(); let f = true; for (const p of G.wall) if (p[1] >= BARE[0] && p[1] <= BARE[1]) { if (f) ctx.moveTo(side * (p[0] + 1), p[1]); else ctx.lineTo(side * (p[0] + 1), p[1]); f = false; } ctx.stroke(); }
     ctx.restore();
   }
   if (st.flap > 0) { // hook: the dentin inside the cut line lifts as a flap and settles (preview of the loss)
-    ctx.save(); ctx.translate(-6 * st.flap, -10 * st.flap); paper(FLAP, P.dentin, 14 * st.flap, { k, bm: st.flap }); ctx.restore();
+    ctx.save(); ctx.translate(-12 * st.flap, -20 * st.flap); paper(FLAP, P.dentin, 22 * st.flap, { k, bm: st.flap }); ctx.restore();
   }
   if (st.guide > 0) { // dashed "cut here" outline of the lesion to come
-    ctx.save(); ctx.globalAlpha = 0.9 * st.guide; ctx.translate(-6 * st.flap, -10 * st.flap);
+    ctx.save(); ctx.globalAlpha = 0.9 * st.guide; ctx.translate(-12 * st.flap, -20 * st.flap);
     for (const side of [1, -1]) stitch(GUIDE_R.map((p) => [side * p[0], p[1]]).reverse(), C.coralDk, 5 * k, [13 * k, 9 * k], 0, k, st.guideDraw);
     ctx.restore();
   }
   if (st.pulp && st.lift > 0) drawRaisedPulp(G, st, t, k);
   drawPeel(st, t, k); drawPrecursors(st, t, k); drawCells(st, k);
+  if (st.snip > 0 && st.snip < 1) { // the cut: a coral paper ring lands on the vessels at the apex, pulses once and leaves
+    const u = st.snip, sc = softBack(clamp(u / 0.25)) * (1 + 0.25 * Math.sin(Math.PI * clamp((u - 0.25) / 0.45))) * (1 - ease.in(clamp((u - 0.72) / 0.28)));
+    if (sc > 0.01) { ctx.save(); ctx.translate(0, 1118); ctx.scale(sc * 1.05, sc * 1.05); paper(RING, P.coral, 4, { rule: 'evenodd', k: k / sc, hl: 0.3 }); ctx.restore(); }
+  }
 }
 
 /* ------------------------------------------------------------------ radiograph film (end scene) */
 const FILM = { x: 530, y: 660, w: 412, h: 552 };
-const SHIFT = { tooth: -54, bone: -80 }; // px the film image slides on the cone shift (bone further: parallax)
+const SHIFT = { tooth: -54, bone: -54 }; // px the whole film image slides on the cone shift
 let FILM_MOUNT, FILM_SHEET, FILM_IMG, XDENTIN, CHIP3;
 const DARROW = (() => { const L = 58, h = 6.5, a = 22, w = 16, p = new Path2D(); p.moveTo(-L, 0); p.lineTo(-L + a, -w); p.lineTo(-L + a, -h); p.lineTo(L - a, -h); p.lineTo(L - a, -w); p.lineTo(L, 0); p.lineTo(L - a, w); p.lineTo(L - a, h); p.lineTo(-L + a, h); p.lineTo(-L + a, w); p.closePath(); return p; })();
 function shiftAt(t) { return sm(seg(t, T.shiftOn[0], T.shiftOn[1])) * (1 - sm(seg(t, T.shiftOff[0], T.shiftOff[1]))); }
@@ -572,12 +588,11 @@ function drawFilm(t, cam) {
   s = setLayer(cam, 0, SHIFT.tooth * sh + dxo); const k = 1 / s;
   ctx.lineJoin = 'round'; ctx.strokeStyle = C.xld; ctx.lineWidth = 7; ctx.stroke(PDL); ctx.fillStyle = C.xpdl; ctx.fill(PDL);
   paper(XDENTIN, P.xroot, 3, { k, hl: 0.25 });
-  // sign 3: dashed ghost of the root outline where it was before the shift (only where the shifted root has left it)
+  // sign 3: dashed ghost of the lesion where it was before the shift (the lesion has moved with the canal)
   if (sh > 0.01) {
-    ctx.save(); const out = new Path2D(); out.rect(-4000, -4000, 8000, 8000); out.addPath(SIL); ctx.clip(out, 'evenodd');
-    setLayer(cam, 0, dxo); ctx.globalAlpha = clamp(sh * 2.5) * 0.9; ctx.lineCap = 'round'; ctx.setLineDash([10 * k, 9 * k]);
-    ctx.strokeStyle = 'rgba(16,20,24,0.7)'; ctx.lineWidth = 6.5 * k; ctx.stroke(SIL);
-    ctx.strokeStyle = '#f7ecd2'; ctx.lineWidth = 3.4 * k; ctx.stroke(SIL);
+    ctx.save(); setLayer(cam, 0, dxo); ctx.globalAlpha = clamp(sh * 2.5); ctx.lineCap = 'round'; ctx.setLineDash([10 * k, 9 * k]);
+    ctx.strokeStyle = 'rgba(16,20,24,0.8)'; ctx.lineWidth = 7.5 * k; ctx.stroke(LES_GHOST);
+    ctx.strokeStyle = '#f7ecd2'; ctx.lineWidth = 3.6 * k; ctx.stroke(LES_GHOST);
     ctx.restore(); setLayer(cam, 0, SHIFT.tooth * sh + dxo);
   }
   // sign 1: equal half-widths either side of the canal (no axis line: nothing may be traceable through the lesion)
@@ -639,17 +654,17 @@ const TABS = [
   { id: 'C', x: 64, y: 606, stripe: 'mauve', seed: 5, rot: -0.006, in: T.tabC, out: T.mechOut, lead: (G) => { let b = G.wall[0]; for (const q of G.wall) if (Math.abs(q[1] - 700) < Math.abs(b[1] - 700)) b = q; return [-(b[0] + 2), b[1]]; },
     lines: [{ t: 'PREDENTIN LOST', f: F.cap36, ls: 0.5 }, { t: 'DENTIN EXPOSED', f: F.cap36, ls: 0.5, c: C.coralDk, arrow: true }] },
   { id: 'D', x: 64, y: 806, stripe: 'teal', seed: 6, rot: 0.008, in: T.tabD, out: T.mechOut + 0.06, lead: (G, st) => { const c = st.cells.find((q) => q.i === 2 && q.side < 0); return c ? [c.x - 4, c.y] : [-20, 790]; },
-    lines: [{ t: 'ODONTOCLASTS', f: F.cap38, ls: 0.5 }, { t: 'resorb the dentin', f: F.role40, c: C.tealTab, lh: 1.22 }] },
-  { id: 'E1', x: 64, y: 498, stripe: 'coral', seed: 7, rot: -0.007, in: T.e1, out: T.treatOut, lines: [{ t: 'PULP OUT', f: F.cap36, ls: 0.5 }] },
+    lines: [{ t: 'ODONTOCLASTS', f: F.cap38, ls: 0.5 }] },
+  { id: 'E1', x: 64, y: 498, stripe: 'coral', seed: 7, rot: -0.007, in: T.e1, out: T.treatOut, lines: [{ t: 'RCT: PULP OUT', f: F.cap36, ls: 0.5 }] },
   { id: 'E2', x: 64, y: 640, stripe: 'thread', seed: 8, rot: 0.006, in: T.e2, out: T.treatOut + 0.04, chev: true, lines: [{ t: 'BLOOD SUPPLY CUT', f: F.cap36, ls: 0.3 }] },
   { id: 'E3', x: 64, y: 782, stripe: 'cream', seed: 9, rot: -0.005, in: T.e3, out: T.treatOut + 0.08, chev: true, fill: 'tealTab', ink: C.cream, lines: [{ t: 'RESORPTION STOPS', f: F.cap36, ls: 0.3 }] },
-  { id: 'H', x: 64, y: 340, stripe: 'coral', seed: 10, rot: -0.006, in: T.head, out: T.endOut, fill: 'ink', ink: C.cream,
-    lines: [{ t: 'Internal', f: F.head, lh: 1.02 }, { t: 'resorption', f: F.head, lh: 1.12 }, { t: 'classic X-ray signs', f: F.headSub, c: '#f6a48d', lh: 1.3 }] },
-  { id: 'S1', x: 64, y: 586, num: 1, seed: 11, rot: 0.006, in: T.s1, out: T.endOut + 0.03,
+  { id: 'H', x: 64, y: 340, stripe: 'cream', seed: 10, rot: -0.006, in: T.head, out: T.endOut, fill: 'coralDk', ink: '#fff8ea',
+    lines: [{ t: 'Internal', f: F.head, lh: 1.02 }, { t: 'resorption', f: F.head, lh: 1.12 }, { t: 'classic X-ray signs', f: F.headSub, c: '#ffe3bd', lh: 1.3 }] },
+  { id: 'S1', x: 64, y: 598, num: 1, seed: 11, rot: 0.006, in: T.s1, out: T.endOut + 0.03,
     lines: [{ t: 'Symmetric,', f: F.sign, c: C.coralDk }, { t: 'well-defined', f: F.sign }, { t: 'ballooning', f: F.sign }] },
-  { id: 'S2', x: 64, y: 806, num: 2, seed: 12, rot: -0.006, in: T.s2, out: T.endOut + 0.06,
-    lines: [{ t: 'Canal outline lost', f: F.sign, hi: [14, 18] }, { t: 'in the lesion', f: F.sign }] },
-  { id: 'S3', x: 64, y: 980, num: 3, seed: 13, rot: 0.005, in: T.s3, out: T.endOut + 0.09,
+  { id: 'S2', x: 64, y: 822, num: 2, seed: 12, rot: -0.006, in: T.s2, out: T.endOut + 0.06,
+    lines: [{ t: 'Canal outline lost', f: F.sign, hi: [14, 18] }] },
+  { id: 'S3', x: 64, y: 956, num: 3, seed: 13, rot: 0.005, in: T.s3, out: T.endOut + 0.09,
     lines: [{ t: 'Cone shift:', f: F.sign }, { t: 'stays on canal', f: F.sign, hi: [6, 14] }] },
 ];
 function setupTabs() {
@@ -659,7 +674,7 @@ function setupTabs() {
       L.size = +/(\d+)px/.exec(L.f)[1]; L.w = tw(L.t, L.f, L.ls || 0) + (L.arrow ? 46 : 0);
       L.y = h + L.size * 0.84; h += L.size * (L.lh || 1.18); wmax = Math.max(wmax, L.w);
     }
-    tb.sw = tb.num ? 60 : 18; tb.h = Math.ceil(h + 14); tb.w = Math.ceil(tb.sw + 20 + wmax + 24);
+    tb.sw = tb.num ? 60 : 18; tb.h = Math.ceil(h + (tb.num && tb.lines.length === 1 ? 20 : 14)); if (tb.num && tb.lines.length === 1) for (const L of tb.lines) L.y += 3; tb.w = Math.ceil(tb.sw + 20 + wmax + 24);
     tb.path = toPath(snip(rrectPts(0, 0, tb.w, tb.h, 13), 36, tb.seed * 13, 0.7));
   }
 }
@@ -767,16 +782,16 @@ function drawInset(t) {
 /* ------------------------------------------------------------------ fixed furniture: tag, handle, fine print, title, mat */
 let TAG_PATH, TITLE = { size: 92, w: 0 }, SUB_PATH, MAT;
 const FINE = [
-  [0, 'schematic · not to scale'],
+  [0, 'inflammatory type · schematic'],
   [2.75, 'schematic · Abbott & Lin 2022, Dent Traumatol'],
-  [6.7, 'schematic · Patel et al. 2022, Int Endod J'],
-  [16.7, 'schematic · Patel 2022, Int Endod J; Thomas 2014, ISRN Dent'],
-  [21.78, 'schematic · not to scale'], // flips back before the loop cross-fade starts
+  [7.15, 'schematic · Patel et al. 2022, Int Endod J'],
+  [16.7, 'schematic · Patel et al. 2022, Int Endod J; Aidos et al. 2018, Eur Endod J'],
+  [21.78, 'inflammatory type · schematic'], // flips back before the loop cross-fade starts
 ];
-const TAG_Y = 284, TITLE_Y = 416, SUB_TXT = 'dead pulp above, live pulp below';
+const TAG_Y = 284, TITLE_Y = 416, SUB_TXT = 'necrotic pulp coronal, vital pulp apical';
 function drawFurniture(t) {
   // corner tag
-  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.translate(66, TAG_Y); ctx.rotate(-0.014 + 0.004 * Math.sin(TAU * t / 11));
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.translate(66, TAG_Y); ctx.rotate(-0.014 + 0.004 * Math.sin(TAU * t / (DUR / 2)));
   paper(TAG_PATH, P.cream, 5, { rule: 'evenodd' });
   txt('RESORPTION 1/5', 50, 10, F.tag, C.ink, { ls: 1.2 });
   const w1 = tw('RESORPTION 1/5', F.tag, 1.2);
@@ -791,18 +806,22 @@ function drawFurniture(t) {
   let idx = 0; for (let i = 0; i < FINE.length; i++) if (t >= FINE[i][0]) idx = i;
   const since = t - FINE[idx][0], flip = idx > 0 && since < 0.3 ? since / 0.3 : 1;
   const show = flip < 0.5 && idx > 0 ? FINE[idx - 1][1] : FINE[idx][1], sy = Math.abs(Math.cos(Math.PI * flip)) < 0.02 ? 0.02 : Math.abs(Math.cos(Math.PI * flip));
-  const fw = tw(show, F.fine) + 30, fp = new Path2D(); fp.roundRect(0, -21, fw, 42, 9);
+  // the label must end before the button column (x 960): a long line is set slightly smaller (never below 22 px)
+  const w24 = tw(show, F.fine), fs = Math.max(22, Math.min(24, Math.floor((24 * (952 - 64 - 30)) / w24 * 10) / 10)), ff = `600 ${fs}px Nunito`;
+  const fw = tw(show, ff) + 30, fp = new Path2D(); fp.roundRect(0, -21, fw, 42, 9);
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.translate(64, 1552); ctx.scale(1, flip >= 1 ? 1 : sy);
-  paper(fp, P.ink, 4, { hl: 0.14 }); txt(show, 15, 8, F.fine, '#efe3cb');
+  paper(fp, P.ink, 4, { hl: 0.14 }); txt(show, 15, 8, ff, '#efe3cb');
 }
-function drawTitle(t) { // exits upward, fading out over the first 60% of its travel so it never crosses the tag
-  const u = ease.in(seg(t, T.titleOut, T.titleOut + 0.38)); if (u >= 1) return;
-  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, -90 * u); ctx.globalAlpha = 1 - sm(clamp(u / 0.6));
-  ctx.shadowColor = 'rgba(4,10,14,0.55)'; ctx.shadowBlur = 14; ctx.shadowOffsetX = 4; ctx.shadowOffsetY = 7;
-  txt('Internal resorption', W / 2, TITLE_Y, `900 ${TITLE.size}px Fraunces`, P.cream, { align: 'center' });
-  ctx.restore();
-  const u2 = ease.in(seg(t, T.titleOut + 0.06, T.titleOut + 0.44)); if (u2 >= 0.6) return;
-  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, -110 * u2); ctx.translate(W / 2 - SUB_PATH.w / 2, TITLE_Y + 34); ctx.rotate(-0.008); ctx.globalAlpha = 1 - sm(clamp(u2 / 0.6));
+function drawTitle(t) { // exits as rigid cut paper, opaque: slides out to the right (the label tabs come in from the left)
+  const u = ease.in(seg(t, T.titleOut + 0.05, T.titleOut + 0.37));
+  if (u < 1) {
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 1120 * u, 0);
+    ctx.shadowColor = 'rgba(4,10,14,0.55)'; ctx.shadowBlur = 14; ctx.shadowOffsetX = 4; ctx.shadowOffsetY = 7;
+    txt('Internal resorption', W / 2, TITLE_Y, `900 ${TITLE.size}px Fraunces`, P.cream, { align: 'center' });
+    ctx.restore();
+  }
+  const u2 = ease.in(seg(t, T.titleOut, T.titleOut + 0.32)); if (u2 >= 1) return;
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 1120 * u2, 0); ctx.translate(W / 2 - SUB_PATH.w / 2, TITLE_Y + 34); ctx.rotate(-0.008 + 0.05 * u2);
   paper(SUB_PATH.path, P.coralDk, 6, { hl: 0.25 });
   txt(SUB_TXT, SUB_PATH.w / 2, 46, '800 38px Nunito', '#fff8ea', { align: 'center' });
   ctx.restore();
@@ -826,7 +845,7 @@ function buildMat() {
 /* ------------------------------------------------------------------ frame */
 function drawScene(t) {
   const cam = camAt(t);
-  SW.x = 2.2 * Math.sin(TAU * t / 11); SW.y = 1.3 * Math.sin(TAU * t / 11 + 1.2);
+  SW.x = 5 * Math.sin(TAU * t / (DUR / 2)); SW.y = 3 * Math.sin(TAU * t / (DUR / 2) + 1.2); // two sway cycles per loop, so the last frame meets the first
   const st = stateAt(t), G = buildGeom(st);
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
   ctx.fillStyle = P.backing; ctx.fillRect(0, 0, W, H);
@@ -847,8 +866,8 @@ function drawScene(t) {
   const up = softBack(seg(t, T.plus, T.plus + 0.4)) * (1 - ease.in(seg(t, T.reqOut - 0.05, T.reqOut + 0.2)));
   if (up > 0) {
     ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.translate(PLUS_AT[0], PLUS_AT[1]); ctx.scale(up, up);
-    const disc = new Path2D(); disc.arc(0, 0, 46, 0, TAU); paper(disc, P.cream, 6);
-    ctx.rotate(0.6 * (1 - up)); ctx.scale(1.4, 1.4); paper(PLUS, P.coral, 1.5, { hl: 0.3 });
+    const disc = new Path2D(); disc.arc(0, 0, 37, 0, TAU); paper(disc, P.coralDk, 6, { hl: 0.25 });
+    ctx.rotate(0.6 * (1 - up)); ctx.scale(0.82, 0.82); paper(PLUS, P.cream, 1.5, { hl: 0.5 });
   }
   drawInset(t);
   drawTitle(t);
@@ -871,12 +890,12 @@ function render(t) {
 window.REEL = {
   title: 'Internal inflammatory root resorption',
   duration: DUR,
-  poster: 20.2,
+  poster: 21.4,
   canvas,
   fonts: ['900 92px Fraunces', '800 60px Fraunces', '800 46px Fraunces', '800 36px Fraunces', 'italic 600 42px Fraunces', 'italic 600 40px Fraunces',
     '900 38px Nunito', '900 36px Nunito', '900 27px Nunito', '800 38px Nunito', '800 34px Nunito', '800 30px Nunito', '800 27px Nunito', '700 30px Nunito', '700 26px Nunito', '600 24px Nunito'],
   setup() {
-    const hatch = (g, n) => { g.strokeStyle = 'rgba(178,74,48,0.38)'; g.lineWidth = 2; for (let x = -n; x < n * 2; x += 12) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x + n, n); g.stroke(); } };
+    const hatch = (g, n) => { g.strokeStyle = 'rgba(74,32,46,0.5)'; g.lineWidth = 2.4; for (let x = -n; x < n * 2; x += 12) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x + n, n); g.stroke(); } };
     const speck = (g, n, R) => { for (let k = 0; k < 900; k++) { g.fillStyle = `rgba(120,112,108,${0.14 + R() * 0.3})`; g.beginPath(); g.arc(R() * n, R() * n, 0.6 + R() * 1.4, 0, TAU); g.fill(); } };
     const spec = { backing: [C.backing, 1, { amp: 6, fl: 0.05 }], bone: [C.bone, 2, { amp: 8, fl: 0.07 }], gum: [C.gum, 3], enamel: [C.enamel, 4, { amp: 6, fd: 0.05 }], dentin: [C.dentin, 5], cream: [C.cream, 6, { amp: 7 }],
       coral: [C.coral, 7], coralDk: [C.coralDk, 22, { fl: 0.08 }], gran: [C.gran, 8], necro: [C.necro, 9, { fl: 0.08 }], mauve: [C.mauve, 10], teal: [C.teal, 11], tealTab: [C.tealTab, 12, { fl: 0.07 }], ink: [C.ink, 13, { amp: 6, fl: 0.06 }],
@@ -884,7 +903,7 @@ window.REEL = {
       pink: [C.pink, 19], frameTeal: [C.frameTeal, 20, { fl: 0.07 }], thread: [C.thread, 21] };
     for (const key in spec) P[key] = makePaper(spec[key][0], spec[key][1], spec[key][2] || {});
     setupTabs(); setupInset();
-    { const A = TABS.find((q) => q.id === 'A'), B = TABS.find((q) => q.id === 'B'); PLUS_AT = [A.x + Math.min(A.w, B.w) / 2, (A.y + A.h + B.y) / 2]; }
+    { const A = TABS.find((q) => q.id === 'A'), B = TABS.find((q) => q.id === 'B'); PLUS_AT = [A.x + A.sw + 20 + 37, (A.y + A.h + B.y) / 2]; }
     CHIP3 = toPath(snip(rrectPts(-112, -31, 224, 62, 14), 30, 97, 0.6));
     XDENTIN = buildGeom({ g: 1, bare: 1, bites: null }).dentin;
     FILM_MOUNT = toPath(snip(rrectPts(-16, -16, FILM.w + 32, FILM.h + 32, 20), 44, 51, 0.9));

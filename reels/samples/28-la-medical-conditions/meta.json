@@ -12,7 +12,7 @@
     },
     {
       "claim": "Non-selective beta-blocker: epinephrine is amber, not red: small doses, recheck BP before the next cartridge",
-      "source": "Hersh EV & Giannakopoulos H, Dent Clin North Am 2010;54(4):687-96 (PMID 20831932; abstract: epinephrine or levonordefrin with nonselective beta-blockers, dose related); Becker DE, Anesth Prog 2011;58(1):31-41 (PMID 21410363; full text: recheck HR/BP after each 20-40 mcg; not contraindicated); Becker & Reed 2012 (PMID 22822998)"
+      "source": "Hersh EV & Giannakopoulos H, Dent Clin North Am 2010;54(4):687-96 (PMID 20831932; abstract: epinephrine or levonordefrin with nonselective beta-blockers, dose related); Becker DE, Anesth Prog 2011;58(1):31-41 (PMID 21410363; full text: 'Vasopressors are not contraindicated in patients taking beta blockers, but doses should be conservative and blood pressure monitored periodically'); Becker & Reed 2012 (PMID 22822998; full text: the same advice for nonselective beta blockers, and the protocol it refers to: recheck HR/BP after every 20-40 mcg = 1-2 cartridges of 1:100,000)"
     },
     {
       "claim": "Tricyclic antidepressant: epinephrine at low dose (amber); avoid levonordefrin (red; a label-level precaution, contested)",
@@ -47,5 +47,5 @@
       "source": "Schematic; brown drop after Guay J, Anesth Analg 2009 (PMID 19224791): 'Chocolate-colored blood suggests methemoglobinemia but other colors may be found'"
     }
   ],
-  "caption": "Before you inject: 8 histories that change the cartridge.\n\nHeart disease: ~0.04 mg epi (~2 cartridges of 1:100,000) per 30 min is convention, not a proven cap.\nNon-selective beta-blockers, tricyclics: epi isn't contraindicated; small doses, aspirate, recheck BP. Avoiding levonordefrin: label precaution.\nRecent cocaine: defer elective care.\nPregnancy: lidocaine ± epi considered safe (ACOG).\n\nRefs: Becker & Reed 2012, Becker 2008, 2011 Anesth Prog; Hersh 2010, Naftalin 2002 DCNA; Yagiela 1985 OOOO; Yagiela 1999 JADA; Brand 2008 BDJ; Little 2006 OOOOE; Guay 2009 Anesth Analg; ACOG CO 569, 2013; FDA labels.\nSchematic pictograms.\n\n#endodontics #localanesthesia #dentistry #endoresident #boardprep"
+  "caption": "Before you inject: 8 histories that change the cartridge.\n\nHeart disease: ~0.04 mg epi (~2 cartridges of 1:100,000) per 30 min is convention, not a proven cap.\nNon-selective beta-blockers, tricyclics: epi isn't contraindicated; small doses, aspirate, recheck BP. Avoiding levonordefrin: label precaution.\nRecent cocaine: defer elective care.\nPregnancy: lidocaine ± epi considered safe (ACOG).\n\nRefs: Becker & Reed 2012, Becker 2008, 2011 Anesth Prog; Hersh 2010, Naftalin 2002 DCNA; Yagiela 1985 OOO; Yagiela 1999 JADA; Brand 2008 BDJ; Little 2006 OOOOE; Guay 2009 Anesth Analg; ACOG CO 569, 2013; FDA labels.\nSchematic pictograms.\n\n#endodontics #localanesthesia #dentistry #endoresident #boardprep"
 }

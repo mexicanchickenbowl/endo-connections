@@ -35,14 +35,14 @@ const FACTORS = [
   { name: 'ROOT-END BEVEL', fav: 'minimum', vs: 'obvious', g: 0 },
   { name: 'RETRO-CAVITY PREP', fav: 'ultrasonic tip', vs: 'bur', g: 0 },
   { name: 'RETRO-FILLING', fav: 'MTA, SuperEBA or IRM', vs: 'amalgam', sub: 'MTA: similar outcome to SuperEBA or IRM', g: 0 },
-  { name: 'PRE-OP SIGNS OR SYMPTOMS', fav: 'absent', vs: 'present', g: 1 },
+  { name: 'PRE-OP SIGNS OR SYMPTOMS', fav: 'absent', vs: 'present', tag: 'univariate only', g: 1 },   // tag: Villa-Machado 2013 abstract — not independent after multivariate regression
   { name: 'PERIODONTAL STATUS', fav: 'endo-only lesion', vs: 'endo-perio', g: 1 },
   { name: 'CORONAL RESTORATION', fav: 'satisfactory', vs: 'unsatisfactory', g: 1 },
 ];
 const TITLE = '10 FACTORS';
 const SUBTITLE = 'ASSOCIATED WITH BETTER HEALING AFTER PERIAPICAL SURGERY';
-const SOURCE = 'Ng & Gulabivala, in Cohen’s Pathways of the Pulp, 12th ed., ch. 17';
-const SCOPE = 'STUDY SUMMARY · TEETH WITH A PREOPERATIVE PERIAPICAL RADIOLUCENCY · HEALING, NOT SURVIVAL';
+const SOURCE = 'Study summary of Ng & Gulabivala, in Cohen’s Pathways of the Pulp, 12th ed., ch. 17';
+const SCOPE = 'TEETH WITH A PREOPERATIVE PERIAPICAL RADIOLUCENCY · HEALING, NOT SURVIVAL';   // must-read scope: 30 px
 
 /* ---------------- timeline ---------------- */
 const DUR = 30, T0 = 2.0;
@@ -66,11 +66,11 @@ const ROW_H = 47, STRIP_H = 36, SUB_H = 33;
 const Y = {};       // filled in layout()
 const NAME_X = 142, PILL_COL = 540;
 const F = {
-  title: '400 96px Anton', sub: '600 34px "Barlow Condensed"', strip: '700 30px "Barlow Condensed"', fine: '500 25px "Barlow Condensed"',
+  title: '400 96px Anton', sub: '600 34px "Barlow Condensed"', strip: '700 30px "Barlow Condensed"', fine: '500 30px "Barlow Condensed"', scope: '500 30px "Barlow Condensed"',
   name: (s) => `700 ${s}px "Barlow Condensed"`, fav: '600 36px "Barlow Condensed"', vs: '500 32px "Barlow Condensed"', subl: '500 30px "Barlow Condensed"',
   badge: '400 30px Anton', count: '400 96px Anton', of: '400 52px Anton', bezel: '500 24px "Barlow Condensed"', handle: '600 26px "Barlow Condensed"',
 };
-const INK = '#1c1813', CREAM = '#f5e9d0', DIM = '#7f725d', RULE = 'rgba(96,74,40,0.22)';
+const INK = '#1c1813', CREAM = '#f5e9d0', DIM = '#72674f', RULE = 'rgba(96,74,40,0.22)';
 
 /* ---------------- text helpers ("≤" is not in the condensed fonts: build it from "<" + a bar) ---------------- */
 function measure(c, s) { let w = 0; for (const part of s.split(/(≤)/)) w += c.measureText(part === '≤' ? '<' : part).width; return w; }
@@ -104,8 +104,10 @@ function layout() {
     m.font = F.fav; const pw = measure(m, f.fav) + 26;
     m.font = F.vs; const vw = measure(m, 'vs ' + f.vs);
     const pillX = Math.max(PILL_COL, NAME_X + nw + 16), vsX = pillX + pw + 14;
+    let tagX = 0, tw = 0;
+    if (f.tag) { m.font = F.subl; tw = measure(m, f.tag); tagX = PADR - 2 - tw; if (tagX - 14 < vsX + vw + 12) console.warn(`row ${i + 1} tag collides with the vs text by ${Math.round(vsX + vw + 26 - tagX)} px`); }
     if (vsX + vw > PADR) console.warn(`row ${i + 1} overflows by ${Math.round(vsX + vw - PADR)} px`);
-    ROWS.push({ y, h, cy: y + ROW_H / 2, ns, nw, pillX, pw, vsX, vw });
+    ROWS.push({ y, h, cy: y + ROW_H / 2, ns, nw, pillX, pw, vsX, vw, tagX, tw });
     y += h;
   }
   Y.end = y;
@@ -173,7 +175,7 @@ function paintHUD() {
     x.fillStyle = CREAM; x.font = F.strip; x.save(); x.letterSpacing = '1.2px';
     let ex = draw(x, G.label, PADL + 40, sy + STRIP_H - 9.5); x.globalAlpha = 0.8; draw(x, '·  ' + G.count, ex + 14, sy + STRIP_H - 9.5); x.restore();
     miniPin(x, PADL + 18, sy + STRIP_H - 5, 0.058, G.band);
-    x.font = F.fine; x.fillStyle = CREAM; x.globalAlpha = 0.92; const fw = measure(x, G.fine); draw(x, G.fine, PADR - 6 - fw, sy + STRIP_H - 10.5); x.globalAlpha = 1;
+    x.font = F.fine; x.fillStyle = CREAM; x.globalAlpha = 0.92; const fw = measure(x, G.fine); draw(x, G.fine, PADR - 6 - fw, sy + STRIP_H - 9.5); x.globalAlpha = 1;
   });
   // row rules + empty badges
   for (let i = 0; i < 10; i++) {
@@ -187,8 +189,9 @@ function paintHUD() {
   x.fillStyle = ig2; x.fillRect(SCR.x, SCR.y, 26, SCR.h);
   x.restore();
   // bezel engraving (brass)
-  x.fillStyle = '#e2c48a'; x.font = F.bezel; x.save(); x.letterSpacing = '1px';
-  const sw = measure(x, SCOPE); draw(x, SCOPE, W / 2 - sw / 2, HOUSE.y + 28); x.restore();
+  x.fillStyle = '#e2c48a'; x.font = F.scope; x.save(); x.letterSpacing = '0.4px';
+  const sw = measure(x, SCOPE); if (sw > 940) console.warn('scope line too wide: ' + Math.round(sw));
+  draw(x, SCOPE, W / 2 - sw / 2, HOUSE.y + 28); x.restore();
   x.font = F.bezel; draw(x, SOURCE, PADL - 4, SCR.y + SCR.h + 31);
   x.font = F.handle; x.fillStyle = '#f0d7a4'; const hw = measure(x, '@natebrooksendo'); draw(x, '@natebrooksendo', PADR + 4 - hw, SCR.y + SCR.h + 32);
   return c;
@@ -372,6 +375,10 @@ function drawRows(S) {
     }
     // the other side, dimmed
     if (vsU > 0) { ctx.save(); ctx.globalAlpha = o * vsU; ctx.font = F.vs; ctx.fillStyle = DIM; draw(ctx, 'vs ' + f.vs, R.vsX, base - 1); ctx.restore(); }
+    if (f.tag && subU > 0) {                                     // honest qualifier, same style as the row-7 note
+      ctx.save(); ctx.globalAlpha = o * subU; ctx.fillStyle = G.ink; ctx.fillRect(R.tagX - 12, base - 24, 3, 26);
+      ctx.font = F.subl; ctx.fillStyle = '#3a3226'; draw(ctx, f.tag, R.tagX, base - 1); ctx.restore();
+    }
     if (f.sub && subU > 0) {
       ctx.save(); ctx.globalAlpha = o * subU; ctx.font = F.subl; ctx.fillStyle = G.ink;
       const sy = R.y + ROW_H + SUB_H - 12; ctx.fillRect(R.pillX + 2, sy - 22, 3, 24); ctx.fillStyle = '#3a3226'; draw(ctx, f.sub, R.pillX + 14, sy - (1 - subU) * 6); ctx.restore();

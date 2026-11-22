@@ -8,7 +8,7 @@ root-end filling"**, book pp. 694–699 (the list itself is on pp. 695 and 699).
 ## What was read, and how
 
 - File: the resident's own copy, "Ch. 17 Evaluation of outcomes.pdf" (60 PDF pages).
-- The Drive text extraction (268 k characters) was read for the whole surgical section (text lines 2700–3140 of the
+- The text extraction (268 k characters) was read for the whole surgical section (text lines 2700–3140 of the
   extraction = book pp. 694–699) and searched across the whole chapter for every factor keyword. It was **not truncated**.
 - The text layer garbles math symbols (for example `=` comes out as `#`, `≤` as `+` and `>` as `$`). To remove any doubt the two
   PDF pages that carry the list (PDF pp. 45 and 49 = book pp. 695 and 699) were rendered to images at 300 dpi and read

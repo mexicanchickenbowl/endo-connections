@@ -32,20 +32,20 @@
     },
     {
       "claim": "Retro-filling: MTA, SuperEBA or IRM vs amalgam; MTA: similar outcome to SuperEBA or IRM",
-      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — unpublished pooled meta-analysis cited by the chapter (ref. 130, unpublished manuscript 2014); chapter RR SuperEBA and IRM vs amalgam 1.2 (1.1, 1.3); MTA vs SuperEBA 1.0 (0.99, 1.1); MTA vs IRM 1.1 (0.98, 1.1)"
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — unpublished pooled meta-analysis cited by the chapter (ref. 130, unpublished manuscript 2014). The chapter lists MTA, SuperEBA or IRM versus amalgam; its RR against amalgam is for SuperEBA and IRM, 1.2 (1.1, 1.3); MTA vs SuperEBA 1.0 (0.99, 1.1); MTA vs IRM 1.1 (0.98, 1.1)"
     },
     {
-      "claim": "Pre-op signs or symptoms: absent vs present — absent associated with better healing",
-      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — individual study cited by the chapter: Villa-Machado et al., Int Endod J 2013;46:1063-76 (PMID 23560363); chapter RR 1.2 (1.1, 1.3). Direction is not stated in the chapter; taken from the study's PubMed abstract (univariate association)"
+      "claim": "Pre-op signs or symptoms: absent vs present (univariate only) — absent associated with better healing",
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 names the factor (RR 1.2; 95% CI 1.1, 1.3) citing Villa-Machado et al., Int Endod J 2013;46:1063-76 (PMID 23560363). The chapter does not state the favored side; it is taken from the study's PubMed abstract, where the association was univariate and not independent after multivariate regression (abstract only read)"
     },
     {
       "claim": "Periodontal status: endo-only lesion vs endo-perio — isolated endodontic lesion associated with better healing",
-      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — individual study cited by the chapter: Song et al., J Endod 2013;39:1491-7 (PMID 24238435); chapter RR 2.1 (1.1, 3.8). Direction and categories are not stated in the chapter; taken from the study's PubMed abstract"
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 names the factor (RR 2.1; 95% CI 1.1, 3.8) citing Song et al., J Endod 2013;39:1491-7 (PMID 24238435). The chapter does not state the favored side or the categories; they are taken from the study's PubMed abstract: isolated endodontic lesion vs endodontic-periodontal lesion (abstract only read)"
     },
     {
       "claim": "Coronal restoration: satisfactory vs unsatisfactory — satisfactory associated with better healing",
-      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 — individual study cited by the chapter: Villa-Machado et al., Int Endod J 2013;46:1063-76 (PMID 23560363); chapter RR 1.6 (1.2, 2.1). Direction is not stated in the chapter; taken from the study's PubMed abstract (independent association)"
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17 names the factor (RR 1.6; 95% CI 1.2, 2.1) citing Villa-Machado et al., Int Endod J 2013;46:1063-76 (PMID 23560363). The chapter does not state the favored side; it is taken from the study's PubMed abstract, where unsatisfactory coronal restoration stayed independently associated with a worse outcome (abstract only read)"
     }
   ],
-  "caption": "Ten pins, ten factors: what is associated with better periapical healing after periapical surgery.\n\nA study summary of the Evaluation of Outcomes chapter in Cohen's Pathways of the Pulp, for teeth with a preoperative periapical radiolucency.\nBack 7 = the chapter's pooled analysis (unpublished). Front 3 = individual studies.\nThis is healing, not tooth survival, and these are associations, not guarantees.\n\nRefs: Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17; Villa-Machado 2013, Int Endod J; Song 2013, J Endod.\n#endodontics #apicalsurgery #apicoectomy #endoresident #boardreview #dentalstudent #endo"
+  "caption": "Ten pins, ten factors associated with better periapical healing after periapical surgery.\n\nA study summary of the Evaluation of Outcomes chapter in Cohen's Pathways of the Pulp, for teeth with a preoperative periapical radiolucency.\nBack 7 = the chapter's unpublished pooled analysis. Front 3 = individual studies: the chapter names them, the favored side is from the cited studies.\nSigns or symptoms: univariate only in Villa-Machado 2013.\nPeriapical healing, not tooth survival. Associations, not causation.\n\nRefs: Ng & Gulabivala, Cohen's Pathways of the Pulp 12e, ch. 17; Villa-Machado 2013, Int Endod J; Song 2013, J Endod.\n#endodontics #apicalsurgery #apicoectomy #endoresident #boardreview"
 }

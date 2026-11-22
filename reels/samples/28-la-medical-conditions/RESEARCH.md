@@ -59,7 +59,7 @@ G = guideline / position statement read; TB = textbook (not read directly); NV =
 | Fact | Exact source | What the source literally reports | Verified | Confidence |
 |---|---|---|---|---|
 | Epinephrine (or levonordefrin) + non-selective beta-blocker -> hypertension with reflex bradycardia; rare in dentistry, dose-related | Hersh EV, Giannakopoulos H. Beta-adrenergic blocking agents and dental vasoconstrictors. Dent Clin North Am 2010;54(4):687-96. PMID 20831932, doi:10.1016/j.cden.2010.06.009 | "although apparently rare in the dental setting, is potentially serious and can lead to significant hypertension with a concomitant reflex bradycardia"; "generally of a smaller magnitude, at least with only 1 or 2 cartridges of lidocaine plus 1:100,000 epinephrine"; one case report of a hypersensitive individual; intravascular injection and high doses worsen it | A | High |
-| Not a contraindication: conservative doses, aspirate, recheck BP and heart rate after each 20-40 mcg (1-2 cartridges of 1:100,000) | Becker DE. Adverse drug interactions. Anesth Prog 2011;58(1):31-41. PMID 21410363, PMC3265267. Also Becker & Reed 2012 | Becker 2011: "record baseline heart rate and blood pressure preoperatively and again following every 20-40 mcg administered" (= "1-2 cartridges containing a 1:100,000 epinephrine concentration"); "Vasopressors are not contraindicated in patients taking beta blockers." Becker & Reed 2012: "Vasopressors are not contraindicated in patients taking nonselective beta blockers" — conservative doses, periodic blood-pressure monitoring, avoid epinephrine retraction cord. **[FC]** The two quotes were merged under one citation; both confirmed. Neither paper gives a maximum dose for these patients | FT (PMC web pages, re-read) | High |
+| Not a contraindication: conservative doses, aspirate, recheck BP and heart rate after each 20-40 mcg (1-2 cartridges of 1:100,000) | Becker DE. Adverse drug interactions. Anesth Prog 2011;58(1):31-41. PMID 21410363, PMC3265267. Also Becker & Reed 2012 | Becker 2011: "record baseline heart rate and blood pressure preoperatively and again following every 20-40 mcg administered" (= "1-2 cartridges containing a 1:100,000 epinephrine concentration"); "Vasopressors are not contraindicated in patients taking beta blockers." Becker & Reed 2012: "Vasopressors are not contraindicated in patients taking nonselective beta blockers" — conservative doses, periodic blood-pressure monitoring, avoid epinephrine retraction cord. **[FC]** The two quotes were merged under one citation; both confirmed. Neither paper gives a maximum dose for these patients. **[CA]** Context of the 20-40 mcg sentence: in Becker 2011 it is written for patients on drugs with sympathomimetic effects (antidepressants, digoxin, anorexics, decongestants, stimulants); the beta-blocker paragraph then says "doses should be conservative and blood pressure monitored periodically during administration as described above". Becker & Reed 2012 contains the same protocol sentence (for any patient whose medical status is in question) and the same cross-reference for nonselective beta blockers | FT (PMC web pages, re-read; re-read again at the citation audit) | High |
 | Cardioselective (beta-1) blockers do not generally produce the interaction | Becker 2011 (FT); Houben H, Thien T, van 't Laar A. Clin Pharmacol Ther 1982;31(6):685-90. PMID 6122527 | Becker: "Selective beta blockers that act only on cardiac beta-1 receptors do not generally introduce a risk for this interaction." Houben: 5 hypertensive patients, epinephrine infusion 0.5-4 mcg/min: marked pressor effect and fall in heart rate on propranolol; "only a slight rise in blood pressure" on metoprolol | FT, A | High (Houben n = 5) |
 | Check BP about 5 minutes after the injection; continue the beta-blocker | Mito RS, Yagiela JA. Hypertensive response to levonordefrin in a patient receiving propranolol: report of case. J Am Dent Assoc 1988;116(1):55-7. PMID 3278028 | Case report; "The blood pressure should be taken approximately 5 minutes after local anesthesia is administered"; limit vasoconstrictor dose, avoid epinephrine retraction cord; applies to nadolol and timolol, possibly labetalol and pindolol | A | High (case report + expert advice) |
 | Classic case series | Foster CA, Aston SJ. Propranolol-epinephrine interaction: a potential disaster. Plast Reconstr Surg 1983;72(1):74-8. PMID 6867180 | "six examples of potentially life-threatening propranolol-epinephrine interactions" (plastic surgery doses, not dental) | A | High |
@@ -167,7 +167,7 @@ monitor (NOT prohibited)**, **green check = OK**. Panels 1-2 must be amber, not 
 |---|---|---|---|---|
 | 1 | Heart ("significant heart disease") | 2 cartridges (1:100,000) counted, a third greyed out; amber | "LIMIT EPI ~0.04 mg" / "~2 cartridges 1:100,000" — **[FC]** do not add "per appointment" (Davis; Malamed) or "per 30 min" (Becker & Reed): the sources differ; keep the time base for the caption | Becker & Reed, Anesth Prog 2012 |
 | 2 **[FC]** | Pill "non-selective beta-blocker" (propranolol), BP up / pulse down arrows | 1 cartridge -> BP cuff -> clock; amber | "SMALL DOSE - ASPIRATE - RECHECK BP" (the word "non-selective" must be on screen) | Hersh & Giannakopoulos, Dent Clin N Am 2010 (interaction, dose-related, worse if intravascular); "recheck BP / HR after each 1-2 cartridges" is Becker, Anesth Prog 2011 |
-| 3 **[FC]** | Pill "tricyclic antidepressant" | Epinephrine cartridge amber "low dose" (the main message); levonordefrin cartridge in red circle | "EPI: LOW DOSE" / "AVOID LEVONORDEFRIN" (not "NO" / "never") | Yagiela et al., OOOO 1985 (dogs); Boakes et al., BMJ 1973 (volunteers); mepivacaine-levonordefrin label. NOT Yagiela JADA 1999 — its abstract reserves complete avoidance for cocaine. NOTES / caption must say Becker 2008 calls both "not contraindicated ... used cautiously" |
+| 3 **[FC]** | Pill "tricyclic antidepressant" | Epinephrine cartridge amber "low dose" (the main message); levonordefrin cartridge in red circle | "EPI: LOW DOSE" / "AVOID LEVONORDEFRIN" (not "NO" / "never") | Yagiela et al., OOO 1985 (dogs); Boakes et al., BMJ 1973 (volunteers); mepivacaine-levonordefrin label. NOT Yagiela JADA 1999 — its abstract reserves complete avoidance for cocaine. NOTES / caption must say Becker 2008 calls both "not contraindicated ... used cautiously" |
 | 4 **[FC]** | Cocaine pictogram, "recent use" (methamphetamine only as a small secondary amber cue "meth: caution", or caption only) | All vasoconstrictor cartridges in red circle; calendar "reschedule" | "RECENT COCAINE: NO VASOCONSTRICTOR" (no hour figure) | Yagiela, JADA 1999 (cocaine intoxication); Brand et al., Br Dent J 2008 (recent use: postpone) |
 | 5 **[FC]** | Thyroid ("uncontrolled hyperthyroidism"). Pheochromocytoma: caption only | Epinephrine cartridge in red circle | "UNCONTROLLED: AVOID EPI" (the word "uncontrolled" must be on screen) | Little, OOOOE 2006 (abstract: risk of hypertensive crisis) |
 | 6 | Blood drop turning brown ("methemoglobinemia risk") | Prilocaine cartridge + benzocaine topical in red circles | "NO PRILOCAINE - NO BENZOCAINE" | Guay, Anesth Analg 2009; prilocaine label (contraindicated in congenital or idiopathic methemoglobinemia) |
@@ -395,7 +395,7 @@ Information retrieved from PubMed; DOIs where available.
 - Textbook: Malamed SF. Handbook of Local Anesthesia. Elsevier (cited as a textbook; not read for this brief).
 
 Short caption "Refs:" line suggestion **[FC: extended so that every panel has a verified source]**: "Refs: Becker &
-Reed 2012 Anesth Prog; Becker 2011 Anesth Prog; Hersh & Giannakopoulos 2010 Dent Clin N Am; Yagiela 1985 OOOO;
+Reed 2012 Anesth Prog; Becker 2011 Anesth Prog; Hersh & Giannakopoulos 2010 Dent Clin N Am; Yagiela 1985 OOO;
 Boakes 1973 BMJ; Yagiela 1999 JADA; Brand 2008 Br Dent J; Little 2006 OOOOE; Guay 2009 Anesth Analg; Naftalin &
 Yagiela 2002 Dent Clin N Am; ACOG CO 569 (2013); FDA labels." If the caption is too long, drop Boakes and Becker
 2011 first — never drop the source of a panel that is still on screen.
@@ -532,7 +532,7 @@ PubMed at this stage (**A**).
 
 | Change | Exact source | What the source literally reports | Verified | Confidence |
 |---|---|---|---|---|
-| Panel 5 (uncontrolled hyperthyroidism) now marks **both** epinephrine and levonordefrin red, strip "NO VASOCONSTRICTOR" (supersedes "UNCONTROLLED: AVOID EPI" in section (b), row 5) | Little JW. Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2006;101(3):276-84. PMID 16504858, https://doi.org/10.1016/j.tripleo.2005.05.069 | Abstract: "the use of epinephrine or other pressor ammines [sic] can cause a hypertensive crisis in the patient with uncontrolled hyperthyroidism." Levonordefrin is a pressor amine; Becker & Reed 2012 (FT, section (a) 4) describe it as norepinephrine-like, not a safer substitute | A (re-read) | Medium, as before: the abstract states the risk, "avoid" is the conventional inference; Yagiela 1999 rates the interaction evidence "much less compelling" |
+| Panel 5 (uncontrolled hyperthyroidism) now marks **both** epinephrine and levonordefrin red, strip "NO VASOCONSTRICTOR" (supersedes "UNCONTROLLED: AVOID EPI" in section (b), row 5) | Little JW. Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2006;101(3):276-84. PMID 16504858, https://doi.org/10.1016/j.tripleo.2005.05.069 | Abstract: "the use of epinephrine or other pressor ammines [sic] can cause a hypertensive crisis in the patient with uncontrolled hyperthyroidism." Levonordefrin is a pressor amine; Becker & Reed 2012 (FT, section (a) 2) describe it as norepinephrine-like, not a safer substitute | A (re-read) | Medium, as before: the abstract states the risk, "avoid" is the conventional inference; Yagiela 1999 rates the interaction evidence "much less compelling" |
 | Panel 2 strip shortened to "SMALL DOSES - RECHECK BP"; "aspirate" moved to the caption (supersedes the wording in section (b), row 2) | Hersh EV, Giannakopoulos H. Dent Clin North Am 2010;54(4):687-96. PMID 20831932, https://doi.org/10.1016/j.cden.2010.06.009 | Abstract: "A clinically significant interaction between epinephrine or levonordefrin with nonselective beta-adrenergic blocking agents ... severity of the interaction seems dose related ... Inadvertent intravascular injections ... are likely to result in a more pronounced response." | A (re-read) | High; the caption now says "Non-selective beta-blockers" |
 | Caption adds "Recent cocaine: defer elective care" | Brand HS, Gonggrijp S, Blanksma CJ. Br Dent J 2008;204(7):365-9. PMID 18408681, https://doi.org/10.1038/sj.bdj.2008.244 | Abstract: "dental treatment should be postponed for 6 to 24 hours after the use of cocaine." | A (re-read) | High that this is what they recommend; no hour figure is used |
 
@@ -548,8 +548,67 @@ Other review-stage decisions:
 - Two Becker 2011 statements cited in NOTES.md (selective beta-1 blockers "do not generally introduce a risk for
   this interaction"; tricyclic uptake inhibition "poses no concern for epinephrine") are quoted from the science
   reviewer's reading of the full text. The builder could not re-read them: PMC returned no full text for PMC3265267
-  through the PubMed tool. They are in NOTES only, not on screen or in the caption.
+  through the PubMed tool. They are in NOTES only, not on screen or in the caption. **[CA]** Both were found
+  verbatim on the PMC web page at the citation audit (section (k)).
 - ACOG Committee Opinion 569: the PDF read at the research stage prints "Reaffirmed 2017"; any later status is
   unverified. No reaffirmation year is on screen or in the caption.
 
 PubMed is the source of the abstracts quoted in this section.
+
+---
+
+## (k) Citation audit (2026-11-22, independent auditor) — rows changed carry the tag **[CA]**
+
+**Method.** All 47 PMIDs in this brief were re-retrieved from PubMed (first author, year, journal, volume, issue,
+pages, DOI, abstract) and compared with the text above. Full text was re-read where the cited statement is not in the
+abstract: Becker & Reed 2012 (PMC3403589) and Becker 2011 (PMC3265267) as complete PMC web pages searched for each
+quotation; Becker 2008 (PMC2533641) and Becker & Reed 2006 (PMC1693664) through a fetch tool (short verbatim
+quotes); Guimaraes 2021 (PMC8286772, full text through the PubMed tool); ACOG Committee Opinion 569 (PDF copy of the
+opinion, pages 1-3); Davis 2010 (jcda.ca); Carbocaine label (DailyMed). PubMed is the source of the bibliographic
+data; DOIs are those listed in sections (g) and (h).
+
+**Result.** No wrong PMID, first author, year, journal, volume or page range. Every on-screen claim is supported by
+the source it is attached to, at the level stated (abstract, full text, label or guideline).
+
+Confirmed verbatim at this audit:
+
+- Becker & Reed 2012 (https://doi.org/10.2344/0003-3006-59.2.90): "An epinephrine dose of 40 µg (approximately 2
+  cartridges containing epinephrine 1:100,000) is the most conservative and frequently cited dose limitation for
+  patients having significant cardiovascular disease. It should be clarified that this guideline more appropriately
+  reflects 30-minute time periods, not appointments."; "Maximum permissible doses of vasopressors have not been
+  established."; "To suggest that a '2-cartridge' limit be imposed for patients with cardiovascular disease is naïve.";
+  "Sulfites prevent the oxidation of vasopressors and are included only in those dental cartridges containing
+  epinephrine or levonordefrin."; "Vasopressors are not contraindicated in patients taking nonselective beta blockers,
+  but doses should be conservative and blood pressure monitored periodically during administration as described
+  above."; levonordefrin "more closely resembles norepinephrine than epinephrine, lacking activity at beta-2
+  receptors"; "For patients suspected of stimulant drug abuse, eg, cocaine, it may be wise to avoid vasopressors
+  altogether."
+- Becker 2011 (https://doi.org/10.2344/0003-3006-58.1.31): "Selective beta blockers that act only on cardiac beta-1
+  receptors do not generally introduce a risk for this interaction."; "Vasopressors are not contraindicated in
+  patients taking beta blockers, but doses should be conservative and blood pressure monitored periodically during
+  administration as described above."; tricyclic uptake inhibition "poses no concern for epinephrine"; "some caution
+  is warranted regarding tricyclic antidepressants and levonordefrin".
+- Becker 2008 (https://doi.org/10.2344/0003-3006-55.3.89): "Epinephrine and levonordefrin are not contraindicated in
+  these patients, but they should be used cautiously."
+- Becker & Reed 2006: "more accurately reflects 30-minute time periods, not appointments"; no "naive".
+- Guimaraes 2021 (https://doi.org/10.1136/bmjopen-2020-044357): 10 RCTs, n = 478; GRADE table: very low for 9
+  outcomes, low for 1; arrhythmia RR 1.24 in the text versus 2.16 in the table (discrepancy confirmed).
+- ACOG CO 569 (https://doi.org/10.1097/01.AOG.0000433007.16843.10), PDF p. 3: "Patients often need reassurance that
+  prevention, diagnosis, and treatment of oral conditions, including dental X-rays (with shielding of the abdomen and
+  thyroid) and local anesthesia (lidocaine with or without epinephrine), are safe during pregnancy." Header: "Number
+  569 • August 2013 (Reaffirmed 2017)". The sentence is not in the PubMed abstract.
+- Davis 2010, J Can Dent Assoc 76:a36: "per appointment"; no PubMed record (search returned none).
+- Carbocaine label: levonordefrin 0.05 mg/mL in the 2% product; "Concurrent use of these agents should generally be
+  avoided."; "CARBOCAINE 3% (30 mg/mL) is SULFITE FREE."
+
+Changes made:
+
+| # | Where | Problem | Change |
+|---|---|---|---|
+| 1 | (b) panel 3 source line; (g) caption Refs suggestion; caption in meta.json | "Yagiela 1985 OOOO": PMID 3892411 (https://doi.org/10.1016/0030-4220(85)90181-1) was published in *Oral Surgery, Oral Medicine, Oral Pathology*; "OOOO" is the journal's title from 2012 | "OOO" |
+| 2 | (a) sect. 3 row 2; NOTES row 2; meta.json claim 2 | The "recheck after every 20-40 mcg" sentence of Becker 2011 was presented as written for beta-blockers. It is written for patients on drugs with sympathomimetic effects; the beta-blocker paragraph refers back to it ("as described above"). Same sentence and same cross-reference in Becker & Reed 2012 | Context stated; meta.json source of claim 2 reworded |
+| 3 | (j) last bullets; NOTES rows 2-3 | Two Becker 2011 quotations were second-hand (not re-read by the builder) | Found verbatim; marked as read |
+| 4 | (j) table row 1 | Cross-reference "(a) 4" for the levonordefrin row | "(a) 2" |
+
+Not read by anyone (abstract only; the cited statements are in the abstracts): Yagiela 1999, Little 2006, Guay 2009,
+Naftalin & Yagiela 2002, Hersh & Giannakopoulos 2010, Brand 2008, Trapp & Will 2010, Perusse 1992 I-II, Goulet 1992.

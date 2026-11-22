@@ -54,7 +54,7 @@ const F = {
   tag: '700 30px "Barlow Condensed"',
   handle: '500 24px "IBM Plex Mono"',
   legend: '600 32px Barlow',
-  key: '500 22px "IBM Plex Mono"',
+  key: '600 30px "Barlow Condensed"',
   label: '700 46px "Barlow Condensed"',
   table: '600 36px "Barlow Condensed"',
   tnum: '600 34px "IBM Plex Mono"',
@@ -63,14 +63,14 @@ const F = {
   hole: '600 30px "Barlow Condensed"',
   range: '500 32px "Barlow Condensed"',
   rnum: '600 30px "IBM Plex Mono"',
-  tick: '500 22px "IBM Plex Mono"',
+  tick: '600 30px "Barlow Condensed"',
   badge: '700 30px "Space Grotesk"',
   take: '700 50px "Barlow Condensed"',
   fine: '500 24px "Barlow Condensed"',
 };
 
 // ---------------------------------------------------------------- timeline (seconds)
-const DUR = 26;
+const DUR = 27.2;
 const RING = [0.25, 1.35];
 const ROWS_T = [
   { lab: 1.4, sw: 1.9, swD: 1.40, pos: 3.30 },
@@ -79,9 +79,9 @@ const ROWS_T = [
 ];
 const POS_D = 0.5;
 const TRK_T = 10.1, TRK_STAG = 0.22;
-const TAKE1 = [16.25, 20.85], TAKE2 = [20.85, 25.7];    // envelopes (0.4 s in, 0.3 s out); never overlap
-const TITLE_OUT = [15.9, 16.25], TITLE_BACK = [25.7, 25.95];
-const ROWS_OUT = [25.4, 25.92];
+const TAKE1 = [16.25, 22.05], TAKE2 = [22.05, 26.9];    // envelopes (0.4 s in, 0.3 s out); never overlap
+const TITLE_OUT = [15.9, 16.25], TITLE_BACK = [26.9, 27.15];
+const ROWS_OUT = [26.6, 27.12];
 
 // ---------------------------------------------------------------- small drawing helpers
 function txt(s, x, y, font, color, align, alpha, ls) {
@@ -194,8 +194,9 @@ function drawTake(which, a, dy, t) {
   ctx.fillStyle = INK.char; ctx.fillRect(SX0, 300, 10, 4);
   const x = SX0 + 30;
   if (which === 1) {
-    richLine([{ t: 'More cases test ' }, { t: 'negative', c: NEG }, { t: ' after NaOCl' }], x, 346, F.take);
-    richLine([{ t: 'and after a dressing.' }], x, 402, F.take);
+    // descriptive comparison of separate study pools (no "more ... after": that reads as one cohort followed through treatment)
+    richLine([{ t: 'A larger share of cases test ' }, { t: 'negative', c: NEG }, { t: ' in' }], x, 346, F.take);
+    richLine([{ t: 'NaOCl studies, and after a dressing.' }], x, 402, F.take);
   } else {
     const hl = seg(t, TAKE2[0] + 0.55, TAKE2[0] + 1.15, ease.out);
     richLine([{ t: 'But ' }, { t: 'ranges are wide', hl }, { t: ' — and' }], x, 346, F.take);
@@ -215,10 +216,10 @@ function drawLegend() {
   entry('pos', 'culture-positive');
   // key for the range tracks (fine print)
   const kx = 800;
-  diamond(kx + 9, LEG_Y - 13, 9); ctx.fillStyle = INK.char; ctx.fill();
-  txt('pooled average', kx + 28, LEG_Y - 6, F.key, INK.char, 'left', 0.85);
-  ctx.beginPath(); ctx.rect(kx, LEG_Y + 8, 20, 10); inkFill(INK.mustard); ctx.strokeStyle = INK.char; ctx.lineWidth = 1.6; ctx.strokeRect(kx, LEG_Y + 8, 20, 10);
-  txt('study range', kx + 28, LEG_Y + 20, F.key, INK.char, 'left', 0.85);
+  diamond(kx + 9, LEG_Y - 18, 10); ctx.fillStyle = INK.char; ctx.fill();
+  txt('pooled average', kx + 28, LEG_Y - 9, F.key, INK.char, 'left', 0.92);
+  ctx.beginPath(); ctx.rect(kx, LEG_Y + 9, 20, 10); inkFill(INK.mustard); ctx.strokeStyle = INK.char; ctx.lineWidth = 1.6; ctx.strokeRect(kx, LEG_Y + 9, 20, 10);
+  txt('study range', kx + 28, LEG_Y + 23, F.key, INK.char, 'left', 0.92);
   ctx.fillStyle = INK.char; ctx.fillRect(SX0, RULE_Y, SX1 - SX0, 3);
 }
 
@@ -308,8 +309,8 @@ function drawRow(i, t, rowsA, t2) {
       const hh = v % 100 === 0 ? 11 : 6;
       ctx.beginPath(); ctx.moveTo(X(v), ty - hh); ctx.lineTo(X(v), ty + hh); ctx.stroke();
     }
-    txt('0', TRK_X0 - 9, ty + 7, F.tick, INK.char, 'right', 0.8 * axU);
-    txt('100', TRK_X1 + 9, ty + 7, F.tick, INK.char, 'left', 0.8 * seg(t, t0 + 0.35, t0 + 0.6));
+    txt('0', TRK_X0 - 9, ty + 10, F.tick, INK.char, 'right', 0.9 * axU);
+    txt('100', TRK_X1 + 9, ty + 10, F.tick, INK.char, 'left', 0.9 * seg(t, t0 + 0.35, t0 + 0.6));
     const spU = seg(t, t0 + 0.4, t0 + 1.0, ease.out);
     if (spU > 0) {
       const xa = lerp(X(d.neg), X(d.min), spU), xb = lerp(X(d.neg), X(d.max), spU);
@@ -361,8 +362,8 @@ window.REEL = {
     const titleA = t < 20 ? 1 - seg(t, TITLE_OUT[0], TITLE_OUT[1], ease.inOut) : seg(t, TITLE_BACK[0], TITLE_BACK[1], ease.inOut);
     drawTitle(titleA, t < 20 ? -14 * (1 - titleA) : 14 * (1 - titleA));
     const a1 = Kit.env(t, TAKE1[0], TAKE1[1], 0.4, 0.3), a2 = Kit.env(t, TAKE2[0], TAKE2[1], 0.4, 0.3);
-    drawTake(1, ease.smooth(a1), t < 18 ? 14 * (1 - a1) : -14 * (1 - a1), t);
-    drawTake(2, ease.smooth(a2), t < 23 ? 14 * (1 - a2) : -14 * (1 - a2), t);
+    drawTake(1, ease.smooth(a1), t < (TAKE1[0] + TAKE1[1]) / 2 ? 14 * (1 - a1) : -14 * (1 - a1), t);
+    drawTake(2, ease.smooth(a2), t < (TAKE2[0] + TAKE2[1]) / 2 ? 14 * (1 - a2) : -14 * (1 - a2), t);
     drawLegend();
 
     const rowsA = 1 - seg(t, ROWS_OUT[0], ROWS_OUT[1], ease.inOut);
