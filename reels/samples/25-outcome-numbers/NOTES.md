@@ -45,7 +45,8 @@ pooled**, not the typical follow-up (Burns' studies ran from 12 months to 19 yea
 
 ## On-screen claims and sources
 All retrieved from PubMed and listed in RESEARCH.md, which was independently fact-checked. "Verified from" says
-what was actually read.
+what was actually read. (Sections further down — Review changes, Final QA — are a dated log; where they say the
+Setzer full text was not read, the "Citation audit" section at the end supersedes them.)
 
 1. **PRIMARY NSRCT · SUCCESS 82% · STRICT · POOLED · 1 YR+.** Burns LE, Kim J, Wu Y, Alzwaideh R, McGowan R,
    Sigurdsson A. Int Endod J 2022;55(7):714-731. PMID 35334111, PMC9322405, doi:10.1111/iej.13736. Weighted pooled
@@ -105,11 +106,12 @@ what was actually read.
 - **Sjögren 1990:** success criteria and the unit of analysis are not in the abstract.
 - **Ng 2007** (not on screen): the 74.7% strict / 85.2% loose means are known only as quoted in Burns 2022. The
   abstract gives a pooled strict range of 68–85%.
-- **Full texts not read:** Ng 2007, Ng 2008, Sjögren 1990, Setzer 2010, Salehrabi & Rotstein 2004 and 2010.
+- **Full texts not read:** Ng 2007, Ng 2008, Sjögren 1990, Salehrabi & Rotstein 2004 and 2010 (abstracts only).
   Whether every tooth in the two claims studies was observed for the full 8 or 5 years is not stated in the
   abstracts; "retained" is the abstracts' own word.
-- **94% is the top of the range of pooled microsurgery estimates** (92% Kang 2015; 89.0% at 1 yr Tsesis 2013;
-  84.5% Sabeti 2023) and a short-minimum-follow-up figure; long-term cohorts read lower (von Arx 2012: 84% at 1 yr
+- **94% is the top of the range of pooled estimates for microsurgery / modern-technique surgery** (92% Kang 2015;
+  89.0% at 1 yr Tsesis 2013, a "modern technique" pool that also included studies done with loupes; 84.5% Sabeti
+  2023, a review of studies reporting hard-tissue defects) and a short-minimum-follow-up figure; long-term cohorts read lower (von Arx 2012: 84% at 1 yr
   to 76% at 5 yr; Pinto 2020: 78% in prospective cohorts, 91% in trials, 2–13 yr). It is attributed to Setzer 2010
   on screen and in the caption.
 
