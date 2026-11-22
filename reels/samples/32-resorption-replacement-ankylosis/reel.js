@@ -8,7 +8,7 @@
 const { canvas, ctx } = Kit.createCanvas();
 const { W, H, clamp, lerp, seg, env, ease, hash, noise1 } = Kit;
 const smooth = ease.smooth;
-const DUR = 21;
+const DUR = 21.5;
 
 const LB = '"Libre Baskerville", "Source Serif 4", serif';
 const SS = '"Source Serif 4", "Libre Baskerville", serif';
@@ -24,20 +24,20 @@ const C = {
 
 // ---------------------------------------------------------------- timeline
 const T = {
-  out0: 1.2, out1: 1.7,          // tooth leaves the socket
-  dry0: 1.7, dry1: 3.4,          // stopwatch
+  out0: 0.9, out1: 1.4,          // tooth leaves the socket
+  dry0: 1.4, dry1: 3.3,          // stopwatch
   in0: 3.5, in1: 4.2,            // replanted
   zin0: 3.8, zin1: 4.8,          // zoom in
   lab0: 4.3, lab1: 5.6,          // "PDL DEAD"
-  fuse0: 5.5, fuse1: 8.7,        // caption
+  fuse0: 5.5, fuse1: 8.95,        // caption
   br0: 5.8, br1: 7.9,            // bone bridging
-  st0: 7.6, st1: 8.9,            // stamp
+  st0: 7.6, st1: 9.0,            // stamp
   zout0: 8.6, zout1: 9.5,        // zoom out
   lap0: 9.3, lap1: 12.8,         // time-lapse
-  capE0: 9.0, capE1: 13.0,
+  capE0: 8.85, capE1: 13.0,
   inf0: 10.0, inf1: 12.9,        // infraposition develops
   sig0: 13.0, sig1: 15.8,        // signs
-  card0: 15.8, card1: 20.5,      // end card (fade until 20.95)
+  card0: 15.8, card1: 20.7,      // end card (fades out before the loop cross-fade)
 };
 
 // ---------------------------------------------------------------- panel + section geometry
@@ -184,8 +184,8 @@ function buildBackground() {
   // sheet margin notes (decorative; outside the safe area)
   txt(g, 'ENDODONTIC FIELD SURVEY', bx, 178, `600 22px ${SS}`, C.inkSoft, 'left', 4);
   txt(g, 'SHEET 32', bx + bw, 178, `600 22px ${SS}`, C.inkSoft, 'right', 4);
-  txt(g, 'CROSS-SECTION A–A’  ·  REPLANTED INCISOR AND ALVEOLAR BONE', W / 2, 1650, `600 20px ${SS}`, C.inkSoft, 'center', 3);
-  txt(g, 'SCHEMATIC  ·  NOT TO SCALE', W / 2, 1682, `400 20px ${SS}`, C.inkSoft, 'center', 3);
+  txt(g, 'CROSS-SECTION A–A’  ·  REPLANTED INCISOR AND ALVEOLAR BONE', W / 2, 1640, `600 20px ${SS}`, C.inkSoft, 'center', 3);
+  txt(g, 'SCHEMATIC  ·  NOT TO SCALE', W / 2, 1668, `400 20px ${SS}`, C.inkSoft, 'center', 3);
 
   // header: series tag, handle, title
   const tagF = `700 30px ${SS}`, tag = 'RESORPTION 4/5 · REPLACEMENT';
@@ -207,21 +207,17 @@ function buildBackground() {
     txt(g, lab, x + 70, ly + 31, `600 30px ${SS}`, C.ink, 'left', 2);
     x += 70 + measure(g, lab, `600 30px ${SS}`, 2) + 38;
   }
-  // root-filling key (line symbol)
-  g.strokeStyle = C.gp; g.lineWidth = 9; g.lineCap = 'butt'; g.beginPath(); g.moveTo(x + 4, ly + 20); g.lineTo(x + 52, ly + 20); g.stroke();
-  g.strokeStyle = C.ink; g.lineWidth = 1.5; g.strokeRect(x + 4, ly + 15.5, 48, 9);
-  txt(g, 'root filling', x + 64, ly + 30, `italic 400 30px ${SS}`, C.ink, 'left', 0);
 }
 
 function buildStamp() {
-  stamp = document.createElement('canvas'); stamp.width = 400; stamp.height = 130; const g = stamp.getContext('2d');
-  const f = `700 48px ${LB}`; const w = measure(g, 'ANKYLOSIS', f, 5);
-  const bw = w + 56, x0 = (400 - bw) / 2;
+  stamp = document.createElement('canvas'); stamp.width = 460; stamp.height = 130; const g = stamp.getContext('2d');
+  const f = `700 44px ${LB}`; const w = measure(g, 'ANKYLOSIS', f, 5);
+  const bw = w + 52, x0 = (460 - bw) / 2;
   g.strokeStyle = C.rust; g.lineWidth = 5; rrect(g, x0, 14, bw, 100, 8); g.stroke();
   g.lineWidth = 1.6; rrect(g, x0 + 9, 23, bw - 18, 82, 4); g.stroke();
-  txt(g, 'ANKYLOSIS', 200 + 2.5, 82, f, C.rust, 'center', 5);
+  txt(g, 'ANKYLOSIS', 230 + 2.5, 80, f, C.rust, 'center', 5);
   g.globalCompositeOperation = 'destination-out';
-  for (let i = 0; i < 900; i++) { g.globalAlpha = 0.25 + 0.6 * hash(i, 81); g.beginPath(); g.arc(hash(i, 82) * 400, hash(i, 83) * 130, 0.5 + hash(i, 84) * 1.5, 0, 7); g.fill(); }
+  for (let i = 0; i < 700; i++) { g.globalAlpha = 0.25 + 0.6 * hash(i, 81); g.beginPath(); g.arc(hash(i, 82) * 460, hash(i, 83) * 130, 0.5 + hash(i, 84) * 1.4, 0, 7); g.fill(); }
 }
 
 // ---------------------------------------------------------------- section drawing (section coordinates 0..952 × 0..760)
@@ -235,7 +231,7 @@ function gumY(x, dI) {
 const crestY = (x, dI) => 300 + 2.5 * Math.sin(x / 47) - dI * wInf(x);
 const c1 = (x) => 432 + 13 * Math.sin(x / 150 + 1) + 5 * Math.sin(x / 47);
 const c2 = (x) => 574 + 12 * Math.sin(x / 170 + 2.2) + 5 * Math.sin(x / 53 + 1);
-const LENSES = [[38, 432, 19, 44, 0.05], [50, 596, 25, 28, 0], [334, 404, 13, 36, 0.03], [336, 540, 20, 40, -0.04], [612, 414, 11, 34, -0.03], [610, 548, 18, 38, 0.05], [884, 398, 27, 46, 0.06], [330, 676, 42, 14, 0.04], [612, 668, 44, 15, -0.05], [742, 686, 36, 12, 0.02]];
+const LENSES = [[38, 432, 19, 44, 0.05], [50, 596, 25, 28, 0], [334, 404, 13, 36, 0.03], [336, 540, 20, 40, -0.04], [612, 414, 11, 34, -0.03], [610, 548, 18, 38, 0.05], [886, 372, 25, 38, 0.06], [330, 676, 42, 14, 0.04], [612, 668, 44, 15, -0.05], [742, 686, 36, 12, 0.02]];
 
 function curveFn(c, fn, x0, x1, step, first) { for (let x = x0; x <= x1; x += step) { if (first && x === x0) c.moveTo(x, fn(x)); else c.lineTo(x, fn(x)); } }
 
@@ -334,9 +330,9 @@ function drawNeighbor(Tt, dI) {
 function depth(y, side, D) {
   if (D <= 0) return 0;
   const s = y / TC.L, n = 0.5 + 0.5 * noise1(y / 36 + side * 41.3, 7);
-  const ramp = smooth(clamp((y - (CREST - 8)) / 52));
+  const ramp = smooth(clamp((y - (CREST - 6)) / 78));
   const scal = 6 * Math.abs(Math.sin(y / 13 + side * 1.7 + 2 * noise1(y / 60, 11 + side))) * clamp(D / 14);
-  return Math.max(0, D * (0.5 + 0.7 * n) * (0.8 + 0.45 * s) + scal - 3) * ramp;
+  return Math.max(0, D * (0.74 + 0.5 * n) * (0.94 + 0.12 * s) + scal - 3) * ramp;
 }
 const ROWS_Y = (() => { const a = []; for (let y = 0; y < TC.L - 24; y += 3) a.push(y); for (let y = TC.L - 24; y <= TC.L; y += 1) a.push(y); return a; })();
 function drawDentinRemaining(D) {
@@ -369,9 +365,9 @@ function state(t) {
   return {
     out, back, present, lift, z: 1 + 0.55 * k, cx: TC.x, cy: lerp(PH / 2, 452, k), k,
     dead: t >= T.in0, tb, fill: seg(t, 4.7, 5.5, smooth),
-    D: 215 * Math.pow(smooth(v), 1.35), v,
+    D: 126 * Math.pow(v, 1.3), v,
     dI: INF * seg(t, T.inf0, T.inf1, ease.inOut),
-    ptr: t < T.zout0 + 0.3 ? lerp(0.03, 0.19, seg(t, T.br0, T.br1 + 0.4, smooth)) : lerp(0.19, 0.965, seg(t, T.lap0 - 0.1, T.lap1, ease.inOut)),
+    ptr: t < T.zout0 + 0.3 ? lerp(0.03, 0.19, seg(t, T.br0, T.br1 + 0.4, smooth)) : lerp(0.19, 0.9, seg(t, T.lap0 - 0.1, T.lap1, ease.inOut)),
   };
 }
 
@@ -396,7 +392,7 @@ function drawSection(t, S) {
   }
   if (S.dead) {
     ctx.save(); ctx.globalAlpha = S.back;
-    const prog = S.tb > 0 ? (j) => smooth(clamp((S.tb * 1.5 - (0.5 + 0.5 * noise1(j * 0.21, 3))) / 0.5)) : null;
+    const prog = S.tb > 0 ? (j) => smooth(clamp((S.tb * 1.6 - (0.5 + 0.5 * noise1(j * 0.36, 3))) / 0.6)) : null;
     if (S.tb < 1) drawPdlDead(Tt, prog);
     else { bandPath(Tt, Tt.Wq); ctx.fillStyle = `rgba(255,244,205,${0.22 * (1 - clamp(S.D / 40))})`; ctx.fill(); }
     ctx.restore();
@@ -408,7 +404,7 @@ function drawSection(t, S) {
       // bone that now occupies the former root: slightly lighter, with the old root outline kept as a dashed "inferred contact"
       ctx.save(); ctx.beginPath(); poly(ctx, Tt.O, true); ctx.clip();
       ctx.fillStyle = `rgba(255,246,214,${0.3 * clamp(S.D / 30)})`; ctx.fillRect(-120, CREST - 10, 240, Tt.L);
-      const la = clamp((S.D - 150) / 50); if (la > 0) { ctx.globalAlpha = la; ctx.beginPath(); ctx.ellipse(-30, 236, 13, 30, 0.08, 0, 7); ctx.fillStyle = C.marrow; ctx.fill(); ctx.fillStyle = PAT.marrow; ctx.fill(); ctx.strokeStyle = Kit.rgba(C.ink, 0.75); ctx.lineWidth = 1.3; ctx.stroke(); }
+      const la = clamp((S.D - 100) / 24); if (la > 0) { ctx.globalAlpha = la; ctx.beginPath(); ctx.ellipse(-30, 236, 13, 30, 0.08, 0, 7); ctx.fillStyle = C.marrow; ctx.fill(); ctx.fillStyle = PAT.marrow; ctx.fill(); ctx.strokeStyle = Kit.rgba(C.ink, 0.75); ctx.lineWidth = 1.3; ctx.stroke(); }
       ctx.restore();
       ctx.save(); ctx.globalAlpha = 0.7 * clamp(S.D / 25); ctx.setLineDash([8, 6]); ctx.beginPath(); for (let j = Tt.j0; j <= Tt.j1; j++) { const p = Tt.O[j]; if (j === Tt.j0) ctx.moveTo(p[0], p[1]); else ctx.lineTo(p[0], p[1]); } ctx.strokeStyle = C.ink; ctx.lineWidth = 1.6; ctx.stroke(); ctx.restore();
     }
@@ -467,13 +463,13 @@ function drawStrip(t, S) {
   }
   ctx.strokeStyle = C.ink; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.moveTo(PX, y0); ctx.lineTo(PX + PW, y0); ctx.stroke();
   const px = PX + S.ptr * PW;
-  ctx.strokeStyle = C.rust; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(px, y0); ctx.lineTo(px, y0 + h); ctx.stroke();
+  ctx.strokeStyle = C.rust; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(px, y0); ctx.lineTo(px, y0 + 9); ctx.stroke();
   ctx.fillStyle = C.rust; ctx.beginPath(); ctx.moveTo(px, y0 + 1); ctx.lineTo(px - 13, y0 - 21); ctx.lineTo(px + 13, y0 - 21); ctx.closePath(); ctx.fill(); ctx.strokeStyle = C.ink; ctx.lineWidth = 1.6; ctx.stroke();
   ctx.restore();
 }
 
 function drawCompass() {
-  const x = PX + 824, y = PY + 478, w = 122, h = 186, cx = x + w / 2, cy = y + h / 2;
+  const x = PX + 824, y = PY + 436, w = 122, h = 186, cx = x + w / 2, cy = y + h / 2;
   plaque(ctx, x, y, w, h, 0.96);
   txt(ctx, 'CORONAL', cx + 1, y + 30, `600 21px ${SS}`, C.ink, 'center', 1.6);
   txt(ctx, 'APICAL', cx + 1, y + h - 14, `600 21px ${SS}`, C.ink, 'center', 1.6);
@@ -485,13 +481,12 @@ function drawCompass() {
   ctx.restore();
 }
 function drawScale() {
-  const x = PX + 18, y = PY + 646, w = 212, h = 50;
+  const x = PX + 18, y = PY + 652, w = 252, h = 42;
   plaque(ctx, x, y, w, h, 0.96);
-  for (let i = 0; i < 4; i++) { ctx.fillStyle = i % 2 ? C.paperLight : C.ink; ctx.fillRect(x + 14 + i * 22, y + 12, 22, 9); }
-  ctx.strokeStyle = C.ink; ctx.lineWidth = 1.3; ctx.strokeRect(x + 14, y + 12, 88, 9);
-  txt(ctx, 'not to scale', x + 14, y + 42, `italic 400 22px ${SS}`, C.ink, 'left', 0);
-  ctx.beginPath(); for (let i = 0; i <= 4; i++) { ctx.moveTo(x + 14 + i * 22, y + 8); ctx.lineTo(x + 14 + i * 22, y + 12); } ctx.stroke();
-  txt(ctx, 'schematic', x + w - 12, y + 24, `italic 400 22px ${SS}`, C.ink, 'right', 0);
+  for (let i = 0; i < 4; i++) { ctx.fillStyle = i % 2 ? C.paperLight : C.ink; ctx.fillRect(x + 14 + i * 22, y + 17, 22, 9); }
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 1.3; ctx.strokeRect(x + 14, y + 17, 88, 9);
+  ctx.beginPath(); for (let i = 0; i <= 4; i++) { ctx.moveTo(x + 14 + i * 22, y + 11); ctx.lineTo(x + 14 + i * 22, y + 17); } ctx.stroke();
+  txt(ctx, 'not to scale', x + 116, y + 29, `italic 400 23px ${SS}`, C.ink, 'left', 0);
 }
 
 function drawPanel(t) {
@@ -504,10 +499,20 @@ function drawPanel(t) {
   const ma = 1 - S.k;
   if (ma > 0) { ctx.save(); ctx.globalAlpha = ma; txt(ctx, 'A', PX + 20, PY + 44, `italic 700 30px ${LB}`, C.ink, 'left', 0); txt(ctx, 'A’', PX + PW - 18, PY + 44, `italic 700 30px ${LB}`, C.ink, 'right', 0); ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(PX + 30, PY + 54); ctx.lineTo(PX + 30, PY + 68); ctx.moveTo(PX + PW - 32, PY + 54); ctx.lineTo(PX + PW - 32, PY + 68); ctx.stroke(); ctx.restore(); }
   drawStrip(t, S);
-  ctx.save(); ctx.globalAlpha = 1 - 0.0 * S.k; drawCompass(); if (seg(t, T.fuse0 - 0.2, T.fuse0 + 0.4) < 1 || true) drawScale(); ctx.restore();
+  drawCompass(); drawScale();
   // "DETAIL" tag while zoomed
   if (S.k > 0.02) { ctx.save(); ctx.globalAlpha = S.k; plaque(ctx, PX + 18, PY + 18, 196, 44); txt(ctx, 'DETAIL · root', PX + 32, PY + 49, `600 25px ${SS}`, C.ink, 'left', 1.2); ctx.restore(); }
 
+  // callout: root filling (what the thin line left in the bone is)
+  const rf = env(t, T.lap0 + 1.2, T.sig0 + 0.1, 0.35, 0.3);
+  if (rf > 0) {
+    ctx.save(); ctx.globalAlpha = rf;
+    const f = `italic 400 30px ${SS}`, s = 'root filling', tw = measure(ctx, s, f, 0), bx = PX + 506, by = PY + 634;
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(bx + 4, by + 6); ctx.lineTo(PX + TC.x + 6, PY + TC.yC + 318); ctx.stroke();
+    ctx.beginPath(); ctx.arc(PX + TC.x + 6, PY + TC.yC + 318, 5, 0, 7); ctx.fillStyle = C.paperLight; ctx.fill(); ctx.stroke();
+    plaque(ctx, bx, by, tw + 28, 44); txt(ctx, s, bx + 14, by + 31, f, C.ink, 'left', 0);
+    ctx.restore();
+  }
   // callout: PDL DEAD
   const la = env(t, T.lab0, T.lab1, 0.3, 0.3);
   if (la > 0) {
@@ -562,7 +567,7 @@ const CAPX = 66;
 
 function drawCaptions(t) {
   // A — figure caption of the plate
-  let a = Math.max(env(t, -1, T.out0 + 0.3, 0.01, 0.3), seg(t, DUR - 0.4, DUR - 0.05));
+  let a = Math.max(env(t, -1, T.out0 + 0.3, 0.01, 0.3), seg(t, DUR - 0.4, DUR - 0.05) * 1);
   if (a > 0) { ctx.save(); ctx.globalAlpha = a; txt(ctx, 'Fig. 1 — Section A–A’: an incisor in its socket, held by the PDL', CAPX, 1318, `italic 400 28px ${SS}`, C.inkSoft, 'left', 0); ctx.restore(); }
 
   // B/C — dry time
@@ -571,11 +576,11 @@ function drawCaptions(t) {
     ctx.save(); ctx.globalAlpha = a;
     const u = seg(t, T.dry0, T.dry1, ease.inOut);
     stopwatch(128, 1372, 58, u);
-    txt(ctx, 'DRY > 60 MIN', 214, 1396, `700 68px ${LB}`, C.ink, 'left', 1);
+    txt(ctx, 'DRY > 60 MIN', 212, 1394, `700 64px ${LB}`, C.ink, 'left', 0.5);
     // the avulsed tooth, drying on the bench
-    miniTooth(880, 1368, 0.33, -Math.PI / 2 - 0.06, { coat: smooth(clamp((u - 0.15) / 0.75)) });
+    miniTooth(826, 1370, 0.31, -Math.PI / 2 - 0.06, { coat: smooth(clamp((u - 0.15) / 0.75)) });
     ctx.strokeStyle = Kit.rgba(C.inkSoft, 0.7); ctx.lineWidth = 2; ctx.lineCap = 'round';
-    for (let i = 0; i < 3; i++) { const ph = (t * 0.9 + i * 0.37) % 1, x0 = 888 + i * 34, y0 = 1322 - ph * 26; ctx.globalAlpha = a * Math.sin(ph * Math.PI) * 0.9; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.bezierCurveTo(x0 + 7, y0 - 7, x0 - 7, y0 - 14, x0, y0 - 21); ctx.stroke(); }
+    for (let i = 0; i < 3; i++) { const ph = (t * 0.9 + i * 0.37) % 1, x0 = 838 + i * 34, y0 = 1324 - ph * 26; ctx.globalAlpha = a * Math.sin(ph * Math.PI) * 0.9; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.bezierCurveTo(x0 + 7, y0 - 7, x0 - 7, y0 - 14, x0, y0 - 21); ctx.stroke(); }
     ctx.globalAlpha = a * seg(t, T.dry1 - 0.5, T.dry1, ease.out);
     txt(ctx, 'PDL cells likely non-viable', CAPX, 1478, `italic 400 38px ${LB}`, C.moss, 'left', 0);
     txt(ctx, 'Fouad 2020, Dent Traumatol (IADT avulsion guideline)', CAPX, 1524, `400 24px ${SS}`, C.inkSoft, 'left', 0.2);
@@ -592,7 +597,7 @@ function drawCaptions(t) {
     ctx.restore();
   }
   const sa = seg(t, T.st0, T.st0 + 0.28, ease.out) * (1 - seg(t, T.st1 - 0.3, T.st1));
-  if (sa > 0) { const k = seg(t, T.st0, T.st0 + 0.28, ease.out); ctx.save(); ctx.globalAlpha = sa; ctx.translate(782, 1392); ctx.rotate(-0.09); const sc = lerp(1.35, 0.9, k); ctx.scale(sc, sc); ctx.drawImage(stamp, -200, -65); ctx.restore(); }
+  if (sa > 0) { const k = seg(t, T.st0, T.st0 + 0.28, ease.out); ctx.save(); ctx.globalAlpha = sa; ctx.translate(770, 1396); ctx.rotate(-0.085); const sc = lerp(1.2, 0.9, k); ctx.scale(sc, sc); ctx.drawImage(stamp, -230, -65); ctx.restore(); }
 
   // E — geological time
   a = env(t, T.capE0, T.capE1, 0.35, 0.3);
@@ -612,35 +617,39 @@ function drawCaptions(t) {
     const f = `700 30px ${SS}`, sw = measure(ctx, 'SIGNS', f, 6);
     txt(ctx, 'SIGNS', 508 + 3, 1304, f, C.moss, 'center', 6);
     ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(CAPX, 1294); ctx.lineTo(508 - sw / 2 - 18, 1294); ctx.moveTo(508 + sw / 2 + 18, 1294); ctx.lineTo(950, 1294); ctx.stroke();
-    const cols = [226, 520, 808];
+    const cols = [226, 520, 806];
     const st = (i) => seg(t, T.sig0 + 0.15 + i * 0.3, T.sig0 + 0.5 + i * 0.3, ease.out);
+    const IY = 1418;                       // CEJ level of the icon teeth
+    const gumBar = (x, w) => { rrect(ctx, x - w / 2, IY - 3, w, 22, 6); ctx.fillStyle = C.gum; ctx.fill(); ctx.fillStyle = PAT.gum; ctx.fill(); ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.stroke(); };
+    const crownOnly = (x, y, sc) => { ctx.save(); ctx.beginPath(); ctx.rect(x - 70, y - 100, 140, 104); ctx.clip(); miniTooth(x, y, sc, 0, { noRoot: true }); ctx.restore(); };
     // 1 percussion
     ctx.globalAlpha = a * st(0);
-    { const x = cols[0], y = 1410; miniTooth(x - 22, y + 12, 0.24, 0, { noRoot: false });
-      ctx.save(); ctx.translate(x + 12, y - 30); ctx.rotate(-0.6); rrect(ctx, 0, -5, 96, 10, 5); ctx.fillStyle = C.steel; ctx.fill(); ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.stroke(); ctx.restore();
-      ctx.strokeStyle = C.rust; ctx.lineWidth = 3; ctx.lineCap = 'round'; for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.arc(x - 30, y - 34, 26 + i * 13, Math.PI * 0.86, Math.PI * 1.4); ctx.stroke(); }
-      // little note
-      ctx.fillStyle = C.rust; ctx.beginPath(); ctx.ellipse(x - 98, y - 60, 8, 6, -0.4, 0, 7); ctx.fill(); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x - 91, y - 62); ctx.lineTo(x - 91, y - 92); ctx.lineTo(x - 76, y - 84); ctx.stroke(); }
-    txt(ctx, 'Metallic percussion', cols[0], 1502, `600 34px ${SS}`, C.ink, 'center', 0);
+    { const x = cols[0];
+      crownOnly(x - 16, IY, 0.3); gumBar(x - 16, 120);
+      ctx.save(); ctx.translate(x + 24, IY - 52); ctx.rotate(-0.62); rrect(ctx, 0, -5.5, 104, 11, 5.5); ctx.fillStyle = C.steel; ctx.fill(); ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.stroke(); ctx.restore();
+      ctx.strokeStyle = C.rust; ctx.lineWidth = 3; ctx.lineCap = 'round'; for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.arc(x - 34, IY - 54, 26 + i * 13, Math.PI * 0.84, Math.PI * 1.4); ctx.stroke(); }
+      ctx.fillStyle = C.rust; ctx.beginPath(); ctx.ellipse(x - 112, IY - 56, 8, 6, -0.4, 0, 7); ctx.fill(); ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.beginPath(); ctx.moveTo(x - 105, IY - 58); ctx.lineTo(x - 105, IY - 88); ctx.lineTo(x - 90, IY - 80); ctx.stroke(); }
+    txt(ctx, 'Metallic percussion', cols[0], 1490, `600 34px ${SS}`, C.ink, 'center', 0);
     // 2 no mobility
     ctx.globalAlpha = a * st(1);
-    { const x = cols[1], y = 1410; miniTooth(x, y + 12, 0.24, 0, {});
+    { const x = cols[1];
+      crownOnly(x, IY, 0.3); gumBar(x, 120);
       ctx.strokeStyle = C.ink; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      const yy = y - 62; ctx.beginPath(); ctx.moveTo(x - 58, yy); ctx.lineTo(x + 58, yy); ctx.moveTo(x - 46, yy - 10); ctx.lineTo(x - 58, yy); ctx.lineTo(x - 46, yy + 10); ctx.moveTo(x + 46, yy - 10); ctx.lineTo(x + 58, yy); ctx.lineTo(x + 46, yy + 10); ctx.stroke();
-      ctx.strokeStyle = C.rust; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(x - 16, yy + 18); ctx.lineTo(x + 16, yy - 18); ctx.stroke(); }
-    txt(ctx, 'No mobility', cols[1], 1502, `600 34px ${SS}`, C.ink, 'center', 0);
+      const yy = IY - 80; ctx.beginPath(); ctx.moveTo(x - 58, yy); ctx.lineTo(x + 58, yy); ctx.moveTo(x - 46, yy - 10); ctx.lineTo(x - 58, yy); ctx.lineTo(x - 46, yy + 10); ctx.moveTo(x + 46, yy - 10); ctx.lineTo(x + 58, yy); ctx.lineTo(x + 46, yy + 10); ctx.stroke();
+      ctx.strokeStyle = C.rust; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(x - 15, yy + 17); ctx.lineTo(x + 15, yy - 17); ctx.stroke(); }
+    txt(ctx, 'No mobility', cols[1], 1490, `600 34px ${SS}`, C.ink, 'center', 0);
     // 3 infraposition
     ctx.globalAlpha = a * st(2);
-    { const x = cols[2], y = 1410;
-      ctx.fillStyle = C.gum; ctx.fillRect(x - 100, y + 2, 200, 28); ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.strokeRect(x - 100, y + 2, 200, 28);
-      miniTooth(x - 64, y, 0.2, 0, { noRoot: true }); miniTooth(x + 64, y, 0.2, 0, { noRoot: true }); miniTooth(x, y + 15, 0.2, 0, { noRoot: true });
-      ctx.fillStyle = C.gum; ctx.fillRect(x - 99, y + 12, 198, 17);
-      ctx.setLineDash([7, 5]); ctx.strokeStyle = C.rust; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(x - 96, y - 46); ctx.lineTo(x + 96, y - 46); ctx.stroke(); ctx.setLineDash([]);
-      ctx.fillStyle = C.rust; ctx.beginPath(); ctx.moveTo(x, y - 27); ctx.lineTo(x - 7, y - 40); ctx.lineTo(x + 7, y - 40); ctx.closePath(); ctx.fill(); }
-    txt(ctx, 'Infraposition', cols[2], 1502, `600 34px ${SS}`, C.ink, 'center', 0);
-    txt(ctx, 'in a growing jaw', cols[2], 1540, `italic 400 30px ${SS}`, C.moss, 'center', 0);
+    { const x = cols[2];
+      crownOnly(x - 68, IY, 0.27); crownOnly(x + 68, IY, 0.27);
+      ctx.save(); ctx.beginPath(); ctx.rect(x - 70, IY - 100, 140, 102); ctx.clip(); miniTooth(x, IY + 16, 0.27, 0, { noRoot: true }); ctx.restore();
+      gumBar(x, 236);
+      ctx.setLineDash([7, 5]); ctx.strokeStyle = C.rust; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(x - 110, IY - 62); ctx.lineTo(x + 110, IY - 62); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = C.rust; ctx.beginPath(); ctx.moveTo(x, IY - 42); ctx.lineTo(x - 7, IY - 56); ctx.lineTo(x + 7, IY - 56); ctx.closePath(); ctx.fill(); }
+    txt(ctx, 'Infraposition', cols[2], 1490, `600 34px ${SS}`, C.ink, 'center', 0);
+    txt(ctx, 'in a growing jaw', cols[2], 1528, `italic 400 30px ${SS}`, C.moss, 'center', 0);
     ctx.globalAlpha = a;
-    txt(ctx, 'Fouad 2020, Dent Traumatol (IADT) · Kawanami 1999, Endod Dent Traumatol', CAPX, 1574, `400 22px ${SS}`, C.inkSoft, 'left', 0.1);
+    txt(ctx, 'Fouad 2020, Dent Traumatol (IADT) · Kawanami 1999, Endod Dent Traumatol', CAPX, 1568, `400 22px ${SS}`, C.inkSoft, 'left', 0.1);
     ctx.restore();
   }
 }
@@ -651,12 +660,12 @@ function drawInset(x, y, w, h) {
   const cx = x + w / 2, crest = y + h * 0.5;
   ctx.fillStyle = C.boneA; ctx.fillRect(x, crest, w, h); ctx.fillStyle = PAT.stipple; ctx.fillRect(x, crest, w, h);
   // root left in bone, canal empty (blood clot)
-  ctx.save(); ctx.translate(cx, crest - 4); ctx.scale(0.3, 0.3);
-  ctx.beginPath(); ctx.rect(-200, 62, 400, 600); ctx.clip();
+  ctx.save(); ctx.translate(cx, crest - 6); ctx.scale(0.36, 0.36);
+  ctx.beginPath(); ctx.rect(-200, 56, 400, 600); ctx.clip();
   ctx.beginPath(); poly(ctx, MINI.O, true); ctx.fillStyle = C.dentin; ctx.fill(); ctx.fillStyle = PAT.hatch; ctx.fill(); ctx.strokeStyle = C.ink; ctx.lineWidth = 6; ctx.stroke();
   ctx.beginPath(); pulpPath(ctx, MINI); ctx.fillStyle = C.clot; ctx.fill();
   ctx.restore();
-  ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cx - 25, crest + 14.5); ctx.lineTo(cx + 25, crest + 14.5); ctx.stroke();
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cx - 29, crest + 14.2); ctx.lineTo(cx + 29, crest + 14.2); ctx.stroke();
   // new bone over the root top + flap ("topsoil") closed
   ctx.fillStyle = C.gum; ctx.beginPath(); ctx.moveTo(x, crest - 20); ctx.quadraticCurveTo(cx, crest - 30, x + w, crest - 20); ctx.lineTo(x + w, crest + 3); ctx.lineTo(x, crest + 3); ctx.closePath(); ctx.fill(); ctx.fillStyle = PAT.gum; ctx.fill();
   ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x, crest - 20); ctx.quadraticCurveTo(cx, crest - 30, x + w, crest - 20); ctx.stroke();
@@ -673,42 +682,42 @@ function drawInset(x, y, w, h) {
 }
 
 function drawCard(t) {
-  const aIn = seg(t, T.card0, T.card0 + 0.6, ease.out), a = aIn * (1 - seg(t, T.card1, T.card1 + 0.42));
-  if (a <= 0) return;
-  const x = 50, y = 1074 + (1 - aIn) * 44, w = 980, h = 514;
-  ctx.save(); ctx.globalAlpha = a;
+  // the card slides up from behind the lower neat line and leaves the same way (opaque: no text ghosting)
+  if (t < T.card0 || t > T.card1 + 0.45) return;
+  const aIn = seg(t, T.card0, T.card0 + 0.6, ease.outQuint), aOut = seg(t, T.card1, T.card1 + 0.45, ease.in), a = 1;
+  const x = 50, y = 1064 + (1 - aIn) * 560 + aOut * 560, w = 980, h = 522;
+  ctx.save(); ctx.beginPath(); ctx.rect(0, 0, W, 1596); ctx.clip();
   ctx.save(); ctx.shadowColor = 'rgba(50,35,10,0.35)'; ctx.shadowBlur = 22; ctx.shadowOffsetY = 7; rrect(ctx, x, y, w, h, 6); ctx.fillStyle = C.paperLight; ctx.fill(); ctx.restore();
   ctx.strokeStyle = C.ink; ctx.lineWidth = 2.6; rrect(ctx, x, y, w, h, 6); ctx.stroke(); ctx.lineWidth = 1; rrect(ctx, x + 8, y + 8, w - 16, h - 16, 3); ctx.stroke();
-  // tab
   const tf = `700 22px ${SS}`, tw = measure(ctx, 'EXPLANATION', tf, 5);
   ctx.fillStyle = C.paperLight; ctx.fillRect(W / 2 - tw / 2 - 16, y - 4, tw + 32, 22);
   txt(ctx, 'EXPLANATION', W / 2 + 2, y + 13, tf, C.inkSoft, 'center', 5);
-  const L0 = 84;
+  const L0 = 84, R0 = 950;
   const s1 = seg(t, T.card0 + 0.3, T.card0 + 0.7, ease.out), s2 = seg(t, T.card0 + 0.9, T.card0 + 1.3, ease.out), s3 = seg(t, T.card0 + 1.6, T.card0 + 2.0, ease.out);
+  const rule = (yy, x1, lw) => { ctx.strokeStyle = C.ink; ctx.lineWidth = lw || 1; ctx.beginPath(); ctx.moveTo(L0, yy); ctx.lineTo(x1 || R0, yy); ctx.stroke(); };
   // takeaway
   ctx.globalAlpha = a * s1;
-  const head = 'NO KNOWN WAY TO ARREST IT', hp = fitFont(ctx, head, 700, LB, 50, 866, 1);
-  txt(ctx, head, L0, y + 88, `700 ${hp}px ${LB}`, C.rust, 'left', 1);
-  ctx.strokeStyle = C.ink; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.moveTo(L0, y + 112); ctx.lineTo(950, y + 112); ctx.stroke(); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(L0, y + 117); ctx.lineTo(950, y + 117); ctx.stroke();
-  // signs recap
-  numRich([['Signs  ', C.moss, 700], ['metallic percussion · no mobility · infraposition', C.ink, 400]], L0, y + 160, 31);
-  ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(L0, y + 180); ctx.lineTo(950, y + 180); ctx.stroke();
+  const head = 'NO KNOWN WAY TO ARREST IT', hp = fitFont(ctx, head, 700, LB, 50, R0 - L0, 1);
+  txt(ctx, head, L0, y + 84, `700 ${hp}px ${LB}`, C.rust, 'left', 1);
+  rule(y + 106, R0, 2.2); rule(y + 111);
+  numRich([['Signs  ', C.moss, 700], ['metallic percussion · no mobility · infraposition', C.ink, 400]], L0, y + 152, 31);
+  rule(y + 172);
   // plan
   ctx.globalAlpha = a * s2;
-  txt(ctx, 'GROWING PATIENT', L0, y + 228, `700 30px ${SS}`, C.moss, 'left', 2.4);
-  txt(ctx, 'Plan early, e.g. decoronation', L0, y + 278, `600 42px ${SS}`, C.ink, 'left', 0);
-  drawInset(736, y + 198, 214, 204);
-  ctx.setLineDash([3, 6]); ctx.lineWidth = 1.5; ctx.strokeStyle = C.ink; ctx.beginPath(); ctx.moveTo(L0, y + 304); ctx.lineTo(706, y + 304); ctx.stroke(); ctx.setLineDash([]);
+  txt(ctx, 'GROWING PATIENT', L0, y + 218, `700 30px ${SS}`, C.moss, 'left', 2.4);
+  txt(ctx, 'Plan early, e.g. decoronation', L0, y + 266, `600 42px ${SS}`, C.ink, 'left', 0);
+  drawInset(736, y + 188, 214, 200);
+  ctx.setLineDash([3, 6]); rule(y + 291, 706, 1.5); ctx.setLineDash([]);
+  txt(ctx, 'decoronation: crown off, root left to be replaced by bone · schematic', L0, y + 421, `italic 400 23px ${SS}`, C.inkSoft, 'left', 0);
   // protect
   ctx.globalAlpha = a * s3;
-  txt(ctx, 'PROTECT THE PDL', L0, y + 352, `700 30px ${SS}`, C.moss, 'left', 2.4);
+  txt(ctx, 'PROTECT THE PDL', L0, y + 336, `700 30px ${SS}`, C.moss, 'left', 2.4);
   const pb = 'Replant at once, or store in milk', pp = fitFont(ctx, pb, 600, SS, 42, 630, 0);
-  txt(ctx, pb, L0, y + 402, `600 ${pp}px ${SS}`, C.ink, 'left', 0);
-  ctx.globalAlpha = a * s2;
-  txt(ctx, 'decoronation: crown off, root left to turn to bone · schematic', L0, y + 446, `italic 400 23px ${SS}`, C.inkSoft, 'left', 0);
+  txt(ctx, pb, L0, y + 384, `600 ${pp}px ${SS}`, C.ink, 'left', 0);
   ctx.globalAlpha = a * s1;
-  ctx.lineWidth = 1; ctx.strokeStyle = C.ink; ctx.beginPath(); ctx.moveTo(L0, y + 462); ctx.lineTo(950, y + 462); ctx.stroke();
-  txt(ctx, 'Campbell 2005, J Can Dent Assoc · Malmgren 1984, Scand J Dent Res · Fouad 2020, Dent Traumatol (IADT)', L0, y + 490, `400 ${fitFont(ctx, 'Campbell 2005, J Can Dent Assoc · Malmgren 1984, Scand J Dent Res · Fouad 2020, Dent Traumatol (IADT)', 400, SS, 23, 866, 0)}px ${SS}`, C.inkSoft, 'left', 0);
+  rule(y + 438);
+  txt(ctx, 'Campbell 2005, J Can Dent Assoc · Malmgren 1984, Scand J Dent Res', L0, y + 466, `400 23px ${SS}`, C.inkSoft, 'left', 0.1);
+  txt(ctx, 'Fouad 2020, Dent Traumatol (IADT avulsion guideline)', L0, y + 494, `400 23px ${SS}`, C.inkSoft, 'left', 0.1);
   ctx.restore();
 }
 
@@ -716,7 +725,7 @@ function frame(t) {
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
   ctx.drawImage(bg, 0, 0);
   drawPanel(t);
-  const lo = seg(t, DUR - 0.5, DUR - 0.04, smooth);
+  const lo = seg(t, DUR - 0.48, DUR - 0.04, smooth);
   if (lo > 0 && startPanel) { ctx.save(); ctx.globalAlpha = lo; ctx.drawImage(startPanel, PX, PY); ctx.restore(); }
   drawPanelFrame();
   drawCaptions(t);

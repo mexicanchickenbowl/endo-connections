@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>23 · From X-ray to pixel — digital sensor teardown</title>
+<link rel="stylesheet" href="../../vendor/fonts/fonts.css">
+<script src="../../lib/kit.js"></script>
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.min.js","three/addons/":"../../vendor/three-addons/"}}</script>
+</head>
+<body>
+<div id="stage"></div>
+<script type="module">
+/*
+ * Sample 23 — exploded 3-D product teardown of a digital intraoral X-ray sensor, then the PSP plate alternative.
+ * scene.js   : three.js scene (sensor layers, ghost teeth, particles, screen, PSP scanner), pure function of t
+ * overlay.js : backdrop + typography (call-outs, steps, end card)
+ * radiograph.js / timeline.js : procedural periapical + shared timing
+ * Composite: 2-D backdrop -> WebGL (transparent) -> 2-D labels, all on one canvas (fast capture path).
+ */
+import { buildScene } from './scene.js';
+import { drawBackground, drawOverlay } from './overlay.js';
+import { T } from './timeline.js';
+
+const { canvas: out, ctx } = Kit.createCanvas();
+const glc = document.createElement('canvas'); glc.width = Kit.W; glc.height = Kit.H;
+let S = null;
+
+window.REEL = {
+  title: 'From X-ray to pixel',
+  duration: T.dur,
+  poster: T.poster,
+  canvas: out,
+  fonts: ['700 112px "Space Grotesk"', '600 38px "Space Grotesk"', '500 26px "Space Grotesk"', '400 30px Inter', '500 30px Inter', '600 30px Inter'],
+  setup() { S = buildScene(glc); },
+  render(t) {
+    t = Kit.clamp(t, 0, T.dur - 1e-4);
+    const A = S.update(t);
+    drawBackground(ctx);
+    ctx.drawImage(glc, 0, 0);
+    drawOverlay(ctx, t, A);
+  },
+};
+Kit.boot(REEL);
+</script>
+</body>
+</html>

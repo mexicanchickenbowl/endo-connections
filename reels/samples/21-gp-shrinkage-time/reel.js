@@ -33,16 +33,16 @@ const LN = { temp: 36, tempH: 120, vol: 156, volH: 250, br: 406, brH: 60, ru: 46
 const CAP = { x: 64, y: 1402, w: 896, h: 178 };
 
 // paper coordinates (px along the strip): 0 = start, S1 = 10 min, S2 = 24 h, S3 = end of record
-const S1 = 230, S2 = 630, S3 = 826, SEND = 2000, DAYPX = 39.2;
+const S1 = 300, S2 = 646, S3 = 826, SEND = 2000, MINPX = S1 / 10, DAYPX = (S3 - S2) / 5;
 const sHr = (h) => S1 + ((h - 1 / 6) / (24 - 1 / 6)) * (S2 - S1);
 const S45 = sHr(0.75), S10 = sHr(10);
 
 // ───────────────────────── timeline (s) ─────────────────────────
-const T = { start: 1.0, minEnd: 5.2, hrStart: 6.0, hrEnd: 11.0, dayStart: 11.8, dayEnd: 13.8, ffStart: 19.75, ffEnd: 20.55, dur: 20.6 };
+const T = { start: 0.7, minEnd: 5.2, hrStart: 6.0, hrEnd: 11.0, dayStart: 12.1, dayEnd: 13.9, ffStart: 19.75, ffEnd: 20.55, dur: 20.6 };
 const EV = {
-  penDown: [0.45, 0.75], cool: 4.62, mark1: 5.22, note1: 5.42, brk: 8.2, brkLab: 8.5, cryst: 9.0,
-  mark2: 11.02, stable: 11.1, lift: [11.2, 11.5], note2: 11.32, nodata: 13.95,
-  slideB: [15.35, 15.9], slideA: [19.7, 20.2], reset: [19.9, 20.4],
+  penDown: [0.25, 0.55], cool: 4.62, mark1: 5.22, note1: 5.42, brk: 8.2, brkLab: 8.5, cryst: 9.9,   // cool / cryst are re-timed in setup()
+  stable: 11.1, mark2: 11.5, lift: [11.7, 12.0], nodata: 14.05,
+  slideB: [15.35, 15.9], slideA: [19.7, 20.2], reset: [19.9, 20.4], opOut: [19.6, 19.85],
 };
 
 function ramp(u, r = 0.08) {           // 0→1, linear with soft start/stop
@@ -62,19 +62,24 @@ function paperS(t) {
   return S3 + (SEND - S3) * ease.inOut(seg(t, T.ffStart, T.ffEnd));
 }
 
+function tWhenS(target) {              // first time the pen has passed paper position `target` (bisection; paperS is monotonic)
+  let a = 0, b = T.ffStart; for (let i = 0; i < 40; i++) { const m = (a + b) / 2; if (paperS(m) >= target) b = m; else a = m; } return b;
+}
+
 // ───────────────────────── schematic curves ─────────────────────────
 const VA = 0.5, VB = 0.26, VTOT = VA + VB;
 function vol(s) {                      // schematic volume loss, 0 … VTOT
   if (s <= 0) return 0;
-  if (s <= S1) { const m = s / 23; return (VA * (1 - Math.exp(-m / 2.2))) / (1 - Math.exp(-10 / 2.2)); }
+  if (s <= S1) { const m = s / MINPX; return (VA * (1 - Math.exp(-m / 2.2))) / (1 - Math.exp(-10 / 2.2)); }
   const u = clamp((s - S1) / (S10 - S1)); return VA + VB * (1 - Math.pow(1 - u, 2.4));
 }
 function tmp(s) {                      // schematic cooling, 0 (hot) … 1 (37 °C)
   if (s <= 0) return 0; if (s >= S1) return 1;
-  const m = s / 23; return (1 - Math.exp(-m / 2.0)) / (1 - Math.exp(-10 / 2.0));
+  const m = s / MINPX; return (1 - Math.exp(-m / 2.0)) / (1 - Math.exp(-10 / 2.0));
 }
-const yVol = (s) => LN.vol + 20 + vol(s) * (LN.volH - 40) + 0.6 * noise1(s / 8, 3);
-const yTmp = (s) => LN.temp + 16 + tmp(s) * (LN.tempH - 34) + 0.45 * noise1(s / 6, 5);
+const VOL0 = 44, TMP0 = 24;            // lane offsets of the two start levels (kept clear of the scale-plate labels)
+const yVol = (s) => LN.vol + VOL0 + vol(s) * (LN.volH - 64) + 0.6 * noise1(s / 8, 3);
+const yTmp = (s) => LN.temp + TMP0 + tmp(s) * (LN.tempH - 42) + 0.45 * noise1(s / 6, 5);
 
 // ───────────────────────── small drawing helpers ─────────────────────────
 function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
@@ -254,16 +259,16 @@ function watchStatic(c) {
   c.fillStyle = g; c.beginPath(); c.arc(cx, cy, rd, 0, TAU); c.fill();
   c.strokeStyle = 'rgba(40,35,25,.6)'; c.lineWidth = 1.5; c.beginPath(); c.arc(cx, cy, rd, 0, TAU); c.stroke();
   // scale: the same composite time axis as the chart
-  c.strokeStyle = 'rgba(37,33,28,.8)'; c.lineWidth = 1.4; c.beginPath(); c.arc(cx, cy, rd - 9, dialAng(0) - Math.PI / 2, dialAng(S3) - Math.PI / 2); c.stroke();
+  c.strokeStyle = 'rgba(37,33,28,.8)'; c.lineWidth = 1.4; c.beginPath(); c.arc(cx, cy, rd - 9, dialAng(0) - Math.PI / 2, dialAng(S2) - Math.PI / 2); c.stroke();
+  c.strokeStyle = 'rgba(37,33,28,.45)'; c.setLineDash([3, 6]); c.beginPath(); c.arc(cx, cy, rd - 9, dialAng(S2) - Math.PI / 2, dialAng(S3) - Math.PI / 2); c.stroke(); c.setLineDash([]);   // past 24 h: nothing recorded
   c.strokeStyle = C.red; c.lineWidth = 6; c.globalAlpha = 0.9; c.beginPath(); c.arc(cx, cy, rd - 5, dialAng(S45) - Math.PI / 2, dialAng(S10) - Math.PI / 2); c.stroke(); c.globalAlpha = 1;
   const tick = (s, len, lw, col) => { const a = dialAng(s), r1 = rd - 9, r0 = r1 - len; c.strokeStyle = col || C.ink; c.lineWidth = lw; c.beginPath(); c.moveTo(cx + Math.sin(a) * r0, cy - Math.cos(a) * r0); c.lineTo(cx + Math.sin(a) * r1, cy - Math.cos(a) * r1); c.stroke(); };
-  for (let k = 0; k <= 10; k++) tick(23 * k, k % 5 === 0 ? 9 : 5, 1.5);
+  for (let k = 0; k <= 10; k++) tick(MINPX * k, k % 5 === 0 ? 9 : 5, 1.5);
   for (let h = 1; h <= 24; h++) tick(sHr(h), h % 5 === 0 ? 9 : 5, 1.5);
-  for (let dd = 2; dd <= 6; dd++) tick(S2 + (dd - 1) * DAYPX, 7, 1.5, 'rgba(37,33,28,.5)');
   tick(0, 14, 3); tick(S1, 14, 3); tick(S2, 14, 3);
   // read-out window
-  rr(c, cx - 53, cy + 28, 106, 44, 5); c.fillStyle = '#efe6cb'; c.fill(); c.strokeStyle = 'rgba(40,35,25,.65)'; c.lineWidth = 1.5; c.stroke();
-  g = c.createLinearGradient(0, cy + 28, 0, cy + 40); g.addColorStop(0, 'rgba(60,45,20,.28)'); g.addColorStop(1, 'rgba(60,45,20,0)'); c.fillStyle = g; c.fillRect(cx - 52, cy + 29, 104, 11);
+  rr(c, cx - 64, cy + 28, 128, 44, 5); c.fillStyle = '#efe6cb'; c.fill(); c.strokeStyle = 'rgba(40,35,25,.65)'; c.lineWidth = 1.5; c.stroke();
+  g = c.createLinearGradient(0, cy + 28, 0, cy + 40); g.addColorStop(0, 'rgba(60,45,20,.28)'); g.addColorStop(1, 'rgba(60,45,20,0)'); c.fillStyle = g; c.fillRect(cx - 63, cy + 29, 126, 11);
   c.restore();
 }
 
@@ -280,15 +285,14 @@ function makeBG() {
   card(c, TITLE, 3); mounts(c, TITLE);
   const tx = TITLE.x + 30;
   c.font = F.bc(20, 600); c.fillStyle = C.pre; c.textBaseline = 'alphabetic';
-  const w1 = spaced(c, 'SPECIMEN', tx, TITLE.y + 41, 2.2);
-  tw(c, 'WARM GUTTA-PERCHA', tx + w1 + 14, TITLE.y + 43, 32, { bold: 1, seed: 4 });
-  const hw = 15 * 27 * ADV, hx = TITLE.x + TITLE.w - 30 - hw;
-  tw(c, '@natebrooksendo', hx, TITLE.y + 42, 27, { color: C.dim, seed: 6 });
-  c.font = F.bc(20, 600); c.fillStyle = C.pre; spaced(c, 'OPERATOR', hx - 14, TITLE.y + 41, 2.2, 'right');
-  c.fillStyle = 'rgba(78,124,98,.8)'; c.fillRect(TITLE.x + 26, TITLE.y + 55, TITLE.w - 52, 1.6); c.fillRect(TITLE.x + 26, TITLE.y + 59, TITLE.w - 52, 0.8);
-  c.font = F.title(100); const mw = c.measureText('STOP SHRINKING?').width / 100; titlePx = Math.min(92, Math.floor(880 / mw));
+  const w1 = spaced(c, 'SPECIMEN', tx, TITLE.y + 48, 2.2);
+  tw(c, 'WARM GUTTA-PERCHA', tx + w1 + 14, TITLE.y + 50, 44, { bold: 1, seed: 4 });
+  const hw = 15 * 26 * ADV, hx = TITLE.x + TITLE.w - 30 - hw;
+  tw(c, '@natebrooksendo', hx, TITLE.y + 48, 26, { color: C.dim, seed: 6 });
+  c.fillStyle = 'rgba(78,124,98,.8)'; c.fillRect(TITLE.x + 26, TITLE.y + 61, TITLE.w - 52, 1.6); c.fillRect(TITLE.x + 26, TITLE.y + 65, TITLE.w - 52, 0.8);
+  c.font = F.title(100); const mw = c.measureText('STOP SHRINKING?').width / 100; titlePx = Math.min(90, Math.floor(880 / mw));
   c.font = F.title(titlePx); c.textAlign = 'left'; c.textBaseline = 'alphabetic';
-  const ty1 = TITLE.y + 136, ty2 = TITLE.y + 216;
+  const ty1 = TITLE.y + 140, ty2 = TITLE.y + 220;
   c.fillStyle = C.ink; c.fillText('WHEN DOES IT', tx - 2, ty1);
   c.fillStyle = C.red; c.fillText('STOP SHRINKING?', tx - 2, ty2);
   // ── specimen card (contents are dynamic) ──
@@ -299,8 +303,8 @@ function makeBG() {
   c.fillStyle = C.blue; c.beginPath(); c.arc(76, LEG_Y - 10, 8, 0, TAU); c.fill(); c.strokeStyle = 'rgba(255,255,255,.5)'; c.lineWidth = 1.5; c.stroke();
   let lx = 94 + engr(c, 'TEMP', 94, LEG_Y, 30, { sp: 2 }) + 30;
   c.fillStyle = C.red; c.beginPath(); c.arc(lx, LEG_Y - 10, 8, 0, TAU); c.fill(); c.strokeStyle = 'rgba(255,255,255,.5)'; c.stroke();
-  engr(c, 'VOLUME', lx + 18, LEG_Y, 30, { sp: 2 });
-  engr(c, 'CURVES SCHEMATIC  ·  BENCH DATA  ·  COMPOSITE TIMELINE', 1012, LEG_Y - 1, 24, { sp: 1.2, align: 'right', alpha: 0.82, w: 500 });
+  engr(c, 'GP SIZE', lx + 18, LEG_Y, 30, { sp: 2 });
+  engr(c, 'SCHEMATIC CURVES  ·  2 BENCH STUDIES (IN VITRO)', 1012, LEG_Y - 1, 26, { sp: 1.2, align: 'right', alpha: 0.85, w: 500 });
   // ── chart bed ──
   c.fillStyle = '#101512'; c.fillRect(0, CHY - 18, W, CHH + 36);
   let g = c.createLinearGradient(0, CHY - 18, 0, CHY); g.addColorStop(0, 'rgba(0,0,0,.8)'); g.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = g; c.fillRect(0, CHY - 18, W, 18);
@@ -340,12 +344,12 @@ function makeOverlay() {                // static parts that sit above the paper
   c.fillStyle = 'rgba(37,33,28,.8)'; c.fillRect(px0 + 2, CHY + LN.vol - 1, pw - 4, 2);
   // temperature anchors (the only numbers on the scale): start of Lottanti's controlled drop, and body temperature
   c.font = F.bc(30, 700); c.textBaseline = 'alphabetic'; c.fillStyle = C.blue; c.textAlign = 'left';
-  const y75 = CHY + LN.temp + 16, y37 = CHY + LN.temp + 16 + (LN.tempH - 34);
-  c.fillText('75°C', px0 + 10, y75 - 13); c.fillText('37°C', px0 + 10, y37 + 35);
+  const y75 = CHY + LN.temp + TMP0, y37 = y75 + (LN.tempH - 42);
+  c.fillText('75°C', px0 + 10, y75 - 20); c.fillText('37°C', px0 + 10, y37 - 15);          // both labels sit ABOVE their blue tick, inside the temperature lane
   c.fillRect(px0 + 2, y75 - 1.5, 18, 3); c.fillRect(px0 + 2, y37 - 1.5, 18, 3);
-  c.fillStyle = C.red; c.fillRect(px0 + 2, CHY + LN.vol + 20 - 1.5, 18, 3);                 // starting volume (no scale: schematic)
-  c.beginPath(); c.moveTo(px0 + 38, CHY + LN.vol + 196); c.lineTo(px0 + 38, CHY + LN.vol + 232); c.strokeStyle = C.red; c.lineWidth = 3; c.stroke();
-  c.beginPath(); c.moveTo(px0 + 30, CHY + LN.vol + 224); c.lineTo(px0 + 38, CHY + LN.vol + 236); c.lineTo(px0 + 46, CHY + LN.vol + 224); c.closePath(); c.fill();
+  c.fillStyle = C.red; c.fillRect(px0 + 2, CHY + LN.vol + VOL0 - 1.5, 18, 3);               // starting size (no scale: schematic)
+  c.beginPath(); c.moveTo(px0 + 38, CHY + LN.vol + 204); c.lineTo(px0 + 38, CHY + LN.vol + 238); c.strokeStyle = C.red; c.lineWidth = 3; c.stroke();
+  c.beginPath(); c.moveTo(px0 + 30, CHY + LN.vol + 230); c.lineTo(px0 + 38, CHY + LN.vol + 242); c.lineTo(px0 + 46, CHY + LN.vol + 230); c.closePath(); c.fill();
   // pen-drive housing (right)
   const hx = PENX + 72, hy = CHY - 24, hh = CHH + 48;
   c.save(); c.shadowColor = 'rgba(0,0,0,.6)'; c.shadowBlur = 14; c.shadowOffsetX = -5;

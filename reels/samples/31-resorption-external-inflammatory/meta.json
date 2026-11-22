@@ -7,45 +7,45 @@
   "duration": 21.9,
   "claims": [
     {
-      "claim": "Damaged root surface (luxation, avulsion) + infected canal = inflammatory resorption",
+      "claim": "Damaged root surface (luxation, avulsion) + infected canal = inflammatory resorption (end card recap: DAMAGE + INFECTION)",
       "source": "Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract"
     },
     {
-      "claim": "Toxins via dentinal tubules reach the denuded surface; intact cementum blocks them (schematic: a theory from monkey histology)",
+      "claim": "Toxins via dentinal tubules reach the denuded surface; intact cementum blocks them (schematic; source line says 'Tubule theory: Andreasen 1981')",
       "source": "Andreasen JO. J Endod 1981;7:294-301 (PMID 6942086); reprint J Endod 2021;47:865-72 (PMID 33975756) - abstract of reprint"
     },
     {
       "claim": "Root + bone resorb: bowl-shaped craters in the root and the facing bone (schematic cutaway, not to scale)",
-      "source": "Abbott PV. Aust Dent J 2016;61 Suppl 1:82-94 (PMID 26923450); Lin S et al. Dent Traumatol 2022;38:253-66 (PMID 35559593)"
+      "source": "Abbott PV. Aust Dent J 2016;61 Suppl 1:82-94 (PMID 26923450) - abstract; Lin S et al. Dent Traumatol 2022;38:253-66 (PMID 35559593) - review full text"
     },
     {
-      "claim": "By week 1: inflammatory resorption seen on histology (monkey)",
+      "claim": "By week 1: histology, monkey (dial qualifier: after trauma, timeline schematic)",
       "source": "Andreasen JO. Swed Dent J 1980;4:101-10 (PMID 6933704) - abstract"
     },
     {
-      "claim": "~1 month: usually visible on X-ray (replanted human incisors)",
+      "claim": "~1 month: on X-ray (inflammatory resorption 'usually observed after 1 month' in 400 replanted human incisors)",
       "source": "Andreasen JO, Borum MK, Jacobsen HL, Andreasen FM. Endod Dent Traumatol 1995;11:76-89 (PMID 7641622) - abstract"
     },
     {
-      "claim": "Months: untreated, the root can be lost (review-level statement; timeline schematic)",
+      "claim": "Months: root can be lost (untreated; review-level statement, tagged '(review)' in the source line)",
       "source": "Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text"
     },
     {
-      "claim": "\"Very rapid in children\" (quoted consensus wording, not a measured rate)",
-      "source": "Fouad AF et al. (IADT). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 10 - guideline full text"
+      "claim": "\"Very rapid in children\" (quoted consensus wording, not a measured rate; the sentence comes from the open-apex paragraph - see caption)",
+      "source": "Fouad AF et al. (IADT). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 10 - guideline full text (read by the research stage in the AAPD Reference Manual reprint; not in PMC)"
     },
     {
       "claim": "Disinfect the canal + Ca(OH)2 dressing: stimulus cut, resorption arrests; crater is lined, not refilled (schematic)",
-      "source": "Fuss Z et al. Dent Traumatol 2003;19:175-82 (PMID 12848710); Bourguignon C et al. (IADT). Dent Traumatol 2020;36:314-30 (PMID 32475015), sect. 13.3"
+      "source": "Fuss Z et al. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract; Bourguignon C et al. (IADT). Dent Traumatol 2020;36:314-30 (PMID 32475015), sect. 13.3 - guideline full text (research stage)"
     },
     {
-      "claim": "97% healed: 192 of 197 teeth with inflammatory resorption (luxated non-vital incisors, Ca(OH)2 then GP, radiographic, retrospective); 5 went on to ankylosis",
+      "claim": "97% healed: 192 of 197 resorbing teeth (luxated non-vital maxillary incisors, Ca(OH)2 then GP, radiographic, retrospective); 5 went on to ankylosis",
       "source": "Cvek M. Endod Dent Traumatol 1992;8:45-55 (PMID 1521505) - abstract"
     },
     {
-      "claim": "Replanted mature (closed-apex) tooth: start RCT within 2 weeks",
-      "source": "Fouad AF et al. (IADT). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 10 - guideline full text"
+      "claim": "Replanted mature (closed-apex) tooth: start root canal treatment within 2 weeks",
+      "source": "Fouad AF et al. (IADT). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 10 - guideline full text (research stage)"
     }
   ],
-  "caption": "External inflammatory resorption = damaged root surface + infected canal.\nAfter luxation/avulsion, toxins from an infected pulp reach the denuded root via tubules (theory); root and bone resorb. By week 1 on monkey histology, usually on X-ray by ~1 month. Canal treated: 192 of 197 teeth with inflammatory resorption healed (luxated non-vital incisors, Ca(OH)2 then GP, retrospective). IADT 2020: replanted closed-apex tooth, start RCT within 2 weeks.\nSchematic animation.\nRefs: Fuss 2003 Dent Traumatol; Andreasen 1981 J Endod; Andreasen 1980 Swed Dent J; Andreasen 1995, Cvek 1992 Endod Dent Traumatol; Fouad 2020 Dent Traumatol\n#endodontics #dentaltrauma #rootresorption #endoresident #boardprep"
+  "caption": "External inflammatory (infection-related) resorption, trauma form = damaged root surface + infected canal.\nToxins from the infected canal reach the denuded root via tubules (theory); root and adjacent bone resorb. Seen by week 1 on monkey histology; usually first seen on X-ray at about 1 month (400 replanted human incisors).\nCanal treated: resorption healed in 192 of 197 teeth (luxated non-vital maxillary incisors, Ca(OH)2 then GP, radiographic, retrospective; 5 went on to ankylosis). Same cohort: cervical root fractures were frequent in immature teeth.\nIADT 2020: replanted closed-apex tooth, start root canal treatment (RCT) within 2 weeks. Open apex: no routine RCT. Watch closely for revascularization and start RCT at once if resorption or infection appears, because this resorption is \"very rapid in children\".\nThe same infection-driven resorption occurs at the apex in apical periodontitis.\nSchematic animation.\nRefs: Fuss 2003 Dent Traumatol; Abbott 2016 Aust Dent J; Andreasen 1981 J Endod; Andreasen 1980 Swed Dent J; Andreasen 1995, Cvek 1992 Endod Dent Traumatol; Fouad 2020, Bourguignon 2020 Dent Traumatol; Patel 2022 Int Endod J\n#endodontics #dentaltrauma #rootresorption #endoresident #boardprep"
 }

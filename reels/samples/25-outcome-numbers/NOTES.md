@@ -193,3 +193,27 @@ Applied:
 Checked after the changes: 10 stills with safe-area overlay (`_stills/fix`), 16 transition stills
 (`_stills/fix-t`: 0–2.6 s, 13.6 s, 15.95–17.0 s, 23.45–23.7 s), no layout warnings; video re-rendered (720 frames,
 24.0 s, H.264 1080×1920 30 fps); frames pulled back out of the MP4 (first vs last: mean luma difference 1.0/255).
+
+## Final QA (fresh-eyes pass)
+Checked: 21 stills with the safe-area overlay (`_stills/final-qa`: 0, 0.6, 1.0, 1.3, 2.6, 3.8, 5.3, 6.2, 7.5, 9.3,
+11.0, 12.0, 13.6, 15.5, 16.3, 16.6, 17.3, 19.2, 21.4, 23.5, 23.95 s), no render errors and no layout warnings;
+frames pulled back out of `reels/out/25-outcome-numbers.mp4` (0, 0.6, 16.3, 21.4, 23.5 s and the last frame) match
+the current `board.js`; ffprobe: 720 frames, 24.000 s, H.264 1080×1920 30 fps = `REEL.duration`; first vs last
+frame mean luma difference 0.5/255 (clean loop, no ghosted text); poster = the 21.4 s frame (complete board, all
+of it inside the 3:4 crop; the "22.6 s" in QA log item 3 is historical).
+
+Reel: no defects found, so `board.js` was not changed and the video was not re-rendered.
+- Text: nothing clipped, overlapping or under 30 px that must be read (tags 34 px, column heads 36 px, row names
+  46 px; sources 24 px and handle 28 px are fine print). Nothing readable in the top 230 px, the bottom 340 px or
+  the button column ("4,744 TEETH" ends at x 956; the row-3 lamp pair under the buttons is decorative).
+- Hook readable on frame 0 (printed header) and 82% settled by 1.2 s; complete board held 18.0–23.4 s.
+- Spin frames re-checked: only letters/blanks before a figure lands; 59% to 94% never shows a third number; digits
+  and "%" clear in the same frame.
+- The seven cited PubMed records (PMID 35334111, 15564861, 2084204, 19133093, 20416420, 20951283, 32899437) were
+  pulled once more and every on-screen figure, tag, first author, journal and year matches the abstract. "6 MO+"
+  on the Setzer cell still rests on Pinto 2020 (secondary source), as recorded above.
+
+meta.json: the caption had 4 hashtags (SPEC asks for 5–8). Added `#endo`; to stay under 700 characters
+"traditional 59% vs microsurgery 94%" became "traditional 59%, microsurgery 94%" (which also drops the "vs" from a
+pair the same caption calls not head-to-head). Caption is now 698 characters; title 37, topic 125, 8 claims in
+on-screen order, duration 24.0 from ffprobe. Nothing else changed.
