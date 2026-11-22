@@ -40,11 +40,16 @@ Diagram labels (legend, ruler, scale plate, card labels) add about 28.
    bracket position on the composite axis is schematic.
 3. Stamp "CRYSTALLIZING?": inferred mechanism, hence the question mark; not stated by Lee. Basis: Grassi MD et al.
    J Endod 1989;15:517-21, PMID 2639948 (isothermal shrinkage during crystallization); Schilder H et al. OOO
-   1985;59:285-96, PMID 3856822. The COOLING and CRYSTALLIZING? stamps are not exclusive phases: Meyer 2006 (PMID
-   16708520) found the fastest shrinkage between 55 and 40 °C and Hsu 2020 (PMID 32256997) found crystallization
-   exotherms at 52 and 32 °C on cooling, so crystallization probably starts during cooling and continues at 37 °C.
-4. "Then stable to 24 h." and stamp "STABLE": Lee 1997 (24-h hold), one study. Goodman's BU thesis abstract (1973, the
-   data behind Schilder 1985) instead says contraction on cooling to 37 °C "continued over a 24 hour holding period".
+   1985;59:285-96, PMID 3856822. The COOLING and CRYSTALLIZING? stamps are not exclusive phases: Meyer KM et al.,
+   Schweiz Monatsschr Zahnmed 2006;116:356-61 (PMID 16708520; abstract) found the fastest shrinkage between 55 and
+   40 °C for conventional GP (45–40 °C for the α/β Multifill GP), and Hsu YH et al., J Dent Sci 2020;15:28-33 (PMID
+   32256997; PMC7109509 full text, Results) found crystallization exotherms on cooling at 52 and 32 °C (5 °C/min;
+   52 °C only at 20 °C/min) in soft-type backfill GP only; the regular type showed none. So crystallization
+   probably starts during cooling and continues at 37 °C, at least in some products.
+4. "Then stable to 24 h." and stamp "STABLE": Lee 1997 (24-h hold), one study. Goodman AS, "The thermo-mechanical
+   properties of gutta-percha", M.Sc.D. thesis, Boston University (hdl.handle.net/2144/40150; thesis note 1973, the
+   repository record says "date issued 1976"; thesis abstract and OCR methods read; the volume data behind Schilder
+   1985) instead says contraction on cooling to 37 °C "continued over a 24 hour holding period".
    The caption states the disagreement.
 5. Stamp "NO DATA FOUND", ruler "days ?", stopwatch ">24 h": literature search of PubMed abstracts (RESEARCH.md L4).
    Not "never measured". Indirect long-term data point to expansion, not more shrinkage: Wu 2000 (PMID 11307452,
@@ -147,10 +152,48 @@ the fast feed (19.85–19.95 s); card headers are 24 px fine print.
 
 Final render: ffprobe h264 1080x1920, 30 fps, 618 frames, 20.6 s = `REEL.duration`.
 
+## Citation audit (independent, PubMed re-check)
+Scope: every citation on screen, in meta.json (claims and the caption Refs line) and in NOTES.md / RESEARCH.md.
+Method: PubMed metadata + abstract re-fetched for PMIDs 24767571, 9587286, 2639948, 3856822, 11307452, 19026888,
+6985547, 4524837, 2599657, 16708520, 32256997, 41872366, 8269881, 6948908, 34492231, 41685848, 39873081, 40217031;
+PMC full text re-read for Hsu 2020 (PMC7109509); the other 21 journal citations in RESEARCH.md matched to their PMIDs
+by journal + year + volume + first page + first author (PubMed citation matcher); both BU thesis records re-read in
+`_scratch/` (Marlin: repository abstract; Goodman: repository abstract + OCR text).
+
+Result
+- On screen: "Lottanti 2014 J Endod", "Lee 1997 J Endod" (twice), "Marlin 1971 BU thesis · Bradshaw 1989 Int Endod J".
+  First author, year and journal are right for all four, and each abstract (thesis abstract for Marlin) contains the
+  number or statement shown with the stated conditions (linear %, 10 min, 75→37 °C; 45 min–10 h, held at 37 °C,
+  24-h hold; compaction; sealer). No on-screen change, so the video was not re-rendered (ffprobe of the existing
+  MP4: h264 1080x1920, 30 fps, 618 frames, 20.6 s).
+- meta.json: every first author, year, journal, volume, page range and PMID belongs to one real paper and supports
+  its claim. No wrong PMID, year, journal or author found.
+
+Changes made
+- NOTES claim 3 and meta.json claim 3: Hsu 2020's exotherms (52 and 32 °C) were found in soft-type backfill GP
+  only (regular type: none) and the figures are in the PMC full text, not the abstract; Meyer 2006's "55–40 °C"
+  is for conventional GP (α/β Multifill: 45–40 °C). Both qualifiers and full citations added; meta.json claim 3
+  now names Hsu 2020 as the basis for "probably starts during cooling" (it named only Grassi and Schilder).
+- NOTES claim 4, meta.json claims 4 and 6: thesis handles added (Goodman hdl.handle.net/2144/40150, Marlin
+  hdl.handle.net/2144/45904); Goodman's year discrepancy noted (thesis note 1973, repository "date issued 1976").
+- RESEARCH.md (b)6, suggested meta.json claims, storyline row and short Refs line still paired "Use sealer" with
+  Wu 2000 and wrote "publ. OOO 1973" for Marlin. They now point to Bradshaw 1989 and "probably published as", in
+  line with the Addendum.
+
+Not resolved
+- Wong, Peters & Lorton 1981 is still unread (see Known weaknesses). The stamp says NO DATA FOUND, which is a
+  statement about the search, so the on-screen wording was kept.
+
 ## Known weaknesses
 - Phase stamps land near the end of each phase (COOLING 4.3 s, CRYSTALLIZING? 9.9 s), because they need recorded
   paper to sit on.
 - The caption is telegraphic to stay at 700 characters.
 - Before posting, someone with journal access should read Wong, Peters & Lorton, J Endod 1981;7:551-8 (PMID
-  6985547); if it reports warm-GP volume beyond 24 h, the NO DATA FOUND stamp must change.
+  6985547); if it reports warm-GP volume beyond 24 h, the NO DATA FOUND stamp must change. Still unread at the
+  citation audit (no PubMed abstract, not in PMC). The only description found is second-hand: Abedi H et al., Dent
+  Res J (Isfahan) 2009;6:55-58 (PMID 21528031, PMC3075455 full text) says Wong et al. used split molds and that
+  vertical-condensation fills were 2.8 % heavier than lateral-condensation fills. That is a weight comparison; it
+  neither confirms nor excludes volume-over-time data. Part 2 (Wong, Peters, Lorton & Bernier, J Endod 1982;8:4-9,
+  PMID 6948908, chloroform techniques) is indexed with the MeSH term "Time Factors", so the series may have
+  followed fillings over time.
 - Card headers are 24 px and the source lines 25 px (fine print). Peak frame time in the fast feed is about 150 ms.

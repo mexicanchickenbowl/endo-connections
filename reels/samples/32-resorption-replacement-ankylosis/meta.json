@@ -1,51 +1,47 @@
 {
   "id": "32",
   "slug": "32-resorption-replacement-ankylosis",
-  "title": "Replacement resorption (ankylosis)",
+  "title": "Ankylosis and replacement resorption",
   "style": "Geology field diagram",
-  "topic": "Dead PDL after a long dry time: bone fuses to the root (ankylosis), then remodeling replaces the root with bone; no known arrest.",
+  "topic": "Dead PDL after a long dry time: bone fuses to the root (ankylosis), then remodeling replaces the root with bone; no proven arrest.",
   "duration": 21.5,
   "claims": [
     {
-      "claim": "Replacement resorption: the root is gradually replaced by bone (title; crown and root filling remain in the drawing - schematic)",
-      "source": "AAE Glossary definition as quoted in Lin S, Moreinos D, Kaufman AY, Abbott PV. Dent Traumatol 2022;38:253-66 (PMID 35559593), Table 1 - review full text (research stage); Hammarstrom L, Blomlof L, Lindskog S. Endod Dent Traumatol 1989;5:163-75 (PMID 2517781) - abstract, monkey"
+      "claim": "Replacement resorption: the root is gradually replaced by bone (title; picture: root replaced from the surface inward while crown and root filling remain - schematic)",
+      "source": "AAE Glossary definition (external replacement resorption) as quoted in Lin S, Moreinos D, Kaufman AY, Abbott PV. Dent Traumatol 2022;38:253-66 (PMID 35559593), Table 1 - review full text (PMC9546147; re-read at the citation audit); Hammarström L, Blomlöf L, Lindskog S. Endod Dent Traumatol 1989;5:163-75 (PMID 2517781) - abstract, monkey; Andersson L et al. Int J Oral Surg 1984;13:423-31 (PMID 6438004) - abstract, background statement; Malmgren B. J Endod 2013;39(3 Suppl):S67-72 (PMID 23439048) - abstract, review"
     },
     {
-      "claim": "DRY > 60 MIN - PDL cells likely non-viable; label PDL DEAD",
-      "source": "Fouad AF et al. (IADT avulsion guideline). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 3 - guideline full text (research stage, AAPD reprint)"
+      "claim": "DRY > 60 MIN (source line Fouad 2020) -> in-diagram label 'PDL likely non-viable'",
+      "source": "Fouad AF et al. (IADT avulsion guideline). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 3 - guideline full text (AAPD Reference Manual reprint; re-read at the citation audit)"
     },
     {
-      "claim": "Bone grows across the dead PDL -> ANKYLOSIS (fusion shown before any root loss; source line says 'monkey')",
-      "source": "Andreasen JO, Kristerson L. Acta Odontol Scand 1981;39:1-13 (PMID 6943904) - abstract (authors' postulate: 'rapid osteogenesis in the alveolus which establishes an ankylosis'); order of events: Hammarstrom et al. 1989 (PMID 2517781) - abstract"
+      "claim": "Bone grows across the dead PDL -> stamp ANKYLOSIS (fusion shown before any root loss; source line 'Hammarström 1989, Endod Dent Traumatol · monkey')",
+      "source": "Hammarström L, Blomlöf L, Lindskog S. Endod Dent Traumatol 1989;5:163-75 (PMID 2517781) - abstract (monkey, 1 h extraoral, endodontically treated: 'most of the periodontal membrane was replaced by bone'; 'The initial ankylosis was not preceded by root resorption'); Andreasen JO, Kristerson L. Acta Odontol Scand 1981;39:1-13 (PMID 6943904) - abstract (authors' postulate: 'rapid osteogenesis in the alveolus which establishes an ankylosis'); Abbott PV, Lin S. Dent Traumatol 2022;38:267-85 (PMID 35605161) - review full text (PMC9543863; re-read at the citation audit): ankylosis can occur without any resorption; root canal treatment will not prevent or arrest external replacement resorption"
     },
     {
-      "claim": "Toy model / schematic: time strip WEEKS - MONTHS - YEARS and the shape/speed of the replacement front (labeled 'time scale schematic')",
-      "source": "Order of magnitude only: fusion at 1-2 weeks in monkey histology (PMID 2517781; Andreasen JO. Swed Dent J 1980;4:101-10, PMID 6933704); usually observed after 1-2 months in humans (Andreasen JO et al. Endod Dent Traumatol 1995;11:76-89, PMID 7641622) - abstracts"
+      "claim": "Toy model / schematic: time strip WEEKS - MONTHS - YEARS; the replacement front follows the pointer (no loss in WEEKS, a shallow rim at the MONTHS/YEARS boundary, most of the root lost inside YEARS); labeled 'time scale schematic' and 'schematic - not to scale'",
+      "source": "Order of magnitude only: fusion at 1-2 weeks in monkey histology (PMID 2517781; Andreasen JO. Swed Dent J 1980;4:101-10, PMID 6933704); usually observed (clinical/radiographic diagnosis) after 1-2 months in humans (Andreasen JO et al. Endod Dent Traumatol 1995;11:76-89, PMID 7641622); years: Andersson, Bodin & Sörensen 1989 (PMID 2598883) - abstracts"
     },
     {
-      "claim": "Root remodeled as bone (root replaced from the surface inward; front shape schematic)",
-      "source": "Andersson L et al. Int J Oral Surg 1984;13:423-31 (PMID 6438004) - abstract, background statement; Malmgren B. J Endod 2013;39(3 Suppl):S67-72 (PMID 23439048) - abstract, review"
-    },
-    {
-      "claim": "Age 8-16: root resorbed in 3-7 yr (>= 1 h dry; authors' conclusion from a radiographic index, mean follow-up 4.8 y)",
-      "source": "Andersson L, Bodin I, Sorensen S. Endod Dent Traumatol 1989;5:38-47 (PMID 2598883) - abstract"
+      "claim": "Age 8-16: root resorbed in 3-7 yr (age at avulsion; ≥ 1 h dry; authors' conclusion from a radiographic index, mean follow-up 4.8 y)",
+      "source": "Andersson L, Bodin I, Sörensen S. Endod Dent Traumatol 1989;5:38-47 (PMID 2598883) - abstract"
     },
     {
       "claim": "Signs: metallic percussion, no mobility, infraposition in a growing jaw",
-      "source": "Fouad et al. 2020 (PMID 32460393), sect. 11 - guideline full text (research stage); Kawanami M et al. Endod Dent Traumatol 1999;15:50-6 (PMID 10379271) - abstract; Campbell KM, Casas MJ, Kenny DJ. J Can Dent Assoc 2005;71:763-8 (PMID 16324230) - abstract"
+      "source": "Fouad et al. 2020 (PMID 32460393), sect. 11.1 ('a metallic sound to percussion') and 11.3.1 ('no mobility (ankylosis) with high-pitched (metallic) percussion sound') - guideline full text (AAPD reprint; re-read at the citation audit); Kawanami M et al. Endod Dent Traumatol 1999;15:50-6 (PMID 10379271) - abstract; Campbell KM, Casas MJ, Kenny DJ. J Can Dent Assoc 2005;71:763-8 (PMID 16324230) - abstract"
     },
     {
-      "claim": "No known way to arrest it",
-      "source": "Campbell KM, Casas MJ, Kenny DJ. J Can Dent Assoc 2005;71:763-8 (PMID 16324230) - abstract ('no known treatment to arrest this condition'); Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text (research stage)"
+      "claim": "No proven way to arrest it",
+      "source": "Campbell KM, Casas MJ, Kenny DJ. J Can Dent Assoc 2005;71:763-8 (PMID 16324230) - abstract ('no known treatment to arrest this condition'; management options 'do not offer any proven long-term benefit'); Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text (PMC9790676; re-read at the citation audit: 'Presently, there is no treatment to arrest ERR'); case-series exception: Yoshpe M et al. J Endod 2020;46:192-9 (PMID 31813579) - abstract (4 patients / 5 teeth, regenerative endodontics: 'In 3 of the cases, replacement resorption was arrested')"
     },
     {
-      "claim": "Growing patient: plan early, e.g. decoronation (inset: crown and root filling removed, root left to be replaced by bone - schematic)",
-      "source": "Malmgren B, Cvek M, Lundberg M, Frykholm A. Scand J Dent Res 1984;92:391-9 (PMID 6593804) - abstract; Fouad et al. 2020 (PMID 32460393), sect. 3.1.3 and 12 (decoronation is one listed option) - guideline full text (research stage)"
+      "claim": "Growing patient: plan early, e.g. decoronation (inset: crown and root filling removed, root left under the flap - labeled schematic)",
+      "source": "Malmgren B, Cvek M, Lundberg M, Frykholm A. Scand J Dent Res 1984;92:391-9 (PMID 6593804) - abstract; Fouad et al. 2020 (PMID 32460393), sect. 3.1.3 and 12 (decoronation is one listed option; sect. 12: discussions should ideally 'take place before the tooth shows signs of infra-position') - guideline full text (AAPD reprint; re-read at the citation audit); timing: Malmgren B, Malmgren O. Dent Traumatol 2002;18:28-36 (PMID 11841463) - abstract"
     },
     {
-      "claim": "Protect the PDL: replant at once, or store in milk (lowers the risk; not a guarantee)",
-      "source": "Fouad et al. 2020 (PMID 32460393), sect. 2-3 - guideline full text (research stage)"
+      "claim": "Protect the PDL: replant at once, or store in milk (lowers the risk; not a guarantee; a tooth dry > 60 min is still replanted - caption)",
+      "source": "Fouad et al. 2020 (PMID 32460393), sect. 2 (immediate replantation; storage media in order: milk, HBSS, saliva, saline), sect. 3 and 3.1.3 - guideline full text (AAPD reprint; re-read at the citation audit)"
     }
   ],
-  "caption": "Replacement resorption: once the PDL dies, the root is remodeled like bone.\nDry > 60 min: PDL cells likely non-viable (IADT 2020). Bone bridges the dead PDL and fuses to the root (ankylosis; monkey histology), then the root is replaced by bone. Root canal treatment does not stop it.\nAge 8-16, 1 h or more dry: root resorbed in 3-7 yr.\nNo known way to arrest it. Growing patient: plan early, e.g. decoronation.\nSchematic animation.\nRefs: Fouad 2020, Abbott & Lin 2022 Dent Traumatol; Andreasen & Kristerson 1981 Acta Odontol Scand; Andersson 1989 Endod Dent Traumatol; Campbell 2005 J Can Dent Assoc; Malmgren 1984 Scand J Dent Res\n#endodontics #dentaltrauma #rootresorption #ankylosis #boardprep"
+  "caption": "External replacement resorption: PDL dies, root is remodeled like bone.\nDry > 60 min: PDL cells likely non-viable; still replant (IADT 2020). Bone bridges the dead PDL and fuses to the root (ankylosis; monkey data), then replaces it. Root canal treatment does not stop it.\nAvulsed at 8-16, ≥ 1 h dry: root resorbed within 3-7 yr (authors' conclusion).\nNo proven way to arrest it. Growing patient: plan early, e.g. decoronation.\nSchematic animation.\nRefs: Fouad 2020, Abbott & Lin 2022 Dent Traumatol; Hammarström 1989, Andersson 1989 Endod Dent Traumatol; Campbell 2005 J Can Dent Assoc; Malmgren 1984 Scand J Dent Res\n#endodontics #dentaltrauma #rootresorption #ankylosis #boardprep"
 }

@@ -298,3 +298,31 @@ Changes to content:
 Not verifiable (left as NOT VERIFIED): any sealer pH value; percent-dead for BC Sealer in tubules; zone sizes
 and species detail in Torabinejad 1995 (truncated abstract); Zhang 2009 7-day result; pH value in Fridland 2005;
 aging time in Jerez-Olate 2022; iRoot SP = EndoSequence BC Sealer equivalence; garbled SMDs in Seron 2024.
+
+## (i) Review pass (22 Nov 2026) — facts added or re-checked by the builder
+
+Re-pulled from PubMed (abstracts) while applying the independent review:
+
+- Zhang H, Pappen FG, Haapasalo M. J Endod 2009;35(2):221-4. PMID 19166777.
+  [doi](https://doi.org/10.1016/j.joen.2008.11.001). "Powder from crushed set cements was either equally or more
+  effective than fresh powders in killing the bacteria"; MTA and BioAggregate powders "caused a significant
+  decrease in bacterial viability within 6 minutes"; adding dentin powder gave faster elimination. Suspension /
+  direct exposure test, E. faecalis. Consequence: "fresh MTA is stronger than set MTA" is NOT supported; together
+  with Farrugia 2017 Sci Rep having no fresh arm (set 24 h, then aged 1 or 7 d), Plate 2 may only say "set MTA:
+  partial kill that declines from day 1 to day 7 of aging". Recommended fact 3 ("Once set: weaker") and the
+  Plate 2 line in storyline (f) are superseded by this wording.
+- Farrugia C, Haider J, Camilleri L, Camilleri J. J Appl Biomater Funct Mater 2017;15(2):e153-61. PMID 28256700.
+  [doi](https://doi.org/10.5301/jabfm.5000337). "Biodentine after immediate mixing and Ionoseal aged for 6 weeks
+  resulted in an inhibition zone" (agar diffusion). Used as the source that a freshly mixed calcium silicate
+  material can give an agar zone.
+- Candeiro GTM et al. Int Endod J 2016;49(9):858-64. PMID 26281002. [doi](https://doi.org/10.1111/iej.12523).
+  Endosequence BC Sealer zone 6.00 +/- 0.03 mm vs AH Plus 10.31 +/- 0.21 mm against E. faecalis, read after
+  48 h; less active than AH Plus up to 1 h of direct contact, similar later.
+- Plate 4: by the definition shown (count falls), the set-MTA reductions (97% / 82% in 1 h) are killing, only
+  partial. The "set" marker therefore stays wholly on the bactericidal half and reads "SET: LESS"; nothing is
+  placed on the bacteriostatic half (not measured). This replaces "slides toward the middle" in storyline (f).
+- End card: "Fresh: bactericidal on contact" (Zhang 2009, iRoot SP, all planktonic E. faecalis killed in 2 min),
+  "Set: partial, fades" (Farrugia 2017), both tagged IN VITRO; "Healing: comparable", tagged CLINICAL,
+  "single-cone trials" (Sabeti 2024: single cone + calcium silicate sealer vs other sealers and techniques).
+- Torabinejad 1995;21:403-6 is no longer cited for a fresh-specific agar zone (its abstract pools freshly mixed
+  and 24-h set material); it is kept only for "some facultatives, no strict anaerobes".

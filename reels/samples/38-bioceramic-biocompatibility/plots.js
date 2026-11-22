@@ -4,11 +4,11 @@
  * Plot 2: cell-culture dish (OSTEOINDUCTIVE? lab signal)   Plot 3: non-bony site (strict test)   Plot 4: site notice board (verdict)
  */
 const TL = {
-  b1: 2.4, pan1: 7.2, b2: 7.85, pan2: 11.6, b3a: 12.25, pan3: 15.2, b3b: 15.85, pan4: 18.9, end: 19.6, wrap: 23.3, dur: 24,
+  b1: 2.4, pan1: 7.2, b2: 7.85, pan2: 11.2, b3a: 11.85, pan3: 15.2, b3b: 15.85, pan4: 18.9, end: 19.6, wrap: 23.3, dur: 24,
   course0: 3.5, courseDt: 0.22,          // cementum course
-  bone0: 8.45, boneDt: 0.27,             // new bone rows
-  recruit0: 13.15, recruitDt: 0.3,       // helmets on
-  stamp: 16.95,
+  bone0: 8.3, boneDt: 0.23,              // new bone rows
+  recruit0: 12.55, recruitDt: 0.25,      // helmets on
+  stamp: 16.4,
 };
 
 // each plot is drawn zoomed about the ground line: screen x = (local x - xa) * s
@@ -27,7 +27,7 @@ function rootPipe() {
   for (let x = xL + 30; x < 190; x += 44) rect(x, 990, 26, 4, 'rgba(255,255,255,0.22)');
   block(196, 936, 134, 152, 'MTA', 5, 42);                                                                 // root-end filling
   rect(196, 936, 3, 152, 'rgba(120,100,60,0.35)');
-  txt('ROOT', 112, 921, F.osw5(34), '#B49A58', 'center', 4);
+  txt('ROOT', 112, 921, F.osw5(34), '#7A5F1E', 'center', 4);
 }
 function billboard(u, t) {
   const k = 0.8 + 0.2 * ease.out(clamp(u));
@@ -41,6 +41,7 @@ function billboard(u, t) {
   rect(604, 822, 314, 30, '#B8C9D6');
   rect(604, 716, 104, 106, '#93A7B9'); rect(604, 716, 104, 6, '#A8BACA'); rect(604, 752, 66, 34, '#7C93A9');
   fillRR(668, 744, 40, 50, 3, '#3C4755'); rect(672, 748, 6, 42, 'rgba(255,255,255,0.22)');                // amalgam root-end filling
+  for (const y of [716, 730, 794, 808]) { fillRR(708, y + 1, 10, 12, 2.5, C.cem); rect(709, y + 2, 8, 3, C.cemL); }   // cementum on the cut dentin only, none over the amalgam (Torabinejad 1997)
   beacon(828, 822, t, 0.6);
   [[748, 1, 0.0], [792, -1, 1.3], [872, -1, 2.4]].forEach((m) => worker({ x: m[0], y: 822, s: 0.52, dir: m[1], role: 'sil', armF: 0.35 + 0.12 * Math.sin(t * 2.1 + m[2]), armB: 0.1 }));
   ctx.restore();
@@ -51,7 +52,7 @@ function billboard(u, t) {
 function plot0(t) {
   fence(16, 880);
   add(1, () => { ctx.globalAlpha = 0.9; lattice(842, -20, 1150, 36, '#F0C64E', 3.5); ctx.globalAlpha = 1; fillRR(816, 1130, 52, 20, 4, '#C5CCD3'); });
-  const bu = seg(t, 5.15, 5.75);
+  const bu = seg(t, 2.5, 3.0);                                             // standing prop: in with the beat sign
   if (bu > 0) add(2, () => billboard(bu, t));
   add(6, () => { pallet(752, G - 18, C.cem, C.cemD); }, () => { boxShadow(708, G - 10, 88, 52); });
   add(10, rootPipe, () => boxShadow(-90, G + 2, 420, 312));
@@ -75,20 +76,20 @@ function plot0(t) {
 
   // early inflammation crew (red helmets): two of three leave, one lingers
   const I = 1 - 0.72 * seg(t, 2.6, 5.4, ease.smooth);
-  add(18, () => beacon(502, G - 8, t, I), () => boxShadow(494, G - 8, 16, 70, 0.16));
-  const r1 = walk(t, 442, 965, 2.5, 5.0), r2 = walk(t, 562, 965, 2.9, 5.0), r3 = walk(t, 652, 812, 3.3, 4.3);
+  add(18, () => beacon(502, G - 8, t, I, 1 + 0.5 * (1 - seg(t, 1.0, 1.9, ease.smooth))), () => boxShadow(494, G - 8, 16, 70, 0.16));
+  const r1 = walk(t, 442, 965, 2.5, 5.0), r2 = walk(t, 562, 965, 2.9, 5.0), r3 = walk(t, 652, 592, 3.3, 3.9);   // r3 stays, steps up to the root
   W_(20, { x: r1.x, y: G - 4, role: 'red', skinI: 2, dir: r1.u > 0 ? 1 : -1, leg: r1.moving ? stride(r1.x) : 0, armF: r1.moving ? undefined : 0.5 + 0.12 * Math.sin(t * 2.3), armB: r1.moving ? undefined : 0.05 });
   W_(20, { x: r2.x, y: G - 2, role: 'red', skinI: 0, dir: 1, leg: r2.moving ? stride(r2.x) : 0, armF: r2.moving ? undefined : 0.3 + 0.1 * Math.sin(t * 1.9 + 1), armB: r2.moving ? undefined : 0.0 });
-  W_(20, { x: r3.x, y: G - 6, role: 'red', skinI: 4, dir: r3.moving ? 1 : -1, leg: r3.moving ? stride(r3.x) : 0, armF: r3.moving ? undefined : 0.25 + 0.08 * Math.sin(t * 1.6 + 2), armB: r3.moving ? undefined : 0.1 });
+  W_(20, { x: r3.x, y: G - 6, role: 'red', skinI: 4, dir: -1, leg: r3.moving ? stride(r3.x) : 0, armF: r3.moving ? undefined : 0.25 + 0.08 * Math.sin(t * 1.6 + 2), armB: r3.moving ? undefined : 0.1 });
 
   // builders (cementoblasts) arrive and stay
-  const a = walk(t, 960, 400, 0.5, 3.2), aWork = t > TL.course0 - 0.05 && t < TL.course0 + 6 * TL.courseDt + 0.1;
+  const a = walk(t, 890, 400, 0.0, 2.7), aWork = t > TL.course0 - 0.05 && t < TL.course0 + 6 * TL.courseDt + 0.1;
   W_(24, { x: a.x, y: G, role: 'builder', skinI: 1, dir: -1, leg: a.moving ? stride(a.x) : 0, armF: aWork ? 1.3 + 0.5 * Math.sin(t * 2 * Math.PI / TL.courseDt) : (a.moving ? undefined : 0.55 + 0.07 * Math.sin(t * 2)), armB: a.moving ? undefined : 0.1, carry: aWork ? 'brick' : (a.u >= 1 ? 'trowel' : null), brickCol: C.cem });
-  const b = walk(t, 990, 499, 0.9, 3.3), cl = seg(t, 3.4, 4.3), b2 = walk(t, 499, 412, 4.3, 4.75);
+  const b = walk(t, 930, 499, 0.3, 3.0), cl = seg(t, 3.4, 4.3), b2 = walk(t, 499, 412, 4.3, 4.75);
   const bx = cl < 1 ? b.x : b2.x, by = lerp(G, 1012, cl), bClimb = cl > 0 && cl < 1;
   const bWork = t > TL.course0 + 6 * TL.courseDt && t < TL.course0 + 13 * TL.courseDt + 0.15;
   W_(26, { x: bx, y: by, role: 'builder', skinI: 3, dir: -1, leg: b.moving || b2.moving ? stride(bx) : bClimb ? 0.5 * Math.sin(t * 9) : 0, armF: bClimb ? 2.5 + 0.4 * Math.sin(t * 9) : bWork ? 1.5 + 0.55 * Math.sin(t * 2 * Math.PI / TL.courseDt) : (b.moving || b2.moving ? undefined : 0.6 + 0.07 * Math.sin(t * 2.2)), armB: bClimb ? 2.5 - 0.4 * Math.sin(t * 9) : (b.moving || b2.moving ? undefined : 0.1), carry: bWork ? 'brick' : (b2.u >= 1 ? 'trowel' : null), brickCol: C.cem });
-  const c = walk(t, 1050, 716, 1.5, 3.9);
+  const c = walk(t, 1010, 716, 0.8, 3.3);
   add(25, () => wheelbarrow(c.x - 62, G + 6, C.steelL, C.cem), () => boxShadow(c.x - 92, G + 6, 56, 40, 0.18));
   W_(25, { x: c.x, y: G + 6, role: 'builder', skinI: 0, dir: -1, leg: c.moving ? stride(c.x) : 0, armF: c.moving ? 0.75 : 0.3 + 0.06 * Math.sin(t * 1.7), armB: c.moving ? 0.6 : 0.05 });
 }
@@ -131,29 +132,29 @@ function newBone(t, side) {
       const x = side < 0 ? 430 - off - w : 650 + off, y = G + 2 - 28 * (r + 1);
       off += w;
       if (u <= 0) continue;
-      const k = ease.outBack(u), fresh = 1 - seg(t, t0 + 0.2, t0 + 0.9);
+      const k = ease.outBack(u), fresh = 1 - seg(t, t0 + 0.2, t0 + 1.7);
       ctx.save(); ctx.globalAlpha = Math.min(1, u * 3); ctx.translate(x + w / 2, y + 14 - (1 - k) * 22); ctx.scale(0.6 + 0.4 * k, 0.6 + 0.4 * k);
-      fillRR(-w / 2 + 1, -13, w - 2, 26, 4, C.boneN); rect(-w / 2 + 3, 9, w - 6, 3, C.boneNL);
+      fillRR(-w / 2 + 1, -13, w - 2, 26, 4, C.boneN); rect(-w / 2 + 3, 9, w - 6, 3, C.boneNL); strokeRR(-w / 2 + 2, -12, w - 4, 24, 3.5, '#D8C48A', 2.5);
       if (fresh > 0) fillRR(-w / 2 + 1, -13, w - 2, 26, 4, `rgba(255,201,40,${0.55 * fresh})`);
       ctx.restore();
     }
   }
   // contact seam: bone laid directly against the cement surface
   const rows = clamp((t - TL.bone0 - 0.25) / TL.boneDt, 0, 10);
-  if (rows > 0) { const x = side < 0 ? 427 : 653; rect(x - 2, G + 2 - rows * 28, 4, rows * 28, C.orange); }
+  if (rows > 0) { const x = side < 0 ? 427 : 646; rect(x, G + 2 - rows * 28, 7, rows * 28, C.orange); rect(x + (side < 0 ? 5 : 0), G + 2 - rows * 28, 2, rows * 28, C.orangeD); }
 }
 function plot1(t) {
   fence(110, 970);
-  add(1, () => { ctx.globalAlpha = 0.92; towerCrane(184, 704, 440, 300, 742 + 30 * seg(t, 8.2, 11.4, ease.inOut), '#F0C64E'); ctx.globalAlpha = 1; });
-  add(4, () => { oldBone(96, 250, 772, 1); oldBone(830, 990, 772, 2); fillRR(166, 808, 84, 42, 6, C.bone); txt('BONE', 208, 840, F.osw5(31), '#A38C55', 'center', 3); },
+  add(1, () => { ctx.globalAlpha = 0.92; towerCrane(184, 704, 440, 300, 742 + 30 * seg(t, 8.2, 11.0, ease.inOut), '#F0C64E'); ctx.globalAlpha = 1; });
+  add(4, () => { oldBone(96, 250, 772, 1); oldBone(830, 990, 772, 2); fillRR(166, 808, 84, 42, 6, C.bone); txt('BONE', 208, 840, F.osw5(31), '#6E5A24', 'center', 3); },
     () => { boxShadow(830, G + 2, 160, 300); });
   add(8, () => { rect(250, BAND_T + 6, 580, 26, 'rgba(120,90,60,0.12)'); });
   add(10, () => block(440, 868, 200, G + 2 - 868, 'MTA', 9, 50));
   const au = seg(t, 7.75, 8.6);
   add(11, () => apatiteSkin(au, t));
   add(12, () => { newBone(t, -1); newBone(t, 1); });
-  // scaffolding clipped to the cement faces
-  add(14, () => { scaffoldBay(258, 424, 1012, 888); scaffoldBay(656, 822, 1012, 888); ladder(264, 1012, G, 22); ladder(794, 1012, G, 22); });
+  // scaffolding stands clear of the cement faces so the bone-to-cement contact line is unobstructed
+  add(14, () => { scaffoldBay(258, 396, 1012, 888); scaffoldBay(684, 822, 1012, 888); ladder(264, 1012, G, 22); ladder(794, 1012, G, 22); });
   // apatite tag
   const tu = seg(t, 8.25, 8.65);
   if (tu > 0) add(30, () => popAt(540, 840, tu, () => {
@@ -170,7 +171,7 @@ function plot1(t) {
   W_(24, { x: 728, y: G, role: 'builder', skinI: 0, dir: -1, armF: working && low ? lay(1.5) : idle(1), armB: 0.1, carry: working && low ? 'brick' : 'trowel' });
   W_(26, { x: 376, y: 1012, role: 'builder', skinI: 4, dir: 1, armF: working && !low ? lay(0.6) + 0.25 : idle(2), armB: 0.1, carry: working && !low ? 'brick' : 'trowel' });
   W_(26, { x: 704, y: 1012, role: 'builder', skinI: 3, dir: -1, armF: working && !low ? lay(2.2) + 0.25 : idle(3), armB: 0.1, carry: working && !low ? 'brick' : 'trowel' });
-  const cl = seg(t, 7.9, 9.3, ease.inOut), cy = lerp(G, 1012, cl), w3 = walk(t, 275, 306, 9.3, 9.7);
+  const cl = seg(t, 7.9, 9.1, ease.inOut), cy = lerp(G, 1012, cl), w3 = walk(t, 275, 306, 9.1, 9.5);
   W_(27, { x: cl < 1 ? 275 : w3.x, y: cy, role: 'builder', skinI: 1, dir: 1, leg: cl > 0 && cl < 1 ? 0.5 * Math.sin(t * 9) : w3.moving ? stride(w3.x) : 0, armF: cl < 1 ? 2.5 + 0.4 * Math.sin(t * 9) : (working && !low ? lay(3.4) + 0.2 : idle(4)), armB: cl < 1 ? 2.5 - 0.4 * Math.sin(t * 9) : 0.1, carry: cl >= 1 && working && !low ? 'brick' : null });
   add(22, () => { pallet(902, G + 4, C.boneN, C.boneNL); cone(586, G + 20, 0.8); });
 }
@@ -187,31 +188,32 @@ function dial(cx, cy, r, u, label, up) {
   circ(cx, cy, 8.5, C.orange); circ(cx, cy, 3.5, C.navy);
   const ax = cx + r - 6, ay = cy - r + 6;
   if (up > 0) popAt(ax, ay, up, () => { circ(ax, ay, 19, C.green); poly([ax, ay - 12, ax + 11, ay + 1, ax + 4.5, ay + 1, ax + 4.5, ay + 12, ax - 4.5, ay + 12, ax - 4.5, ay + 1, ax - 11, ay + 1], '#FFFFFF'); });
-  txt(label, cx, cy + r + 39, F.bc6(29), '#FFFFFF', 'center', 0.8);
+  txt(label, cx, cy + r + 41, F.bc6(29), '#FFFFFF', 'center', 0.8);
 }
-const GAUGES = [{ cx: 464, label: 'BMP-2', t0: 13.45, hi: 0.84 }, { cx: 604, label: 'ALP', t0: 13.85, hi: 0.76 }, { cx: 744, label: 'OSTEOCALCIN', t0: 14.2, hi: 0.8 }];
+// needles all settle at the same height: direction only, the three markers come from different cell systems
+const GAUGES = [{ cx: 458, label: 'BMP-2', t0: 12.75, hi: 0.8 }, { cx: 592, label: 'ALP', t0: 13.05, hi: 0.8 }, { cx: 726, label: 'OSTEOCALCIN', t0: 13.35, hi: 0.8 }];
 function plot2(t) {
   fence(20, 880);
   // gauge board
   add(2, () => {
     rect(424, 890, 11, 262, '#A3B5C5'); rect(778, 890, 11, 262, '#A3B5C5');
     fillRR(397, 711, 428, 196, 14, 'rgba(25,45,75,0.16)'); fillRR(390, 702, 428, 196, 14, C.navy); strokeRR(397, 709, 414, 182, 9, C.navy2, 2.5);
-    GAUGES.forEach((g) => { const u = 0.1 + (g.hi - 0.1) * seg(t, g.t0, g.t0 + 0.85, ease.outBack) + 0.012 * Math.sin(t * 5 + g.cx); dial(g.cx, 778, 54, u, g.label, seg(t, g.t0 + 0.6, g.t0 + 0.95)); });
+    GAUGES.forEach((g) => { const u = 0.1 + (g.hi - 0.1) * seg(t, g.t0, g.t0 + 0.85, ease.outBack) + 0.012 * Math.sin(t * 5 + g.cx); dial(g.cx, 776, 50, u, g.label, seg(t, g.t0 + 0.6, g.t0 + 0.95)); });
   });
   // culture dish: back glass
   add(3, () => { fillRR(60, 1100, 900, 84, 16, 'rgba(255,255,255,0.35)'); });
   // cement block + foreman
   add(10, () => block(150, 932, 200, 244, null, 13), () => boxShadow(150, G + 8, 200, 240));
-  const sig = seg(t, 11.9, 12.4) * (1 - seg(t, 15.3, 15.8));
+  const sig = seg(t, 11.5, 12.0) * (1 - seg(t, 15.3, 15.8));
   add(12, () => {                                                                                         // megaphone signal arcs
     for (let i = 0; i < 3; i++) { const ph = ((t * 1.25 + i / 3) % 1), r = 18 + ph * 62; ctx.beginPath(); ctx.arc(316, 838, r, -0.6, 0.6); ctx.strokeStyle = `rgba(255,122,26,${(1 - ph) * 0.85 * sig})`; ctx.lineWidth = 6; ctx.lineCap = 'round'; ctx.stroke(); }
   });
   // Ca2+ flag + wire to the BMP-2 gauge only
   const fl = 0.05 * Math.sin(t * 2.4);
   add(13, () => {
-    ctx.beginPath(); ctx.moveTo(222, 722); ctx.quadraticCurveTo(306, 792, 400, 778);
+    ctx.beginPath(); ctx.moveTo(222, 722); ctx.quadraticCurveTo(306, 792, 398, 776);
     ctx.strokeStyle = C.yellow; ctx.lineWidth = 4.5; ctx.setLineDash([13, 9]); ctx.lineDashOffset = -t * 55; ctx.lineCap = 'butt'; ctx.stroke(); ctx.setLineDash([]);
-    circ(401, 778, 7, C.yellow);
+    circ(399, 776, 7, C.yellow);
     ctx.save(); ctx.translate(222, 720); ctx.rotate(fl);
     poly([0, 0, -124, 6, -116, 37, -124, 68, 0, 64], C.navy); poly([-6, 6, -114, 11, -107, 37, -114, 62, -6, 58], C.yellow);
     txt('Ca', -100, 49, F.osw7(38), C.navy); txt('2+', -57, 33, F.osw7(23), C.navy);
@@ -228,7 +230,7 @@ function plot2(t) {
   });
   // new hires -> builders
   for (let i = 0; i < 4; i++) {
-    const xf = 462 + i * 98, w = walk(t, 960 + i * 86, xf, 10.2, 12.45 + i * 0.12);
+    const xf = 462 + i * 98, w = walk(t, 960 + i * 86, xf, 9.8, 12.05 + i * 0.12);
     const t0 = TL.recruit0 + i * TL.recruitDt, hd = seg(t, t0, t0 + 0.4), rec = seg(t, t0 + 0.15, t0 + 0.6), cheer = seg(t, t0 + 0.3, t0 + 0.55) * (1 - seg(t, t0 + 0.9, t0 + 1.3));
     W_(22 + i * 0.1, { x: w.x, y: G + (i % 2) * 5, role: 'hire', skinI: i + 2, hairI: i, dir: -1, leg: w.moving ? stride(w.x) : 0, armF: w.moving ? undefined : 0.2 + 2.6 * cheer + 0.06 * Math.sin(t * 2 + i), armB: w.moving ? undefined : 0.1 + 2.3 * cheer, helmetDrop: hd > 0 ? hd : null, recruit: rec, bob: 9 * Math.sin(cheer * Math.PI), carry: rec >= 1 && cheer <= 0 ? 'trowel' : null });
     if (hd > 0 && hd < 1) add(21, () => { ctx.beginPath(); ctx.arc(w.x, G - 98, 20 + hd * 34, 0, TAU); ctx.strokeStyle = `rgba(255,201,40,${(1 - hd) * 0.9})`; ctx.lineWidth = 6; ctx.stroke(); });
@@ -267,7 +269,7 @@ function plot3(t) {
   add(2, () => {
     postBoard(138, 704, 272, 122, 1150, C.paper, C.orange);
     txt('NON-BONY SITE', 274, 757, F.osw7(36), C.navy, 'center', 1);
-    txt('rat skin', 274, 802, F.bc6(36), '#C2470A', 'center', 1);
+    txt('rat · subcutaneous', 274, 801, F.bc6(fit('rat · subcutaneous', 240, 36, F.bc6, 0.5)), '#C2470A', 'center', 0.5);
   });
   // ghost outline of the bone that would count as ectopic bone
   add(5, () => {
@@ -281,7 +283,7 @@ function plot3(t) {
   add(10, () => block(450, 978, 190, G + 6 - 978, 'MTA', 21, 46), () => boxShadow(450, G + 6, 190, 196));
   // mineral deposits (dystrophic calcification), not bone
   PEBBLES.forEach((p, i) => {
-    const u = seg(t, 15.7 + i * 0.09, 16.0 + i * 0.09);
+    const u = seg(t, 15.6 + i * 0.045, 15.9 + i * 0.045);
     if (u > 0) add(p[1] > 1000 ? 16 : 11, () => popAt(p[0], p[1], u, () => { poly([p[0] - p[2], p[1], p[0] - p[2] * 0.5, p[1] - p[2] * 1.1, p[0] + p[2] * 0.6, p[1] - p[2] * 1.2, p[0] + p[2], p[1]], '#F7F9FA'); poly([p[0] - p[2], p[1], p[0] + p[2], p[1], p[0] + p[2] * 0.6, p[1] - p[2] * 0.45, p[0] - p[2] * 0.4, p[1] - p[2] * 0.35], '#C5CDD5'); }));
   });
   // immature cells stay immature; a reaction lingers
@@ -305,9 +307,9 @@ function plot4(t) {
     rect(150, 1000, 18, 152, C.navy2); rect(908, 1000, 18, 152, C.navy2);
     fillRR(86, 280, 928, 756, 20, 'rgba(25,45,75,0.18)');
     fillRR(74, 266, 928, 756, 20, C.navy);
-    txt('CALCIUM SILICATE BIOCERAMICS', 538, 319, F.osw5(37), C.yellow, 'center', 5);
+    txt('MTA-TYPE CALCIUM SILICATE CEMENTS', 538, 319, F.osw5(fit('MTA-TYPE CALCIUM SILICATE CEMENTS', 850, 37, F.osw5, 4)), C.yellow, 'center', 4);
     ROWS.forEach((r, i) => {
-      const y = 338 + i * 226, h = 216, mk = seg(t, TL.end + 0.05 + i * 0.3, TL.end + 0.45 + i * 0.3);
+      const y = 338 + i * 226, h = 216, mk = seg(t, TL.end + 0.05 + i * 0.18, TL.end + 0.45 + i * 0.18);
       fillRR(90, y, 896, h, 10, C.paper);
       ctx.save(); rr(90, y, 896, h, 10); ctx.clip(); ctx.beginPath(); ctx.rect(90, y, 168, h); ctx.clip();
       if (r.ok) rect(90, y, 168, h, '#DDF3E6');

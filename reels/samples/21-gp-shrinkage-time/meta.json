@@ -16,11 +16,11 @@
     },
     {
       "claim": "Stamp 'CRYSTALLIZING?' = inferred mechanism (hence the question mark); crystallization probably starts during cooling and continues at 37 °C; Lee's abstract names no mechanism",
-      "source": "Inferred from Grassi MD et al., J Endod 1989;15:517-21 (PMID 2639948; abstract: isothermal shrinkage during crystallization) and Schilder H, Goodman A, Aldrich W, Oral Surg Oral Med Oral Pathol 1985;59:285-96 (PMID 3856822; abstract)"
+      "source": "Inferred from Grassi MD et al., J Endod 1989;15:517-21 (PMID 2639948; abstract: isothermal shrinkage during crystallization) and Schilder H, Goodman A, Aldrich W, Oral Surg Oral Med Oral Pathol 1985;59:285-96 (PMID 3856822; abstract). 'Starts during cooling': Hsu YH et al., J Dent Sci 2020;15:28-33 (PMID 32256997; PMC full text: exotherms at 52 and 32 °C on cooling, soft-type backfill GP only, regular type none)"
     },
     {
       "claim": "Then stable to 24 h (stamp STABLE; end of the 24-h hold), in vitro, one study; Goodman's thesis abstract instead describes contraction continuing over a 24-h hold",
-      "source": "Lee CQ et al., J Endod 1997;23:579-82 (PMID 9587286; abstract). Contrast: Goodman AS, MScD thesis, Boston University 1973 (thesis abstract; data behind Schilder 1985, PMID 3856822)"
+      "source": "Lee CQ et al., J Endod 1997;23:579-82 (PMID 9587286; abstract). Contrast: Goodman AS, MScD thesis, Boston University 1973 (hdl.handle.net/2144/40150; thesis abstract; data behind Schilder 1985, PMID 3856822)"
     },
     {
       "claim": "After 24 h: stamp NO DATA FOUND, ruler 'days ?', stopwatch reads '>24 h' (no volume data found for heated GP)",
@@ -28,7 +28,7 @@
     },
     {
       "claim": "Compact it warm (in vitro): warm vertical compaction (Schilder technique) more than compensated for shrinkage on cooling; not tested against the hours-long tail",
-      "source": "Marlin J, MSD thesis, Boston University 1971 (thesis abstract only; probably published as Marlin J, Schilder H, Oral Surg Oral Med Oral Pathol 1973;36:872-9, PMID 4524837, paper not read)"
+      "source": "Marlin J, MSD thesis, Boston University 1971 (hdl.handle.net/2144/45904; thesis abstract only; probably published as Marlin J, Schilder H, Oral Surg Oral Med Oral Pathol 1973;36:872-9, PMID 4524837, paper not read)"
     },
     {
       "claim": "Use sealer (in vitro): the seal of injected thermoplasticized GP was enhanced by a sealer (dye penetration)",

@@ -3,8 +3,8 @@
   "slug": "37-bioceramic-antibacterial",
   "title": "Bioceramics: bactericidal or bacteriostatic?",
   "style": "Agar plate lab bench",
-  "topic": "Calcium silicate materials kill on contact when fresh, are weaker and partial once set; healing is comparable to other sealers.",
-  "duration": 24.0,
+  "topic": "Fresh calcium silicate sealer kills on contact; set MTA kills partially and fades with aging; healing is comparable to other sealers.",
+  "duration": 24.4,
   "claims": [
     {
       "claim": "MTA: pH 10.2 at mixing, 12.5 at 3 h (cement, pH meter)",
@@ -15,37 +15,37 @@
       "source": "Zhang et al., J Endod 2009;35:1051-5 (PMID 19567333), abstract"
     },
     {
-      "claim": "Schematic: pink pH halo, hydroxyl-ion dots and clear-zone size on the fresh plate are illustrative",
-      "source": "Illustration; fresh calcium silicate materials can give agar-diffusion zones: Torabinejad et al., J Endod 1995;21:403-6 (PMID 7595152)"
+      "claim": "Schematic: pink pH halo, hydroxyl-ion dots and the agar zone on the fresh plate (a zone = no growth, not kill)",
+      "source": "Illustration; freshly mixed calcium silicate materials can give agar zones: Farrugia et al., J Appl Biomater Funct Mater 2017;15:e153-61 (PMID 28256700); Candeiro et al., Int Endod J 2016;49:858-64 (PMID 26281002), abstracts"
     },
     {
-      "claim": "Set ProRoot MTA aged in water, 1 h contact with E. faecalis: 97% killed at day 1, 82% at day 7 (in vitro)",
+      "claim": "Set: partial, fading. Set ProRoot MTA aged in water, 1 h contact with E. faecalis: 97% killed at day 1, 82% at day 7 of aging (in vitro)",
+      "source": "Farrugia et al., Sci Rep 2017;7:41359 (PMID 28128328), full text, Table 1"
+    },
+    {
+      "claim": "Set plate shows no clear zone (set ProRoot MTA gave no inhibition zone); residual halo schematic",
       "source": "Farrugia et al., Sci Rep 2017;7:41359 (PMID 28128328), full text"
     },
     {
-      "claim": "Set plate shows no clear zone (set ProRoot MTA gave no inhibition zone)",
-      "source": "Farrugia et al., Sci Rep 2017;7:41359 (PMID 28128328), full text"
-    },
-    {
-      "claim": "In dentin tubules: slow, partial kill; more dead at day 30 than day 1 (in vitro; cell counts schematic)",
+      "claim": "In dentin tubules, sealers: slow, partial kill; more dead at day 30 than day 1 (in vitro; cell counts schematic)",
       "source": "Wang et al., J Endod 2014;40:505-8 (PMID 24666900); Du et al., J Endod 2015;41:1294-8 (PMID 26092772), abstracts"
     },
     {
       "claim": "Bactericidal = count falls; bacteriostatic = count held (schematic curves and colonies)",
-      "source": "Pankey & Sabath, Clin Infect Dis 2004;38:864-70 (PMID 14999632), concept only"
+      "source": "Pankey & Sabath, Clin Infect Dis 2004;38:864-70 (PMID 14999632), abstract, concept only"
     },
     {
-      "claim": "FRESH sits on the bactericidal half; SET ? stops between the halves (set = weaker; 'bacteriostatic' not measured)",
+      "claim": "FRESH and SET both sit on the bactericidal half; set = partial kill (under 2 log in 1 h); bacteriostatic action has not been measured",
       "source": "Inference from Zhang 2009 (PMID 19567333) and Farrugia 2017 (PMID 28128328)"
     },
     {
-      "claim": "Healing: comparable to other sealers (clinical meta-analysis)",
-      "source": "Sabeti et al., J Endod 2024;50:735-46.e1 (PMID 38548045); Donnermeyer et al., J Dent 2026;176:107002 (PMID 42668107), abstracts"
+      "claim": "Verdict: Fresh: bactericidal on contact; Set: partial, fades (both tagged IN VITRO)",
+      "source": "Zhang et al., J Endod 2009 (PMID 19567333), abstract; Farrugia et al., Sci Rep 2017 (PMID 28128328), full text"
     },
     {
-      "claim": "Evidence on antibacterial activity is mostly in vitro",
-      "source": "Simundic Munitic et al., PLoS One 2019;14:e0223575 (PMID 31622387), abstract"
+      "claim": "Healing: comparable (tagged CLINICAL; single-cone trials with a calcium silicate sealer vs other sealers/techniques, 3 trials, failure RR 0.71, 95% CI 0.33-1.51)",
+      "source": "Sabeti et al., J Endod 2024;50:735-46.e1 (PMID 38548045), abstract; see also Donnermeyer et al., J Dent 2026;176:107002 (PMID 42668107), abstract"
     }
   ],
-  "caption": "Bioceramics: bactericidal or bacteriostatic? It depends on when, and on which test.\n• Freshly mixed iRoot SP killed all free-floating E. faecalis in 2 min of direct contact (AH Plus needed 5).\n• Set ProRoot MTA, 1 h contact: 97% killed at day 1, 82% at day 7 (under 2 log).\n• In dentin tubules sealers kill slowly and only partially over weeks.\n• Clinical healing: comparable to other sealers.\nLab data are in vitro. Schematic animation: halo, zones, counts and curves are illustrative.\nRefs: Zhang 2009, Wang 2014, Sabeti 2024 (J Endod); Farrugia 2017 (Sci Rep).\n#endodontics #bioceramics #MTA #rootcanal #endodontist #dentalresident #dentistry"
+  "caption": "Bioceramics: bactericidal or bacteriostatic? It depends on when, and on the test.\n• Fresh iRoot SP killed all free-floating E. faecalis in 2 min of contact (AH Plus: 5); pH alone did not explain it.\n• Set ProRoot MTA, 1 h contact: 97% killed after 1 day in water, 82% after 7 (<2 log); aged in blood, no effect by day 7.\n• In tubules, sealers kill slowly and partially (BC Sealer = AH Plus).\n• Clinical: healing similar to other sealers (single-cone trials).\nIn vitro unless stated. Schematic: halo, agar zone (no growth, not kill), counts, curves.\nRefs: Zhang 2009, Wang 2014, Du 2015, Sabeti 2024 (J Endod); Farrugia 2017 (Sci Rep).\n#endodontics #bioceramics #MTA #rootcanal #dentistry"
 }

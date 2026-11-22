@@ -1199,6 +1199,157 @@
     "caption": "Who lives in the canal? Depends on whether the tooth was treated.\n\nPrimary (untreated necrotic pulp): ~10-20 taxa per canal (molecular studies), mostly anaerobes, Gram - and +.\nRoot-filled, with a lesion: 1-5 taxa if adequately treated (culture, early PCR), more facultatives, mostly Gram +, sometimes yeast.\nPersistent = survived treatment; secondary = got in during or after it.\nE. faecalis: qPCR, 11 of 29 such teeth, dominant in 1. Sequencing finds more taxa in both.\n\nRefs: Siqueira & Rôças 2009, J Oral Microbiol; Rôças & Siqueira 2012, J Clin Microbiol; Siqueira 2016, PLoS One; Manoil 2020, Proteomics Clin Appl\nSchematic animation.\n\n#endodontics #endo #microbiology #rootcanal #endoresident"
   },
   {
+    "id": "30",
+    "slug": "30-resorption-surface-pressure",
+    "title": "Surface + pressure resorption",
+    "style": "Risograph duotone print",
+    "topic": "External surface and pressure resorption stop when their cause stops; the pulp is not the cause, so no root canal treatment.",
+    "duration": 22,
+    "video": "videos/30-resorption-surface-pressure.mp4",
+    "poster": "posters/30-resorption-surface-pressure.jpg",
+    "claims": [
+      {
+        "claim": "Surface resorption: small injury -> shallow lacunae in cementum (schematic cells)",
+        "source": "Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, section 6.1"
+      },
+      {
+        "claim": "No infection -> new cementum in weeks (clock has no numerals and sweeps under a third of a turn; narrative-review time frame)",
+        "source": "Lin S, Moreinos D, Kaufman AY, Abbott PV. Dent Traumatol 2022;38:253-266 (PMID 35559593) - full text ('cementoid-like tissue ... about 4 weeks'); Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, section 6.1 ('will not persist', 'a few weeks')"
+      },
+      {
+        "claim": "Pressure keeps clasts working (labels: ortho force, impacted tooth)",
+        "source": "Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract"
+      },
+      {
+        "claim": "Pressure off -> it stops. A shortened root stays short.",
+        "source": "Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text (relevant sections) and abstract"
+      },
+      {
+        "claim": "No root canal treatment. Pulp is not the cause.",
+        "source": "Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text, Table 1 and external surface resorption section (no signs of endodontic disease; pulp tests normal; managed by eliminating the etiological factor); Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, sections 6.1, 6.5, 6.6 (surface: no management indicated; pressure: clinically normal pulp; 'Orthodontic resorption itself does not cause pulp pathosis')"
+      },
+      {
+        "claim": "Radiograph icon, surface: usually nothing",
+        "source": "Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, section 6.1 ('will not usually be evident')"
+      },
+      {
+        "claim": "Radiograph icon, pressure (orthodontic): blunted apex",
+        "source": "Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, section 6.6 ('shortened and blunted with rounded apices'); Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text ('flattening or blunting of the root apices')"
+      },
+      {
+        "claim": "Remove the cause. (printed under the PRESSURE panel only; surface resorption needs no management)",
+        "source": "Fuss Z et al. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract (removal of the pressure is the treatment of choice); Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - full text (managed by eliminating the etiological factor); Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) - full text, section 6.1 (surface: no management indicated)"
+      },
+      {
+        "claim": "Toy model / schematic: cell size, amount of root loss and timing are exaggerated, not to scale (labelled on every sheet)",
+        "source": "Illustration only"
+      }
+    ],
+    "caption": "Two root resorptions that stop when the cause stops.\n\nSURFACE: one-off injury, shallow lacunae, new cementum in weeks if no infection. Usually not seen on radiographs. No treatment.\nPRESSURE (ortho, impacted tooth, cyst/tumor): active while pressure lasts. Remove it and it arrests, but not instantly or always. Lost root length stays lost.\nPULP: not the cause. Root canal treatment only if the pulp is diseased; advanced defects can reach it.\n\nRefs: Lin 2022, Abbott & Lin 2022, Fuss 2003, Dent Traumatol; Patel 2022, Int Endod J; Cheng 2009, AJODO; Falahat 2008, Angle Orthod.\nSchematic animation; root loss exaggerated.\n#endodontics #rootresorption #orthodontics #dentaltrauma #endoresident"
+  },
+  {
+    "id": "31",
+    "slug": "31-resorption-external-inflammatory",
+    "title": "External inflammatory resorption",
+    "style": "Hazard signage placard",
+    "topic": "Damaged root surface + infected canal = external inflammatory resorption of root and bone; treating the canal early arrests it.",
+    "duration": 21.9,
+    "video": "videos/31-resorption-external-inflammatory.mp4",
+    "poster": "posters/31-resorption-external-inflammatory.jpg",
+    "claims": [
+      {
+        "claim": "Damaged root surface (luxation, avulsion) + infected canal = inflammatory resorption (end card recap: DAMAGE + INFECTION)",
+        "source": "Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract (two phases: injury + stimulation by infection); 'luxation, avulsion' as the typical injuries: Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text"
+      },
+      {
+        "claim": "Toxins via dentinal tubules reach the denuded surface; intact cementum blocks them (schematic; source line says 'Tubule theory: Andreasen 1981')",
+        "source": "Andreasen JO. J Endod 1981;7:294-301 (PMID 6942086); reprint J Endod 2021;47:865-72 (PMID 33975756) - abstract of reprint"
+      },
+      {
+        "claim": "By week 1: histology, monkey (dial qualifier: after trauma, timeline schematic)",
+        "source": "Andreasen JO. Swed Dent J 1980;4:101-10 (PMID 6933704) - abstract"
+      },
+      {
+        "claim": "~1 month: on X-ray (inflammatory resorption 'usually observed after 1 month' in 400 replanted human incisors)",
+        "source": "Andreasen JO, Borum MK, Jacobsen HL, Andreasen FM. Endod Dent Traumatol 1995;11:76-89 (PMID 7641622) - abstract"
+      },
+      {
+        "claim": "Root + bone resorb: bowl-shaped craters in the root and the facing bone (schematic cutaway, not to scale)",
+        "source": "Abbott PV. Aust Dent J 2016;61 Suppl 1:82-94 (PMID 26923450) - abstract; Lin S, Moreinos D, Kaufman AY, Abbott PV. Dent Traumatol 2022;38:253-66 (PMID 35559593) - review full text (PMC9546147)"
+      },
+      {
+        "claim": "Months: root can be lost (untreated; review-level statement, tagged '(review)' in the source line)",
+        "source": "Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text (PMC9790676; the sentence carries no reference there)"
+      },
+      {
+        "claim": "\"Very rapid in children\" (quoted consensus wording, not a measured rate; the sentence comes from the open-apex paragraph - see caption)",
+        "source": "Fouad AF et al. (IADT). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 10; same sentence in Bourguignon C et al. (IADT). Dent Traumatol 2020;36:314-30 (PMID 32475015), sect. 13.2 - guideline full text (not in PMC; read in the AAPD Reference Manual reprints, re-read at the citation audit)"
+      },
+      {
+        "claim": "Disinfect the canal + Ca(OH)2 dressing: stimulus cut, resorption arrests; crater is lined, not refilled (schematic)",
+        "source": "Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82 (PMID 12848710) - abstract; Bourguignon C et al. (IADT). Dent Traumatol 2020;36:314-30 (PMID 32475015), sect. 13.3 - guideline full text (AAPD reprint); repair as a cementum lining: Trope M et al. Endod Dent Traumatol 1995;11:124-8 (PMID 7641628; dogs) - abstract"
+      },
+      {
+        "claim": "97% healed: 192 of 197 resorbing teeth (luxated non-vital maxillary incisors, Ca(OH)2 then GP, radiographic, retrospective); 5 went on to ankylosis",
+        "source": "Cvek M. Endod Dent Traumatol 1992;8:45-55 (PMID 1521505) - abstract"
+      },
+      {
+        "claim": "Replanted mature (closed-apex) tooth: start root canal treatment within 2 weeks",
+        "source": "Fouad AF et al. (IADT). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 10 - guideline full text (AAPD Reference Manual reprint, re-read at the citation audit)"
+      }
+    ],
+    "caption": "External inflammatory (infection-related) resorption after trauma = damaged root surface + infected canal.\nBy week 1 (monkey histology); on X-ray usually ~1 month (human replants).\n192 of 197 resorbing teeth healed after Ca(OH)2 then GP (luxated non-vital incisors; radiographic, retrospective; 5 ankylosed).\nIADT 2020: replanted closed-apex tooth, start RCT within 2 weeks. Open apex: only if necrosis/infection evident; resorption is \"very rapid in children\".\nSchematic animation.\nRefs: Fuss 2003, Fouad 2020 Dent Traumatol; Andreasen 1980 Swed Dent J, 1981 J Endod; Andreasen 1995, Cvek 1992 Endod Dent Traumatol; Patel 2022 Int Endod J\n#endodontics #dentaltrauma #rootresorption #IADT #boardprep"
+  },
+  {
+    "id": "32",
+    "slug": "32-resorption-replacement-ankylosis",
+    "title": "Ankylosis and replacement resorption",
+    "style": "Geology field diagram",
+    "topic": "Dead PDL after a long dry time: bone fuses to the root (ankylosis), then remodeling replaces the root with bone; no proven arrest.",
+    "duration": 21.5,
+    "video": "videos/32-resorption-replacement-ankylosis.mp4",
+    "poster": "posters/32-resorption-replacement-ankylosis.jpg",
+    "claims": [
+      {
+        "claim": "Replacement resorption: the root is gradually replaced by bone (title; picture: root replaced from the surface inward while crown and root filling remain - schematic)",
+        "source": "AAE Glossary definition (external replacement resorption) as quoted in Lin S, Moreinos D, Kaufman AY, Abbott PV. Dent Traumatol 2022;38:253-66 (PMID 35559593), Table 1 - review full text (PMC9546147; re-read at the citation audit); Hammarström L, Blomlöf L, Lindskog S. Endod Dent Traumatol 1989;5:163-75 (PMID 2517781) - abstract, monkey; Andersson L et al. Int J Oral Surg 1984;13:423-31 (PMID 6438004) - abstract, background statement; Malmgren B. J Endod 2013;39(3 Suppl):S67-72 (PMID 23439048) - abstract, review"
+      },
+      {
+        "claim": "DRY > 60 MIN (source line Fouad 2020) -> in-diagram label 'PDL likely non-viable'",
+        "source": "Fouad AF et al. (IADT avulsion guideline). Dent Traumatol 2020;36:331-42 (PMID 32460393), sect. 3 - guideline full text (AAPD Reference Manual reprint; re-read at the citation audit)"
+      },
+      {
+        "claim": "Bone grows across the dead PDL -> stamp ANKYLOSIS (fusion shown before any root loss; source line 'Hammarström 1989, Endod Dent Traumatol · monkey')",
+        "source": "Hammarström L, Blomlöf L, Lindskog S. Endod Dent Traumatol 1989;5:163-75 (PMID 2517781) - abstract (monkey, 1 h extraoral, endodontically treated: 'most of the periodontal membrane was replaced by bone'; 'The initial ankylosis was not preceded by root resorption'); Andreasen JO, Kristerson L. Acta Odontol Scand 1981;39:1-13 (PMID 6943904) - abstract (authors' postulate: 'rapid osteogenesis in the alveolus which establishes an ankylosis'); Abbott PV, Lin S. Dent Traumatol 2022;38:267-85 (PMID 35605161) - review full text (PMC9543863; re-read at the citation audit): ankylosis can occur without any resorption; root canal treatment will not prevent or arrest external replacement resorption"
+      },
+      {
+        "claim": "Toy model / schematic: time strip WEEKS - MONTHS - YEARS; the replacement front follows the pointer (no loss in WEEKS, a shallow rim at the MONTHS/YEARS boundary, most of the root lost inside YEARS); labeled 'time scale schematic' and 'schematic - not to scale'",
+        "source": "Order of magnitude only: fusion at 1-2 weeks in monkey histology (PMID 2517781; Andreasen JO. Swed Dent J 1980;4:101-10, PMID 6933704); usually observed (clinical/radiographic diagnosis) after 1-2 months in humans (Andreasen JO et al. Endod Dent Traumatol 1995;11:76-89, PMID 7641622); years: Andersson, Bodin & Sörensen 1989 (PMID 2598883) - abstracts"
+      },
+      {
+        "claim": "Age 8-16: root resorbed in 3-7 yr (age at avulsion; ≥ 1 h dry; authors' conclusion from a radiographic index, mean follow-up 4.8 y)",
+        "source": "Andersson L, Bodin I, Sörensen S. Endod Dent Traumatol 1989;5:38-47 (PMID 2598883) - abstract"
+      },
+      {
+        "claim": "Signs: metallic percussion, no mobility, infraposition in a growing jaw",
+        "source": "Fouad et al. 2020 (PMID 32460393), sect. 11.1 ('a metallic sound to percussion') and 11.3.1 ('no mobility (ankylosis) with high-pitched (metallic) percussion sound') - guideline full text (AAPD reprint; re-read at the citation audit); Kawanami M et al. Endod Dent Traumatol 1999;15:50-6 (PMID 10379271) - abstract; Campbell KM, Casas MJ, Kenny DJ. J Can Dent Assoc 2005;71:763-8 (PMID 16324230) - abstract"
+      },
+      {
+        "claim": "No proven way to arrest it",
+        "source": "Campbell KM, Casas MJ, Kenny DJ. J Can Dent Assoc 2005;71:763-8 (PMID 16324230) - abstract ('no known treatment to arrest this condition'; management options 'do not offer any proven long-term benefit'); Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320) - review full text (PMC9790676; re-read at the citation audit: 'Presently, there is no treatment to arrest ERR'); case-series exception: Yoshpe M et al. J Endod 2020;46:192-9 (PMID 31813579) - abstract (4 patients / 5 teeth, regenerative endodontics: 'In 3 of the cases, replacement resorption was arrested')"
+      },
+      {
+        "claim": "Growing patient: plan early, e.g. decoronation (inset: crown and root filling removed, root left under the flap - labeled schematic)",
+        "source": "Malmgren B, Cvek M, Lundberg M, Frykholm A. Scand J Dent Res 1984;92:391-9 (PMID 6593804) - abstract; Fouad et al. 2020 (PMID 32460393), sect. 3.1.3 and 12 (decoronation is one listed option; sect. 12: discussions should ideally 'take place before the tooth shows signs of infra-position') - guideline full text (AAPD reprint; re-read at the citation audit); timing: Malmgren B, Malmgren O. Dent Traumatol 2002;18:28-36 (PMID 11841463) - abstract"
+      },
+      {
+        "claim": "Protect the PDL: replant at once, or store in milk (lowers the risk; not a guarantee; a tooth dry > 60 min is still replanted - caption)",
+        "source": "Fouad et al. 2020 (PMID 32460393), sect. 2 (immediate replantation; storage media in order: milk, HBSS, saliva, saline), sect. 3 and 3.1.3 - guideline full text (AAPD reprint; re-read at the citation audit)"
+      }
+    ],
+    "caption": "External replacement resorption: PDL dies, root is remodeled like bone.\nDry > 60 min: PDL cells likely non-viable; still replant (IADT 2020). Bone bridges the dead PDL and fuses to the root (ankylosis; monkey data), then replaces it. Root canal treatment does not stop it.\nAvulsed at 8-16, ≥ 1 h dry: root resorbed within 3-7 yr (authors' conclusion).\nNo proven way to arrest it. Growing patient: plan early, e.g. decoronation.\nSchematic animation.\nRefs: Fouad 2020, Abbott & Lin 2022 Dent Traumatol; Hammarström 1989, Andersson 1989 Endod Dent Traumatol; Campbell 2005 J Can Dent Assoc; Malmgren 1984 Scand J Dent Res\n#endodontics #dentaltrauma #rootresorption #ankylosis #boardprep"
+  },
+  {
     "id": "33",
     "slug": "33-resorption-external-cervical",
     "title": "External cervical resorption on CBCT",

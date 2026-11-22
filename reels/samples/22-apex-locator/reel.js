@@ -179,7 +179,7 @@
     maskTrace(g, [[14, 240], [14, 1700]], 5); maskTrace(g, [[27, 300], [27, 1330], [14 + 13, 1330]], 4);
     maskTrace(g, [[1066, 250], [1066, 1090]], 5);
     // a few quiet runs behind the content
-    maskTrace(g, [[330, 1010], [372, 1010], [392, 990], [392, 950]], 4); maskVia(g, 392, 950, 5);
+    // (final QA: the short run at x 330-392, y 950-1010 was removed; it ran under "CONFIRM WITH A RADIOGRAPH")
     maskTrace(g, [[64, 1066], [300, 1066]], 4); maskVia(g, 300, 1066, 5);
     maskTrace(g, [[660, 1128], [720, 1128], [740, 1108]], 4);
     // decorative parts

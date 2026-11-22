@@ -134,11 +134,14 @@ Confidence = confidence that the source says exactly this (not that the number i
 5. **After 24 h:** "no data found" (L4). Draw the gap in the record; do not draw a line.
    *(Changed from "not measured": that is an absolute claim a literature search cannot prove.)*
 6. **What to do:** "Compact it warm. Use sealer." + qualifier "in vitro" —
-   source line `Marlin 1971 thesis (publ. OOO 1973) · Wu 2000 IEJ`. (C1, C3)
-   The plain line `Marlin & Schilder 1973 · Wu 2000` is tolerable only if meta.json and NOTES.md state that the
-   1973 paper was not read and the wording comes from the thesis abstract.
+   source line `Marlin 1971 BU thesis · Bradshaw 1989 Int Endod J`. (C1, C8)
+   *(Citation audit: this line replaces `Marlin 1971 thesis (publ. OOO 1973) · Wu 2000 IEJ`. "publ. OOO 1973" is
+   an inference — the thesis and the 1973 paper have different titles and the paper was not read — and Wu 2000's
+   main result (sealer-free GP leaked less at 6 months) does not support "use sealer"; see the Addendum, C8.)*
    - Supported: vertical compaction of warm GP more than compensated for shrinkage (Marlin thesis abstract — the
-     1973 paper itself was not read; say so in meta.json); GP without sealer leaked more at 48 h (Wu 2000).
+     1973 paper itself was not read; say so in meta.json); the seal of injected thermoplasticized GP was enhanced
+     by a sealer (Bradshaw 1989, abstract). Wu 2000 (GP without sealer leaked more at 48 h, less by 6 months) is
+     context only.
    - "Hold plugger pressure ~10 s while it cools" may be shown **only** with the tag "technique convention"
      (narrative review, Tait 2025 Br Dent J, downpack step, uncited). It must not sit under "in vitro evidence".
 
@@ -165,8 +168,8 @@ Suggested `meta.json` claims (if the builder uses the facts above):
 - "Backfill GP: 1.0–2.3 % linear shrinkage within 10 min cooling 75→37 °C (3 brands, tabletop device, in vitro)" — Lottanti S et al., J Endod 2014;40:721-4 (PMID 24767571; abstract)
 - "Cooled from 80 °C and held at 37 °C, shrinkage continued 45 min–10 h before the volume stabilized (4 thermosensitive GP products, dilatometer, 24-h hold, in vitro; clock start not defined in the abstract)" — Lee CQ et al., J Endod 1997;23:579-82 (PMID 9587286; abstract)
 - "Beyond 24 h: no volume data found for heated GP" — literature search, no study found (see RESEARCH.md L4)
-- "Vertical compaction of warm GP more than compensated for shrinkage (in vitro)" — Marlin J, MSD thesis, Boston University 1971 (abstract; published as Marlin J, Schilder H, Oral Surg Oral Med Oral Pathol 1973;36:872-9, PMID 4524837, paper not read)
-- "GP without sealer leaked more than GP + sealer at 48 h (in vitro, fluid transport)" — Wu MK et al., Int Endod J 2000;33:121-5 (PMID 11307452; abstract)
+- "Vertical compaction of warm GP more than compensated for shrinkage (in vitro)" — Marlin J, MSD thesis, Boston University 1971 (hdl.handle.net/2144/45904; abstract; probably published as Marlin J, Schilder H, Oral Surg Oral Med Oral Pathol 1973;36:872-9, PMID 4524837, paper not read)
+- "The seal of injected thermoplasticized GP was enhanced by a sealer (in vitro, dye penetration)" — Bradshaw GB, Hall A, Edmunds DH, Int Endod J 1989;22:17-20 (PMID 2599657; abstract) *(citation audit: replaces the Wu 2000 line, see Addendum C8)*
 - (only if shown) "Technique convention: hold plugger pressure ~10 s after heat-off in the downpack" — Tait C et al., Br Dent J 2025;238:487-496 (PMID 40217031; narrative review, full text)
 - "Toy model / schematic: curve shapes, temperature trace, composite time axis, canal gap exaggerated, mechanism label 'crystallizing' inferred from Grassi 1989 / Schilder 1985"
 
@@ -334,7 +337,7 @@ Word budget ≈ 55 must-read words. One source line per scene. Red pen = GP volu
 | 6.0–7.0 s | Paper jerks, a vertical typed tick: **"CHART SPEED CHANGED"**; ruler relabels to HOURS. | — | "CHART SPEED CHANGED" |
 | 7.0–12.5 s | Blue pen dead flat on 37 °C. Red pen keeps creeping down and flattens; a bracket spans **45 min → 10 h** (optionally four faint traces flattening at different times = four products, schematic). Stamp **CRYSTALLIZING** (inferred mechanism — see (b)3; alternative stamp **37 °C HOLD**). | Gap grows a little more, slowly, in step with the red trace. | "held at 37 °C: still shrinking 45 min–10 h" · "in vitro" · `Lee 1997 J Endod` |
 | 12.5–14.5 s | Second speed-change tick, ruler → DAYS. Red trace flat to the **24 h** tick, stamp **STABLE · in vitro**. Past 24 h the red pen lifts off the paper; typed across the empty grid: **"NO DATA FOUND"** *(fact-check: was "NOT MEASURED")*. | Gap unchanged. | "stable — watched 24 h" · "after that: no data found" |
-| 14.5–19.0 s | Chart keeps scrolling empty in the background (dimmed). | Rewind to the warm state: a plugger compacts the warm GP while the glow fades; sealer film shown at the wall; the gap is drawn smaller, not abolished. Label "schematic". | **"Compact it warm. Use sealer."** · "in vitro" · `Marlin 1971 thesis (publ. OOO 1973) · Wu 2000 IEJ` *(fact-check: was "Hold pressure while it cools. Sealer takes the rest." — a pressure hold is convention only and "takes the rest" is unsupported; an optional small tag "hold ~10 s = technique convention" is allowed)* |
+| 14.5–19.0 s | Chart keeps scrolling empty in the background (dimmed). | Rewind to the warm state: a plugger compacts the warm GP while the glow fades; sealer film shown at the wall; the gap is drawn smaller, not abolished. Label "schematic". | **"Compact it warm. Use sealer."** · "in vitro" · `Marlin 1971 BU thesis · Bradshaw 1989 Int Endod J` *(citation audit: was `Marlin 1971 thesis (publ. OOO 1973) · Wu 2000 IEJ`, see Addendum C8; fact-check: was "Hold pressure while it cools. Sealer takes the rest." — a pressure hold is convention only and "takes the rest" is unsupported; an optional small tag "hold ~10 s = technique convention" is allowed)* |
 | 19.0–20.5 s | Text fades first, then pens return to park, paper blank → loops into frame 0. | Canal returns to "just backfilled". | (handle only) |
 
 Notes for the builder:
@@ -369,8 +372,11 @@ Refs:
 - Grassi MD, Plazek DJ, Michanowicz AE, Chay IC. J Endod 1989;15:517-21. PMID 2639948.
 - Capurro MA, Goldberg F, Balbachan L, Macchi RL. Endod Dent Traumatol 1993;9:160-4. PMID 8269881.
 - Dong M et al. Polymer Testing 2019;73:115-123 (not PubMed-indexed).
-- Marlin J, Schilder H. Oral Surg Oral Med Oral Pathol 1973;36:872-9. PMID 4524837.
-  (verified only via Marlin J, MSD thesis abstract, Boston University, 1971.)
+- Marlin J. MSD thesis, Boston University, 1971 (hdl.handle.net/2144/45904; thesis abstract read). Probably
+  published as Marlin J, Schilder H. Oral Surg Oral Med Oral Pathol 1973;36:872-9. PMID 4524837 (no abstract,
+  paper not read).
+- Bradshaw GB, Hall A, Edmunds DH. Int Endod J 1989;22:17-20. PMID 2599657. (sealer enhanced the seal of injected
+  GP) — added at the review-fix stage
 - Wu MK, Fan B, Wesselink PR. Int Endod J 2000;33:121-5. PMID 11307452.
 - Ørstavik D, Nordahl I, Tibballs JE. Dent Mater 2001;17:512-9. PMID 11567689. (sealers, separate process)
 - Pirani C, Camilleri J. Int Endod J 2023;56 Suppl 3:436-454. PMID 35735776. (technique did not affect outcome; high risk of bias)
@@ -379,8 +385,10 @@ Refs:
 - Tait C, Camilleri J, Blundell K. Br Dent J 2025;238:487-496. PMID 40217031. (narrative review) — cite only if the "hold ~10 s" convention is mentioned
 
 Short "Refs:" line for the caption: `Refs: Lee 1997 J Endod; Lottanti 2014 J Endod; Schilder 1985 OOO;
-Marlin & Schilder 1973 OOO; Wu 2000 Int Endod J; Ørstavik 2001 Dent Mater; Pirani & Camilleri 2023 Int Endod J;
-Mushtaq 2026 Sci Rep.` (Drop any reference whose claim the final caption does not make.)
+Marlin 1971 BU thesis; Bradshaw 1989 Int Endod J; Wu 2000 Int Endod J; Ørstavik 2001 Dent Mater; Pirani &
+Camilleri 2023 Int Endod J; Mushtaq 2026 Sci Rep.` (Drop any reference whose claim the final caption does not
+make.) *(Citation audit: "Marlin & Schilder 1973 OOO" replaced by the thesis, which is what was read; Bradshaw
+1989 added for "use sealer". The caption actually posted is in meta.json.)*
 
 ---
 
@@ -458,3 +466,27 @@ limits; Skinner & Himel 1987; Evans & Simon 1986; Buchanan 1996; Wong 1981/1982.
 - L4 lead still unread: Wong, Peters & Lorton, J Endod 1981;7:551-8 (PMID 6985547). Check before posting.
 - No other fact changed. The reel never converts or merges the linear % (Lottanti) with volume (Lee); the red trace
   is labelled "GP SIZE".
+
+## Citation audit log (independent, after the final render)
+
+**Method.** PubMed metadata + abstract re-fetched for the papers behind every on-screen claim and every meta.json
+citation (PMIDs 24767571, 9587286, 2639948, 3856822, 11307452, 19026888, 6985547, 4524837, 2599657, 16708520,
+32256997) and for 41872366, 8269881, 6948908, 34492231, 41685848, 39873081, 40217031. PMC full text re-read for Hsu
+2020 (PMC7109509). The remaining journal citations in this file (Tsukada 2004, Schilder 1974 Parts I–III, Goodman
+1981, Venturi 2002, Weller & Koch 1995, Donley 1991, Cohen 1992, Johnson & Bond 1999, Peng 2007, Pirani & Camilleri
+2023, Ørstavik 2001, Kazemi 1993, Hammad 2008, Carvalho-Junior 2007, Maniglia-Ferreira 2007, Combe 2001, Camilleri
+2015, Skinner & Himel 1987, Evans & Simon 1986) were matched to the PMIDs given here by journal + year + volume +
+first page + first author with the PubMed citation matcher; their abstracts were not re-read at this audit. The
+Marlin and Goodman thesis records in `_scratch/` were re-read. Not re-checked: Dong 2019 and Chang 2011 (not in
+PubMed).
+
+**Result.** No wrong first author, year, journal, volume, page range, PMID or DOI. Every quotation attached to an
+on-screen claim (T1, T3, T5, T8, C1, C3, C8, L5) is in the abstract, thesis abstract or full text named in its
+"Verified from" cell.
+
+| # | Where | Problem found | Change made |
+|---|---|---|---|
+| A1 | (b)6; suggested meta.json claims; storyline payoff row; (g) Refs | Still recommended `Marlin 1971 thesis (publ. OOO 1973) · Wu 2000 IEJ` for "Compact it warm. Use sealer." although the Addendum had replaced Wu 2000 by Bradshaw 1989 (Wu's 6-month result runs against "use sealer") and had downgraded "published as" to "probably published as". | All four places now give `Marlin 1971 BU thesis · Bradshaw 1989 Int Endod J`; Marlin & Schilder 1973 is listed as "probably published as … paper not read". |
+| A2 | NOTES.md claim 3 / meta.json claim 3 (uses T10, T12) | "Hsu 2020 found crystallization exotherms at 52 and 32 °C on cooling" dropped the qualifier in T12: soft-type backfill GP only, regular type none, figures from the full text. "Meyer 2006: fastest shrinkage 55–40 °C" applies to conventional GP (α/β: 45–40 °C). | Qualifiers and full citations added in NOTES.md; Hsu 2020 added to the source of meta.json claim 3. T10 and T12 in this file were already correct. |
+| A3 | L4 lead (Wong 1981) | Still unread. Second-hand description found in Abedi H, Shahriari S, Jalalzadeh SM, Moradkhany R, Dent Res J (Isfahan) 2009;6(2):55-58 (PMID 21528031, PMC3075455 full text): Wong et al. "used split molds" and "obturations using vertical condensation were 2.8 % heavier than those with LC". | None on screen ("NO DATA FOUND" describes the search). Recorded here and in NOTES.md; the paper must still be read before posting. |
+

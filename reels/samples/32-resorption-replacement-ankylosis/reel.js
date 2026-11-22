@@ -29,7 +29,7 @@ const T = {
   dry0: 0.8, dry1: 2.4,          // stopwatch sweep
   in0: 2.6, in1: 3.2,            // replanted
   zin0: 2.9, zin1: 3.9,          // zoom in
-  lab0: 3.7, lab1: 6.0,          // in-diagram plaque "PDL likely non-viable" (held into the bridging)
+  lab0: 3.7, lab1: 6.1,          // in-diagram plaque "PDL likely non-viable" (held into the bridging)
   fuse0: 4.7, fuse1: 8.2,        // caption
   br0: 5.0, br1: 7.0,            // bone bridging
   st0: 6.4,                      // stamp lands when the bridges are ~70 % across; it stays until the signs scene
@@ -520,12 +520,13 @@ function drawPanel(t) {
   drawSection(t, S);
   ctx.restore();
   // section end marks
-  const ma = 1 - S.k;
+  const ma = 1 - clamp(S.k / 0.45);   // gone before the DETAIL tag (same corner) starts to appear
   if (ma > 0) { ctx.save(); ctx.globalAlpha = ma; txt(ctx, 'A', PX + 20, PY + 44, `italic 700 30px ${LB}`, C.ink, 'left', 0); txt(ctx, 'A’', PX + PW - 18, PY + 44, `italic 700 30px ${LB}`, C.ink, 'right', 0); ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(PX + 30, PY + 54); ctx.lineTo(PX + 30, PY + 68); ctx.moveTo(PX + PW - 32, PY + 54); ctx.lineTo(PX + PW - 32, PY + 68); ctx.stroke(); ctx.restore(); }
   drawStrip(t, S);
   drawCompass(1 - S.k); drawScale(1 - S.k);
   // "DETAIL" tag while zoomed
-  if (S.k > 0.02) { ctx.save(); ctx.globalAlpha = S.k; plaque(ctx, PX + 18, PY + 18, 196, 44); txt(ctx, 'DETAIL · root', PX + 32, PY + 49, `600 25px ${SS}`, C.ink, 'left', 1.2); ctx.restore(); }
+  const da = clamp((S.k - 0.55) / 0.45);
+  if (da > 0) { ctx.save(); ctx.globalAlpha = da; plaque(ctx, PX + 18, PY + 18, 196, 44); txt(ctx, 'DETAIL · root', PX + 32, PY + 49, `600 25px ${SS}`, C.ink, 'left', 1.2); ctx.restore(); }
 
   // callout: root filling (what the thin line left in the bone is)
   const rf = env(t, T.lap0 + 2.5, T.rst1, 0.35, 0.3);   // after the front has passed; then it stays as a map annotation
@@ -592,7 +593,7 @@ const CAPX = 66;
 
 function drawCaptions(t) {
   // A — figure caption of the plate (also closes the loop)
-  let a = Math.max(env(t, -1, T.out0 + 0.4, 0.01, 0.3), seg(t, DUR - 0.4, DUR - 0.05) * 1);
+  let a = Math.max(env(t, -1, T.dryIn, 0.01, 0.3), seg(t, DUR - 0.27, DUR - 0.05) * 1);   // out before the stopwatch group; back in only after the card has slid past it
   if (a > 0) { ctx.save(); ctx.globalAlpha = a; txt(ctx, 'Fig. 1 — healthy PDL', CAPX, 1330, `italic 400 34px ${SS}`, C.inkSoft, 'left', 0); ctx.restore(); }
 
   // B — dry time

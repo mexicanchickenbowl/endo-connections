@@ -43,9 +43,9 @@
       "source": "Martins et al., J Endod 2014;40:759-777 (PMID 24862702), systematic review, abstract ('At least one radiographic control should be performed'); J. Morita ROOT ZX II operation instructions"
     },
     {
-      "claim": "History strip: 1918 Custer and 1962 Sunada (direct current), then AC impedance, then the ratio method (1994 = date of the J Endod paper)",
+      "claim": "Persistent history strip (lights up 5.6-8.6 s): 1918 Custer and 1962 Sunada (direct current), then AC impedance, then the ratio method (1994 = date of the J Endod paper)",
       "source": "Custer, Dent Regist 1918;72:420-425 (PMID 33703181), full text; Sunada, J Dent Res 1962;41:375-387 (not in PubMed; record and secondary full text only); Nasiri & Wrbas, Saudi Dent J 2022;34:11-20 (PMID 35068894); Kobayashi & Suda, J Endod 1994;20:111-114 (PMID 7996080)"
     }
   ],
-  "caption": "How does an apex locator find the end?\nPatient = circuit: file > fluid > foramen > PDL > lip clip. Dentin acts as the insulator.\nRatio method (Root ZX: 0.4 + 8 kHz): 2 AC signals. Fluid shifts both; ratio barely moves, then drops in the last ~1 mm.\nIt senses the foramen region; marks ≠ mm. Root ZX family, permanent teeth, hand files, in vivo: ~70-100% within ±0.5 mm of each study's landmark (foramen, 0.5 mm short, constriction); 16 studies, not pooled. Confirm with a radiograph.\nSchematic.\nRefs: Nekoofar 2006, Ounsi 1999, Vieyra 2010 Int Endod J; Kobayashi 1994, Oishi 2002, Stöber 2011, Martins 2014 J Endod; Rambo 2010 Biomed Eng Online\n#endo #endodontics #apexlocator #rootcanal #dental"
+  "caption": "How does an apex locator find the end?\nPatient = circuit: file > fluid > foramen > PDL > lip clip. Dentin insulates.\nRatio method (Root ZX: 0.4 + 8 kHz): 2 AC signals. Fluid shifts both; ratio barely moves, then drops in the last ~1 mm.\nSenses the foramen region; marks ≠ mm. Root ZX family, permanent teeth, hand files, in vivo: ~70-100% within ±0.5 mm of each study's landmark (foramen, 0.5 mm short, constriction); 16 studies, not pooled. Confirm with a radiograph.\nSchematic.\nRefs: Nekoofar 2006, Ounsi 1999, Vieyra 2010 Int Endod J; Kobayashi 1994, Oishi 2002, Stöber 2011, Martins 2014 J Endod; Rambo 2010 Biomed Eng Online; Root ZX II manual\n#endo #endodontics #apexlocator #rootcanal #dental"
 }

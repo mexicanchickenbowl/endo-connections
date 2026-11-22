@@ -19,7 +19,7 @@ const C = {
   dentin: '#F3E3B5', dentinL: '#FBF1D2', dentinD: '#DCC78C', gp: '#F08A62', gpL: '#F6A683',
   cem: '#FFBE55', cemL: '#FFD88E', cemD: '#DE9423',
   bone: '#E9D8AC', boneD: '#CDB983', boneN: '#FFF8E3', boneNL: '#E5D6A9', marrow: '#EEA78F',
-  sand: '#EBD2A4', sandL: '#F6E5C2', soil: '#C6935F', soilD: '#AE7B49', deep: '#212B38', deep2: '#2A3645',
+  sand: '#EBD2A4', sandL: '#F6E5C2', soil: '#C6935F', soilD: '#AE7B49', deep: '#2B394B', deep2: '#35465A',
   red: '#E5383B', redD: '#B4232B', green: '#1FA35B', greenD: '#157C45', white: '#FFFFFF', paper: '#FFFDF4',
   wood: '#D9A65E', woodD: '#B98440',
   skin: ['#F4C59C', '#D99F72', '#A66E48', '#7A4A2B', '#EBB58A'],
@@ -142,14 +142,14 @@ function drawGround(cam) {
   }
   // underground: strata, a service main, a conduit, stones
   rect(x0, FACE_B, w, H - FACE_B, C.deep);
-  rect(x0, 1392, w, 86, '#243040'); rect(x0, 1560, w, 120, '#1D2733');
+  rect(x0, 1392, w, 86, '#314256'); rect(x0, 1560, w, 120, '#243141');
   for (let i = Math.floor(x0 / 90); i < (x0 + w) / 90; i++) {
     const m = ((i % 60) + 60) % 60;
-    fillRR(i * 90 + hash(m, 61) * 60, 1372 + hash(m * 3 + 1, 62, 5) * 500, 22 + hash(m, 63) * 46, 12 + hash(m, 64) * 16, 9, hash(m, 65) < 0.5 ? C.deep2 : '#303E4F');
+    fillRR(i * 90 + hash(m, 61) * 60, 1372 + hash(m * 3 + 1, 62, 5) * 500, 22 + hash(m, 63) * 46, 12 + hash(m, 64) * 16, 9, hash(m, 65) < 0.5 ? C.deep2 : '#3F5269');
   }
-  rect(x0, 1418, w, 34, '#34455A'); rect(x0, 1418, w, 7, '#41546B'); rect(x0, 1445, w, 7, '#2A394B');                 // service main
-  for (let i = Math.floor(x0 / 270); i < (x0 + w) / 270; i++) { fillRR(i * 270 + 60, 1410, 22, 50, 5, '#3D5068'); rect(i * 270 + 60, 1410, 22, 7, '#4A5F7A'); }
-  ctx.save(); ctx.setLineDash([26, 14]); ctx.lineDashOffset = 0; line(x0 - (x0 % 40), 1516, x0 + w, 1516, 'rgba(255,122,26,0.42)', 7, 'butt'); ctx.restore();   // conduit
+  rect(x0, 1418, w, 34, '#465B75'); rect(x0, 1418, w, 7, '#58708D'); rect(x0, 1445, w, 7, '#35475C');                 // service main
+  for (let i = Math.floor(x0 / 270); i < (x0 + w) / 270; i++) { fillRR(i * 270 + 60, 1410, 22, 50, 5, '#536A87'); rect(i * 270 + 60, 1410, 22, 7, '#657E9C'); }
+  ctx.save(); ctx.setLineDash([26, 14]); ctx.lineDashOffset = 0; line(x0 - (x0 % 40), 1516, x0 + w, 1516, 'rgba(255,122,26,0.55)', 7, 'butt'); ctx.restore();   // conduit
 }
 /** pale site hoarding along the back of a plot (local coords) */
 function fence(x0, x1) {
@@ -205,7 +205,7 @@ function block(x, y, w, h, label, seed, labelPx) {
   }
   rect(x, y + h * 0.5, w - 12, 2.5, 'rgba(125,134,144,0.35)');
   ctx.restore();
-  if (label) { const px = labelPx || 44; txt(label, x + (w - 12) / 2, y + h * 0.5 - 14, F.osw7(px), '#6C7681', 'center', 2); }
+  if (label) { const px = labelPx || 44; txt(label, x + (w - 12) / 2, y + h * 0.5 - 14, F.osw7(px), '#3F4954', 'center', 2); }
 }
 function cone(x, y, s) {
   s = s || 1;
@@ -235,9 +235,9 @@ function scaffoldBay(xa, xb, yDeck, yTop, base) {
   fillRR(xa - 9, yDeck, xb - xa + 18, 10, 3, C.wood); rect(xa - 9, yDeck + 7, xb - xa + 18, 3, C.woodD);
   for (const x of [xa, xb]) { fillRR(x - 6, yDeck + 8, 12, 11, 3, C.orange); fillRR(x - 6, yDeck - 57, 12, 10, 3, C.orange); fillRR(x - 9, yB - 5, 18, 6, 2, C.navy2); }
 }
-function beacon(x, y, t, I) {
-  const p = 0.5 + 0.5 * Math.sin(t * 4.4);
-  circ(x, y - 76, 30 + 16 * p, `rgba(229,56,59,${0.20 * I})`); circ(x, y - 76, 19 + 6 * p, `rgba(229,56,59,${0.30 * I})`);
+function beacon(x, y, t, I, amp) {
+  const p = 0.5 + 0.5 * Math.sin(t * 4.4), k = 1 + ((amp || 1) - 1) * p;                // amp > 1: stronger pulse (hook)
+  circ(x, y - 76, (30 + 16 * p) * k, `rgba(229,56,59,${0.20 * I})`); circ(x, y - 76, (19 + 6 * p) * k, `rgba(229,56,59,${0.30 * I})`);
   line(x, y - 62, x - 16, y, C.navy2, 4); line(x, y - 62, x + 16, y, C.navy2, 4); line(x, y - 62, x, y - 6, C.navy2, 4);
   fillRR(x - 9, y - 70, 18, 9, 3, C.navy);
   ctx.beginPath(); ctx.arc(x, y - 70, 11, Math.PI, 0); ctx.closePath(); ctx.fillStyle = Kit.rgba(Kit.mix('#8D3A40', C.red, 0.35 + 0.65 * I)); ctx.fill();

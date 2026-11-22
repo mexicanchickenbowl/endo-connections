@@ -105,8 +105,9 @@ Stöber 2011 J Endod (21496657) 72%; Piasecki 2011 J Endod (21846536) 83% and 10
 - The tooth is not to scale: the file travels about 5 "mm" at 45 px per mm.
 - A single apical foramen is drawn. Real roots can also leak current through lateral canals, cracks and perforations,
   and dentin is a poor conductor rather than a perfect insulator (Meredith & Gulabivala 1997 describe a complex
-  network that includes bulk dentin). On screen "DENTIN = INSULATOR" follows Nekoofar 2006; the caption says "acts as
-  the insulator".
+  network that includes bulk dentin). On screen "DENTIN = INSULATOR" follows Nekoofar 2006; the caption says "Dentin
+  insulates" (shortened at final QA to make room for the manufacturer reference), and the poor-conductor nuance is
+  kept in the first claim source in meta.json.
 - The LCD is an original design (wedge bar, no numerals), not a copy of a commercial display.
 
 ## Kept off screen on purpose (see RESEARCH.md "Do not claim")
@@ -180,3 +181,29 @@ Design
 - Nits: pin-1 dot clears under the chip marking; RESISTOR label fades with its symbol; APEX and the AC signals go out
   before the loop rewind; pre-printed chart words hidden until used; cleaner, more opaque canal fluid colors.
 
+## Final QA (fresh-eyes pass, 2026-11-22)
+Checked: 21 stills with the safe-area overlay (`_stills/final-qa`: 0, 0.6, 1.5, 2.8, 4.2, 5.6, 6.8, 8.2, 9.6, 11.4,
+12.7, 13.6, 15.0, 16.4, 17.6, 18.6, 20.2, 21.6, 22.8, 23.3, 23.95 s), 18 transition stills (`_stills/final-qa-tr`:
+every headline hand-over, the payoff build and the loop rewind), frames pulled from the encoded MP4, and the poster in
+the 3:4 crop. No console errors, no missing glyphs, no ghosted text at the loop, nothing must-read in the no-go zones.
+According to PubMed, the abstracts of the nine sources behind the on-screen numbers and source lines read as recorded
+(PMIDs 7996080, 12026919, 20819212, 21496657, 20002800, 36848949, 10371907, 24862702, 16872454).
+
+Defects found and fixed
+- A decorative mask-covered trace and its via (x 330-392, y 950-1010) ran under the payoff caution: the via sat 5 px
+  after "CONFIRM WITH" and the run touched the "PH" of "RADIOGRAPH". The run was removed from the static board art
+  (`buildBase`). Nothing else on the board moved.
+- Caption: "marks ≠ mm" rests on the manufacturer instructions, which were on screen but missing from the Refs line.
+  "Root ZX II manual" added; "Dentin acts as the insulator" shortened to "Dentin insulates" and "It senses" to
+  "Senses" to stay within 700 characters (now 699).
+- meta.json: the history-strip claim is labelled as the persistent strip (it lights up at 5.6-8.6 s, so it does not
+  sit after the radiograph line in time).
+
+Left as is (judged acceptable, noted for the record)
+- "RANGE OF 16 STUDIES" stays at 24 px fine print: the chip face is 260 px wide and the three lines above it (30, 62
+  and 33 px) carry the device, the setting and the tolerance.
+- The reference landmark for "within ±0.5 mm" (major foramen, 0.5 mm short of it, or the constriction, by study) is
+  in the caption and in meta.json, not on screen.
+- The accuracy marking appears at 18.3 s, 0.8 s before its source line (19.1 s).
+
+Video re-rendered once after the fix: 720 frames, 24.000 s by ffprobe, 5.14 MB; poster at 21.6 s.
