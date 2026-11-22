@@ -11,8 +11,8 @@
       "source": "Veerayutthwilai et al., Oral Microbiol Immunol 2007;22:5-13 (PMID 17241164)"
     },
     {
-      "claim": "Dendritic cells sample; then T cells, macrophages and neutrophils accumulate as caries deepens (some of these cells are already resident in healthy pulp)",
-      "source": "Farges et al., Mediators Inflamm 2015;2015:230251 (PMID 26538821), review; Jontell et al., J Dent Res 1987;66:1149-53 (PMID 3305633)"
+      "claim": "Dendritic cells sample; then T cells, macrophages, neutrophils (accumulate as caries deepens)",
+      "source": "Farges et al., Mediators Inflamm 2015;2015:230251 (PMID 26538821), review"
     },
     {
       "claim": "Necrotic pulp: no immune access, a protected bacterial reservoir",
@@ -35,9 +35,9 @@
       "source": "Márton & Kiss, Oral Microbiol Immunol 2000;15:139-50 (PMID 11154396); Nair, Crit Rev Oral Biol Med 2004;15:348-81 (PMID 15574679)"
     },
     {
-      "claim": "Schematic: cast and mediators from human tissue studies; sequence/kinetics largely from rodent models (Stashenko 1992, rat); cell numbers, sizes and timing illustrative",
+      "claim": "Schematic: 'human + rodent data' - cells and mediators from human tissue studies; sequence and kinetics largely from rodent models; cell numbers, sizes and timing illustrative",
       "source": "Stashenko et al., J Endod 1992;18:422-6 (PMID 9796508); Graves et al. 2011 (PMID 21547019)"
     }
   ],
-  "caption": "The tooth fights back, from dentin to apex.\n\nOdontoblasts (TLR2/TLR4) sense bacteria first. Dendritic cells sample; T cells, macrophages, neutrophils, later B cells build up as caries deepens (some are resident in healthy pulp).\nA necrotic canal is out of immune reach.\nAt the apex the lesion usually contains the infection (abscesses are the exception); plasma cells: mostly IgG.\nThe cost is bone. Review model: IL-1, TNF, PGE2 act partly through RANKL (balanced by OPG), the final osteoclast signal. They also protect: mice lacking IL-1 or TNF receptors got bigger lesions.\nIt can't reach the canal. Treatment can.\n\nSchematic. Cells and mediators: human tissue; timing and causality: mostly rodent models.\nRefs: Veerayutthwilai 2007, Oral Microbiol Immunol; Farges 2015, Mediators Inflamm; Jontell 1987, J Dent Res; Graves 2011, J Oral Microbiol; Chen 1999, Am J Pathol; Stashenko 1992, J Endod; Matthews & Mason 1983, Br J Oral Surg; Wang & Stashenko 1993, J Endod; Márton & Kiss 2000, Oral Microbiol Immunol; Nair 2004, Crit Rev Oral Biol Med\n\n#endodontics #endo #dentistry #immunology #apicalperiodontitis"
+  "caption": "The tooth fights back: dentin to apex.\n\nOdontoblasts carry TLR2/TLR4. Dendritic cells sample; T cells, macrophages, neutrophils follow as caries deepens.\nA necrotic canal: out of immune reach.\nThe lesion usually contains the infection (plasma cells: mostly IgG). The cost is bone: IL-1, TNF, PGE2, RANKL (review model).\nIt can't reach the canal. Treatment can.\n\nSchematic animation; human + rodent data.\nRefs: Veerayutthwilai 2007, Oral Microbiol Immunol; Farges 2015, Mediators Inflamm; Graves 2011, J Oral Microbiol; Márton & Kiss 2000, Oral Microbiol Immunol; Matthews & Mason 1983, Br J Oral Surg; Nair 2004, Crit Rev Oral Biol Med\n\n#endodontics #endo #dentistry #immunology #apicalperiodontitis"
 }

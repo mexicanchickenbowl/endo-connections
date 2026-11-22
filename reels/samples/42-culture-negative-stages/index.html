@@ -246,16 +246,16 @@ function drawRow(i, t, rowsA, t2) {
   const aN = A0 + d.aNeg * p;
   if (p > 0) { sector(cx, cy, DON_R0, DON_R1, A0, aN); inkFill(NEG); }
   if (q > 0) { const aEnd = A0 + d.aNeg + (Math.PI * 2 - d.aNeg) * q; sector(cx, cy, DON_R0, DON_R1, A0 + d.aNeg, aEnd); posFill(); }
+  // thin paper-coloured gaps centred exactly on the common start angle and on the split (3 px = 0.36% of the circle)
+  const sep = (a) => { ctx.save(); ctx.strokeStyle = INK.paper; ctx.lineWidth = 3; ctx.lineCap = 'butt'; ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * (DON_R0 - 1), cy + Math.sin(a) * (DON_R0 - 1)); ctx.lineTo(cx + Math.cos(a) * (DON_R1 + 1), cy + Math.sin(a) * (DON_R1 + 1)); ctx.stroke(); ctx.restore(); };
+  if (p > 0) sep(A0);
+  if (q > 0) sep(A0 + d.aNeg);
   ctx.restore();
   // keylines
   ctx.strokeStyle = INK.char; ctx.lineWidth = 2.5; ctx.lineCap = 'round';
   ctx.beginPath(); ctx.arc(cx, cy, DON_R1, A0, A0 + Math.PI * 2 * ringU); ctx.stroke();
   ctx.beginPath(); ctx.arc(cx, cy, DON_R0, A0, A0 + Math.PI * 2 * ringU); ctx.stroke();
-  // paper-coloured separators at the common start angle and at the split
-  const sep = (a, al) => { ctx.save(); ctx.globalAlpha *= al; ctx.strokeStyle = INK.paper; ctx.lineWidth = 5; ctx.lineCap = 'butt'; ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * (DON_R0 + 1.5), cy + Math.sin(a) * (DON_R0 + 1.5)); ctx.lineTo(cx + Math.cos(a) * (DON_R1 - 1.5), cy + Math.sin(a) * (DON_R1 - 1.5)); ctx.stroke(); ctx.restore(); };
   if (p > 0 && p < 1) { ctx.save(); ctx.strokeStyle = INK.char; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(cx + Math.cos(aN) * (DON_R0 - 7), cy + Math.sin(aN) * (DON_R0 - 7)); ctx.lineTo(cx + Math.cos(aN) * (DON_R1 + 7), cy + Math.sin(aN) * (DON_R1 + 7)); ctx.stroke(); ctx.restore(); }
-  if (p > 0) sep(A0, 1);
-  if (q > 0) sep(A0 + d.aNeg, 1);
   // start tick at 12 o'clock (same start angle on every donut)
   ctx.save(); ctx.globalAlpha *= ringU; ctx.fillStyle = INK.char; ctx.beginPath(); ctx.moveTo(cx, cy - DON_R1 + 3); ctx.lineTo(cx - 7, cy - DON_R1 - 10); ctx.lineTo(cx + 7, cy - DON_R1 - 10); ctx.closePath(); ctx.fill(); ctx.restore();
 
