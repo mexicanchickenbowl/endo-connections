@@ -103,9 +103,9 @@ the full text of a later open-access review that cites the primary paper (second
 |---|---|---|---|---|---|
 | 39 | Options: periodic review · external (surgical) repair ± pulp/root canal treatment · internal repair with root canal treatment · intentional replantation · extraction | Patel S et al., Int Endod J 2018;51:1224-1238 (PMID 29737544); Patel 2022 (PMID 35229320) | Part 2 abstract: supracrestal, superficial, limited spread → "surgical repair without root canal treatment is the preferred approach"; more extensive → vital pulp therapy or RCT may also be indicated; internal repair where external access not possible; intentional replantation where neither is practical; periodic review where active management is not pragmatic; extraction for untreatable cases | A + FT | High |
 | 40 | Outcome falls with extent: success 100% (classes 1-2), 77.8% (class 3), 12.5% (class 4) | Heithersay GS, Quintessence Int 1999;30(2):96-110 (PMID 10356561) | 94 patients / 101 teeth; topical 90% trichloracetic acid, curettage, RCT where necessary, glass-ionomer restoration; minimum 3 years (unless earlier failure). Success = absence of resorption and of periapical/periradicular pathosis. Class 1 and 2 "complete success"; class 3 77.8%; "Only 12.5% of teeth in class 4 were free of resorption and deemed to be clinically sound". **[FC]** The abstract does not give the number of teeth per class (the class 3 and class 4 percentages may rest on small subgroups) and does not say "one operator" — describe it as a single-author series (PubMed tags it "Case Reports"). Conclusion in the abstract: class 4 "generally unsuccessful ... alternative treatment is recommended" | A | High for the four percentages; per-class denominators NOT verified; periapical-based classes; historical TCA protocol |
-| 41 | Survival in later cohorts varies widely: 70% at 5 years (Leuven/Rotterdam) vs 86% at 5 years (5 specialist practices) | Mavridou AM et al., Int Endod J 2022;55:347-373 (PMID 35034370); Patel 2026 (PMID 42244033) | Mavridou: 542 teeth observed (182 extracted immediately, 47 excluded); overall survival 84.6% (3 y), 70.3% (5 y), 42.7% (8 y), 28.6% (10 y). Patel 2026: 296 teeth / 233 patients, mean follow-up 2.9 y; cumulative survival 95.5% (1 y), 93.3% (2 y), 85.7% (5 y), 80.5% (7 and 10 y; only 3 teeth at risk at 10 y); 72 teeth excluded (immediate extraction or <1 y follow-up) | A + FT | High for the numbers; not comparable head-to-head |
-| 42 | Circumferential spread >180° → higher extraction hazard | Patel 2026 (PMID 42244033) | Multivariable: spread C (>180°-<270°) HR 12.9 (95% CI 1.81-93.10; p = 0.011); "The Heithersay classification was not significantly associated with survival." Survival by strategy: periodic review 93.6%, external repair 90.2%, internal repair 59.1% — authors: "associations rather than evidence of treatment superiority" | FT | Medium (few events, wide CIs, confounding by indication) |
-| 43 | Other outcome cohorts | Irinakis E et al., Int Endod J 2022;55:441-452 (PMID 35243651); DeLuca 2023 (PMID 36931461); Jebril A et al., J Endod 2020;46:778-785 (PMID 32334857); Jeng PY et al., J Dent Sci 2024;19:377-386 (PMID 38303835); Fernández-Grisales 2026 (PMID 42126216) | Irinakis: 89 teeth, mean 3.9 y, "overall probability of failure was 50.0% 8 years after the diagnosis"; class 1-2 better than 3-4; posterior worse. DeLuca: 72 teeth with ≥1 y, 70% survived; no correlation of 1-y outcome with classification or treatment. Jebril: 14 teeth, mean 20 months, all survived, 11 "clinical success". Jeng: 42 teeth, 2-y survival 71.20%. Fernández-Grisales: 81 teeth, survival 77.8% at median 5.6 y | A | High for the numbers |
+| 41 | Survival in later cohorts varies widely: 70% at 5 years (Leuven/Rotterdam) vs 86% at 5 years (5 specialist practices) | Mavridou AM et al., Int Endod J 2022;55:347-373 (PMID 35034370); Patel 2026 (PMID 42244033) | Mavridou: 542 teeth observed (182 extracted immediately, 47 excluded); overall survival 84.6% (3 y), 70.3% (5 y), 42.7% (8 y), 28.6% (10 y). Patel 2026: 296 teeth / 233 patients, mean follow-up 2.9 y; cumulative survival 95.5% (1 y), 93.3% (2 y), 85.7% (5 y), 80.5% (7 and 10 y; only 3 teeth at risk at 10 y, 14 at 7 y, 64 at 5 y); 72 teeth excluded (immediate extraction, <1 y follow-up or no follow-up); 25 failures in total. **[FC — omitted criterion added]** In the same paper cumulative *success* (asymptomatic and healed) was much lower than survival: 94.4% (1 y), 84.5% (2 y), 62.7% (5 y), 50.9% (7 y), 45.9% (10 y) (full text, section 3.9). **[FC]** Mavridou 2022 denominators are unclear from its abstract (542 − 47 excluded − 182 immediately extracted = 313, whereas Patel 2026 describes the outcome cohort as "274 teeth (from an original cohort of 542)"); its analysis is described as descriptive statistics, not Kaplan-Meier | A + FT | High for the printed numbers; not comparable head-to-head; never quote survival without saying it is survival (not success) |
+| 42 | **[FC downgraded — caption/NOTES only]** More circumferential spread tends to mean higher extraction hazard, but only category C reached significance | Patel 2026 (PMID 42244033) | Abstract: "circumferential involvement greater than 180°" associated with higher extraction hazard. Full text is weaker than that summary: univariate C (>180°-<270°) HR 7.86 (95% CI 1.80-34.37; p = 0.006), **D (>270°) HR 3.43 (0.65-18.02; p = 0.144, not significant)**, grouped C+D vs A+B HR 2.42 (0.99-5.94; **p = 0.054**); multivariable C HR 12.9 (95% CI 1.81-93.10; p = 0.011), other spread/depth categories not significant; models "considered exploratory" given few failures. "The Heithersay classification was not significantly associated with survival." Survival by strategy: periodic review 93.6%, external repair 90.2%, internal repair 59.1% — authors: "associations rather than evidence of treatment superiority" | FT | Low-medium (25 events, very wide CIs, non-monotonic across C and D, confounding by indication). Do not state ">180° predicts tooth loss" as a fact |
+| 43 | Other outcome cohorts | Irinakis E et al., Int Endod J 2022;55:441-452 (PMID 35243651); DeLuca 2023 (PMID 36931461); Jebril A et al., J Endod 2020;46:778-785 (PMID 32334857); Jeng PY et al., J Dent Sci 2024;19:377-386 (PMID 38303835); Fernández-Grisales 2026 (PMID 42126216) | Irinakis: 89 teeth, mean 3.9 y, "overall probability of failure was 50.0% 8 years after the diagnosis"; class 1-2 better than 3-4; posterior worse. DeLuca: 72 teeth with ≥1 y, 70% survived; no correlation of 1-y outcome with classification or treatment. Jebril: 14 teeth, mean 20 months, all survived, 11 "clinical success". Jeng: 42 teeth, 2-y survival 71.20%. Fernández-Grisales: 81 teeth — **[FC]** only teeth repaired surgically by an external approach with ≥2 y follow-up — survival 77.8% at median 5.6 y, success 61.7% on periapicals / 49.3% on CBCT. **[FC]** Jeng 2024 CI for the 2-y survival is wide: 71.20% [54.16%, 93.59%]. Jebril: 14 teeth in 13 patients | A | High for the numbers |
 | 44 | No trials: best treatment is not established | Bardini G et al., Aust Endod J 2023;49:769-787 (PMID 37702252); Sousa J et al., J Clin Exp Dent 2024;16:e1555-e1563 (PMID 39822782) | Bardini: 60 case reports + 6 case series; "No randomised clinical trials were found"; "it was not possible to define the optimum clinical treatment". Sousa: 3 studies, certainty "very low", external repair "more promising" | A | High |
 | 45 | Trichloroacetic acid is the historical protocol, not current consensus | Patel 2022 (PMID 35229320); Patel 2026 (PMID 42244033) | Patel 2022: because of "potentially carcinogenic and genotoxic effects ... it is not recommended by the authors of this paper"; "no studies comparing the prognosis of ECR managed with and without TCA". Patel 2026: TCA used in less than 10% of cases | FT | Medium (authors' opinion) |
 
@@ -118,23 +118,45 @@ Budget reminder (SPEC lessons): about 60 must-read words in the whole reel, one 
 1. **"Entry: cervical root surface, just below the epithelial attachment."**
    Source line: *Mavridou et al., J Endod 2016.* (row 1)
 2. **"It spreads AROUND the canal."** (show, do not write more) — rows 3, 29.
-3. **"Pericanalar resorption-resistant sheet — predentin + dentin, ~0.2 mm — walls off the pulp until late."**
-   If a number is shown, write it as "mean 210 µm, 27 teeth" (row 5). Same source line as item 1.
+3. **"Pericanalar resorption-resistant sheet — predentin + dentin, ~0.2 mm on average — walls off the pulp
+   until late."** **[FC reworded]** If a number is shown it must carry "average" (and ideally "ex vivo"), e.g.
+   "avg ≈ 0.2 mm". Do NOT write "27 teeth" beside it: 27 is the size of the study, and the abstract does not say
+   in how many teeth the sheet was measured (row 5). Source line: *Mavridou et al., J Endod 2016* covers the sheet,
+   its composition and the 210 µm average; the words "until late" are Heithersay 1999 (Quintessence Int 30:27-37)
+   and Patel 2022 — list both in NOTES.md / meta.json claims.
 4. **"Later: bone-like repair tissue grows in."** (rows 2, 8). Do not write "heals".
-5. **"Often silent — 58% found by chance on a radiograph. Pink spot: ~5%."**
-   Source line: *Patel et al., Int Endod J 2023 (215 lesions).* (rows 21-22)
-6. **"Periapical understates it: right class ~40% vs ~70% with CBCT (ex vivo)."** (exact: 39.7% vs 70.5% / 69.2%)
-   Source line: *Vaz de Souza et al., J Endod 2017.* (row 31). On the PA thumbnail: "canal outline often still
-   traceable" (row 27).
+5. **"Often silent — 58% were incidental imaging findings. Pink spot: ~5%."** (exact: 58.1% = 125/215
+   "incidental radiographic finding", detected on periapical or CBCT; pink spot 5.1%.) **[FC]** Denominator is
+   215 lesions *referred* to a London postgraduate endodontic unit / specialist practice, and 23.3% did present
+   with pulpal/periapical symptoms — so write "often", not "usually", and keep "215 referred lesions" in the
+   source line: *Patel et al., Int Endod J 2023 (215 referred lesions).* (rows 21-22). Caption is the safer home.
+6. **[FC — split into two claims; the first draft fused two different papers]**
+   - 6a (preferred on screen, clinical data): **"2-D underestimates it"** — periapicals "underestimated the size
+     of the ECR lesion" and were poor for circumferential spread in 115 consecutively diagnosed teeth.
+     Source line: *Patel K et al., J Endod 2016.* (row 30)
+   - 6b (optional number; caption preferred): **"Correct Heithersay class: periapical ~40% vs CBCT ~70% —
+     ex vivo."** (exact: 39.7% vs 70.5% / 69.2%; simulated cavities, 13 mandibular teeth in 3 dry mandibles,
+     parallax periapicals, two CBCT units.) Source line: *Vaz de Souza et al., J Endod 2017.* (row 31). The word
+     **"Heithersay"** and **"ex vivo"** are mandatory: these percentages are for the 2-D Heithersay class, so
+     they must not sit beside the Patel 3-D strip as if they referred to it, and this study does not show
+     "understating" (that is 6a).
+   - On the PA thumbnail: "canal outline often still traceable" (rows 27, 29).
 7. **Classification strip — Patel 3-D:** "HEIGHT 1-4 · SPREAD A ≤90° B ≤180° C ≤270° D >270° · d dentin / p probable pulp."
    Source line: *Patel et al., Int Endod J 2018.* (row 37). Heithersay 1→4 may be shown as the classic 2-D
    system (row 36), labelled "2-D".
-8. **End card:** "Recognize early · CBCT before you treat · Treatment depends on extent and access."
-   Optional single number, only with its criteria: "Success 100% (class 1-2) → 12.5% (class 4), ≥3 y —
-   Heithersay 1999" (row 40). Better placed in the caption than on screen.
+8. **End card:** "Recognize early · Consider CBCT before you treat · Treatment depends on extent and access."
+   **[FC softened]** "CBCT before you treat" read as a rule; the verified wording is "should be considered"
+   (Patel K 2016 abstract; ESE via Patel 2022 full text), so keep the word "Consider".
+   **[FC — moved to caption only]** The Heithersay outcome figures ("success 100% in classes 1-2, 77.8% class 3,
+   12.5% class 4, ≥3 y, 101 teeth, 1999 TCA protocol" — row 40) are verified from the abstract but stay OFF
+   screen: the abstract gives no per-class denominators, the protocol (trichloracetic acid) is no longer
+   recommended by current authors, and "success" must not be confused with later "survival" figures.
 
-Optional chip row if space allows (otherwise caption only): "Associated with orthodontics · trauma · bleaching —
-cause unknown" (rows 13-18).
+Optional chip row if space allows (otherwise caption only): **[FC reworded]** "Most-reported links: orthodontics ·
+trauma — cause unknown" (rows 13-18). Bleaching was dropped from the chip: it is a Heithersay-1999 finding
+(sole factor in 3.9% of teeth; row 13), is absent from the factor lists in the abstracts of Mavridou 2017 and
+Patel 2025, and the only controlled study found just trauma and diabetes significant (row 16). Mention
+intracoronal bleaching only in the caption, attributed to Heithersay 1999.
 
 ---
 
@@ -154,8 +176,10 @@ cause unknown" (rows 13-18).
    histology is Mavridou 2016 (27 vital teeth) and Mavridou 2017 Int Endod J (7 root-filled teeth).
 5. **PRRS composition and thickness**: "predentin, dentin, and occasionally reparative mineralized (bonelike)
    tissue", "fluctuating thickness averaging 210 μm". It is not predentin alone, and 210 µm is a mean from
-   extracted teeth measured ex vivo — a CBCT "measurement tool" cannot honestly read it (typical endodontic
-   CBCT voxel 0.08-0.125 mm). If the reel shows a caliper on the sheet, label the value as the published mean.
+   extracted teeth measured ex vivo — a CBCT "measurement tool" cannot honestly read it (a ~0.2 mm
+   layer is at the limit of clinical CBCT resolution). **[FC]** The first draft quoted "typical endodontic CBCT
+   voxel 0.08-0.125 mm"; that figure comes from none of the cited papers and has been removed — do not print a
+   voxel size. If the reel shows a caliper on the sheet, label the value as the published average ("avg, ex vivo").
 6. **"The canal stays walled off" needs "until late".** Advanced lesions perforate. In recent CBCT cohorts most
    lesions were already coded "p" (probable pulpal involvement): 75.0% (222/296; Patel 2026) and 57.5%
    (Machado 2024).
@@ -167,7 +191,8 @@ cause unknown" (rows 13-18).
    malocclusion 17.5%, extraction of a neighboring tooth 14%; more than one factor in 59%. Note the abstract's
    sex split is internally inconsistent ("175 (54%)" and "162 (46%)" of 337 teeth) — do not quote it.
 9. **Intracoronal bleaching is a minor factor numerically**: sole factor in 3.9% of teeth (Heithersay 1999);
-   1.96% of bleached teeth developed ICR (Heithersay 1994, thermocatalytic 30% H2O2); none in Jeng 2020.
+   1.96% of bleached teeth developed ICR (Heithersay 1994, thermocatalytic 30% H2O2). **[FC]** "None in Jeng 2020"
+   was deleted: the Jeng 2020 abstract simply does not list bleaching among its factors, which is not a count of zero.
    "Surgery" in Heithersay = sole factor in 5.4% of teeth. Listing ortho/trauma/bleaching/surgery as four
    equal causes overstates the last two.
 10. **"Junctional epithelium" is not the wording of the sources.** Mavridou: "below the gingival epithelial
@@ -217,18 +242,34 @@ cause unknown" (rows 13-18).
   benefit" over a single periapical for ECR assessment. Both are true: parallax helps tell external from
   internal, it does not reveal extent.
 - **Which classification predicts outcome is unsettled.** Irinakis 2022: Heithersay class predicted failure.
-  Patel 2026: Heithersay not significantly associated, Patel 3-D (spread >180°) was. DeLuca 2023: neither
+  Patel 2026: Heithersay not significantly associated; among Patel 3-D categories only spread C (>180°-<270°)
+  reached significance (multivariable HR 12.9, 95% CI 1.81-93.10), D (>270°) did not, and grouped >180° vs ≤180°
+  was borderline (HR 2.42, 95% CI 0.99-5.94, p = 0.054) in an analysis the authors call exploratory **[FC]**.
+  DeLuca 2023: neither
   correlated with 1-year outcome. Reliability: Jebril 2020 kappa 0.69 (Heithersay) vs 0.40 (Patel), 13
   patients; DeLuca 2023 "substantial agreement" for both.
 - **Outcomes**: all retrospective, no randomized trials, heterogeneous definitions (success vs survival),
   strong confounding by indication (teeth chosen for "periodic review" are often quiescent/reparative lesions).
-  Ten-year survival ranges from 28.6% (Mavridou 2022) to 80.5% (Patel 2026, 3 teeth at risk). The Patel 2026
+  Ten-year survival ranges from 28.6% (Mavridou 2022) to 80.5% (Patel 2026, 3 teeth at risk). **[FC]** Survival
+  flatters the picture: in Patel 2026 success (asymptomatic and healed) was 62.7% at 5 y and 50.9% at 7 y against
+  survival of 85.7% and 80.5%; in Fernández-Grisales 2026 success was 61.7% (periapical) / 49.3% (CBCT) against
+  77.8% survival. The Patel 2026
   paper states the ESE position statement regards ECR management options as "still experimental".
 - **Bone-like tissue is repair, not cure.** It marks the reparative phase and supports monitoring in
   asymptomatic, inaccessible lesions, but it also makes the tooth more prone to fracture at extraction
   (Patel 2022).
-- **"Pulp protected"** applies to vital teeth; in root-filled teeth the sheet has been removed and resorption is
-  more intense (Mavridou 2017, 7 teeth).
+- **"Pulp protected"** applies to vital teeth; in root-filled teeth the pulp and the sheet "had been removed
+  during root canal treatment", the resorption stage was "more intense than the repair stage" and bonelike repair
+  formed "to a lesser extent" (Mavridou 2017, 7 teeth) **[FC: exact wording restored]**.
+- **"Walled off" versus the CBCT cohorts [FC].** The histology (27 extracted vital teeth) says the front does not
+  penetrate the pulp space, yet on CBCT most lesions are coded "p" — "probable pulpal involvement" in the 2018
+  classification, "probable or actual pulp involvement" in Patel 2026 (75.0%, 222/296) and 57.5% in Machado 2024;
+  Patel 2023: "the majority of ECRs were in (close) proximity to the pulp". "p" is proximity on a scan, not proof
+  of perforation. On screen keep "until late" and never draw the sheet as a guarantee.
+- **PRRS evidence base [FC].** The sheet and its 210 µm average come from one research group (Leuven: Gunst 2013
+  case report; Mavridou 2016, 27 extracted teeth; Mavridou 2017, 7 teeth), supported by Luso & Luder 2012
+  (9 extracted teeth: innermost dentin intact) and single-case reports (Noma 2024; Ricucci 2023). There is no
+  in-vivo measurement of the sheet.
 - **Terminology**: external cervical resorption (ESE, Patel) = invasive cervical resorption (Heithersay) =
   extracanal invasive resorption (Frank & Torabinejad). Use "External cervical resorption (invasive cervical
   resorption)" once; then "ECR".
@@ -252,6 +293,29 @@ cause unknown" (rows 13-18).
 - The ~10% CEJ-gap figure (seen only in a secondary review) or any hormone/virus mechanism.
 - That the drawn CBCT is a patient scan — label it "schematic" inside the safe area.
 
+Added by the fact-check **[FC]**:
+- "210 µm in 27 teeth" / "n = 27" beside the thickness — the abstract does not say how many teeth were measured.
+  Allowed: "averaging 210 µm (ex vivo; Mavridou 2016)".
+- Any CBCT voxel size (the "0.08-0.125 mm" of the first draft has no source in this brief).
+- "First described by Gunst 2013" or any other priority claim.
+- "Right class 40% vs 70%" without the words "Heithersay" and "ex vivo", or placed so it appears to describe the
+  Patel 3-D classification or patients. And do not cite Vaz de Souza 2017 for "underestimates" — that is
+  Patel K 2016.
+- "Spread >180° predicts tooth loss" (only category C was significant; >270° was not; exploratory model).
+- The 32.5% / 39.2% Heithersay-Patel "mismatch" as an on-screen statistic (definition not given in the paper).
+- The Heithersay 100% / 77.8% / 12.5% figures on screen (caption only, with "success", "≥3 y", "101 teeth",
+  "1999 TCA protocol"); and do not call that series "one operator" — that is not in the abstract.
+- A survival figure from Patel 2026 without noting that success was much lower (62.7% at 5 y).
+- "Resorption is more intense in root-filled than in vital teeth" attributed to the Mavridou 2017 abstract
+  (the abstract compares resorption with repair inside root-filled teeth).
+- Any quoted wording or recommendation number from the AAE/AAOMR statements (2015 or 2025 update) or from the
+  ESE statements; allowed paraphrase: "position statements advise considering small-field CBCT" (rows 30, 35).
+- "CBCT before you treat" as an unconditional rule — use "Consider CBCT before you treat".
+- "Bleaching" as one of three headline associations on screen; "no bleaching cases in Jeng 2020".
+- "All four bleached teeth that resorbed had trauma" as evidence that trauma is the driver (78% of the whole
+  bleached sample had a trauma history).
+- "Usually found by chance" as a general-population statement — 58.1% is of 215 *referred* lesions.
+
 ---
 
 ## (f) Suggested storyline (silent, 20-22 s, CBCT-viewer style)
@@ -267,12 +331,12 @@ Keep "SCHEMATIC — not a patient scan" in small text inside the safe area for t
 |---|---|---|
 | 0.0-2.5 | Viewer boots: axial / coronal / sagittal panes + 3-D pane, crosshairs settle on a maxillary incisor. Small periapical thumbnail shows a modest cervical radiolucency. Corner tag "RESORPTION 5/5 · EXTERNAL CERVICAL" | **External cervical resorption** / "What the periapical doesn't show" (8) |
 | 2.5-6.0 | Axial slice counter scrolls to the cervical level; crosshair lands on a tiny defect in the root surface; marker pulses in the sagittal pane just below the gingival attachment | "Entry: just below the epithelial attachment" (6). Source: Mavridou et al., J Endod 2016 |
-| 6.0-11.5 | Continued scroll / time-lapse: dark channels tunnel into dentin and wrap round the canal; angle tool sweeps the axial pane (≤90° → ≤180° → ≤270°); the thin bright ring around the canal is outlined in cyan | "Spreads around the canal" (4) · "Resorption-resistant sheet ~0.2 mm: pulp walled off until late" (10) |
+| 6.0-11.5 | Continued scroll / time-lapse: dark channels tunnel into dentin and wrap round the canal; angle tool sweeps the axial pane (≤90° → ≤180° → ≤270°); the thin bright ring around the canal is outlined in cyan | "Spreads around the canal" (4) · "Resorption-resistant sheet, avg ~0.2 mm: pulp walled off until late" (11) **[FC: "avg" added]**. Source: Mavridou et al., J Endod 2016 |
 | 11.5-14.5 | Mottled gray flecks appear inside the lesion while a dark front still advances elsewhere; 3-D pane rotates to show the hollowed cervical third | "Later: bone-like repair tissue" (4) |
-| 14.5-18.5 | Bottom strip animates the Patel 3-D classification as three readouts driven by the tools: HEIGHT 1-4, SPREAD A-D, PROXIMITY d/p. PA thumbnail enlarges beside the axial pane: canal outline still traceable, lesion looks small | "Height 1-4 · Spread A-D · d/p" (strip labels) · "Periapical: right class ~40% · CBCT ~70% (ex vivo)" (9). Source: Patel 2018 IEJ; Vaz de Souza 2017 JOE |
-| 18.5-22.0 | End card over dimmed viewer; hold ≥ 2.5 s; text fades before the loop back to the boot frame | "Recognize early · CBCT before you treat · Treatment depends on extent" (10) |
+| 14.5-18.5 | Bottom strip animates the Patel 3-D classification as three readouts driven by the tools: HEIGHT 1-4, SPREAD A-D, PROXIMITY d/p. PA thumbnail enlarges beside the axial pane: canal outline often still traceable, lesion looks small | "Height 1-4 · Spread A-D · d/p" (strip labels; source: Patel et al., Int Endod J 2018) · **[FC]** then EITHER "2-D underestimates size and spread" (5; source: Patel K et al., J Endod 2016 — preferred, clinical) OR "Heithersay class right: periapical ~40% · CBCT ~70% (ex vivo)" (10; source: Vaz de Souza et al., J Endod 2017). Never the bare "right class ~40% / ~70%" next to the Patel strip — those figures are for the 2-D Heithersay class in simulated lesions. One source line per beat |
+| 18.5-22.0 | End card over dimmed viewer; hold ≥ 2.5 s; text fades before the loop back to the boot frame | "Recognize early · Consider CBCT before you treat · Treatment depends on extent" (11) **[FC: "Consider" added]** |
 
-Total ≈ 50-55 must-read words. Poster frame ≈ 9-10 s (lesion wrapped around the highlighted sheet, title tag visible).
+Total ≈ 52-58 must-read words after the fact-check rewording (still under the ~60-word budget). Poster frame ≈ 9-10 s (lesion wrapped around the highlighted sheet, title tag visible).
 If the Heithersay strip is preferred to the Patel strip, draw four tooth icons 1→4 with the wording of row 36
 and tag it "Heithersay 1999 · 2-D".
 
@@ -280,10 +344,14 @@ and tag it "Heithersay 1999 · 2-D".
 
 ## (g) Suggested Instagram caption reference list
 
-Caption nuance worth including: usually symptom-free and found by chance (58%); pink spot only ~5%; pulp usually
-still vital; factors are associations (orthodontics, trauma most often), cause unknown; 2-D films understate
-circumferential spread; treatment is chosen by extent and access (review, external repair, internal repair,
-replantation, extraction) and no trials tell us which is best; schematic animation.
+Caption nuance worth including: often symptom-free — 58% of 215 referred lesions were incidental imaging findings
+(Patel 2023); pink spot only ~5%; pulp usually still responds to testing; factors are associations (orthodontics,
+trauma most often reported), cause unknown; 2-D films underestimate size and circumferential spread (Patel K
+2016); treatment is chosen by extent and access (review, external repair, internal repair, replantation,
+extraction) and no trials tell us which is best; schematic animation. **[FC]** If the caption quotes Heithersay's
+outcome figures it must say "success", "≥3 years", "101 teeth" and "1999 trichloracetic-acid protocol"; if it
+quotes a survival figure it must name the cohort and say "survival". Every paper named in the caption needs an
+entry in the "Refs:" line.
 
 Refs (all verified on PubMed; DOI links):
 - Heithersay GS. Clinical, radiologic, and histopathologic features of invasive cervical resorption. Quintessence Int 1999;30(1):27-37. PMID 10323156 (no DOI).
@@ -336,4 +404,84 @@ Fernández-Grisales et al., Eur Endod J 2026;11:117-128 (PMID 42126216, [doi](ht
 Lima et al., Dent Traumatol 2026 (PMID 42885097, [doi](https://doi.org/10.1111/edt.70145));
 ESE position statement on CBCT, Int Endod J 2019;52:1675-1678 (PMID 31301231, [doi](https://doi.org/10.1111/iej.13187)).
 
+Added by the fact-check (background only):
+Mavridou et al., Int Endod J 2016;49:287-300 (PMID 25819599, [doi](https://doi.org/10.1111/iej.12450)) — single-case nano-CT methodology paper that already uses "PRRS";
+Noma et al., J Dent Sci 2024;19:1840-1845 (PMID 39035321, [doi](https://doi.org/10.1016/j.jds.2024.04.023)) — single case, PRRS = dentin, predentin, reparative bone-like tissue;
+Ricucci et al., J Endod 2023;49:720-729 (PMID 37001728, [doi](https://doi.org/10.1016/j.joen.2023.03.012)) — 2 impacted canines, continuous PRRS around the pulp space;
+Tay et al., J Dent 2022;127:104353 (PMID 36349644, [doi](https://doi.org/10.1016/j.jdent.2022.104353)) — systematic review: CBCT changed endodontic treatment plans in 24.3-66.7% of cases across 15 studies (all indications, ECR among them).
+
 Not PubMed-indexed and therefore not cited: Heithersay GS, "Invasive cervical resorption", Endodontic Topics 2004;7:73-92.
+
+---
+
+## (h) Fact-check log (independent re-verification, 2026-11-22)
+
+**Method.** According to PubMed: metadata and abstracts were re-fetched for all 49 PMIDs cited in this brief, plus
+four found by new searches (PMIDs 25819599, 39035321, 37001728, 36349644). PMC full text was re-read for Patel
+2022 (PMC9790676: ECR section in full, Table 1 row on sensibility testing, the parallax passage), Patel 2026
+(PMC13462384: Results incl. Tables 7-8, univariate and multivariable Cox sections, success rates, Discussion) and
+Rotondi 2020 (PMC7557762: complete). Not accessible in full text (abstract only): Heithersay 1999 ×3, Mavridou
+2016/2017/2022, Gunst 2013, Patel 2018 ×3, Patel K 2016, Vaz de Souza 2017, Goodell 2018, Patel 2023, both ESE
+statements, both AAE/AAOMR statements (2015 has no abstract), Gartner 1976 (no abstract).
+
+**Result in one line.** No wrong author, year, journal, volume, page, PMID or DOI was found, and every number in
+the table matches its abstract or full text. The problems were of a different kind: two papers fused into one
+on-screen claim, an unverified denominator, an unsourced technical figure, two priority claims, an outcome
+criterion left out, one result summarized more strongly than the full text supports, and wording stronger than the
+guidance it rests on.
+
+### Changes made
+
+| # | Where | What was wrong or missing | What was done |
+|---|---|---|---|
+| 1 | (b) item 6; row 31; storyline 14.5-18.5 s | "Periapical understates it: right class ~40% vs ~70%" fused two papers. The 39.7% vs 70.5% / 69.2% figures (Vaz de Souza 2017) are for the **Heithersay 2-D class** in simulated lesions on dry mandibles with parallax periapicals; "underestimated the size" is Patel K 2016 (clinical, 115 teeth). Shown beside the Patel 3-D strip the number would have been read as Patel-class accuracy in patients | Split into 6a (clinical, no number, Patel K 2016 — preferred on screen) and 6b (number, must say "Heithersay" + "ex vivo", Vaz de Souza 2017). Storyline cell rewritten |
+| 2 | (b) item 3; row 5; storyline 6.0-11.5 s | "mean 210 µm, 27 teeth": the abstract says "fluctuating thickness averaging 210 μm" in a study of 27 teeth; it does not say how many teeth were measured or give a range | Reworded to "~0.2 mm on average (ex vivo)"; "27 teeth" banned beside the number; confidence note added |
+| 3 | (b) item 3; row 4 | "Until late" was credited to Mavridou 2016; it is Heithersay 1999 / Patel 2022 wording (Mavridou: "did not penetrate the pulp space") | Attribution split; note that the histology sample is extracted (advanced) teeth |
+| 4 | (c) item 5 | "Typical endodontic CBCT voxel 0.08-0.125 mm" has no source among the cited papers | Figure removed; replaced by a qualitative statement; added to (e) |
+| 5 | Row 6 | "First description" of the resorption-resistant sheet (Gunst 2013) is a priority claim the abstract does not make | Softened to "early case-report description"; search result and Rotondi's attribution to Mavridou noted; added to (e) |
+| 6 | Row 34 | "First in-vivo comparison" (Patel 2009) — priority not verifiable | "First" removed |
+| 7 | Row 41; (d) | Outcome criterion omitted: Patel 2026 survival (85.7% at 5 y) was quoted without its success rates (asymptomatic and healed): 94.4%, 84.5%, 62.7%, 50.9%, 45.9% at 1, 2, 5, 7, 10 y. Teeth at risk: 64 at 5 y, 14 at 7 y, 3 at 10 y; 25 failures | Success figures and at-risk numbers added; caveat added to (d) and (e) |
+| 8 | Row 41 | Mavridou 2022 denominators unclear (abstract arithmetic gives 313 teeth; Patel 2026 describes the outcome cohort as 274); descriptive statistics, not Kaplan-Meier | Caveat added |
+| 9 | Row 42; (d) | "Spread >180° → higher extraction hazard" follows the abstract, but the full text shows only category C significant (multivariable HR 12.9, CI 1.81-93.10), D (>270°) not significant (univariate HR 3.43, p = 0.144), grouped >180° borderline (HR 2.42, p = 0.054), models "exploratory" | Row rewritten and downgraded to Low-medium; caption/NOTES only; added to (e) |
+| 10 | Row 38 | 32.5% / 39.2% "mismatch" confirmed in the Patel 2026 full text, but only in the Discussion and without a definition | Downgraded for use as a statistic; off screen; added to (e) |
+| 11 | Row 40; (b) item 8 | Heithersay 1999 outcome: "one operator" is not in the abstract; per-class numbers of teeth are not in the abstract; protocol used TCA, which Patel 2022 does not recommend | Row caveated; figures moved from "optional on screen" to caption only |
+| 12 | (b) item 8; storyline end card | "CBCT before you treat" reads as a rule; verified wording is "should be considered" (Patel K 2016 abstract; ESE 2018 as cited in Patel 2022 full text) | Changed to "Consider CBCT before you treat" |
+| 13 | Row 35 | The "should be considered ... amenable to treatment" wording comes from the abstract of Patel 2018 (epub 2017), so it describes the ESE 2014 and AAE/AAOMR 2015 statements, not the later ESE statements or the AAE/AAOMR 2025 update, whose wording nobody here has read | Provenance spelled out; "no AAE/AAOMR wording on screen" added to row and (e) |
+| 14 | (b) optional chip | "orthodontics · trauma · bleaching" gave bleaching equal weight, against this brief's own correction 9; bleaching is absent from the factor lists in the Mavridou 2017 and Patel 2025 abstracts and the only controlled study found trauma and diabetes | Chip reduced to orthodontics · trauma; bleaching caption-only with Heithersay attribution |
+| 15 | (c) item 9 | "None in Jeng 2020" (bleaching) — not stated in the abstract | Deleted |
+| 16 | Row 10; (d) | "Resorption more intense" in root-filled teeth: the abstract says the resorption stage was "more intense than the repair stage" (a within-group comparison); the vital-vs-root-filled reading is Rotondi's paraphrase | Exact wording restored in row and in (d); added to (e) |
+| 17 | Row 17 | "All four had a trauma history" lacked context: 77.94% of all 204 bleached teeth had a trauma history | Context added; added to (e) |
+| 18 | Row 30 | The 0.75 and 0.60 values are not labelled as ROC/AUC in the abstract | Metric caveat added; "AUC" not to be printed |
+| 19 | (b) item 5; (g) | 58.1% incidental finding: population (215 lesions referred to a London postgraduate unit / specialist practice) and the 23.3% with symptoms were missing | Denominator and "often, not usually" added |
+| 20 | Row 19 | "roughly 0.5-2.3%" did not match the range printed in Patel 2022 (0.02%-2.3%) | Row reworded to give both |
+| 21 | Rows 20, 43 | Missing denominators/criteria: Jeng 2020 = 63 teeth from 31 patients; Fernández-Grisales 2026 outcome = externally repaired teeth only, ≥2 y, success 61.7% / 49.3%; Jeng 2024 CI 54.16-93.59% | Added |
+| 22 | (d) | Missing caveats: (i) PRRS "walled off" vs 75% / 57.5% of lesions coded "p" on CBCT; (ii) PRRS evidence comes from one research group plus single cases, no in-vivo measurement | Two bullets added |
+| 23 | (g) | Caption guidance tightened; four background references added | Done |
+
+### Secondary-source misquotes confirmed (do not copy from reviews)
+
+- Rotondi 2020 full text prints Heithersay's class 3 and class 4 success as "78%" and "2%" (abstract: 77.8% and 12.5%).
+- Patel 2026 introduction prints Heithersay's results as "survival" of 100% / 96.8% / 50% (abstract: success 100% / 77.8% / 12.5%).
+- Patel 2022 full text prints the Vaz de Souza Heithersay-class accuracy as "32% and 70%" (abstract: 39.7% vs 70.5% / 69.2%).
+- Mavridou 2017 abstract's sex split ("175 (54%)" and "162 (46%)" of 337) is arithmetically inconsistent (175/337 = 51.9%) — confirmed; do not quote.
+
+### Checked and left unchanged (matches the source)
+
+Rows 1-3, 7-9, 11-16, 18, 21-29, 32-33, 36-37, 39, 44-45 and all of section (c) except items 5 and 9: quotes,
+numbers, sample sizes and citations match the PubMed abstracts or the full texts named. In particular: Mavridou
+2016 three-stage wording and PRRS composition; all Heithersay 1999 predisposing-factor percentages; Mavridou
+2017 (59%; 45.7 / 28.5 / 23.2 / 22.9 / 17.5 / 14%); Patel 2025 (22.3 / 57.7 / 20%; 25.6 / 20.9 / 15.8 / 10.2%);
+Irinakis 2020 (2.3%; trauma and diabetes); Patel 2023 (58.1%, 5.1%, 14%, 70.2 / 29.8%); Luso & Luder 2012;
+Goodell 2018 (56.7%); de Sousa 2026 (0.85 / 0.93 vs 1.00 / 1.00, GRADE very low); Patel 2018 3-D classification
+categories; Heithersay classes 1 and 4 (abstract) and 2-3 (Patel 2022 and Rotondi 2020 full texts, secondary);
+Patel 2022 quotes on probing ("profuse bleeding", "hard and scratchy"), canal outline, parallax, associations
+"rather than causative", and TCA "not recommended by the authors of this paper".
+
+### Still unverified (kept flagged; none of it is on the recommended list)
+
+- "Sharp, thinned-out edges" on probing (no source found; Patel 2022 says "hard and scratchy", figure legend "hard, glassy").
+- Original wording of Heithersay classes 2 and 3 (secondary sources only).
+- Gartner 1976 (no abstract; cited via Patel 2022).
+- Number of teeth per Heithersay class in the 1999 outcome paper; number of teeth in which the 210 µm average was measured.
+- Verbatim wording / recommendation numbers of the ESE and AAE/AAOMR statements.
+- The ~10% CEJ-gap figure.

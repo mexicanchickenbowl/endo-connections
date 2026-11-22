@@ -1,0 +1,43 @@
+{
+  "id": "25",
+  "slug": "25-outcome-numbers",
+  "title": "Endo outcome numbers worth memorizing",
+  "style": "Split-flap departure board",
+  "topic": "Success and survival figures for primary NSRCT, retreatment and apical surgery, each with its criteria, follow-up and source.",
+  "duration": 25.0,
+  "claims": [
+    {
+      "claim": "PRIMARY NSRCT · SUCCESS 82% · strict · pooled · 1 yr+",
+      "source": "Burns et al., Int Endod J 2022;55:714-731 (PMID 35334111); abstract + PMC full text: 82.0% strict, 39 studies, 7,432 teeth, at least 12 months of review"
+    },
+    {
+      "claim": "PRIMARY NSRCT · SURVIVAL 97% · retained · 8 yr · 1.46M teeth",
+      "source": "Salehrabi & Rotstein, J Endod 2004;30:846-850 (PMID 15564861); abstract: 1,462,936 teeth, US insurance claims"
+    },
+    {
+      "claim": "Apical lesion at start? NO >96% · YES 86% · success · 8-10 yr",
+      "source": "Sjögren et al., J Endod 1990;16:498-504 (PMID 2084204); abstract (criteria and unit of analysis not stated there)"
+    },
+    {
+      "claim": "RETREATMENT · SUCCESS 77% · strict · pooled · 6 mo+",
+      "source": "Ng, Mann & Gulabivala, Int Endod J 2008;41:1026-1046 (PMID 19133093); abstract: 76.7% by complete healing, inclusion at least 6-month review"
+    },
+    {
+      "claim": "RETREATMENT · SURVIVAL 89% · retained · 5 yr · 4,744 teeth",
+      "source": "Salehrabi & Rotstein, J Endod 2010;36:790-792 (PMID 20416420); abstract: retreatments by endodontists, US insurance claims"
+    },
+    {
+      "claim": "APICAL SURGERY · SUCCESS: traditional 59% · microsurgery 94% · pooled · 6 mo+",
+      "source": "Setzer et al., J Endod 2010;36:1757-1765 (PMID 20951283); abstract (12 studies n=925 vs 9 studies n=699, separate single-arm groups). 6-month minimum follow-up per a secondary source: Pinto et al., Medicina (Kaunas) 2020;56:447 (PMID 32899437), full text"
+    },
+    {
+      "claim": "APICAL SURGERY · SURVIVAL: flaps left blank (no number shown)",
+      "source": "Not a claim: no pooled survival figure could be verified. Torabinejad et al., J Endod 2015;41:1-10 (PMID 25306305) calculated one, but its abstract prints no number"
+    },
+    {
+      "claim": "SUCCESS ≠ SURVIVAL · NOT HEAD-TO-HEAD",
+      "source": "Definitions differ across sources 1-6: strict success (Burns 2022; Ng 2008), retention in claims data (Salehrabi & Rotstein 2004, 2010), pooled single-arm surgery groups (Setzer 2010)"
+    }
+  ],
+  "caption": "Endo outcome numbers worth memorizing, and what each one measures.\nPrimary NSRCT: 82% strict pooled success (1 yr+); 97% retained at 8 yr.\nApical lesion at the start: success >96% without vs 86% with (8–10 yr).\nRetreatment: 77% strict pooled (6 mo+); 89% retained at 5 yr.\nApical surgery, pooled series (6 mo+): traditional 59% vs microsurgery 94%; microsurgery at 2–13 yr: 78–91%. Survival left blank: no pooled figure I could verify.\n1 yr+ / 6 mo+ = minimum follow-up. Success ≠ survival; not head-to-head.\nRefs: Burns 2022, Ng 2008 (Int Endod J); Salehrabi & Rotstein 2004, 2010, Sjögren 1990, Setzer 2010 (J Endod); Pinto 2020 (Medicina).\n#endodontics #endo #rootcanal #boardprep #apicalsurgery"
+}

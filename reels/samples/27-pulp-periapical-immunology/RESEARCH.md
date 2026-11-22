@@ -5,6 +5,13 @@ Compiled 2026-11-22 from PubMed (abstracts for every PMID listed; PMC full text 
 Farges 2015 and Galler 2021). According to PubMed, the records below say what is quoted; every reference
 carries its DOI link in section (g). "Verified from" tells the builder how far a claim was actually checked.
 
+**Fact-checked 2026-11-22 (independent second pass).** Every PMID in the tables was re-fetched from PubMed and
+its abstract re-read; PMC full texts of Graves 2011, Farges 2015, Galler 2021 and Duka 2019 were downloaded
+again and searched. All bibliographic details (authors, year, journal, pages, PMID, DOI) and all numbers in the
+tables matched the PubMed records. What changed is mostly **attribution and wording**: several on-screen
+captions were tied to a source that does not say that thing. Changes are marked "FC:" inline and listed in the
+"Fact-check log" at the end. Where this file and an older summary of it disagree, this file wins.
+
 **How to read the confidence column**
 - HIGH = stated directly in an abstract/full text I read, consistent across sources.
 - MEDIUM = stated in one source, or true only for a species/model, or a review-level synthesis.
@@ -25,7 +32,7 @@ protective and destructive at the same time, and it cannot sterilize the canal.
 
 | # | Fact as it could appear on screen | Exact source | What the source literally reports | Verified from | Confidence |
 |---|---|---|---|---|---|
-| 1.1 | Odontoblasts carry TLR2 and TLR4 | Veerayutthwilai O et al., Oral Microbiol Immunol 2007;22:5-13, PMID 17241164 | "TLR2 and TLR4, as well as CCR6, were immunolocalized in human OBs and their dentinal processes in situ." In tooth-crown organ cultures LPS (TLR4) up-regulated IL-1β, TNF-α, CCL20, hBD2, IL-8; IL-1β, TNF-α, CCL20 were up 6- to 30-fold in preparations from decayed teeth. "OBs express microbial pattern recognition receptors in situ". | abstract | HIGH (expression, human, in situ); MEDIUM (function: organ culture) |
+| 1.1 | Odontoblasts carry TLR2 and TLR4 | Veerayutthwilai O et al., Oral Microbiol Immunol 2007;22:5-13, PMID 17241164 | "TLR2 and TLR4, as well as CCR6, were immunolocalized in human OBs and their dentinal processes in situ." In tooth-crown organ cultures LPS (TLR4) up-regulated IL-1β, TNF-α, CCL20, hBD2, IL-8; IL-1β, TNF-α, CCL20 were up 6- to 30-fold in preparations from decayed teeth. "OBs express microbial pattern recognition receptors in situ". FC: in the same abstract the TLR2 agonist Pam3CSK4 **down**-regulated these mRNAs, so the study supports "TLR2 and TLR4 are there" and "TLR4/LPS switches on cytokines", not "TLR2 switches on cytokines" (for TLR2 see 1.3, a different cell model). Number of decayed teeth is not in the abstract. | abstract | HIGH (expression, human, in situ); MEDIUM (function: organ culture) |
 | 1.2 | TLR4 protein in human odontoblasts | Jiang HW et al., J Endod 2006;32:747-51, PMID 16861074 | TLR4 mRNA and protein in the odontoblast layer and pulp of extracted human wisdom teeth (RT-PCR, Western blot, IHC). | abstract | HIGH |
 | 1.3 | Odontoblasts answer Gram-positive wall (LTA) via TLR2 with chemokines that call dendritic cells | Durand SH et al., J Immunol 2006;176:2880-7, PMID 16493045 | In vitro-differentiated human odontoblasts constitutively express TLR1-6 and 9 (not 7, 8, 10). LTA up-regulated TLR2 and chemokines (CCL2, CXCL10); supernatants increased migration of immature dendritic cells; CCL2 was expressed in vivo by odontoblasts under active caries, not in healthy pulp. LTA also down-regulated collagen I and DSPP (dentin matrix). | abstract | MEDIUM (in vitro, one in vivo IHC confirmation) |
 | 1.4 | Odontoblasts are stronger dendritic-cell attractants than pulp fibroblasts | Staquet MJ et al., J Dent Res 2008;87:256-61, PMID 18296610 | Odontoblast-like cells vs pulp fibroblasts stimulated with TLR2/3/4 agonists; supernatants increased immature DC migration, "odontoblast-like cells being more potent attractants than fibroblasts". | abstract | MEDIUM (in vitro) |
@@ -38,11 +45,11 @@ protective and destructive at the same time, and it cannot sterilize the canal.
 
 | # | Fact as it could appear on screen | Exact source | What the source literally reports | Verified from | Confidence |
 |---|---|---|---|---|---|
-| 2.1 | A healthy pulp already holds immune cells (about 1% of its cells) | Gaudin A et al., J Endod 2015;41:621-7, PMID 25702858 | Flow cytometry, healthy human third molars (42 young patients): CD45+ cells = 0.94% ± 0.65% of digested pulp cells (n = 34). Within CD45+: granulocytes/neutrophils 50.01% ± 9.08%, CD3+ T cells 32.58% ± 11%, CD14+ monocytes 8.93%, dendritic cells 4.51% ± 1.12%, NK 2.63%, B cells 1.65% ± 0.89%. | abstract | HIGH for the 0.94%; LOW for using the 50% neutrophil figure (may include intravascular cells; do not claim "half the pulp's immune cells are neutrophils") |
+| 2.1 | A healthy pulp already holds immune cells (about 1% of its cells) | Gaudin A et al., J Endod 2015;41:621-7, PMID 25702858 | Flow cytometry, healthy human third molars (42 young patients): CD45+ cells = 0.94% ± 0.65% of digested pulp cells (n = 34). Within CD45+: granulocytes/neutrophils 50.01% ± 9.08% (n = 7), CD3+ T cells 32.58% ± 11% (n = 17), CD14+ monocytes 8.93% ± 5.8% (n = 7), dendritic cells 4.51% ± 1.12% (n = 7), NK 2.63% ± 1.15% (n = 7), B cells 1.65% ± 0.89% (n = 17). FC: subgroup n values added; the 50% figure rests on 7 pulps. | abstract | HIGH for the 0.94%; LOW for using the 50% neutrophil figure (may include intravascular cells; do not claim "half the pulp's immune cells are neutrophils") |
 | 2.2 | Dendritic cells sit in the odontoblast layer of normal pulp; B cells are rare/absent | Jontell M, Gunraj MN, Bergenholtz G, J Dent Res 1987;66:1149-53, PMID 3305633 | Human intact premolars/third molars: class II (HLA-DR, -DQ) dendritic cells "in the odontoblastic layer as well as in the central portions"; T cells (helper and cytotoxic) in all specimens; "B cells were not seen in any of the pulp samples". | abstract | HIGH |
 | 2.3 | Dendritic cells gather under caries and push processes into the tubules | Yoshiba N et al., J Dent Res 1996;75:1585-9, PMID 8906127 | Human teeth: superficial caries caused aggregation of HLA-DR+ cells under the lesion; with deeper caries they lie along the pulp-dentin border "with cytoplasmic processes projecting deep into the dentinal tubules". | abstract | HIGH |
 | 2.4 | Dendritic cells and nerve fibers accumulate together under caries (earliest with superficial caries) | Sakurai K, Okiji T, Suda H, J Dent Res 1999;78:1596-608, PMID 10520964; Yoshiba K et al., J Dent Res 2003;82:422-7, PMID 12766192 | Co-increase of factor XIIIa+ / HLA-DR+ dendritic cells and nerve fibers at the pulpal end of carious tubules, "most apparent in teeth with superficial caries"; clusters of DCs, T cells and nerve fibers persisted 6 months after caries treatment (Yoshiba 2003). | abstracts | HIGH |
-| 2.5 | Dendritic cells carry antigen from pulp to the regional lymph nodes | Bhingare AC et al., J Dent Res 2014;93:288-93, PMID 24378366 | Photoconvertible KikGR mice: pulp DCs (CD11c-high, mature, CD86+, MHC II+) had migrated to regional lymph nodes 16 h after cusp trimming + acid etching. | abstract | MEDIUM (mouse) |
+| 2.5 | Pulp dendritic cells migrate to the regional lymph nodes (FC: was "carry antigen"; the study tracked cells, not antigen) | Bhingare AC et al., J Dent Res 2014;93:288-93, PMID 24378366 | Photoconvertible KikGR mice: pulp DCs (CD11c-high, mature, CD86+, MHC II+) had migrated to regional lymph nodes 16 h after cusp trimming + acid etching. FC: the stimulus was cusp trimming and acid etching, not caries; a second migrating fraction was granulocytes. | abstract | MEDIUM (mouse; not a caries model) |
 | 2.6 | Dendritic cells do not recognize antigen specifically; they activate T cells, which orchestrate the rest | Jontell M, Okiji T, Dahlgren U, Bergenholtz G, Crit Rev Oral Biol Med 1998;9:179-200, PMID 9603235 | "Although DCs are not able to identify foreign antigens specifically, they provide necessary signals to activate T-lymphocytes which in turn will orchestrate other immunocompetent cells". | abstract (review) | HIGH |
 | 2.7 | Under shallow caries the pulp answer is mostly T cells; with deep caries B cells, neutrophils and macrophages surge | Izumi T et al., Arch Oral Biol 1995;40:609-14, PMID 7575232 | Human teeth staged S0-S6 by caries depth: "substantial change ... between S3 and S4", with a "remarkable increase" in helper T cells, B-lineage cells, neutrophils and macrophages; early phase (S1-S3) T-cell response, advanced phase (S4-S6) humoral response plus tissue destruction by neutrophil/macrophage proteolytic enzymes. | abstract | HIGH |
 | 2.8 | T-cell balance shifts as pulpitis becomes irreversible | Hahn CL, Falkler WA, Siegel MA, J Endod 1989;15:20-6, PMID 2607262 | Human pulps: normal pulp T8 (CD8) predominant; reversible pulpitis > 90% of lymphocytes are T cells, T4/T8 = 0.56; irreversible pulpitis T4/T8 = 1.14 and B/T = 1.60. | abstract | MEDIUM (single study; not needed on screen) |
@@ -54,11 +61,11 @@ protective and destructive at the same time, and it cannot sterilize the canal.
 
 | # | Fact as it could appear on screen | Exact source | What the source literally reports | Verified from | Confidence |
 |---|---|---|---|---|---|
-| 3.1 | No bacteria, no necrosis and no periapical lesion | Kakehashi S, Stanley HR, Fitzgerald RJ, Oral Surg Oral Med Oral Pathol 1965;20:340-9, PMID 14342926; Möller AJ et al., Scand J Dent Res 1981;89:475-84, PMID 6951246 | Kakehashi has no PubMed abstract (content confirmed via Graves 2011 full text: germ-free rats bridged the exposure with dentin-like matrix; conventional rats developed necrosis and chronic infection). Möller (monkeys, 78 teeth, 6-7 months): 26 uninfected necrotic pulps "did not induce inflammatory reactions in the apical tissues"; infected teeth showed radiographic reactions in 47/52. | Möller abstract; Kakehashi via Graves full text | HIGH |
+| 3.1 | No bacteria, no periapical lesion (FC: was "no necrosis and no periapical lesion"; Möller's pulps were necrotic on purpose, so Möller cannot support "no necrosis") | Möller AJ et al., Scand J Dent Res 1981;89:475-84, PMID 6951246; Kakehashi S, Stanley HR, Fitzgerald RJ, Oral Surg Oral Med Oral Pathol 1965;20:340-9, PMID 14342926 | Möller (9 monkeys, 78 teeth aseptically necrotized, 6-7 months): 26 sealed, uninfected necrotic pulps stayed sterile and "did not induce inflammatory reactions in the apical tissues"; infected teeth showed reactions clinically in 12/52 and radiographically in 47/52, and all infected teeth examined histologically had strong periapical inflammation. Kakehashi has no PubMed abstract; Graves 2011 full text (re-read) describes it only as "germ-free animals" whose exposed pulps healed with a dentin-like bridge, versus necrosis and chronic infection with normal oral bacteria. | Möller abstract; Kakehashi only second-hand via Graves full text | HIGH (Möller, monkey); MEDIUM (Kakehashi details: second-hand, cite as "via review") |
 | 3.2 | Necrosis creeps from the crown toward the apex; periapical inflammation starts before the whole pulp is dead | Yamasaki M et al., J Endod 1994;20:13-7, PMID 8182380 | Rat pulp exposure, 1-56 days: "pulpal necrosis extended gradually from the upper part of the pulpal tissue to the apex, with inflammation starting in the periapical tissue at an early stage"; necrosis length increased from day 1 to 28. | abstract | HIGH (rat) |
 | 3.3 | In irreversible pulpitis bacteria are already inside the pulp tissue | Ricucci D, Loghin S, Siqueira JF Jr, J Endod 2014;40:1932-9, PMID 25312886 | 95 human teeth: "Infection advancing to the pulp tissue was a common finding in teeth with irreversible pulpitis but was never observed in normal/reversibly inflamed pulps." (clinical vs histologic agreement 96.6% and 84.4%). | abstract | HIGH |
 | 3.4 | The pulp is a low-compliance tissue: swelling raises pressure | Heyeraas & Berggreen 1999 (above) | "even a modest increase in pulpal fluid volume will raise the tissue pressure, which may compress blood vessels, leading to ischemia and necrosis"; BUT raised pressure also increases lymph flow and capillary absorption in nearby tissue, lowering it again. | abstract (review) | MEDIUM; do NOT draw whole-pulp "strangulation" |
-| 3.5 | The necrotic canal is a reservoir the immune system cannot reach | Graves DT, Oates T, Garlet GP, J Oral Microbiol 2011;3:5304, PMID 21547019 | "The infection persists as the necrotic tissue of the dental pulp is inaccessible to leukocytes and, hence, represents a protected reservoir of bacteria"; abstract: "bacteria persist in a protected reservoir that is not readily accessible to the immune defenses." | abstract + full text (PMC3087239) | HIGH |
+| 3.5 | The necrotic canal is a reservoir the immune system cannot reach | Graves DT, Oates T, Garlet GP, J Oral Microbiol 2011;3:5304, PMID 21547019 | "The infection persists as the necrotic tissue of the dental pulp is inaccessible to leukocytes and, hence, represents a protected reservoir of bacteria"; abstract: "bacteria persist in a protected reservoir that is not readily accessible to the immune defenses." FC: both quotes confirmed. The words "blood supply", "vascular" or "circulation" do **not** occur anywhere in Graves 2011, and Galler 2021 says only "the loss of the pulp tissue accounts for the loss of immune function". "No blood supply" is the textbook explanation, not a statement of this source. | abstract + full text (PMC3087239) | HIGH for "out of reach of leukocytes / protected reservoir"; NOT SOURCED for "no blood supply" |
 | 3.6 | Boosting neutrophils protected the pulp and the bone (rat) | Stashenko P et al., J Dent Res 1995;74:323-30, PMID 7876425 | PGG glucan (raised circulating neutrophils and monocytes; neutrophil phagocytic activity about two-fold): periapical bone resorption -48.0% radiographically, -40.8% / -42.4% histomorphometrically; complete pulp necrosis in 3.3% of first-molar pulps vs 40.6% in controls. | abstract | MEDIUM (rat, one study) |
 
 ### 4. The fight moves to the periapex (innate + adaptive)
@@ -68,14 +75,14 @@ protective and destructive at the same time, and it cannot sterilize the canal.
 | 4.1 | Apical periodontitis is the host's defense against canal microbes | Nair PNR, Crit Rev Oral Biol Med 2004;15:348-81, PMID 15574679 | "manifests itself as the host defense response to microbial challenge emanating from the root canal system ... a dynamic encounter between microbial factors and host defenses at the interface between infected radicular pulp and periodontal ligament". | abstract | HIGH |
 | 4.2 | The periapical tissue stops bacteria from spreading beyond the root, at a cost | Márton IJ, Kiss C, Oral Microbiol Immunol 2000;15:139-50, PMID 11154396 | "Successful mobilization of host defense mechanisms prevents abundant extraradicular bacterial invasion. However, anti-infective effector mechanisms ... also destroy normal tissue components and induce bone absorption". | abstract | HIGH |
 | 4.3 | Cast of the lesion: lymphocytes (T and B), plasma cells, macrophages, neutrophils, mast cells | Stashenko P, Yu SM, Wang CY, J Endod 1992;18:422-6, PMID 9796508; Stashenko P et al., Oral Surg Oral Med Oral Pathol 1994;78:494-502, PMID 7800381 | "The cell composition of human or rat periapical lesions is mixed, consisting of T, B, and 'null' lymphocytes, plasma cells, macrophages, polymorphonuclear leukocytes, and mast cells." | abstracts | HIGH |
-| 4.4 | Macrophages are major players (dominant immunocompetent cell in the rat lesion) | Kawashima N et al., J Endod 1996;22:311-6, PMID 8934992; Metzger Z, Endod Dent Traumatol 2000;16:1-8, PMID 11202850 | Rat: "Exudative macrophages ... were the most dominating immunocompetent cells during all experimental periods"; CD4+ cells dominated first, CD8+ cells and plasma cells when lesion size stabilized. Metzger review: macrophages are "major constituents of periapical granulomas" and activated macrophages are the source of bone-resorbing cytokines. | abstracts | HIGH (rat) / MEDIUM (human ranking) |
-| 4.5 | In human granulomas lymphocytes are the commonest leukocyte | Vernal R et al., Oral Dis 2006;12:283-9, PMID 16700737; Márton I et al., Fogorv Sz 1999;92:379-85, PMID 10641421 (Hungarian, English abstract); Liapatas S et al., Int Endod J 2003;36:464-71, PMID 12823701 | Vernal: flow cytometry of 6 granulomas, lymphocytes 53.31% of leukocytes. Márton: CD3+ T cells "about 50% of the mononuclear cells" in 20 granulomas. Liapatas (45 lesions): "the majority of inflammatory cells consisted of T and B lymphocytes and macrophages. T and B lymphocytes were equally distributed in 60% of the cases." | abstracts | MEDIUM (small series; proportions differ by method) |
+| 4.4 | Macrophages are major players (dominant immunocompetent cell in the rat lesion) | Kawashima N et al., J Endod 1996;22:311-6, PMID 8934992; Metzger Z, Endod Dent Traumatol 2000;16:1-8, PMID 11202850 | Rat: "Exudative macrophages ... were the most dominating immunocompetent cells during all experimental periods"; CD4+ cells dominated first, CD8+ cells and plasma cells when lesion size stabilized. Metzger review: macrophages are "major constituents of periapical granulomas" and activated macrophages are the source of bone-resorbing cytokines ("Only a few of the macrophages in the periapical granuloma are activated"). FC: Graves 2011 full text states the opposite ranking for a rat model ("predominant cell types ... T-cells followed by B-cells and monocytes/macrophages"), so even in the rat the "dominant cell" depends on the study. | abstracts | MEDIUM (rat, one IHC study; contradicted by another review) / LOW (any ranking on screen) |
+| 4.5 | Human lesions: lymphocytes and macrophages make up most of the infiltrate; which is commoner depends on the method (FC: was "lymphocytes are the commonest leukocyte"; not safe, see right) | Vernal R et al., Oral Dis 2006;12:283-9, PMID 16700737; Márton I et al., Fogorv Sz 1999;92:379-85, PMID 10641421 (Hungarian, English abstract); Liapatas S et al., Int Endod J 2003;36:464-71, PMID 12823701; Marton IJ, Kiss C, Int Endod J 1993;26:131-6, PMID 8330936 | Vernal: flow cytometry of 6 granulomas, lymphocytes 53.31% of leukocytes. Márton 1999: CD3+ T cells "about 50% of the mononuclear cells" in 20 granulomas, CD14+ macrophages "much less". Liapatas (45 surgical biopsies = 25 granulomas, 17 cysts, 3 scars): "the majority of inflammatory cells consisted of T and B lymphocytes and macrophages. T and B lymphocytes were equally distributed in 60% of the cases." Marton & Kiss 1993 (38 granulomas analysed): "a remarkably high proportion of macrophages". | abstracts | LOW for any ranking (6 to 45 lesions, methods disagree); do not put a "commonest cell" on screen |
 | 4.6 | T helper cells dominate while the lesion is expanding; CD8 cells when it stabilizes (rat) | Stashenko P, Yu SM, J Dent Res 1989;68:830-4, PMID 2523917 | 29 rats: TH/TS ratio 1.7 at day 15 (active phase), 0.9 at day 20, 0.7 at day 90. Total T cells unchanged. | abstract | HIGH (rat); terminology "T suppressor" is dated (CD8+) |
 | 4.7 | Rat model timeline: rapid expansion days 0-15, then chronic | Stashenko 1994 (PMID 7800381); Stashenko 1992 (PMID 9796508) | "periapical lesions develop rapidly between days 0 and 15 (active phase) and more slowly thereafter (chronic phase)". | abstracts | HIGH (rat only; never present as a human timeline) |
 | 4.8 | Plasma cells in the lesion make mostly IgG | Matthews JB, Mason GI, Br J Oral Surg 1983;21:192-7, PMID 6578841 | 10 human periapical granulomas: IgG, IgA, IgM, IgE, IgD plasma cells = 81.9%, 11.4%, 5.4%, 1.1%, 0.2% of positive cells; IgG predominated in all lesions. | abstract | HIGH (n = 10; say "mostly IgG", number only with n) |
 | 4.9 | Those antibodies are aimed at root canal bacteria | Baumgartner JC, Falkler WA Jr, J Endod 1991;17:207-12, PMID 1940739; Kettering JD, Torabinejad M, Jones SL, J Endod 1991;17:213-6, PMID 1940740 | Baumgartner: IgG from explant cultures of 90 periapical lesions; 89% reacted with at least one of Bacteroides intermedius (now Prevotella intermedia) / Porphyromonas gingivalis / P. endodontalis. Kettering: specific IgG, IgM and IgA against all 16 root canal species tested. | abstracts | HIGH |
 | 4.10 | Without B and T cells the infection escapes (mice) | Teles R, Wang CY, Stashenko P, Infect Immun 1997;65:3781-7, PMID 9284152 | RAG-2 SCID mice: "Approximately one-third ... developed endodontic abscesses, while no immunocompetent controls had abscesses"; non-abscessed SCID teeth had lesions no different in size from controls. | abstract | HIGH (mouse) |
-| 4.11 | Antibody (B cells) is what keeps it local (mice) | Hou L, Sasaki H, Stashenko P, Infect Immun 2000;68:5645-51, PMID 10992465 | RAG-2 SCID and B-cell-deficient mice, "but not T-cell- or C5-deficient mice", had more disseminating infections; passive antibody transfer cut dissemination "from 74 to 25%". | abstract | HIGH (mouse) |
+| 4.11 | Antibody (B cells) is what keeps it local (mice) | Hou L, Sasaki H, Stashenko P, Infect Immun 2000;68:5645-51, PMID 10992465 | RAG-2 SCID and B-cell-deficient mice, "but not T-cell- or C5-deficient mice", had more disseminating infections; passive antibody transfer cut dissemination "from 74 to 25%". FC: the 74% to 25% transfer experiment was done in RAG-2 SCID mice (no T or B cells), not in the B-cell-deficient strain; the transferred antibody was mainly IgG2b and IgM, and IgG-enriched fractions protected better. Teeth were sealed after inoculation with four anaerobes. | abstract | HIGH (mouse; say "in SCID mice" with the 74% to 25% numbers) |
 | 4.12 | Bone loss does not need T cells (athymic rats) | Wallstrom JB et al., Oral Surg Oral Med Oral Pathol 1993;76:213-8, PMID 8361734 | 15 athymic vs 15 conventional rats, 2/4/8 weeks: "no significant difference between periapical tissue responses". Labelled "a preliminary report". | abstract | MEDIUM |
 | 4.13 | Symptomatic (flaring) human lesions: more neutrophils and more IL-17 | Čolić M et al., Eur J Oral Sci 2007;115:315-20, PMID 17697172; Čolić M et al., Mol Immunol 2009;47:101-13, PMID 19232436 | Human lesion cells in culture: IL-17 level and neutrophil proportion significantly higher in symptomatic lesions; IL-17 correlated with IL-8. 2009: "Th1 immune response is most probably important for all stages"; Th2/immunoregulatory cytokines "more significant for advanced types of lesions with the predominance of B cells/plasma cells"; "Th17 immune response seems to play a dominant role in exacerbating inflammation". | abstracts | MEDIUM (ex vivo association) |
 | 4.14 | Active human lesions: Th1/Th17-type signals; inactive lesions: IL-10 / Treg-type signals | Araujo-Pires AC et al., J Appl Oral Sci 2014;22:336-46, PMID 25141207; review: Cavalla F et al., J Dent Res 2021;100:29-36, PMID 32866421 | 110 human granulomas (40 active vs 70 inactive, defined by RANKL/OPG mRNA ratio): TNF-α, IFN-γ, IL-17A, IL-21 higher in active; IL-4, IL-9, IL-10, IL-22, FOXP3 higher in inactive. Cavalla: high RANKL/OPG ratio is "the primary determinant of osteolytic activity"; Th1, Th17 and B cells give pro-osteoclastogenic support; Th2 + Tregs associate with stability. | abstracts | MEDIUM (cross-sectional mRNA association, activity defined by the same axis) |
@@ -86,13 +93,13 @@ protective and destructive at the same time, and it cannot sterilize the canal.
 
 | # | Fact as it could appear on screen | Exact source | What the source literally reports | Verified from | Confidence |
 |---|---|---|---|---|---|
-| 5.1 | IL-1 is the main bone-resorbing signal in the rat lesion; blocking it cut bone loss by 60% | Stashenko P et al., Oral Surg Oral Med Oral Pathol 1994;78:494-502, PMID 7800381 | "Most bone-resorbing activity is mediated by the cytokine interleukin-1 alpha"; PGE2 "accounts for 10% to 15% of resorptive activity"; IL-1α-expressing cells in pulp from day 2 and periapex from day 7; "periapical bone destruction was inhibited by 60% by treatment with interleukin-1 receptor antagonist." | abstract | HIGH (rat; IL-1α) |
-| 5.2 | In human granulomas the resorbing activity is IL-1β and TNF-β (lymphotoxin), partly via prostaglandins | Wang CY, Stashenko P, J Endod 1993;19:107-11, PMID 8509747 | 10/10 human granulomas had bone-resorbing activity (fetal rat long bone assay); inhibited by anti-IL-1β (69%) and anti-TNF-β (66%); anti-IL-1α and anti-TNF-α had no effect; indomethacin reduced activity by 74%. | abstract | HIGH (n = 10; note species difference vs 5.1) |
+| 5.1 | IL-1 is the main bone-resorbing signal in the rat lesion; blocking it cut bone loss by 60% | Stashenko P et al., Oral Surg Oral Med Oral Pathol 1994;78:494-502, PMID 7800381 | "Most bone-resorbing activity is mediated by the cytokine interleukin-1 alpha"; PGE2 "accounts for 10% to 15% of resorptive activity"; IL-1α-expressing cells in pulp from day 2 and periapex from day 7; "periapical bone destruction was inhibited by 60% by treatment with interleukin-1 receptor antagonist." FC: the abstract literally prints "Prostaglandin2" (read as PGE2); TNF-α-expressing cells "were also detected" (no resorption share given), cells expressing IL-1β or TNF-β "were absent". The paper pre-dates RANKL and says nothing about it: never use it as the source of a "... → RANKL" arrow. PubMed types this record as a review of the group's rat studies. | abstract | HIGH (rat; IL-1α and prostaglandin) / NOT A SOURCE for TNF's share or for RANKL |
+| 5.2 | In human granulomas the resorbing activity is IL-1β and TNF-β (lymphotoxin), partly via prostaglandins | Wang CY, Stashenko P, J Endod 1993;19:107-11, PMID 8509747 | 10/10 human granulomas had bone-resorbing activity (fetal rat long bone assay); inhibited by anti-IL-1β (69%) and anti-TNF-β (66%); anti-IL-1α and anti-TNF-α had no effect; indomethacin reduced activity by 74%. FC: confirmed; characterization used an extract pool, a minor low-molecular-weight peak "was identified as prostaglandin E2 by radioimmunoassay", and the PubMed abstract is truncated at 250 words. | abstract (truncated) | HIGH (n = 10; note species difference vs 5.1) |
 | 5.3 | PGE2 is higher in acute than in chronic human lesions | McNicholas S et al., J Endod 1991;17:97-100, PMID 1940730 | Radioimmunoassay: low PGE2 in control tissue; "Significantly higher levels of PGE2 were found in acute lesions than those found in chronic lesions." | abstract | HIGH |
 | 5.4 | Indomethacin blocked periapical bone resorption but not the inflammatory infiltrate (cat) | Torabinejad M, Clagett J, Engel D, Calcif Tissue Int 1979;29:207-14, PMID 117884 (indexed as "Torbinejad") | Simulated immune complexes injected through the canal caused periapical bone resorption within 7 days; "Bone resorption, but not the accumulation of inflammatory cells, was blocked by the systemic administration of indomethacin". | abstract | MEDIUM (cat, immune-complex model, not infection) |
 | 5.5 | RANKL is up in human periapical granulomas | Vernal 2006 (PMID 16700737); Menezes R et al., J Endod 2008;34:932-8, PMID 18634923; Menezes R et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2006;102:404-9, PMID 16920551 | Vernal: RANKL mRNA 16.2-fold (range 2.0-131.6) higher in 8 granulomas than 8 healthy PDL samples; monocytes and dendritic cells were the main RANKL-positive leukocytes. Menezes 2008 (44 granulomas): RANKL and OPG both higher than healthy PDL; RANKL/OPG ratio heterogeneous, from "minimal or absent bone resorption" patterns to "active bone resorption" patterns. Menezes 2006: RANKL and OPG protein in neutrophils, macrophages, endothelial cells and lymphocytes of granulomas and cysts. | abstracts | HIGH |
 | 5.6 | The RANKL : OPG ratio peaks while the lesion is expanding (rat, weeks 2-3) | Kawashima N et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2007;103:707-11, PMID 17336108; Zhang X, Peng B, J Endod 2005;31:574-7, PMID 16044039 | Kawashima: RANKL up at the start of lesion expansion, RANKL/OPG ratio "peaked at 2 and 3 weeks", with TNF-α, IL-1α, IL-1β; "Most of RANKL+ cells were fibroblastic, but few of them were T cells." Zhang: TRAP+ osteoclasts and RANKL+ cells peaked on day 14. | abstracts | HIGH (rat). Already used in reel 18: keep this panel short |
-| 5.7 | Pro-inflammatory cytokines raise RANKL; IL-10 raises OPG (human lesion cells) | Duka M et al., Mediators Inflamm 2019;2019:8325380, PMID 31011287; Graves 2011 full text | Human periapical lesion cell cultures: RANKL production "upregulated by IFN-γ and IL-17"; "IL-10 ... augmented the production of OPG"; RANKL higher in symptomatic lesions. Graves: TLR/NOD activation leads to IL-1, TNF-α, IL-6 and "has been associated with enhanced RANKL production, osteoclastogenesis, and bone resorption"; OPG is the decoy receptor for RANKL. | abstract; full text | MEDIUM-HIGH |
+| 5.7 | IFN-γ and IL-17 raised RANKL, IL-10 raised OPG, TNF-α changed neither (human lesion cells in culture). FC: heading was "pro-inflammatory cytokines raise RANKL", which hid the negative TNF result | Duka M et al., Mediators Inflamm 2019;2019:8325380, PMID 31011287; Graves 2011 full text | Human periapical lesion cell cultures: RANKL production "upregulated by IFN-γ and IL-17 and higher concentrations of IL-33"; "IL-10 and lower concentrations of IL-33 augmented the production of OPG"; RANKL higher in symptomatic lesions. FC, full text (PMC6442274): "We did not find any modulation of both RANKL and OPG production by TNF-α"; IL-1 was not tested. Graves: TLR/NOD activation leads to IL-1, TNF-α, IL-6 and "has been associated with enhanced RANKL production, osteoclastogenesis, and bone resorption"; Fig. 2 legend: "Cytokines such as TNF-α can stimulate osteoclastogenesis independently while other cytokines stimulate RANKL expression"; OPG is the decoy receptor for RANKL. | Duka abstract + full text; Graves full text | MEDIUM (ex vivo; the step "IL-1/TNF/PGE2 raise RANKL" is a review-level model, not shown in periapical tissue) |
 | 5.8 | The same cytokines that resorb bone are needed to contain the bacteria | Chen CP et al., Am J Pathol 1999;155:2145-52, PMID 10595943; Graves 2011 | Mice lacking IL-1 receptor and/or TNF receptors: "osteolytic lesion formation was greatest in animals lacking TNF and/or IL-1 receptors", with greater bacterial penetration into host tissue. "IL-1 or TNF receptor signaling is not required for bacteria-induced osteoclastogenesis and bone loss, but does play a critical role in protecting the host". | abstract | HIGH (mouse). This is the key "double-edged" fact |
 | 5.9 | IL-6 is net protective in the mouse model | Balto K, Sasaki H, Stashenko P, Infect Immun 2001;69:744-50, PMID 11159963 | IL-6 -/- mice: bone destruction increased 30% (P < 0.001); anti-IL-6 antibody: +40% (P < 0.05); more osteoclasts, more IL-1α/β, less IL-10. | abstract | HIGH (mouse) |
 | 5.10 | IL-17: both "needed for lesions" and "protective" have been published | Oseko F et al., Microbiol Immunol 2009;53:287-94, PMID 19457170; AlShwaimi E et al., J Immunol 2013;191:1785-91, PMID 23863904; Xiong H, Wei L, Peng B, J Endod 2009;35:216-20, PMID 19166776; review: Xiong H, Wei L, Peng B, Int Endod J 2019;52:1128-37, PMID 30859589 | Oseko: lesions formed in wild-type, IFN-γ -/- and TNF-α -/- mice but "were not observed in IL-17A -/- mice". AlShwaimi: IL-17 receptor A knockout mice had "significantly increased bone destruction and more abscess formation". Xiong 2009 (rat): IL-17+ cells and neutrophils rose to day 28 while osteoclasts peaked at day 14 and fell. Xiong 2019 (25 papers): presence of IL-17 is clear; "relatively little information ... would highlight the specific role". | abstracts | LOW for any causal on-screen claim |
@@ -103,8 +110,8 @@ protective and destructive at the same time, and it cannot sterilize the canal.
 
 | # | Fact as it could appear on screen | Exact source | What the source literally reports | Verified from | Confidence |
 |---|---|---|---|---|---|
-| 6.1 | The bacteria stay (mostly) inside the canal | Ricucci D, Siqueira JF Jr, J Endod 2010;36:1277-88, PMID 20647081 | 106 roots with apical periodontitis: intraradicular biofilm in the apical canal of 77%; "Extraradicular biofilms were observed in only 6% of the cases." | abstract | HIGH (histobacteriology; "6% extraradicular biofilm", not "6% extraradicular bacteria") |
-| 6.2 | Treatment = remove the microbial load; the tissue then heals itself | Nair 2004 (abstract); Márton IJ, Kiss C, J Endod 2014;40:155-63, PMID 24461396 | Nair: treatment "consists of eradicating microbes or substantially reducing the microbial load from the root canal and preventing re-infection by orthograde root filling". Márton & Kiss 2014: "Regeneration of the injured tooth-supporting structures may follow elimination of the causative microbial irritation." | abstracts | HIGH |
+| 6.1 | The bacteria stay (mostly) inside the canal | Ricucci D, Siqueira JF Jr, J Endod 2010;36:1277-88, PMID 20647081 | 106 roots with apical periodontitis: intraradicular biofilm in the apical canal of 77%; "Extraradicular biofilms were observed in only 6% of the cases." FC: the 106 roots were 64 untreated and 42 already root-filled (intraradicular biofilm 80% and 74%), obtained by apical surgery or extraction; "Bacteria were found in all but one specimen". So the denominator is "roots with apical periodontitis, treated and untreated", a surgical/extraction sample. | abstract | HIGH (histobacteriology; "6% extraradicular biofilm", not "6% extraradicular bacteria"; give the mixed denominator if the number is used) |
+| 6.2 | Treatment = remove the microbial load; the tissue then heals itself | Nair 2004 (abstract); Márton IJ, Kiss C, J Endod 2014;40:155-63, PMID 24461396 | Nair: treatment "consists of eradicating microbes or substantially reducing the microbial load from the root canal and preventing re-infection by orthograde root filling". Márton & Kiss 2014: "Regeneration of the injured tooth-supporting structures may follow elimination of the causative microbial irritation." FC: the same Nair abstract adds that failures still occur because "there are root canal regions that cannot be cleaned and obturated ... and thus, infection can persist". Treatment reduces the load; it is not described as sterilizing the canal. | abstracts | HIGH for "treatment targets the canal infection"; do NOT write "treatment clears the canal" |
 | 6.3 | Healing after treatment did not differ with HIV status | Quesnell BT et al., J Endod 2005;31:633-6, PMID 16123697 | Retrospective, 33 HIV+ vs 33 healthy patients, necrotic teeth with chronic apical periodontitis, PAI change at 12 months: "no statistically significant differences". | abstract | MEDIUM (small retrospective; caption-level nuance only) |
 
 ### Items searched but NOT verifiable from PubMed (no abstract) — keep off screen
@@ -122,26 +129,77 @@ protective and destructive at the same time, and it cannot sterilize the canal.
 ## (b) Recommended on-screen facts (best supported, board-relevant, safe wording)
 
 Budget: about 60 must-read words in total. No number is required for this reel; if one number is wanted,
-use only 4 or 6 below with its denominator.
+use only the IgG figure in item 4 with its denominator.
+
+FC: this list was re-checked item by item against PubMed. The biology survived; four source lines and three
+wordings did not. Each item now says exactly which record supports which half of the sentence, because the
+resident will quote these as board facts.
 
 1. **Odontoblasts sense bacteria through the tubules (TLR2, TLR4).**
-   Source line: "Veerayutthwilai 2007, Oral Microbiol Immunol". (Human, in situ expression. HIGH.)
+   Source line: "Veerayutthwilai 2007, Oral Microbiol Immunol". Verified from the abstract: TLR2 and TLR4
+   immunolocalized in human odontoblasts and their dentinal processes in situ. HIGH for "the receptors are
+   there"; "sense" is the authors' inference from organ culture, so add nothing stronger (no "TLR2 triggers a
+   cytokine burst": in this paper the TLR2 agonist turned those genes down). Draw bacterial products (small
+   dots) running ahead of the cocci in the tubules: Farges 2015 speaks of "pathogens and their released products".
 2. **Dendritic cells sample antigen at the dentin border; macrophages and neutrophils move in as caries deepens.**
-   Source line: "Jontell 1998, Crit Rev Oral Biol Med" (or "Izumi 1995, Arch Oral Biol" for the human staging). HIGH.
-3. **Necrotic pulp: no blood supply, no immune access. A protected bacterial reservoir.**
-   Source line: "Graves 2011, J Oral Microbiol". HIGH.
-4. **At the apex the defense regroups: macrophages, T cells, B cells, plasma cells (mostly IgG).**
-   Source line: "Stashenko 1998, Crit Rev Oral Biol Med". Optional number: "IgG ≈ 82% of plasma cells (10 granulomas)" with "Matthews & Mason 1983". HIGH.
-5. **The cost: IL-1, TNF, PGE2 → RANKL up → osteoclasts resorb bone.**
-   Source line: "Stashenko 1994, Oral Surg (rat)" or "Wang & Stashenko 1993, J Endod (human)". HIGH. Do not add IL-6 here (see corrections).
-6. **Brakes: IL-10 and regulatory T cells. Lesions can be active or stable.**
-   Source line: "Cavalla 2021, J Dent Res". MEDIUM-HIGH. Optional; drop first if the page is crowded.
-7. **Takeaway: the lesion contains the infection; it cannot clear the canal. Treatment removes the cause.**
-   Source line: "Nair 2004, Crit Rev Oral Biol Med". HIGH.
+   Source line: **"Farges 2015, Mediators Inflamm" (review; full text re-read)**, which states the whole
+   sentence: immature dendritic cells accumulate early at the dentin-pulp interface "to capture foreign
+   antigens", then T cells, macrophages, neutrophils and B cells accumulate as the lesion deepens.
+   FC: the earlier source line "Jontell 1998" is wrong for this caption; its abstract covers only dendritic
+   cells activating T cells and says nothing about macrophages, neutrophils or caries depth. Primary human
+   data: Yoshiba 1996 (dendritic processes in tubules) and Izumi 1995 (surge between stages S3 and S4); neither
+   abstract alone covers both halves. Note T cells arrive before the phagocytes: show lymphocytes in the picture.
+   MEDIUM-HIGH (review synthesis of human immunohistochemistry; no times).
+3. **Necrotic pulp: out of reach of immune cells. A protected bacterial reservoir.**
+   Source line: "Graves 2011, J Oral Microbiol". HIGH for this wording (abstract: "not readily accessible to
+   the immune defenses"; full text: "inaccessible to leukocytes ... a protected reservoir of bacteria").
+   FC: **"no blood supply" removed.** Graves 2011 never mentions blood supply, vessels or circulation, and no
+   other record read for this brief states it. It is a reasonable textbook explanation, but it may not sit on
+   screen next to "Graves 2011". If the builder wants it, cite a named textbook as a textbook in NOTES.md.
+4. **At the apex the defense regroups: macrophages, T cells, B cells, plasma cells, antibodies.**
+   Source line: **"Stashenko 1992, J Endod"** (abstract lists the cast for human or rat lesions: T, B and
+   "null" lymphocytes, plasma cells, macrophages, neutrophils, mast cells). HIGH for the cast, unranked.
+   FC: the earlier source line "Stashenko 1998" does not support the cast; its abstract mentions only
+   neutrophil and monocyte migration and "T- and B-cell-mediated anti-bacterial responses", with no plasma
+   cells, no macrophages by name and no IgG.
+   "Mostly IgG" is a separate claim with a separate source: Matthews & Mason 1983, Br J Oral Surg (10 human
+   granulomas; IgG 81.9% of immunoglobulin-positive plasma cells, IgG predominant in all 10). An "IgG" tag on
+   the antibody drawing is fine if meta.json lists it as its own claim. Optional number, exact form:
+   "IgG about 82% of antibody-containing plasma cells (10 human granulomas)".
+5. **The cost: IL-1, TNF, PGE2 and RANKL switch on osteoclasts; bone resorbs.**
+   Source line: **"Graves 2011, J Oral Microbiol (review)"**, full text: bacteria "stimulate resorption through
+   the induction of proinflammatory cytokines such as IL-1β, IL-1α, ... RANKL, or TNF-α", with prostaglandins
+   among the mediators released. MEDIUM-HIGH that each of the four is implicated; write them **side by side**.
+   FC: the earlier chain "IL-1, TNF, PGE2 → RANKL up → osteoclasts", sourced to "Stashenko 1994 (rat)" and
+   rated HIGH, is downgraded. (a) Stashenko 1994 is a pre-RANKL paper and supports only IL-1α, a prostaglandin
+   share of 10-15% and a 60% effect of IL-1 receptor antagonist in rats. (b) The step "these cytokines raise
+   RANKL" is a review-level model (Cavalla 2021 abstract: "Proinflammatory cytokines directly modulate
+   RANKL/OPG expression"); in periapical tissue it is only correlational in the rat (Kawashima 2007), and in
+   human lesion-cell cultures IFN-γ and IL-17 raised RANKL while TNF-α changed neither RANKL nor OPG (Duka
+   2019, full text). (c) Mice without IL-1 and TNF receptors still lost bone (Chen 1999). If a two-step arrow is
+   kept for the picture, the source line must be a review ("Cavalla 2021, J Dent Res (review)"), never
+   Stashenko 1994, and NOTES.md must call the step a model. Do not add IL-6 here (see corrections).
+6. **Brakes: IL-10 and regulatory T cells. Lesions can be active or stable.** Optional; drop first if crowded.
+   FC: one source does not cover this. IL-10 = Sasaki 2000, J Immunol (knockout mice: more bone resorption).
+   Regulatory T cells = Francisconi 2016, J Endod (mice: blocking them worsened lesions). "Active or stable" =
+   Cavalla 2021, J Dent Res (review); its abstract credits "Th2 and Tregs" and does not name IL-10, so it must
+   not be the lone citation for an "IL-10" tag. MEDIUM (mouse causal data; human data associative). If shown
+   without a source line, list both mouse papers as the claim's sources in meta.json.
+7. **Takeaway: the lesion contains the infection; it cannot reach the canal. Treatment can.**
+   Source line: "Nair 2004, Crit Rev Oral Biol Med" (abstract: apical periodontitis is the host defense
+   response; treatment "consists of eradicating microbes or substantially reducing the microbial load from the
+   root canal and preventing re-infection"). "Contains" rests on Márton & Kiss 2000 ("prevents abundant
+   extraradicular bacterial invasion"); "cannot reach" rests on Graves 2011. HIGH.
+   FC: the earlier wording "It can't clear the canal. Treatment can." implied that treatment clears (sterilizes)
+   the canal. Nair's own abstract says the load is eradicated **or substantially reduced** and that infection
+   can persist in regions that cannot be cleaned. "Can't reach / treatment can" is literally true and needs no
+   hedge. Containment is also not absolute (12/52 infected monkey teeth had clinical signs, Möller 1981;
+   one-third of SCID mice abscessed, Teles 1997): prefer "contains" or "holds", not "seals off".
 8. One honest qualifier, small, inside the safe area for the periapical panels: **"sequence largely from rodent models; schematic"**.
 
-Wording to prefer: "contains", "walls off", "holds the line", "at a cost", "linked to", "restrain".
-Wording to avoid: "kills the bacteria", "cures", "Th17 destroys bone", "the body makes room", "the pulp strangles itself".
+Wording to prefer: "contains", "walls off", "holds the line", "at a cost", "linked to", "restrain", "out of reach".
+Wording to avoid: "kills the bacteria", "cures", "clears / sterilizes the canal", "no blood supply" (unsourced),
+"Th17 destroys bone", "the body makes room", "the pulp strangles itself", "seals off".
 
 ---
 
@@ -162,7 +220,15 @@ Wording to avoid: "kills the bacteria", "cures", "Th17 destroys bone", "the body
 13. **"Plasma cells (IgG)" is correct**, but cite Matthews & Mason 1983 (81.9% IgG, n = 10), not Pulver 1978 / Stern 1981 (no abstracts).
 14. **Odontoblast TLRs:** expression in situ in human teeth is verified (TLR2, TLR4); the functional story (chemokines, defensins, NO) is mostly in vitro or organ culture, as Farges 2015 itself states. Caption-level hedge: "lab and tissue studies".
 15. **My own lead for Teles was wrong and is corrected here:** the SCID paper is Teles, Wang, Stashenko, **Infect Immun 1997;65:3781-7** (PMID 9284152), not Oral Microbiol Immunol.
-16. **"No blood supply" as the reason treatment is needed: supported** (Graves 2011: necrotic pulp "inaccessible to leukocytes ... protected reservoir"). Keep.
+16. **"Immunity cannot clear bacteria inside a necrotic canal": supported. "(no blood supply)": NOT supported by the cited source.** FC: this item originally said "No blood supply ... supported (Graves 2011)". Graves 2011 says the necrotic pulp is "inaccessible to leukocytes ... a protected reservoir of bacteria" and nothing about blood supply, vessels or circulation (full text searched). Keep the conclusion, drop the parenthesis from the screen, or cite a textbook for it.
+
+Added by the fact-check (FC):
+
+17. **The brief's chain "IL-1, TNF, IL-6, IL-17, PGE2 → RANKL/OPG → osteoclasts" is a textbook model, not a measured periapical pathway.** Verified pieces: IL-1 and prostaglandin as resorbing activity (rat: Stashenko 1994; human: Wang & Stashenko 1993, where the cytokines were IL-1β and TNF-β); RANKL raised in human granulomas (Vernal 2006; Menezes 2008). The connecting arrow is review-level (Cavalla 2021; Graves 2011). Against a simple serial reading: TNF-α did not change RANKL or OPG in human periapical lesion cells (Duka 2019, full text), and mice lacking IL-1 and TNF receptors still resorbed bone (Chen 1999). Show the mediators side by side.
+18. **"Why treatment is needed" must not become "treatment clears the canal".** Nair 2004: treatment eradicates microbes "or substantially reduc[es] the microbial load"; some canal regions cannot be cleaned and infection can persist there.
+19. **Source lines were attached to the wrong papers** in the first version of this brief: Jontell 1998 for macrophage/neutrophil influx (it is Farges 2015 / Izumi 1995), Stashenko 1998 for the list of lesion cells and IgG (it is Stashenko 1992 and Matthews & Mason 1983), Stashenko 1994 for RANKL (it does not mention RANKL), Cavalla 2021 for IL-10 (its abstract names Th2 and Tregs; IL-10 is Sasaki 2000). All four are corrected in sections (b) and (f).
+20. **On item 9:** the newest review still credits "the cooperative action between Th2 and Tregs" with lesion stability (Cavalla 2021 abstract), and IL-4 was higher in inactive human granulomas (Araujo-Pires 2014). So "Th2 is associated with stable lesions" is a fair reading of human association data; what the knockouts refute is IL-4 as a necessary brake. "IL-10 / Tregs restrain" remains the best-supported short label.
+21. **Kakehashi 1965 cannot be cited from a reading of the paper.** It has no PubMed abstract, and Graves 2011 describes it without numbers or species ("germ-free animals"). If it is named in the caption, cite it as the classic it is and do not attach details.
 
 ---
 
@@ -179,6 +245,10 @@ Wording to avoid: "kills the bacteria", "cures", "Th17 destroys bone", "the body
 - **Granuloma vs cyst immunology** is inconsistent across studies (Liapatas 2003: no significant difference; Galler 2021 summarizes conflicting CD8 and macrophage-polarization data). Leave cysts out of this reel.
 - **Pulp necrosis mechanism.** Low compliance is real (Heyeraas & Berggreen 1999), but the same review describes lymph drainage and capillary absorption that relieve pressure; total "self-strangulation" of the pulp is not what the physiology shows. Necrosis is driven by bacterial advance plus host enzymes (Izumi 1995; Ricucci 2014).
 - **Clinical translation.** HIV status did not change 12-month periapical healing in a small retrospective study (Quesnell 2005). Do not imply that immunocompromised patients cannot heal, nor that immunity is irrelevant: the mouse data concern untreated infection.
+- **FC: is the cytokine → RANKL step real in the periapex?** Reviews draw it (Cavalla 2021; Graves 2011, Fig. 2). Direct periapical evidence is thin: rat RANKL/OPG rises together with TNF-α and IL-1 during expansion (Kawashima 2007, correlation only); in cultured human lesion cells IFN-γ and IL-17 raised RANKL but TNF-α did not, and IL-1 was not tested (Duka 2019); IL-1/TNF receptor knockout mice still lost bone (Chen 1999). The reel may list IL-1, TNF, PGE2 and RANKL as the osteoclast signals; it should not teach a proven one-way relay.
+- **FC: which cell dominates the rat lesion is itself disputed.** Kawashima 1996 counted macrophages as dominant at all time points; Graves 2011 summarises a rat model as "T-cells followed by B-cells and monocytes/macrophages". One more reason to draw the cast without ranking.
+- **FC: "bacteria stay in the canal" comes from a mixed surgical/extraction sample.** Ricucci & Siqueira 2010 examined 64 untreated and 42 root-filled roots; extraradicular biofilm in 6%. "Mainly inside the canal" is fair; "never outside" is not.
+- **FC: "no blood supply"** is how textbooks explain why leukocytes cannot enter a necrotic canal. None of the records read for this brief states it, so it is unsourced here.
 
 ---
 
@@ -200,6 +270,19 @@ Wording to avoid: "kills the bacteria", "cures", "Th17 destroys bone", "the body
 - Do not duplicate reel 18: no radiograph, no PA-vs-CBCT, no detection percentages; RANKL/OPG gets one beat only.
 - No faces on cells (style brief), no copyrighted comic characters or onomatopoeia lettering copied from existing comics.
 
+Added by the fact-check (FC), items moved here from the recommended list or newly barred:
+
+- Do not write "no blood supply" on screen with Graves 2011 (or any source in this brief) beside it: the phrase is in none of them.
+- Do not write or imply that treatment "clears", "cleans out" or "sterilizes" the canal. Supported: treatment eradicates or substantially reduces the canal's microbial load (Nair 2004); the immune system cannot reach the canal, treatment can.
+- Do not present "IL-1, TNF, PGE2 → RANKL" as a proven serial pathway in periapical tissue, and never with Stashenko 1994 as its source (that paper does not mention RANKL). List the signals side by side, or cite a review and call it a model in NOTES.md.
+- Do not cite Stashenko 1998 for the list of lesion cells or for IgG, Jontell 1998 for macrophage/neutrophil influx, or Cavalla 2021 alone for IL-10 (see correction 19).
+- Do not say lymphocytes (or macrophages) are "the commonest cell" in human lesions: series of 6 to 45 lesions disagree by method.
+- Do not say dendritic cells "carry antigen to the lymph nodes during caries": the migration data are from mice after cusp trimming and acid etching (Bhingare 2014).
+- Do not say "no bacteria, no necrosis" on the strength of Möller 1981 (those pulps were necrotized aseptically); the supported statement is "no bacteria, no periapical inflammation" (monkey).
+- Do not quote "74% to 25%" as an experiment in B-cell-deficient mice: the antibody transfer was done in RAG-2 SCID mice (Hou 2000).
+- Do not quote "6% extraradicular biofilm" without saying the 106 roots included 42 root-filled teeth (Ricucci & Siqueira 2010).
+- Do not show "TLR2 → cytokine burst" as the Veerayutthwilai finding: in that paper the TLR2 agonist lowered those transcripts; the TLR2/LTA chemokine data are in vitro (Durand 2006).
+
 ---
 
 ## (f) Suggested storyline (silent comic strip, about 23 s, six panels, about 60 must-read words)
@@ -213,14 +296,16 @@ typing "→". Bangers for the one-word panel headers, Comic Neue Bold for captio
 |---|---|---|---|---|---|
 | 0.0-1.2 s | Title strip | THE TOOTH FIGHTS BACK | "Dentin to apex" | Whole page faintly visible as empty gutters; a tooth cross-section in the title strip with a caries spot. Handle small. | none |
 | 1.2-5.0 s | 1 | SENSE! | "Odontoblasts sense bacteria through the tubules: TLR2/TLR4" | Close-up: dentin tubules in halftone, cocci (magenta dots) drifting down; columnar odontoblasts with processes in the tubules, small receptor "antennae" lighting yellow; chemokine dots released toward the pulp. | Veerayutthwilai 2007, Oral Microbiol Immunol |
-| 5.0-9.0 s | 2 | RALLY! | "Dendritic cells sample; macrophages and neutrophils move in" | Dendritic cell with arms reaching between odontoblasts into a tubule; macrophage engulfing; neutrophils (3-5 lobed nucleus) squeezing out of a venule with action lines; a few round lymphocytes behind. | Jontell 1998, Crit Rev Oral Biol Med |
-| 9.0-12.5 s | 3 | NECROSIS | "No blood supply. No immune access." | Pulp chamber turns gray from the crown downward (wipe coronal to apical), vessels fade, bacteria fill the canal; at the apex the PDL already starts to flush. No cells inside the gray canal. | Graves 2011, J Oral Microbiol |
-| 12.5-16.5 s | 4 | HOLD THE LINE | "Macrophages, T cells, plasma cells, antibodies" | Camera pans down to the root tip. Bacteria and fragments leak from the foramen; neutrophils massed at the foramen; macrophages; T cells; plasma cells (eccentric clock-face nucleus) releasing Y-shaped IgG that tag bacteria. Qualifier in panel corner: "schematic". | Stashenko 1998, Crit Rev Oral Biol Med |
-| 16.5-20.0 s | 5 | THE COST | "IL-1, TNF, PGE2 [arrow] RANKL [arrow] osteoclasts resorb bone" | Cytokine burst lines from the lesion toward the bone edge; a multinucleated osteoclast on a scalloped lacuna; bone halftone recedes, the lesion zone widens. Optional small cyan "brake" tag "IL-10 / Tregs" on the lesion rim (adds 3 words; drop first if crowded). | Stashenko 1994, Oral Surg (rat) |
-| 20.0-23.5 s | 6 + full page | (no header) | "The lesion contains the infection. It can't clear the canal. Treatment can." | Pull back to the whole page: all six panels visible like a printed comic page; panel 6 shows the tooth with the lesion as a ring around the apex and the canal still dark. Hold >= 2.5 s. Fine print: "sequence largely from rodent models". | Nair 2004, Crit Rev Oral Biol Med |
+| 5.0-9.0 s | 2 | RALLY! | "Dendritic cells sample; macrophages and neutrophils move in" | Dendritic cell with arms reaching between odontoblasts into a tubule; macrophage engulfing; neutrophils (3-5 lobed nucleus) squeezing out of a venule with action lines; a few round lymphocytes behind (T cells arrive before the phagocytes). | FC: Farges 2015, Mediators Inflamm (was Jontell 1998, which does not cover the phagocytes) |
+| 9.0-12.5 s | 3 | NECROSIS | FC: "No immune access. A protected bacterial reservoir." (was "No blood supply. No immune access."; "no blood supply" is not in the source) | Pulp chamber turns gray from the crown downward (wipe coronal to apical), vessels fade, bacteria fill the canal; at the apex the PDL already starts to flush. No cells inside the gray canal. | Graves 2011, J Oral Microbiol |
+| 12.5-16.5 s | 4 | HOLD THE LINE | "Macrophages, T cells, plasma cells, antibodies" | Camera pans down to the root tip. Bacteria and fragments leak from the foramen; neutrophils massed at the foramen; macrophages; T cells; plasma cells (eccentric clock-face nucleus) releasing Y-shaped IgG that tag bacteria. Qualifier in panel corner: "schematic". If the antibodies carry an "IgG" tag, add Matthews & Mason 1983 as that claim's source in meta.json. | FC: Stashenko 1992, J Endod (was Stashenko 1998, whose abstract does not list these cells) |
+| 16.5-20.0 s | 5 | THE COST | FC: "IL-1, TNF, PGE2, RANKL [one arrow] osteoclasts resorb bone" (was a two-step relay "IL-1, TNF, PGE2 [arrow] RANKL [arrow] osteoclasts"; the middle arrow is a review-level model, see (b) item 5) | Four signal tags leave the lesion side by side toward the bone edge; a multinucleated osteoclast on a scalloped lacuna; bone halftone recedes, the lesion zone widens. Optional small cyan "brake" tag "IL-10 / Tregs" on the lesion rim (adds 3 words; drop first if crowded; sources Sasaki 2000 and Francisconi 2016, both mice). | FC: Graves 2011, J Oral Microbiol (review) (was Stashenko 1994, which does not mention RANKL) |
+| 20.0-23.5 s | 6 + full page | (no header) | FC: "The lesion contains the infection. It can't reach the canal. Treatment can." (was "can't clear the canal. Treatment can.", which implied treatment sterilizes the canal) | Pull back to the whole page: all six panels visible like a printed comic page; panel 6 shows the tooth with the lesion as a ring around the apex and the canal still dark. Hold >= 2.5 s. Fine print: "sequence largely from rodent models". | Nair 2004, Crit Rev Oral Biol Med |
 | 23.5-24.0 s | Loop | | | Text fades first; page slides back to the title strip so texts never ghost. | |
 
-Must-read word count of headers + captions above: about 61 (title 7, panels 8 + 9 + 7 + 9 + 9, takeaway 12).
+Must-read word count of headers + captions above, after the fact-check rewording: about 62 (title 7, panels
+8 + 9 + 8 + 9 + 9, takeaway 12). The "FC:" notes and the "(was ...)" remarks in the table are instructions to the
+builder, not on-screen text.
 If cell name tags are added inside panels 2 and 4, shorten those captions so the names are not written twice.
 
 Anatomical drawing notes (standard histology; textbook-level, not PubMed-verified, safe as schematic):
@@ -241,12 +326,14 @@ every step, the clean panel-by-panel sequence (stages overlap in reality), and r
 
 Short "Refs:" line for the caption (covers every claim the suggested caption would make):
 
-Refs: Veerayutthwilai 2007, Oral Microbiol Immunol; Farges 2015, Mediators Inflamm; Jontell 1998, Crit Rev Oral Biol Med; Izumi 1995, Arch Oral Biol; Graves 2011, J Oral Microbiol; Stashenko 1998, Crit Rev Oral Biol Med; Stashenko 1994, Oral Surg Oral Med Oral Pathol; Wang & Stashenko 1993, J Endod; Matthews & Mason 1983, Br J Oral Surg; Hou 2000, Infect Immun; Cavalla 2021, J Dent Res; Nair 2004, Crit Rev Oral Biol Med.
+Refs (FC: revised so each on-screen caption has the record that actually states it): Veerayutthwilai 2007, Oral Microbiol Immunol; Farges 2015, Mediators Inflamm; Izumi 1995, Arch Oral Biol; Graves 2011, J Oral Microbiol; Stashenko 1992, J Endod; Matthews & Mason 1983, Br J Oral Surg (only if "IgG" is shown); Wang & Stashenko 1993, J Endod; Vernal 2006, Oral Dis; Sasaki 2000, J Immunol and Francisconi 2016, J Endod (only if the "IL-10 / Tregs" tag is shown); Márton & Kiss 2000, Oral Microbiol Immunol; Nair 2004, Crit Rev Oral Biol Med. Add Chen 1999, Am J Pathol and Hou 2000, Infect Immun only if the caption uses nuance lines (1) or (2). Stashenko 1998, Jontell 1998, Stashenko 1994 and Cavalla 2021 remain valid background reviews but are no longer the source of any on-screen line.
 
 Caption nuance worth one line each: (1) the same IL-1/TNF signaling that resorbs bone keeps bacteria from
-spreading, so knocking it out made mouse lesions bigger (Chen 1999, Am J Pathol); (2) mice without B cells
-got disseminating infections and antibody transfer cut that from 74% to 25% (Hou 2000); (3) most of the
-sequence comes from rat and mouse pulp-exposure models; (4) schematic animation, not to scale.
+spreading, so knocking out its receptors made mouse lesions bigger (Chen 1999, Am J Pathol); (2) mice without
+B cells got disseminating infections, and in SCID mice (no T or B cells) antibody transfer cut dissemination
+from 74% to 25% (Hou 2000, Infect Immun); (3) most of the periapical sequence comes from rat and mouse
+pulp-exposure models; (4) root canal treatment works by cutting the canal's bacterial load, which the immune
+system cannot reach (Nair 2004; Graves 2011); (5) schematic animation, not to scale.
 
 Full reference list with DOIs (all confirmed on PubMed; "abs" = abstract read, "FT" = PMC full text read,
 "no abs" = record has no abstract):
@@ -329,6 +416,13 @@ Full reference list with DOIs (all confirmed on PubMed; "abs" = abstract read, "
 76. Ricucci D, Siqueira JF Jr. Biofilms and apical periodontitis: study of prevalence and association with clinical and histopathologic findings. J Endod 2010;36:1277-88. PMID 20647081. [DOI](https://doi.org/10.1016/j.joen.2010.04.007) (abs)
 77. Quesnell BT, Alves M, Hawkinson RW, et al. The effect of human immunodeficiency virus on endodontic treatment outcome. J Endod 2005;31:633-6. PMID 16123697. [DOI](https://doi.org/10.1097/01.don.0000157985.88883.81) (abs)
 78. Braz-Silva PH, Bergamini ML, Mardegan AP, et al. Inflammatory profile of chronic apical periodontitis: a literature review. Acta Odontol Scand 2019;77:173-80. PMID 30585523. [DOI](https://doi.org/10.1080/00016357.2018.1521005) (abs; background only)
+79. FC addition: Wen YH, Lin YX, Zhou L, Lin C, Zhang L. The immune landscape in apical periodontitis: from mechanism to therapy. Int Endod J 2024;57:1526-45. PMID 39087849. [DOI](https://doi.org/10.1111/iej.14125) (abs only; newest narrative review found; contents NOT read, cite for nothing specific)
+80. FC addition: Wang L, Yang F, Qiu Y, Ye L, Song D, Huang D. The potential roles of T cells in periapical lesions. J Endod 2022;48:70-9. PMID 34627784. [DOI](https://doi.org/10.1016/j.joen.2021.09.016) (abs only; narrative review of 108 articles; contents NOT read)
+
+FC note on the list above: all 78 original entries were re-fetched from PubMed on 2026-11-22; authors, year,
+journal, volume, pages, PMID and DOI matched in every case. PubMed indexes ref 63 under the misspelling
+"Torbinejad", ref 42 as "Lukic A", ref 48's second author as "Sasakj H", and Nair 1987 as "Ramachandran Nair PN".
+Full texts re-read for this check: refs 5, 6, 28 and 68 (PMC).
 
 Unverified classics (no PubMed abstract; do not cite for numbers): Stern MH et al., J Endod 1981;7:117-22
 (PMID 6938631, [DOI](https://doi.org/10.1016/S0099-2399(81)80125-2)); Stern MH et al., J Endod 1981;7:447-52
@@ -338,7 +432,75 @@ Smith DJ, Arch Oral Biol 1978;23:435-43 (PMID 361023, [DOI](https://doi.org/10.1
 Nair PNR, J Endod 1987;13:29-39 (PMID 3469299, [DOI](https://doi.org/10.1016/S0099-2399(87)80089-4)); Nair PNR,
 Periodontol 2000 1997;13:121-48 (PMID 9567926, [DOI](https://doi.org/10.1111/j.1600-0757.1997.tb00098.x)).
 
-Search limits: no AAE/ESE guideline or position statement exists for this basic-science topic; the best
-recent syntheses are narrative reviews (Galler 2021; Cavalla 2021; Braz-Silva 2019) and two systematic
-reviews of narrow questions (Naufel 2017 on Treg/Th17; Xiong 2019 on IL-17). Paywalled reviews were read as
-abstracts only.
+Search limits: no AAE/ESE guideline or position statement was found for this basic-science topic; the
+syntheses used are narrative reviews (Galler 2021; Cavalla 2021; Braz-Silva 2019) and two reviews of narrow
+questions (Naufel 2017 on Treg/Th17, a systematic review of 8 human studies; Xiong 2019 on IL-17, a structured
+literature review of 25 papers that PubMed types as "Review"). FC: two newer narrative reviews exist that the
+first pass missed (Wen 2024, Int Endod J; Wang 2022, J Endod; refs 79-80); only their abstracts were read and
+neither abstract contradicts anything above. Paywalled reviews were read as abstracts only.
+
+---
+
+## Fact-check log (2026-11-22, adversarial second pass)
+
+Method: every PMID in sections (a) and (g) re-fetched from PubMed (metadata + abstract); PMC full texts of
+Graves 2011 (PMC3087239), Farges 2015 (PMC4619960), Galler 2021 (PMC7867227) and Duka 2019 (PMC6442274)
+downloaded again and searched for each quoted phrase. Count: 56 table rows in section (a) + 8 recommended
+on-screen items in section (b) + all 78 references in section (g).
+
+**Result in one line:** no wrong author, year, journal, PMID or number was found; the errors were in what
+each source was asked to carry. Eleven changes follow, most serious first.
+
+1. **"No blood supply" removed from the recommended list and from panel 3.** It was attributed to Graves
+   2011 and rated HIGH, and correction 16 called it "supported". Graves 2011 (abstract and full text) says
+   only that the necrotic pulp is "inaccessible to leukocytes" and "a protected reservoir of bacteria"; the
+   words blood supply, vascular and circulation do not appear. New caption: "No immune access. A protected
+   bacterial reservoir." Fading vessels may stay in the drawing as schematic; the phrase may not be captioned
+   or cited. Moved to "Do not claim".
+2. **Panel 5 chain downgraded and re-sourced.** "IL-1, TNF, PGE2 → RANKL up → osteoclasts", HIGH, source
+   "Stashenko 1994 (rat)". Stashenko 1994 pre-dates RANKL and does not mention it. The middle arrow is a
+   review-level model; Duka 2019 (full text) found TNF-α changed neither RANKL nor OPG in human periapical
+   lesion cells, and Chen 1999 found bone loss without IL-1/TNF receptors. New wording lists the four signals
+   side by side; new source line Graves 2011 (review, full text); confidence MEDIUM-HIGH for "implicated",
+   MEDIUM for any relay. Table row 5.7 retitled to show the negative TNF result; row 5.1 annotated.
+3. **Takeaway reworded.** "It can't clear the canal. Treatment can." implied that treatment clears the canal.
+   Nair 2004: treatment eradicates "or substantially reduc[es]" the load, and infection can persist in regions
+   that cannot be cleaned. New: "It can't reach the canal. Treatment can." Row 6.2 annotated; added to "Do not
+   claim".
+4. **Panel 2 source line changed** from Jontell 1998 to Farges 2015. Jontell's abstract supports dendritic
+   cells activating T cells, not macrophage/neutrophil influx with caries depth. Farges 2015 full text states
+   the whole caption.
+5. **Panel 4 source line changed** from Stashenko 1998 to Stashenko 1992. The 1998 abstract does not list
+   plasma cells, macrophages or IgG; the 1992 abstract lists the full cast. "Mostly IgG" split off as its own
+   claim (Matthews & Mason 1983, n = 10 granulomas) with the exact denominator "immunoglobulin-positive
+   plasma cells".
+6. **"Brakes" item re-sourced.** Cavalla 2021's abstract names Th2 and Tregs, not IL-10. IL-10 = Sasaki 2000
+   (mouse knockout); Tregs = Francisconi 2016 (mouse). Confidence lowered from MEDIUM-HIGH to MEDIUM.
+   Correction 20 added so that item 9 does not overstate the case against Th2.
+7. **Row 3.1 heading corrected.** "No bacteria, no necrosis and no periapical lesion" could not rest on
+   Möller 1981, whose pulps were necrotized on purpose. Now "No bacteria, no periapical lesion"; Möller's
+   counts completed (9 monkeys; clinical signs 12/52; radiographic 47/52). Kakehashi 1965 marked as second-hand.
+8. **Row 4.5 heading softened and moved to "Do not claim".** "Lymphocytes are the commonest leukocyte in
+   human granulomas" rested on 6 lesions by flow cytometry; Marton & Kiss 1993 reports "a remarkably high
+   proportion of macrophages", and Liapatas' 45 specimens were 25 granulomas, 17 cysts and 3 scars. Row 4.4
+   annotated with a conflicting rat ranking from Graves 2011.
+9. **Row 4.11 and caption nuance (2) made precise.** The 74% to 25% antibody-transfer result was obtained in
+   RAG-2 SCID mice, not in B-cell-deficient mice.
+10. **Row 6.1 denominator completed.** Ricucci & Siqueira's 106 roots were 64 untreated and 42 root-filled,
+    from surgery or extraction.
+11. **Smaller precision fixes.** Row 1.1: the TLR2 agonist lowered the cytokine transcripts in Veerayutthwilai
+    2007 (only TLR4/LPS raised them). Row 2.1: subgroup n values added (the 50% granulocyte figure is n = 7).
+    Row 2.5: "carry antigen" changed to "migrate"; stimulus was cusp trimming and acid etching in mice. Row
+    5.2: abstract truncated; PGE2 peak noted. Search-limits paragraph: Xiong 2019 is not indexed as a
+    systematic review; two newer reviews added (refs 79-80).
+
+**Checked and left unchanged (verified as written):** rows 1.2-1.8, 2.2-2.4, 2.6-2.11, 3.2-3.4, 3.6, 4.1-4.3,
+4.6-4.10, 4.12-4.16, 5.3-5.6, 5.8-5.12, 6.3; corrections 1-15; the Graves 2011 table/text contradiction on
+IFN-γ and IL-17 (confirmed: Table 1 "No effect on lesion size" vs text and Table 2 "Increased" for IFN-γ;
+Table 1 "Reduced lesion size" vs Table 2 "No effect" for IL-17); the four "no abstract" classics (Stern 1981
+both papers, Torabinejad & Kettering 1985, Pulver 1978, Nair 1987, Nair 1997: still no PubMed abstract, still
+off screen).
+
+**Still unverified after this pass (abstract-only or second-hand):** anything inside Stashenko 1998, Jontell
+1998, Nair 2004, Hahn & Liewehr 2007, Márton & Kiss 2000/2014 and Cavalla 2021 beyond their abstracts;
+Kakehashi 1965; the drawing conventions for cell morphology (textbook histology); and "no blood supply".

@@ -4,6 +4,13 @@ Evidence brief for the reel builder. Research stage only (nothing was built).
 Literature checked on PubMed on 2026-11-22. According to PubMed (abstracts and PMC full texts cited below, DOIs in section h),
 plus two AAE web pages. Every row says how it was verified. Anything not verified is marked **NOT VERIFIED** and should stay off screen.
 
+**Fact-check status (2026-11-22).** An independent adversarial pass re-verified every row of section (a) and every item of
+section (b) against the PubMed records (61 PMIDs: metadata + abstract), the PMC full texts of Lin 2022, Abbott & Lin 2022,
+Patel 2022, Sondeijker 2020 and Aidos 2018, and the AAE Communiqué page. Every citation (authors, year, journal, volume, pages,
+PMID, DOI) matched PubMed and every quoted number was found in its source. What changed are source-to-claim mismatches, a
+truncated quote, missing selection caveats and two on-screen wordings. Changed rows carry **[FC]**; the full list is in
+section (i) "Fact-check log". Where (b), (e), (f) and (i) disagree with older text elsewhere in this file, (b)/(e)/(f)/(i) win.
+
 **What was actually read**
 
 - Full text, complete: Lin et al. 2022 (PMC9546147), Sondeijker et al. 2020 guideline (PMC7109605), Aidos et al. 2018 (PMC7006572).
@@ -26,8 +33,8 @@ Confidence: H = high, M = medium, L = low. "Verified from" = where the exact sta
 
 | # | Fact as it could appear on screen | Exact source | What the source literally reports | Verified from | Conf. |
 |---|---|---|---|---|---|
-| A1 | Surface resorption was first described after tooth replantation, as one of three types: surface, inflammatory, replacement | Andreasen JO, Hjørting-Hansen E. Acta Odontol Scand 1966;24:263-86 (PMID 5225449) and 1966;24:287-306 (PMID 5225450) | No PubMed abstract. Lin et al. 2022: they "named these responses as inflammatory resorption, replacement resorption, surface resorption, and healing with no resorption"; "surface resorption was identified histologically but could not be detected radiographically" | Full text of Lin et al. 2022 (secondary); the 1966 papers themselves NOT read | H for attribution |
-| A2 | Shallow lacunae in cementum (sometimes outer dentin), repaired by new cementum | AAE Glossary of Endodontic Terms (current edition updated March 2020), entry "external surface resorption" | "A physiologic process causing small superficial defects in the cementum and underlying dentin that undergo repair by deposition of new cementum" | Glossary wording as quoted verbatim in Lin et al. 2022 Table 1 (full text). The AAE PDF itself was not opened | H |
+| A1 | Surface resorption was first described after tooth replantation, as one of three types: surface, inflammatory, replacement | Andreasen JO, Hjørting-Hansen E. Acta Odontol Scand 1966;24:263-86 (PMID 5225449) and 1966;24:287-306 (PMID 5225450) | No PubMed abstract. Lin et al. 2022: they "named these responses as inflammatory resorption, replacement resorption, surface resorption, and healing with no resorption"; "surface resorption was identified histologically but could not be detected radiographically". **[FC]** PubMed titles show both 1966 papers are human studies (I: radiographic / clinical study of 110 replanted human teeth; II: histology of 22 replanted human anterior teeth) | Full text of Lin et al. 2022 (secondary; quotes re-verified); the 1966 papers themselves NOT read | H for attribution |
+| A2 | Shallow lacunae in cementum (sometimes outer dentin), repaired by new cementum | AAE Glossary of Endodontic Terms, entry "external surface resorption" (**[FC]** the edition date "March 2020" was not re-verified: cite as "AAE Glossary, as quoted in Lin et al. 2022") | "A physiologic process causing small superficial defects in the cementum and underlying dentin that undergo repair by deposition of new cementum" | Glossary wording as quoted verbatim in Lin et al. 2022 Table 1 (full text). The AAE PDF itself was not opened | H |
 | A3 | Self-limiting; caused by a localized injury to cementum / PDL; needs no treatment | Abbott PV, Lin S. Dent Traumatol 2022;38:267-285 (PMID 35605161) | "a self-limiting process which is usually caused by a localized injury to the involved part of the cementum and/or PDL … as long as the tooth has not been contaminated with bacteria, the resorptive process will not persist"; "There is no indication for any management" | Full text (section 6.1) | H |
 | A4 | Current trauma literature calls it "repair-related resorption (surface resorption)" | Hermann NV et al. Dent Traumatol 2012;28:386-93 (PMID 22804794) and 2012;28:394-402 (PMID 22971023) | "repair-related resorption (surface resorption), infection-related resorption (inflammatory resorption), ankylosis-related resorption (replacement resorption)" | Abstract | H |
 | A5 | Pulp vital + no infection → the lacuna stays "surface"; infected necrotic pulp + lacuna reaching dentinal tubules → inflammatory resorption | Andreasen JO. J Endod 1981;7:294-301 (PMID 6942086); reprinted J Endod 2021;47:865-872 (PMID 33975756) | Monkeys, histology at 2 and 8 weeks. "In contrast to surface resorption, inflammatory resorption was related to infected necrotic tissue or an infected leukocyte zone in the root canal … if the pulp contains vital, inflamed, or noninflamed tissue or if root canal treatment has been performed, surface resorption will occur regardless of the depth of the cavity" | Abstract (of the 2021 reprint; the 1981 record has no abstract) | H (animal) |
@@ -37,18 +44,19 @@ Confidence: H = high, M = medium, L = low. "Verified from" = where the exact sta
 
 | # | Fact | Exact source | What the source literally reports | Verified from | Conf. |
 |---|---|---|---|---|---|
-| B1 | Seen at 1 week, prominent at 2 weeks; PDL healing almost complete at 2–4 weeks (monkey replantation) | Andreasen JO. Swed Dent J 1980;4:101-10 (PMID 6933704) | Vervet monkeys killed 1, 2, 4, 8 weeks after replantation. "Periodontal ligament healing … was almost complete 2–4 weeks after replantation. Surface resorption was first recognized after 1 week and became prominent after 2 weeks; the frequency increased slightly after 4- and 8 weeks." | Abstract | H (animal) |
-| B2 | Healing "usually takes about 4 weeks" | Lin S et al. Dent Traumatol 2022;38:253-266 (PMID 35559593), citing Andreasen textbook 5th ed. 2019 (Avulsion chapter) and Mandel & Viidik, Arch Oral Biol 1989;34:209-17 (PMID 2818270) | "This type of healing usually takes about 4 weeks to complete." Mandel & Viidik (monkey extrusive luxation) abstract: PDL mechanical properties "returned to 50–60% of those of uninjured PDL by 2 weeks" | Full text (Lin); abstract (Mandel & Viidik); textbook page not seen | M |
+| B1 | Seen at 1 week, prominent at 2 weeks; PDL healing almost complete at 2–4 weeks (monkey replantation) | Andreasen JO. Swed Dent J 1980;4:101-10 (PMID 6933704) | Vervet monkeys killed 1, 2, 4, 8 weeks after replantation. "Periodontal ligament healing … was almost complete 2–4 weeks after replantation. Surface resorption was first recognized after 1 week and became prominent after 2 weeks; the frequency increased slightly after 4- and 8 weeks." **[FC]** The abstract says nothing about cementum repair, lacuna depth or resolution of the lacunae, and the teeth were extracted and replanted (immediately or after 18 min dry): a severe injury, not a "small" one. It supports the onset timing only | Abstract (re-verified) | H for onset timing (animal). Does NOT support "repaired in weeks" or "small injury → shallow lacunae" |
+| B2 | Healing "usually takes about 4 weeks" | Lin S et al. Dent Traumatol 2022;38:253-266 (PMID 35559593), citing Andreasen textbook 5th ed. 2019 (Avulsion chapter) and Mandel & Viidik, Arch Oral Biol 1989;34:209-17 (PMID 2818270) | "This type of healing usually takes about 4 weeks to complete." Mandel & Viidik (monkey extrusive luxation) abstract: PDL mechanical properties "returned to 50–60% of those of uninjured PDL by 2 weeks" | Full text (Lin; quote re-verified — it follows "In most cases, the resorptive defects are repaired with the formation of cementoid-like tissue"); abstract (Mandel & Viidik, re-verified). **[FC]** Lin's reference numbers [14], [15] could not be matched to these two sources (reference list not in the retrieved text); textbook page not seen | M (narrative review) |
 | B3 | "A few weeks" | Abbott & Lin 2022 (as A3) | "present for a brief period of a few weeks after the injury" | Full text | H |
-| B4 | "Repair within 2–3 weeks" | Tronstad L. Endod Dent Traumatol 1988;4:241-52 (PMID 3078294), as paraphrased by Aidos H et al. Eur Endod J 2018;3:134-145 (PMID 32161869) | Aidos: "remains transient (the cementum reparation occurs within 2-3 weeks with no treatment necessary)" [cites Tronstad] | Full text of Aidos (secondary). Tronstad itself has no abstract. The same figure is often attributed to Fuss et al. 2003: **NOT VERIFIED** in Fuss | L |
-| B5 | In replanted human incisors, surface resorption is usually picked up on radiographs only at about 12 months | Andreasen JO et al. Endod Dent Traumatol 1995;11:76-89 (PMID 7641622) | 400 replanted incisors. "Surface resorption was generally diagnosed after 12 months; while inflammatory resorption and replacement resorption (ankylosis) were usually observed after 1 month and 1–2 months respectively." | Abstract | H |
+| B4 | "Repair within 2–3 weeks" — keep off screen | Tronstad L. Endod Dent Traumatol 1988;4:241-52 (PMID 3078294), as paraphrased by Aidos H et al. Eur Endod J 2018;3:134-145 (PMID 32161869) | Aidos: "remains transient (the cementum reparation occurs within 2-3 weeks with no treatment necessary)" [cites Tronstad]. **[FC]** In Aidos this sentence sits in the paragraph on *cervical* root resorption (Tronstad's transient phase after injury to the cervical attachment), not in the surface-resorption paragraph. Abbott & Lin 2022 give "2–3 weeks" of resorptive activity for *internal* surface resorption only | Full text of Aidos (secondary, and the context is shifted). Tronstad itself has no abstract. The same figure is often attributed to Fuss et al. 2003: **NOT VERIFIED** in Fuss | L |
+| B5 | In replanted human incisors, surface resorption is usually picked up on radiographs only at about 12 months | Andreasen JO et al. Endod Dent Traumatol 1995;11:76-89 (PMID 7641622) | 400 replanted incisors. "Surface resorption was generally diagnosed after 12 months; while inflammatory resorption and replacement resorption (ankylosis) were usually observed after 1 month and 1–2 months respectively." | Abstract (re-verified) | H |
+| B6 **[FC]** | The only human repair kinetics are orthodontic: repair starts within a week of force removal and is still incomplete at 8 weeks | Owman-Moll P, Kurol J, Lundgren D. Angle Orthod 1995;65:403-8 (PMID 8702065) — same paper as E10 | 64 premolars, 50 cN for 6 weeks: resorptive areas that had begun to repair rose from 28% at 1 week to 75% at 8 weeks of retention; "functional repair" (whole cavity wall covered with cementum) in 33–40% at 5–8 weeks | Abstract | H (extracted human premolars; orthodontic, not trauma). Reason not to show "healed" at 2–4 weeks on the clock |
 
 ### C. How often, and what the radiograph shows (surface)
 
 | # | Fact | Exact source | What the source literally reports | Verified from | Conf. |
 |---|---|---|---|---|---|
 | C1 | Usually nothing on the radiograph; typically a histologic finding | Abbott & Lin 2022 | "Radiographically, external surface resorption will not usually be evident as a result of the shallow nature of the resorptive defect. Typically, it is revealed only during histological examination." | Full text | H |
-| C2 | But it is sometimes visible: 3-year risk of radiographic repair-related (surface) resorption in mature teeth — concussion 3.2%, subluxation 3.6%, extrusion 15.6%, lateral luxation 29.5% | Hermann NV et al. Dent Traumatol 2012;28:386-93 (469 concussed + 404 subluxated teeth) and 28:394-402 (82 extruded + 179 laterally luxated teeth) | Concussion 3.2% (95% CI 0.3–6.0); subluxation 3.6% (0–7.6); extrusive 15.6% (4.4–26.7); lateral luxation 29.5% (20.5–38.5). Kaplan-Meier, mature root development | Abstract | H |
+| C2 | But it is sometimes visible: 3-year risk of radiographic repair-related (surface) resorption in mature teeth — concussion 3.2%, subluxation 3.6%, extrusion 15.6%, lateral luxation 29.5% | Hermann NV et al. Dent Traumatol 2012;28:386-93 (469 concussed + 404 subluxated teeth) and 28:394-402 (82 extruded + 179 laterally luxated teeth) | Concussion 3.2% (95% CI 0.3–6.0); subluxation 3.6% (0–7.6); extrusive 15.6% (4.4–26.7); lateral luxation 29.5% (20.5–38.5). Kaplan-Meier, mature root development. **[FC]** After concussion it occurred only in multiple-trauma cases. Immature teeth: not observed after concussion; 2.1% (0–6.1) after lateral luxation | Abstract (both re-verified) | H |
 | C3 | Pulp tests normal; tooth looks healthy | Patel S et al. Int Endod J 2022;55 Suppl 4:892-921 (PMID 35229320), Table 1 and text | External surface resorption: clinical features "None"; appearance "Healthy"; pulp sensibility "+ve". "The affected teeth respond normally to pulp sensitivity tests." | Full text | H |
 
 ### D. Pressure resorption (ectopic / impacted tooth, cyst, tumor, orthodontic force)
@@ -57,11 +65,11 @@ Confidence: H = high, M = medium, L = low. "Verified from" = where the exact sta
 |---|---|---|---|---|---|
 | D1 | Resorption needs two things: injury to the protective layer + a stimulus (infection or pressure). For pressure resorption, the treatment is to remove the pressure | Fuss Z, Tsesis I, Lin S. Dent Traumatol 2003;19:175-82 (PMID 12848710) | "Etiology of different types of root resorption requires two phases: mechanical or chemical injury to the protective tissues and stimulation by infection or pressure." "Removal of the stimulation factor, i.e. pressure, is the treatment of choice in root resorption related to pressure during orthodontic treatment, or an impacted tooth or tumor." | Abstract | H |
 | D2 | Non-infective; stops when the pressure source is eliminated; cementum then repairs | Patel et al. 2022 | "noninfective and self-limiting, i.e. once the source of the pressure has been eliminated, cemental repair ensues and it has also been described as pressure resorption"; "The resorptive process will stop with the removal of the source of pressure." | Full text | H |
-| D3 | Pulp is not the cause → root canal treatment is not indicated | Blicher B. "Differentiating Resorption". AAE Communiqué, 5 Jan 2021 (aae.org) | "Removing the causative agent … will halt PR; however, resorbed tooth structures will not regrow. As pulpal disease does not cause PR, endodontic therapy is not indicated in its management." | Web page via fetch tool (extracts) | M–H |
-| D4 | Tooth under pressure resorption has a clinically normal pulp | Abbott & Lin 2022, section 6.5 | "The resorbing tooth will have a clinically normal pulp and clinically normal periapical tissues, unless there is concurrent pulp disease as a result of other causes" | Full text | H |
-| D5 | Ectopic maxillary canines (CT): 38% of adjacent lateral incisors and 9% of central incisors resorbed; 48% of the children | Ericson S, Kurol J. Angle Orthod 2000;70:415-23 (PMID 11138644) | 107 children aged 9–15 referred to a specialist clinic, 156 ectopic canines, conventional CT. "Resorptions … occurred in 38% of the laterals and in 9% of the centrals." Of 58 resorbed laterals: slight 31%, moderate 9%, "severe with pulpal involvement in 60%". 51 of 107 subjects (48%). Intraoral film sensitivity 0.68 | Abstract | H |
-| D6 | CBCT meta-analyses: about half of lateral incisors next to an impacted canine show resorption, mostly slight | Mitsea A et al. Children (Basel) 2022;9:1006 (PMID 35883990); Schroder AGD et al. J Am Dent Assoc 2018;149:765-777 (PMID 30165975) | Mitsea: 7 studies, 540 participants, lateral incisor RR "common (50%)", mild 62%. Schroder: 18 studies; slight 43.2% (95% CI 35.2–51.4), severe 30.9% (19.0–44.3) | Abstract | M |
-| D7 | After the canine is corrected, resorbed incisors do well: none lost in 2–10 years | Falahat B et al. Angle Orthod 2008;78:778-85 (PMID 18298199) | 27 subjects. "No resorbed incisor was lost during the 2- to 10-year follow-up period. The resorptive lesions had undergone repair in 13 teeth, remained unchanged in 12 teeth and progressed in 7 teeth." | Abstract | H (small n) |
+| D3 | Pulp is not the cause → root canal treatment is not indicated | Blicher B. "Differentiating Resorption". AAE Communiqué, 5 Jan 2021 (aae.org) | "Removing the causative agent … will halt PR; however, resorbed tooth structures will not regrow. As pulpal disease does not cause PR, endodontic therapy is not indicated in its management." | Web page via fetch tool (extracts). **[FC]** Re-fetched and confirmed, together with "Pressure resorption (PR) is a non-inflammatory form of external resorption". This is a clinical newsletter article, not peer-reviewed: name it in the caption, do not use it as an on-screen source line | M |
+| D4 | Tooth under pressure resorption has a clinically normal pulp | Abbott & Lin 2022, section 6.5 | "The resorbing tooth will have a clinically normal pulp and clinically normal periapical tissues, unless there is concurrent pulp disease as a result of other causes". **[FC]** Same section: "In the later stages, there may be symptoms associated with the pulp if the resorption has progressed to involve the pulp and the root canal system" | Full text (re-verified) | H |
+| D5 | Ectopic maxillary canines (CT): 38% of adjacent lateral incisors and 9% of central incisors resorbed; 48% of the children | Ericson S, Kurol J. Angle Orthod 2000;70:415-23 (PMID 11138644) | 107 children aged 9–15 referred to a specialist clinic, 156 ectopic canines, conventional CT. "Resorptions … occurred in 38% of the laterals and in 9% of the centrals." Of 58 resorbed laterals: slight 31%, moderate 9%, "severe with pulpal involvement in 60%". 51 of 107 subjects (48%). Intraoral film sensitivity 0.68. **[FC]** All numbers re-verified. The denominators are the incisors adjacent to the 156 ectopic canines, in children referred to an orthodontic specialist clinic (a selected sample); "severe" in this grading means the resorption reached the pulp | Abstract (re-verified) | H |
+| D6 | CBCT meta-analyses: about half of lateral incisors next to an impacted canine show resorption, most often mild **[FC]** (was "mostly slight") | Mitsea A et al. Children (Basel) 2022;9:1006 (PMID 35883990); Schroder AGD et al. J Am Dent Assoc 2018;149:765-777 (PMID 30165975) | Mitsea: 7 studies, 540 participants, lateral incisor RR "common (50%)", mild 62%. Schroder: 18 studies; slight 43.2% (95% CI 35.2–51.4), severe 30.9% (19.0–44.3). **[FC]** Schroder's percentages are shares of the resorbed teeth by severity (slight is the largest category, not a majority), not prevalences; mild is a majority only in Mitsea (62%) | Abstracts (re-verified) | M |
+| D7 | After the canine is corrected, the resorbed incisors that were kept and followed did well: none of them was lost in 2–10 years **[FC]** | Falahat B et al. Angle Orthod 2008;78:778-85 (PMID 18298199) | 27 subjects. "No resorbed incisor was lost during the 2- to 10-year follow-up period. The resorptive lesions had undergone repair in 13 teeth, remained unchanged in 12 teeth and progressed in 7 teeth." **[FC]** Omitted caveats: of the 51 children contacted only 27 were followed (16 did not attend; 8 were excluded *because their lateral incisors had been extracted*), and follow-up used intraoral films although baseline used CT (film sensitivity 0.68 in the parent study), so "repair" partly means "no longer visible on a less sensitive image" | Abstract (re-verified) | M (small, survivor-selected sample; less sensitive follow-up imaging) |
 | D8 | Once the canine is moved away, resorption nearly stops even while the incisor is still being moved orthodontically | Becker A, Chaushu S. Am J Orthod Dentofacial Orthop 2005;127:650-4 (PMID 15953888) | 11 patients, 20 severely resorbed incisors. "The resorption rate reduced to an almost insignificant level, despite continued and often appreciable orthodontic movement" | Abstract | M (small n) |
 | D9 | Radiograph: asymmetric "scooped" loss of root facing the tooth / lesion; root canal outline intact | Patel et al. 2022 | "Asymmetric loss of external root surface adjacent to the source of pressure from an impacted tooth, cyst or tumour is a common radiographic presentation. In advanced cases, this may result in perforation of the root canal." Table 1: "Flattened/blunted root apex, asymmetrical loss of root, intact root canal" | Full text | H |
 
@@ -69,22 +77,23 @@ Confidence: H = high, M = medium, L = low. "Verified from" = where the exact sta
 
 | # | Fact | Exact source | What the source literally reports | Verified from | Conf. |
 |---|---|---|---|---|---|
-| E1 | Histologically, almost every orthodontically moved tooth shows resorption lacunae, even with light force | Kurol J, Owman-Moll P, Lundgren D. Am J Orthod Dentofacial Orthop 1996;110:303-10 (PMID 8814032) | 56 premolars, 50 cN buccal force, 1–7 weeks. "Root resorption was registered after 1 week and occurred in all test teeth but four." "The radiographs failed to reveal any adverse tissue reactions." | Abstract | H |
-| E2 | Review estimate: >90% of moved teeth histologically; 48–66% mild–moderate (<2.5 mm) on radiographs; 1–5% of teeth severe (≥4 mm or >1/3 of the root) | Sondeijker CFW et al. Eur J Orthod 2020;42:115-124 (PMID 31087032), introduction, citing Weltman et al. 2010 and others; same 1–5% in Patel et al. 2022 (citing Killiany 1999; Weltman 2010) | "Over 90 per cent of all orthodontically moved teeth are associated with histologically noticeable EARR … Between 48 and 66 per cent … mild to moderate EARR (less than 2.5 mm), and only 1–5 per cent of all moved teeth end up with severe apical root resorption, defined as a loss of 4 mm of the original root length or more than one-third of the root" | Full text of the guideline (background statement). Weltman 2010 full text NOT read | M |
-| E3 | Prospective CBCT: 94% of patients had ≥1 root shortened >1 mm; >4 mm in 6.6% of patients and 2.6% of upper incisors | Lund H et al. Angle Orthod 2012;82:480-7 (PMID 21919826) | 152 Class I patients. "94% of patients had ≥1 root with shortening >1 mm, and 6.6% had ≥1 tooth where it exceeded 4 mm … Of upper incisors and the palatal root of upper premolars, 2.6% showed root shortenings >4 mm." | Abstract | H |
+| E1 | Histologically, almost every orthodontically moved tooth shows resorption lacunae, even with light force | Kurol J, Owman-Moll P, Lundgren D. Am J Orthod Dentofacial Orthop 1996;110:303-10 (PMID 8814032) | 56 premolars, 50 cN buccal force, 1–7 weeks. "Root resorption was registered after 1 week and occurred in all test teeth but four." "The radiographs failed to reveal any adverse tissue reactions." **[FC]** Read correctly: first seen at 1 week, and present in 52 of 56 test teeth over the whole 1–7-week series (8 children per week) — not "52 of 56 at 1 week" | Abstract (re-verified) | H |
+| E2 | Review estimate: >90% of moved teeth histologically; 48–66% mild–moderate (<2.5 mm) on radiographs; 1–5% of teeth severe (≥4 mm or >1/3 of the root) | Sondeijker CFW et al. Eur J Orthod 2020;42:115-124 (PMID 31087032), introduction (citing its refs 2–4); same 1–5% in Patel et al. 2022 (citing Killiany 1999; Weltman 2010) | "Over 90 per cent of all orthodontically moved teeth are associated with histologically noticeable EARR … Between 48 and 66 per cent … mild to moderate EARR (less than 2.5 mm), and only 1–5 per cent of all moved teeth end up with severe apical root resorption, defined as a loss of 4 mm of the original root length or more than one-third of the root" | Full text of the guideline (background statement; quote re-verified). **[FC]** The guideline's reference list was not visible to the fact-checker, so "citing Weltman" could not be confirmed for the guideline. Patel 2022 full text (re-verified): "1%–5% of orthodontically treated teeth have severe surface resorption (>4 mm or 1/3 of root loss; Killiany, 1999; Weltman et al., 2010)". Weltman 2010 full text NOT read; its abstract reports no pooled incidence | M |
+| E3 | Prospective CBCT: 94% of patients had ≥1 root shortened >1 mm; >4 mm in ≥1 tooth in 6.6% of patients; >4 mm in 2.6% "of upper incisors and the palatal root of upper premolars" (one combined figure — **[FC]** do not shorten it to "2.6% of upper incisors") | Lund H et al. Angle Orthod 2012;82:480-7 (PMID 21919826) | 152 Class I patients. "94% of patients had ≥1 root with shortening >1 mm, and 6.6% had ≥1 tooth where it exceeded 4 mm … Of upper incisors and the palatal root of upper premolars, 2.6% showed root shortenings >4 mm." Also in the abstract: slanted resorption of buccal / palatal root surfaces in 15.1% of upper central and 11.5% of upper lateral incisors; treatment duration was not associated with shortening. **[FC]** PMC returns no XML full text for this paper. The PMC page (read through a fetch tool, so medium confidence) describes the sample as 9–18-year-olds with Class I crowding, mostly treated with extraction of four premolars and an MBT fixed appliance, mean treatment 20.7 months, 152 of 183 invited patients completing; it gives no per-tooth-type breakdown of the >4 mm figure in the text | Abstract (re-verified); sample details from the PMC page via fetch tool | H for the abstract numbers; M for the sample details |
 | E4 | Average shortening is under 1 mm (CBCT, pooled) | Samandara A et al. Eur J Orthod 2019;41:67-79 (PMID 29771300) | Systematic review / meta-analysis, 33 studies (27 in quantitative analysis): "pooled OIRR of 0.79 mm based on all included studies and 0.86 mm when OIRR was assessed at the end of orthodontic treatment … low quality of the included studies" | Abstract | H (low-quality base) |
 | E5 | Heavier force → more resorption (25 g vs 225 g: 3.3× the crater volume) | Chan E, Darendeliler MA. Am J Orthod Dentofacial Orthop 2005;127:186-95 (PMID 15750537); Weltman B et al. Am J Orthod Dentofacial Orthop 2010;137:462-76 (PMID 20362905) | Chan: 36 premolars, 28 days; heavy-force group "3.31-fold greater total resorption volume than the light-force group (P < .001)". Weltman (SR of 13 RCTs, no meta-analysis): "heavy forces might be particularly harmful … evidence to support the use of light forces, especially with incisor intrusion" | Abstract | H |
-| E6 | A 2–3 month pause reduces total resorption (0.4 vs 1.5 mm in one trial) | Levander E, Malmgren O, Eliasson S. Eur J Orthod 1994;16:223-8 (PMID 8062862); numbers from Sondeijker 2020 full text | 40 patients, 62 upper incisors with early resorption; pause of 2–3 months. "significantly less in patients treated with a pause". Guideline text: −0.4 mm (SD 0.7) with interruption vs −1.5 mm (SD 0.8) without. Guideline recommendation 3.4 (weak): consider a 3-month pause with a passive appliance | Abstract (direction); full text of guideline (numbers) | M |
-| E7 | Resorption stops when active treatment stops: 2.93 mm during treatment vs 0.1 mm afterwards | Copeland S, Green LJ. Am J Orthod 1986;89:51-5 (PMID 3455795) | 45 subjects who had resorption; maxillary central incisors on cephalograms. "mean amount of root resorption during active treatment was 2.93 mm … during the posttreatment period was 0.1 mm" | Abstract | H |
-| E8 | 14 years later: no further change except smoothing of sharp edges | Remington DN et al. Am J Orthod Dentofacial Orthop 1989;96:43-6 (PMID 2750719) | 100 patients, mean 14.1 years after treatment. "no apparent changes after appliance removal except remodeling of rough and sharp edges. Hypermobility was observed in only two instances." | Abstract | H |
-| E9 | The stop is not instantaneous at tissue level | Cheng LL et al. Am J Orthod Dentofacial Orthop 2009;136:320.e1-10 (PMID 19732664); Winter BU et al. Eur J Orthod 2009;31:346-51 (PMID 19465737) | Cheng (40 patients, micro-CT): "root resorption continued for 4 weeks after orthodontic force stopped". Winter (76 premolars): "resorptive activity continued up to 10 days after removal of forces … repair of the resorbed area sometimes started during active movement" | Abstract | H |
+| E6 | A 2–3 month pause reduces total resorption (0.4 vs 1.5 mm in one trial) | Levander E, Malmgren O, Eliasson S. Eur J Orthod 1994;16:223-8 (PMID 8062862); numbers from Sondeijker 2020 full text | 40 patients, 62 upper incisors with early resorption; pause of 2–3 months. "significantly less in patients treated with a pause". Guideline text: −0.4 mm (SD 0.7) with interruption vs −1.5 mm (SD 0.8) without. Guideline recommendation 3.4 (weak): consider a 3-month pause with a passive appliance. **[FC]** Numbers re-verified in the guideline, which describes the pause as "3 months" (trial abstract: 2–3 months) and notes that the trial was excluded from the Cochrane review (Ahangari 2015) "due to unclear methodology". The abstract does not state randomization, although PubMed tags the paper as an RCT | Abstract (direction); full text of guideline (numbers) | M–L |
+| E7 | Resorption stops when active treatment stops: 2.93 mm during treatment vs 0.1 mm afterwards | Copeland S, Green LJ. Am J Orthod 1986;89:51-5 (PMID 3455795) | 45 subjects **selected because they had experienced root resorption during treatment** **[FC]**; maxillary central incisors measured on lateral cephalograms before treatment, after active treatment and after retention. "mean amount of root resorption during active treatment was 2.93 mm … during the posttreatment period was 0.1 mm". The authors add that post-treatment resorption, when it occurs, is more likely associated with "traumatic occlusion and active force-delivering retainers" | Abstract (re-verified) | H for the numbers. 2.93 mm is NOT a typical loss (selected sample; pooled CBCT mean about 0.8 mm, E4) |
+| E8 | 14 years later: no further change except smoothing of sharp edges | Remington DN et al. Am J Orthod Dentofacial Orthop 1989;96:43-6 (PMID 2750719) | 100 patients **who exhibited root resorption during appliance therapy** **[FC]**, recalled a mean 14.1 years (SD 0.4) after treatment; periapical radiographs scored 0–4. "no apparent changes after appliance removal except remodeling of rough and sharp edges. Hypermobility was observed in only two instances." (The abstract says "two instances"; it does not say "2 of 100 patients".) | Abstract (re-verified) | H |
+| E9 | The stop is not instantaneous at tissue level | Cheng LL et al. Am J Orthod Dentofacial Orthop 2009;136:320.e1-10 (PMID 19732664); Winter BU et al. Eur J Orthod 2009;31:346-51 (PMID 19465737) | Cheng (40 patients, micro-CT): "root resorption continued for 4 weeks after orthodontic force stopped". Winter (76 premolars): "resorptive activity continued up to 10 days after removal of forces … repair of the resorbed area sometimes started during active movement". **[FC]** Scope: Cheng = maxillary first premolars, 4 weeks of 25 g or 225 g force, then 4 or 8 weeks of retention; Winter = orthodontically intruded premolars, light microscopy, and the sentence begins "In some teeth" | Abstracts (re-verified) | H |
 | E10 | Lacunae are relined with (mostly cellular) cementum: 28% of lacunae repairing at 1 week, 75% at 8 weeks after force removal | Owman-Moll P, Kurol J, Lundgren D. Angle Orthod 1995;65:403-8 (PMID 8702065) | 64 premolars, 50 cN for 6 weeks, then 1–8 weeks retention. "resorptive areas that had begun to repair ranged from 28% after 1 week of retention to 75% after 8 weeks. The healing cementum was almost exclusively of the cellular type." | Abstract | H |
-| E11 | Lost root length does not come back | AAE Communiqué (Blicher 2021); Remington 1989 | "resorbed tooth structures will not regrow"; long term only "remodeling of rough and sharp edges" | Web page; abstract | M–H |
-| E12 | Radiograph: shortened, blunted, rounded apices; normal lamina dura; no periapical lesion | Abbott & Lin 2022, section 6.6; Patel et al. 2022 | "the roots appear shortened and blunted with rounded apices. The lamina dura usually appears normal … no signs of ankylosis and no periapical radiolucency or radiopacity"; "flattening or blunting of the root apices" | Full text | H |
+| E11 | Lost root length does not come back | AAE Communiqué (Blicher 2021); Remington 1989; **[FC]** Patel et al. 2022 (abstract) | "resorbed tooth structures will not regrow"; long term only "remodeling of rough and sharp edges"; Patel abstract: "Regardless of its location, root resorption is irreversible". **[FC]** Nuance: this is about root *length*. Small lacunae are relined and partly filled by reparative cementum (E10; Lin 2022: the contour "may only be partially restored"), so write "a shortened root stays short", not "nothing ever repairs" | Web page; abstracts | H for length |
+| E12 | Radiograph: shortened, blunted, rounded apices; normal lamina dura; no periapical lesion | Abbott & Lin 2022, section 6.6; Patel et al. 2022 | "the roots appear shortened and blunted with rounded apices. The lamina dura usually appears normal … no signs of ankylosis and no periapical radiolucency or radiopacity"; "flattening or blunting of the root apices". **[FC]** Not only apical: on CBCT, slanted resorption of buccal / palatal root surfaces was seen in 15.1% of upper central and 11.5% of upper lateral incisors (Lund 2012 abstract), although Abbott & Lin describe the site as "always apical" | Full text (re-verified) | H |
 | E13 | Orthodontic resorption does not make the pulp sick | Abbott & Lin 2022; Weissheimer T et al. Int Endod J 2021;54:1246-1262 (PMID 33780015) | "Orthodontic resorption itself does not cause pulp pathosis." Weissheimer (SR, 12 studies): "orthodontic movements do not induce loss of pulp vitality with low to very low certainty of evidence" | Full text; abstract | M |
 | E14 | Root-filled teeth resorb no more (slightly less) than vital teeth during orthodontics | Ioannidou-Marathiotou I et al. Clin Oral Investig 2013;17:1733-44 (PMID 23064975); Alhadainy HA et al. J Endod 2019;45:483-489 (PMID 30904319) | Meta-analysis of 4 studies: MD −0.48 mm (95% CI −0.81 to −0.14), quality "low". Alhadainy (7 studies): "Significantly less OIERR for ETT … Endodontic treatment does not seem to increase OIERR" | Abstract | M |
 | E15 | Mechanism: resorption starts at the edge of the compressed, hyalinized (necrotic) PDL zone as it is cleared | Brudvik P, Rygh P. Eur J Orthod 1993;15:249-63 (PMID 7691628) and 1995;17:177-88 (PMID 7542608) | Rats / mice. "Root resorption started in the circumference of the necrotic hyalinized tissue." 1995: "root resorption continued in the area where hyalinized tissue persisted even after active force had terminated" | Abstract | H (animal) |
-| E16 | No randomized trials exist on how to manage external root resorption | Ahangari Z et al. Cochrane Database Syst Rev 2015;(11):CD008003 (PMID 26599212) | "No randomised controlled trials that met the inclusion criteria were identified." | Abstract | H |
+| E16 | No randomized trials exist on how to manage external root resorption | Ahangari Z et al. Cochrane Database Syst Rev 2015;(11):CD008003 (PMID 26599212) | "No randomised controlled trials that met the inclusion criteria were identified." | Abstract (re-verified) | H |
+| E17 **[FC]** | Review and guideline consensus: orthodontic resorption ceases when active treatment ends | Brezniak N, Wasserstein A. Am J Orthod Dentofacial Orthop 1993;103:138-46 (PMID 8427218); Sondeijker 2020 guideline | Brezniak abstract: "Most studies agree that the root resorption process ceases once the active treatment is terminated." Guideline Table 3: "There are indications that the EARR process will stop after active orthodontic treatment is stopped" (evidence not graded; rests on Copeland & Green 1986). Guideline patient-information item 4.2: "EARR will stop after the appliances are removed" | Abstract; full text of guideline | M (narrative review / consensus) |
 
 ### F. Leads that could NOT be verified (keep off screen)
 
@@ -97,36 +106,76 @@ Confidence: H = high, M = medium, L = low. "Verified from" = where the exact sta
 | Cohen's Pathways of the Pulp (Trope chapter): "root surface repair within 14 days" | Textbook not available; **NOT VERIFIED** |
 | Trope M. Endod Topics 2002;1:79-100 | Journal not indexed in PubMed; classification seen only via Lin 2022 / Aidos 2018 tables |
 | Andreasen JO. Int Endod J 1985;18:109-18 (PMID 2860072) | Exists, no abstract; content seen only via Lin 2022 ("In 1985, Andreasen named asymptomatic apical resorption following orthodontic treatment as 'external surface resorption'") |
-| Linge & Linge, Eur J Orthod 1983;5:173-83 (PMID 6578039) | No abstract; numbers NOT VERIFIED |
+| Linge BO, Linge L. Eur J Orthod 1983;5:173-83 (PMID 6578039) — **[FC]** PubMed author order is Linge BO first (the 1991 paper is Linge L, Linge BO) | No abstract; numbers NOT VERIFIED |
 | Second-molar resorption from impacted third molars: 0.3–24.2% on plain films, up to 54.9% on CBCT | Read only as cited in Patel et al. 2022 full text; primary papers not checked |
 
 ---
 
 ## (b) Recommended on-screen facts (pick 5–7; total must-read text ≤ ~60 words)
 
-1. **Surface resorption = shallow lacunae in cementum after a small injury. Self-limiting.**
-   Safe wording: "Small injury → shallow lacunae in cementum". The classic attribution is Andreasen & Hjørting-Hansen 1966, but
-   those papers have no PubMed abstract and were confirmed only second-hand (Lin et al. 2022 full text). For the on-screen source
-   line use a directly read source and keep one line for scenes 1–2: "Andreasen, Swed Dent J 1980 (monkey replantation)".
-   Name the 1966 papers in the caption as the historical origin.
-2. **No infection → cementoblasts repair it in weeks.**
-   Safe wording: "No infection → new cementum in weeks". Clock should read "weeks", with at most a small qualifier
-   "monkey replantation: seen at 1 wk, PDL healing almost complete at 2–4 wk". Source line as above.
+**[FC] Items 1, 2, 4, 5 and 6 were changed and item 0 was added by the fact-check (see section i). Every item below is verified
+as worded here; the shortest on-screen forms are in the storyline table (f).**
+
+0. **Title.** "The resorption that stops itself" fits surface resorption only: pressure resorption does not stop by itself while
+   the pressure persists. Safer hook: "Resorption that stops when the cause stops" (or keep the old title only over the surface
+   scenes).
+1. **Surface resorption = small, shallow areas of resorption in cementum after a localized injury. Self-limiting.**
+   Safe wording: "Small injury → shallow lacunae in cementum".
+   **Source line (changed): "Abbott & Lin, Dent Traumatol 2022"** — full text read by researcher and fact-checker: "small areas
+   of resorption of the cementum. Occasionally it may extend into the dentin"; "a self-limiting process which is usually caused
+   by a localized injury to the involved part of the cementum and/or PDL". Do NOT put "Andreasen, Swed Dent J 1980" under this
+   text: that abstract concerns extracted-and-replanted monkey incisors (a severe injury) and says nothing about lacuna depth.
+   Name Andreasen & Hjørting-Hansen 1966 (human replanted teeth; no PubMed abstract; confirmed second-hand through Lin et al.
+   2022) and Andreasen 1980 (monkeys) in the caption as the historical / experimental origin.
+2. **No infection → it does not persist; the lacuna is repaired with new cementum over weeks.**
+   Safe wording: "No infection → new cementum in weeks". The clock reads "weeks" only: no number, and no "healed" mark at
+   2–4 weeks.
+   Support (all full text, narrative reviews): Abbott & Lin 2022 ("as long as the tooth has not been contaminated with bacteria,
+   the resorptive process will not persist"; "a brief period of a few weeks"); Lin et al. 2022 ("repaired with the formation of
+   cementoid-like tissue … usually takes about 4 weeks to complete"); AAE Glossary via Lin ("repair by deposition of new
+   cementum"). Andreasen 1980 (monkeys) supports only the onset — lacunae first seen at 1 week, prominent at 2 weeks, PDL
+   healing almost complete at 2–4 weeks; its abstract does not describe cementum repair, and the frequency of surface resorption
+   *rose* slightly at 4 and 8 weeks. The only human repair kinetics are orthodontic (Owman-Moll 1995: repair begun in 28% of
+   lacunae at 1 week and 75% at 8 weeks), so nothing on screen may imply completion by 2–4 weeks.
+   **Source line: the same single line as item 1** ("Abbott & Lin, Dent Traumatol 2022"). If a monkey qualifier is wanted it
+   must read "monkey replantation: lacunae seen from 1 wk" and Andreasen 1980 then goes in the caption.
 3. **Pressure keeps the clastic cells working** (orthodontic force, ectopic canine, cyst / tumor).
    Safe wording: "Pressure = the stimulus that keeps them working". Source line: "Fuss et al., Dent Traumatol 2003".
-4. **Remove the pressure → resorption arrests; cementum relines the lacuna; lost length stays lost.**
-   Safe wording: "Pressure off → it stops. Lost root does not regrow."
-   Optional numeral: "2.93 mm during treatment → 0.1 mm after" (Copeland & Green, Am J Orthod 1986; 45 patients, central incisors).
+4. **Remove the pressure → resorption arrests; cementum relines the lacuna; a shortened root stays short.**
+   Safe wording (changed): "Pressure off → it stops. A shortened root stays short." Avoid the blanket "lost root stays lost /
+   does not regrow" next to a picture of cementum relining a lacuna: small defects are relined and partly filled (Owman-Moll
+   1995; Lin 2022), and 13 of 32 canine-related lesions looked repaired on intraoral films in Falahat 2008. What does not return
+   is root length.
+   **Source line (changed): "Patel et al., Int Endod J 2022"** — full text: "once the source of the pressure has been
+   eliminated, cemental repair ensues"; "The resorptive process will stop with the removal of the source of pressure"; abstract:
+   "root resorption is irreversible". Fuss 2003 (abstract) only says that removing the pressure is the treatment of choice, so it
+   is the right line for item 3, not for this one.
+   Numeral "2.93 mm during treatment → 0.1 mm after" (Copeland & Green, Am J Orthod 1986): **caption only by default.** The 45
+   patients were selected because they already had resorption, and length was measured on lateral cephalograms, so 2.93 mm is
+   not a typical loss (pooled CBCT mean about 0.8 mm, Samandara 2019). If it is shown at all it must carry "45 patients selected
+   for resorption · central incisors".
 5. **One headline number for the pressure scene** (choose one, keep the denominator):
-   - "38% of lateral incisors next to an ectopic canine (CT, 107 children)" — Ericson & Kurol, Angle Orthod 2000; or
-   - ">4 mm root loss: 2.6% of upper incisors (CBCT, 152 patients)" — Lund et al., Angle Orthod 2012.
-   ("≈1–5% of teeth, ≥4 mm or >1/3 root" is a review estimate: caption only.)
-6. **End card, pulp:** "Pulp vital. No root canal treatment — remove the cause." Source line: "Fuss et al., Dent Traumatol 2003"
-   (abstract: removing the pressure is the treatment of choice). The literal "endodontic therapy is not indicated" wording is from
-   the AAE Communiqué 2021; "pulp tests positive" and the radiographic signs are from Patel et al., Int Endod J 2022. Put the
-   other two in the caption.
-7. **End card, radiograph:** "Surface: usually nothing" · "Orthodontic: short, blunted apex" ·
-   (optional third) "Ectopic tooth / lesion: scooped root facing it".
+   - "38% of lateral incisors next to an ectopic canine (CT, 107 referred children)" — Ericson & Kurol, Angle Orthod 2000
+     (verified: 38% of adjacent laterals, 9% of centrals, 156 ectopic canines, ages 9–15). Keep "CT" on screen; "referred
+     children aged 9–15" may go in the caption; or
+   - (changed) "Root shortening >4 mm in at least one tooth: 6.6% of patients (CBCT, 152 patients)" — Lund et al., Angle Orthod
+     2012. The earlier wording ">4 mm root loss: 2.6% of upper incisors" was a truncated quote and is withdrawn: the abstract
+     says "Of upper incisors and the palatal root of upper premolars, 2.6%". Sample (caption): adolescents with Class I
+     crowding, mostly four-premolar extraction, fixed appliance for about 21 months.
+   ("≈1–5% of teeth, 4 mm or more or >1/3 root" is a review background estimate: caption only.)
+6. **End card, pulp** (wording changed): "Pulp is not the cause — it tests normal. No root canal treatment: remove the cause."
+   "Pulp vital" alone is acceptable but less exact: in advanced pressure resorption the defect can reach the pulp (Ericson &
+   Kurol: 60% of resorbed laterals; Abbott & Lin and Patel say the same for late stages), and a tooth can have unrelated pulp
+   disease.
+   **Source line: "Patel et al., Int Endod J 2022"** (full text: "no signs of endodontic disease. The affected teeth respond
+   normally to pulp sensitivity tests"; managed by "elimination of the aetiological factor"; Table 1 pulp sensibility "+ve").
+   Caption: the literal "endodontic therapy is not indicated" is from the AAE Communiqué 2021 (web article, not peer-reviewed);
+   "removal of the stimulation factor, i.e. pressure, is the treatment of choice" is Fuss et al. 2003 (abstract); "Orthodontic
+   resorption itself does not cause pulp pathosis" is Abbott & Lin 2022.
+7. **End card, radiograph:** "Surface: usually nothing" (Abbott & Lin 2022) · "Orthodontic: short, blunted apex" (Abbott & Lin
+   2022; Patel 2022) · (optional third) "Ectopic tooth / lesion: scooped root facing it" — "scooped" is our paraphrase of
+   "asymmetric loss of external root surface adjacent to the source of pressure" (Patel 2022). One source line for the whole end
+   card: "Patel et al., Int Endod J 2022".
 8. Small label wherever cells are drawn: "schematic · not to scale".
 
 ---
@@ -139,7 +188,8 @@ Confidence: H = high, M = medium, L = low. "Verified from" = where the exact sta
    Patel S, Saberi N, Pimental T, Teng PH. Int Endod J 2022;55 Suppl 4:892-921.
 2. **The healing time-course is not from the 1966 papers or the 1985 review.** The 1966 replantation papers named the three types;
    the time data come from the vervet-monkey series (Andreasen, Swed Dent J 1980;4:101-10): seen at 1 week, prominent at 2 weeks,
-   PDL healing almost complete at 2–4 weeks.
+   PDL healing almost complete at 2–4 weeks. **[FC]** These are onset data: the abstract does not time the cementum repair of
+   the lacunae (their frequency rose slightly at 4 and 8 weeks). "Repaired in weeks" rests on narrative reviews (B2, B3).
 3. **"2–4 weeks" is an animal-based range, not a human measurement.** Reviews say "a few weeks" (Abbott & Lin 2022),
    "about 4 weeks" (Lin et al. 2022), "2–3 weeks" (Tronstad 1988, second-hand). On screen say "weeks".
 4. **"Radiograph usually shows nothing" is right, but not "never".** Radiographic repair-related (surface) resorption was recorded
@@ -153,6 +203,8 @@ Confidence: H = high, M = medium, L = low. "Verified from" = where the exact sta
    after appliance removal (Copeland & Green 1986; Remington 1989), but lacunae can stay active for about 10 days to 4 weeks
    (Winter 2009; Cheng 2009), and in Falahat 2008, 7 of 32 incisor lesions progressed after the canine was corrected.
    Animate a wind-down, not a switch. Do not draw the apex growing back: repair relines the lacuna with cementum only.
+   **[FC]** Copeland & Green and Remington both studied patients selected for having resorption; Winter found continued
+   activity "in some teeth" (intruded premolars); Falahat followed 27 of 51 children on intraoral films (see D7).
 7. **Weltman 2010 is a systematic review of 13 RCTs with no meta-analysis; it did not pool an incidence.** Its conclusions:
    comprehensive treatment increases incidence and severity; heavy forces harmful; light forces advised, especially for incisor
    intrusion; a 2–3 month pause reduces total resorption; archwire sequence, bracket prescription and self-ligation make no
@@ -181,19 +233,30 @@ Confidence: H = high, M = medium, L = low. "Verified from" = where the exact sta
    - AAE Communiqué 2021: "pressure resorption" covers orthodontic movement, misaligned eruption, slow-growing cysts / tumors.
    The reel's "surface + pressure, both stimulus-dependent" framing is defensible under all of them.
 2. **"Non-inflammatory" vs "inflammatory".** The AAE Communiqué calls pressure resorption "non-inflammatory"; the orthodontic
-   literature calls it inflammatory (OIIRR), and Tronstad / Trope regard all resorption as inflammatory. Use "non-infective" or
+   literature calls it inflammatory (OIIRR); Tronstad based his nomenclature "on the concept that all resorptive reactions are
+   caused by inflammation" (as reported by Lin 2022), and Lin 2022 itself calls surface resorption "of an inflammatory nature".
+   **[FC]** The same view was attributed to Trope without a verified source: removed. Use "non-infective" (Patel 2022) or
    "no infection" on screen.
 3. **Time frame** for surface-resorption repair rests on monkey replantation histology and narrative reviews (section B).
 4. **How common is severe orthodontic resorption?** Depends on definition, imaging and unit: 1–5% of teeth (review estimate);
-   2.6% of upper incisors and 6.6% of patients >4 mm on CBCT (Lund 2012); 14.5% of 1049 Brazilian edgewise patients with >1/3 root
+   6.6% of patients with at least one tooth shortened >4 mm, and 2.6% "of upper incisors and the palatal root of upper
+   premolars" >4 mm, on CBCT (Lund 2012; **[FC]** wording corrected); 14.5% of 1049 Brazilian edgewise patients with >1/3 root
    loss on periapicals (Marques 2010); "5% of patients >5 mm" (Killiany 1999 estimate); moderate–severe in 24.5% of incisors in
    88 adults (Lupi 1996). "Uncommon" is fair; a single percentage without its definition is not.
 5. **Risk factors are low-certainty.** The Dutch guideline (Sondeijker 2020, GRADE low / very low) found "indications that the
    duration of active treatment is not an independent predictor"; Årtun 2009 found no relation to treatment duration; Segal 2004
    and Yassir 2021 found the opposite. Previous trauma: risk factor in Linge & Linge 1991, not in Malmgren 1982 or Weltman 2010.
    Safest: "heavier force → more resorption" (human micro-CT / SEM trials plus systematic reviews).
+   **[FC]** Lund 2012 (CBCT) also found treatment duration not associated with shortening. Beware a secondary-source error:
+   Patel 2022 cites Malmgren 1982 for trauma-history teeth being "more prone" to orthodontic resorption, but Malmgren's abstract
+   concludes the comparisons do not "support the hypothesis that traumatized teeth have a greater tendency toward root
+   resorption" (only teeth already showing resorption before treatment may be more prone). Do not repeat Patel's sentence.
+   A 2026 meta-analysis (Alqahtani et al., Acta Odontol Scand 2026;85:623-634, PMID 42740579; 7 RCTs + 1 prospective study;
+   abstract only) found intrusive mechanics associated with significantly more resorption than non-intrusive mechanics in a
+   post-hoc subgroup analysis — consistent with Weltman 2010, and nothing in it contradicts this brief.
 6. **Light force is not zero risk**: 50 cN produced lacunae in 52 of 56 premolars within 1–7 weeks (Kurol 1996).
-7. **The pause** rests on one small trial (Levander 1994); the guideline recommendation is weak.
+7. **The pause** rests on one small trial (Levander 1994); the guideline recommendation is weak. **[FC]** The guideline itself
+   notes that the trial was excluded from the Cochrane review for unclear methodology.
 8. **Root-filled teeth resorb slightly less** than vital teeth (low-quality observational data). This is not a reason for
    elective root canal treatment.
 9. **Orthodontic force and the pulp**: no loss of vitality in the 2021 systematic review, low to very low certainty; a history of
@@ -206,6 +269,20 @@ Confidence: H = high, M = medium, L = low. "Verified from" = where the exact sta
     of 5–25 years) but the guideline rates the evidence insufficient; teeth with <10 mm of root may be more mobile.
 13. **Cell behavior is schematic.** Odontoclasts, cementoblast repair and the hyalinized zone are drawn from histology in animals
     and extracted human premolars; timing on screen is compressed.
+14. **[FC] The "stops after the cause is removed" evidence is survivor- and selection-biased.** Copeland & Green 1986 (45) and
+    Remington 1989 (100) recalled patients chosen because they had resorption; Falahat 2008 followed 27 of 51 children, after
+    excluding 8 whose resorbed lateral incisors had been extracted, and used intraoral films at follow-up versus CT at baseline.
+    The direction of the finding is consistent across all of them and with the guideline, but "none were lost" and "13 repaired"
+    should not be quoted without these limits.
+15. **[FC] Orthodontic resorption is not only apical blunting.** Lund 2012 (CBCT) found slanted resorption of buccal / palatal
+    root surfaces in 15.1% of upper central and 11.5% of upper lateral incisors — invisible on periapical films. "Blunted apex"
+    is the typical radiographic sign, not the only form.
+16. **[FC] "Self-limiting" means two different things here.** Trauma-related surface resorption limits itself (the injury is a
+    one-off event). Pressure resorption is called "self-limiting" by Patel 2022 only in the sense that it stops once the pressure
+    is eliminated; it does not stop by itself under continuing pressure. The title and the gauge should not blur this.
+17. **[FC] Human timing of repair.** No human study times the repair of trauma-related surface resorption. The human data that
+    exist are orthodontic (extracted premolars): activity can continue for up to 10 days (Winter 2009) to 4 weeks (Cheng 2009)
+    after force removal, and only 75% of lacunae had begun to repair at 8 weeks (Owman-Moll 1995).
 
 ---
 
@@ -227,24 +304,54 @@ Confidence: H = high, M = medium, L = low. "Verified from" = where the exact sta
   or Cohen's "14 days" (all NOT VERIFIED).
 - Do not merge this entity with transient apical breakdown (a different, radiographically visible post-luxation phenomenon).
 
+Added by the fact-check **[FC]**:
+
+- "Andreasen, Swed Dent J 1980" as the source line under "small injury → shallow lacunae" or under "new cementum in weeks".
+  The abstract covers replanted monkey incisors and reports when lacunae appear (1–2 weeks), not their depth and not their repair.
+- A clock that shows the lacuna "healed" at a stated time (2, 3 or 4 weeks), for monkeys or for humans.
+- ">4 mm loss in 2.6% of upper incisors" (Lund 2012). The abstract's figure is for "upper incisors and the palatal root of upper
+  premolars" combined. Use "6.6% of patients had at least one tooth shortened >4 mm", or quote the combined wording.
+- "2.93 mm" (Copeland & Green 1986) as a typical or average orthodontic root loss. It comes from 45 patients selected because
+  they had resorption; the pooled CBCT mean is about 0.8 mm (Samandara 2019, low-quality studies).
+- "No resorbed incisor is lost after the canine is corrected" as a general statement. In Falahat 2008 it applies to 27 followed
+  children; 8 others had been excluded because their lateral incisors had been extracted.
+- "Lost root stays lost / nothing repairs" as a blanket statement over a picture of cementum repair. Root *length* does not
+  return; small lacunae are relined and partly filled with cementum.
+- "The resorption that stops itself" over the pressure scenes. Pressure resorption stops when the pressure is removed.
+- "Orthodontic resorption is always apical" (slanted buccal / palatal surface resorption in 11.5–15.1% of upper incisors on
+  CBCT, Lund 2012).
+- "A history of trauma makes teeth more prone to orthodontic resorption" (stated in Patel 2022 citing Malmgren 1982, whose
+  abstract concludes the opposite).
+- "52 of 56 premolars resorbed after 1 week" (Kurol 1996: first seen at 1 week; 52 of 56 over the 1–7-week series).
+- "Hypermobility in 2 of 100 patients" (Remington 1989 says "two instances").
+- "Fuss et al. 2003" as the source for "it stops" or for "pulp vital / no root canal treatment". Its abstract supports only
+  "pressure is a stimulus" and "removing the pressure is the treatment of choice".
+- The AAE Communiqué as an on-screen source line (web article; caption only), and "AAE Glossary, March 2020" (date not verified).
+
 ---
 
 ## (f) Suggested storyline (about 20 s, silent, risograph duotone)
 
 Corner tag throughout: "RESORPTION 2/5 · SURFACE + PRESSURE". Small "schematic · not to scale" inside the safe area whenever cells
-are on screen. About 55 must-read words in total.
+are on screen. About 60 must-read words in total after the fact-check rewording (the end-card line may be cut back to
+"Pulp tests normal. No root canal treatment." if space is short).
 
 | Time | Picture | Text on screen | Source line (24–26 px) |
 |---|---|---|---|
-| 0–1.5 s | Root-surface close-up, flat ink shapes: dentin (teal), cementum band (overprint dark), PDL fibers, bone. Title stamps in. | **The resorption that stops itself** | — |
-| 1.5–5 s | A small knock: a gap opens in the cementoblast row; 2–3 pink multinucleated clastic cells settle and scoop shallow lacunae in cementum. | "Small injury → shallow lacunae" | Andreasen, Swed Dent J 1980 (monkey replantation) — same line held through the next beat |
-| 5–8.5 s | Clock hand sweeps a dial marked in weeks. Clasts leave; cementoblasts lay new cementum; PDL fibers reattach. | "No infection → new cementum in **weeks**" | (same line) |
+| 0–1.5 s | Root-surface close-up, flat ink shapes: dentin (teal), cementum band (overprint dark), PDL fibers, bone. Title stamps in. | **Resorption that stops when the cause stops** (**[FC]** was "The resorption that stops itself", which is true of the surface type only) | — |
+| 1.5–5 s | A small knock: a gap opens in the cementoblast row; 2–3 pink multinucleated clastic cells settle and scoop shallow lacunae in cementum. | "Small injury → shallow lacunae" | **[FC]** Abbott & Lin, Dent Traumatol 2022 — same line held through the next beat (was "Andreasen, Swed Dent J 1980", which does not support this text) |
+| 5–8.5 s | Clock hand sweeps a dial marked in weeks. Clasts leave; cementoblasts lay new cementum; PDL fibers reattach. **[FC]** No numerals on the dial and no "healed" mark at a stated week. | "No infection → new cementum in **weeks**" | (same line) |
 | 8.5–13 s | Pressure version. A big force arrow (bracket + wire, then an ectopic canine crown) presses the PDL; clasts keep working while the arrow is on; apex blunts / root is scooped. One big numeral. | "Pressure keeps them working" + **38%** "of lateral incisors beside an ectopic canine (CT)" | Ericson & Kurol, Angle Orthod 2000 |
-| 13–16.5 s | Arrow retracts. Clasts wind down over a beat (not instantly); cementum relines the lacuna; apex stays blunt. Two-needle gauge: both needles fall when "stimulus" flips to OFF. | "Pressure off → it stops. Lost root stays lost." | Fuss et al., Dent Traumatol 2003 |
-| 16.5–20 s | End card: two mini radiograph icons (normal-looking root; short blunted apex) and a pulp drawn alive. Hold ≥ 2.5 s, fade text before the loop. | "**Pulp vital. No root canal treatment.**" · "X-ray: surface — usually nothing · ortho — blunted apex" | Patel et al., Int Endod J 2022 (radiographic signs, pulp tests); the "no root canal treatment" line rests on Fuss 2003 + AAE Communiqué 2021, named in the caption |
+| 13–16.5 s | Arrow retracts. Clasts wind down over a beat (not instantly); cementum relines the lacuna; apex stays blunt. Two-needle gauge: both needles fall when "stimulus" flips to OFF. | "Pressure off → it stops. A shortened root stays short." (**[FC]** was "Lost root stays lost.") | **[FC]** Patel et al., Int Endod J 2022 (was Fuss 2003, whose abstract names removal of pressure as the treatment of choice but does not say the resorption stops) |
+| 16.5–20 s | End card: two mini radiograph icons (normal-looking root; short blunted apex) and a pulp drawn alive. Hold ≥ 2.5 s, fade text before the loop. | "**Pulp is not the cause — it tests normal. No root canal treatment.**" (**[FC]** was "Pulp vital. No root canal treatment."; the short form "Pulp vital" remains acceptable) · "X-ray: surface — usually nothing · ortho — blunted apex" | Patel et al., Int Endod J 2022 (radiographic signs, pulp tests, management by removing the cause); the literal "endodontic therapy is not indicated" is the AAE Communiqué 2021 and "treatment of choice = remove the pressure" is Fuss 2003, both named in the caption |
 
-Alternative numeral for the pressure scene if the builder prefers orthodontics over the canine: "**2.93 mm → 0.1 mm**, during vs
-after braces" (Copeland & Green, Am J Orthod 1986), or ">4 mm loss: **2.6%** of upper incisors (CBCT)" (Lund et al., Angle Orthod 2012).
+The "Pressure keeps them working" beat (8.5–13 s) carries the numeral's source line (Ericson & Kurol, Angle Orthod 2000); the
+statement itself rests on Fuss 2003 (abstract), which goes in the caption.
+
+Alternative numeral for the pressure scene if the builder prefers orthodontics over the canine (**[FC]** both changed):
+"Root shortening >4 mm in at least one tooth: **6.6%** of patients (CBCT, 152 patients)" (Lund et al., Angle Orthod 2012).
+"2.93 mm → 0.1 mm, during vs after braces" (Copeland & Green, Am J Orthod 1986) is caption-only unless it carries
+"45 patients selected for resorption". ">4 mm loss: 2.6% of upper incisors" is withdrawn (truncated quote).
 
 Animation honesty notes: lacunae in scene 1 must stay within cementum / outermost dentin; do not show bacteria anywhere; the pulp
 stays the same "alive" color throughout; no regrowth of the apex.
@@ -274,6 +381,12 @@ Patel "external surface = pressure", Abbott & Lin "pressure" and "orthodontic" a
 from monkey replantation histology; (3) arrest follows removal of the cause, with a short histologic lag, and the lost length
 does not return; (4) severe orthodontic loss (>4 mm or >1/3 root) is roughly 1–5% of teeth in reviews; (5) schematic animation.
 
+**[FC] Caption must also carry** (because the screen no longer does): the Ericson & Kurol sample (107 children aged 9–15
+referred for ectopic canines, CT); that advanced pressure resorption can reach the pulp even though the pulp is not the cause;
+and, if Copeland & Green or Remington are cited for "it stops", that both followed patients selected for having resorption.
+Cite the AAE Glossary as "quoted in Lin et al. 2022" and the Communiqué as a web article. Brezniak & Wasserstein 1993 (Part 2,
+Am J Orthod Dentofacial Orthop) may be added for "most studies agree that resorption ceases once active treatment ends".
+
 ---
 
 ## (h) Full citations with DOIs
@@ -282,6 +395,7 @@ does not return; (4) severe orthodontic loss (>4 mm or >1/3 root) is roughly 1�
 - Ahangari Z et al. Interventions for the management of external root resorption. Cochrane Database Syst Rev 2015;(11):CD008003. PMID 26599212. https://doi.org/10.1002/14651858.CD008003.pub3
 - Aidos H, Diogo P, Santos JM. Root resorption classifications: a narrative review and a clinical aid proposal. Eur Endod J 2018;3:134-145. PMID 32161869. https://doi.org/10.14744/eej.2018.33043
 - Alhadainy HA et al. Orthodontic-induced external root resorption of endodontically treated teeth: a meta-analysis. J Endod 2019;45:483-489. PMID 30904319. https://doi.org/10.1016/j.joen.2019.02.001
+- Alqahtani KA et al. Radiographic assessment and orthodontic intervention effects on orthodontically induced root resorption: a systematic review and meta-analysis of clinical trials. Acta Odontol Scand 2026;85:623-634. PMID 42740579. https://doi.org/10.2340/aos.v85.46818 (added by the fact-check; abstract only)
 - Andreasen JO, Hjørting-Hansen E. Replantation of teeth. I. Acta Odontol Scand 1966;24:263-86. PMID 5225449. https://doi.org/10.3109/00016356609028222
 - Andreasen JO, Hjørting-Hansen E. Replantation of teeth. II. Acta Odontol Scand 1966;24:287-306. PMID 5225450. https://doi.org/10.3109/00016356609028223
 - Andreasen JO. A time-related study of periodontal healing and root resorption activity after replantation of mature permanent incisors in monkeys. Swed Dent J 1980;4:101-10. PMID 6933704 (no DOI).
@@ -332,3 +446,65 @@ does not return; (4) severe orthodontic loss (>4 mm or >1/3 root) is roughly 1�
 - Weltman B, Vig KWL, Fields HW, Shanker S, Kaizar EE. Root resorption associated with orthodontic tooth movement: a systematic review. Am J Orthod Dentofacial Orthop 2010;137:462-76. PMID 20362905. https://doi.org/10.1016/j.ajodo.2009.06.021
 - Winter BU, Stenvik A, Vandevska-Radunovic V. Dynamics of orthodontic root resorption and repair in human premolars: a light microscopy study. Eur J Orthod 2009;31:346-51. PMID 19465737. https://doi.org/10.1093/ejo/cjp020
 - Yassir YA, McIntyre GT, Bearn DR. Orthodontic treatment and root resorption: an overview of systematic reviews. Eur J Orthod 2021;43:442-456. PMID 33215186. https://doi.org/10.1093/ejo/cjaa058
+
+---
+
+## (i) Fact-check log (independent adversarial pass, 2026-11-22)
+
+**Method.** According to PubMed: metadata and abstract re-read for all 61 PMIDs the researcher cited (plus one added here).
+PMC full text re-read for Lin et al. 2022, Sondeijker et al. 2020 and Aidos et al. 2018 (whole articles); for Abbott & Lin 2022
+only sections 6.1, 6.5 and 6.6 and one passage of 5.1; for Patel et al. 2022 only the abstract, the whole "External surface
+resorption" section and the Table 1 rows on appearance, location, pulp testing and radiographic features. The AAE Communiqué
+page and the PMC page of Lund 2012 were read through a fetch tool that returns extracts (PMC supplies no XML full text for
+Lund 2012). A PubMed search for newer syntheses (2021–2026) found nothing that contradicts the brief. The researcher's quotes
+were not relied on.
+
+**Overall result.** No wrong author, year, journal, volume, page, PMID or DOI was found, and every number quoted in section (a)
+is present in its stated source. The problems were of four kinds: a source line attached to text it does not support, one
+truncated quote, selection caveats left out, and two on-screen wordings that said slightly more than the sources.
+
+**Changes made**
+
+| # | Where | Problem found | Change |
+|---|---|---|---|
+| 1 | (b)1, (b)2, (f) scenes 1.5–8.5 s, B1 | Source line "Andreasen, Swed Dent J 1980 (monkey replantation)" sat under "Small injury → shallow lacunae" and "new cementum in weeks". The abstract concerns extracted-and-replanted monkey incisors, gives onset times only (seen at 1 week, prominent at 2 weeks, frequency rising slightly at 4 and 8 weeks) and does not mention lacuna depth or cementum repair. Animal onset data were standing in for a human repair claim | Source line changed to "Abbott & Lin, Dent Traumatol 2022" (full text supports every word). Andreasen 1980 moved to the caption as the experimental origin. B1 confidence note rewritten |
+| 2 | (b)2, (f) clock, new row B6, (d)17, (e) | "Repaired in weeks" has no timed human or animal measurement behind it (narrative reviews: "a few weeks", "about 4 weeks"). Human orthodontic histology shows repair still incomplete at 8 weeks | Clock must read "weeks" with no numerals and no "healed" mark; row B6 added (Owman-Moll 1995); the optional qualifier "PDL healing almost complete at 2–4 wk" removed from the screen |
+| 3 | (b)4, (f) scene 13–16.5 s | Source line "Fuss et al. 2003" under "Pressure off → it stops". The abstract says removal of pressure is the treatment of choice; it does not say the resorption stops or that cementum repairs it | Source line changed to "Patel et al., Int Endod J 2022" (full text: "will stop with the removal of the source of pressure"; "cemental repair ensues"). Fuss stays as the source for item 3 |
+| 4 | (b)4, (f), E11, (e) | "Lost root stays lost / does not regrow" was a blanket statement shown beside cementum relining; lacunae are partly filled, and 13 of 32 lesions looked repaired in Falahat 2008 | Wording changed to "A shortened root stays short"; Patel abstract ("root resorption is irreversible") added as support for length |
+| 5 | (b)4, (f) alternative numeral, E7 | "2.93 mm → 0.1 mm (45 patients, central incisors)" omitted that the 45 were selected because they had resorption, and that length was measured on lateral cephalograms. Shown alone it reads as a typical loss (pooled CBCT mean about 0.8 mm) | Demoted to caption-only unless it carries "45 patients selected for resorption"; caveat written into E7 |
+| 6 | (b)5, (f) alternative numeral, E3, (e) | ">4 mm root loss: 2.6% of upper incisors" truncates the abstract ("Of upper incisors and the palatal root of upper premolars, 2.6%"). No per-tooth breakdown could be verified (PMC has no XML full text) | Withdrawn. Replaced by the unambiguous "6.6% of patients had at least one tooth shortened >4 mm (CBCT, 152 patients)". Sample details added from the PMC page (medium confidence) |
+| 7 | (b)6, (f) end card | "Pulp vital. No root canal treatment" was given the source line "Fuss et al. 2003" in (b)6; that abstract says neither. And a bare "pulp vital" ignores that advanced pressure resorption can reach the pulp (60% of resorbed laterals in Ericson & Kurol) | Wording changed to "Pulp is not the cause — it tests normal. No root canal treatment: remove the cause"; source line "Patel et al., Int Endod J 2022"; AAE Communiqué and Fuss named in the caption |
+| 8 | (b)0, (f) title, (d)16, (e) | "The resorption that stops itself" is true of surface resorption, not of pressure resorption under continuing pressure | Title suggestion changed to "Resorption that stops when the cause stops" |
+| 9 | D7, (c)6, (d)14, (e) | Falahat 2008 "none lost; 13 repaired" quoted without its limits: 27 of 51 followed, 8 excluded because their lateral incisors had been extracted, follow-up on intraoral films versus baseline CT | Fact reworded, caveats added, confidence lowered from H to M |
+| 10 | E8 | Remington 1989: the 100 patients were those "who exhibited root resorption during appliance therapy"; the abstract says hypermobility in "two instances", not "2 of 100 patients" | Caveat and exact wording added |
+| 11 | E1 | Kurol 1996 could be (and in the researcher's return summary was) read as "52 of 56 premolars at 1 week". The abstract: first registered at 1 week; all but four of the test teeth over the 1–7-week series | Reading clarified in the row and in (e) |
+| 12 | B4 | The "2–3 weeks" sentence in Aidos 2018 is in a paragraph about cervical resorption (Tronstad's transient phase), not about surface resorption | Context corrected; stays off screen |
+| 13 | D6 | "Mostly slight" overstated Schroder 2018 (slight 43.2% of resorbed teeth: the largest category, not a majority) | Softened to "most often mild"; note that Schroder's percentages are severity shares, not prevalences |
+| 14 | E2 | "Sondeijker … citing Weltman 2010" could not be confirmed (the guideline cites its refs 2–4; reference list not visible) | Reworded; the Patel 2022 sentence that does name Killiany 1999 and Weltman 2010 quoted instead |
+| 15 | E6, (d)7 | Levander 1994: the guideline describes a "3 month" pause (abstract: 2–3 months) and records that the trial was excluded from the Cochrane review for unclear methodology | Added; confidence M → M–L |
+| 16 | E12, (d)15, (e) | "Blunted apex" presented as the form of orthodontic resorption; Lund 2012 found slanted buccal / palatal surface resorption in 11.5–15.1% of upper incisors on CBCT | Caveat added |
+| 17 | (d)5, (e) | Patel 2022 cites Malmgren 1982 for trauma-history teeth being "more prone" to orthodontic resorption; Malmgren's abstract concludes the opposite | Flagged so the builder does not repeat it; Lund 2012 (duration not associated) and a 2026 meta-analysis (intrusion) added |
+| 18 | (d)2 | "Tronstad / Trope regard all resorption as inflammatory": verified for Tronstad (via Lin 2022) only | Trope removed |
+| 19 | A1, A2 | 1966 papers are human studies (PubMed titles); the AAE Glossary edition date "March 2020" could not be re-verified | Added; glossary to be cited "as quoted in Lin et al. 2022" |
+| 20 | D3 | AAE Communiqué quotes confirmed by re-fetch, but it is a non-peer-reviewed web article | Confidence set to M; caption only, not an on-screen source line |
+| 21 | D4, D5, C2, E9 | Scope details missing (late-stage pulp involvement; referred sample and meaning of "severe"; concussion cases were multiple-trauma only; study designs of Cheng and Winter) | Added |
+| 22 | E17 (new), (g), (h) | A directly verified abstract statement for "ceases once active treatment ends" was available and unused (Brezniak & Wasserstein 1993 Part 2); guideline wording added | Row added; Alqahtani 2026 added to (h) |
+| 23 | F table | Linge 1983: PubMed first author is Linge BO | Corrected |
+
+**Removed from the recommended on-screen list**
+
+- ">4 mm root loss: 2.6% of upper incisors" (Lund 2012) — truncated quote.
+- "2.93 mm → 0.1 mm" (Copeland & Green 1986) as a free-standing numeral — caption only unless the selection is stated.
+- "Andreasen, Swed Dent J 1980 (monkey replantation)" as the source line for scenes 1–2, and the qualifier "PDL healing almost
+  complete at 2–4 wk".
+- "Fuss et al., Dent Traumatol 2003" as the source line for "Pressure off → it stops" and for the pulp end card.
+- "Lost root stays lost / does not regrow" (replaced by "A shortened root stays short").
+- "The resorption that stops itself" as the title over the whole reel.
+
+**Verified with no change needed** (number, population and attribution all match the source): A3–A6, B3, B5, C1, C3, D1, D2,
+D8, D9, E4, E5, E10, E13–E16; corrections (c)1, 3–5 and 7–10; controversies (d)1, 3, 4, 6, 8–13; all DOIs in (h).
+
+**Still not verified by anyone (unchanged status):** the 1966 papers, Andreasen 1985, Tronstad 1988, Levander & Malmgren 1988,
+Linge & Linge 1983, Henry & Weinmann 1951 (no abstracts); Massler & Malone 1954 (not in PubMed); the AAE Glossary PDF; the full
+texts of Fuss 2003, Weltman 2010, Ericson & Kurol 2000, Hermann 2012, Lund 2012 and the other abstract-only papers (every
+number quoted from them here is in the abstract).
