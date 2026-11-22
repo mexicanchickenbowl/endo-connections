@@ -1048,6 +1048,153 @@
     "caption": "How does a premixed bioceramic sealer set?\nPremixed calcium-silicate sealers carry no water: they hydrate with dentin moisture, so a very dry canal can delay the set.\nHydration forms C–S–H gel + Ca(OH)₂; Ca²⁺ and OH⁻ leach out and pH reaches ~10–12 in lab tests.\nIn PBS, calcium + phosphate form apatite-like deposits at the wall and in tubules. In vitro only: clinical bioactivity is unproven, and ion release means some solubility.\nRefs: Xuereb 2015, J Endod; Antunes 2026, Aust Endod J; Camilleri 2011, Dent Mater; Loushine 2011, J Endod; Lee 2017, Bioinorg Chem Appl; Han & Okiji 2013, IEJ; Sarkar 2005, J Endod (MTA); Donnermeyer 2019, Odontology.\nSchematic animation: not to scale, time compressed.\n#endodontics #endo #dentistry #rootcanal #bioceramics #dentalmaterials #endodontist"
   },
   {
+    "id": "21",
+    "slug": "21-gp-shrinkage-time",
+    "title": "Warm GP: when does it stop shrinking?",
+    "style": "Strip-chart recorder",
+    "topic": "Bench data on how long heated gutta-percha keeps shrinking: minutes while cooling, up to 10 h at 37 °C, no data found past 24 h.",
+    "duration": 20.6,
+    "video": "videos/21-gp-shrinkage-time.mp4",
+    "poster": "posters/21-gp-shrinkage-time.jpg",
+    "claims": [
+      {
+        "claim": "Cooling: 1.0–2.3 % linear shrinkage (brand means 0.96–2.31 %) in 10 min, 75→37 °C, in vitro (3 backfill GP brands, tabletop device); also printed on the chart as '1.0–2.3% linear'",
+        "source": "Lottanti S, Tauböck TT, Zehnder M, J Endod 2014;40:721-4 (PMID 24767571; abstract)"
+      },
+      {
+        "claim": "Held at 37 °C: keeps shrinking for 45 min–10 h (time to stabilize, range across 4 thermosensitive GP products; GP first heated to 80 °C in a dilatometer; clock start not defined in the abstract), in vitro",
+        "source": "Lee CQ, Chang Y, Cobb CM, Robinson S, Hellmuth EM, J Endod 1997;23:579-82 (PMID 9587286; abstract)"
+      },
+      {
+        "claim": "Stamp 'CRYSTALLIZING?' = inferred mechanism (hence the question mark); crystallization probably starts during cooling and continues at 37 °C; Lee's abstract names no mechanism",
+        "source": "Inferred from Grassi MD et al., J Endod 1989;15:517-21 (PMID 2639948; abstract: isothermal shrinkage during crystallization) and Schilder H, Goodman A, Aldrich W, Oral Surg Oral Med Oral Pathol 1985;59:285-96 (PMID 3856822; abstract). 'Starts during cooling': Hsu YH et al., J Dent Sci 2020;15:28-33 (PMID 32256997; PMC full text: exotherms at 52 and 32 °C on cooling, soft-type backfill GP only, regular type none)"
+      },
+      {
+        "claim": "Then stable to 24 h (stamp STABLE; end of the 24-h hold), in vitro, one study; Goodman's thesis abstract instead describes contraction continuing over a 24-h hold",
+        "source": "Lee CQ et al., J Endod 1997;23:579-82 (PMID 9587286; abstract). Contrast: Goodman AS, MScD thesis, Boston University 1973 (hdl.handle.net/2144/40150; thesis abstract; data behind Schilder 1985, PMID 3856822)"
+      },
+      {
+        "claim": "After 24 h: stamp NO DATA FOUND, ruler 'days ?', stopwatch reads '>24 h' (no volume data found for heated GP)",
+        "source": "Literature search of PubMed abstracts, no study found (RESEARCH.md L4); not a claim that it was never measured. Wong M, Peters DD, Lorton L, J Endod 1981;7:551-8 (PMID 6985547) has no abstract and was not read. Indirect long-term data point to expansion: Wu MK, Fan B, Wesselink PR, Int Endod J 2000;33:121-5 (PMID 11307452; abstract), Michaud RA et al., J Endod 2008;34:1528-32 (PMID 19026888; abstract)"
+      },
+      {
+        "claim": "Compact it warm (in vitro): warm vertical compaction (Schilder technique) more than compensated for shrinkage on cooling; not tested against the hours-long tail",
+        "source": "Marlin J, MSD thesis, Boston University 1971 (hdl.handle.net/2144/45904; thesis abstract only; probably published as Marlin J, Schilder H, Oral Surg Oral Med Oral Pathol 1973;36:872-9, PMID 4524837, paper not read)"
+      },
+      {
+        "claim": "Use sealer (in vitro): the seal of injected thermoplasticized GP was enhanced by a sealer (dye penetration)",
+        "source": "Bradshaw GB, Hall A, Edmunds DH, Int Endod J 1989;22:17-20 (PMID 2599657; abstract)"
+      },
+      {
+        "claim": "Curves, temperature trace, time axis and canal views are schematic (legend: SCHEMATIC CURVES · 2 BENCH STUDIES (IN VITRO); cards: 'NO-SEALER CANAL · SCHEMATIC', 'gap exaggerated', 'illustration')",
+        "source": "Toy model / schematic: curve shapes and the split between phases are drawn, not measured; the time axis is a composite of two bench experiments; no y-scale; the canal views are illustrations (no cited study measured a wall gap)"
+      }
+    ],
+    "caption": "Warm gutta-percha: when does it stop shrinking?\n\nCooling 75→37 °C: 1.0–2.3% linear shrinkage in 10 min. At 37 °C: 45 min–10 h more by product, then stable to 24 h; Goodman's thesis: contraction through 24 h. Past 24 h: no volume data found; indirect data hint at expansion.\nBench data on free GP; crystallization inferred. In vitro, warm vertical compaction offset cooling shrinkage; injected GP sealed better with sealer. Neither covers the late tail.\n\nRefs: Lottanti 2014, Lee 1997, Grassi 1989, J Endod; Goodman 1973, Marlin 1971, BU theses; Schilder 1985, OOO; Bradshaw 1989, Wu 2000, Int Endod J\nSchematic animation: no wall gap measured.\n\n#endodontics #endo #guttapercha #obturation #rootcanal"
+  },
+  {
+    "id": "22",
+    "slug": "22-apex-locator",
+    "title": "How an apex locator finds the end",
+    "style": "Printed circuit board",
+    "topic": "The patient completes the circuit; ratio-type locators compare two AC signals, and that ratio drops sharply near the foramen.",
+    "duration": 24,
+    "video": "videos/22-apex-locator.mp4",
+    "poster": "posters/22-apex-locator.jpg",
+    "claims": [
+      {
+        "claim": "The patient is the circuit: file, canal fluid, foramen, periodontal tissues, lip clip; dentin = insulator (drawn as a schematic)",
+        "source": "Nekoofar et al., Int Endod J 2006;39:595-609 (PMID 16872454), abstract ('dentine and cementum that are insulators'; a poor conductor rather than a perfect insulator, see Meredith & Gulabivala 1997); lip electrode: Nasiri & Wrbas, Saudi Dent J 2022;34:11-20 (PMID 35068894), full text"
+      },
+      {
+        "claim": "Toy model / schematic: canal column drawn as a resistor that shortens as the file advances, root wall drawn as a capacitor; no component values",
+        "source": "Nekoofar et al., Int Endod J 2006;39:595-609 (PMID 16872454), abstract; Meredith & Gulabivala, Endod Dent Traumatol 1997;13:126-131 (PMID 9550026), abstract"
+      },
+      {
+        "claim": "2 AC signals, 1 ratio; Root ZX: 0.4 + 8 kHz",
+        "source": "Ratio method: Kobayashi & Suda, J Endod 1994;20:111-114 (PMID 7996080), abstract; Root ZX frequencies: Oishi et al., J Endod 2002;28:361-364 (PMID 12026919), abstract. Toy model / schematic: the two waves are drawn 10:1, the real frequencies are 20:1"
+      },
+      {
+        "claim": "Fluid (saline, NaOCl) shifts both signals; the ratio barely moves. Toy model / schematic: wave sizes are illustrative",
+        "source": "Kobayashi & Suda, J Endod 1994;20:111-114 (PMID 7996080), abstract: quotient 'only negligibly influenced by the electrolyte'; 5.25% NaOCl more conductive than saline: Shin et al., Restor Dent Endod 2012;37:149-154 (PMID 23431125), abstract; NaOCl lowers canal resistance in vivo: Meredith & Gulabivala 1997 (PMID 9550026), abstract. Not on screen: blood in the canal did not change Root ZX accuracy in vivo (91.5% vs 86.2% within 0.5 mm, n.s.; accuracy-level evidence): Saatchi et al., Braz Dent J 2016;27:336-339 (PMID 27224570), abstract"
+      },
+      {
+        "claim": "Last ~1 mm: the ratio drops (in vivo, 7-21 canals per file position). Toy model / schematic: curve shape only, no values",
+        "source": "Rambo et al., Biomed Eng Online 2010;9:46 (PMID 20819212), full text (Table 2; n = 21 canals at 0 mm, 14 at -0.5 mm, 18 at -1 mm, 7 at -1.5 to -3 mm; custom research analyzer, canals irrigated with 2.5% NaOCl; 0 mm defined by a Root ZX reading plus a radiograph). The drawn curve follows the table's proportions: about 15% of the fall from -3 to -1 mm, 10% from -1 to -0.5 mm, 75% in the last 0.5 mm"
+      },
+      {
+        "claim": "It senses the foramen region",
+        "source": "Ounsi & Naaman, Int Endod J 1999;32:120-123 (PMID 10371907), in vitro, abstract ('should only be used to detect the foramen'); Martins et al., J Endod 2014;40:759-777 (PMID 24862702), systematic review, abstract ('detect the transition of the pulp to the periodontal tissue'); supporting: Rambo et al. 2010 (PMID 20819212), full text"
+      },
+      {
+        "claim": "Not millimeters (the display scale)",
+        "source": "J. Morita ROOT ZX II operation instructions (manufacturer document, not a PubMed source): 'The numerals on the meter gauge do not represent millimeters'; supported by Rambo et al. 2010 (PMID 20819212, full text: the ratio method cannot accurately measure distances between -3.0 and -0.5 mm from the foramen) and Ounsi & Naaman 1999 (PMID 10371907, abstract: the Root ZX 'is not capable of detecting the 0.5 mm from the foramen position')"
+      },
+      {
+        "claim": "Root ZX, in vivo: ~70-100% within ±0.5 mm; range of 16 studies",
+        "source": "Range of 16 in vivo abstracts, 1996-2023, not pooled; Root ZX family (Root ZX in 12 studies, Root ZX II in 3, Dentaport ZX in 1), permanent teeth, hand files (a K-file or hand file is named in 9 of the 16 abstracts; none reports engine-driven files); most studies have 11-40 teeth. Reference point = major foramen, a point 0.5 mm coronal to it, or the minor foramen/constriction, depending on the study. Lowest 72%, Stöber et al., J Endod 2011;37:608-610 (PMID 21496657; reference 0.5 mm coronal to the major foramen); highest 100%, Vieyra et al., Int Endod J 2010;43:16-20 (PMID 20002800; 482 canals, 160 teeth, minor foramen) and De-Deus et al., J Endod 2023;49:487-495 (PMID 36848949; Root ZX II). Outside this scope: primary molars 65-69% (Beltrame et al., Int Endod J 2011;44:402-406, PMID 21219365); rotary NiTi files 50% (Siu et al., J Endod 2009;35:962-965, PMID 19567315). In scope and inside the range but not among the 16: 78.3% (Duran-Sindreu et al., J Endod 2012;38:236-239, PMID 22244644) and 82.35% (Dentaport ZX; Moscoso et al., Med Oral Patol Oral Cir Bucal 2014;19:e202-205, PMID 24121908). All verified from PubMed abstracts. Full list in NOTES.md"
+      },
+      {
+        "claim": "Confirm with a radiograph",
+        "source": "Martins et al., J Endod 2014;40:759-777 (PMID 24862702), systematic review, abstract ('At least one radiographic control should be performed'); J. Morita ROOT ZX II operation instructions"
+      },
+      {
+        "claim": "Persistent history strip (lights up 5.6-8.6 s): 1918 Custer and 1962 Sunada (direct current), then AC impedance, then the ratio method (1994 = date of the J Endod paper)",
+        "source": "Custer, Dent Regist 1918;72:420-425 (PMID 33703181), full text; Sunada, J Dent Res 1962;41:375-387 (not in PubMed; record and secondary full text only); Nasiri & Wrbas, Saudi Dent J 2022;34:11-20 (PMID 35068894); Kobayashi & Suda, J Endod 1994;20:111-114 (PMID 7996080)"
+      }
+    ],
+    "caption": "How does an apex locator find the end?\nPatient = circuit: file > fluid > foramen > PDL > lip clip. Dentin insulates.\nRatio method (Root ZX: 0.4 + 8 kHz): 2 AC signals. Fluid shifts both; ratio barely moves, then drops in the last ~1 mm.\nSenses the foramen region; marks ≠ mm. Root ZX family, permanent teeth, hand files, in vivo: ~70-100% within ±0.5 mm of each study's landmark (foramen, 0.5 mm short, constriction); 16 studies, not pooled. Confirm with a radiograph.\nSchematic.\nRefs: Nekoofar 2006, Ounsi 1999, Vieyra 2010 Int Endod J; Kobayashi 1994, Oishi 2002, Stöber 2011, Martins 2014 J Endod; Rambo 2010 Biomed Eng Online; Root ZX II manual\n#endo #endodontics #apexlocator #rootcanal #dental"
+  },
+  {
+    "id": "23",
+    "slug": "23-digital-xray-sensor",
+    "title": "From X-ray to pixel: inside a digital sensor",
+    "style": "Exploded 3-D teardown",
+    "topic": "How a digital intraoral sensor turns X-ray photons into gray-level pixels, layer by layer, and how a PSP plate does it differently.",
+    "duration": 24,
+    "video": "videos/23-digital-xray-sensor.mp4",
+    "poster": "posters/23-digital-xray-sensor.jpg",
+    "claims": [
+      {
+        "claim": "Layer stack of a solid-state sensor: housing, scintillator, fiber-optic plate, CMOS chip, read-out electronics + ADC (schematic model of one sensor design, not to scale)",
+        "source": "White & Pharoah, Oral Radiology: Principles and Interpretation, 7th ed. 2014, Ch. 4 Digital Imaging (Ludlow & Mol) - textbook, read in an online reproduction (printed page not seen), Fig. 4-3 caption (manufacturer-supplied figure). Not every sensor has a fiber-optic plate (W&P: scintillator 'coated directly on the CCD surface or coupled to the surface by fiberoptics')"
+      },
+      {
+        "claim": "Scintillator: X-ray -> visible light; CsI or Gd oxysulfide",
+        "source": "Function: White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction). Materials: Farman TT et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2005;99:608-13 (PMID 15829886), abstract (thallium-doped CsI and terbium-doped gadolinium oxysulfide screens on an intraoral CCD). Board note: the W&P 7e solid-state paragraph prints 'gadolinium oxybromide compounds... or cesium iodide'"
+      },
+      {
+        "claim": "Fiber-optic plate: guides light",
+        "source": "White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction), Fig. 4-3 / 4-4 captions (fiber-optics couple the scintillator to the chip)"
+      },
+      {
+        "claim": "CMOS chip: light -> charge; transistors per pixel",
+        "source": "White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) ('charge in each pixel proportional to the exposure'; 'each pixel is... directly connected to a transistor'); plural per Arvanitis et al., Med Phys 2007;34:4612-25 (PMID 18196789), abstract ('standard three transistor CMOS active pixel sensor', bench mammography detector)"
+      },
+      {
+        "claim": "Read-out + ADC: charge -> number, 8-16 bit",
+        "source": "White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) (analog-to-digital conversion; 'Current digital detectors capture data at 8, 10, 12, or 16 bits')"
+      },
+      {
+        "claim": "Image: number -> gray level. Toy model / schematic: 36 x 27 charge wells and a procedurally drawn periapical; more exposure = fuller well = darker pixel; well heights and the row-by-row build-up are illustrative",
+        "source": "White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) (charge packets proportional to exposure; display convention); no measured values shown"
+      },
+      {
+        "claim": "PSP plate (Eu-doped barium fluorohalide): X-rays -> trapped electrons",
+        "source": "White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) ('europium-doped' barium fluorohalide; trapped electrons = latent image); Leblans et al., Materials (Basel) 2011;4:1034-86 (PMID 28879966), abstract ('Absorbed X-ray energy is stored in crystal defects'; medical computed-radiography review, no dental content); Kamburoğlu et al., Imaging Sci Dent 2022;52:93-101 (PMID 35387105), PMC full text (dental paper: PSP crystals 'contain europium doped barium fluorohalides')"
+      },
+      {
+        "claim": "Red laser -> blue-violet light -> photomultiplier (schematic scanner; exposure and read-out drawn as two separate steps)",
+        "source": "Leblans et al., Materials (Basel) 2011;4:1034-86 (PMID 28879966): abstract ('set free as blue photons'); PMC full text ('A red laser beam is moved over the plate'; 'characteristic 390 nm luminescence'; 'UV to blue Eu2+ emission'; light guide to a photomultiplier tube). 'Blue-violet' is the reel's word for that blue, 390 nm-peak emission; neither source prints the compound word; IAEA, Diagnostic Radiology Physics handbook 2014, Ch. 7 ('usually blue'); White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) (red laser, fiber-optics to a photomultiplier tube). Board note: W&P 7e prints 'green spectrum between 300 and 500 nm' for the emitted light"
+      },
+      {
+        "claim": "End card. Sensor (CMOS, CCD): image in seconds, rigid. PSP plate: thin, film-sized, wide latitude (source line says in vitro), needs a scanner",
+        "source": "Kamburoğlu et al., Imaging Sci Dent 2022;52:93-101 (PMID 35387105), PMC full text (said of CMOS: 'available to view in a matter of seconds after the exposure'; CMOS 'bulky and rigid'; plates 'the same shape and dimensions of conventional films'; 'thinner nature of PSP sensors'); White & Pharoah 7th ed. 2014, Ch. 4 (textbook, online reproduction) (solid-state detectors: 'rapid availability of the image after exposure', 'sensor bulk'; film-like handling of plates; laser scanner). CCD speed: Mouyen et al., Oral Surg Oral Med Oral Pathol 1989;68:238-42 (PMID 2780024), abstract (RVG, a CCD unit, produces 'an image immediately after exposure'). 'Wide latitude', in vitro: Berkhout et al., Dentomaxillofac Radiol 2004;33:1-5 (PMID 15140814), abstract (also warns of unnecessarily high dose); Borg et al., Dentomaxillofac Radiol 2000;29:70-5 (PMID 10808218), abstract. Deliberately not 'wider than sensors': Farman & Farman, Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2005;99:485-9 (PMID 15772598); Marinho-Vieira et al., Dentomaxillofac Radiol 2023;52:20220370 (PMID 36988093), abstracts"
+      }
+    ],
+    "caption": "From X-ray to pixel: a sensor, taken apart.\nA scintillator (CsI or Gd oxysulfide) turns X-rays into light. In some sensors a fiber-optic plate guides it to the CMOS chip, where each pixel stores charge. The ADC turns charge into a number, shown as gray.\nPSP plates trap electrons: red laser in, blue-violet light out, bright light erases. Latitude is wide in vitro (can hide overexposure), not always wider than today's sensors.\nBoards: W&P 7e says \"Gd oxybromide\" and \"green\" PSP light.\nSchematic animation.\nRefs: White & Pharoah 7e (textbook); Farman TT 2005, OOOOE; Leblans 2011, Materials; Berkhout 2004, Marinho-Vieira 2023, DMFR.\n#endodontics #oralradiology #endoresident #boardreview #xray"
+  },
+  {
     "id": "24",
     "slug": "24-xray-settings-tubehead",
     "title": "kVp, mA, time: inside the X-ray tube",

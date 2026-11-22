@@ -469,3 +469,34 @@ No verified fact changed. Changes to what the reel states, and one re-verificati
   correction 6 above: W&P 7e "green spectrum between 300 and 500 nm"; solid-state paragraph "gadolinium oxybromide").
   Both were read only in an online reproduction of the 7th edition; check against the printed edition before posting.
 
+## Citation audit (2026-11-22)
+Independent audit, based on articles retrieved from PubMed. No fact in this file changed.
+- **Bibliography:** all 40 PMIDs cited above resolve to the paper named (journal, year, volume, first page, first
+  author). Abstracts re-read for 22 of them (every paper behind an on-screen claim, plus Borg 1996, Wenzel & Møystad
+  2010, Marinho-Vieira 2022, Farman & Farman 1999, Brüllmann 2013, Farman TT 2006, Hildebolt 2000, Mouyen 1989,
+  Berkhout 2003, Ludlow 2008, Jørgensen 2012, Nascimento 2016, Çalışkan 2017, Dashpuntsag 2017): quoted wording and
+  numbers match. The other 18 (Sanderink 2000, Couture 2002, Künzel 2003, Kitagawa 2003, Bedard 2004, Akdeniz 2005,
+  Akdeniz 2006, Ang 2006, Wenzel 2007, Vandenberghe 2010, Şenel 2010, Udupa 2013, Al-Rawi 2013, Shah 2014, Nejaim
+  2016, Mol & Yoon 2015, Benavides 2024, Nair 2007) were matched bibliographically only in this audit; none is on
+  screen or in the caption.
+- **Full text re-read (PMC):** Kamburoğlu 2022 (PMC8967495, https://doi.org/10.5624/isd.20210241) — every quote in
+  rows 10, 11, 24 and in the addendum above is there; it also states that PSP crystals "contain europium doped barium
+  fluorohalides" (a dental, PubMed-indexed source for row 15). Leblans 2011 (PMC5448636,
+  https://doi.org/10.3390/ma4061034) — "A red laser beam is moved over the plate", "HeNe laser (633 nm) or diode
+  lasers (650 nm–680 nm)", "the characteristic 390 nm luminescence", "the UV to blue Eu²⁺ emission", the light guide
+  → photomultiplier sentence, "Only roughly 50% of the stored energy (trapped charges) is released during scanning"
+  and "between 10 and 25% in the first hour" are in the body text; "set free as blue photons" and "stored in crystal
+  defects" are in the **abstract** (rows 16 and 18 already say so). The review contains no dental content (no hit
+  for "dental" / "intraoral"). Marinho-Vieira 2023 (PMC10170171, https://doi.org/10.1259/dmfr.20220370): PMC
+  returns no full text, so it stays abstract-level, as stated in the fact-check log.
+- **System types in Marinho-Vieira 2023** (row 23) re-confirmed from the abstracts of Jørgensen & Wenzel 2012
+  (https://doi.org/10.1259/dmfr/73402308: Digora Optime = phosphor plate; Digora Toto and Snapshot = CMOS sensors)
+  and Nascimento 2016 (https://doi.org/10.1111/iej.12547: VistaScan and Express = PSP systems).
+- **Row 24, added support:** "image appears at once" for a CCD sensor is also in the Mouyen 1989 abstract (PMID
+  2780024, https://doi.org/10.1016/0030-4220(89)90200-4: the RVG "produce[s] an image immediately after exposure");
+  Kamburoğlu's "matter of seconds" sentence is about CMOS.
+- **"Blue-violet"** (row 18) is this project's descriptor; the sources print "blue", "UV to blue", "usually blue"
+  and a 390 nm peak. Kept on screen; flagged as our wording in NOTES.md and meta.json.
+- **Textbook / handbook:** quotes re-located in the downloaded copies (`_scratch/dl/pd`, `_scratch/dl/iaea`). The
+  printed White & Pharoah page remains unseen.
+

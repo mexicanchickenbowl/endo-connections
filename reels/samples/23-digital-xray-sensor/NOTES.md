@@ -61,10 +61,10 @@ reproduction of the first part of the chapter; the printed page and the 8th/9th 
 | 05 Read-out + ADC: "charge → number", "8–16 bit" | W&P: analog-to-digital conversion = sampling + quantization; "Current digital detectors capture data at 8, 10, 12, or 16 bits". |
 | 06 Image: "number → gray level" | W&P (gray scale / contrast resolution section). Display convention used: more exposure → fuller well → darker pixel. |
 | "PSP plate — Eu-doped barium fluorohalide" | W&P: "'europium-doped' barium fluorohalide… polyester base similar to radiographic film". (The exact formula BaFBr:Eu²⁺ is the typical medical CR phosphor — Leblans 2011, IAEA handbook — and is not printed.) |
-| ① "X-rays → trapped electrons" | W&P: electrons trapped at halogen vacancies (F-centers); "the number of trapped electrons is proportional to x-ray exposure and represents a latent image". Leblans P et al. Materials (Basel) 2011;4:1034-86. PMID 28879966, PMC5448636 (full text). |
-| ② "red laser → blue-violet light" + "photomultiplier" | Leblans 2011 (full text): "A red laser beam is moved over the plate"; energy "set free as blue photons"; "A light guide transfers the emitted light to a photomultiplier tube". W&P: red light "around 600 nm"; "Fiberoptics conduct light from the PSP plate to a photomultiplier tube". IAEA, *Diagnostic Radiology Physics* 2014, Ch. 7 (handbook): "photostimulated light (usually blue)". No wavelength is printed. **Board note (in the caption):** W&P 7e prints "energy is released in the green spectrum between 300 and 500 nm… the remaining green light is detected"; the resident should check this wording against the printed edition used for boards (only an online reproduction of the 7th edition was read). |
+| ① "X-rays → trapped electrons" | W&P: electrons trapped at halogen vacancies (F-centers); "the number of trapped electrons is proportional to x-ray exposure and represents a latent image". Leblans P, Vandenbroucke D, Willems P. Materials (Basel) 2011;4:1034-86. PMID 28879966, PMC5448636 (abstract: "Absorbed X-ray energy is stored in crystal defects"; full text: "trapped charges"). Dental, PubMed-indexed: Kamburoğlu 2022 (PMC full text) — PSP crystals "contain europium doped barium fluorohalides". |
+| ② "red laser → blue-violet light" + "photomultiplier" | Leblans 2011, abstract: energy "set free as blue photons"; full text: "A red laser beam is moved over the plate"; "the characteristic 390 nm luminescence"; "the UV to blue Eu²⁺ emission"; "A light guide transfers the emitted light to a photomultiplier tube". "Blue-violet" is the reel's own word for that blue, 390 nm-peak emission — no source read prints the compound word. W&P: red light "around 600 nm"; "Fiberoptics conduct light from the PSP plate to a photomultiplier tube". IAEA, *Diagnostic Radiology Physics* 2014, Ch. 7 (handbook): "photostimulated light (usually blue)". No wavelength is printed. **Board note (in the caption):** W&P 7e prints "energy is released in the green spectrum between 300 and 500 nm… the remaining green light is detected"; the resident should check this wording against the printed edition used for boards (only an online reproduction of the 7th edition was read). |
 | (caption only) "bright light erases" | W&P: plates "must be erased… by flooding the plate with a bright light"; Leblans 2011. The on-screen erase beat was removed in review. |
-| End card A — Sensor (CMOS · CCD): "image in seconds", "rigid" | Kamburoğlu K et al. Imaging Sci Dent 2022;52:93-101. PMID 35387105, PMC8967495 (full text, re-read in the review round: "the radiographic images are available to view in a matter of seconds after the exposure"; CMOS detectors "are bulky and rigid"). W&P: "rapid availability of the image after exposure"; "sensor bulk… most detectors incorporate an electronic cable". |
+| End card A — Sensor (CMOS · CCD): "image in seconds", "rigid" | Kamburoğlu K et al. Imaging Sci Dent 2022;52:93-101. PMID 35387105, PMC8967495 (full text, re-read in the review round: "the radiographic images are available to view in a matter of seconds after the exposure" — said of CMOS; CMOS detectors "are bulky and rigid"). For solid-state detectors in general (CCD included): W&P, "rapid availability of the image after exposure"; "sensor bulk… most detectors incorporate an electronic cable"; and for CCD, Mouyen F et al., Oral Surg Oral Med Oral Pathol 1989;68:238-42, PMID 2780024 (abstract: RVG, a CCD unit, produces "an image immediately after exposure"). "Rigid" is Kamburoğlu's word; the textbook passage read says "bulk". |
 | End card B — PSP plate: "thin, film-sized", "needs a scanner" | W&P: plates "provide handling characteristics similar to intraoral film"; laser scanner read-out. Kamburoğlu 2022 (full text): plates have "the same shape and dimensions of conventional films" but are "more rigid than film" — so the plate is never shown bending and "flexible" is not written. thin: Kamburoğlu 2022, PMC full text ("the thinner nature of PSP sensors, which enabled easier detector positioning", the authors' reading of Farrier et al.). |
 | "wide latitude" (no comparison; source line says "in vitro") | Berkhout WE et al. Dentomaxillofac Radiol 2004;33:1-5. PMID 15140814 (abstract, in vitro: phosphor plate exposure range "very wide"; its own conclusion is the flip side, plates give good images even at high exposure times, "which may result in an unnecessarily high dose" — carried in the caption as "can hide overexposure"). Borg E, Attaelmanan A, Gröndahl HG. Dentomaxillofac Radiol 2000;29:70-5. PMID 10808218 (abstract: PSP "wide exposure range"). Deliberately **not** "wider than sensors": Farman AG, Farman TT. Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2005;99:485-9, PMID 15772598, and Marinho-Vieira LE et al., Dentomaxillofac Radiol 2023;52:20220370, PMID 36988093 ("PSP-based systems may not necessarily have a wider range than sensor-based systems"). |
 
@@ -86,7 +86,8 @@ reproduction of the first part of the chapter; the printed page and the 8th/9th 
   radiograph; fill and read-out are slowed enormously (a real exposure and read-out take a fraction of a second to
   seconds). Row-by-row block build-up on the screen is illustrative.
 - Dart counts, flash sizes, the gaps the light crosses between exploded layers (in a real sensor the layers touch),
-  and colors (no color word or wavelength is claimed for the scintillator light; "blue-violet" follows the sources).
+  and colors (no color word or wavelength is claimed for the scintillator light; "blue-violet" paraphrases the
+  sources' "blue" / "UV to blue" emission with its 390 nm peak — Leblans 2011, IAEA handbook).
 - The PSP scanner: a carriage with a light guide, a photomultiplier tube and a laser on an arm is a schematic of a
   flying-spot reader, not a specific product. Exposure and scanning are drawn as two steps: the read-out carriage is
   out of frame while the plate is exposed and slides in afterwards. The plate still sits on the scanner bed in open
@@ -186,3 +187,49 @@ Fresh-eyes pass on the shipped build (no change to the reel sources, so no re-re
   textbook phrases added for the ADC and PSP rows, "Kamburoğlu" spelled with its diacritic.
 - **Open item for the account owner (not a build defect):** the caption's board note quotes White & Pharoah 7e
   from an online reproduction; compare with the printed edition used for boards before posting.
+
+## Citation audit (2026-11-22)
+Independent audit of every citation on screen, in `meta.json`, in this file and in `RESEARCH.md`. Based on articles
+retrieved from PubMed (metadata + abstracts; PMC full text where stated). **No wrong PMID, first author, year,
+journal, volume or page was found, and no on-screen text or number had to change — the reel sources are untouched
+and the video was not re-rendered** (ffprobe of the existing file: 1080 × 1920, 30 fps, 720 frames, 24.000 s).
+
+Checked
+- **On screen (3 source rows):** "Farman TT 2005, OOOOE" = Farman TT, Vandre RH, Pajak JC, Miller SR, Lempicki A,
+  Farman AG. Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2005;99:608-13, PMID 15829886,
+  https://doi.org/10.1016/j.tripleo.2004.08.013 (abstract names thallium-doped cesium iodide and terbium-doped
+  gadolinium oxysulfide screens on an intraoral CCD). "Leblans 2011, Materials" = Leblans P, Vandenbroucke D,
+  Willems P. Materials (Basel) 2011;4:1034-86, PMID 28879966, PMC5448636, https://doi.org/10.3390/ma4061034 (abstract
+  + PMC full text re-read). "Berkhout 2004, DMFR (in vitro)" = Berkhout WE, Beuger DA, Sanderink GC, van der Stelt
+  PF. Dentomaxillofac Radiol 2004;33:1-5, PMID 15140814, https://doi.org/10.1259/dmfr/40677472 (abstract: dry bone
+  specimens; phosphor plate exposure range "very wide").
+- **meta.json / this file:** Arvanitis 2007 (PMID 18196789, https://doi.org/10.1118/1.2804744), Kamburoğlu 2022
+  (PMID 35387105, PMC8967495, https://doi.org/10.5624/isd.20210241 — all four quotes found again in the PMC full
+  text), Borg 2000 (PMID 10808218, https://doi.org/10.1038/sj/dmfr/4600501), Farman & Farman 2005 (PMID 15772598,
+  https://doi.org/10.1016/j.tripleo.2004.04.002), Marinho-Vieira 2023 (PMID 36988093,
+  https://doi.org/10.1259/dmfr.20220370 — abstract only: PMC10170171 returns no full text), Farman & Farman 1999
+  (PMID 11351483, no DOI in PubMed), Brüllmann 2013 (PMID 23706925, https://doi.org/10.1016/j.oooo.2013.03.007),
+  Farman TT 2006 (PMID 16448925, https://doi.org/10.1016/j.tripleo.2005.07.032): record and abstract wording match.
+- **RESEARCH.md:** all 40 PMIDs resolve to the paper named (journal, year, volume, first page, first author). The
+  11 above plus Borg 1996, Wenzel & Møystad 2010, Marinho-Vieira 2022, Hildebolt 2000, Mouyen 1989, Berkhout 2003,
+  Ludlow 2008, Jørgensen 2012, Nascimento 2016, Çalışkan 2017 and Dashpuntsag 2017 were also re-read as abstracts
+  and their quoted numbers match; the other 18 off-screen items were matched bibliographically only.
+- **Textbook and handbook** (not in PubMed): every White & Pharoah 7e quote used here was found again in the
+  downloaded online reproduction (chapter authors Ludlow & Mol; Fig. 4-3 "Courtesy XDR Radiology"), and the IAEA
+  quotes in the handbook text (STI/PUB/1564, Vienna 2014, Ch. 7, Rowlands & Neitzel). The printed textbook page is
+  still unseen (open item above stands).
+
+Tightened (wording of source fields only)
+1. `meta.json` claim 8 and the ② row above labeled Leblans' "blue photons" as full text; the phrase is in the
+   **abstract**. The full text supplies "A red laser beam is moved over the plate", "the characteristic 390 nm
+   luminescence", "the UV to blue Eu²⁺ emission" and the light guide → photomultiplier sentence. Labels corrected.
+2. "Blue-violet" (on screen) is not printed by either cited source: Leblans says "blue" / "UV to blue" with a 390 nm
+   peak, the IAEA handbook "usually blue", the board textbook "green spectrum between 300 and 500 nm". The word is a
+   fair description of a 390 nm-peak emission and stays; the notes and `meta.json` now say it is the reel's wording
+   (the caption already tells the resident what the board textbook prints).
+3. End card "image in seconds" sits under "Sensor (CMOS · CCD)", but the Kamburoğlu sentence is about CMOS. Added
+   the CCD support that was already verified in the research file: Mouyen 1989 (PMID 2780024,
+   https://doi.org/10.1016/0030-4220(89)90200-4, abstract: "an image immediately after exposure") next to the
+   textbook's "rapid availability of the image after exposure" for solid-state detectors.
+4. "Eu-doped barium fluorohalide" for a *dental* plate rested on the textbook only (Leblans is a medical CR review).
+   Added a PubMed-indexed dental source read in full text: Kamburoğlu 2022, "europium doped barium fluorohalides".

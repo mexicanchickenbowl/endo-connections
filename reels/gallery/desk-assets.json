@@ -31,7 +31,10 @@
   "31-resorption-external-inflammatory": "d21411d19fff12a10d567cb7341a3d81",
   "32-resorption-replacement-ankylosis": "5d5147c603351c80bc33bdd880d475f2",
   "37-bioceramic-antibacterial": "77c138ecc5f40796334b02b52a9faafb",
-  "38-bioceramic-biocompatibility": "fae8a73f37b7fce45587c52354a864ae"
+  "38-bioceramic-biocompatibility": "fae8a73f37b7fce45587c52354a864ae",
+  "21-gp-shrinkage-time": "8caa3bdc82ce90ef28548922c5a4d7ac",
+  "22-apex-locator": "0cde21135c5cbff33fd72d939967aee8",
+  "23-digital-xray-sensor": "5790d42ced282eb6ad228fdb577f6db2"
  },
  "pos": {
   "01-pain-pathway": "0ae050f62c9b82b5273d3b41f29d33db",
@@ -65,6 +68,9 @@
   "31-resorption-external-inflammatory": "e8c4765cab86282d1293596495025af9",
   "32-resorption-replacement-ankylosis": "97e4949e91d7f5d65faac7897b0fe814",
   "37-bioceramic-antibacterial": "1600a97c1ab85275706e18f700d78a2e",
-  "38-bioceramic-biocompatibility": "9174383246edea4af4f8d84579e6ab12"
+  "38-bioceramic-biocompatibility": "9174383246edea4af4f8d84579e6ab12",
+  "21-gp-shrinkage-time": "9c9aaba3d7f1b9e105dd16f2eb7b67f5",
+  "22-apex-locator": "68a2aca8e343796b6f006a2fa2049b9f",
+  "23-digital-xray-sensor": "03f9373194724f322b6ea23b17653cb2"
  }
 }
