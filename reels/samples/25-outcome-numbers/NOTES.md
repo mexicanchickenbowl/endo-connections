@@ -75,13 +75,21 @@ what was actually read.
    MR, Karabucak B, Kim S. J Endod 2010;36(11):1757-1765. PMID 20951283, doi:10.1016/j.joen.2010.08.007. 12
    studies of traditional root-end surgery (n = 925): 59% positive outcome; 9 studies of endodontic microsurgery
    (n = 699): 94%; RR 1.58. Separate single-arm study groups from different eras, not a trial. Verified from:
-   abstract (numbers). The "6 MO+" tag is the inclusion minimum **as reported by a secondary source**: Pinto D et
-   al., Medicina (Kaunas) 2020;56(9):447, PMID 32899437, PMC7558840 (full text). In the review round the Setzer
-   full text was requested again and is paywalled (not in PMC; publisher page returns 403), so this is still not
-   verified at the primary source. The column head over this cell reads SUCCESS, and the cell carries no STRICT
-   tag: the abstract reports "positive outcome" and states no strict criterion; surgical success scales
-   (Rud/Molven) normally count incomplete (scar) healing, which was not confirmed in the Setzer full text, so
-   "SCAR" is not printed anywhere. The caption says "surgical criteria, not strict".
+   abstract + full text (citation audit: the article PDF hosted by the AAE,
+   aae.org/specialty/wp-content/uploads/sites/2/2017/07/setzerparti.pdf; it prints "J Endod 2010;36:1757–1765").
+   The "6 MO+" tag is inclusion criterion 3 of the paper itself: "A minimum follow-up period of 6 months"
+   (Results: "Success rates, after a minimum follow-up period of 6 months for TRS and EMS"; 59.04% and 93.52%).
+   The Discussion adds that every study in the microsurgery group in fact had at least 12 months of follow-up, so
+   "6 MO+" is the review's stated minimum and is conservative for the 94%. Pinto D et al., Medicina (Kaunas)
+   2020;56(9):447, PMID 32899437, PMC7558840 (full text) says the same ("a minimum follow-up period of
+   6-months") and is no longer the only support. The column head over this cell reads SUCCESS, and the cell
+   carries no STRICT tag: inclusion criterion 4 defines success by Rud/Molven as "either complete or incomplete
+   healing (scar tissue formation)" plus absence of pain, swelling, percussion sensitivity and sinus tracts,
+   evaluated per tooth; uncertain and unsatisfactory healing are failures. So the caption's "surgical criteria,
+   not strict" is verified at the source. "SCAR" is still not printed on the board (word budget). Case selection
+   to keep in mind: the review excluded lesions over 10 mm, apico-marginal defects, re-surgery and guided tissue
+   regeneration; traditional = burs, amalgam, 0–4× magnification; microsurgery = ultrasonic preparation, IRM /
+   SuperEBA / MTA, 10× or more.
 7. **APICAL SURGERY · SURVIVAL: dim "– – %".** Not a claim. No pooled survival figure for apical surgery could be
    verified from an abstract or full text, so the three flaps land on a dim dash placeholder (the fact-check
    allowed "blank or a dash, with no words"). The board does not say that no such figure exists (Torabinejad M et al., J Endod 2015;41:1-10, PMID 25306305 calculated a weighted
@@ -91,8 +99,9 @@ what was actually read.
    pooled single-arm groups. The "≠" is drawn by hand (it is not in the Barlow Condensed subset).
 
 ## Residual uncertainty (from the fact-check; carried here on purpose)
-- **Setzer 2010:** the follow-up minimum (6 months) and the success criteria are not in its abstract; "6 MO+" rests
-  on Pinto 2020's full text. The Setzer full text was not read.
+- **Setzer 2010:** resolved in the citation audit. The follow-up minimum (6 months) and the success criteria
+  (complete or incomplete/scar healing, Rud/Molven, per tooth) are not in the abstract but were read in the full
+  text; see claim 6.
 - **Sjögren 1990:** success criteria and the unit of analysis are not in the abstract.
 - **Ng 2007** (not on screen): the 74.7% strict / 85.2% loose means are known only as quoted in Burns 2022. The
   abstract gives a pooled strict range of 68–85%.

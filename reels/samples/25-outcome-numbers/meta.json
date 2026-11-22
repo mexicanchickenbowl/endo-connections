@@ -28,7 +28,7 @@
     },
     {
       "claim": "APICAL SURGERY · SUCCESS: traditional 59% · microsurgery 94% · pooled · 6 mo+",
-      "source": "Setzer et al., J Endod 2010;36:1757-1765 (PMID 20951283); abstract (12 studies n=925 vs 9 studies n=699, separate single-arm groups; 'positive outcome', no strict criterion stated). The abstract gives no follow-up; the full text is paywalled and was not read. 6-month minimum follow-up per a secondary source: Pinto et al., Medicina (Kaunas) 2020;56:447 (PMID 32899437), full text"
+      "source": "Setzer et al., J Endod 2010;36:1757-1765 (PMID 20951283); abstract + full text (12 studies n=925 vs 9 studies n=699, separate single-arm groups). Full text, inclusion criteria: 'A minimum follow-up period of 6 months'; success = complete or incomplete (scar) healing on the Rud/Molven scale with no clinical signs, per tooth (surgical criteria, not strict)"
     },
     {
       "claim": "APICAL SURGERY · SURVIVAL: dim placeholder \"– – %\" (no number shown)",

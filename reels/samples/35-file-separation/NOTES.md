@@ -111,3 +111,20 @@ Design
 Not changed: the loop is still a hard cut from the whole board to the hook close-up (a closing push-in would crop
 the final whole-board frame); the lamp pool stays screen-fixed; the typewriter "1" is left as is; the handle is
 only on the evidence-bag label.
+
+## Final QA (fresh-eyes pass)
+Checked 50 stills (22 with the safe-area overlay incl. t = 0 and t = 23.95, 20 at transition times, 8 close-ups of
+both mechanism diagrams) and four frames pulled from the MP4. No render errors, no clipped/overlapping/ghosted text,
+nothing must-read in the no-go zones (right-most must-read ink ends at x ≈ 950), hook readable at t = 0, payoff
+complete at 21.25 s and held 2.75 s, poster (t = 1.5 s) reads inside the 3:4 crop. All 13 PMIDs cited in NOTES and
+meta.json re-read on PubMed (authors, year, volume, pages and the abstract sentences behind 91.8% / 94.5%, 100% /
+60% / 31%, 72 teeth, 146 pairs, 14 endodontists): all match. Video: 1080 x 1920, 30 fps, 720 frames, ffprobe
+duration 24.000 s = REEL.duration; frames match the current source, so the reel was NOT re-rendered.
+- Fixed (meta.json only): the caption says "often no visible warning" but its Refs line had no source for it.
+  Added "Spanaki-Voreadi 2006 (IEJ)" (PMID 16507069: 73.9% of failed ProTaper files fractured without plastic
+  deformation) and trimmed wording to stay within 700 characters (now 699): "file defects" -> "defects",
+  "Curve, size and glide-path data: in vitro" -> "Curve, size, glide path: in vitro", "Retained fragment" ->
+  "Fragment left", "specialist practice" -> "specialists". No number or claim changed.
+- Left as is: hard cut at the loop (no ghosting); the typewriter "1" in "≥ 1 yr"; "forced" is on screen about 1.0 s
+  in its own shot (it returns in the prognosis shot and on the final board); the MP4 is 55 MB (cork grain under a
+  moving camera), far larger than the other reels but within Instagram limits.

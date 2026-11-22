@@ -30,7 +30,9 @@ const probe = (f) => +run('ffprobe', ['-v', 'error', '-show_entries', 'format=du
 const newer = (a, b) => !fs.existsSync(b) || fs.statSync(a).mtimeMs > fs.statSync(b).mtimeMs;
 
 const list = [], missing = [];
-for (const slug of fs.readdirSync(SAMPLES).filter((d) => /^\d\d-/.test(d) && !d.startsWith('00-')).sort()) {
+// Only reels that have passed every pipeline stage are published: ids listed in reels/gallery/ready.json.
+const READY = new Set(JSON.parse(fs.readFileSync(path.join(GAL, 'ready.json'), 'utf8')));
+for (const slug of fs.readdirSync(SAMPLES).filter((d) => /^\d\d-/.test(d) && !d.startsWith('00-') && READY.has(d.slice(0, 2))).sort()) {
   const metaF = path.join(SAMPLES, slug, 'meta.json');
   const mp4 = path.join(OUT, slug + '.mp4'), jpg = path.join(OUT, slug + '.jpg');
   if (!fs.existsSync(mp4) || !fs.existsSync(jpg)) { missing.push(slug + ' (no video/poster)'); continue; }
