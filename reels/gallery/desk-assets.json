@@ -36,7 +36,8 @@
   "22-apex-locator": "0cde21135c5cbff33fd72d939967aee8",
   "23-digital-xray-sensor": "5790d42ced282eb6ad228fdb577f6db2",
   "29-resorption-internal": "34f97b72f5650c16013c017baf2b3d65",
-  "40-survival-eight-conditions": "ae204c6df6955f7f9fea2ab29b2a9bdd"
+  "40-survival-eight-conditions": "ae204c6df6955f7f9fea2ab29b2a9bdd",
+  "41-healing-seven-factors": "d133b8068d26e74c22cfac494b0d9cb1"
  },
  "pos": {
   "01-pain-pathway": "0ae050f62c9b82b5273d3b41f29d33db",
@@ -75,6 +76,7 @@
   "22-apex-locator": "68a2aca8e343796b6f006a2fa2049b9f",
   "23-digital-xray-sensor": "03f9373194724f322b6ea23b17653cb2",
   "29-resorption-internal": "fa655322caaa9ce92349d3f19fd3b7e1",
-  "40-survival-eight-conditions": "ff121ea2f92ccc774aeaffba3c68e72f"
+  "40-survival-eight-conditions": "ff121ea2f92ccc774aeaffba3c68e72f",
+  "41-healing-seven-factors": "4e0e96fa983d07b7ae0efc67b7b77291"
  }
 }

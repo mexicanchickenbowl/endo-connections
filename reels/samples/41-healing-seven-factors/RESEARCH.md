@@ -5,8 +5,7 @@ Study animation for an endodontic resident. The reel may only state what is supp
 ## Source and how much of it was read
 - **Chapter:** Ng Y-L, Gulabivala K. *Evaluation of Outcomes.* Chapter 17 (Part III, Advanced Clinical Topics; chapter
   opens on p. 652) in *Cohen's Pathways of the Pulp*.
-  Read from the resident's Google Drive PDF "Ch. 17 Evaluation of outcomes.pdf" (file id
-  ), returned as extracted text (about 268,000 characters, **not truncated**; the
+  Read from the resident's copy of the chapter (PDF), as extracted text (about 268,000 characters, **not truncated**; the
   reference list at the end of the chapter is present). Forest-plot figures came through as captions and study labels
   only (no graphics), and some symbols in captions are garbled by extraction (e.g. "≥" and "<" in Fig. 17.21, "=" in
   odds ratios).

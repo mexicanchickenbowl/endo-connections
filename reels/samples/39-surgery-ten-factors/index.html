@@ -271,7 +271,9 @@ function stateAt(t) {
     const u = (t - 0.3 - i * 0.085) / 0.8, wave = u > 0 && u < 1 ? Math.sin(Math.PI * u) ** 2 * 0.32 : 0;
     lit.push(Math.max(on * out, wave));
     act.push(Math.max(0, a));
-    spotK.push(Math.max(0, a, 0.1 * all));           // finale: every lamp on, softly
+    // finale: one lap of the lamps over all ten, then every lamp stays on softly for the summary hold
+    const fu = (t - T_ALL - 0.35 - i * 0.11) / 0.75, lap = fu > 0 && fu < 1 ? Math.sin(Math.PI * fu) ** 2 * 0.55 : 0;
+    spotK.push(Math.max(0, a, (0.1 * all + lap) * out));
   }
   return { t, lit, act, tau, spotK, n, out, all };
 }
@@ -283,19 +285,24 @@ function drawBeams(S) {
   for (let i = 0; i < 10; i++) {
     const k = 0.03 * S.lit[i] + 0.11 * S.spotK[i]; if (k < 0.004) continue;
     const P = PINS2D[i], G = GROUPS[FACTORS[i].g];
+    // the haze cone starts at the lamp bar, or just above the pin when another pin stands in the beam's path
+    const y1 = P.base.y + 14, y0 = Math.max(lampY, P.top.y - 130), free = y0 === lampY;
     for (let j = 0; j < 4; j++) {
       const spread = 1 + j * 0.42, a = k / (j + 1.2);
-      const g = ctx.createLinearGradient(0, lampY, 0, P.base.y + 14);
-      g.addColorStop(0, `rgba(255,236,200,${a})`); g.addColorStop(0.75, `rgba(255,232,190,${a * 0.55})`); g.addColorStop(1, 'rgba(255,232,190,0)');
+      const g = ctx.createLinearGradient(0, y0, 0, y1), ty = clamp((P.top.y - y0) / (y1 - y0), 0.05, 0.9);
+      g.addColorStop(0, `rgba(255,236,200,${free ? a * 0.35 : 0})`); g.addColorStop(ty, `rgba(255,236,200,${a})`); g.addColorStop(ty + (1 - ty) * 0.6, `rgba(255,232,190,${a * 0.5})`); g.addColorStop(1, 'rgba(255,232,190,0)');
+      const w0 = lerp(6, P.w * 0.75, (y0 - lampY) / (y1 - lampY)) * spread;
       ctx.fillStyle = g; ctx.beginPath();
-      ctx.moveTo(P.top.x - 6 * spread, lampY); ctx.lineTo(P.top.x + 6 * spread, lampY);
-      ctx.lineTo(P.base.x + P.w * 0.75 * spread, P.base.y + 14); ctx.lineTo(P.base.x - P.w * 0.75 * spread, P.base.y + 14); ctx.closePath(); ctx.fill();
+      ctx.moveTo(P.top.x - w0, y0); ctx.lineTo(P.top.x + w0, y0);
+      ctx.lineTo(P.base.x + P.w * 0.75 * spread, y1); ctx.lineTo(P.base.x - P.w * 0.75 * spread, y1); ctx.closePath(); ctx.fill();
     }
     // coloured ring flash on the deck when the pin comes on
     const fl = S.tau[i] > 0 ? 1 - seg(S.tau[i], 0, 0.9, ease.out) : 0;
     if (fl > 0.01) {
-      const u = 1 - fl; ctx.strokeStyle = `rgba(${G.glow},${0.75 * fl * S.out})`; ctx.lineWidth = 5 * fl + 1;
-      ctx.beginPath(); ctx.ellipse(P.base.x, P.base.y, P.w * (0.7 + 1.5 * u), P.w * (0.7 + 1.5 * u) * 0.58, 0, 0, 7); ctx.stroke();
+      const u = 1 - fl, rx = P.w * (0.65 + 1.25 * u);
+      ctx.save(); ctx.shadowColor = `rgba(${G.glow},${0.9 * fl})`; ctx.shadowBlur = 22;
+      ctx.strokeStyle = `rgba(${G.glow},${0.42 * fl * S.out})`; ctx.lineWidth = 2 + 4 * fl;
+      ctx.beginPath(); ctx.ellipse(P.base.x, P.base.y + 2, rx, rx * 0.63, 0, 0, 7); ctx.stroke(); ctx.restore();
     }
   }
   ctx.restore();
@@ -303,7 +310,7 @@ function drawBeams(S) {
 
 function drawDeckLabels(S) {
   // which pins belong to which evidence group (left wall; the right side is Instagram's button column)
-  const a = seg(S.t, 0.9, 1.6) ; if (a <= 0) return;
+  const a = 1;
   const blocks = [
     { g: 0, y: (PINS2D[0].top.y + PINS2D[4].base.y) / 2 - 8, head: 'BACK 7', lines: ['pooled'] },
     { g: 1, y: (PINS2D[7].top.y + PINS2D[9].base.y) / 2 + 26, head: 'FRONT 3', lines: ['individual', 'studies'] },
@@ -436,7 +443,7 @@ function render(t) {
 window.REEL = {
   title: 'Ten factors · healing after periapical surgery',
   duration: DUR,
-  poster: 27.4,
+  poster: 27.8,
   canvas,
   fonts: ['400 96px Anton', '500 32px "Barlow Condensed"', '600 36px "Barlow Condensed"', '700 40px "Barlow Condensed"'],
   setup() {
@@ -448,7 +455,6 @@ window.REEL = {
     });
     BG = paintBG(); HUD = paintHUD(); GRAIN = paintGrain();
     LAYER.dark = grab(-1, -1);
-    window.__DBG = { PINS2D, ROWS, Y, LAYER };
   },
   render,
 };

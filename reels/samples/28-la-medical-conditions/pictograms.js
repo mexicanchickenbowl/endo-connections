@@ -90,17 +90,6 @@
     const w = parts.reduce((a, p) => a + g.measureText(p).width, 0) + (parts.length - 1) * (o.size || 30) * 0.44;
     g.restore(); return w;
   }
-  /** "SO3" with a real subscript, centred on x */
-  function so3(g, x, y, size, color) {
-    g.save(); g.fillStyle = color; g.textBaseline = 'alphabetic'; g.textAlign = 'left';
-    g.font = `700 ${size}px ${COND}`; const w1 = g.measureText('SO').width;
-    g.font = `700 ${size * 0.66}px ${COND}`; const w2 = g.measureText('3').width;
-    const x0 = x - (w1 + w2 + 1) / 2;
-    g.font = `700 ${size}px ${COND}`; g.fillText('SO', x0, y);
-    g.font = `700 ${size * 0.66}px ${COND}`; g.fillText('3', x0 + w1 + 1, y + size * 0.17);
-    g.restore();
-  }
-
   // ------------------------------------------------------------------ signs
   function prohibit(g, x, y, r) {
     g.save();
@@ -163,7 +152,7 @@
   // ------------------------------------------------------------------ dental cartridge (horizontal)
   /**
    * x,y = left end / mid-height. L = total length, h = height.
-   * o: {label, size, ghost, chip:'SO3', alpha}
+   * o: {label, size, ghost, chip: word printed on a coral chip after the label}
    */
   function cartridge(g, x, y, L, h, o = {}) {
     const capW = h * 0.36, neckW = h * 0.2, bodyL = L - capW - neckW, stop = h * 0.42, r = h * 0.14;
@@ -189,11 +178,12 @@
     g.beginPath(); g.moveTo(x + bodyL + neckW + capW * 0.5, y - h * 0.2); g.lineTo(x + bodyL + neckW + capW * 0.5, y + h * 0.2); fs(g, null, 2.2, rgba(C.ink, 0.55));
     // label
     const zx = x + stop + (bodyL - stop) / 2, size = o.size || 30, base = y + size * 0.355;
-    if (o.chip === 'SO3') {
-      const w1 = textWidth(g, o.label, { size }), cw = 58, gap = 8, x0 = zx - (w1 + gap + cw) / 2;
+    if (o.chip) {
+      const cs = 30, cls = -0.6, w1 = textWidth(g, o.label, { size }), cw = textWidth(g, o.chip, { size: cs, ls: cls }) + 8, gap = 5;
+      const x0 = zx - (w1 + gap + cw) / 2;
       text(g, o.label, x0, base, { size });
-      rr(g, x0 + w1 + gap, y - 16, cw, 32, 8); g.fillStyle = C.coral; g.fill();
-      so3(g, x0 + w1 + gap + cw / 2, y + 10, 30, '#fff');
+      rr(g, x0 + w1 + gap, y - 16, cw, 32, 7); g.fillStyle = C.coral; g.fill();
+      text(g, o.chip, x0 + w1 + gap + cw / 2 + 0.3, y + cs * 0.355, { size: cs, ls: cls, align: 'center', color: '#fff' });
     } else if (o.label) {
       text(g, o.label, zx, base, { size, align: 'center' });
     }
@@ -425,21 +415,15 @@
     }
   }
 
-  /** 7 · sulfite allergy: bust with hives and an "SO3" tag. a: {fig, dots(0..1), tag} */
+  /** 7 · sulfite allergy: bust with a rash (generic allergy symbol). a: {fig, dots(0..1)} */
   function condSulfite(g, cx, cy, a = {}) {
-    const bx = cx - 12;
+    const bx = cx;
     grow(g, a.fig, bx, cy + 10, () => bust(g, bx, cy));
     const pts = [[-26, 22], [-5, 12], [16, 26], [-14, 40], [30, 12], [6, 44], [33, 38], [-34, 44]];
     const d = clamp(a.dots || 0);
     pts.forEach(([dx, dy], i) => {
       const u = clamp(d * (pts.length + 2) - i);
       if (u > 0) { g.beginPath(); g.arc(bx + dx, cy + dy, (i % 2 ? 4.6 : 5.6) * ease.outBack(u), 0, Math.PI * 2); fs(g, C.coral, 2.2); }
-    });
-    grow(g, a.tag, cx + 34, cy - 42, () => {
-      rr(g, cx + 4, cy - 62, 62, 40, 10); fs(g, C.ink, 0);
-      // little tail towards the patient
-      g.beginPath(); g.moveTo(cx + 12, cy - 26); g.lineTo(cx + 4, cy - 14); g.lineTo(cx + 26, cy - 26); g.closePath(); fs(g, C.ink, 0);
-      so3(g, cx + 35, cy - 31, 31, '#fff');
     });
   }
 
@@ -472,8 +456,11 @@
   }
 
   // ------------------------------------------------------------------ small instruments
-  /** aneroid blood-pressure dial; needle 0..1 */
+  /** aneroid blood-pressure gauge: dial with a rubber tube and an inflation bulb (lower left); needle 0..1 */
   function gauge(g, x, y, r, needle = 0.6) {
+    const bx = x - r - 7, by = y + r + 5.5;                    // bulb centre
+    g.beginPath(); g.moveTo(x - 3, y + r - 3); g.quadraticCurveTo(x - 3, by + 1, bx + 9, by); fs(g, null, 4);
+    g.beginPath(); g.ellipse(bx, by, 11, 6.8, -0.12, 0, Math.PI * 2); fs(g, C.rubber, 3);
     g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); fs(g, '#fff', 3);
     g.save(); g.strokeStyle = rgba(C.ink, 0.75); g.lineWidth = 2.2; g.lineCap = 'round';
     for (let i = 0; i <= 6; i++) { const a = Math.PI * 0.8 + (i / 6) * Math.PI * 1.4; g.beginPath(); g.moveTo(x + Math.cos(a) * r * 0.62, y + Math.sin(a) * r * 0.62); g.lineTo(x + Math.cos(a) * r * 0.8, y + Math.sin(a) * r * 0.8); g.stroke(); }
@@ -481,8 +468,6 @@
     const a = Math.PI * 0.8 + needle * Math.PI * 1.4;
     g.beginPath(); g.moveTo(x - Math.cos(a) * 4, y - Math.sin(a) * 4); g.lineTo(x + Math.cos(a) * r * 0.7, y + Math.sin(a) * r * 0.7); fs(g, null, 3.4, C.coral);
     g.beginPath(); g.arc(x, y, 3.4, 0, Math.PI * 2); fs(g, C.ink, 0);
-    // tube stub to the cuff
-    g.beginPath(); g.moveTo(x - 6, y + r + 1); g.lineTo(x - 6, y + r + 7); g.moveTo(x + 6, y + r + 1); g.lineTo(x + 6, y + r + 7); fs(g, null, 3);
   }
   /** circular "repeat" arrow; rot = extra rotation */
   function loopArrow(g, x, y, r, rot = 0) {
@@ -508,7 +493,7 @@
   }
 
   window.Pic = {
-    C, COND, SANS, rr, fs, grow, text, textWidth, so3, stamp, SIGN, SIGN_COLOR, arrow, cartridge, tube,
+    C, COND, SANS, rr, fs, grow, text, textWidth, stamp, SIGN, SIGN_COLOR, arrow, cartridge, tube,
     condHeart, condBottle, condCocaine, condThyroid, condMetHb, condSulfite, condPregnant, gauge, loopArrow, tooth,
   };
 })();

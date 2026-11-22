@@ -14,27 +14,35 @@
   // ------------------------------------------------------------------ layout
   const CARD = { x: 40, y: 190, w: 1004, h: 1760, r: 42 };       // laminate outline (bottom is hidden in the pocket)
   const SHEET = { x: 47, y: 197, w: 990, r: 35 };                // printed sheet inside the clear rim
-  const HEAD = { y0: 197, y1: 372 };                             // navy header band
+  const HEAD = { y0: 197, y1: 384 };                             // navy header band
   const INDEX_X = 976;                                           // right-hand index strip (decorative, x 976-1037)
-  const GX0 = 66, GAP = 12, PW = 440, PH = 268, GY0 = 392;
+  const GX0 = 66, GAP = 12, GAPY = 8, PW = 440, PH = 268, GY0 = 404;
   const GX1 = GX0 + 2 * PW + GAP;                                // 958  (keeps clear of the button column x > 960)
-  const GY1 = GY0 + 4 * PH + 3 * GAP;                            // 1500
+  const GY1 = GY0 + 4 * PH + 3 * GAPY;                           // 1500
   const LIFT = 1.42;                                             // scale of the panel in focus
+  const LIFT4 = 1.36;                                            // ... and of a panel in the bottom row
+  const LIFT_BOTTOM = 1578;                                      // a lifted panel may reach down to the edge of the safe area
   const PEEK = 1274;                                             // card offset when it sits in the pocket (header peeks out)
   const POCKET = { x0: 22, x1: 1058, y: 1640, sag: 44 };
 
   // panel-local layout (panel box = PW x PH)
   const CX = 76, CY = 118, AX0 = 142, AX1 = 178, IX = 186, BX = 400, CL = 182;
   const STRIP = { x: 10, y: 184, w: PW - 20, h: 76, r: 14 };
+  const TITLE_X = 56, TITLE_SIZE = 30, TITLE_LS = -0.2;          // one common title size (the longest, panel 5, sets it)
 
   // ------------------------------------------------------------------ timeline (seconds)
   const DUR = 25;
-  const RISE = [0.0, 0.82];
-  const T0 = 1.45, STEP = 2.2;                                   // panel i starts at T0 + i * STEP
-  const TEND = T0 + 8 * STEP;                                    // 19.05: last panel starts to dock
-  const FINE = [TEND + 0.3, TEND + 0.8];                         // fine print
-  const SHEEN2 = [TEND + 0.7, TEND + 2.1];
-  const ROLL = TEND + 1.3;                                             // sign roll-call
+  const RISE = [0.0, 0.6];
+  const T0 = 1.4;                                                // first panel pops
+  const DURS = [2.8, 2.6, 2.7, 2.0, 1.9, 1.9, 1.9, 2.0];         // time in focus per panel (wordy amber panels get longer)
+  const START = [];
+  let TEND = T0;
+  for (const d of DURS) { START.push(TEND); TEND += d; }         // TEND = 19.2: last panel is docked
+  const DOCK = 0.45;                                             // a panel docks over the last 0.45 s of its slot; the next pops only then
+  const FINE = [TEND - 0.05, TEND + 0.4];                        // fine print
+  const SHEEN1 = [0.6, 1.4];
+  const SHEEN2 = [TEND - 0.5, TEND + 0.4];                       // crosses while panel 8 docks, so the hold is clean
+  const ROLL = TEND + 0.9;                                       // sign roll-call
   const EXIT = [DUR - 0.74, DUR - 0.07];
 
   const softBack = (x) => { const c1 = 0.75, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
@@ -47,127 +55,131 @@
 
   // ------------------------------------------------------------------ panels
   /** helper bound to the panel-local time */
-  const A = (tau) => (t0, d = 0.34) => seg(tau, t0, t0 + d);
+  const A = (tau) => (t0, d = 0.28) => seg(tau, t0, t0 + d);
 
   const PANELS = [
     {
       title: 'SIGNIFICANT HEART DISEASE', kind: 'limit', lines: ['LIMIT EPI ≈ 0.04 mg', '≈ 2 CARTRIDGES'],
       draw(tau, pulse) {
         const a = A(tau);
-        P.condHeart(g, CX, CY, { fig: a(0.1), organ: a(0.28), beat: beat(tau, [0.72, 1.12, 1.52]) });
-        P.arrow(g, AX0, AX1, CY, a(0.46, 0.24));
+        P.condHeart(g, CX, CY, { fig: a(0.04), organ: a(0.16), beat: beat(tau, [0.62, 1.02, 1.42, 1.82]) });
+        P.arrow(g, AX0, AX1, CY, a(0.25, 0.2));
         const L = 160, h = 34;
-        P.grow(g, a(0.6), IX + L / 2, CY - 40, () => P.cartridge(g, IX, CY - 40, L, h, { label: '1:100,000' }));
-        P.grow(g, a(0.74), IX + L / 2, CY, () => P.cartridge(g, IX, CY, L, h, { label: '1:100,000' }));
-        P.grow(g, a(0.88), IX + L / 2, CY + 40, () => P.cartridge(g, IX, CY + 40, L, h, { ghost: true }));
-        const b = a(0.92, 0.2);
+        P.grow(g, a(0.35), IX + L / 2, CY - 40, () => P.cartridge(g, IX, CY - 40, L, h, { label: '1:100,000' }));
+        P.grow(g, a(0.45), IX + L / 2, CY, () => P.cartridge(g, IX, CY, L, h, { label: '1:100,000' }));
+        P.grow(g, a(0.55), IX + L / 2, CY + 40, () => P.cartridge(g, IX, CY + 40, L, h, { ghost: true }));
+        const b = a(0.6, 0.2);
         if (b > 0) {                                             // bracket: "these two"
           const x = IX + L + 10, y0 = CY - 55, y1 = lerp(y0, CY + 15, ease.out(b));
           g.beginPath(); g.moveTo(x - 7, y0); g.lineTo(x, y0); g.lineTo(x, y1); g.lineTo(x - 7, y1); P.fs(g, null, 3.6);
         }
-        P.stamp(g, 'limit', BX - 3, CY - 23, 24, a(1.0, 0.26), seg(tau, 1.12, 1.62), pulse);
+        P.stamp(g, 'limit', BX - 3, CY - 23, 24, a(0.62, 0.24), seg(tau, 0.72, 1.2), pulse);
       },
     },
     {
-      title: 'NON-SELECTIVE BETA-BLOCKER', kind: 'limit', lines: ['SMALL DOSE · ASPIRATE', 'RECHECK BP'],
+      title: 'NON-SELECTIVE BETA-BLOCKER', kind: 'limit', lines: ['SMALL DOSES · RECHECK BP'], stripSize: 40,
       draw(tau, pulse) {
         const a = A(tau);
-        P.condBottle(g, CX, CY, 'beta', { fig: a(0.1), pills: a(0.3, 0.4) });
-        P.arrow(g, AX0, AX1, CY, a(0.46, 0.24));
-        P.grow(g, a(0.6), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'EPI' }));
-        P.stamp(g, 'limit', BX, CY - 33, 23, a(0.8, 0.26), seg(tau, 0.92, 1.42), pulse);
-        // then: blood-pressure dial -> repeat -> next cartridge
-        const k = Math.max(0, tau - 1.3);
-        const needle = 0.2 + 0.44 * ease.out(seg(tau, 0.9, 1.3)) + (tau > 1.3 ? 0.07 * Math.sin(k * 9) * Math.exp(-k * 3.2) : 0);
-        P.grow(g, a(0.88), IX + 27, CY + 29, () => P.gauge(g, IX + 27, CY + 29, 23, needle));
-        P.grow(g, a(0.98), IX + 80, CY + 31, () => P.loopArrow(g, IX + 80, CY + 31, 14, -2.4 * (1 - ease.out(seg(tau, 0.98, 1.75)))));
-        P.grow(g, a(1.06), IX + 164, CY + 31, () => P.cartridge(g, IX + 106, CY + 31, 126, 32, { ghost: true }));
+        P.condBottle(g, CX, CY, 'beta', { fig: a(0.04), pills: a(0.16, 0.3) });
+        P.arrow(g, AX0, AX1, CY, a(0.25, 0.2));
+        P.grow(g, a(0.35), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'EPI' }));
+        P.stamp(g, 'limit', BX, CY - 33, 23, a(0.52, 0.24), seg(tau, 0.62, 1.1), pulse);
+        // then: blood-pressure gauge -> repeat -> next cartridge
+        const k = Math.max(0, tau - 1.0);
+        const needle = 0.2 + 0.44 * ease.out(seg(tau, 0.62, 1.0)) + (tau > 1.0 ? 0.07 * Math.sin(k * 9) * Math.exp(-k * 3.2) : 0);
+        P.grow(g, a(0.5), IX + 27, CY + 27, () => P.gauge(g, IX + 28, CY + 25, 21, needle));
+        P.grow(g, a(0.58), IX + 80, CY + 28, () => P.loopArrow(g, IX + 80, CY + 28, 14, -2.4 * (1 - ease.out(seg(tau, 0.58, 1.3)))));
+        P.grow(g, a(0.66), IX + 164, CY + 28, () => P.cartridge(g, IX + 106, CY + 28, 126, 32, { ghost: true }));
       },
     },
     {
       title: 'TRICYCLIC ANTIDEPRESSANT', kind: 'split', lines: ['EPI: LOW DOSE', 'AVOID LEVONORDEFRIN'],
       draw(tau, pulse) {
         const a = A(tau);
-        P.condBottle(g, CX, CY, 'tricyclic', { fig: a(0.1), pills: a(0.3, 0.4) });
-        P.arrow(g, AX0, AX1, CY, a(0.46, 0.24));
-        P.grow(g, a(0.6), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'EPI' }));
-        P.stamp(g, 'limit', BX, CY - 33, 23, a(0.8, 0.26), seg(tau, 0.92, 1.42), pulse);
-        P.grow(g, a(0.84), IX + CL / 2, CY + 31, () => P.cartridge(g, IX, CY + 31, CL, 42, { label: 'LEVO' }));
-        P.stamp(g, 'avoid', BX, CY + 31, 24, a(1.04, 0.26), seg(tau, 1.16, 1.66), pulse);
+        P.condBottle(g, CX, CY, 'tricyclic', { fig: a(0.04), pills: a(0.16, 0.3) });
+        P.arrow(g, AX0, AX1, CY, a(0.25, 0.2));
+        P.grow(g, a(0.35), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'EPI' }));
+        P.stamp(g, 'limit', BX, CY - 33, 23, a(0.52, 0.24), seg(tau, 0.62, 1.1), pulse);
+        P.grow(g, a(0.45), IX + CL / 2, CY + 31, () => P.cartridge(g, IX, CY + 31, CL, 42, { label: 'LEVO' }));
+        P.stamp(g, 'avoid', BX, CY + 31, 24, a(0.66, 0.24), seg(tau, 0.76, 1.24), pulse);
       },
     },
     {
       title: 'RECENT COCAINE USE', kind: 'avoid', lines: ['NO VASOCONSTRICTOR'],
       draw(tau, pulse) {
         const a = A(tau);
-        P.condCocaine(g, CX, CY, { fig: a(0.1), powder: a(0.28), sniff: (Math.min(tau, 2.35) * 0.85) % 1, clock: a(0.38), hand: seg(tau, 0.45, 1.25, ease.inOut) });
-        P.arrow(g, AX0, AX1, CY, a(0.46, 0.24));
-        P.grow(g, a(0.6), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'EPI' }));
-        P.stamp(g, 'avoid', BX, CY - 31, 24, a(0.8, 0.26), seg(tau, 0.92, 1.42), pulse);
-        P.grow(g, a(0.78), IX + CL / 2, CY + 31, () => P.cartridge(g, IX, CY + 31, CL, 42, { label: 'LEVO' }));
-        P.stamp(g, 'avoid', BX, CY + 31, 24, a(0.98, 0.26), seg(tau, 1.1, 1.6), pulse);
+        P.condCocaine(g, CX, CY, { fig: a(0.04), powder: a(0.16), sniff: (Math.min(tau, 2.0) * 0.99875) % 1, clock: a(0.22), hand: seg(tau, 0.3, 1.0, ease.inOut) });
+        P.arrow(g, AX0, AX1, CY, a(0.25, 0.2));
+        P.grow(g, a(0.35), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'EPI' }));
+        P.stamp(g, 'avoid', BX, CY - 31, 24, a(0.52, 0.24), seg(tau, 0.62, 1.1), pulse);
+        P.grow(g, a(0.45), IX + CL / 2, CY + 31, () => P.cartridge(g, IX, CY + 31, CL, 42, { label: 'LEVO' }));
+        P.stamp(g, 'avoid', BX, CY + 31, 24, a(0.66, 0.24), seg(tau, 0.76, 1.24), pulse);
       },
     },
     {
-      title: 'UNCONTROLLED HYPERTHYROIDISM', kind: 'avoid', lines: ['AVOID EPI'],
+      title: 'UNCONTROLLED HYPERTHYROIDISM', kind: 'avoid', lines: ['NO VASOCONSTRICTOR'],
       draw(tau, pulse) {
         const a = A(tau);
-        const k = Math.max(0, tau - 0.5);
-        const ph = tau > 0.5 ? Math.max(0, Math.sin(k * 7.5)) * Math.exp(-k * 1.5) : 0;
-        P.condThyroid(g, CX, CY, { fig: a(0.1), organ: a(0.28), beat: beat(tau, [0.7, 1.1, 1.5]), rays: a(0.42, 0.3), rayPhase: ph });
-        P.arrow(g, AX0, AX1, CY, a(0.46, 0.24));
-        P.grow(g, a(0.62), IX + 88, CY, () => P.cartridge(g, IX, CY, 176, 52, { label: 'EPI', size: 38 }));
-        P.stamp(g, 'avoid', BX, CY, 29, a(0.86, 0.26), seg(tau, 0.98, 1.5), pulse);
+        const k = Math.max(0, tau - 0.4);
+        const ph = tau > 0.4 ? Math.max(0, Math.sin(k * 7.5)) * Math.exp(-k * 1.5) : 0;
+        P.condThyroid(g, CX, CY, { fig: a(0.04), organ: a(0.16), beat: beat(tau, [0.6, 1.0, 1.4]), rays: a(0.28, 0.3), rayPhase: ph });
+        P.arrow(g, AX0, AX1, CY, a(0.25, 0.2));
+        P.grow(g, a(0.35), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'EPI' }));
+        P.stamp(g, 'avoid', BX, CY - 31, 24, a(0.52, 0.24), seg(tau, 0.62, 1.1), pulse);
+        P.grow(g, a(0.45), IX + CL / 2, CY + 31, () => P.cartridge(g, IX, CY + 31, CL, 42, { label: 'LEVO' }));
+        P.stamp(g, 'avoid', BX, CY + 31, 24, a(0.66, 0.24), seg(tau, 0.76, 1.24), pulse);
       },
     },
     {
       title: 'METHEMOGLOBINEMIA RISK', kind: 'avoid', lines: ['AVOID BOTH'],
       draw(tau, pulse) {
         const a = A(tau);
-        P.condMetHb(g, CX, CY, { fig: a(0.1), turn: seg(tau, 0.34, 1.15) });
-        P.arrow(g, AX0, AX1, CY, a(0.46, 0.24));
-        P.grow(g, a(0.6), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'PRILOCAINE' }));
-        P.stamp(g, 'avoid', BX, CY - 31, 24, a(0.8, 0.26), seg(tau, 0.92, 1.42), pulse);
-        P.grow(g, a(0.78), IX + CL / 2, CY + 31, () => P.tube(g, IX, CY + 31, CL, 42, { label: 'BENZOCAINE' }));
-        P.stamp(g, 'avoid', BX, CY + 31, 24, a(0.98, 0.26), seg(tau, 1.1, 1.6), pulse);
+        P.condMetHb(g, CX, CY, { fig: a(0.04), turn: seg(tau, 0.18, 0.9) });
+        P.arrow(g, AX0, AX1, CY, a(0.25, 0.2));
+        P.grow(g, a(0.35), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'PRILOCAINE' }));
+        P.stamp(g, 'avoid', BX, CY - 31, 24, a(0.52, 0.24), seg(tau, 0.62, 1.1), pulse);
+        P.grow(g, a(0.45), IX + CL / 2, CY + 31, () => P.tube(g, IX, CY + 31, CL, 42, { label: 'BENZOCAINE' }));
+        P.stamp(g, 'avoid', BX, CY + 31, 24, a(0.66, 0.24), seg(tau, 0.76, 1.24), pulse);
       },
     },
     {
       title: 'SULFITE ALLERGY', kind: 'ok', lines: ['USE PLAIN'],
       draw(tau, pulse) {
         const a = A(tau);
-        P.condSulfite(g, CX, CY, { fig: a(0.1), dots: seg(tau, 0.26, 0.7), tag: a(0.4) });
-        P.arrow(g, AX0, AX1, CY, a(0.46, 0.24));
-        P.grow(g, a(0.6), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'EPI', chip: 'SO3' }));
-        P.stamp(g, 'avoid', BX, CY - 31, 24, a(0.8, 0.26), seg(tau, 0.92, 1.42), pulse);
-        P.grow(g, a(0.84), IX + CL / 2, CY + 31, () => P.cartridge(g, IX, CY + 31, CL, 42, { label: 'PLAIN' }));
-        P.stamp(g, 'ok', BX, CY + 31, 23, a(1.04, 0.26), seg(tau, 1.16, 1.66), pulse);
+        P.condSulfite(g, CX, CY, { fig: a(0.04), dots: seg(tau, 0.14, 0.55) });
+        P.arrow(g, AX0, AX1, CY, a(0.25, 0.2));
+        P.grow(g, a(0.35), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'EPI', chip: 'SULFITE' }));
+        P.stamp(g, 'avoid', BX, CY - 31, 24, a(0.52, 0.24), seg(tau, 0.62, 1.1), pulse);
+        P.grow(g, a(0.45), IX + CL / 2, CY + 31, () => P.cartridge(g, IX, CY + 31, CL, 42, { label: 'PLAIN' }));
+        P.stamp(g, 'ok', BX, CY + 31, 23, a(0.66, 0.24), seg(tau, 0.76, 1.24), pulse);
       },
     },
     {
       title: 'PREGNANCY', kind: 'ok', lines: ['CONSIDERED SAFE'],
       draw(tau, pulse) {
         const a = A(tau);
-        P.condPregnant(g, CX, CY, { fig: a(0.1), organ: a(0.32), beat: beat(tau, [0.8, 1.15, 1.5]) });
-        P.arrow(g, AX0, AX1, CY, a(0.46, 0.24));
-        P.grow(g, a(0.6), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'LIDOCAINE' }));
-        P.stamp(g, 'ok', BX, CY - 31, 23, a(0.8, 0.26), seg(tau, 0.92, 1.42), pulse);
-        P.grow(g, a(0.78), IX + CL / 2, CY + 31, () => P.cartridge(g, IX, CY + 31, CL, 42, { label: 'LIDO + EPI' }));
-        P.stamp(g, 'ok', BX, CY + 31, 23, a(0.98, 0.26), seg(tau, 1.1, 1.6), pulse);
+        P.condPregnant(g, CX, CY, { fig: a(0.04), organ: a(0.18), beat: beat(tau, [0.65, 1.0, 1.35]) });
+        P.arrow(g, AX0, AX1, CY, a(0.25, 0.2));
+        P.grow(g, a(0.35), IX + CL / 2, CY - 31, () => P.cartridge(g, IX, CY - 31, CL, 42, { label: 'LIDOCAINE' }));
+        P.stamp(g, 'ok', BX, CY - 31, 23, a(0.52, 0.24), seg(tau, 0.62, 1.1), pulse);
+        P.grow(g, a(0.45), IX + CL / 2, CY + 31, () => P.cartridge(g, IX, CY + 31, CL, 42, { label: 'LIDO + EPI' }));
+        P.stamp(g, 'ok', BX, CY + 31, 23, a(0.66, 0.24), seg(tau, 0.76, 1.24), pulse);
       },
     },
   ];
-  const STRIP_AT = 1.1;
+  const STRIP_AT = 0.5, STRIP_WIPE = 0.3;                         // the answer comes early: complete by tau 0.8 (0.94 for the split strip)
 
   /** coloured action strip at the bottom of a panel, wiped in from the left */
   function drawStrip(p, tau) {
     const { x, y, w, h, r } = STRIP;
-    const wipe = (t0) => seg(tau, t0, t0 + 0.34, ease.out);
+    const wipe = (t0) => seg(tau, t0, t0 + STRIP_WIPE, ease.out);
+    // pale slot from the first frame of the pop, so the lower part of the lifted card is never a blank white area
+    P.rr(g, x, y, w, h, r); g.fillStyle = '#EEF3F7'; g.fill();
     const u = wipe(STRIP_AT);
     if (u <= 0) return;
     g.save(); P.rr(g, x, y, w, h, r); g.clip();
     if (p.kind === 'split') {
-      const u2 = wipe(STRIP_AT + 0.16), hh = h / 2;
+      const u2 = wipe(STRIP_AT + 0.14), hh = h / 2;
       g.save(); g.beginPath(); g.rect(x, y, w * u, hh); g.clip();
       g.fillStyle = C.amber; g.fillRect(x, y, w, hh);
       P.text(g, p.lines[0], x + w / 2, y + hh / 2 + 11.5, { size: 33, align: 'center', color: C.ink });
@@ -183,7 +195,7 @@
       const bg = p.kind === 'limit' ? C.amber : p.kind === 'avoid' ? C.red : C.green;
       const fg = p.kind === 'limit' ? C.ink : '#fff';
       g.fillStyle = bg; g.fillRect(x, y, w, h);
-      if (p.lines.length === 1) P.text(g, p.lines[0], x + w / 2, y + h / 2 + 15.5, { size: 44, align: 'center', color: fg });
+      if (p.lines.length === 1) { const sz = p.stripSize || 44; P.text(g, p.lines[0], x + w / 2, y + h / 2 + sz * 0.352, { size: sz, align: 'center', color: fg }); }
       else {
         P.text(g, p.lines[0], x + w / 2, y + 33, { size: 37, align: 'center', color: fg });
         P.text(g, p.lines[1], x + w / 2, y + 66, { size: 31, align: 'center', color: fg });
@@ -202,15 +214,15 @@
     g.restore();
     P.rr(g, 2.5, 2.5, PW - 5, PH - 5, 22); P.fs(g, null, 5);
     // number badge + condition title
-    const nb = seg(tau, 0.06, 0.36);
+    const nb = seg(tau, 0, 0.25);
     P.grow(g, nb, 32, 30, () => {
       g.beginPath(); g.arc(32, 30, 19, 0, Math.PI * 2); g.fillStyle = C.ink; g.fill();
       P.text(g, String(i + 1), 32, 41, { size: 32, align: 'center', color: '#fff' });
     });
-    const tw = seg(tau, 0.1, 0.46, ease.out);
+    const tw = seg(tau, 0.02, 0.3, ease.out);
     if (tw > 0) {
-      g.save(); g.beginPath(); g.rect(56, 6, (PW - 66) * tw, 46); g.clip();
-      P.text(g, p.title, 60, 41, { size: p.titleSize, ls: p.titleLs, color: C.ink });
+      g.save(); g.beginPath(); g.rect(52, 6, (PW - 62) * tw, 46); g.clip();
+      P.text(g, p.title, TITLE_X, 40.5, { size: TITLE_SIZE, ls: TITLE_LS, color: C.ink });
       g.restore();
       g.beginPath(); g.moveTo(14, 55); g.lineTo(14 + (PW - 28) * tw, 55); P.fs(g, null, 2.5, C.pale);
     }
@@ -220,30 +232,30 @@
 
   /** where panel i sits for a given lift (0 = docked in its slot, 1 = in focus) */
   function panelBox(i, lift) {
-    const col = i % 2, row = (i / 2) | 0;
-    const x = GX0 + col * (PW + GAP), y = GY0 + row * (PH + GAP);
-    const s = 1 + (LIFT - 1) * lift, w = PW * s, h = PH * s;
-    const lx = clamp(x + PW / 2 - w / 2, GX0 - 4, GX1 + 4 - w);
-    const ly = clamp(y + PH / 2 - h / 2, GY0 - 2, GY1 + 6 - h);
+    const s0 = slot(i);
+    const L = i >= 6 ? LIFT4 : LIFT;                             // bottom row lifts a little less, so it clears the strips of row 3
+    const s = 1 + (L - 1) * lift, w = PW * s, h = PH * s;
+    const lx = clamp(s0.x + PW / 2 - w / 2, GX0 - 4, GX1 + 4 - w);
+    // a panel in focus grows downward (over rows that are still empty), so it never hides the strips of the row above
+    const ly = Math.min(s0.y - 4 * lift, LIFT_BOTTOM - h);
     return { x: lx, y: ly, s, w, h };
   }
-  const slot = (i) => ({ x: GX0 + (i % 2) * (PW + GAP), y: GY0 + ((i / 2) | 0) * (PH + GAP) });
+  function slot(i) { return { x: GX0 + (i % 2) * (PW + GAP), y: GY0 + ((i / 2) | 0) * (PH + GAPY) }; }
 
   function drawPanel(i, t) {
-    const tau = t - (T0 + i * STEP);
+    const tau = t - START[i];
     if (tau <= 0) return;
-    const lift = 1 - seg(tau, STEP - 0.05, STEP + 0.42, ease.inOut);
-    const pop = seg(tau, 0, 0.42);
-    const sPop = 0.7 + 0.3 * ease.outBack(pop);
+    const lift = 1 - seg(tau, DURS[i] - DOCK, DURS[i], ease.inOut);
+    const pop = seg(tau, 0, 0.3);
+    const sPop = 0.9 + 0.1 * ease.outBack(pop);
     const b = panelBox(i, lift);
     const pulse = seg(t, ROLL + i * 0.2, ROLL + i * 0.2 + 0.55);
     g.save();
-    g.globalAlpha = clamp(pop * 9);
+    g.globalAlpha = clamp(pop * 7);
     g.translate(b.x + b.w / 2, b.y + b.h / 2); g.scale(b.s * sPop, b.s * sPop); g.translate(-PW / 2, -PH / 2);
     drawPanelLocal(i, tau, pulse, lift);
-    // docked panels step back while another one is in focus
-    const focus = seg(t, T0, T0 + 0.3) * (1 - seg(t, TEND - 0.05, TEND + 0.42));
-    const dim = 0.4 * focus * (1 - lift);
+    // a docked panel steps back only once the next one pops (it keeps full contrast while it docks); all return at the end
+    const dim = i < 7 ? 0.4 * seg(t, START[i + 1], START[i + 1] + 0.3) * (1 - seg(t, TEND - DOCK, TEND)) : 0;
     if (dim > 0.003) { P.rr(g, 0, 0, PW, PH, 24); g.fillStyle = rgba('#F4F8FB', dim); g.fill(); }
     g.restore();
   }
@@ -254,14 +266,14 @@
   function drawHeader(t) {
     g.fillStyle = C.ink; g.fillRect(SHEET.x, HEAD.y0, SHEET.w, HEAD.y1 - HEAD.y0);
     g.fillStyle = C.amber; g.fillRect(SHEET.x, HEAD.y1, SHEET.w, 7);
-    P.text(g, 'BEFORE YOU INJECT', 72, 316, { size: 90, color: '#fff', ls: 0.5 });
-    P.text(g, 'LOCAL ANESTHETIC SAFETY CARD', 75, 353, { size: 30, weight: 600, fam: SANS, color: C.amber, ls: 1.6 });
+    P.text(g, 'BEFORE YOU INJECT', 72, 329, { size: 90, color: '#fff', ls: 0.5 });
+    P.text(g, 'LOCAL ANESTHETIC SAFETY CARD', 75, 366, { size: 30, weight: 600, fam: SANS, color: C.amber, ls: 1.6 });
     // legend: the three signs used on the card
     const items = [['limit', 'LIMIT'], ['avoid', 'AVOID'], ['ok', 'OK']];
-    g.beginPath(); g.moveTo(838, 244); g.lineTo(838, 360); P.fs(g, null, 2.5, rgba('#ffffff', 0.22));
+    g.beginPath(); g.moveTo(838, 257); g.lineTo(838, 372); P.fs(g, null, 2.5, rgba('#ffffff', 0.22));
     items.forEach(([kind, word], i) => {
-      const y = 261 + i * 41, x = 878;
-      const bump = Math.sin(Math.PI * seg(t, 0.85 + i * 0.24, 1.4 + i * 0.24)) ** 2;
+      const y = 274 + i * 39, x = 878;
+      const bump = Math.sin(Math.PI * seg(t, 0.6 + i * 0.2, 1.0 + i * 0.2)) ** 2;
       g.save(); g.translate(x, y); g.scale(1 + 0.32 * bump, 1 + 0.32 * bump);
       P.SIGN[kind](g, 0, kind === 'limit' ? -3 : 0, kind === 'limit' ? 14 : 15.5);
       g.restore();
@@ -273,22 +285,21 @@
     g.fillStyle = '#DDE9F3'; g.fillRect(INDEX_X, HEAD.y1 + 7, SHEET.x + SHEET.w - INDEX_X, CARD.h);
     g.beginPath(); g.moveTo(INDEX_X, HEAD.y1 + 7); g.lineTo(INDEX_X, CARD.y + CARD.h); P.fs(g, null, 2, rgba(C.ink, 0.16));
     const cx = (INDEX_X + SHEET.x + SHEET.w) / 2 - 2;
-    P.tooth(g, cx, 436, 34, '#fff');
-    g.save(); g.translate(cx + 6, 690); g.rotate(-Math.PI / 2);
+    P.tooth(g, cx, 448, 34, '#fff');
+    g.save(); g.translate(cx + 6, 676); g.rotate(-Math.PI / 2);
     P.text(g, '@natebrooksendo', 0, 0, { size: 27, weight: 600, fam: SANS, color: rgba(C.ink, 0.82), align: 'center', ls: 0.8 });
     g.restore();
-    // decorative tick marks, one per row of panels
+    // index ticks: one per row of panels
     for (let r = 0; r < 4; r++) {
-      const y = GY0 + r * (PH + GAP) + PH / 2;
-      if (r === 0 || r === 1) continue;                          // rows 1-2 carry the tooth mark and the handle
-      g.beginPath(); g.moveTo(cx - 10, y + 6); g.lineTo(cx, y - 6); g.lineTo(cx + 10, y + 6); P.fs(g, null, 3, rgba(C.ink, 0.22));
+      const y = GY0 + r * (PH + GAPY) + PH / 2;
+      g.beginPath(); g.moveTo(INDEX_X + 1, y); g.lineTo(INDEX_X + 15, y); P.fs(g, null, 3, rgba(C.ink, 0.26));
     }
   }
 
   function drawPlaceholders(t) {
     for (let i = 0; i < 8; i++) {
-      const ti = T0 + i * STEP;
-      const a = seg(t, 0.5 + i * 0.05, 0.85 + i * 0.05) * (1 - seg(t, ti, ti + 0.16));
+      const ti = START[i];
+      const a = seg(t, 0.4 + i * 0.05, 0.75 + i * 0.05) * (1 - seg(t, ti, ti + 0.16));
       if (a <= 0) continue;
       const s = slot(i);
       g.save(); g.globalAlpha = a;
@@ -304,12 +315,12 @@
     g.save(); g.globalAlpha = a;
     const dy = (1 - ease.out(a)) * 8;
     P.text(g, 'Conventional precautions, not trial-proven limits · check current references', GX0 + 2, 1535 + dy, { size: 25, weight: 600, fam: SANS, color: C.ink });
-    P.text(g, 'Becker & Reed, Anesth Prog 2012 · Yagiela, JADA 1999 · Guay, Anesth Analg 2009 · full refs in caption', GX0 + 2, 1568 + dy, { size: 25, weight: 500, color: rgba(C.ink, 0.78), ls: 0.2 });
+    P.text(g, 'Becker & Reed 2012 · Yagiela 1999 · Little 2006 · Guay 2009 · ACOG 2013', GX0 + 2, 1568 + dy, { size: 25, weight: 500, color: rgba(C.ink, 0.78), ls: 0.2 });
     g.restore();
   }
 
-  /** laminate gloss: two fixed soft streaks + a moving sheen (u = 0..1 or -1 for none) */
-  function drawGloss(u) {
+  /** laminate gloss: two fixed soft streaks + a moving sheen (u = 0..1; peak alpha a, band width w) */
+  function drawGloss(u, a = 0.25, w = 260) {
     const band = (x, w, a) => {
       g.save(); g.transform(1, 0, -0.36, 1, 0, 0);
       const gr = g.createLinearGradient(x - w / 2, 0, x + w / 2, 0);
@@ -318,7 +329,7 @@
       g.restore();
     };
     band(700, 260, 0.085); band(1500, 120, 0.07);
-    if (u > 0 && u < 1) band(lerp(-150, 1950, ease.inOut(u)), 300, 0.42 * Math.sin(Math.PI * u));
+    if (u > 0 && u < 1) band(lerp(-150, 1950, ease.inOut(u)), w, a * Math.sin(Math.PI * u));
   }
 
   function drawCard(t) {
@@ -336,15 +347,15 @@
     // docked panels first, then whatever is lifted (newest on top)
     const lifted = [];
     for (let i = 0; i < 8; i++) {
-      const tau = t - (T0 + i * STEP);
+      const tau = t - START[i];
       if (tau <= 0) continue;
-      if (tau >= STEP + 0.42) drawPanel(i, t); else lifted.push(i);
+      if (tau >= DURS[i]) drawPanel(i, t); else lifted.push(i);
     }
     for (const i of lifted) drawPanel(i, t);
     drawFinePrint(t);
     g.save(); P.rr(g, CARD.x, CARD.y, CARD.w, CARD.h, CARD.r); g.clip();
-    const s1 = seg(t, 0.3, 1.4), s2 = seg(t, SHEEN2[0], SHEEN2[1]);
-    drawGloss(s1 > 0 && s1 < 1 ? s1 : s2);
+    const s1 = seg(t, SHEEN1[0], SHEEN1[1]), s2 = seg(t, SHEEN2[0], SHEEN2[1]);
+    if (s1 > 0 && s1 < 1) drawGloss(s1, 0.25, 260); else drawGloss(s2, 0.2, 220);
     g.restore();
   }
 
@@ -418,14 +429,6 @@
     setup() {
       seatLayer = makeLayer(drawSeat);
       pocketLayer = makeLayer(drawPocket);
-      // fit each condition title on one line (never below 30 px)
-      const avail = PW - 60 - 13;
-      for (const p of PANELS) {
-        p.titleSize = 32; p.titleLs = 0;
-        while (p.titleSize > 30 && P.textWidth(g, p.title, { size: p.titleSize }) > avail) p.titleSize -= 0.5;
-        const w = P.textWidth(g, p.title, { size: p.titleSize });
-        if (w > avail) p.titleLs = Math.max(-0.8, (avail - w) / (p.title.length - 1));
-      }
     },
     render(t) {
       t = clamp(t, 0, DUR);

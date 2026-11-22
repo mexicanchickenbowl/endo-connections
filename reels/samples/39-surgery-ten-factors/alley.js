@@ -174,7 +174,7 @@ export function buildAlley(o) {
   const key = new THREE.DirectionalLight(0xfff1dd, 1.5); key.position.set(-34, 78, 46); key.target.position.set(0, 0, -15); world.add(key); world.add(key.target);
   key.castShadow = true; key.shadow.mapSize.set(4096, 4096); key.shadow.radius = 5; key.shadow.bias = -0.0008; key.shadow.normalBias = 0.05;
   const sc = key.shadow.camera; sc.left = -34; sc.right = 34; sc.top = 40; sc.bottom = -30; sc.near = 20; sc.far = 220; sc.updateProjectionMatrix();
-  const spot = new THREE.SpotLight(0xffe6c2, 0, 0, 0.115, 0.85, 0); world.add(spot); world.add(spot.target);
+  const spot = new THREE.SpotLight(0xffe6c2, 0, 0, 0.105, 0.9, 0); world.add(spot); world.add(spot.target);
   const fill = new THREE.DirectionalLight(0x86a8d8, 0.25); fill.position.set(40, 30, 60); fill.target.position.set(0, 4, -15); world.add(fill); world.add(fill.target);
 
   const DARK = new THREE.Color(0.20, 0.235, 0.31), LIT = new THREE.Color(1, 1, 1), tmpC = new THREE.Color();
@@ -195,7 +195,7 @@ export function buildAlley(o) {
     key.intensity = lerp(0.6, 1.5, state.house);
     hemi.intensity = lerp(0.36, 0.6, state.house);
     spot.intensity = 3.4 * state.spot.k;
-    spot.position.set(state.spot.x - 3, 86, state.spot.z + 26); spot.target.position.set(state.spot.x, 5, state.spot.z);
+    spot.position.set(state.spot.x - 2, 92, state.spot.z + 9); spot.target.position.set(state.spot.x, 5, state.spot.z);
     // pass 1 — reflection: mirror pins + lights below the lane
     renderer.clear();
     statics.visible = false; sub.visible = true; world.scale.y = -1;

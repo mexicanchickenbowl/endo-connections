@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>42 · Culture-negative cases at three treatment stages</title>
+<link rel="stylesheet" href="../../vendor/fonts/fonts.css">
+<script src="../../lib/kit.js"></script>
+</head>
+<body>
+<div id="stage"></div>
+<script src="print.js"></script>
+<script>
+/*
+ * 42 · Negative cultures at three stages of root canal treatment  (DRAFT study card)
+ * Style: mid-century science-textbook plate, three-ink offset print on warm paper.
+ * Everything on screen is driven by DATA below: arc angles, counters, table rows and range tracks
+ * are all computed from the same numbers, so the drawing cannot drift from the labels.
+ * Sources: see RESEARCH.md / NOTES.md.
+ */
+const { canvas, ctx } = Kit.createCanvas();
+const { seg, ease, clamp, lerp, W, H } = Kit;
+const P = window.Print42;          // static paper, grain and pattern layers (print.js)
+
+// ---------------------------------------------------------------- data (single source of truth)
+// neg = % of cases with a NEGATIVE culture (weighted pooled average); min/max = range across studies.
+const DATA = [
+  { id: 'A', label: ['Instrumentation', '+ water or saline'],       neg: 31, min: 0,  max: 79 },
+  { id: 'B', label: ['Instrumentation', '+ NaOCl 0.5–5%'],     neg: 52, min: 13, max: 95 },
+  { id: 'C', label: ['Next visit, after', 'antibacterial dressing'], neg: 71, min: 25, max: 100 },
+];
+DATA.forEach((d) => {
+  d.pos = 100 - d.neg;                                   // culture-positive complement
+  d.aNeg = (d.neg / 100) * Math.PI * 2;                  // arc angle of the negative share
+  if (d.neg + d.pos !== 100 || d.min > d.neg || d.max < d.neg) throw new Error('bad data ' + d.id);
+});
+
+// ---------------------------------------------------------------- inks (colour meaning never changes)
+const INK = P.INK;                 // paper, paper2, char, teal (= culture-negative), brick (= culture-positive), mustard (accent)
+const NEG = INK.teal, POS = INK.brick;
+
+// ---------------------------------------------------------------- layout
+const SX0 = 64, SX1 = 1016, RX1 = 956;       // safe area; RX1 keeps clear of the right-hand button column
+const TAG_Y0 = 240, TAG_Y1 = 286;
+const TITLE_Y = 364, SUB_Y = 406, LEG_Y = 444, RULE_Y = 478;
+const ROW_T0 = 484, ROW_H = 350;
+const DON_X = 235, DON_R1 = 165, DON_R0 = 103, A0 = -Math.PI / 2;   // same size, same start angle, clockwise
+const COL_X = 432;
+const TRK_X0 = 456, TRK_X1 = 900;
+const FINE_Y1 = 1549, FINE_Y2 = 1573;
+
+const F = {
+  title: '700 94px "Space Grotesk"',
+  sub: '500 34px Barlow',
+  tag: '700 30px "Barlow Condensed"',
+  handle: '500 24px "IBM Plex Mono"',
+  legend: '600 32px Barlow',
+  key: '500 22px "IBM Plex Mono"',
+  label: '700 46px "Barlow Condensed"',
+  table: '600 36px "Barlow Condensed"',
+  tnum: '600 34px "IBM Plex Mono"',
+  num: '700 116px "Barlow Condensed"',
+  pct: '700 54px "Barlow Condensed"',
+  hole: '600 30px "Barlow Condensed"',
+  range: '500 32px "Barlow Condensed"',
+  rnum: '600 30px "IBM Plex Mono"',
+  tick: '500 20px "IBM Plex Mono"',
+  badge: '700 30px "Space Grotesk"',
+  take: '700 50px "Barlow Condensed"',
+  fine: '500 24px "Barlow Condensed"',
+};
+
+// ---------------------------------------------------------------- timeline (seconds)
+const DUR = 26;
+const RING = [0.25, 1.35];
+const ROWS_T = [
+  { lab: 1.4, sw: 1.9, swD: 1.40, pos: 3.30 },
+  { lab: 4.1, sw: 4.6, swD: 1.75, pos: 6.35 },
+  { lab: 7.0, sw: 7.5, swD: 2.05, pos: 9.55 },
+];
+const POS_D = 0.5;
+const TRK_T = 10.1, TRK_STAG = 0.22;
+const TAKE1 = [16.25, 20.85], TAKE2 = [20.85, 25.7];    // envelopes (0.4 s in, 0.3 s out); never overlap
+const TITLE_OUT = [15.9, 16.25], TITLE_BACK = [25.68, 25.95];
+const ROWS_OUT = [25.4, 25.92];
+
+// ---------------------------------------------------------------- small drawing helpers
+function txt(s, x, y, font, color, align, alpha, ls) {
+  ctx.save();
+  ctx.font = font; ctx.fillStyle = color; ctx.textAlign = align || 'left'; ctx.textBaseline = 'alphabetic';
+  if (ls) ctx.letterSpacing = ls + 'px';
+  if (alpha != null) ctx.globalAlpha *= alpha;
+  ctx.fillText(s, x, y);
+  ctx.restore();
+}
+function measure(s, font, ls) {
+  ctx.save(); ctx.font = font; if (ls) ctx.letterSpacing = ls + 'px';
+  const w = ctx.measureText(s).width; ctx.restore(); return w;
+}
+function sector(cx, cy, r0, r1, a0, a1) {
+  ctx.beginPath(); ctx.arc(cx, cy, r1, a0, a1); ctx.arc(cx, cy, r0, a1, a0, true); ctx.closePath();
+}
+/** flat ink fill that overprints the paper (multiply), like an offset plate */
+function inkFill(color, alpha) {
+  ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha *= alpha == null ? 1 : alpha;
+  ctx.fillStyle = color; ctx.fill(); ctx.restore();
+}
+/** the culture-positive ink always carries the "cloudy" halftone dots (a non-colour cue as well) */
+function posFill(alpha) {
+  inkFill(POS, alpha);
+  ctx.save(); ctx.globalAlpha *= alpha == null ? 1 : alpha; ctx.fillStyle = P.dots(ctx); ctx.fill(); ctx.restore();
+}
+function swatch(x, y, s, kind) {
+  ctx.beginPath(); ctx.rect(x, y, s, s);
+  if (kind === 'neg') inkFill(NEG); else posFill();
+  ctx.strokeStyle = INK.char; ctx.lineWidth = 2; ctx.strokeRect(x, y, s, s);
+}
+/** "not equal" sign drawn by hand (the vendored latin subsets have no U+2260) */
+function neq(x, base, s, color) {
+  ctx.save(); ctx.fillStyle = color; ctx.strokeStyle = color;
+  const w = 0.52 * s, th = 0.10 * s;
+  ctx.fillRect(x, base - 0.52 * s, w, th); ctx.fillRect(x, base - 0.27 * s, w, th);
+  ctx.lineWidth = th; ctx.lineCap = 'butt';
+  ctx.beginPath(); ctx.moveTo(x + 0.5 * w + 0.13 * s, base - 0.70 * s); ctx.lineTo(x + 0.5 * w - 0.13 * s, base - 0.04 * s); ctx.stroke();
+  ctx.restore();
+  return w;
+}
+/** broth tube: clear = culture-negative, cloudy = culture-positive */
+function tube(x, cy, h, kind) {
+  const w = h * 0.44, top = cy - h / 2, r = w / 2, bot = top + h - r;
+  const body = () => { ctx.beginPath(); ctx.moveTo(x, top); ctx.lineTo(x, bot); ctx.arc(x + r, bot, r, Math.PI, 0, true); ctx.lineTo(x + w, top); ctx.closePath(); };
+  ctx.save();
+  body(); ctx.fillStyle = INK.paper; ctx.fill();
+  ctx.save(); body(); ctx.clip();
+  const lvl = top + h * 0.30;
+  ctx.beginPath(); ctx.rect(x - 2, lvl, w + 4, h);
+  if (kind === 'neg') { inkFill(NEG, 0.20); }
+  else {
+    inkFill(POS, 0.62);
+    ctx.fillStyle = INK.brickD;
+    for (let i = 0; i < 16; i++) {
+      const px = x + 3 + Kit.hash(i, 77) * (w - 6), py = lvl + 4 + Kit.hash(i, 78) * (h * 0.66);
+      ctx.globalAlpha = 0.75; ctx.beginPath(); ctx.arc(px, py, 1.1 + Kit.hash(i, 79) * 1.2, 0, 7); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  ctx.restore();
+  ctx.strokeStyle = INK.char; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
+  body(); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x - 3.5, top); ctx.lineTo(x + w + 3.5, top); ctx.lineWidth = 3.5; ctx.lineCap = 'round'; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x + 1.5, lvl); ctx.lineTo(x + w - 1.5, lvl); ctx.lineWidth = 1.6; ctx.globalAlpha = 0.7; ctx.stroke();
+  ctx.restore();
+  return w;
+}
+function diamond(x, y, s) { ctx.beginPath(); ctx.moveTo(x, y - s); ctx.lineTo(x + s * 0.78, y); ctx.lineTo(x, y + s); ctx.lineTo(x - s * 0.78, y); ctx.closePath(); }
+const pulse = (t, a, b) => { const u = seg(t, a, b); return Math.sin(Math.PI * u); };
+
+// ---------------------------------------------------------------- header: tag, headline slot, legend
+function drawTag() {
+  const s = 'POOLED FROM DIFFERENT STUDIES · NOT ONE COHORT';
+  const w = measure(s, F.tag, 1.2);
+  ctx.beginPath(); ctx.rect(SX0, TAG_Y0, w + 58, TAG_Y1 - TAG_Y0); inkFill(INK.mustard);
+  ctx.fillStyle = INK.char; ctx.fillRect(SX0, TAG_Y0, 12, TAG_Y1 - TAG_Y0);
+  txt(s, SX0 + 30, TAG_Y1 - 13, F.tag, INK.char, 'left', 1, 1.2);
+  txt('@natebrooksendo', SX1, TAG_Y1 - 14, F.handle, INK.char, 'right', 0.72);
+}
+function drawTitle(a, dy) {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha = a; ctx.translate(0, dy);
+  const w1 = measure('Negative', F.title, -3);
+  txt('Negative', SX0 - 5, TITLE_Y, F.title, NEG, 'left', 1, -3);
+  txt('cultures', SX0 - 5 + w1 + 22, TITLE_Y, F.title, INK.char, 'left', 1, -3);
+  txt('at three stages of root canal treatment', SX0, SUB_Y, F.sub, INK.char, 'left', 0.92);
+  ctx.restore();
+}
+/** a headline line made of coloured segments; {neq:1} draws the hand-made sign, {hl:1} adds a highlighter bar */
+function richLine(parts, x, y, font) {
+  const size = parseFloat(font.match(/(\d+)px/)[1]);
+  let cx = x;
+  for (const p of parts) {
+    if (p.neq) { cx += 14; cx += neq(cx, y, size, POS) + 16; continue; }
+    const w = measure(p.t, font);
+    if (p.hl != null && p.hl > 0) {
+      ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = INK.mustard; ctx.globalAlpha *= 0.95;
+      ctx.fillRect(cx - 6, y - size * 0.80, (w + 12) * p.hl, size * 0.98); ctx.restore();
+    }
+    txt(p.t, cx, y, font, p.c || INK.char);
+    cx += w;
+  }
+}
+function drawTake(which, a, dy, t) {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha = a; ctx.translate(0, dy);
+  ctx.fillStyle = INK.mustard; ctx.fillRect(SX0, 304, 10, 112);
+  ctx.fillStyle = INK.char; ctx.fillRect(SX0, 304, 10, 4);
+  const x = SX0 + 30;
+  if (which === 1) {
+    richLine([{ t: 'More cases test ' }, { t: 'negative', c: NEG }, { t: ' after NaOCl' }], x, 350, F.take);
+    richLine([{ t: 'and after a dressing.' }], x, 406, F.take);
+  } else {
+    const hl = seg(t, TAKE2[0] + 0.55, TAKE2[0] + 1.15, ease.out);
+    richLine([{ t: 'But ' }, { t: 'ranges are wide', hl }, { t: ' — and' }], x, 350, F.take);
+    richLine([{ t: 'negative culture', c: NEG }, { neq: 1 }, { t: 'sterile canal.' }], x, 406, F.take);
+  }
+  ctx.restore();
+}
+function drawLegend() {
+  let x = SX0 + 4;
+  const entry = (kind, label) => {
+    x += tube(x, LEG_Y, 44, kind) + 14;
+    swatch(x, LEG_Y - 13, 26, kind); x += 26 + 12;
+    txt(label, x, LEG_Y + 11, F.legend, INK.char);
+    x += measure(label, F.legend) + 34;
+  };
+  entry('neg', 'culture-negative');
+  entry('pos', 'culture-positive');
+  // key for the range tracks (fine print)
+  const kx = 800;
+  diamond(kx + 9, LEG_Y - 13, 9); ctx.fillStyle = INK.char; ctx.fill();
+  txt('pooled average', kx + 28, LEG_Y - 6, F.key, INK.char, 'left', 0.85);
+  ctx.beginPath(); ctx.rect(kx, LEG_Y + 8, 20, 10); inkFill(INK.mustard); ctx.strokeStyle = INK.char; ctx.lineWidth = 1.6; ctx.strokeRect(kx, LEG_Y + 8, 20, 10);
+  txt('study range', kx + 28, LEG_Y + 20, F.key, INK.char, 'left', 0.85);
+  ctx.fillStyle = INK.char; ctx.fillRect(SX0, RULE_Y, SX1 - SX0, 3);
+}
+
+// ---------------------------------------------------------------- one row = one snapshot
+function drawRow(i, t, rowsA, t2) {
+  const d = DATA[i], tm = ROWS_T[i], T = ROW_T0 + i * ROW_H, cx = DON_X, cy = T + 175;
+  const ringU = seg(t, RING[0] + i * 0.18, RING[1] - (2 - i) * 0.12, ease.inOut);
+  if (ringU <= 0) return;
+  const labA = seg(t, tm.lab, tm.lab + 0.45, ease.out);
+  const p = seg(t, tm.sw, tm.sw + tm.swD, ease.inOut);                 // negative sweep 0..1
+  const q = seg(t, tm.pos, tm.pos + POS_D, ease.inOut);                // positive remainder 0..1
+  ctx.save(); ctx.globalAlpha = rowsA;
+
+  // row separator
+  if (i > 0) { ctx.save(); ctx.strokeStyle = INK.char; ctx.globalAlpha *= 0.55 * ringU; ctx.lineWidth = 2; ctx.setLineDash([2, 8]); ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(COL_X, T); ctx.lineTo(COL_X + (RX1 - COL_X) * ringU, T); ctx.stroke(); ctx.restore(); }
+
+  // --- donut
+  sector(cx, cy, DON_R0, DON_R1, 0, Math.PI * 2); ctx.save(); ctx.globalAlpha *= 0.5 * ringU; ctx.fillStyle = INK.paper2; ctx.fill('evenodd'); ctx.restore();
+  ctx.save(); ctx.translate(1.6, 1.4);                                   // slight plate misregistration
+  const aN = A0 + d.aNeg * p;
+  if (p > 0) { sector(cx, cy, DON_R0, DON_R1, A0, aN); inkFill(NEG); }
+  if (q > 0) { const aEnd = A0 + d.aNeg + (Math.PI * 2 - d.aNeg) * q; sector(cx, cy, DON_R0, DON_R1, A0 + d.aNeg, aEnd); posFill(); }
+  ctx.restore();
+  // keylines
+  ctx.strokeStyle = INK.char; ctx.lineWidth = 2.5; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.arc(cx, cy, DON_R1, A0, A0 + Math.PI * 2 * ringU); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, DON_R0, A0, A0 + Math.PI * 2 * ringU); ctx.stroke();
+  // paper-coloured separators at the common start angle and at the split
+  const sep = (a, al) => { ctx.save(); ctx.globalAlpha *= al; ctx.strokeStyle = INK.paper; ctx.lineWidth = 5; ctx.lineCap = 'butt'; ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * (DON_R0 + 1.5), cy + Math.sin(a) * (DON_R0 + 1.5)); ctx.lineTo(cx + Math.cos(a) * (DON_R1 - 1.5), cy + Math.sin(a) * (DON_R1 - 1.5)); ctx.stroke(); ctx.restore(); };
+  if (p > 0 && p < 1) { ctx.save(); ctx.strokeStyle = INK.char; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(cx + Math.cos(aN) * (DON_R0 - 7), cy + Math.sin(aN) * (DON_R0 - 7)); ctx.lineTo(cx + Math.cos(aN) * (DON_R1 + 7), cy + Math.sin(aN) * (DON_R1 + 7)); ctx.stroke(); ctx.restore(); }
+  if (p > 0) sep(A0, 1);
+  if (q > 0) sep(A0 + d.aNeg, 1);
+  // start tick at 12 o'clock (same start angle on every donut)
+  ctx.save(); ctx.globalAlpha *= ringU; ctx.fillStyle = INK.char; ctx.beginPath(); ctx.moveTo(cx, cy - DON_R1 + 3); ctx.lineTo(cx - 7, cy - DON_R1 - 10); ctx.lineTo(cx + 7, cy - DON_R1 - 10); ctx.closePath(); ctx.fill(); ctx.restore();
+
+  // --- big counter in the hole: always the rounded share currently drawn; settles exactly on d.neg
+  const shown = p >= 1 ? d.neg : Math.min(d.neg, Math.round(d.neg * p));
+  const numA = seg(t, tm.sw - 0.05, tm.sw + 0.25);
+  if (numA > 0) {
+    const wN = measure(String(d.neg), F.num, -2), wP = measure('%', F.pct);
+    const x0 = cx - (wN + 3 + wP) / 2;
+    const sc = 1 + 0.07 * (i > 0 ? pulse(t2, TAKE1[0] + 0.5 + (i - 1) * 0.55, TAKE1[0] + 1.3 + (i - 1) * 0.55) : 0) + 0.06 * pulse(t, tm.sw + tm.swD - 0.02, tm.sw + tm.swD + 0.4);
+    ctx.save(); ctx.globalAlpha *= numA; ctx.translate(cx, cy); ctx.scale(sc, sc); ctx.translate(-cx, -cy);
+    txt(String(shown), x0 + wN, cy + 22, F.num, NEG, 'right', 1, -2);
+    txt('%', x0 + wN + 3, cy + 22, F.pct, NEG, 'left');
+    txt('negative', cx, cy + 62, F.hole, NEG, 'center', seg(t, tm.sw + tm.swD - 0.1, tm.sw + tm.swD + 0.3));
+    ctx.restore();
+  }
+
+  // --- badge
+  const bU = seg(t, RING[0] + 0.3 + i * 0.18, RING[0] + 0.75 + i * 0.18, ease.outBack);
+  if (bU > 0) {
+    ctx.save(); ctx.translate(92, T + 44); ctx.scale(bU, bU);
+    ctx.beginPath(); ctx.arc(0, 0, 25, 0, 7); ctx.fillStyle = INK.char; ctx.fill();
+    txt(d.id, 0, 11, F.badge, INK.paper, 'center');
+    ctx.restore();
+  }
+
+  // --- stage label
+  if (labA > 0) {
+    const dx = (1 - labA) * 18;
+    txt(d.label[0], COL_X + dx, T + 92, F.label, INK.char, 'left', labA);
+    txt(d.label[1], COL_X + dx, T + 140, F.label, INK.char, 'left', labA);
+  }
+
+  // --- the two-line table: negative + positive = 100
+  const tableRow = (y, kind, label, val, a) => {
+    if (a <= 0) return;
+    ctx.save(); ctx.globalAlpha *= a;
+    swatch(COL_X, y - 24, 24, kind);
+    txt(label, COL_X + 38, y, F.table, INK.char);
+    const xl = COL_X + 38 + measure(label, F.table) + 14, vs = val + '%', xr = RX1 - measure(vs, F.tnum) - 12;
+    ctx.fillStyle = INK.char; ctx.globalAlpha *= 0.55;
+    for (let x = xl; x < xr; x += 9) { ctx.beginPath(); ctx.arc(x, y - 4, 1.5, 0, 7); ctx.fill(); }
+    ctx.globalAlpha /= 0.55;
+    txt(vs, RX1, y, F.tnum, kind === 'neg' ? NEG : POS, 'right');
+    ctx.restore();
+  };
+  tableRow(T + 196, 'neg', 'cases culture-negative', d.neg, seg(t, tm.sw + tm.swD - 0.05, tm.sw + tm.swD + 0.35));
+  tableRow(T + 240, 'pos', 'culture-positive', d.pos, seg(t, tm.pos + POS_D - 0.1, tm.pos + POS_D + 0.3));
+
+  // --- range track: 0-100 axis, min-max span across studies, pooled average marked
+  const t0 = TRK_T + i * TRK_STAG, ty = T + 283;
+  const axU = seg(t, t0, t0 + 0.5, ease.inOut);
+  if (axU > 0) {
+    const X = (v) => lerp(TRK_X0, TRK_X1, v / 100);
+    ctx.strokeStyle = INK.char; ctx.lineWidth = 2.5; ctx.lineCap = 'butt';
+    ctx.beginPath(); ctx.moveTo(TRK_X0, ty); ctx.lineTo(lerp(TRK_X0, TRK_X1, axU), ty); ctx.stroke();
+    for (const v of [0, 25, 50, 75, 100]) {
+      if (v / 100 > axU) continue;
+      const hh = v % 100 === 0 ? 11 : 6;
+      ctx.beginPath(); ctx.moveTo(X(v), ty - hh); ctx.lineTo(X(v), ty + hh); ctx.stroke();
+    }
+    txt('0', TRK_X0 - 9, ty + 7, F.tick, INK.char, 'right', 0.8 * axU);
+    txt('100', TRK_X1 + 9, ty + 7, F.tick, INK.char, 'left', 0.8 * seg(t, t0 + 0.35, t0 + 0.6));
+    const spU = seg(t, t0 + 0.4, t0 + 1.0, ease.out);
+    if (spU > 0) {
+      const xa = lerp(X(d.neg), X(d.min), spU), xb = lerp(X(d.neg), X(d.max), spU);
+      const hh = 8 * (1 + 0.45 * pulse(t2, TAKE2[0] + 0.7 + i * 0.12, TAKE2[0] + 1.7 + i * 0.12));
+      ctx.beginPath(); ctx.rect(xa, ty - hh, Math.max(1, xb - xa), hh * 2);
+      ctx.fillStyle = INK.paper; ctx.fill(); inkFill(INK.mustard);
+      ctx.strokeStyle = INK.char; ctx.lineWidth = 2; ctx.strokeRect(xa, ty - hh, Math.max(1, xb - xa), hh * 2);
+    }
+    const mU = seg(t, t0 + 0.85, t0 + 1.2, ease.outBack);
+    if (mU > 0) {
+      ctx.save(); ctx.translate(X(d.neg), ty); ctx.scale(mU, mU);
+      diamond(0, 0, 15); ctx.fillStyle = INK.char; ctx.fill(); ctx.strokeStyle = INK.paper; ctx.lineWidth = 2.5; ctx.stroke();
+      ctx.restore();
+    }
+    const lA = seg(t, t0 + 0.9, t0 + 1.3);
+    if (lA > 0) {
+      const s1 = 'range across studies';
+      txt(s1, COL_X, T + 329, F.range, INK.char, 'left', lA);
+      txt(d.min + '–' + d.max + '%', COL_X + measure(s1, F.range) + 14, T + 328, F.rnum, INK.char, 'left', lA);
+    }
+  }
+  ctx.restore();
+}
+
+function drawFine() {
+  const l1 = 'Weighted pooled averages of culture studies · case = a sampled tooth or canal';
+  const l2 = 'Ng & Gulabivala, Cohen’s Pathways of the Pulp, 12th ed., ch. 17 · Gulabivala & Ng, Int Endod J 2023';
+  let f = F.fine, size = 24;
+  while (measure(l2, f) > RX1 - SX0 && size > 21) { size -= 0.5; f = `500 ${size}px "Barlow Condensed"`; }
+  txt(l1, SX0, FINE_Y1, f, INK.char, 'left', 0.82);
+  txt(l2, SX0, FINE_Y2, f, INK.char, 'left', 0.82);
+}
+
+// ---------------------------------------------------------------- reel
+window.REEL = {
+  title: 'Negative cultures at three treatment stages',
+  duration: DUR,
+  poster: 14.0,
+  canvas,
+  fonts: Object.values(F).concat(['500 23px "Barlow Condensed"', '500 22px "Barlow Condensed"']),
+  setup() { P.build(); },
+  render(t) {
+    t = clamp(t, 0, DUR);
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(P.paper, 0, 0);
+
+    drawTag();
+    // headline slot: title -> takeaway 1 -> takeaway 2 -> title (so the last frame equals the first)
+    const titleA = t < 20 ? 1 - seg(t, TITLE_OUT[0], TITLE_OUT[1], ease.inOut) : seg(t, TITLE_BACK[0], TITLE_BACK[1], ease.inOut);
+    drawTitle(titleA, t < 20 ? -14 * (1 - titleA) : 14 * (1 - titleA));
+    const a1 = Kit.env(t, TAKE1[0], TAKE1[1], 0.4, 0.3), a2 = Kit.env(t, TAKE2[0], TAKE2[1], 0.4, 0.3);
+    drawTake(1, ease.smooth(a1), t < 18 ? 14 * (1 - a1) : -14 * (1 - a1), t);
+    drawTake(2, ease.smooth(a2), t < 23 ? 14 * (1 - a2) : -14 * (1 - a2), t);
+    drawLegend();
+
+    const rowsA = 1 - seg(t, ROWS_OUT[0], ROWS_OUT[1], ease.inOut);
+    if (rowsA > 0) {
+      for (let i = 0; i < 3; i++) drawRow(i, t, rowsA, t);
+      ctx.save(); ctx.globalAlpha = rowsA * seg(t, 0.5, 1.2); drawFine(); ctx.restore();
+    }
+
+    // ink dropout / paper grain over everything (static: no boiling)
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(P.grain, 0, 0);
+  },
+};
+Kit.boot(REEL);
+</script>
+</body>
+</html>

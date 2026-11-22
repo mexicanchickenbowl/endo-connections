@@ -26,7 +26,7 @@
   const ROWS = [
     { name: 'Periapical lesion: presence, size', good: 'none, or smaller' },
     { name: 'Patency at the canal terminus', good: 'achieved' },
-    { name: 'Apical extent of preparation', good: 'flush', sub: '0–2 mm within the radiographic apex, not beyond' },
+    { name: 'Apical extent of preparation', good: 'flush', sub: 'flush: root filling 0–2 mm within the radiographic apex' },
     { name: 'Intraoperative culture test', good: 'negative', sub: 'a prognostic factor, though not routine practice' },
     { name: 'Iatrogenic perforation', good: 'none' },
     { name: 'Root-filling quality on radiograph', good: 'good, no voids' },
@@ -35,10 +35,12 @@
   const SOURCE = 'Ng & Gulabivala, in Cohen’s Pathways of the Pulp, 12th ed., ch. 17';
 
   // ------------------------------------------------------------------ timeline
-  const T0 = 1.5, SLOT = 2.55, EXTRA = 0.5;     // rows 3 and 4 carry a second line and get EXTRA seconds
-  const start = (k) => T0 + k * SLOT + (k > 2 ? EXTRA : 0) + (k > 3 ? EXTRA : 0);
-  const TALL = start(6) + SLOT;        // all seven have had their turn
-  const OUT0 = TALL + 0.8 + 4.6;       // end of the summary hold
+  // each pane/row holds the stage for a time in proportion to the words it carries (rows 3 and 4 have a second line)
+  const T0 = 1.0, SLOTS = [3.2, 2.9, 5.0, 4.2, 2.3, 3.2, 1.9];
+  const STARTS = SLOTS.map((_, k) => +(T0 + SLOTS.slice(0, k).reduce((a, b) => a + b, 0)).toFixed(3));
+  const start = (k) => STARTS[k];
+  const TALL = start(6) + SLOTS[6];    // all seven have had their turn
+  const OUT0 = TALL + 0.8 + 4.0;       // end of the summary hold (4.0 s with every pane fully lit)
   const DUR = OUT0 + 0.8;
 
   // ------------------------------------------------------------------ geometry
@@ -455,7 +457,7 @@
     const lit = [], act = [];
     for (let k = 0; k < N; k++) {
       const s = start(k), up = seg(t, s, s + 0.85, ease.inOut);
-      const a = up * (1 - seg(t, s + SLOT, s + SLOT + 0.6, ease.inOut));
+      const a = up * (1 - seg(t, s + SLOTS[k], s + SLOTS[k] + 0.6, ease.inOut));
       act.push(a * (1 - fin));
       lit.push(clamp(up * lerp(lerp(0.74, 1, a), 1, fin) * (1 - out) * breathe));
     }
@@ -528,7 +530,7 @@
     const rowsOut = 1 - seg(t, OUT0, OUT0 + 0.55);
     for (let k = 0; k < N; k++) {
       const s = start(k), y = rowY(k), P = PANES[k], R = ROWS[k];
-      const u = seg(t, s + 0.35, s + 0.9, ease.out) * rowsOut;
+      const u = seg(t, s + 0.25, s + 0.7, ease.out) * rowsOut;
       const hot = Math.max(act[k], fin * (1 - out) * 0.0);
       // slot marker before the row is carved
       carved(String(k + 1), XN, y, '700 38px Fraunces', '#8d8576', 0.4 * (1 - u), 'center');
@@ -540,11 +542,11 @@
       }
       const base = lerp(0.86, 1, Math.max(hot, fin));
       carved(String(k + 1), XN, y, '700 38px Fraunces', P.txt, u, 'center');
-      ctx.save(); ctx.beginPath(); ctx.rect(TB.x, y - 44, 72 + (TB.w - 72) * seg(t, s + 0.35, s + 1.0, ease.out) + 2, 96); ctx.clip();
+      ctx.save(); ctx.beginPath(); ctx.rect(TB.x, y - 44, 72 + (TB.w - 72) * seg(t, s + 0.25, s + 0.8, ease.out) + 2, 96); ctx.clip();
       carved(R.name, XT, y, '600 36px Fraunces', CREAM, u * base);
-      carved(R.good, XR, y + 0.5, '600 31px Inter', GILT, u * base * seg(t, s + 0.75, s + 1.15), 'right');
+      carved(R.good, XR, y + 0.5, '600 31px Inter', GILT, u * base * seg(t, s + 0.55, s + 0.9), 'right');
       ctx.restore();
-      if (R.sub) carved(R.sub, XT, y + 35, 'italic 500 30px Fraunces', P.txt, seg(t, s + 1.2, s + 1.7, ease.out) * rowsOut * 0.95);
+      if (R.sub) carved(R.sub, XT, y + 35, 'italic 500 30px Fraunces', P.txt, seg(t, s + 0.9, s + 1.3, ease.out) * rowsOut * 0.95);
     }
     carved(SOURCE, 64, 1577, '400 23px Inter', '#b9ae98', 0.72);
   }

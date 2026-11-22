@@ -4,7 +4,7 @@
   "title": "Periapical healing: 7 prognostic factors",
   "style": "Stained-glass rose window",
   "topic": "The seven factors Cohen's ch. 17 lists as having a major impact on periapical healing after nonsurgical RCT, each with its favorable state.",
-  "duration": 26.55,
+  "duration": 29.3,
   "claims": [
     {
       "claim": "1 · Periapical lesion: presence, size · better healing associated with: none, or smaller",
@@ -15,8 +15,8 @@
       "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 2: achieving patency increased the chance of success twofold, citing Ng 2011). Cross-check: Ng et al., Int Endod J 2011;44:583-609 (PMID 21366626), abstract"
     },
     {
-      "claim": "3 · Apical extent of preparation · flush · 0–2 mm within the radiographic apex, not beyond",
-      "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 3; Fig. 17.22 and the text on apical extent: flush = 0–2 mm within the radiographic apex, defined for root fillings; long fillings lowest success). Cross-check: Ng et al., Int Endod J 2008;41:6-31 (PMID 17931388) and 2011;44:583-609 (PMID 21366626), abstracts"
+      "claim": "3 · Apical extent of preparation · flush · flush: root filling 0–2 mm within the radiographic apex",
+      "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 3 names the extent of chemomechanical preparation and cites Fig. 17.22, which pools root fillings: underextended 0.76, flush 0.81, overextended 0.66 probability of periapical health; flush is the root-filling category 0–2 mm within the radiographic apex; the text says canals are normally filled to the extent of preparation). Cross-check: Ng et al., Int Endod J 2008;41:6-31 (PMID 17931388) and 2011;44:583-609 (PMID 21366626), abstracts"
     },
     {
       "claim": "4 · Intraoperative culture test · negative · a prognostic factor, though not routine practice",
@@ -28,12 +28,12 @@
     },
     {
       "claim": "6 · Root-filling quality on radiograph · good, no voids",
-      "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 6; Fig. 17.23: pooled OR 3.9 for good-quality vs suboptimal root filling; unsatisfactory includes radiographic voids). Cross-check: Ng et al., Int Endod J 2008;41:6-31 (PMID 17931388), abstract"
+      "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 6; Fig. 17.23: pooled OR 3.9 for good-quality vs suboptimal root filling; the chapter says the criteria were not well defined; unsatisfactory = inadequate seal, poor apical seal or radiographic voids). Cross-check: Ng et al., Int Endod J 2008;41:6-31 (PMID 17931388), abstract"
     },
     {
       "claim": "7 · Final coronal restoration · good quality",
       "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 7; Fig. 17.24: pooled OR 1.9 for satisfactory vs unsatisfactory restoration; good quality regardless of type). Cross-check: Ng et al., Int Endod J 2008;41:6-31 (PMID 17931388) and 2011;44:583-609 (PMID 21366626), abstracts"
     }
   ],
-  "caption": "7 factors that influence periapical healing after nonsurgical root canal treatment: a study summary of the outcomes chapter in Cohen's.\nBetter healing is associated with: no periapical lesion (or a smaller one) · patency at the canal terminus · preparation flush with the terminus (0–2 mm within the radiographic apex) · negative culture before obturation · no perforation · good root filling on the radiograph · good coronal restoration.\nCulture is prognostic, though not routine practice. Healing, not tooth survival. Associations, not guarantees.\nRef: Ng & Gulabivala, ch. 17, Cohen's Pathways of the Pulp, 12th ed.\n#endodontics #endo #rootcanal #boardprep #apicalperiodontitis"
+  "caption": "7 factors that influence periapical healing after nonsurgical root canal treatment: a study summary of the outcomes chapter in Cohen's.\nBetter healing is associated with: no periapical lesion (or a smaller one) · patency at the canal terminus · flush apical extent of preparation (pooled as root fillings 0–2 mm within the radiographic apex) · negative culture · no perforation · good root filling on radiograph · good coronal restoration.\nCulture is prognostic, though not routine practice. Healing, not tooth survival. Associations, not causation. Schematic icons.\nRef: Ng & Gulabivala, ch. 17, Cohen's Pathways of the Pulp, 12th ed.\n#endodontics #endo #rootcanal #boardprep #apicalperiodontitis"
 }

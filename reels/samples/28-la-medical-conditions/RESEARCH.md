@@ -523,3 +523,33 @@ Wording decisions taken at build time, all inside the limits of sections (b) and
 - Methamphetamine, pheochromocytoma, liver disease, atypical cholinesterase, MAOIs and malignant hyperthermia are
   not on screen (caption / NOTES only).
 
+---
+
+## (j) Review-stage addendum (2026-11-22, reel builder after independent review)
+
+No new facts were added to the screen; three items changed how verified facts are shown. Abstracts were re-read on
+PubMed at this stage (**A**).
+
+| Change | Exact source | What the source literally reports | Verified | Confidence |
+|---|---|---|---|---|
+| Panel 5 (uncontrolled hyperthyroidism) now marks **both** epinephrine and levonordefrin red, strip "NO VASOCONSTRICTOR" (supersedes "UNCONTROLLED: AVOID EPI" in section (b), row 5) | Little JW. Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2006;101(3):276-84. PMID 16504858, https://doi.org/10.1016/j.tripleo.2005.05.069 | Abstract: "the use of epinephrine or other pressor ammines [sic] can cause a hypertensive crisis in the patient with uncontrolled hyperthyroidism." Levonordefrin is a pressor amine; Becker & Reed 2012 (FT, section (a) 4) describe it as norepinephrine-like, not a safer substitute | A (re-read) | Medium, as before: the abstract states the risk, "avoid" is the conventional inference; Yagiela 1999 rates the interaction evidence "much less compelling" |
+| Panel 2 strip shortened to "SMALL DOSES - RECHECK BP"; "aspirate" moved to the caption (supersedes the wording in section (b), row 2) | Hersh EV, Giannakopoulos H. Dent Clin North Am 2010;54(4):687-96. PMID 20831932, https://doi.org/10.1016/j.cden.2010.06.009 | Abstract: "A clinically significant interaction between epinephrine or levonordefrin with nonselective beta-adrenergic blocking agents ... severity of the interaction seems dose related ... Inadvertent intravascular injections ... are likely to result in a more pronounced response." | A (re-read) | High; the caption now says "Non-selective beta-blockers" |
+| Caption adds "Recent cocaine: defer elective care" | Brand HS, Gonggrijp S, Blanksma CJ. Br Dent J 2008;204(7):365-9. PMID 18408681, https://doi.org/10.1038/sj.bdj.2008.244 | Abstract: "dental treatment should be postponed for 6 to 24 hours after the use of cocaine." | A (re-read) | High that this is what they recommend; no hour figure is used |
+
+Other review-stage decisions:
+
+- The caption gives the time base of the 0.04 mg convention as "per 30 min" (Becker & Reed 2012, FT, section (a) 2 and
+  correction (c) 1). "Per appointment" (Davis 2010; Malamed, textbook, not read) is recorded in NOTES.md as the usual
+  board answer. Nothing about the time base is on screen.
+- The on-screen source line is now "Becker & Reed 2012 - Yagiela 1999 - Little 2006 - Guay 2009 - ACOG 2013", so
+  panels 5 and 8 have a source on a screenshot.
+- The "SO3" chip was replaced by the word "SULFITE" (SO3 without a charge is sulfur trioxide; cartridges contain
+  sodium or potassium metabisulfite).
+- Two Becker 2011 statements cited in NOTES.md (selective beta-1 blockers "do not generally introduce a risk for
+  this interaction"; tricyclic uptake inhibition "poses no concern for epinephrine") are quoted from the science
+  reviewer's reading of the full text. The builder could not re-read them: PMC returned no full text for PMC3265267
+  through the PubMed tool. They are in NOTES only, not on screen or in the caption.
+- ACOG Committee Opinion 569: the PDF read at the research stage prints "Reaffirmed 2017"; any later status is
+  unverified. No reaffirmation year is on screen or in the caption.
+
+PubMed is the source of the abstracts quoted in this section.
