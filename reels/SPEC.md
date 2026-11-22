@@ -16,7 +16,11 @@ concept *visually* in **10–30 seconds** with minimal on-screen text. No voice-
 reels/samples/NN-slug/
   index.html     required — the reel
   *.js / *.css   optional extra files
-  NOTES.md       required — concept, every on-screen claim + its source, design notes, change log
+  RESEARCH.md    evidence brief (written by the research stage; the reel may only state what it supports)
+  NOTES.md       required — concept, storyboard, every on-screen claim + its source, what is schematic, change log
+  meta.json      required — gallery metadata + ready-to-paste Instagram caption (schema below)
+  _scratch/      your private scratch space (git-ignored). Never write scratch files anywhere else.
+  _stills/       render output (git-ignored)
 ```
 Final video: `reels/out/NN-slug.mp4` + poster `reels/out/NN-slug.jpg` (written by the renderer).
 
@@ -53,7 +57,9 @@ Final video: `reels/out/NN-slug.mp4` + poster `reels/out/NN-slug.jpg` (written b
 - Fonts (`vendor/fonts/fonts.css`, latin + latin-ext + greek): Inter, IBM Plex Sans, IBM Plex Mono, Space Grotesk,
   Playfair Display, Source Serif 4, EB Garamond, Caveat (handwriting), Press Start 2P (pixel), JetBrains Mono,
   Fraunces, Bebas Neue, DM Serif Display, VT323 (CRT terminal), Share Tech Mono, Nunito, Libre Baskerville,
-  Archivo Black. System fallbacks: DejaVu Sans/Serif, Liberation, FreeSerif (have subscripts ₂ ⁻ ⇌ etc.).
+  Archivo Black; latin + latin-ext only: Bangers (comic display), Comic Neue (comic body), Permanent Marker,
+  Patrick Hand (handwriting), Barlow, Barlow Condensed, Oswald, Anton (signage/condensed), Courier Prime,
+  Special Elite (typewriter). System fallbacks: DejaVu Sans/Serif, Liberation, FreeSerif (have subscripts ₂ ⁻ ⇌ etc.).
   Subscript/superscript glyphs (₂ ⁺ ⁻) may fall back to DejaVu — check they look OK, or draw them yourself.
 - `vendor/three.module.min.js` + `vendor/three-addons/` (three r169), `vendor/rough.js` (hand-drawn, global `rough`),
   `vendor/d3.min.js` (global `d3`), `vendor/gsap.min.js` (global `gsap`).
@@ -92,3 +98,39 @@ node reels/tools/render.cjs video reels/samples/NN-slug
 Look at the sheet and at full-resolution stills (Read tool shows images) — check text overflow, overlaps,
 clipping, legibility, safe area (`--safe` overlays red no-go zones and the cyan 3:4 grid crop), and that the
 story reads with no sound. Iterate until it is genuinely good. Do not git commit (the orchestrator commits).
+
+## meta.json (gallery + caption)
+```json
+{
+  "id": "21", "slug": "21-example",
+  "title": "Short human title (<= 48 chars)",
+  "style": "Style name (2-4 words)",
+  "topic": "One sentence (<= 140 chars): what the viewer learns",
+  "duration": 21.0,
+  "claims": [ { "claim": "on-screen claim, concise", "source": "Author et al., Journal Year;vol:pages (PMID n)" } ],
+  "caption": "Ready-to-paste Instagram caption, 300-700 chars: one-line hook, 2-4 short lines with the clinician-level nuance, a 'Refs:' line (Author Year, Journal) covering every claim the caption makes, a 'schematic animation' note if applicable, 5-8 hashtags."
+}
+```
+4-10 claims, in on-screen order, matching what is on screen NOW. Toy-model items say "Toy model / schematic: ...".
+
+## Lessons from the first 20 reels (follow these)
+- **Less text.** The first set ran long (22-30 s) and text-heavy because every hedge was put on screen. Budget: aim for
+  <= ~60 must-read words in the whole reel and 15-25 s. Show the mechanism; write only what the picture cannot say.
+  Put the nuance, the study details and the full reference list in `meta.json` caption and NOTES.md. On screen keep
+  one honest qualifier where needed ("in vitro", "schematic", "pooled estimate") and at most ONE small source line
+  per scene (first author + year + journal abbreviation, 24-26 px).
+- **Must-read text >= 30 px always** (labels inside diagrams included). If it does not fit at 30 px, cut words.
+- **Never state a number without its source and its denominator/criteria** (e.g. "strict criteria", "2-10 yr",
+  "teeth with apical periodontitis"). A clinician will quote these numbers.
+- **Cite precisely.** Reviewers found wrong first authors, wrong years, papers attached to claims they do not make,
+  and claims supported only by full text nobody had read. Only cite what you verified on PubMed (abstract or full
+  text) and say which. A textbook is cited as a textbook.
+- **Do not present a toy model as a measurement.** If a simulated field shows values, tune them to published
+  measurements or remove the scale; label "toy model" inside the safe area whenever it is on screen.
+- **Keep clear of the right-hand button column** (x > 960, y > 1100) and the bottom 340 px, including fine print.
+- **Loop cleanly**: fade text out before the loop crossfade so two texts never ghost over each other.
+- **Fonts**: only the first use of a weight/subset triggers a lazy load; the renderer now warms these up, but list
+  every font/weight you use in `REEL.fonts` anyway.
+- **American spelling** on screen and in captions: dentin, anesthesia, gray, color (the account is US-based).
+- **Shared machine etiquette**: always pass `--out reels/samples/NN-slug/_stills/<name>` to the stills tool; write
+  scratch files only in your own `_scratch/`; never touch another sample or the shared scratchpad.
