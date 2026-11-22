@@ -155,7 +155,8 @@ const PIC = (() => {
     stroke(gold(0.45), 1.6 * k);                                          // ridge line
     slash(k);
   };
-  // 7 — no preoperative deep probing defect (shown: probe sunk into a narrow, deep defect), pain, sinus tract or perforation
+  // 7 — no preoperative deep probing defect (probe sunk into a narrow, deep defect), pain (bolt), sinus tract (dotted
+  //     track to a stoma) or perforation (track through a gap in the root wall): all four shown, one "absent" stroke
   P[7] = (k) => {
     single(16, -74, 86, 152); fill(gold(0.08));
     single(16, -74, 86, 152); stroke(gold(0.85), 3 * k);
@@ -170,6 +171,18 @@ const PIC = (() => {
     ctx.beginPath(); ctx.moveTo(0, -60); ctx.lineTo(-52, -92); stroke('#fff6d6', 6.5 * k);
     for (const y of [40, 26, 4, -10]) { ctx.beginPath(); ctx.moveTo(-7, y); ctx.lineTo(7, y); stroke('#fff6d6', 3 * k); }
     ctx.restore();
+    // the other three preoperative findings of item 7, so that no part of the item is left out of the picture:
+    ctx.beginPath();                                                      // pain: bolt in the crown
+    ctx.moveTo(8, -64); ctx.lineTo(-7, -44); ctx.lineTo(1, -44); ctx.lineTo(-5, -27); ctx.lineTo(11, -49); ctx.lineTo(3, -49); ctx.closePath();
+    fill('#fff6d6');
+    ctx.save(); ctx.setLineDash([1, 7.5 * k]);                            // sinus tract: dotted track from the apex to a stoma on the gingiva
+    ctx.beginPath(); ctx.moveTo(24, 72); ctx.bezierCurveTo(50, 66, 69, 30, 72, -6); stroke(hi(1), 3.4 * k);
+    ctx.restore();
+    ctx.beginPath(); ctx.arc(72, -14, 6.5, 0, TAU); fill('rgba(8,12,40,0.95)');
+    ctx.beginPath(); ctx.arc(72, -14, 6.5, 0, TAU); stroke(hi(1), 2.6 * k);
+    ctx.beginPath(); ctx.arc(72, -14, 2.2, 0, TAU); fill('#fff6d6');
+    ctx.beginPath(); ctx.arc(45, 23, 7, 0, TAU); fill('rgba(8,12,40,0.95)'); // perforation: a hole through the root wall
+    ctx.beginPath(); ctx.moveTo(33, 19); ctx.lineTo(58, 28); stroke('#fff6d6', 3 * k);
     slash(k);
   };
   // 8 — patency at the canal terminus and no root-filling extrusion: file tip exactly at the terminus, nothing beyond

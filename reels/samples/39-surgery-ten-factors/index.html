@@ -14,7 +14,8 @@
  * 39 · TEN FACTORS associated with periapical healing after periapical surgery — a ten-pin study aid.
  * Source: Ng & Gulabivala, ch. 17 "Evaluation of Outcomes", Cohen's Pathways of the Pulp, 12th ed. (see RESEARCH.md).
  * Back seven pins (rows of 4 + 3) = the chapter's unpublished pooled analysis; front three (rows of 2 + 1) = individual studies.
- * Frame = 2-D back wall  +  3-D alley (alley.js, three.js)  +  2-D light beams  +  2-D overhead score display.
+ * Frame = 2-D back wall  +  3-D alley (alley.js, three.js, baked into additive light layers)  +  2-D light beams
+ *         +  2-D overhead score display.
  */
 import { buildAlley } from './alley.js';
 
@@ -187,7 +188,7 @@ function paintHUD() {
   x.restore();
   // bezel engraving (brass)
   x.fillStyle = '#e2c48a'; x.font = F.bezel; x.save(); x.letterSpacing = '1px';
-  const sw = measure(x, SCOPE); draw(x, SCOPE, W / 2 - sw / 2, HOUSE.y + 26); x.restore();
+  const sw = measure(x, SCOPE); draw(x, SCOPE, W / 2 - sw / 2, HOUSE.y + 28); x.restore();
   x.font = F.bezel; draw(x, SOURCE, PADL - 4, SCR.y + SCR.h + 31);
   x.font = F.handle; x.fillStyle = '#f0d7a4'; const hw = measure(x, '@natebrooksendo'); draw(x, '@natebrooksendo', PADR + 4 - hw, SCR.y + SCR.h + 32);
   return c;
@@ -213,31 +214,66 @@ function miniPin(c, x, y, k, band) {
   c.restore();
 }
 
+/* ---------------- baked light layers ----------------
+ * Software WebGL needs 1-2 s per frame here, so the alley is rendered only 21 times and then composited in 2-D:
+ *   DARK                 all ten pins unlit (opaque, already over the back wall)
+ *   LIT[i]  = (pin i lit)            - DARK      added with weight lit_i
+ *   SPOT[i] = (pin i lit + its spot) - (pin i lit)   added with weight act_i
+ * A rasterised scene has no inter-reflections, so the sum is exact wherever the layers do not overlap.
+ */
+const HOUSE_LEVEL = 0.35;
+const LAYER = { dark: null, lit: [], spot: [] };
+function grab(lit, spot) {
+  const st = { lit: PIN_XZ.map((_, i) => (i === lit ? 1 : 0)), house: HOUSE_LEVEL, spot: spot >= 0 ? { x: PIN_XZ[spot].x, z: PIN_XZ[spot].z, k: 1 } : { x: 0, z: 0, k: 0 } };
+  alley.render(st);
+  const c = document.createElement('canvas'); c.width = W; c.height = GL_H; const x = c.getContext('2d', { willReadFrequently: true });
+  x.drawImage(BG, 0, GL_TOP, W, GL_H, 0, 0, W, GL_H); x.drawImage(alley.canvas, 0, 0);
+  return { c, x };
+}
+function diff(a, b) {                   // b - a, cropped to its bounding box, as an opaque additive sprite
+  const A = a.x.getImageData(0, 0, W, GL_H).data, B = b.x.getImageData(0, 0, W, GL_H).data;
+  const D = new Uint8ClampedArray(A.length); let x0 = W, y0 = GL_H, x1 = 0, y1 = 0;
+  for (let y = 0, p = 0; y < GL_H; y++) for (let x = 0; x < W; x++, p += 4) {
+    const r = B[p] - A[p], g = B[p + 1] - A[p + 1], bl = B[p + 2] - A[p + 2];
+    D[p] = r; D[p + 1] = g; D[p + 2] = bl; D[p + 3] = 255;
+    if (r > 1 || g > 1 || bl > 1) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+  }
+  if (x1 < x0) return null;
+  const w = x1 - x0 + 1, h = y1 - y0 + 1, c = document.createElement('canvas'); c.width = w; c.height = h;
+  c.getContext('2d').putImageData(new ImageData(D, W, GL_H), -x0, -y0);
+  return { c, x: x0, y: y0 + GL_TOP };
+}
+const litFull = [];
+function layerLit(i) { if (LAYER.lit[i] === undefined) { litFull[i] = grab(i, -1); LAYER.lit[i] = diff(LAYER.dark, litFull[i]); } return LAYER.lit[i]; }
+function layerSpot(i) { if (LAYER.spot[i] === undefined) { layerLit(i); LAYER.spot[i] = diff(litFull[i], grab(i, i)); litFull[i] = null; } return LAYER.spot[i]; }
+function drawAlley(S) {
+  ctx.drawImage(LAYER.dark.c, 0, GL_TOP);
+  ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < 10; i++) {
+    if (S.lit[i] > 0.003) { const L = layerLit(i); if (L) { ctx.globalAlpha = clamp(S.lit[i]); ctx.drawImage(L.c, L.x, L.y); } }
+    if (S.spotK[i] > 0.003) { const L = layerSpot(i); if (L) { ctx.globalAlpha = clamp(S.spotK[i]); ctx.drawImage(L.c, L.x, L.y); } }
+  }
+  ctx.restore();
+}
+
 /* ---------------- per-frame state ---------------- */
 function stateAt(t) {
   const out = 1 - seg(t, T_OUT, DUR - 0.05, ease.inOut);
-  const lit = [], act = [], tau = [];
-  let n = 0, cur = -1;
+  const all = seg(t, T_ALL, T_ALL + 0.7, ease.out) * out;
+  const lit = [], act = [], tau = [], spotK = [];
+  let n = 0;
   for (let i = 0; i < 10; i++) {
     const ta = t - START[i]; tau.push(ta);
-    if (ta >= 0) { n++; cur = i; }
+    if (ta >= 0) n++;
     const on = seg(ta, 0, 0.45, ease.out);
-    const a = i < 9 ? Kit.env(ta, 0, SLOTS[i] + 0.3, 0.3, 0.45) : seg(ta, 0, 0.3) * (1 - 0.55 * seg(t, T_ALL - 0.1, T_ALL + 0.5));
+    const a = (i < 9 ? Kit.env(ta, 0, SLOTS[i] + 0.3, 0.3, 0.45) : seg(ta, 0, 0.3) * (1 - seg(t, T_ALL - 0.1, T_ALL + 0.5))) * out;
     // intro shimmer: a soft wave runs over the ten dark pins so the 4-3-2-1 triangle reads before anything is lit
-    const u = (t - 0.3 - i * 0.085) / 0.75, wave = u > 0 && u < 1 ? Math.sin(Math.PI * u) ** 2 * 0.3 : 0;
-    lit.push(Math.max(on * (0.86 + 0.14 * Math.max(a, seg(t, T_ALL, T_ALL + 0.5))), wave) * out);
-    act.push(Math.max(0, a) * out);
+    const u = (t - 0.3 - i * 0.085) / 0.8, wave = u > 0 && u < 1 ? Math.sin(Math.PI * u) ** 2 * 0.32 : 0;
+    lit.push(Math.max(on * out, wave));
+    act.push(Math.max(0, a));
+    spotK.push(Math.max(0, a, 0.42 * all));          // finale: every lamp on, softly
   }
-  // spotlight glides from pin to pin
-  let sx = PIN_XZ[0].x, sz = PIN_XZ[0].z, sk = 0;
-  if (cur >= 0) {
-    const p = PIN_XZ[cur], q = PIN_XZ[Math.max(0, cur - 1)], u = seg(tau[cur], 0, 0.4, ease.inOut);
-    sx = lerp(q.x, p.x, u); sz = lerp(q.z, p.z, u);
-    sk = (cur === 0 ? seg(tau[0], 0, 0.3) : 1) * (1 - 0.7 * seg(t, T_ALL, T_ALL + 0.6)) * out;
-  }
-  const all = seg(t, T_ALL, T_ALL + 0.6, ease.out) * out;
-  const house = Math.max(seg(t, 0.2, 1.4) * 0.35, all);
-  return { t, lit, act, tau, n, cur, out, all, house, spot: { x: sx, z: sz, k: sk } };
+  return { t, lit, act, tau, spotK, n, out, all };
 }
 
 /* ---------------- drawing ---------------- */
@@ -245,7 +281,7 @@ function drawBeams(S) {
   ctx.save(); ctx.globalCompositeOperation = 'lighter';
   const lampY = HOUSE.y + HOUSE.h + 6;
   for (let i = 0; i < 10; i++) {
-    const k = 0.05 * S.lit[i] + 0.2 * S.act[i] + 0.035 * S.all; if (k < 0.004) continue;
+    const k = 0.05 * S.lit[i] + 0.22 * S.spotK[i]; if (k < 0.004) continue;
     const P = PINS2D[i], G = GROUPS[FACTORS[i].g];
     for (let j = 0; j < 4; j++) {
       const spread = 1 + j * 0.42, a = k / (j + 1.2);
@@ -270,7 +306,7 @@ function drawLampBar(S) {
   const g = ctx.createLinearGradient(0, y, 0, y + 14); g.addColorStop(0, '#2a2f31'); g.addColorStop(0.4, '#c9d0d2'); g.addColorStop(1, '#3b4245');
   ctx.fillStyle = g; rr(ctx, 150, y, 780, 13, 6); ctx.fill();
   for (let i = 0; i < 10; i++) {
-    const P = PINS2D[i], k = clamp(0.25 * S.lit[i] + 0.75 * S.act[i] + 0.3 * S.all);
+    const P = PINS2D[i], k = clamp(0.25 * S.lit[i] + 0.75 * S.spotK[i]);
     ctx.fillStyle = '#15181a'; rr(ctx, P.top.x - 13, y + 2, 26, 15, 5); ctx.fill();
     ctx.fillStyle = rgba(Kit.mix('#4a4436', '#fff1d0', k), 1); rr(ctx, P.top.x - 9, y + 9, 18, 7, 3); ctx.fill();
     if (k > 0.02) { const gg = ctx.createRadialGradient(P.top.x, y + 14, 0, P.top.x, y + 14, 46); gg.addColorStop(0, `rgba(255,236,196,${0.55 * k})`); gg.addColorStop(1, 'rgba(255,236,196,0)'); ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = gg; ctx.fillRect(P.top.x - 46, y - 32, 92, 92); ctx.restore(); }
@@ -320,20 +356,21 @@ function drawRows(S) {
 
 function drawCounter(S) {
   // "n / 10" + pindicator triangle in the header
-  const o = S.out, n = S.n, G = n >= 8 ? GROUPS[1] : GROUPS[0];
+  const o = S.out, n = S.n, col = (k) => (k === 0 ? '#b7a47d' : GROUPS[k >= 8 ? 1 : 0].ink);
   ctx.textBaseline = 'alphabetic';
   ctx.font = F.of; ctx.fillStyle = INK; ctx.textAlign = 'right'; ctx.fillText('/10', PADR, Y.title);
-  const ow = ctx.measureText('/10').width;
-  const ta = n > 0 ? S.tau[n - 1] : 9, u = seg(ta, 0, 0.3, ease.out);
-  ctx.save(); rr(ctx, PADR - ow - 150, Y.title - 96, 144, 104, 0); ctx.clip();
+  const ow = ctx.measureText('/10').width, nx = PADR - ow - 8;
+  const u = n > 0 ? seg(S.tau[n - 1], 0, 0.32, ease.out) : 1;
+  ctx.save(); ctx.beginPath(); ctx.rect(nx - 150, Y.title - 92, 156, 100); ctx.clip();
   ctx.font = F.count; ctx.textAlign = 'right';
-  const shown = o > 0.5 ? n : 0;
-  if (u < 1 && n > 0 && o > 0.5) { ctx.globalAlpha = 1 - u; ctx.fillStyle = n - 1 === 0 ? '#b7a47d' : (n - 1 >= 8 ? GROUPS[1].ink : GROUPS[0].ink); ctx.fillText(String(n - 1), PADR - ow - 8, Y.title - 70 * u); }
-  ctx.globalAlpha = (o > 0.5 ? (n > 0 ? u : 1) : 1) * (o > 0.5 ? Math.min(1, (o - 0.5) * 2) : Math.min(1, (0.5 - o) * 2 + 0.0));
-  ctx.fillStyle = shown === 0 ? '#b7a47d' : G.ink; ctx.fillText(String(shown), PADR - ow - 8, Y.title + (n > 0 && o > 0.5 ? 70 * (1 - u) : 0));
+  if (n === 0 || o < 1) { ctx.globalAlpha = n === 0 ? 1 : 1 - o; ctx.fillStyle = col(0); ctx.fillText('0', nx, Y.title); }
+  if (n > 0) {
+    if (u < 1) { ctx.globalAlpha = (1 - u) * o; ctx.fillStyle = col(n - 1); ctx.fillText(String(n - 1), nx, Y.title - 64 * u); }
+    ctx.globalAlpha = u * o; ctx.fillStyle = col(n); ctx.fillText(String(n), nx, Y.title + 64 * (1 - u));
+  }
   ctx.restore();
+  const cx = nx - 224, cy = Y.title - 82, dx = 27, dy = 23;
   // pindicator
-  const cx = PADR - ow - 232, cy = Y.title - 82, dx = 27, dy = 23;
   const P = [[-1.5, 0], [-0.5, 0], [0.5, 0], [1.5, 0], [-1, 1], [0, 1], [1, 1], [-0.5, 2], [0.5, 2], [0, 3]];
   for (let i = 0; i < 10; i++) {
     const k = clamp(seg(S.tau[i], 0, 0.3)) * o, GG = GROUPS[FACTORS[i].g], x = cx + P[i][0] * dx, y = cy + P[i][1] * dy;
@@ -359,8 +396,7 @@ function render(t) {
   const S = stateAt(t);
   ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
   ctx.drawImage(BG, 0, 0);
-  alley.render(S);
-  ctx.drawImage(alley.canvas, 0, GL_TOP);
+  drawAlley(S);
   drawBeams(S);
   drawLampBar(S);
   ctx.drawImage(HUD, 0, 0);
@@ -391,14 +427,8 @@ window.REEL = {
       return { top: { x: top.x, y: top.y + GL_TOP }, base: { x: base.x, y: base.y + GL_TOP }, w: (side.x - mid.x) * 2 };
     });
     BG = paintBG(); HUD = paintHUD(); GRAIN = paintGrain();
-    window.__DBG = { PINS2D, ROWS, Y };
-    window.__PERF = () => {
-      const gl = alley.canvas.getContext('webgl2'), o = {};
-      let t0 = performance.now(); for (let i = 0; i < 5; i++) { alley.render(stateAt(5 + i * 0.1)); gl.finish(); } o.gl = (performance.now() - t0) / 5;
-      t0 = performance.now(); for (let i = 0; i < 5; i++) { ctx.drawImage(alley.canvas, 0, GL_TOP); ctx.getImageData(0, 0, 1, 1); } o.blit = (performance.now() - t0) / 5;
-      t0 = performance.now(); for (let i = 0; i < 5; i++) { const S = stateAt(5 + i * 0.1); ctx.drawImage(BG, 0, 0); drawBeams(S); drawLampBar(S); ctx.drawImage(HUD, 0, 0); drawRows(S); drawCounter(S); ctx.getImageData(0, 0, 1, 1); } o.twoD = (performance.now() - t0) / 5;
-      return o;
-    };
+    LAYER.dark = grab(-1, -1);
+    window.__DBG = { PINS2D, ROWS, Y, LAYER };
   },
   render,
 };

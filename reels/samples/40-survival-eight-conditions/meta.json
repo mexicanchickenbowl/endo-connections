@@ -28,20 +28,20 @@
     },
     {
       "claim": "6 · Not a fixed-prosthesis abutment",
-      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list; chapter text read (body text: in Ng 2011 the abutment sample, n = 94, was too small to reach significance). Ng, Mann & Gulabivala, Int Endod J 2010;43:171-89 (PMID 20158529): not an abutment for removable or fixed prosthesis; abstract"
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list (chapter refs 3, 111, 191, 151); chapter text read (body text: in Ng 2011 abutment teeth had poorer survival but the sample, n = 94, was too small to reach significance). Ng, Mann & Gulabivala, Int Endod J 2010;43:171-89 (PMID 20158529): 'not functioning as an abutment for removable or fixed prosthesis'; abstract"
     },
     {
       "claim": "7 · No preoperative deep probing defect, pain, sinus tract, or perforation",
-      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list; chapter text read. Ng et al., Int Endod J 2011;44:610-25 (PMID 21366627): 'narrow but deep periodontal probing depth; pain; discharging sinus; and iatrogenic perforation (for 2°RCTx cases only)'; abstract"
+      "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list; chapter text read. Ng et al., Int Endod J 2011;44:610-25 (PMID 21366627): 'narrow but deep periodontal probing depth; pain; discharging sinus; and iatrogenic perforation (for 2°RCTx cases only)'; abstract. Chapter body text: probing defects 'of endodontic origin'"
     },
     {
       "claim": "8 · Canal terminus patency, no root-filling extrusion",
       "source": "Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed., ch. 17, summary list; chapter text read. Ng et al., Int Endod J 2011;44:610-25 (PMID 21366627): patency HR 0.3 in the first 22 months; gutta-percha extrusion HR 3.0 beyond 22 months; abstract"
     },
     {
-      "claim": "Schematic: the tooth-shaped constellation, star positions and pictograms are illustration only",
+      "claim": "Schematic: the tooth-shaped constellation, star positions and pictograms are illustration only (star 1 sits on a molar-shaped figure by design, not by meaning)",
       "source": "Design device; star positions carry no anatomical meaning (see NOTES.md)"
     }
   ],
-  "caption": "Board review: 8 conditions associated with better tooth survival after root canal treatment.\nA study summary of one list in Ng & Gulabivala's outcomes chapter (Cohen's Pathways of the Pulp, 12th ed., ch. 17).\nSurvival = the tooth stays in the mouth. This is not the periapical healing list.\nAssociations from cohort data, not guarantees. The abutment item rests mostly on pooled data; cast restoration is listed for molars, and the authors caution against crowning every tooth.\nSchematic animation.\nRefs: Ng & Gulabivala, Cohen's Pathways of the Pulp 12th ed.; Ng 2010, Ng 2011, Int Endod J.\n#endodontics #rootcanal #boardreview #endoresident #dentistry #toothsurvival"
+  "caption": "8 conditions associated with better tooth survival after root canal treatment.\nA study summary of one list in Ng & Gulabivala's outcomes chapter (ch. 17, Cohen's Pathways of the Pulp).\nSurvival = tooth still in the mouth; not the periapical healing list.\nAssociations, not guarantees or proof of cause.\nItem 4 is listed for molars (the authors caution against crowning every tooth). Item 6: fixed-prosthesis abutments; their own cohort had too few for significance. Item 8: patency and no extrusion during treatment.\nSchematic animation.\nRefs: Ng & Gulabivala, Cohen's Pathways of the Pulp, 12th ed.; Ng 2010 & 2011, Int Endod J.\n#endodontics #rootcanal #boardreview #endoresident #toothsurvival"
 }

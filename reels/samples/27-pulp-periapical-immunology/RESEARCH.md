@@ -504,3 +504,10 @@ off screen).
 **Still unverified after this pass (abstract-only or second-hand):** anything inside Stashenko 1998, Jontell
 1998, Nair 2004, Hahn & Liewehr 2007, Márton & Kiss 2000/2014 and Cavalla 2021 beyond their abstracts;
 Kakehashi 1965; the drawing conventions for cell morphology (textbook histology); and "no blood supply".
+
+
+## Review round 1 (2026-11-22): what changed and what was re-checked
+- No fact in sections (a) to (e) changed. Two abstracts were re-read on PubMed because the Instagram caption now leans on them: Chen et al., Am J Pathol 1999;155:2145-52, PMID 10595943 ("osteolytic lesion formation was greatest in animals lacking TNF and/or IL-1 receptors"; mouse, pulp inoculated with six anaerobes) and Jontell et al., J Dent Res 1987;66:1149-53, PMID 3305633 (human intact teeth: class II dendritic cells and T cells present in all pulps; "B cells were not seen").
+- On-screen disclaimer corrected from "largely rodent-model data" to "human + rodent data": rows 1.1, 2.7, 2.10, 4.x (IgG) and 5.2 are human tissue; kinetics (Stashenko 1992, Yamasaki 1994, Kawashima 2007) and knockout causality (Chen 1999, Hou 2000) are rodent.
+- The IgG figure is attributed on screen to Matthews & Mason 1983 (row for IgG), not to Stashenko 1992.
+- Antibodies are drawn only beside plasma cells and on leaked bacteria (cell of origin: plasma cells).

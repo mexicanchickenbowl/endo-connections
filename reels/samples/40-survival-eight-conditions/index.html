@@ -182,11 +182,11 @@ function drawTitle() {
   // L3
   ctx.fillStyle = foil(424, 88); txt('TOOTH SURVIVAL', cx, 424, F.pf(88, 700), ctx.fillStyle, 'center', 5);
   // L4
-  const a = 'after root canal treatment', b = 'associations, not guarantees', f4 = F.gi(33, 500), f4b = F.gi(33, 600);
-  const wa = tw(a, f4), wb = tw(b, f4b), gap = 44, x0 = cx - (wa + gap + wb) / 2;
-  txt(a, x0, 476, f4, cream(0.92));
+  const a = 'after root canal treatment', b = 'associations, not guarantees', f4 = F.gi(37, 500), f4b = F.gi(37, 600);
+  const wa = tw(a, f4), wb = tw(b, f4b), gap = 40, x0 = cx - (wa + gap + wb) / 2;
+  txt(a, x0, 477, f4, cream(0.92));
   diamond(x0 + wa + gap / 2, 466, 5.5, C.gold);
-  txt(b, x0 + wa + gap, 476, f4b, C.goldHi);
+  txt(b, x0 + wa + gap, 477, f4b, C.goldHi);
 }
 
 // ------------------------------------------------------------------ chart plate: border, graduated scale, grid

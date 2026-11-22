@@ -1,0 +1,39 @@
+{
+  "id": "41",
+  "slug": "41-healing-seven-factors",
+  "title": "Periapical healing: 7 prognostic factors",
+  "style": "Stained-glass rose window",
+  "topic": "The seven factors Cohen's ch. 17 lists as having a major impact on periapical healing after nonsurgical RCT, each with its favorable state.",
+  "duration": 26.55,
+  "claims": [
+    {
+      "claim": "1 · Periapical lesion: presence, size · better healing associated with: none, or smaller",
+      "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 1; Figs. 17.20, 17.21: pooled OR 2.4 for no radiolucency, 2.2 for small vs large). Cross-check: Ng, Mann & Gulabivala, Int Endod J 2011;44:583-609 (PMID 21366626), abstract"
+    },
+    {
+      "claim": "2 · Patency at the canal terminus · achieved",
+      "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 2: achieving patency increased the chance of success twofold, citing Ng 2011). Cross-check: Ng et al., Int Endod J 2011;44:583-609 (PMID 21366626), abstract"
+    },
+    {
+      "claim": "3 · Apical extent of preparation · flush · 0–2 mm within the radiographic apex, not beyond",
+      "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 3; Fig. 17.22 and the text on apical extent: flush = 0–2 mm within the radiographic apex, defined for root fillings; long fillings lowest success). Cross-check: Ng et al., Int Endod J 2008;41:6-31 (PMID 17931388) and 2011;44:583-609 (PMID 21366626), abstracts"
+    },
+    {
+      "claim": "4 · Intraoperative culture test · negative · a prognostic factor, though not routine practice",
+      "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 4; Fig. 17.19: pooled OR 2.1 for a negative preobturation culture; text: the practice has fallen out of clinical favor). Cross-check: Sjögren et al., Int Endod J 1997;30:297-306 (PMID 9477818), abstract"
+    },
+    {
+      "claim": "5 · Iatrogenic perforation · none",
+      "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 5: if present, reduces the odds of success by 30%, citing Ng 2011). Cross-check: Ng et al., Int Endod J 2011;44:583-609 (PMID 21366626), abstract (perforation P = 0.06)"
+    },
+    {
+      "claim": "6 · Root-filling quality on radiograph · good, no voids",
+      "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 6; Fig. 17.23: pooled OR 3.9 for good-quality vs suboptimal root filling; unsatisfactory includes radiographic voids). Cross-check: Ng et al., Int Endod J 2008;41:6-31 (PMID 17931388), abstract"
+    },
+    {
+      "claim": "7 · Final coronal restoration · good quality",
+      "source": "Ng & Gulabivala, Evaluation of Outcomes, ch. 17 in Cohen's Pathways of the Pulp, 12th ed.: Summary of Factors Influencing Periapical Healing Following Nonsurgical Root Canal Treatment (bullet 7; Fig. 17.24: pooled OR 1.9 for satisfactory vs unsatisfactory restoration; good quality regardless of type). Cross-check: Ng et al., Int Endod J 2008;41:6-31 (PMID 17931388) and 2011;44:583-609 (PMID 21366626), abstracts"
+    }
+  ],
+  "caption": "7 factors that influence periapical healing after nonsurgical root canal treatment: a study summary of the outcomes chapter in Cohen's.\nBetter healing is associated with: no periapical lesion (or a smaller one) · patency at the canal terminus · preparation flush with the terminus (0–2 mm within the radiographic apex) · negative culture before obturation · no perforation · good root filling on the radiograph · good coronal restoration.\nCulture is prognostic, though not routine practice. Healing, not tooth survival. Associations, not guarantees.\nRef: Ng & Gulabivala, ch. 17, Cohen's Pathways of the Pulp, 12th ed.\n#endodontics #endo #rootcanal #boardprep #apicalperiodontitis"
+}

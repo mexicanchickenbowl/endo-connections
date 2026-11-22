@@ -1,7 +1,8 @@
 /*
  * 39 · alley.js — the 3-D bowling alley (three.js): ten glossy pins on a polished maple pin deck,
  * with real reflections (mirrored pass under a semi-transparent lane), one shadow-casting key light and a
- * moving "active" spotlight. Everything is a pure function of the state passed to render().
+ * per-pin spotlight. render(state) is a pure function of the state; the page calls it a handful of times at start-up
+ * to bake light layers (see index.html), because software WebGL is far too slow to run for every video frame.
  * Units are inches. The camera looks down -Z; the head pin stands at the origin, rows recede to -Z.
  */
 import * as THREE from 'three';
@@ -110,17 +111,16 @@ function poolTexture() {
 export function buildAlley(o) {
   const { W, H, pins, cam: C } = o;          // pins: [{x, z, label, band}]  (x, z in inches)
   const glc = document.createElement('canvas'); glc.width = W; glc.height = H;
-  const Q = new URLSearchParams(location.search), q = (k, d) => (Q.has(k) ? +Q.get(k) : d);
-  const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: !!q('aa', 1), alpha: true, preserveDrawingBuffer: true, premultipliedAlpha: true });
+  const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: true, alpha: true, preserveDrawingBuffer: true, premultipliedAlpha: true });
   renderer.setPixelRatio(1); renderer.setSize(W, H, false);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
-  renderer.shadowMap.enabled = !!q('sh', 1); renderer.shadowMap.type = q('soft', 1) ? THREE.PCFSoftShadowMap : THREE.PCFShadowMap; renderer.shadowMap.autoUpdate = false;
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.shadowMap.autoUpdate = false;
   renderer.autoClear = false; renderer.setClearColor(0x000000, 0);
 
   const scene = new THREE.Scene();
   const pm = new THREE.PMREMGenerator(renderer);
-  if (q('env', 1)) scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture;
   scene.environmentIntensity = 0.32;
 
   const camera = new THREE.PerspectiveCamera(C.fov, W / H, 20, 900);
@@ -135,7 +135,7 @@ export function buildAlley(o) {
 
   // lane
   const laneGeo = new THREE.PlaneGeometry(geom.width, geom.len); laneGeo.rotateX(-Math.PI / 2); laneGeo.translate(0, 0, (geom.zNear + geom.zFar) / 2);
-  const laneMat = new THREE.MeshStandardMaterial({ map: laneTexture(geom, pins), roughness: 0.2, metalness: 0, transparent: true, opacity: 0.8, envMapIntensity: 1 });
+  const laneMat = new THREE.MeshStandardMaterial({ map: laneTexture(geom, pins), roughness: 0.2, metalness: 0, transparent: true, opacity: 0.86, envMapIntensity: 1 });
   const lane = new THREE.Mesh(laneGeo, laneMat); lane.receiveShadow = true; statics.add(lane);
   const sub = new THREE.Mesh(laneGeo, new THREE.MeshBasicMaterial({ color: 0x06080a, depthTest: false, depthWrite: false })); sub.renderOrder = -10; scene.add(sub);
 
@@ -173,7 +173,7 @@ export function buildAlley(o) {
   // lights
   const hemi = new THREE.HemisphereLight(0x9fb6d6, 0x24160a, 0.5); hemi.position.set(0, 1, 0); world.add(hemi);
   const key = new THREE.DirectionalLight(0xfff1dd, 1.5); key.position.set(-34, 78, 46); key.target.position.set(0, 0, -15); world.add(key); world.add(key.target);
-  key.castShadow = true; key.shadow.mapSize.set(q('sm', 2048), q('sm', 2048)); key.shadow.radius = 5; key.shadow.bias = -0.0008; key.shadow.normalBias = 0.05;
+  key.castShadow = true; key.shadow.mapSize.set(4096, 4096); key.shadow.radius = 5; key.shadow.bias = -0.0008; key.shadow.normalBias = 0.05;
   const sc = key.shadow.camera; sc.left = -34; sc.right = 34; sc.top = 40; sc.bottom = -30; sc.near = 20; sc.far = 220; sc.updateProjectionMatrix();
   const spot = new THREE.SpotLight(0xffe6c2, 0, 0, 0.115, 0.85, 0); world.add(spot); world.add(spot.target);
   const fill = new THREE.DirectionalLight(0x86a8d8, 0.25); fill.position.set(40, 30, 60); fill.target.position.set(0, 4, -15); world.add(fill); world.add(fill.target);
@@ -193,21 +193,18 @@ export function buildAlley(o) {
       meshes[i].material.emissiveIntensity = 0.02 + 0.2 * l;
       pools[i].material.opacity = 0.34 * l;
     }
-    key.intensity = lerp(0.85, 1.55, state.house);
-    hemi.intensity = lerp(0.42, 0.6, state.house);
+    key.intensity = lerp(0.6, 1.5, state.house);
+    hemi.intensity = lerp(0.36, 0.6, state.house);
     spot.intensity = 5.5 * state.spot.k;
-    spot.position.set(state.spot.x - 4, 86, state.spot.z + 30); spot.target.position.set(state.spot.x, 5, state.spot.z);
+    spot.position.set(state.spot.x - 3, 86, state.spot.z + 26); spot.target.position.set(state.spot.x, 5, state.spot.z);
     // pass 1 — reflection: mirror pins + lights below the lane
     renderer.clear();
-    if (q('mir', 1)) {
     statics.visible = false; sub.visible = true; world.scale.y = -1;
     renderer.render(scene, camera);
-    }
-    // pass 2 — the real scene over it (lane is 80% opaque, so 20% of the mirror image shows through)
+    // pass 2 — the real scene over it (the lane is 86% opaque, so a little of the mirror image shows through)
     renderer.clearDepth();
     statics.visible = true; sub.visible = false; world.scale.y = 1;
-    if (!q('shs', 0) || !render.done) renderer.shadowMap.needsUpdate = true;
-    render.done = true;
+    renderer.shadowMap.needsUpdate = true;
     renderer.render(scene, camera);
   }
 

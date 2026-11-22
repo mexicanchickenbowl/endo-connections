@@ -486,8 +486,8 @@
     ctx.drawImage(cameLayer, ox, oy);
     // bloom: glass glows from within and spills onto leads and stone
     ctx.globalCompositeOperation = 'lighter';
-    ctx.globalAlpha = 0.32 * litC; ctx.drawImage(paneBloom[0], ox, oy, OS, OS);
-    for (let k = 0; k < N; k++) if (lit[k] > 0.004) { ctx.globalAlpha = (0.3 + 0.05 * act[k]) * lit[k]; ctx.drawImage(paneBloom[k + 1], ox, oy, OS, OS); }
+    ctx.globalAlpha = 0.25 * litC; ctx.drawImage(paneBloom[0], ox, oy, OS, OS);
+    for (let k = 0; k < N; k++) if (lit[k] > 0.004) { ctx.globalAlpha = (0.23 + 0.07 * act[k]) * lit[k]; ctx.drawImage(paneBloom[k + 1], ox, oy, OS, OS); }
     // shafts of light
     for (let k = 0; k < N; k++) {
       const a = (0.5 * act[k] + 0.13 * fin * (1 - out)) * lit[k];
