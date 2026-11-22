@@ -138,3 +138,61 @@ below. "Abstract" = the PubMed abstract contains it; "full text" = read in the p
   (3) summary source line shortened to stay out of the button column, RCT slip changed from two columns to rows,
   part 2 source line now names the flow-model paper, "(2 cohorts)" added to the per-mm line in the summary, "≥#30" line
   added to the summary so the poster is a complete study card.
+
+## Review changes (v2, after independent science + design review)
+The v2 build supersedes the storyboard times, word count and wording above where they differ. New timeline: 24.9 s
+(was 25.6); hook/anatomy 0-2.6 s, part 1 2.6-11.2, wipe, part 2 11.7-17.4, wipe, summary 17.9-23.3, final wipe; poster
+22.9 s. About 65 must-read words (was about 74). Last frame = first frame (pixel-identical, re-checked).
+
+Science
+- Per-mm note is now "per mm short ~12-14% **worse odds**" (part 1 and summary; "(2 cohorts)" dropped on screen).
+  "Worse" covers both Chugal 2003 (14% higher chance of failure per mm, radiographic apex, apical periodontitis, 4 yr)
+  and Ng 2011 (12% lower odds of success per un-instrumented mm, apex-locator zero, 2-4 yr). The caption spells out both.
+  The design reviewer's alternative "less healing" was not used: it is not accurate for Chugal's failure metric.
+- "Long" scribble redrawn: it leaves the side-exit foramen and runs on past the dashed 0 line (the line now extends
+  left across it), below the root tip, so the 76% is unambiguously "beyond the radiographic apex" (Sjögren's category).
+- Summary line 1 is now "Infected: fill 0-2 mm short of x-ray apex" (reference point and "fill", not "stop").
+- Caption: the wrong sentence "Vital cases did as well slightly shorter" is replaced by Chugal 2003's actual finding
+  (normal pulp/periapex: successes 1.23 mm, failures 0.20 mm short; abstract). Added: definition of "long", one Swedish
+  cohort per root, in vitro conditions for #30, "only +2 significantly worse", Wu 2002 on the first binding file
+  (PMID 11985678, abstract re-read on PubMed 2026-11-22: in 90% of canals the first binding instrument was smaller
+  than the canal's short diameter), schematic note on the constriction, Boutsioukis 2021 and Wu 2002 in Refs.
+- Sticky now reads "Evidence: LOW" (not the GRADE word "Certainty"); the caption says which part has a published
+  rating (Sabeti 2024, apical size only).
+- Fatima 2021 source note corrected: only +2 with 4% taper was lowest (57.1%); +2 with 6% taper did not differ from +3.
+- Still open before posting: check 94 / 76 / 68 against the results table of Sjögren 1990 (J Endod 16:498-504).
+
+Design
+- Cut: the blue "≥#30 ..." line in the summary (now caption only), "(2 cohorts)", "mand. molars" on the RCT slip.
+- Hook: root outline and canal are drawn in the first 0.9 s and the paper ruler slides in at 0.5 s, so by 1.0 s there
+  is a recognizable apex plus a prop; labels from 1.5 s; part 1 starts at 2.6 s.
+- Summary: sticky at +1.7 s, second highlight done at +2.35 s; complete board held 20.25-23.32 s (3.07 s).
+- Wipes: each sweep 0.20 s (was 0.16), and the three hard ghost copies are replaced by a continuous smear (18
+  sub-frame copies across the previous frame interval). Four rows kept: three rows cannot cover the 1230 px of ink
+  with a 320 px eraser.
+- Poster/grid crop: header moved down 24 px (highlighter top at y 270, 30 px inside the 3:4 crop); summary re-spaced
+  (47 px between RCT slip and sticky, 55 px to the source line).
+- Ghosting is built from strokes only (no text) and blurred 4.5 px, so no residue is readable.
+- "schematic / not to scale" is now two short lines in free space (left margin in part 1, between the roots in
+  part 2); blue anatomy labels right-aligned at x 226, clear of the socket line.
+- RCT slip pinned 0.8 s earlier (B0 + 3.1). Handle tape moved up to y 1541-1579 (inside the safe line). Summary source
+  line is 24 px with the four papers whose numbers are on that board (Sjögren, Saini, Chugal, Ng).
+- File and needle are clipped below the header underline.
+
+## Final QA (2026-11-22)
+- Rendered 23 stills with `--safe` (`_stills/final-qa`), t = 0 to 24.85 s. No clipped, overlapping or missing text, no
+  NaN/undefined, no blank frames; last frame equals the first (clean board, header only), so nothing ghosts at the loop.
+  Header hook is fully legible at t = 0; complete summary board held 20.25-23.3 s; poster (22.9 s) reads inside the
+  3:4 crop. Video: 1080x1920, 30 fps, ffprobe 24.9 s = REEL.duration; rendered after the last source edit.
+- Every on-screen number re-checked against RESEARCH.md (94/76/68 Sjögren 1990; 12-14% Chugal 2003 + Ng 2011; #30
+  Khademi 2006; 48% and 71-92% Saini 2012). No reel source change, no re-render.
+- meta.json: caption was about 1,900 characters; the schema asks for 300-700. Rewritten to fit (numbers, denominators,
+  refs for each claim, schematic note). The longer nuance stays in the claims' source fields and in this file:
+  "long" = filling material radiographically beyond the apex; Chugal 2003 = 14% higher chance of failure per mm from the
+  radiographic apex (apical periodontitis, 4 yr), Ng 2011 = 12% lower odds of healing per un-instrumented mm from the
+  apex-locator zero (2-4 yr); normal pulp/periapex in Chugal 2003: successes 1.23 mm, failures 0.20 mm short; #30 is from
+  extracted mesiobuccal canals with syringe irrigation and depends on taper and needle (Boutsioukis & Gutierrez Nova
+  2021); the first binding file under-reads the canal (Wu 2002); the published "low" rating covers apical size only
+  (Sabeti 2024).
+- Left as is: the label "constriction" starts at x = 59, 5 px outside the 64 px side margin (no Instagram UI there).
+- Still open before posting: check 94 / 76 / 68 against the results table of Sjögren 1990 (primary full text not read).

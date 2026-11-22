@@ -548,3 +548,21 @@ irrigate/activate station tagged `IFU`; "≤ 4 canals" without the document name
 - Which of the two live manufacturer documents is packed with product sold in the USA is unknown; the account owner
   should check the leaflet in his own box before posting.
 - Sponsorship / relationship with the manufacturer: to be stated by the account owner.
+
+
+---
+
+## Corrections after independent review (22 Nov 2026)
+- **"Unwinding" sentence.** Earlier text here attributed "As a safety feature the files are designed to unwind. They may
+  be used until the files unwind backwards" to older DFUs only. It is also printed in the current US-labelled
+  DFU-RF-US Rev D 06/23 under "Safe Unwinding (Heat Treat only)" (see `_scratch/manufacturer_DFU-US-2023_extract.txt`).
+  The IFU says "discard if it shows any signs of distortion or wear". The two live documents conflict; the reel shows
+  only "inspect" and the caption notes give the conservative rule (discard).
+- **"IFU 2026".** The multilingual IFU (REF 99.EX7.10.01A.XX) prints no revision date; "2026" is the PDF creation date
+  (5 Mar 2026). Cite it by REF number.
+- **Final irrigation** is a printed step of DFU-RF-US Rev D ("Disinfecting"), so it is a manufacturer direction in one
+  of the two documents, not only a convention.
+- **Berutti 2004 (PMID 15085052).** The intervention is "manual preflaring"; the abstract gives no file size. The
+  outcome is the mean number of resin blocks shaped before breakage (59 vs 10), not time. The reel now says "Hand
+  preflaring first: shaped about 6× more blocks" and the hand-file label is "#10 K, then #15 K" (US DFU minimum).
+- **Speed/torque** are "recommended" in the IFU and optional in the US DFU ("Or if you wish, you can use…").

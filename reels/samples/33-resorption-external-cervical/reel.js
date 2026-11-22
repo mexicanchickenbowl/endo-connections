@@ -65,7 +65,7 @@
   const LP = { ax: LX.sag, sag: LX.pa, cor: LX.cor, v3: LX.v3, pa: LX.ax };   // periapical scene: the radiograph is the hero
   function rect(name, t) {
     const s1 = seg(t, TC - 0.1, TC + 0.5, ease.inOut), s2 = seg(t, TE2 - 0.1, TE2 + 0.7, ease.inOut);
-    const s3 = seg(t, DUR - 0.13, DUR - 0.01, ease.inOut);     // panes are black by then: slide back to the opening grid for the loop
+    const s3 = t >= DUR - 0.14 ? 1 : 0;     // panes are black by then: slide back to the opening grid for the loop
     const a = LG[name], b = LX[name], c = LP[name];
     const r = [0, 0, 0, 0];
     for (let i = 0; i < 4; i++) r[i] = lerp(lerp(lerp(a[i], b[i], s1), c[i], s2), a[i], s3);
@@ -314,7 +314,7 @@
   function drawCaptions(t) {
     const F = 0.2;
     // title: present at t = 0 and again on the end card, so the loop is seamless
-    const titleA = Math.max(1 - seg(t, TB - F, TB), seg(t, TEND, TEND + F));
+    const titleA = Math.max(1 - seg(t, TB - F, TB), seg(t, TEND + 0.1, TEND + 0.3));     // headline out 19.1-19.3 -> title in 19.3-19.5: never two texts at once
     if (titleA > 0) { ctx.save(); ctx.globalAlpha = titleA; txt('External cervical resorption', 64, 368, `600 62px ${SANS}`, C.text); ctx.restore(); }
     sub(t, 0.1, TB, [{ t: 'Why ', c: C.text }, { t: '2-D', c: C.orange, w: 600 }, { t: ' underestimates it', c: C.text }], 44);
     // 1 · initiation
@@ -330,7 +330,7 @@
     // classification
     head(t, TE1, TE2, null, 'Patel 3-D classification', 62, 26);
     // 2-D vs 3-D
-    head(t, TE2, TEND + F, null, 'The periapical underestimates it', 60, 26);
+    head(t, TE2, TEND + 0.1, null, 'The periapical underestimates it', 60, 26);
   }
 
   // ---------- axial annotations ----------
@@ -596,7 +596,7 @@
 
   // ---------- end card ----------
   function drawEnd(t) {
-    const out = 1 - seg(t, DUR - 0.3, DUR - 0.12, ease.inOut);
+    const out = 1 - seg(t, DUR - 0.35, DUR - 0.15, ease.inOut);
     // 1) the lower panes (and their labels) clear first, so the card never fades in over other text
     const cov = seg(t, TEND - 0.2, TEND) * out;
     if (cov > 0) { ctx.save(); ctx.globalAlpha = cov; ctx.fillStyle = C.panel; ctx.fillRect(50, 1046, 980, 278); ctx.restore(); }

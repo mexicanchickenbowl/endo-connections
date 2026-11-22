@@ -3,49 +3,56 @@
   "slug": "36-x7-file-sequence",
   "title": "EdgeFile X7: the route from access to apex",
   "style": "Transit route map",
-  "topic": "The manufacturer's EdgeFile X7 shaping sequence and settings as a metro map, with the habits and the one evidence flag that go with it.",
-  "duration": 23.6,
+  "topic": "The manufacturer's EdgeFile X7 shaping sequence and settings as a metro map, with per-file habits and one in vitro evidence flag.",
+  "duration": 22.4,
   "claims": [
     {
-      "claim": "Line info: speed 300–500 rpm; torque limit 300 g·cm (= 2.94 N·cm); apical pressure minimal",
-      "source": "Manufacturer directions, not evidence. Speed and torque limit: EdgeEndo, Instructions for Use – EdgeFile X7, REF 99.EX7.10.01A.XX ('IFU 2026'), edgeendo.com, accessed 22 Nov 2026 (section 1) and EdgeEndo, Rotary/Reciprocating Files Directions for Use, DFU-RF-US Rev D 06/23 ('US DFU 2023'), edgeendo.com, accessed 22 Nov 2026. 'Minimal apical pressure' is in the US DFU only"
+      "claim": "Line info (header 'IFU · DFU'): speed 300–500 rpm; torque limit 300 g·cm",
+      "source": "Manufacturer directions, not evidence. EdgeEndo, Instructions for Use – EdgeFile X7, REF 99.EX7.10.01A.XX (undated; PDF created 5 Mar 2026), edgeendo.com, accessed 22 Nov 2026, section 1 ('Recommended speed 300-500 rpm continuous rotation. Torque limit: 300 g·cm (2.94 N·cm)'). EdgeEndo, Rotary/Reciprocating Files Directions for Use, DFU-RF-US Rev D 06/23, edgeendo.com, accessed 22 Nov 2026 offers the same values as an option ('Or if you wish, you can use ... Speed: 300-500 rpm, Torque: 2.94 N-cm/300 g-cm')"
     },
     {
-      "claim": "Route: ACCESS straight-line → SCOUT with hand files → WORKING LENGTH with a #10 K or larger (apex locator and radiograph pictograms) = glide path",
-      "source": "Manufacturer: EdgeEndo, Instructions for Use – EdgeFile X7, REF 99.EX7.10.01A.XX ('IFU 2026'), edgeendo.com, accessed 22 Nov 2026, 'Simplified Technique Guide' steps 1, 2 and 4 (this technique is printed in the IFU 2026 only)"
+      "claim": "Route: ACCESS → SCOUT → WORKING LENGTH: #10 K, then #15 K (apex locator and radiograph pictograms) = glide path",
+      "source": "Manufacturer. IFU (REF 99.EX7.10.01A.XX) 'Simplified Technique Guide' steps 1, 2 and 4 ('#10 K file or larger ... with an apex locator and radiographs ... This will also form a glide path'); DFU-RF-US Rev D 06/23: 'Establish patency by taking a #10 K-File 1mm past the canal terminus, and at least a #15 K-File to the terminus.' The label satisfies both"
     },
     {
-      "claim": "Evidence · in vitro: glide path first, file lasted about 6× longer (ProTaper S1 in resin blocks: mean 59 vs 10 blocks before breakage)",
-      "source": "Berutti et al., J Endod 2004;30(4):228-30 (PMID 15085052); abstract only; conventional NiTi, not EdgeFile X7"
+      "claim": "Evidence · in vitro: hand preflaring first, shaped about 6× more blocks (ProTaper S1, resin blocks: mean 59 vs 10 before breaking)",
+      "source": "Berutti E, Negro AR, Lendini M, Pasqualini D. J Endod 2004;30(4):228-30 (PMID 15085052, doi:10.1097/00004770-200404000-00011); abstract only; conventional NiTi, not EdgeFile X7; the size of the manual preflaring is not given in the abstract"
     },
     {
-      "claim": "17/.04, then 25/.04; 20/.04 only if the 25 won't reach length (alternate 20 and 25)",
-      "source": "Manufacturer: EdgeEndo, Instructions for Use – EdgeFile X7, REF 99.EX7.10.01A.XX ('IFU 2026'), edgeendo.com, accessed 22 Nov 2026, 'Simplified Technique Guide' steps 5-6"
+      "claim": "17/.04, then 25/.04; 20/.04 only after the 25 stops short (alternate 20 and 25)",
+      "source": "Manufacturer: IFU (REF 99.EX7.10.01A.XX), 'Simplified Technique Guide' steps 5-6; this technique is printed in the IFU only, not in DFU-RF-US Rev D"
     },
     {
-      "claim": "Every file: irrigate · recap #10/#15 · clean flutes · inspect",
-      "source": "Manufacturer: IFU 2026 step 3 (irrigate before each hand or rotary file) and section 5 (clean flutes, inspect, discard if distorted); 'recapitulate with a #10 or #15' is the crown-down wording in IFU 2026 and DFU-RF-US Rev D 06/23"
+      "claim": "Every file: irrigate · recap #10–15 · clean flutes · inspect",
+      "source": "Manufacturer directions (no literature cited): IFU step 3 (irrigate before each hand or rotary file) and section 5 (clean flutes, inspect, discard if distorted); 'recapitulate with a #10 or #15 tip hand file' is the crown-down wording in the IFU and in DFU-RF-US Rev D 06/23"
     },
     {
-      "claim": "If wanted: larger .04 (all canals) or larger .06 (straight to mildly curved); drawn with a white core = conditional service",
-      "source": "Manufacturer: IFU 2026 step 7 (larger .04 or .06 instruments if the clinician desires); the taper rule comes from the crown-down section headings (IFU 2026; DFU-RF-US Rev D 06/23), no angle is given"
+      "claim": "If wanted: larger .04 (all canals) or larger .06 (straight to mildly curved); white dashed core = conditional service",
+      "source": "Manufacturer: IFU step 7 (larger .04 or .06 instruments if the clinician desires); the taper rule comes from the crown-down section headings (IFU; DFU-RF-US Rev D 06/23); no angle is given"
     },
     {
-      "claim": "IRRIGATE (tagged 'convention') → OBTURATE: check cone fit",
-      "source": "Final irrigation station = convention, not an IFU 2026 step. Cone fit: IFU 2026 and DFU-RF-US Rev D 06/23 ('may need to drop down in cone tip size'); Keith et al., J Endod 2024;50(12):1766-71 (PMID 39393517; abstract, EdgeTaper Platinum not X7)"
+      "claim": "IRRIGATE → OBTURATE: check cone fit",
+      "source": "Final irrigation: DFU-RF-US Rev D 06/23, 'Disinfecting' (after each canal is fully shaped: 17% EDTA 1 min, then 5% NaOCl 5 min, then further rinses); not a step of the IFU simplified technique. Recipe not shown. Cone fit: IFU and DFU-RF-US Rev D 06/23 ('may need to drop down in cone tip size'); Keith et al., J Endod 2024;50(12):1766-71 (PMID 39393517; abstract, EdgeTaper Platinum not X7)"
     },
     {
-      "claim": "One patient · one procedure · then discard; max 4 canals per file (IFU 2026); follow the current DFU",
-      "source": "Manufacturer: IFU 2026 section 5 ('up to four (4) canals during a single procedure. Discard after use'); DFU-RF-US Rev D 06/23 says 'single use only'"
+      "claim": "One patient · one procedure · then discard; follow the current DFU",
+      "source": "Manufacturer: IFU section 5 ('up to four (4) canals during a single procedure. Discard after use'); DFU-RF-US Rev D 06/23 ('single use only'). The on-screen wording is true under both"
     },
     {
-      "claim": "Alternative service: crown-down 25 → 20 → (17), each to resistance (US DFU 2023)",
-      "source": "Manufacturer: DFU-RF-US Rev D 06/23, X7 '04 Taper Crown Down for All Canals' (the only sequence in the US-labelled DFU; also printed in IFU 2026)"
-    },
-    {
-      "claim": "Fine print: manufacturer IFU 2026 / US DFU 2023 + evidence-informed habits; no sequence is proven 'most efficient'",
-      "source": "No study comparing EdgeFile X7 sequences found on PubMed (searches of 22 Nov 2026, see RESEARCH.md); Peters OA, J Endod 2004;30(8):559-67 (PMID 15273636; abstract) lists instrument sequence among the less significant factors"
+      "claim": "Fine print: schematic · manufacturer IFU / US DFU + one in vitro study · no sequence is proven 'most efficient'",
+      "source": "No study comparing EdgeFile X7 sequences found on PubMed (searches of 22 Nov 2026, RESEARCH.md); Peters OA, J Endod 2004;30(8):559-67 (PMID 15273636; abstract) lists instrument sequence among the less significant factors"
     }
   ],
-  "caption": "EdgeFile X7, access to apex, as a transit map.\n\nMain line = manufacturer's simplified technique (IFU 2026): #10 K or larger to length (= glide path) → 17/.04 → 25/.04, 20/.04 only if the 25 won't reach. Larger .04/.06 only if wanted. 300–500 rpm, torque limit 300 g·cm.\nThe US DFU (2023) prints crown-down only: check your leaflet.\nPubMed, Nov 2026: no study compares X7 sequences, so none is proven \"most efficient\". Glide-path flag: in vitro (ProTaper S1, resin blocks).\n\nRefs: EdgeEndo IFU EdgeFile X7 + DFU-RF-US Rev D (accessed Nov 2026); Berutti 2004, J Endod\nSchematic map. Disclosure: [add sponsorship statement]\n\n#endodontics #endo #rootcanal #NiTi #rotaryfiles #endoresident"
+  "caption": "EdgeFile X7, access to apex, as a transit map.\n\nMain line = the simplified technique in the IFU: #10 then #15 K to length; 17/.04, 25/.04; 20/.04 only if the 25 stops short. The US DFU (Rev D 06/23) prints crown-down only: check the leaflet in your box.\n300–500 rpm, torque limit 300 g·cm.\nHabits shown = manufacturer directions. Only the flag is literature: in vitro, ProTaper S1 in resin blocks, not X7. No study compares X7 sequences, so none is proven \"most efficient\".\n\nRefs: EdgeEndo IFU EdgeFile X7 + DFU-RF-US Rev D, accessed Nov 2026; Berutti 2004, J Endod\nSchematic map. Disclosure: [REQUIRED BEFORE POSTING: your true statement]\n\n#endodontics #endo #rootcanal #NiTi #endoresident",
+  "publish_blocked": "Do not post until the Disclosure placeholder in the caption is replaced with the account owner's true statement about any relationship with EdgeEndo. Example if true: \"No financial relationship with EdgeEndo. Not sponsored.\"",
+  "caption_extras": [
+    "The simplified technique is printed only in the multilingual IFU (REF 99.EX7.10.01A.XX, PDF dated Mar 2026). Crown-down 25 → 20 → (17) is in both documents and is the only X7 sequence in the US DFU (Rev D 06/23).",
+    "US DFU: #10 K 1 mm past the terminus for patency, at least #15 K to the terminus.",
+    "Berutti 2004 (J Endod): mean 59 vs 10 resin blocks shaped before S1 breakage; the preflaring size is not in the abstract.",
+    "Inspect: the IFU says discard at any distortion; the US DFU (Rev D) says heat-treated files may be used until they unwind backwards. The conservative rule is to discard.",
+    "Speed and torque limit as recommended in the IFU; the US DFU offers the same values as an option. \"Minimal apical pressure\" is US DFU wording.",
+    "IFU order shown. Re-confirm working length after coronal flaring (Stabholz 1995, J Endod; Ibarrola 1999, J Endod).",
+    "US DFU: take each file to length once, for no more than one second.",
+    "US DFU final rinse ('Disinfecting') is printed in the leaflet; the recipe is not shown in the reel."
+  ]
 }

@@ -51,7 +51,7 @@ function buildSims() {
   for (let i = 0; i < NS; i++) {
     const t = i * DT, on = beamOn(t) ? 1 : 0, kv = setKV(t), ma = setMA(t);
     const target = on * kv * ma / 560;                                       // kV x mA, 1 = 70 x 8
-    const w = 12, z = 0.55; v += (w * w * (target * 0.8 - x) - 2 * z * w * v) * DT; x += v * DT; simNeedle[i] = x;
+    const w = 12, z = 0.7; v += (w * w * (target * 0.8 - x) - 2 * z * w * v) * DT; x += v * DT; simNeedle[i] = x;
     h += (target - h) * DT / 0.5; simHeat[i] = h;
     b += (on - b) * DT / 0.10; simOn[i] = b;
     // electrons per second follow mA only. The stream is pre-filled (emission starts one transit time early and is
@@ -375,7 +375,7 @@ function vuStatic(c) {
     c.strokeStyle = f > 0.86 ? '#c8321c' : '#2a1b10'; c.lineWidth = major ? 3 : 1.6;
     c.beginPath(); c.moveTo(px + R * Math.sin(a), py - R * Math.cos(a)); c.lineTo(px + r1 * Math.sin(a), py - r1 * Math.cos(a)); c.stroke();
   }
-  txt(c, 'kV × mA', px, fy + 98, '600 24px "Barlow Condensed"', '#6e4b2a', 'center', '1.5px');
+  txt(c, 'kV × mA', fx + fw - 12, fy + 99, '600 24px "Barlow Condensed"', '#6e4b2a', 'right', '1.5px');
   g = c.createLinearGradient(0, fy, 0, fy + 26); g.addColorStop(0, 'rgba(0,0,0,0.28)'); g.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = g; c.fillRect(fx, fy, fw, 26);
   c.restore();
   // lower legend plate
@@ -545,7 +545,7 @@ function drawCaption(t) {
   txt(ctx, '@natebrooksendo', GL.x + 20, GL.y + GL.h - 9, '500 25px "Barlow Condensed"', 'rgba(255,190,96,0.78)', 'left', '1.2px');
 
   // --- title ---
-  const aT = Math.max(1 - seg(t, SC_MA[0] - 0.32, SC_MA[0] - 0.02), seg(t, END0 + 0.25, END0 + 0.65));
+  const aT = Math.max(1 - seg(t, SC_MA[0] - 0.2, SC_MA[0] + 0.1), seg(t, END0 + 0.25, END0 + 0.65));
   if (aT > 0.003) {
     ctx.save(); ctx.globalAlpha = aT; capGlow(aT);
     const w1 = tw(ctx, '3 KNOBS', '700 100px Oswald', '2px'), w2 = Math.max(tw(ctx, 'What does each do', '500 44px "Barlow Condensed"'), tw(ctx, 'inside the tube?', '500 44px "Barlow Condensed"'));
@@ -569,7 +569,7 @@ function drawCaption(t) {
   };
   const sub = (a, parts) => { if (a <= 0.003) return; ctx.save(); ctx.globalAlpha = a; ctx.shadowColor = `rgba(255,150,40,${0.55 * a})`; ctx.shadowBlur = 10; rich(ctx, parts, cxm, GL.y + 122, F.sub); ctx.restore(); };
   const C = COL.cream, dotc = 'rgba(243,232,205,0.55)';
-  const aMA = env(t, SC_MA[0] + 0.05, SC_MA[1], 0.3, 0.3);
+  const aMA = env(t, SC_MA[0] + 0.2, SC_MA[1], 0.3, 0.3);
   if (aMA > 0.003) { head(aMA, 'mA', 'HOW MANY'); sub(aMA, [{ t: 'more ', c: C }, { t: 'electrons', c: COL.blue }, { t: ', more ', c: C }, { t: 'photons', c: COL.green }, { t: '  ·  ', c: dotc }, { t: 'same energies', c: C }]); }
   const aKV = env(t, SC_KV[0] + 0.05, SC_KV[1], 0.3, 0.3);
   if (aKV > 0.003) {

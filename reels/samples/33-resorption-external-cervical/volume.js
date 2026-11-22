@@ -529,9 +529,9 @@
         if (ov > 0.001) {
           const c = cL;
           if (c > 0.01) {
-            const mk = sstep(0.02, 0.30, c);
+            const mk = sstep(0.02, 0.26, c);
             const edge = mk * (1 - mk) * 4;
-            const k2 = Math.min(1, ov * 1.25 * edge);        // outline only: the radiolucency inside stays gray
+            const k2 = Math.min(1, ov * 1.3 * edge);        // outline only: the radiolucency inside stays gray
             r += (255 - r) * k2; gg += (138 - gg) * k2; b += (40 - b) * k2;
           }
         }
