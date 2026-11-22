@@ -3,7 +3,7 @@
   "slug": "37-bioceramic-antibacterial",
   "title": "Bioceramics: bactericidal or bacteriostatic?",
   "style": "Agar plate lab bench",
-  "topic": "Fresh calcium silicate sealer kills on contact; set MTA kills partially and fades with aging; healing is comparable to other sealers.",
+  "topic": "In vitro, fresh calcium silicate sealer kills on contact and set MTA only partially, fading with aging; clinical healing is comparable.",
   "duration": 24.4,
   "claims": [
     {
@@ -11,16 +11,16 @@
       "source": "Torabinejad et al., J Endod 1995;21:349-53 (PMID 7499973), abstract"
     },
     {
+      "claim": "Schematic: pink pH halo, hydroxyl-ion dots and the agar zone on the fresh plate (a zone = no growth, not kill)",
+      "source": "Illustration; calcium silicate materials can give agar zones: Biodentine immediately after mixing, Farrugia et al., J Appl Biomater Funct Mater 2017;15:e153-61 (PMID 28256700); EndoSequence BC Sealer, 6.00 mm zone read at 48 h, Candeiro et al., Int Endod J 2016;49:858-64 (PMID 26281002); abstracts"
+    },
+    {
       "claim": "Fresh iRoot SP: all free-floating E. faecalis dead in 2 min (direct contact test, in vitro)",
       "source": "Zhang et al., J Endod 2009;35:1051-5 (PMID 19567333), abstract"
     },
     {
-      "claim": "Schematic: pink pH halo, hydroxyl-ion dots and the agar zone on the fresh plate (a zone = no growth, not kill)",
-      "source": "Illustration; freshly mixed calcium silicate materials can give agar zones: Farrugia et al., J Appl Biomater Funct Mater 2017;15:e153-61 (PMID 28256700); Candeiro et al., Int Endod J 2016;49:858-64 (PMID 26281002), abstracts"
-    },
-    {
       "claim": "Set: partial, fading. Set ProRoot MTA aged in water, 1 h contact with E. faecalis: 97% killed at day 1, 82% at day 7 of aging (in vitro)",
-      "source": "Farrugia et al., Sci Rep 2017;7:41359 (PMID 28128328), full text, Table 1"
+      "source": "Farrugia et al., Sci Rep 2017;7:41359 (PMID 28128328), full text (PMC5269669): percentages 97.30% and 81.76% in the Discussion; log10 counts in Table 1"
     },
     {
       "claim": "Set plate shows no clear zone (set ProRoot MTA gave no inhibition zone); residual halo schematic",
@@ -32,7 +32,7 @@
     },
     {
       "claim": "Bactericidal = count falls; bacteriostatic = count held (schematic curves and colonies)",
-      "source": "Pankey & Sabath, Clin Infect Dis 2004;38:864-70 (PMID 14999632), abstract, concept only"
+      "source": "Definition and time-kill curve shapes: Ishak et al., J Antimicrob Chemother 2025;80:1-17 (PMID 39471409), full text (PMC11695898). Laboratory, condition-dependent label: Pankey & Sabath, Clin Infect Dis 2004;38:864-70 (PMID 14999632), abstract"
     },
     {
       "claim": "FRESH and SET both sit on the bactericidal half; set = partial kill (under 2 log in 1 h); bacteriostatic action has not been measured",
@@ -43,7 +43,7 @@
       "source": "Zhang et al., J Endod 2009 (PMID 19567333), abstract; Farrugia et al., Sci Rep 2017 (PMID 28128328), full text"
     },
     {
-      "claim": "Healing: comparable (tagged CLINICAL; single-cone trials with a calcium silicate sealer vs other sealers/techniques, 3 trials, failure RR 0.71, 95% CI 0.33-1.51)",
+      "claim": "Healing: comparable (tagged CLINICAL; single-cone trials vs other sealers: single cone + calcium silicate sealer vs other sealers/techniques, 3 trials, failure RR 0.71, 95% CI 0.33-1.51, NS)",
       "source": "Sabeti et al., J Endod 2024;50:735-46.e1 (PMID 38548045), abstract; see also Donnermeyer et al., J Dent 2026;176:107002 (PMID 42668107), abstract"
     }
   ],

@@ -229,7 +229,7 @@
       const u = seg(t, 0.4, 1.0, ease.out);
       arrow(66, -62, lerp(72, 156, u), lerp(-68, -148, u), WAXK, 5.5, 20);
       wax('OH', 166, -164, 62, { color: WAXK, reveal: seg(t, 0.8, 1.15) });
-      if (t > 1.1) { ctx.strokeStyle = WAXK; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(227, -203); ctx.lineTo(245, -204); ctx.stroke(); }
+      if (t > 1.1) { ctx.strokeStyle = WAXK; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(240, -197); ctx.lineTo(257, -198); ctx.stroke(); } // superscript minus, clear of the H
       ctx.restore();
     }
   }
@@ -445,7 +445,7 @@
     brace(bx, 334, 470, seg(t, 20.05, 20.3, ease.out), WAXY);
     tape(bx + 34 + 92, 402, 184, 58, { rot: 4 * DEG, color: TAPEY, pop: pop(t, 20.1, 0.35) }, () => mono('IN VITRO', 0, 11, 32, 700, INK, 'center', 1));
     tape(X + w3 + 30 + 92, 514, 184, 58, { rot: -2 * DEG, color: TAPEY, pop: pop(t, 20.2, 0.3) }, () => mono('CLINICAL', 0, 11, 32, 700, INK, 'center', 1));
-    fine('single-cone trials · Sabeti 2024 J Endod', X + 4, 580, seg(t, 20.25, 20.5), 'left');
+    fine('single-cone trials vs other sealers · Sabeti 2024 J Endod', X + 4, 580, seg(t, 20.25, 20.5), 'left');
     handleTape(seg(t, 19.3, 19.6));
     ctx.restore();
   }

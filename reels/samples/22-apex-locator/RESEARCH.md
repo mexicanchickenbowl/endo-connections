@@ -556,3 +556,39 @@ Changes to how existing rows are used:
   says "introduced in 1994" or "first".
 - Addendum 1, "Not sourced: the relative conductivity of blood versus saline": still not sourced, and the reel no
   longer draws a blood step.
+
+---
+
+## Citation audit addendum (2026-11-22)
+
+Sections (a)-(g) are unchanged. According to PubMed, metadata and abstracts were fetched again for all 68 PMIDs in
+this file, `NOTES.md` and `meta.json`; every record matches the citation given (first author, year, journal, volume,
+pages, PMID). PMC full text was read again for Rambo 2010, Nasiri & Wrbas 2022 and Custer 1918; the quotations and
+Table 2 values in C7-C9, H1, H3, H7, C1, C6, M4 and A10 match. Sunada 1962 was confirmed in Crossref (J Dent Res
+1962;41(2):375-387) and has no PubMed record. Not read again: the full texts of Gehlot 2016, Alothmani & Siddiqui
+2023 and Tampelini 2017 (off-screen notes in C6, D4, D7 only).
+
+Points to carry with the existing rows:
+- **A7.** The 16 studies used the Root ZX (12), Root ZX II (3) and Dentaport ZX (1); none used the Root ZX mini. A
+  K-file or hand file is named in 9 of the 16 abstracts (A4, A5, A16, A18, A19, A20, A22, A23, A24); the other 7 name
+  no file type.
+- **L3.** The row's heading says a perforation, fracture or lateral canal "can read APEX". The quoted sources support
+  electrical leakage through a fractured tooth or a branch canal (manufacturer instructions) and the use of apex
+  locators to detect perforations (Gordon & Chandler 2004; Alhadainy 1994); none of them says "reads APEX", and the
+  instructions do not mention perforation. Treat "reads APEX" as an inference.
+- **L2.** "Reads short" with a wide apex is the manufacturer's wording and the finding of Ebrahim et al. 2006
+  (51:153-157, PMID 16848263, enlarged canals, small files). Ebrahim et al. 2006 (51:258-262, PMID 17037894) says
+  "unreliable", not "short".
+
+Abstracts read for the first time at this audit (one further query, 46 records, to test whether A7 is selective):
+
+| # | Fact | Exact source | What the source literally reports | Verified from | Confidence |
+|---|---|---|---|---|---|
+| CA1 | Root ZX, in vivo, SEM: within ±0.5 mm of the point 0.5 mm coronal to the major foramen in 78.3% (23 canals); in vitro 74% | Duran-Sindreu F, Stöber E, Mercadé M, Vera J, Garcia M, Bueno R, Roig M. J Endod 2012;38(2):236-239. PMID 22244644. [DOI](https://doi.org/10.1016/j.joen.2011.10.008) | "the Root ZX was accurate 78.3% of the time to ±0.5 mm and 100% of the time to ±1 mm in the in vivo group"; 15 K-file. | abstract | High. In scope for A7 and inside its range; not among the 16. |
+| CA2 | Dentaport ZX, in vivo: major foramen within ±0.5 mm in 82.35% (36 single-rooted teeth) | Moscoso S, Pineda K, Basilio J, Alvarado C, Roig M, Duran-Sindreu F. Med Oral Patol Oral Cir Bucal 2014;19(2):e202-205. PMID 24121908. [DOI](https://doi.org/10.4317/medoral.19114) | Dentaport ZX 82.35% (±0.5 mm) and 97.05% (±1 mm); Raypex 6 88.22% and 100%; 10 K-file. | abstract | High. In scope for A7 and inside its range; not among the 16. |
+| CA3 | Dentaport ZX, in vivo: "correct" in 6 of 10 teeth (4 short, 0 long) | Somma F, Castagnola R, Lajolo C, Paternò Holtzman L, Marigo L. Int Endod J 2012;45(6):552-556. PMID 22257341. [DOI](https://doi.org/10.1111/j.1365-2591.2011.02010.x) | 30 teeth, 10 per device; no tolerance for "correct" is given in the abstract; differences between devices not significant. | abstract | Medium. Not a ±0.5 mm figure, so it is not part of A7; like A6, do not mix it into the range. |
+
+No in vivo abstract with a stated ±0.5 mm tolerance, hand files and permanent teeth was found below 70%. The ex vivo
+39% for the Dentaport ZX (Pascon et al., Oral Surg Oral Med Oral Pathol Oral Radiol Endod 2009;108(3):e147-151,
+PMID 19716484, [DOI](https://doi.org/10.1016/j.tripleo.2009.04.040); alginate model, reference 1.0 mm short of the
+canal length) is outside the in vivo scope.

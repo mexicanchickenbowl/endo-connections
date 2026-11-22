@@ -106,14 +106,17 @@ at the review stage). "Verified from" there is "abstract" for all of them; no fu
   from different cell systems and are not comparable.
 - Culture results are not uniform. MTA-conditioned medium lowered osteocalcin, bone sialoprotein and von Kossa
   staining in mouse PDL and marrow progenitors (Vidovic Zdrilic et al., J Periodontal Res 2017;52:1058-67, PMID
-  28691752); results vary with extract dilution and cell type.
+  28691752), the opposite direction to Wang 2014 (rat marrow stromal cells). That in vitro outcomes depend on
+  cement dilution and exposure time is stated for pulp cells in a systematic review (Emara, Elhennawy &
+  Schwendicke, J Dent 2018;77:18-36, PMID 30086349; abstract); it is not a finding of the Vidovic Zdrilic abstract.
 - Marker expression is also reported in rat subcutaneous tissue (Souza 2021, J Biomed Mater Res B; Martins 2023,
   Int Endod J) and in a mouse lineage-tracing model at an orthotopic site (Vidovic Zdrilic 2017); none of these is
   bone at a non-bony site. Endodontic papers use "osteoinductive" for such findings, including bone formation in
   rabbit tibia (Gandolfi 2017, Dent Mater).
 - Scope. "Bioceramics" here means endodontic calcium silicate cements. Other bioceramics have passed the ectopic
-  test: calcium phosphate ceramics (Barradas 2011) and a Bioglass 45S5 glass-ceramic that formed bone in dog muscle
-  in 16 of 16 implants (Yuan et al., J Biomed Mater Res 2001;58:270-6, PMID 11319740).
+  test: a porous hydroxyapatite (calcium phosphate) ceramic formed bone in dog dorsal muscle at 3 and 6 months
+  (Yuan et al., Biomaterials 1999;20:1799-806, PMID 10509190; abstract) and a Bioglass 45S5 glass-ceramic formed
+  bone in dog muscle in 16 of 16 implants (Yuan et al., J Biomed Mater Res 2001;58:270-6, PMID 11319740; abstract).
 - Material differences. Every in vivo study shown used MTA. Rat two-site data exist for Biodentine, NeoMTA and a
   premixed sealer (RESEARCH.md rows 52, 53), and Torabinejad, Parirokh & Dummer 2018 (Int Endod J) note low levels
   of evidence for the newer cements. The caption says "Mostly MTA data."
@@ -191,6 +194,33 @@ Fixed:
 Re-rendered once: 1080×1920, 30 fps, 720 frames, 24.0 s (ffprobe), H.264 + silent AAC. Poster (22.0 s) unchanged.
 Left as is (see Known weaknesses): the verdict board carries 25 words and is readable for about 4 s (complete and
 held 2.89 s); the title is up for 1.7 s on the first play.
+
+## Citation audit (2026-11-22)
+Independent audit of every citation on screen, in meta.json and in this file, plus all PMIDs in RESEARCH.md,
+against PubMed (records re-fetched; no earlier pass was trusted).
+- On screen (five source lines and the SOURCES fine print): 10 papers. First author, year and journal match PubMed
+  for all of them, and every on-screen number and wording is in the abstract (5 of 6, complete cementum, monkey,
+  5 months; guinea-pig bone; rat, subcutaneous, 15-60 days; BMP-2 with Ca; ALP and osteocalcin). No on-screen
+  change, so the video was not re-rendered.
+- meta.json and this file: 16 PMIDs opened as full PubMed records (the 13 behind the claims plus Gandolfi 2010,
+  Peng 2011, Yuan 2001). Authors, year, journal, volume, pages and PMID agree, and all quoted phrases are verbatim.
+- RESEARCH.md: the remaining 56 journal citations were matched to their PMIDs by journal, year, volume, first page
+  and first author (all 56 resolve to the stated PMID); 11 of them were also opened and read (Souza 2021, Gandolfi
+  2017, Torabinejad 2018, Martins 2023, Bilge 2024, Zhang & Peng 2015, Habibovic 2007, Emara 2018, Urist 1965,
+  Pitt Ford 1995, Torabinejad 1995 dogs).
+- Full text: PMC returns no machine-readable text for Albrektsson & Johansson 2001 (PMC3611551), tried again. All
+  sources remain verified from abstracts only.
+Problems found and fixed (none on screen):
+1. "Other bioceramics have passed the ectopic test: calcium phosphate ceramics (Barradas 2011)". The Barradas
+   abstract names no material; that was full text nobody read. Re-sourced to Yuan et al., Biomaterials
+   1999;20:1799-806 (PMID 10509190), whose abstract reports bone in porous hydroxyapatite ceramic in dog muscle.
+2. "Results vary with extract dilution and cell type" was attached to Vidovic Zdrilic 2017, whose abstract reports
+   a reduction but no dilution effect. The dilution/exposure-time statement is now cited to Emara 2018 (abstract),
+   here and in meta.json claim 7.
+3. RESEARCH.md R7 said MTA "raised" BMP4 and osteocalcin under rat skin; the Souza 2021 abstract says MTA
+   "influenced" them (no direction given). Reworded.
+4. RESEARCH.md correction 1 listed Habibovic & de Groot 2007 as a source of the heterotopic-site criterion; its
+   abstract does not state the criterion. Marked as background, abstract silent.
 
 ## Known weaknesses
 - 84 must-read words against a target of about 60 (about 66 first exposures). The excess is evidence tags, the

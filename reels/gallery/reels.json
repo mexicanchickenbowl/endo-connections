@@ -1540,5 +1540,111 @@
       }
     ],
     "caption": "EdgeFile X7, access to apex, as a transit map.\n\nMain line = the simplified technique in the IFU: #10 then #15 K to length; 17/.04, 25/.04; 20/.04 only if the 25 stops short. The US DFU (Rev D 06/23) prints crown-down only: check the leaflet in your box.\n300–500 rpm, torque limit 300 g·cm.\nHabits shown = manufacturer directions. Only the flag is literature: in vitro, ProTaper S1 in resin blocks, not X7. No study compares X7 sequences, so none is proven \"most efficient\".\n\nRefs: EdgeEndo IFU EdgeFile X7 + DFU-RF-US Rev D, accessed Nov 2026; Berutti 2004, J Endod\nSchematic map. Disclosure: [REQUIRED BEFORE POSTING: your true statement]\n\n#endodontics #endo #rootcanal #NiTi #endoresident"
+  },
+  {
+    "id": "37",
+    "slug": "37-bioceramic-antibacterial",
+    "title": "Bioceramics: bactericidal or bacteriostatic?",
+    "style": "Agar plate lab bench",
+    "topic": "In vitro, fresh calcium silicate sealer kills on contact and set MTA only partially, fading with aging; clinical healing is comparable.",
+    "duration": 24.4,
+    "video": "videos/37-bioceramic-antibacterial.mp4",
+    "poster": "posters/37-bioceramic-antibacterial.jpg",
+    "claims": [
+      {
+        "claim": "MTA: pH 10.2 at mixing, 12.5 at 3 h (cement, pH meter)",
+        "source": "Torabinejad et al., J Endod 1995;21:349-53 (PMID 7499973), abstract"
+      },
+      {
+        "claim": "Schematic: pink pH halo, hydroxyl-ion dots and the agar zone on the fresh plate (a zone = no growth, not kill)",
+        "source": "Illustration; calcium silicate materials can give agar zones: Biodentine immediately after mixing, Farrugia et al., J Appl Biomater Funct Mater 2017;15:e153-61 (PMID 28256700); EndoSequence BC Sealer, 6.00 mm zone read at 48 h, Candeiro et al., Int Endod J 2016;49:858-64 (PMID 26281002); abstracts"
+      },
+      {
+        "claim": "Fresh iRoot SP: all free-floating E. faecalis dead in 2 min (direct contact test, in vitro)",
+        "source": "Zhang et al., J Endod 2009;35:1051-5 (PMID 19567333), abstract"
+      },
+      {
+        "claim": "Set: partial, fading. Set ProRoot MTA aged in water, 1 h contact with E. faecalis: 97% killed at day 1, 82% at day 7 of aging (in vitro)",
+        "source": "Farrugia et al., Sci Rep 2017;7:41359 (PMID 28128328), full text (PMC5269669): percentages 97.30% and 81.76% in the Discussion; log10 counts in Table 1"
+      },
+      {
+        "claim": "Set plate shows no clear zone (set ProRoot MTA gave no inhibition zone); residual halo schematic",
+        "source": "Farrugia et al., Sci Rep 2017;7:41359 (PMID 28128328), full text"
+      },
+      {
+        "claim": "In dentin tubules, sealers: slow, partial kill; more dead at day 30 than day 1 (in vitro; cell counts schematic)",
+        "source": "Wang et al., J Endod 2014;40:505-8 (PMID 24666900); Du et al., J Endod 2015;41:1294-8 (PMID 26092772), abstracts"
+      },
+      {
+        "claim": "Bactericidal = count falls; bacteriostatic = count held (schematic curves and colonies)",
+        "source": "Definition and time-kill curve shapes: Ishak et al., J Antimicrob Chemother 2025;80:1-17 (PMID 39471409), full text (PMC11695898). Laboratory, condition-dependent label: Pankey & Sabath, Clin Infect Dis 2004;38:864-70 (PMID 14999632), abstract"
+      },
+      {
+        "claim": "FRESH and SET both sit on the bactericidal half; set = partial kill (under 2 log in 1 h); bacteriostatic action has not been measured",
+        "source": "Inference from Zhang 2009 (PMID 19567333) and Farrugia 2017 (PMID 28128328)"
+      },
+      {
+        "claim": "Verdict: Fresh: bactericidal on contact; Set: partial, fades (both tagged IN VITRO)",
+        "source": "Zhang et al., J Endod 2009 (PMID 19567333), abstract; Farrugia et al., Sci Rep 2017 (PMID 28128328), full text"
+      },
+      {
+        "claim": "Healing: comparable (tagged CLINICAL; single-cone trials vs other sealers: single cone + calcium silicate sealer vs other sealers/techniques, 3 trials, failure RR 0.71, 95% CI 0.33-1.51, NS)",
+        "source": "Sabeti et al., J Endod 2024;50:735-46.e1 (PMID 38548045), abstract; see also Donnermeyer et al., J Dent 2026;176:107002 (PMID 42668107), abstract"
+      }
+    ],
+    "caption": "Bioceramics: bactericidal or bacteriostatic? It depends on when, and on the test.\n• Fresh iRoot SP killed all free-floating E. faecalis in 2 min of contact (AH Plus: 5); pH alone did not explain it.\n• Set ProRoot MTA, 1 h contact: 97% killed after 1 day in water, 82% after 7 (<2 log); aged in blood, no effect by day 7.\n• In tubules, sealers kill slowly and partially (BC Sealer = AH Plus).\n• Clinical: healing similar to other sealers (single-cone trials).\nIn vitro unless stated. Schematic: halo, agar zone (no growth, not kill), counts, curves.\nRefs: Zhang 2009, Wang 2014, Du 2015, Sabeti 2024 (J Endod); Farrugia 2017 (Sci Rep).\n#endodontics #bioceramics #MTA #rootcanal #dentistry"
+  },
+  {
+    "id": "38",
+    "slug": "38-bioceramic-biocompatibility",
+    "title": "Bioceramics: are they osteoinductive?",
+    "style": "Construction site diorama",
+    "topic": "MTA-type calcium silicate cements are biocompatible and osteoconductive; osteoinduction: cell-culture signals only, ectopic bone not shown.",
+    "duration": 24,
+    "video": "videos/38-bioceramic-biocompatibility.mp4",
+    "poster": "posters/38-bioceramic-biocompatibility.jpg",
+    "claims": [
+      {
+        "claim": "BIOCOMPATIBLE · early inflammation subsides (animal histology)",
+        "source": "Torabinejad & Parirokh, J Endod 2010;36:190-202 (PMID 20113774); Gomes-Filho et al., J Endod 2009;35:256-60 (PMID 19166785); Moretton et al., J Biomed Mater Res 2000;52:528-33 (PMID 11007621): subsided to 'mostly moderate' under rat skin; abstracts"
+      },
+      {
+        "claim": "5 of 6 root ends: complete cementum over MTA · monkey · 5 months (animal histology)",
+        "source": "Torabinejad et al., J Endod 1997;23:225-8 (PMID 9594770); abstract: 'five of six root ends filled with MTA had a complete layer of cementum over the filling', 3 monkeys"
+      },
+      {
+        "claim": "AMALGAM billboard, shown for the whole beat: inflammation stays; cementum on the cut dentin, none over the filling (picture only)",
+        "source": "Torabinejad et al., J Endod 1997;23:225-8 (PMID 9594770); abstract: all amalgam root ends inflamed; cementum 'had not formed over the root-end filling material, although it was present over the cut root end' (amalgam count not stated, so none shown)"
+      },
+      {
+        "claim": "OSTEOCONDUCTIVE · bone grows on the surface · MTA implanted in bone (animal histology)",
+        "source": "Definition: Albrektsson & Johansson, Eur Spine J 2001;10 Suppl 2:S96-101 (PMID 11716023). Torabinejad et al., J Endod 1998;24:468-71 (PMID 9693572): guinea-pig tibia, direct bone apposition most often with MTA, no frequency given; abstracts"
+      },
+      {
+        "claim": "apatite layer (in vitro)",
+        "source": "Sarkar et al., J Endod 2005;31:97-100 (PMID 15671817); abstract: hydroxyapatite-like layer on MTA in phosphate-buffered fluid"
+      },
+      {
+        "claim": "OSTEOINDUCTIVE? · immature cells → bone-forming cells",
+        "source": "Albrektsson & Johansson, Eur Spine J 2001;10 Suppl 2:S96-101 (PMID 11716023); abstract: recruitment of immature cells and their stimulation to develop into preosteoblasts"
+      },
+      {
+        "claim": "CELL CULTURE · BMP-2, ALP, osteocalcin rise; Ca²⁺ wired to BMP-2 only",
+        "source": "Maeda et al., J Endod 2010;36:647-52 (PMID 20307738): human PDL cells, 2 donors, calcium from MTA and BMP-2. Wang et al., Cell Prolif 2014;47:241-8 (PMID 24635197): rat mandibular marrow stromal cells, MTA 0.02 mg/ml, ALP and osteocalcin up; abstracts. Schematic: dials show direction only, all needles at the same height. Culture results are not uniform: MTA-conditioned medium lowered osteocalcin in mouse PDL and marrow progenitors (Vidovic Zdrilic et al., J Periodontal Res 2017;52:1058-67, PMID 28691752; abstract); in a systematic review of pulp-cell studies, cement dilution and exposure time influenced in vitro outcomes (Emara et al., J Dent 2018;77:18-36, PMID 30086349; abstract)"
+      },
+      {
+        "claim": "NON-BONY SITE · rat · subcutaneous · mineral chips, no bone (picture) · stamp ECTOPIC BONE: NOT SHOWN (animal histology)",
+        "source": "Moretton et al., J Biomed Mater Res 2000;52:528-33 (PMID 11007621); abstract: subcutaneous MTA in rats, 15-60 days, dystrophic calcification, no osteogenesis. Strict test: Barradas et al., Eur Cell Mater 2011;21:407-29 (PMID 21604242); abstract, which also says rodents show limited, if any, bone induction by biomaterials, hence 'not shown' rather than 'cannot'"
+      },
+      {
+        "claim": "Verdict (MTA-type calcium silicate cements): BIOCOMPATIBLE ✓ tissue tolerates it (animal + human histology) · OSTEOCONDUCTIVE ✓ bone grows on it (animal histology)",
+        "source": "Claims 1-4 above; human pulp histology: Nair et al., Int Endod J 2008;41:128-50 (PMID 17956562). 'Tissue tolerates it' follows Williams DF, Biomaterials 2008;29:2941-53 (PMID 18440630); abstract: the material 'shall do no harm to those tissues'. All in vivo studies shown used MTA"
+      },
+      {
+        "claim": "Verdict: OSTEOINDUCTIVE ? cell-culture signals · ectopic bone: not shown",
+        "source": "Maeda 2010; Wang 2014; Moretton 2000 (rat, the only study found that reports directly on bone at a non-bony site); Barradas 2011 (as above)"
+      }
+    ],
+    "caption": "Are endodontic bioceramics osteoinductive? Depends on the definition.\nBiocompatible: yes. Cementum covered MTA in 5 of 6 monkey root ends, 5 months (amalgam: none).\nOsteoconductive: yes. Bone forms directly on MTA in bone.\nOsteoinductive: in culture BMP-2 (PDL cells), ALP, osteocalcin (marrow cells) rise. Strict test, bone at a non-bony site: not shown. Under rat skin: mineral, no bone; rats are a weak model, no large-animal test found.\nMostly MTA data. Schematic animation.\nRefs: Albrektsson 2001 Eur Spine J; Barradas 2011 Eur Cell Mater; Torabinejad 1997, 1998, Maeda 2010 J Endod; Wang 2014 Cell Prolif; Moretton 2000 J Biomed Mater Res.\n#endodontics #bioceramics #MTA #boardprep #dentistry"
   }
 ]

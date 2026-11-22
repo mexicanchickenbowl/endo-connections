@@ -16,8 +16,8 @@ const sstep = (a, b, x) => sm(clamp((x - a) / (b - a)));
 
 /* ------------------------------------------------------------------ timeline */
 const T = {
-  titleOut: 2.2, guide: [0.05, 0.7], flap: [0.6, 0.95, 1.15, 1.5],
-  cam1: [1.9, 2.75], lift1: [2.3, 2.8], necro: [2.4, 3.1], tabA: 2.6, tabB: 2.85, plus: 3.25, reqOut: 6.25, lower1: [5.9, 6.3],
+  titleOut: 2.4, guide: [0.05, 0.7], flap: [0.6, 0.95, 1.15, 1.5],
+  cam1: [2.15, 2.9], lift1: [2.3, 2.8], necro: [2.4, 3.1], tabA: 2.7, tabB: 2.95, plus: 3.35, reqOut: 6.25, lower1: [5.9, 6.3],
   cam2: [6.3, 7.05], peel: [6.75, 7.55], tabC: 7.05, cellsIn: 7.9, grow: [8.25, 10.6], tabD: 8.35, mechOut: 10.75,
   cam3: [10.8, 11.6], lift2: [11.3, 11.7], pull: [11.7, 12.5], e1: 11.6, cut: [12.3, 12.7], e2: 12.3, drop: 12.5, e3: 12.95,
   inset: 13.1, ring: 13.4, gp: [13.6, 13.9], cem: [13.9, 14.3], treatOut: 15.9,
@@ -525,10 +525,10 @@ function drawTooth(cam, st, G, t) {
     ctx.restore();
   }
   if (st.flap > 0) { // hook: the dentin inside the cut line lifts as a flap and settles (preview of the loss)
-    ctx.save(); ctx.translate(-4 * st.flap, -7 * st.flap); paper(FLAP, P.dentin, 11 * st.flap, { k, bm: st.flap }); ctx.restore();
+    ctx.save(); ctx.translate(-6 * st.flap, -10 * st.flap); paper(FLAP, P.dentin, 14 * st.flap, { k, bm: st.flap }); ctx.restore();
   }
   if (st.guide > 0) { // dashed "cut here" outline of the lesion to come
-    ctx.save(); ctx.globalAlpha = 0.9 * st.guide; ctx.translate(-4 * st.flap, -7 * st.flap);
+    ctx.save(); ctx.globalAlpha = 0.9 * st.guide; ctx.translate(-6 * st.flap, -10 * st.flap);
     for (const side of [1, -1]) stitch(GUIDE_R.map((p) => [side * p[0], p[1]]).reverse(), C.coralDk, 5 * k, [13 * k, 9 * k], 0, k, st.guideDraw);
     ctx.restore();
   }
@@ -562,22 +562,23 @@ function trace(pts, k, upto) {
 function drawFilm(t, cam) {
   const uin = softBack(seg(t, T.film[0], T.film[1])); if (seg(t, T.film[0], T.film[1]) <= 0) return;
   const uout = ease.in(seg(t, T.endOut, T.endOut + 0.31)); if (uout >= 1) return;
-  const dx = (1 - uin) * 660 + uout * 720, rot = 0.012 + (1 - uin) * 0.07 + uout * 0.07, sh = shiftAt(t);
+  const dxo = uout * 720, dx = (1 - uin) * 660 + dxo, rot = 0.012 + (1 - uin) * 0.07 + uout * 0.07, sh = shiftAt(t);
+  if (t >= T.camR[0]) cam = CAMS.end; // on the way out the film is a rigid card: its image keeps the end framing and rides with it
   const place = () => { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.translate(FILM.x + dx + FILM.w / 2, FILM.y + FILM.h / 2); ctx.rotate(rot); ctx.translate(-FILM.w / 2, -FILM.h / 2); };
   place(); paper(FILM_MOUNT, P.cream, 9); paper(FILM_SHEET, P.film, 1.5, { hl: 0.1 });
   ctx.save(); ctx.clip(FILM_IMG);
-  let s = setLayer(cam, -2, SHIFT.bone * sh);
+  let s = setLayer(cam, -2, SHIFT.bone * sh + dxo);
   paper(BONE, P.xbone, 3, { rule: 'evenodd', bevel: false });
-  s = setLayer(cam, 0, SHIFT.tooth * sh); const k = 1 / s;
+  s = setLayer(cam, 0, SHIFT.tooth * sh + dxo); const k = 1 / s;
   ctx.lineJoin = 'round'; ctx.strokeStyle = C.xld; ctx.lineWidth = 7; ctx.stroke(PDL); ctx.fillStyle = C.xpdl; ctx.fill(PDL);
   paper(XDENTIN, P.xroot, 3, { k, hl: 0.25 });
   // sign 3: dashed ghost of the root outline where it was before the shift (only where the shifted root has left it)
   if (sh > 0.01) {
     ctx.save(); const out = new Path2D(); out.rect(-4000, -4000, 8000, 8000); out.addPath(SIL); ctx.clip(out, 'evenodd');
-    setLayer(cam, 0, 0); ctx.globalAlpha = clamp(sh * 2.5) * 0.9; ctx.lineCap = 'round'; ctx.setLineDash([10 * k, 9 * k]);
+    setLayer(cam, 0, dxo); ctx.globalAlpha = clamp(sh * 2.5) * 0.9; ctx.lineCap = 'round'; ctx.setLineDash([10 * k, 9 * k]);
     ctx.strokeStyle = 'rgba(16,20,24,0.7)'; ctx.lineWidth = 6.5 * k; ctx.stroke(SIL);
     ctx.strokeStyle = '#f7ecd2'; ctx.lineWidth = 3.4 * k; ctx.stroke(SIL);
-    ctx.restore(); setLayer(cam, 0, SHIFT.tooth * sh);
+    ctx.restore(); setLayer(cam, 0, SHIFT.tooth * sh + dxo);
   }
   // sign 1: equal half-widths either side of the canal (no axis line: nothing may be traceable through the lesion)
   const a1 = sm(seg(t, T.s1 + 0.25, T.s1 + 0.7));
@@ -644,11 +645,11 @@ const TABS = [
   { id: 'E3', x: 64, y: 782, stripe: 'cream', seed: 9, rot: -0.005, in: T.e3, out: T.treatOut + 0.08, chev: true, fill: 'tealTab', ink: C.cream, lines: [{ t: 'RESORPTION STOPS', f: F.cap36, ls: 0.3 }] },
   { id: 'H', x: 64, y: 340, stripe: 'coral', seed: 10, rot: -0.006, in: T.head, out: T.endOut, fill: 'ink', ink: C.cream,
     lines: [{ t: 'Internal', f: F.head, lh: 1.02 }, { t: 'resorption', f: F.head, lh: 1.12 }, { t: 'classic X-ray signs', f: F.headSub, c: '#f6a48d', lh: 1.3 }] },
-  { id: 'S1', x: 64, y: 572, num: 1, seed: 11, rot: 0.006, in: T.s1, out: T.endOut + 0.03,
+  { id: 'S1', x: 64, y: 586, num: 1, seed: 11, rot: 0.006, in: T.s1, out: T.endOut + 0.03,
     lines: [{ t: 'Symmetric,', f: F.sign, c: C.coralDk }, { t: 'well-defined', f: F.sign }, { t: 'ballooning', f: F.sign }] },
-  { id: 'S2', x: 64, y: 780, num: 2, seed: 12, rot: -0.006, in: T.s2, out: T.endOut + 0.06,
+  { id: 'S2', x: 64, y: 806, num: 2, seed: 12, rot: -0.006, in: T.s2, out: T.endOut + 0.06,
     lines: [{ t: 'Canal outline lost', f: F.sign, hi: [14, 18] }, { t: 'in the lesion', f: F.sign }] },
-  { id: 'S3', x: 64, y: 943, num: 3, seed: 13, rot: 0.005, in: T.s3, out: T.endOut + 0.09,
+  { id: 'S3', x: 64, y: 980, num: 3, seed: 13, rot: 0.005, in: T.s3, out: T.endOut + 0.09,
     lines: [{ t: 'Cone shift:', f: F.sign }, { t: 'stays on canal', f: F.sign, hi: [6, 14] }] },
 ];
 function setupTabs() {

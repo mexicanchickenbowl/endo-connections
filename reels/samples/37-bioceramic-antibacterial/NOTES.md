@@ -28,7 +28,7 @@ model-specific: every number on screen sits next to its material and its test.
 | 23.3-24.4 | | Verdict fades (23.3-23.6 s) while dish 1's timer and handle scrap return, small; dishes 1 and 3 are rewound while the camera is still pulled back (23.35-23.8 s); push-in 23.6-24.25 s; the hook returns only after the camera has landed (24.2-24.38 s): clean loop. | |
 
 Must-read words on screen: about 73 counting every number and every repeated one-word label (about 58 if repeated
-labels such as "fresh", "set", "day", "BIOCERAMICS" count once). Fine print and source lines: about 47 words (was
+labels such as "fresh", "set", "day", "BIOCERAMICS" count once). Fine print and source lines: about 50 words (was
 about 55).
 
 ## On-screen claims and their sources
@@ -36,14 +36,14 @@ about 55).
 |---|---|---|---|
 | 1 | MTA pH 10.2 at mixing, 12.5 at 3 h | Torabinejad M, Hong CU, McDonald F, Pitt Ford TR. J Endod 1995;21(7):349-53. PMID 7499973 | abstract |
 | 2 | Fresh iRoot SP: free-floating (planktonic) E. faecalis all dead in 2 min; direct contact test, in vitro | Zhang H, Shen Y, Ruse ND, Haapasalo M. J Endod 2009;35(7):1051-5. PMID 19567333 | abstract |
-| 3 | Dish 1 picture (halo, hydroxyl dots, agar zone) — schematic; tape "agar zone = no growth · schematic" | Illustration. That freshly mixed calcium silicate materials can give an agar zone: Farrugia C, Haider J, Camilleri L, Camilleri J. J Appl Biomater Funct Mater 2017;15(2):e153-61, PMID 28256700 ("Biodentine after immediate mixing ... resulted in an inhibition zone"); Candeiro GTM et al. Int Endod J 2016;49(9):858-64, PMID 26281002 (BC Sealer 6.00 mm vs AH Plus 10.31 mm, E. faecalis, read at 48 h) | abstracts (re-pulled at the review pass) |
-| 4 | "Set: partial, fading" + bars: set ProRoot MTA aged in water, 1 h direct contact with E. faecalis: 97% killed at day 1, 82% at day 7 of aging | Farrugia C, Baca P, Camilleri J, Arias Moliz MT. Sci Rep 2017;7:41359. PMID 28128328 (97.30% = 1.67 log10; 81.76%; day 1 vs day 7 p < 0.05). The paper has no fresh arm: MTA was set for 24 h, then aged 1 or 7 days | full text (PMC5269669), read at the research stage |
+| 3 | Dish 1 picture (halo, hydroxyl dots, agar zone) — schematic; tape "agar zone = no growth · schematic" | Illustration. That calcium silicate materials can give an agar zone: Farrugia C, Haider J, Camilleri L, Camilleri J. J Appl Biomater Funct Mater 2017;15(2):e153-61, PMID 28256700 ("Biodentine after immediate mixing ... resulted in an inhibition zone"); Candeiro GTM et al. Int Endod J 2016;49(9):858-64, PMID 26281002 (BC Sealer 6.00 mm vs AH Plus 10.31 mm, E. faecalis, read at 48 h; the abstract does not say whether the sealer was fresh or set) | abstracts (re-pulled at the review pass) |
+| 4 | "Set: partial, fading" + bars: set ProRoot MTA aged in water, 1 h direct contact with E. faecalis: 97% killed at day 1, 82% at day 7 of aging | Farrugia C, Baca P, Camilleri J, Arias Moliz MT. Sci Rep 2017;7:41359. PMID 28128328 (Discussion: 97.30% = 1.67 log10; 81.76%. Table 1: log10 counts 3.86 / 4.79 vs control 5.53 / 5.59; day 1 vs day 7 p < 0.05). The paper has no fresh arm: MTA was set for 24 h, then aged 1 or 7 days | full text (PMC5269669), read at the research stage and again at the citation audit |
 | 5 | Set plate drawn with no clear zone | same paper: "no inhibition zones were found in any of the study groups" | full text |
 | 6 | In dentin tubules: slow, partial kill; more dead at day 30 than day 1 ("sealers": BC Sealer and AH Plus did not differ) | Wang Z, Shen Y, Haapasalo M. J Endod 2014;40(4):505-8. PMID 24666900; "partial" from Du T et al. J Endod 2015;41(8):1294-8, PMID 26092772 (best combination, 5% NaOCl + MTA Fillapex, 83% at 60 d; little added after 30 d) | abstracts (Wang full text not read) |
-| 7 | Bactericidal = count falls; bacteriostatic = count held | Pankey GA, Sabath LD. Clin Infect Dis 2004;38(6):864-70. PMID 14999632 (concept only; no 3-log figure is shown) | abstract |
+| 7 | Bactericidal = count falls; bacteriostatic = count held | Definition and curve shapes: Ishak A, Mazonakis N, Spernovasilis N, Akinosoglou K, Tsioutis C. J Antimicrob Chemother 2025;80(1):1-17. PMID 39471409 ("bacteriostatic antibacterials are ... those that prevent the growth of the bacteria; bactericidal antibacterials are those that kill bacteria"; in time-kill curves the bacterial concentration "stabilizes or is maintained" with bacteriostatic agents and shows "a steady or rapid reduction" with bactericidal agents). That the label is a laboratory, condition-dependent one: Pankey GA, Sabath LD. Clin Infect Dis 2004;38(6):864-70. PMID 14999632 (its abstract does not give the definitions themselves). No 3-log figure is shown | Ishak: full text (PMC11695898); Pankey & Sabath: abstract |
 | 8 | "FRESH" and "SET: LESS" both on the bactericidal half | inference stated as such: fresh iRoot SP killed all planktonic cells (Zhang 2009); set MTA gave a partial, under-2-log reduction in 1 h (Farrugia 2017), which by the definition shown is killing, only less of it. Bacteriostatic action of set material has not been measured, so nothing is placed on that half | — |
 | 9 | Verdict lines 1-2 with brace + "IN VITRO" | rows 2 and 4 | as above |
-| 10 | Healing: comparable — "CLINICAL", "single-cone trials · Sabeti 2024 J Endod" | Sabeti MA, Karimpourtalebi N, Shahravan A, Dianat O. J Endod 2024;50(6):735-46.e1. PMID 38548045 (single cone + calcium silicate sealer vs other sealers and techniques; failure RR 0.71, 95% CI 0.33-1.51, 3 trials, NS). Larger synthesis: Donnermeyer D et al. J Dent 2026;176:107002, PMID 42668107 (53 cohorts, 5913 teeth; loose criteria OR 0.70, 95% CI 0.50-0.99; strict criteria OR 0.89, 0.67-1.19, NS). Neither tests the antibacterial effect | abstracts |
+| 10 | Healing: comparable — "CLINICAL", "single-cone trials vs other sealers · Sabeti 2024 J Endod" | Sabeti MA, Karimpourtalebi N, Shahravan A, Dianat O. J Endod 2024;50(6):735-46.e1. PMID 38548045 (single cone + calcium silicate sealer vs other sealers and techniques; failure RR 0.71, 95% CI 0.33-1.51, 3 trials, NS). Larger synthesis: Donnermeyer D et al. J Dent 2026;176:107002, PMID 42668107 (53 cohorts, 5913 teeth; loose criteria OR 0.70, 95% CI 0.50-0.99; strict criteria OR 0.89, 0.67-1.19, NS). Neither tests the antibacterial effect | abstracts |
 
 Wording constraints from RESEARCH.md that were applied: the 2-min kill names iRoot SP and "free-floating"; the
 97% / 82% pair carries "SET MTA · 1 H CONTACT"; no sealer pH value; no percent-dead for BC Sealer; no "dentin
@@ -65,10 +65,11 @@ osteogenesis.
   is in the caption.
 - The bars are true to scale in percent, which looks stronger than it is microbiologically (1.67 log and under
   1 log); "<2 log" is in the caption.
-- Cidal/static is a laboratory label. The antibiotic-testing convention is a 99.9% (3 log10) fall at 18-24 h; it
-  is not a cement standard, agents classed bacteriostatic can still lower counts, and the label depends on
-  conditions. The convention figure is NOT taken from the Pankey & Sabath abstract (paper body not read); it is
-  cited here only as a laboratory convention and is not on screen.
+- Cidal/static is a laboratory label. The antibiotic-testing convention is a 3-log10 (>= 99.9%) kill against the
+  starting inoculum at 24 h (the MBC; bactericidal if MBC/MIC <= 4), and "even bacteriostatic antibacterials do
+  kill bacteria" (Ishak 2025, J Antimicrob Chemother, PMID 39471409, full text). It is an antibiotic convention,
+  not a cement standard, and the label depends on conditions (Pankey & Sabath 2004, abstract). The figure is NOT
+  in the Pankey & Sabath abstract (paper body not read) and is not on screen.
 - An agar zone means no growth, not killing; it is read at 24-48 h (the bench timer's 0 h to 3 h belongs to the
   pH tape only) and it cannot separate bactericidal from bacteriostatic (Farrugia 2017 Sci Rep, full text).
 - In tubules the effect is not bioceramic-specific: BC Sealer and AH Plus did not differ at any time point (Wang
@@ -111,6 +112,17 @@ osteogenesis.
   source strip placed between the rows on the end card; sources moved onto the data tapes.
 - v1.2: retimed so the 82% bar and the "SET ?" flag are held longer; dropped "time", "at" to save words.
 - v2: review pass — see "Review changes".
+- v2.1: Final QA (fresh-eyes pass, 27 stills with --safe + PubMed re-check of the five on-screen citations:
+  PMID 7499973, 19567333, 28128328, 24666900, 38548045 — all match). Fixes: (1) the hand-drawn superscript minus
+  of "OH-" on dish 1 touched the H and read as "OHΓ"; moved 13 px right / 6 px down so it is a separate
+  minus (also on the end card and poster). (2) End-card fine print now names the comparator: "single-cone trials
+  vs other sealers · Sabeti 2024 J Endod" ("Healing: comparable" had no "to what" on screen; Sabeti 2024 compares
+  single cone + calcium silicate sealer with other sealers and techniques). It still clears the CLINICAL tape
+  (about 10 px) and ends at x about 735. (3) meta.json: claims put in true on-screen order (pH tape 0.8 s,
+  schematic tape 1.3 s, kill note 2.45 s), topic now says "in vitro", clinical claim quotes the new fine print.
+  Checked and left alone: safe areas (all must-read text inside x 64-1016, y 230-1580, nothing in the button
+  column), hook readable at t = 0, loop (no ghosting; hook returns after the camera lands), poster t 22.4 s
+  inside the 3:4 crop, every number next to its material/test/source. Video re-rendered once; ffprobe 24.4 s.
 
 ## Review changes (v2, after independent science + design review)
 Science
@@ -154,3 +166,31 @@ Design
 Not applied: the optional second (shallower) "set" curve on the cidal card — it would need a label to be read;
 the optional one-state pH tape — the 10.2 -> 12.5 pair is the board-style fact and the resequencing already
 removes the focal-point clash.
+
+## Citation audit (22 Nov 2026)
+Every citation on screen, in meta.json, in this file and in RESEARCH.md was re-pulled from PubMed.
+- On screen (5 source lines): Torabinejad 1995 J Endod (PMID 7499973), Zhang 2009 J Endod (PMID 19567333),
+  Farrugia 2017 Sci Rep (PMID 28128328), Wang 2014 J Endod (PMID 24666900), Sabeti 2024 J Endod (PMID 38548045).
+  First author, year, journal, volume, pages and PMID all belong to the same paper, and each paper states the
+  number or finding shown with the criteria shown. Farrugia 2017 was re-read in PMC full text: 97.30% / 81.76%
+  (water, day 1 / day 7 of aging, 1 h contact), "no inhibition zones were found in any of the study groups",
+  blood arm no different from control at day 7. No on-screen text or number changed; the video was not
+  re-rendered.
+- All other citations here and in RESEARCH.md (35 more PMIDs) match PubMed bibliographically; the ones behind an
+  on-screen claim or the caption were also re-read (Du 2015, Candeiro 2016, Farrugia 2017 JABFM, Torabinejad
+  1995;21:403-6, Zhang 2009;35:221-4, Pankey & Sabath 2004, Donnermeyer 2026, Zamparini 2024, Sheng 2026, Mushtaq
+  2026, Seog 2025, Bardini 2025, Zavattini 2020). No wrong PMID, author, year or journal was found.
+Fixes (documentation only):
+1. Dish 4 definition ("count falls" / "count held") was attributed to the Pankey & Sabath abstract, which says
+   only that the distinction is an in vitro, condition-dependent one and does not give the definitions. Source
+   added and read in full text: Ishak et al., J Antimicrob Chemother 2025;80(1):1-17, PMID 39471409
+   (PMC11695898). Pankey & Sabath kept for the "laboratory label" caveat. The 3-log convention in the caveats is
+   now sourced to the same full text.
+2. meta.json claim 4 said the 97% / 82% pair is in "Table 1"; the percentages are in the Discussion and Table 1
+   holds the log10 counts. Corrected in meta.json and in row 4 above.
+3. meta.json claim 2 and row 3 above called Candeiro 2016 a "freshly mixed" result; its abstract does not state
+   the setting state for the agar test. Reworded (Biodentine "after immediate mixing" stays with Farrugia 2017
+   JABFM).
+Checked and left: "single-cone trials vs other sealers" (Sabeti 2024 controls were other sealers and other
+obturation techniques; meta.json says so in full); "partial" in tubules rests on Du 2015 (same model, best
+combination 83% at 60 d), Wang 2014 gives the direction only — both are listed in meta.json.

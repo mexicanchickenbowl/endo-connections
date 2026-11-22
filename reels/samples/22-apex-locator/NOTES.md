@@ -63,15 +63,25 @@ Source types: *abstract* = PubMed abstract read; *full text* = PMC full text rea
 | AC IMPEDANCE (no year) | Nasiri & Wrbas 2022, PMID 35068894; Nekoofar 2006, PMID 16872454 [H5, H7] | full text; abstract |
 | 1994 RATIO | Kobayashi & Suda 1994, PMID 7996080. 1994 is the date of the J Endod paper, not a claimed year of introduction; say "ratio method (Kobayashi & Suda, J Endod 1994)", never "introduced in 1994" or "first" [H6] | abstract |
 
-**The 70–100% range** (Root ZX family: Root ZX, Root ZX II, Root ZX mini, Dentaport ZX; permanent teeth; hand files;
-percentage of readings within ±0.5 mm of that study's reference point):
+**The 70–100% range** (Root ZX family: Root ZX in 12 studies, Root ZX II in 3, Dentaport ZX in 1; no Root ZX mini
+study is in the list; permanent teeth; hand files; percentage of readings within ±0.5 mm of that study's reference
+point):
 Shabahang 1996 J Endod (PMID 9198419) 96.2%; Dunlap 1998 J Endod (9487868) 82.3%; Pagavino 1998 J Endod (9693591)
 82.75%; Welk 2003 J Endod (12929694) 90.7%; Tselnik 2005 J Endod (15980709) 75%; Haffner 2005 J Dent (16139692) 78%;
-Wrbas 2007 Int Endod J (17229119) 75%; Kim 2008 Oral Surg (18329572) 84%; Vieyra 2010 Int Endod J (20002800) 100%;
-Stöber 2011 J Endod (21496657) 72%; Piasecki 2011 J Endod (21846536) 83% and 100%; Vasconcelos 2014 Braz Dent J
-(24789285) 75%; Saatchi 2014 J Endod (24565652) 93%; Swapna 2015 J Conserv Dent (26180412) 96.6%; De-Deus 2022 J Endod
-(35780927) 81.8%; De-Deus 2023 J Endod (36848949, Root ZX II) 100%.
+Wrbas 2007 Int Endod J (17229119) 75%; Kim 2008 Oral Surg Oral Med Oral Pathol Oral Radiol Endod (18329572) 84%;
+Vieyra 2010 Int Endod J (20002800) 100%; Stöber 2011 J Endod (21496657) 72%; Piasecki 2011 J Endod (21846536,
+Root ZX II) 83% and 100%; Vasconcelos 2014 Braz Dent J (24789285) 75%; Saatchi 2014 J Endod (24565652, Dentaport ZX)
+93%; Swapna 2015 J Conserv Dent (26180412) 96.6%; De-Deus 2022 J Endod (35780927, Root ZX II) 81.8%; De-Deus 2023
+J Endod (36848949, Root ZX II) 100%.
 - Not pooled; one PubMed query, not a systematic search.
+- "Hand files" is stated in 9 of the 16 abstracts (K-file or hand file: Welk, Tselnik, Kim, Stöber, Piasecki,
+  Vasconcelos, Swapna, De-Deus 2022, De-Deus 2023). The other 7 (Shabahang, Dunlap, Pagavino, Haffner, Wrbas, Vieyra,
+  Saatchi) name no file type; none of the 16 reports engine-driven files.
+- In scope, inside the range, but not among the 16 (found at the citation audit; abstracts): Duran-Sindreu et al.,
+  J Endod 2012;38:236-239 (PMID 22244644), Root ZX 78.3% in vivo, reference 0.5 mm coronal to the major foramen;
+  Moscoso et al., Med Oral Patol Oral Cir Bucal 2014;19:e202-205 (PMID 24121908), Dentaport ZX 82.35%, major foramen.
+  Not a ±0.5 mm figure, so not counted: Somma et al., Int Endod J 2012;45:552-556 (PMID 22257341), Dentaport ZX
+  "correct" in 6 of 10 teeth with no tolerance given in the abstract.
 - Reference point differs by study: the major foramen, a point 0.5 mm coronal to it (Stöber 2011, the 72% anchor;
   also Saatchi 2014), or the minor foramen/constriction (Vieyra 2010, the 100% anchor).
 - Most have 11–40 teeth, but not all: Vieyra 2010 measured 482 canals in 160 teeth. That is why the chip no longer
@@ -115,8 +125,13 @@ No kΩ value for Sunada, no quotient value, no Rambo ratio numbers, no "cancels"
 numbers, no "first", no dry-canal state, no pooled accuracy figure, nothing about pacemakers.
 
 Nuance for replies or a longer caption: constriction-versus-foramen is disputed (Hoer & Attin 2004, PMID 14871179);
-readings run short with a wide-open apex (Ebrahim 2006, PMID 17037894); a file touching metal or a flooded chamber
-shorts the circuit, and a perforation can read APEX (manufacturer instructions; Gordon & Chandler 2004, PMID 15189431);
+with a wide apical foramen and a small file the reading is unreliable (Ebrahim et al., Aust Dent J 2006;51:258-262,
+PMID 17037894, ex vivo, abstract); the manufacturer instructions say an exceptionally large foramen reads short, and
+in enlarged canals "the measured length with the smaller size files became shorter" (Ebrahim et al., Aust Dent J
+2006;51:153-157, PMID 16848263, in vitro, abstract); a file touching a metal prosthesis that touches the gingiva, or
+fluid overflowing to the gums, leaks current (manufacturer instructions, which also list a fractured tooth and a
+branch canal as leakage paths); apex locators are also used to detect perforations (Gordon & Chandler, Int Endod J
+2004;37:425-437, PMID 15189431, abstract), although neither that abstract nor the instructions say "reads APEX";
 the Root ZX II label says not to use it on patients with a pacemaker, while small clinical studies found no
 interference (Wilson 2006, PMID 16934627; Conde-Mir 2018, PMID 29972599) and one recorded noise under provoked
 conditions (Moraes 2016, PMID 26105663).
@@ -207,3 +222,43 @@ Left as is (judged acceptable, noted for the record)
 - The accuracy marking appears at 18.3 s, 0.8 s before its source line (19.1 s).
 
 Video re-rendered once after the fix: 720 frames, 24.000 s by ffprobe, 5.14 MB; poster at 21.6 s.
+
+## Citation audit (2026-11-22)
+Scope: every literature citation on screen (six source lines, the chip marking, the history strip), in `meta.json`
+(claims and the caption's Refs line), in this file, and in `RESEARCH.md`.
+
+Method. According to PubMed, metadata and abstracts were fetched again for all 68 PMIDs cited in the sample and
+compared with first author, year, journal, volume, pages and the claim attached. PMC full text was read again for
+Rambo 2010 (PMC2944265: Table 2, canal counts per file position, the Root ZX-defined 0 mm point), Nasiri & Wrbas 2022
+(PMC8767164: lip electrode, direct-current and alternating-current device classes, 8 kHz and 400 Hz) and Custer 1918
+(PMC7845214: dry cells and a milliammeter). Sunada 1962 has no PubMed record (citation lookup returns none); the
+Crossref record gives J Dent Res 1962;41(2):375-387, author Imao Sunada. The manufacturer quotes ("The numerals on the
+meter gauge do not represent millimeters", "Always check the measurement with an x ray", "Contrary Electrode (Lip
+Clip)") were found in the local text of the ROOT ZX II instructions. Not read again: the full texts of Gehlot 2016,
+Alothmani & Siddiqui 2023 and Tampelini 2017, which support only off-screen notes in `RESEARCH.md`.
+
+Result. All 68 PubMed records match the citations given (first author, year, journal, volume, pages, PMID). Every
+number on screen is in the source cited for it: 0.4 and 8 kHz (Oishi 2002, abstract), 7–21 canals (Rambo 2010, full
+text), 72% and 100% as the ends of the 16-study range (Stöber 2011; Vieyra 2010 and De-Deus 2023, abstracts). Nothing
+on screen was changed and the video was not rendered again.
+
+Corrected in the documentation
+- "Root ZX mini" was listed in the Root ZX family behind the 70–100% range. None of the 16 studies used it (12 Root ZX,
+  3 Root ZX II, 1 Dentaport ZX). Removed here and in `meta.json`.
+- "Hand files" as the scope of the range: stated in 9 of the 16 abstracts, not named in 7, engine-driven files in
+  none. Now said in `meta.json` and above.
+- Nuance paragraph: "readings run short with a wide-open apex" was attached to Ebrahim 2006 (PMID 17037894), whose
+  abstract says "unreliable", not "short". "Short" is the manufacturer's wording and the finding of the companion paper
+  (PMID 16848263). "A perforation can read APEX" was attached to the manufacturer instructions, which do not mention
+  perforation. Both sentences reworded.
+- Kim 2008: journal written out (Oral Surg Oral Med Oral Pathol Oral Radiol Endod); device named for Piasecki 2011,
+  Saatchi 2014 and De-Deus 2022.
+
+Checked and left
+- Is 70–100% selective? One more PubMed query for in vivo Root ZX studies (46 records) found two in-scope abstracts
+  outside the list, both inside the range (Duran-Sindreu 2012, 78.3%; Moscoso 2014, 82.35%), and none below 70% with a
+  stated ±0.5 mm tolerance. Somma 2012 (Dentaport ZX "correct" in 6 of 10 teeth, tolerance not given) is recorded
+  above and not counted. "RANGE OF 16 STUDIES" stays true as worded.
+- Source line "Ounsi & Naaman 1999, Int Endod J (in vitro) · Martins 2014" gives no journal for Martins (J Endod).
+  Adding it would run the 24 px line past x = 956 into the button column; the journal is in the caption's Refs line
+  and in `meta.json`.

@@ -39,7 +39,7 @@ in this reel; setting chemistry and apatite formation belong to reel 20.
 | 23 | Clinical: healing/success with calcium silicate sealers is COMPARABLE to other sealers. Sabeti 2024: sealer + single cone vs other sealers/techniques, failure RR 0.71 (95% CI 0.33-1.51), not significant (3 trials) | Sabeti MA, Karimpourtalebi N, Shahravan A, Dianat O. J Endod 2024;50(6):735-46.e1. PMID 38548045. [doi](https://doi.org/10.1016/j.joen.2024.03.007) | 5 studies; pooled failure 6.8% (95% CI 3-12%, I2 46%); comparison on 3 trials "found no significant difference... Risk ratio = 0.71, 95% CI = (0.33, 1.51), I2 = 0". Search to March 2023. Compares sealer + technique bundles; not a test of antibacterial effect. | abstract | high |
 | 23b | NEWER and larger clinical meta-analyses (added at fact-check): success comparable; one finds fewer failures by LOOSE criteria only | Donnermeyer D, Ingold O, Meyer-Luckel H, Wolf TG, Wierichs RJ, Al-Haj Husain N. J Dent 2026;176:107002. PMID 42668107. [doi](https://doi.org/10.1016/j.jdent.2026.107002); Zamparini F, Lenzi J, Duncan HF, Spinelli A, Gandolfi MG, Prati C. Int Endod J 2024;57(8):1021-42. PMID 38606520. [doi](https://doi.org/10.1111/iej.14069); Sheng Q et al. Front Med (Lausanne) 2026;13:1762823. PMID 41783054. [doi](https://doi.org/10.3389/fmed.2026.1762823); Mushtaq A et al. Sci Rep 2026;16(1). PMID 41872366. [doi](https://doi.org/10.1038/s41598-026-37936-7) | Donnermeyer 2026 (55 articles, 53 cohorts, 5913 teeth, randomized + non-randomized): loose criteria "significantly fewer failures" with calcium silicate sealers, OR 0.70 (95% CI 0.50-0.99); strict criteria no significant difference, OR 0.89 (0.67-1.19); conclusion "success rates comparable". Zamparini 2024 (15 comparative clinical studies, 11 RCTs, follow-up <= 2 yr): "No significant differences... in terms of survival and success rates." Sheng 2026 (15 studies, 1528 teeth, vs AH Plus, single cone): mid-term success OR 1.12 (0.85-1.47), NS. Mushtaq 2026: "Bioceramic sealers used with SC techniques have not demonstrated clear clinical benefits." None isolates an antibacterial effect. | abstract | high (Donnermeyer 2026 is very recent; abstract only) |
 | 24 | RCTs agree: similar healing/success vs AH Plus or ZOE sealers | Seog M, Kwon SK, Kim D, Shin SJ, Jung IY. J Endod 2025;51(5):538-46, PMID 39923930 [doi](https://doi.org/10.1016/j.joen.2025.02.001) (5-yr RCT, Endoseal TCS sealer-based obturation vs AH Plus continuous wave; loose-criteria success 87.0% vs 81.8%, strict 78.3% vs 75.8%, NS; 56 teeth analyzed of 93, recall 64.5%); Bardini G et al. Int Endod J 2025;58(2):193-208, PMID 39655615 [doi](https://doi.org/10.1111/iej.14167) (4-yr RCT, BioRoot RCS single cone vs Pulp Canal Sealer EWT warm vertical, 67 teeth, recall 73%, no significant difference); Zavattini A, Knight A, Foschi F, Mannocci F. J Clin Med 2020;9(3):782, PMID 32183124 [doi](https://doi.org/10.3390/jcm9030782) (non-randomized, 1-yr CBCT loose criteria, BioRoot RCS 84% vs AH Plus 80%, p = 0.61) | As listed. | abstract | high |
-| 25 | Definition: bactericidal = kills; bacteriostatic = holds growth without killing; the label is a laboratory, condition-dependent one | Pankey GA, Sabath LD. Clin Infect Dis 2004;38(6):864-70. PMID 14999632. [doi](https://doi.org/10.1086/381972) | Abstract: the distinction "only applies under strict laboratory conditions and is inconsistent for a particular agent against all bacteria." The ">= 99.9% (3-log10) fall at 18-24 h" criterion is the standard antibiotic-testing convention; it is NOT in this abstract and the paper body was not read. It is defined for antibiotics in broth, not for dental cements. | abstract (concept only) | high for concept; the 3-log number is NOT VERIFIED from this source — if shown, label "lab convention" and do not attach this citation to it |
+| 25 | Definition: bactericidal = kills; bacteriostatic = holds growth without killing; the label is a laboratory, condition-dependent one | Definition: Ishak A, Mazonakis N, Spernovasilis N, Akinosoglou K, Tsioutis C. J Antimicrob Chemother 2025;80(1):1-17. PMID 39471409. [doi](https://doi.org/10.1093/jac/dkae380) (added at the citation audit, section (j)). Laboratory label: Pankey GA, Sabath LD. Clin Infect Dis 2004;38(6):864-70. PMID 14999632. [doi](https://doi.org/10.1086/381972) | Ishak 2025 full text: "bacteriostatic antibacterials are defined as those that prevent the growth of the bacteria; bactericidal antibacterials are those that kill bacteria... even bacteriostatic antibacterials do kill bacteria, although they do not reach specific laboratory thresholds"; MBC = "3-log10 (>= 99.9% killing) reduction in surviving bacteria (cfu/mL) compared with the initial inoculum at 24 h"; bactericidal if MBC/MIC <= 4; in time-kill curves the bacterial concentration "stabilizes or is maintained" with bacteriostatic agents and shows "a steady or rapid reduction" with bactericidal agents. Pankey & Sabath abstract: the distinction "only applies under strict laboratory conditions and is inconsistent for a particular agent against all bacteria" — this abstract does NOT give the definitions or the 3-log figure, and the paper body was not read. Both are about antibiotics in broth, not dental cements. | Ishak: full text (PMC11695898); Pankey & Sabath: abstract | high; the 3-log number may be cited to Ishak 2025 (label it "lab convention"), never to Pankey & Sabath |
 | 26 | Aging: Biodentine maintained its antibacterial action after prolonged aging (dual-species aerobic PLANKTONIC model, modified DCT) | Jerez-Olate C, Araya N, Alcantara R, Luengo L, Bello-Toledo H, Gonzalez-Rocha G, Sanchez-Sanhueza G. Aust Endod J 2022;48(3):465-72. PMID 34741571. [doi](https://doi.org/10.1111/aej.12587) | "Biodentine and BioRoot RCS had higher antibacterial action, and Biodentine was able to maintain its antibacterial action after a prolonged aging period in vitro." Aging time not stated in abstract; the abstract does not say "longest". | abstract | medium |
 | 27 | Smear layer removal improved sealer killing in tubules; BioRoot RCS worked even with smear layer | Zancan RF, Di Maio A, Tomson PL, Duarte MAH, Camilleri J. Int Endod J 2021;54(8):1369-82. PMID 33763882. [doi](https://doi.org/10.1111/iej.13522) | "Smear layer removal improved the bactericidal effect of all sealers and Ca2+ leaching." CLSM % living cells. | abstract | high |
 
@@ -229,7 +229,8 @@ otherwise generic "lawn".
 - Koutroulis A et al. Eur J Oral Sci 2023;131:e12943 (serum, fluid turnover).
 - Simundic Munitic M et al. PLoS One 2019;14:e0223575; Seron MA et al. Odontology 2024;112:672-99 (reviews of bioceramic sealers).
 - Sabeti MA et al. J Endod 2024;50:735-46; Donnermeyer D et al. J Dent 2026;176:107002 (clinical meta-analyses).
-- Pankey GA, Sabath LD. Clin Infect Dis 2004;38:864-70 (bactericidal vs bacteriostatic, concept).
+- Ishak A et al. J Antimicrob Chemother 2025;80:1-17 (bactericidal vs bacteriostatic: definitions, MBC convention; full text read).
+- Pankey GA, Sabath LD. Clin Infect Dis 2004;38:864-70 (bactericidal vs bacteriostatic is a laboratory, condition-dependent label).
 - Haapasalo HK et al. Int Endod J 2000;33:126-31 — cite only if the Ca(OH)2-solution/dentin-powder finding is
   mentioned as such.
 
@@ -326,3 +327,31 @@ Re-pulled from PubMed (abstracts) while applying the independent review:
   "single-cone trials" (Sabeti 2024: single cone + calcium silicate sealer vs other sealers and techniques).
 - Torabinejad 1995;21:403-6 is no longer cited for a fresh-specific agar zone (its abstract pools freshly mixed
   and 24-h set material); it is kept only for "some facultatives, no strict anaerobes".
+
+## (j) Citation audit (22 Nov 2026)
+
+Method: every PMID in this file, NOTES.md and meta.json (40 records) was checked against PubMed again, either
+by fetching the record or by a citation lookup (journal + year + volume + first page + first author -> PMID).
+All 40 resolve to the paper named, with the first author, year, journal, volume and pages given here. Abstracts
+were re-read for every paper behind an on-screen claim or the caption, for the clinical rows 23, 23b and 24, and
+for rows 2, 4, 5, 6, 11 and 12; Farrugia 2017 Sci Rep was re-read in PMC full text. Rows not re-read for content
+at this audit (bibliographic check only): 3, 8, 15, 16, 18, 19 (Farrugia 2018; Camilleri 2020), 20, 21, 22, 26,
+27, and the papers named only in (c)6, (c)10 and (d) (Silva Almeida 2017; Hage 2023; Candeiro 2012; Donnermeyer
+2019). None of those is on screen or in the caption.
+
+Findings:
+
+1. Row 25 — the definition "bactericidal = kills / bacteriostatic = holds growth" was attributed to Pankey &
+   Sabath 2004, whose abstract does not contain it (the definitions are in the paper body, which was not read).
+   A source that states it was found and read in full text: Ishak et al., J Antimicrob Chemother 2025;80(1):1-17,
+   PMID 39471409, PMC11695898. Row 25 and list (g) updated; the 3-log convention is now verified from that
+   full text. Pankey & Sabath kept for the "laboratory, condition-dependent" point only.
+2. Row 17 (Farrugia 2017 Sci Rep) — re-read; all numbers stand. The 97.30% / 82.64% / 81.76% figures are in the
+   Discussion; Table 1 holds the log10 counts (3.86 / 4.71 / 5.53 at day 1; 4.79 / 5.41 / 5.59 at day 7).
+   meta.json had "Table 1" for the percentages; corrected there.
+3. Section (i) / meta.json — Candeiro 2016 was grouped under "freshly mixed" materials giving an agar zone; the
+   abstract gives the zone (6.00 mm, read after 48 h) but not the setting state. Reworded in meta.json and
+   NOTES.md.
+4. Row 23b — Mushtaq 2026 has no article number in its PubMed record (Sci Rep 2026;16(1)); cite by PMID/DOI.
+
+No wrong PMID, first author, year, journal or page range was found, and no on-screen number changed.

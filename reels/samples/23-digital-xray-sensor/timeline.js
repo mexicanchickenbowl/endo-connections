@@ -4,14 +4,14 @@ export const AW = 3.4, AD = 2.55;         // active area in world units (4:3), s
 
 export const T = {
   dur: 24.0,
-  hook: [0, 1.7],                         // intact sensor, title
+  hook: [0, 2.05],                        // intact sensor, title (title fades 1.75-2.1)
   explode: [1.55, 3.15],                  // layers separate, camera pulls back to the teardown view
-  monitorIn: [1.75, 3.1],                 // the small screen slides in below the stack
-  names: 2.2,                             // layer names stagger in from here
+  names: 2.45,                            // layer names stagger in from here
   scint: 3.4,                             // 02 expands; flashes in the scintillator
   fop: 4.6,                               // 03 expands; light is shown crossing the fiber-optic plate
   cmos: 5.8,                              // 04 expands; light reaches the chip, wells start to fill
-  cmos2: 6.75,                            // second line: a transistor at every pixel
+  cmos2: 6.75,                            // second line: transistors in every pixel
+  monitorIn: [7.65, 8.55],                // the small screen slides in (standby) as the read-out beat starts
   exposeEnd: 7.9,                         // last X-ray dart lands
   ghostOut: [8.0, 8.5],                   // ghost teeth fade
   adc: 8.2,                               // 05 expands
@@ -19,20 +19,16 @@ export const T = {
   lag: 0.4,                               // chip -> screen delay
   img: 9.0,                               // 06 expands
   refine: [10.75, 11.15],                 // coarse blocks -> smooth image
-  poster: 11.35,
-  labelsOut: 11.6,
-  sensorOut: [11.6, 12.4],                // sensor closes and leaves, PSP rig arrives
-  pspIn: [11.75, 12.55],
-  pspTitle: 12.2,
-  pspExpose: [12.65, 13.65],              // X-rays -> trapped electrons (latent image)
-  pspScan: [13.8, 15.4],                  // red laser line scan, blue-violet light -> photomultiplier
-  carriageOut: [15.4, 15.9],
-  eraseLabel: 15.2,
-  eraseIn: [15.4, 15.9],                  // erase lamp (ring light) comes down
-  eraseGlow: [15.85, 16.8],
-  eraseDots: [16.0, 16.55],               // residual trapped electrons cleared
+  poster: 12.0,                           // complete labeled teardown, held 11.15-12.65
+  labelsOut: 12.65,
+  sensorOut: [12.65, 13.45],              // sensor closes and leaves, PSP plate on the scanner bed arrives
+  pspIn: [12.8, 13.6],
+  pspTitle: 13.25,
+  pspExpose: [13.65, 14.55],              // X-rays -> trapped electrons (latent image); no read-out hardware in view
+  carriageIn: [14.5, 14.95],              // laser + light guide + photomultiplier slide in only now
+  pspScan: [14.95, 16.4],                 // red laser line scan, blue-violet light -> photomultiplier
   pspOut: 17.05,                          // PSP labels fade
-  family: [17.1, 17.9],                   // both detectors together
-  endText: [17.85, 23.3],
-  loop: [23.25, 24.0],                    // back to the hero pose
+  family: [17.1, 17.9],                   // scanner + screen leave together, then both detectors side by side
+  endText: [17.8, 23.35],
+  loop: [23.3, 24.0],                     // back to the hero pose
 };
