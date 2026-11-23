@@ -1,0 +1,177 @@
+[
+ {
+  "scene": "hook",
+  "lines": [
+   [
+    "h1",
+    "Point to the tooth that hurts."
+   ],
+   [
+    "h2",
+    "It's the first thing a dentist asks. And it sounds like the easiest question in medicine."
+   ],
+   [
+    "h3",
+    "But when the pain is coming from deep inside the tooth, patients point to the right one only about thirty percent of the time."
+   ],
+   [
+    "h4",
+    "So why is your brain so bad at finding a toothache?"
+   ]
+  ]
+ },
+ {
+  "scene": "title",
+  "lines": []
+ },
+ {
+  "scene": "mccarthy",
+  "lines": [
+   [
+    "e1",
+    "In 2010, endodontists at the University of Minnesota asked seventy-nine emergency patients to do exactly that."
+   ],
+   [
+    "e2",
+    "Overall, they picked the right tooth about seventy-three percent of the time."
+   ],
+   [
+    "e3",
+    "But split the patients into two groups, and a pattern appears."
+   ],
+   [
+    "e4",
+    "When the inflammation had spread to the tissues around the root, they were right eighty-nine percent of the time."
+   ],
+   [
+    "e5",
+    "When the pain was still confined to the inside of the tooth? Just thirty percent."
+   ]
+  ]
+ },
+ {
+  "scene": "anatomy",
+  "lines": [
+   [
+    "a1",
+    "To understand why, you have to look inside the tooth."
+   ],
+   [
+    "a2",
+    "At its center is the pulp: a soft core of blood vessels and nerves."
+   ],
+   [
+    "a3",
+    "Those nerves come in two main kinds. Fast A delta fibers, which fire a sharp, quick jolt. And slow C fibers, which produce that dull, throbbing ache."
+   ],
+   [
+    "a4",
+    "What the pulp doesn't have are proprioceptors, the sensors that tell your brain exactly where something is happening."
+   ],
+   [
+    "a5",
+    "The ligament around the root is different. It's packed with mechanoreceptors that track pressure on the tooth with remarkable precision."
+   ],
+   [
+    "a6",
+    "So once inflammation reaches that ligament, the tooth starts to hurt when you bite. And suddenly, the patient can point right at it."
+   ],
+   [
+    "a7",
+    "A 2007 study in San Antonio found this tenderness when biting in fifty-seven percent of patients with irreversible pulpitis."
+   ]
+  ]
+ },
+ {
+  "scene": "wiring",
+  "lines": [
+   [
+    "w1",
+    "There's a second problem. And it's in the wiring."
+   ],
+   [
+    "w2",
+    "Pain signals from your teeth, your skin, your jaw muscles, and even your neck all flow into the same relay station in the brainstem."
+   ],
+   [
+    "w3",
+    "In 1986, Barry Sessle's lab at the University of Toronto recorded single neurons in that relay station, in cats."
+   ],
+   [
+    "w4",
+    "They found that single neurons there responded to several sources at once: a tooth, the skin of the face, the lining of the mouth, and the muscles of the jaw and neck."
+   ],
+   [
+    "w5",
+    "It's like a switchboard where many lines share a single operator. A signal arrives, but the brain has to guess which line it came from."
+   ],
+   [
+    "w6",
+    "When it guesses wrong, we call it referred pain."
+   ]
+  ]
+ },
+ {
+  "scene": "spread",
+  "lines": [
+   [
+    "s1",
+    "And the worse the pain gets, the less reliable that guess becomes."
+   ],
+   [
+    "s2",
+    "In 1984, Yair Sharav and colleagues at the Hebrew University mapped the pain of one hundred ninety-six dental patients."
+   ],
+   [
+    "s3",
+    "The more intense the pain, the farther it spread. And pain from upper and lower teeth overlapped so much that its location alone could not identify the source."
+   ],
+   [
+    "s4",
+    "In 1996, a team at the University of Kentucky asked four hundred patients with back-tooth pain to draw it on a diagram of the head."
+   ],
+   [
+    "s5",
+    "Again, stronger pain meant more referral. The researchers pointed to an overexcited nervous system, where pain neurons start responding to a wider and wider area."
+   ]
+  ]
+ },
+ {
+  "scene": "dundee",
+  "lines": [
+   [
+    "l1",
+    "Even in a perfectly controlled lab, the problem doesn't go away."
+   ],
+   [
+    "l2",
+    "In 2025, researchers at the University of Dundee sent tiny electrical pulses into specific upper teeth of nineteen volunteers, and asked them to point."
+   ],
+   [
+    "l3",
+    "For front teeth, they were right about two-thirds of the time. For back teeth, it was closer to a coin flip."
+   ]
+  ]
+ },
+ {
+  "scene": "close",
+  "lines": [
+   [
+    "c1",
+    "That's why endodontists don't just trust where a patient points."
+   ],
+   [
+    "c2",
+    "They reproduce the pain instead. Cold tests, tapping, bite tests, sometimes selective anesthesia, until one tooth gives itself away."
+   ],
+   [
+    "c3",
+    "The patient tells you that something hurts. The testing tells you where."
+   ],
+   [
+    "c4",
+    "So if you've ever struggled to tell which tooth is aching, it isn't you. It's how your nervous system is wired."
+   ]
+  ]
+ }
+]
