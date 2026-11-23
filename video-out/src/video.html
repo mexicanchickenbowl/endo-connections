@@ -1,0 +1,537 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Pulp Test Stats</title>
+<style>
+:root{
+  --bg:#070B1A; --ink:#F4F7FF; --mut:#9AA6C7; --nec:#FF6B6B; --vit:#34E0A1; --acc:#5EB6FF;
+  --yel:#FFD84D; --amb:#FFB547; --card:rgba(255,255,255,.065); --line:rgba(255,255,255,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);
+  font-family:'Inter Display','Inter',system-ui,sans-serif;font-feature-settings:'tnum' 1,'ss01' 1;-webkit-font-smoothing:antialiased}
+body.v{--mx:56px;--top:225px;--sh:1160px}
+body.h{--mx:90px;--top:44px;--sh:830px}
+#stage{position:absolute;inset:0;overflow:hidden}
+.bg{position:absolute;inset:0;background:
+  radial-gradient(1200px 900px at 50% -10%,#18235a 0%,transparent 60%),
+  radial-gradient(900px 900px at 100% 100%,#0f2d4a 0%,transparent 60%),#070B1A}
+.blob{position:absolute;width:900px;height:900px;border-radius:50%;filter:blur(120px);opacity:.33}
+.blob.a{background:#3559ff}.blob.b{background:#00b3a4}
+.gridbg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:90px 90px}
+.scene{position:absolute;left:var(--mx);right:var(--mx);top:var(--top);height:var(--sh);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;text-align:center}
+.nec{color:var(--nec)}.vit{color:var(--vit)}.acc{color:var(--acc)}.yel{color:var(--yel)}.amb{color:var(--amb)}
+svg.tooth{width:1em;height:1.2em;fill:currentColor;display:block}
+.kicker,.tag{display:inline-block;font-weight:800;letter-spacing:.14em;font-size:30px;padding:14px 26px;border-radius:999px;background:rgba(94,182,255,.14);color:var(--acc);border:2px solid rgba(94,182,255,.4)}
+.tag.big{font-size:44px;padding:18px 38px;background:var(--yel);color:#141414;border:0}
+h1.mega{font-weight:900;letter-spacing:-.035em;line-height:1.0}
+body.v h1.mega{font-size:150px}
+body.h h1.mega{font-size:132px}
+h1.mega span{display:inline-block;margin:0 .1em}
+h2.big{font-weight:850;letter-spacing:-.025em;line-height:1.08}
+body.v h2.big{font-size:84px}
+body.h h2.big{font-size:84px}
+.sub{font-size:64px;font-weight:800;letter-spacing:-.02em}
+.sub b{color:var(--nec)}
+.fine{font-size:30px;color:var(--mut);font-weight:500}
+
+/* hook */
+.six{display:flex;gap:26px;font-size:120px}
+body.h .six{font-size:108px;gap:40px}
+.six .t{position:relative;color:color-mix(in srgb,var(--nec) calc(var(--k,0)*100%),#fff)}
+.six .t .x{position:absolute;right:-18px;top:-18px;width:62px;height:62px;border-radius:50%;background:var(--nec);color:#fff;font-size:40px;font-weight:900;line-height:62px;opacity:var(--k,0);transform:scale(calc(.4 + .6*var(--k,0)))}
+
+/* intro */
+.paper{background:#F6F8FF;color:#0d1330;border-radius:36px;padding:44px 50px;text-align:left;box-shadow:0 40px 100px rgba(0,0,0,.5);width:100%;max-width:1100px}
+.paper .ptag{font-size:25px;font-weight:800;letter-spacing:.13em;color:#3b5bdb}
+.paper .ptitle{font-size:62px;font-weight:850;letter-spacing:-.03em;line-height:1.05;margin:16px 0 20px}
+.paper .pmeta{font-size:33px;color:#4a5578;font-weight:500}
+.paper .pmeta b{color:#0d1330}
+.stats{display:flex;gap:28px;width:100%;max-width:1100px}
+.stat{flex:1;background:var(--card);border:2px solid var(--line);border-radius:30px;padding:26px 10px}
+.stat b{display:block;font-size:112px;font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--yel)}
+.stat span{font-size:32px;font-weight:600;color:var(--mut)}
+.chips{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+.chip{font-size:44px;font-weight:800;padding:20px 34px;border-radius:22px;background:rgba(255,255,255,.1);border:2px solid var(--line)}
+
+/* rule */
+.pair{display:flex;gap:30px;width:100%}
+body.v .pair{flex-direction:column}
+.rcard{flex:1;border-radius:34px;padding:38px 30px;border:3px solid;display:flex;flex-direction:column;gap:8px;align-items:center}
+.rcard.n{background:rgba(255,107,107,.12);border-color:rgba(255,107,107,.65)}
+.rcard.g{background:rgba(52,224,161,.10);border-color:rgba(52,224,161,.55)}
+.rcard .rl{font-size:38px;font-weight:800;letter-spacing:.1em;color:var(--mut)}
+.rcard .rr{white-space:nowrap;font-size:92px;font-weight:900;letter-spacing:-.03em;line-height:1}
+.rcard .rs{font-size:34px;font-weight:600;color:var(--mut)}
+
+/* sens / spec */
+.panels{display:flex;gap:34px;width:100%;justify-content:center}
+.panel{background:var(--card);border:2px solid var(--line);border-radius:34px;padding:30px 26px;display:flex;flex-direction:column;align-items:center;gap:22px}
+body.v .panel{flex:1}
+body.h .panel{width:830px;display:grid;grid-template-columns:auto 1fr;column-gap:34px;row-gap:10px;align-items:center;justify-items:center;padding:30px 34px}
+body.h .panel .pt{grid-column:1/3;margin-bottom:8px}
+body.h .panel .dots{grid-column:1;grid-row:2/5}
+body.h .panel>*:nth-child(n+3){grid-column:2}
+.panel .pt{font-size:36px;font-weight:800}
+.dots{display:grid;grid-template-columns:repeat(10,1fr);gap:9px}
+.dots i{width:31px;height:31px;border-radius:50%;border:3px solid currentColor;opacity:.45}
+body.h .dots i{width:34px;height:34px}
+.dots i.f{background:currentColor;opacity:1}
+.panel .pn{font-size:118px;font-weight:900;letter-spacing:-.04em;line-height:.95}
+.panel .pn i{font-style:normal;font-size:.5em}
+.panel .pl{font-size:38px;font-weight:900;letter-spacing:.08em}
+.panel .pd{font-size:28px;font-weight:500;color:var(--mut);line-height:1.25}
+.banner{font-size:46px;font-weight:800;padding:24px 40px;border-radius:26px;background:rgba(255,216,77,.14);border:3px solid rgba(255,216,77,.6);letter-spacing:-.01em}
+.banner b{color:var(--yel)}
+
+/* 2x2 */
+.pvwrap{display:flex;gap:36px;width:100%;align-items:center}
+body.v .pvwrap{flex-direction:column}
+.tbl{display:grid;grid-template-columns:230px 1fr 1fr;grid-template-rows:auto 1fr 1fr auto;gap:12px;position:relative}
+body.v .tbl{width:100%}
+body.h .tbl{width:980px;flex:none}
+.tbl .hd{font-size:31px;font-weight:800;padding:16px 6px;border-radius:18px;line-height:1.15}
+.tbl .hd small{display:block;font-size:22px;letter-spacing:.14em;color:var(--mut);font-weight:700}
+.tbl .rh{font-size:33px;font-weight:850;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;text-align:right;padding-right:14px;line-height:1.1}
+.tbl .rh small{font-size:23px;color:var(--mut);font-weight:700;letter-spacing:.06em;margin-top:6px}
+.tbl .c{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:26px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:180px}
+.tbl .c b{font-size:58px;font-weight:900;letter-spacing:-.02em;line-height:1}
+.tbl .c span{font-size:25px;color:var(--mut);font-weight:600;line-height:1.2}
+.tbl .c.ok b{color:var(--vit)}.tbl .c.no b{color:var(--nec)}
+.tbl .hl{border-radius:30px;border:6px solid;opacity:var(--k,0);margin:-9px;pointer-events:none;z-index:3}
+.tbl .hl.col{grid-row:2/4;border-color:var(--acc);box-shadow:0 0 50px rgba(94,182,255,.45)}
+.tbl .hl.row{grid-column:2/4;border-color:var(--yel);box-shadow:0 0 50px rgba(255,216,77,.45)}
+.tbl .cl{font-size:30px;font-weight:800;color:var(--acc);opacity:var(--k,0);padding-top:6px}
+.pvside{display:flex;flex-direction:column;gap:22px;flex:1;width:100%}
+body.v .pvside .fcards{display:flex;gap:22px}
+body.h .pvside .fcards{display:flex;flex-direction:column;gap:22px}
+.fcard{flex:1;background:rgba(255,216,77,.10);border:3px solid rgba(255,216,77,.55);border-radius:28px;padding:24px 18px}
+.fcard .fn{font-size:60px;font-weight:900;color:var(--yel);letter-spacing:-.02em;line-height:1}
+.fcard .ff{font-size:31px;font-weight:700;margin:10px 0 8px;font-family:'DejaVu Sans Mono',monospace;letter-spacing:-.04em}
+.fcard .fq{font-size:28px;color:var(--mut);font-weight:600;line-height:1.2}
+body.v .pvside .banner{font-size:40px;padding:20px 20px}
+body.h .pvside .banner{font-size:38px;padding:20px 20px}
+
+/* test cards */
+.tcard{width:100%;max-width:1500px;display:flex;flex-direction:column;gap:44px;align-items:center}
+body.v .thead{font-size:64px}
+body.v .thead svg{width:80px;height:80px}
+.thead{display:flex;align-items:center;gap:24px;font-size:76px;font-weight:900;letter-spacing:-.02em}
+.thead svg{width:96px;height:96px}
+.tiles{display:grid;gap:24px;width:100%}
+body.v .tiles{grid-template-columns:1fr 1fr}
+body.h .tiles{grid-template-columns:repeat(4,1fr)}
+.tile{position:relative;background:var(--card);border:2px solid var(--line);border-radius:32px;padding:30px 14px 26px}
+.tile .tl{font-size:31px;font-weight:850;letter-spacing:.1em;color:var(--mut)}
+.tile .tv{font-size:150px;font-weight:900;letter-spacing:-.05em;line-height:1.02}
+.tile .tv i{font-style:normal;font-size:.42em;letter-spacing:0;margin-left:4px}
+.tile .td{font-size:27px;font-weight:600;color:var(--mut);line-height:1.2}
+.tile.pv{border-color:rgba(255,216,77,.5);background:rgba(255,216,77,.08)}
+.tile.pv .tv{color:var(--yel)}
+.tile .warn{position:absolute;left:50%;top:-22px;transform:translateX(-50%) scale(calc(.6 + .4*var(--k,0)));opacity:var(--k,0);white-space:nowrap;background:var(--nec);color:#fff;font-size:25px;font-weight:800;padding:8px 18px;border-radius:999px}
+.callout{display:flex;align-items:center;gap:28px;font-size:44px;font-weight:800;padding:24px 36px;border-radius:28px;background:rgba(255,255,255,.08);border:2px solid var(--line);line-height:1.15;text-align:left}
+.callout .five{display:flex;gap:10px;font-size:62px;color:var(--nec)}
+.callout .five .o{color:var(--vit)}
+body.v .callout{font-size:40px}
+
+/* leaderboard */
+.board{width:100%;max-width:1400px;display:flex;flex-direction:column;gap:20px}
+.brow{display:grid;grid-template-columns:330px 1fr 150px;align-items:center;gap:22px;text-align:left}
+body.h .brow{grid-template-columns:420px 1fr 170px}
+.brow .bn{font-size:42px;font-weight:850;line-height:1.05}
+.brow .bn small{display:block;font-size:25px;font-weight:600;color:var(--mut);margin-top:4px;letter-spacing:.01em}
+.brow .bar{height:66px;border-radius:18px;background:rgba(255,255,255,.08);overflow:hidden}
+.brow .bar i{display:block;height:100%;border-radius:18px;background:var(--acc)}
+.brow .bv{font-size:70px;font-weight:900;letter-spacing:-.04em;text-align:right}
+.brow.best .bar i{background:var(--vit)}.brow.best .bv{color:var(--vit)}
+.brow.worst .bar i{background:var(--nec)}.brow.worst .bv{color:var(--nec)}
+.brow .bt{display:inline-block;font-size:21px;font-weight:900;letter-spacing:.1em;padding:4px 12px;border-radius:999px;margin-left:12px;vertical-align:middle;opacity:var(--k,0);color:#10131f}
+.brow.best .bt{background:var(--vit)}.brow.worst .bt{background:var(--nec);color:#fff}
+
+/* catch */
+.slider{width:100%;max-width:1200px;background:var(--card);border:2px solid var(--line);border-radius:32px;padding:30px 40px 36px}
+.slider .sl{font-size:33px;font-weight:700;color:var(--mut);display:flex;justify-content:space-between;align-items:baseline}
+.slider .sl b{font-size:66px;color:var(--ink);font-weight:900;letter-spacing:-.03em}
+.track{position:relative;height:22px;border-radius:11px;background:rgba(255,255,255,.14);margin-top:26px}
+.track i{position:absolute;left:0;top:0;bottom:0;border-radius:11px;background:linear-gradient(90deg,var(--acc),var(--nec))}
+.track u{position:absolute;top:50%;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:#fff;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.gauges{display:flex;gap:28px;width:100%;max-width:1200px}
+.gauge{flex:1;background:rgba(255,216,77,.08);border:3px solid rgba(255,216,77,.5);border-radius:32px;padding:26px 20px}
+.gauge .gl{font-size:36px;font-weight:900;letter-spacing:.1em;color:var(--yel)}
+.gauge .gv{font-size:150px;font-weight:900;letter-spacing:-.05em;line-height:1}
+.gauge .gv i{font-style:normal;font-size:.42em}
+.gauge .gd{font-size:27px;font-weight:600;color:var(--mut)}
+
+/* recap */
+.rt{width:100%;max-width:1400px;display:flex;flex-direction:column;gap:14px}
+.qr{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;align-items:center;border-radius:24px;padding:20px 16px}
+.qr.hdr{font-size:30px;font-weight:850;letter-spacing:.1em;color:var(--mut);padding:6px 16px}
+.qr.hdr .y{color:var(--yel)}
+.qr.row{background:color-mix(in srgb,var(--rc,#fff) calc(8% + var(--k,0)*14%),transparent);border:3px solid color-mix(in srgb,var(--rc,#fff) calc(18% + var(--k,0)*62%),transparent);opacity:calc(.45 + .55*var(--k,0))}
+.qr .n{font-size:46px;font-weight:900;text-align:left;padding-left:14px;letter-spacing:-.01em}
+.qr .s{font-size:80px;font-weight:900;letter-spacing:-.04em;line-height:1}
+.qr .p{font-size:56px;font-weight:700;letter-spacing:-.03em;color:var(--yel);opacity:.9;line-height:1}
+body.v .qr .n{font-size:40px}
+body.v .qr .s{font-size:76px}
+body.v .qr .p{font-size:52px}
+
+/* cta */
+.book{width:150px;height:190px;fill:var(--yel)}
+.mem{display:flex;gap:26px;width:100%;max-width:1300px}
+body.v .mem{flex-direction:column}
+.mcard{flex:1;border-radius:30px;padding:30px 24px;background:var(--card);border:2px solid var(--line)}
+.mcard .m1{font-size:54px;font-weight:900;letter-spacing:-.02em}
+.mcard .m2{font-size:40px;font-weight:700;color:var(--mut);margin-top:8px}
+.mcard .m2 b{color:var(--ink)}
+.cite{font-size:27px;color:var(--mut);font-weight:500;line-height:1.4}
+
+/* captions */
+#cap{position:absolute;left:0;right:0;display:flex;justify-content:center;align-items:center;text-align:center;z-index:20}
+body.v #cap{top:1408px;height:190px;padding:0 70px}
+body.h #cap{bottom:44px;height:120px}
+#cap .in{display:inline-block}
+body.v #cap .in{font-size:68px;font-weight:900;letter-spacing:-.02em;line-height:1.12;text-shadow:0 4px 0 rgba(0,0,0,.55),0 0 26px rgba(0,0,0,.9)}
+body.h #cap .in{font-size:48px;font-weight:750;letter-spacing:-.01em;background:rgba(3,6,18,.72);padding:16px 34px;border-radius:20px;border:1px solid rgba(255,255,255,.12)}
+#cap .w{display:inline-block;margin:0 .13em}
+body.v #cap .w{margin:0 .19em}
+#cap .w.a{color:var(--yel)}
+body.v #cap .w.a{transform:scale(1.08)}
+#prog{position:absolute;left:0;top:0;height:8px;background:linear-gradient(90deg,var(--acc),var(--vit));z-index:30}
+#wm{position:absolute;font-size:24px;font-weight:600;color:rgba(255,255,255,.5);z-index:10}
+body.h #wm{right:36px;top:24px}
+body.v #wm{display:none}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="tooth" viewBox="0 0 100 120"><path d="M50 18 C38 6 14 8 12 34 C10 56 20 66 24 86 C27 102 30 114 37 114 C45 114 43 84 50 84 C57 84 55 114 63 114 C70 114 73 102 76 86 C80 66 90 56 88 34 C86 8 62 6 50 18 Z"/></symbol>
+  <symbol id="snow" viewBox="0 0 100 100"><g stroke="currentColor" stroke-width="8" stroke-linecap="round" fill="none"><path d="M50 8v84M13.6 29l72.8 42M13.6 71l72.8-42"/><path d="M38 14l12 12 12-12M38 86l12-12 12 12M10 45l16 5-4 16M90 55l-16-5 4-16M22 82l4-16-16-5M78 18l-4 16 16 5"/></g></symbol>
+  <symbol id="bolt" viewBox="0 0 100 100"><path fill="currentColor" d="M58 4 18 56h26l-8 40 46-56H54z"/></symbol>
+  <symbol id="bm" viewBox="0 0 100 126"><path d="M12 6h76a6 6 0 0 1 6 6v108L50 90 6 120V12a6 6 0 0 1 6-6z"/></symbol>
+</svg>
+
+<div id="stage">
+  <div class="bg"></div><div class="blob a"></div><div class="blob b"></div><div class="gridbg"></div>
+  <div id="wm">Mainkar &amp; Kim · J Endod 2018</div>
+
+  <!-- HOOK -->
+  <section class="scene" id="hook">
+    <div class="kicker" data-at="hook.0-2">PULP TESTING · BY THE NUMBERS</div>
+    <h1 class="mega">
+      <span data-at="hook.0@0" data-anim="pop">Your</span><span class="acc" data-at="hook.0@1" data-anim="pop">cold</span><span class="acc" data-at="hook.0@2" data-anim="pop">test</span><br>
+      <span data-at="hook.0@3" data-anim="pop">is</span><span class="nec" data-at="hook.0@4" data-anim="pop">lying</span><br class="vbr"><span data-at="hook.0@5" data-anim="pop">to</span><span data-at="hook.0@6" data-anim="pop">you.</span>
+    </h1>
+    <div class="six" id="six"></div>
+    <div class="sub" data-at="hook.1@5">About <b>1 in 6</b> results is wrong</div>
+    <div class="fine" data-at="hook.1@5+0.3">Pooled accuracy of cold testing = 0.84</div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="scene" id="intro">
+    <div class="paper" data-at="intro.0-0.15">
+      <div class="ptag">SYSTEMATIC REVIEW &amp; META-ANALYSIS</div>
+      <div class="ptitle">Diagnostic Accuracy of 5 Dental Pulp Tests</div>
+      <div class="pmeta"><b>Mainkar &amp; Kim</b> · Journal of Endodontics · 2018</div>
+    </div>
+    <div class="stats">
+      <div class="stat" data-at="intro.1@0" data-anim="pop"><b data-count="28">28</b><span>studies</span></div>
+      <div class="stat" data-at="intro.1@2" data-anim="pop"><b>5</b><span>pulp tests</span></div>
+      <div class="stat" data-at="intro.1@6" data-anim="pop"><b>4</b><span>mixed-up numbers</span></div>
+    </div>
+    <div class="chips" id="chips">
+      <div class="chip" data-at="intro.1@7" data-anim="pop">Sensitivity</div>
+      <div class="chip" data-at="intro.1@7+0.12" data-anim="pop">Specificity</div>
+      <div class="chip" data-at="intro.1@7+0.24" data-anim="pop">PPV</div>
+      <div class="chip" data-at="intro.1@7+0.36" data-anim="pop">NPV</div>
+    </div>
+  </section>
+
+  <!-- RULE -->
+  <section class="scene" id="rule">
+    <div class="tag big" data-at="rule.0" data-anim="pop">RULE #1</div>
+    <h2 class="big" data-at="rule.1@0">The “disease” is<br><span class="nec">pulp necrosis</span></h2>
+    <div class="pair">
+      <div class="rcard n" data-at="rule.2@2"><div class="rl">POSITIVE TEST =</div><div class="rr nec">NO response</div><div class="rs">points to a necrotic pulp</div></div>
+      <div class="rcard g" data-at="rule.2@4"><div class="rl">NEGATIVE TEST =</div><div class="rr vit">Responds</div><div class="rs">points to a vital pulp</div></div>
+    </div>
+  </section>
+
+  <!-- SENS / SPEC -->
+  <section class="scene" id="sens">
+    <div class="panels">
+      <div class="panel nec" data-at="sens.0@1">
+        <div class="pt">100 necrotic teeth</div>
+        <div class="dots" data-n="87" data-fill="sens.2@2"></div>
+        <div data-at="sens.1@0"><div class="pl">SENSITIVITY</div></div>
+        <div class="pn" data-at="sens.2@2" data-anim="pop"><b data-count="87">87</b><i>%</i></div>
+        <div class="pd" data-at="sens.1@3">necrotic teeth the test<br>caught (no response)</div>
+      </div>
+      <div class="panel vit" data-at="sens.3@1">
+        <div class="pt">100 vital teeth</div>
+        <div class="dots" data-n="84" data-fill="sens.5@0"></div>
+        <div data-at="sens.4@0"><div class="pl">SPECIFICITY</div></div>
+        <div class="pn" data-at="sens.5@0" data-anim="pop"><b data-count="84">84</b><i>%</i></div>
+        <div class="pd" data-at="sens.4@3">vital teeth that<br>responded normally</div>
+      </div>
+    </div>
+    <div class="banner" data-at="sens.6@0">Start with the <b>TRUTH</b> → grade the <b>TEST</b></div>
+  </section>
+
+  <!-- PREDICTIVE VALUES -->
+  <section class="scene" id="pv">
+    <div class="pvwrap">
+      <div class="tbl" data-at="pv.0-0.2" data-anim="fade">
+        <div></div>
+        <div class="hd nec"><small>TRUTH</small>Truly necrotic</div>
+        <div class="hd vit"><small>TRUTH</small>Truly vital</div>
+        <div class="rh" style="grid-row:2;grid-column:1">NO response<small>TEST +</small></div>
+        <div class="c ok" style="grid-row:2;grid-column:2"><b>TP</b><span>necrotic,<br>no response</span></div>
+        <div class="c no" style="grid-row:2;grid-column:3"><b>FP</b><span>vital,<br>no response</span></div>
+        <div class="rh" style="grid-row:3;grid-column:1">Responds<small>TEST −</small></div>
+        <div class="c no" style="grid-row:3;grid-column:2"><b>FN</b><span>necrotic,<br>responds</span></div>
+        <div class="c ok" style="grid-row:3;grid-column:3"><b>TN</b><span>vital,<br>responds</span></div>
+        <div class="hl col" style="grid-column:2" data-k="pv.0+0.1;pv.2@1"></div>
+        <div class="hl col" style="grid-column:3" data-k="pv.0+0.25;pv.2@1"></div>
+        <div class="hl row" style="grid-row:2" data-k="pv.3@0;pv.4@0-0.1"></div>
+        <div class="hl row" style="grid-row:3" data-k="pv.4@0"></div>
+        <div style="grid-row:4;grid-column:1"></div>
+        <div class="cl" style="grid-row:4;grid-column:2" data-k="pv.0+0.1;pv.2@1">↓ Sensitivity</div>
+        <div class="cl" style="grid-row:4;grid-column:3" data-k="pv.0+0.25;pv.2@1">↓ Specificity</div>
+      </div>
+      <div class="pvside">
+        <div class="banner" data-at="pv.2@1" data-anim="pop">Start with the <b>TEST</b> → predict the <b>TRUTH</b></div>
+        <div class="fcards">
+          <div class="fcard" data-at="pv.3@0"><div class="fn">PPV</div><div class="ff">TP ÷ (TP + FP)</div><div class="fq">No response → really necrotic?</div></div>
+          <div class="fcard" data-at="pv.4@0"><div class="fn">NPV</div><div class="ff">TN ÷ (TN + FN)</div><div class="fq">Responds → really vital?</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLD -->
+  <section class="scene" id="cold">
+    <div class="tcard">
+      <div class="thead acc" data-at="cold.0-0.1" data-anim="pop"><svg><use href="#snow"/></svg><span>COLD TEST</span></div>
+      <div class="tiles">
+        <div class="tile" data-at="cold.1@1"><div class="tl">SENSITIVITY</div><div class="tv"><b data-count="87">87</b><i>%</i></div><div class="td">catches necrotic teeth</div></div>
+        <div class="tile" data-at="cold.1@3"><div class="tl">SPECIFICITY</div><div class="tv"><b data-count="84">84</b><i>%</i></div><div class="td">clears vital teeth</div></div>
+        <div class="tile pv" data-at="cold.2@4"><div class="tl">PPV</div><div class="tv"><b data-count="81">81</b><i>%</i></div><div class="td">no response → truly necrotic</div></div>
+        <div class="tile pv" data-at="cold.2@4+0.5"><div class="tl">NPV</div><div class="tv"><b data-count="87">87</b><i>%</i></div><div class="td">responds → truly vital</div></div>
+      </div>
+      <div class="callout" data-at="cold.3@1">
+        <div class="five"><svg class="tooth"><use href="#tooth"/></svg><svg class="tooth"><use href="#tooth"/></svg><svg class="tooth"><use href="#tooth"/></svg><svg class="tooth"><use href="#tooth"/></svg><svg class="tooth o"><use href="#tooth"/></svg></div>
+        <div>≈ 1 in 5 “no response” teeth<br>is a <span class="vit">false alarm</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EPT -->
+  <section class="scene" id="ept">
+    <div class="tcard">
+      <div class="thead amb" data-at="ept.0@1" data-anim="pop"><svg><use href="#bolt"/></svg><span>ELECTRIC PULP TEST</span></div>
+      <div class="tiles">
+        <div class="tile" data-at="ept.1@3"><div class="warn" data-k="ept.1@6">misses ~1 in 4 necrotic teeth</div><div class="tl">SENSITIVITY</div><div class="tv nec"><b data-count="72">72</b><i>%</i></div><div class="td">catches necrotic teeth</div></div>
+        <div class="tile" data-at="ept.2@3"><div class="tl">SPECIFICITY</div><div class="tv vit"><b data-count="93">93</b><i>%</i></div><div class="td">clears vital teeth</div></div>
+        <div class="tile pv" data-at="ept.3@11"><div class="tl">PPV</div><div class="tv"><b data-count="89">89</b><i>%</i></div><div class="td">no response → truly necrotic</div></div>
+        <div class="tile pv" data-at="ept.3@11+0.5"><div class="tl">NPV</div><div class="tv"><b data-count="80">80</b><i>%</i></div><div class="td">responds → truly vital</div></div>
+      </div>
+      <div class="callout" data-at="ept.3@4" style="text-align:center"><div>No response on EPT? <span class="yel">Believe it.</span></div></div>
+    </div>
+  </section>
+
+  <!-- RANK -->
+  <section class="scene" id="rank">
+    <div class="kicker" data-at="rank.0-0.2">ACCURACY LEADERBOARD</div>
+    <div class="board" id="board"></div>
+    <div class="banner" data-at="rank.2@0">They test <b>blood supply</b>, not nerves</div>
+  </section>
+
+  <!-- CATCH -->
+  <section class="scene" id="catch" data-hs=".85">
+    <div class="tag big" data-at="catch.0" data-anim="pop">ONE CATCH</div>
+    <h2 class="big" data-at="catch.1@0" style="font-size:66px">Same test. Different patients.<br><span class="yel">Different predictive value.</span></h2>
+    <div class="slider" data-at="catch.1@3">
+      <div class="sl"><span>How common is necrosis in the teeth you test?</span><b id="pval">10%</b></div>
+      <div class="track"><i id="ptrk"></i><u id="pknob"></u></div>
+    </div>
+    <div class="gauges" data-at="catch.1@3+0.2">
+      <div class="gauge"><div class="gl">PPV</div><div class="gv"><b id="gppv">38</b><i>%</i></div><div class="gd">no response → truly necrotic</div></div>
+      <div class="gauge"><div class="gl">NPV</div><div class="gv"><b id="gnpv">98</b><i>%</i></div><div class="gd">responds → truly vital</div></div>
+    </div>
+    <div class="fine" data-at="catch.1@3+0.4">Illustration: cold test, calculated from sensitivity 0.87 and specificity 0.84</div>
+    <div class="banner" data-at="catch.2@4" data-anim="pop" style="font-size:40px">The paper reports <b>adjusted</b> PPV and NPV</div>
+  </section>
+
+  <!-- RECAP -->
+  <section class="scene" id="recap" style="gap:28px" data-hs=".84">
+    <div class="tag big" data-at="recap.0" data-anim="pop">NUMBERS TO REMEMBER</div>
+    <div class="rt" id="rt"></div>
+    <div class="banner" data-at="recap.4@1">One test <b>≠</b> the whole diagnosis</div>
+  </section>
+
+  <!-- CTA -->
+  <section class="scene" id="cta">
+    <svg class="book" data-at="cta.0" data-anim="pop"><use href="#bm"/></svg>
+    <h2 class="big" data-at="cta.0@0">Save this for <span class="yel">boards</span></h2>
+    <div class="mem">
+      <div class="mcard" data-at="cta.0@5"><div class="m1 acc">Sensitivity · Specificity</div><div class="m2">start with the <b>truth</b> → grade the <b>test</b></div></div>
+      <div class="mcard" data-at="cta.0@8"><div class="m1 yel">PPV · NPV</div><div class="m2">start with the <b>test</b> → predict the <b>truth</b></div></div>
+    </div>
+    <div class="cite" data-at="cta.0@10">Mainkar A, Kim SG. Diagnostic Accuracy of 5 Dental Pulp Tests: A Systematic Review and Meta-analysis.<br>J Endod. 2018;44(5):694–702. doi:10.1016/j.joen.2018.01.021</div>
+  </section>
+
+  <div id="cap"><span class="in"></span></div>
+  <div id="prog"></div>
+</div>
+
+<script>
+const q = new URLSearchParams(location.search);
+const FMT = q.get('fmt') || (innerWidth > innerHeight ? 'h' : 'v');
+document.body.className = FMT;
+const TL = window.TL;
+const L = {};
+TL.scenes.forEach(s => s.lines.forEach((l, i) => L[s.id + '.' + i] = l));
+function T(expr){
+  const m = expr.trim().match(/^([a-z]+\.\d+)(?:@(\d+))?((?:[+-][\d.]+)*)$/);
+  if(!m || !L[m[1]]) throw new Error('bad cue ' + expr);
+  const l = L[m[1]];
+  let base = l.s;
+  if(m[2] != null){ if(!l.words[+m[2]]) throw new Error('bad word ' + expr); base = l.words[+m[2]].s; }
+  return base + (m[3].match(/[+-][\d.]+/g) || []).reduce((a, x) => a + parseFloat(x), 0);
+}
+const clamp = x => Math.max(0, Math.min(1, x));
+const eo = x => 1 - Math.pow(1 - x, 3);
+const eio = x => x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3)/2;
+const back = x => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3*Math.pow(x-1,3) + c1*Math.pow(x-1,2); };
+const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const tooth = c => `<svg class="tooth ${c||''}"><use href="#tooth"/></svg>`;
+
+// ---------- build dynamic DOM ----------
+$('#six').innerHTML = [0,1,2,3,4,5].map(i => `<div class="t" data-at="hook.1@0+${(i*0.07).toFixed(2)}" data-anim="pop" ${i==5?'data-k="hook.1@5"':''}>${tooth()}${i==5?'<div class="x">✕</div>':''}</div>`).join('');
+$$('.dots').forEach(d => d.innerHTML = '<i></i>'.repeat(100));
+const BOARD = [
+  ['Laser Doppler','sens 98 · spec 95',97,'best','rank.1@2','BEST'],
+  ['Pulse oximetry','sens 97 · spec 95',97,'best','rank.1@5','BEST'],
+  ['Cold','sens 87 · spec 84',84,'','rank.0-0.3',''],
+  ['Electric (EPT)','sens 72 · spec 93',82,'','rank.0-0.2',''],
+  ['Heat','sens 78 · spec 67',72,'worst','rank.0@4','WEAKEST'],
+];
+$('#board').innerHTML = BOARD.map((b,i) => `<div class="brow ${b[3]}" data-at="rank.0-0.3+${(i*0.06).toFixed(2)}"><div class="bn">${b[0]}${b[5]?`<span class="bt" data-k="${b[4]}+0.4">${b[5]}</span>`:''}<small>${b[1]}</small></div><div class="bar"><i data-w="${b[2]}" data-fill="${b[4]}"></i></div><div class="bv"><b data-count="${b[2]}" data-cue="${b[4]}">${b[2]}</b>%</div></div>`).join('');
+const RT = [
+  ['Cold',87,84,81,87,'#5EB6FF','recap.1'],
+  ['Electric',72,93,89,80,'#FFB547','recap.2'],
+  ['Heat',78,67,62,79,'#FF6B6B','recap.3'],
+  ['Laser Doppler',98,95,94,100,'#34E0A1','recap.3@2'],
+  ['Pulse oximetry',97,95,94,99,'#34E0A1','recap.3@2+0.15'],
+];
+$('#rt').innerHTML = `<div class="qr hdr" data-at="recap.0@1"><div></div><div>SENS</div><div>SPEC</div><div class="y">PPV</div><div class="y">NPV</div></div>` +
+  RT.map((r,i) => `<div class="qr row" style="--rc:${r[5]}" data-at="recap.0@1+${(i*0.07).toFixed(2)}" data-k="${r[6]}"><div class="n">${r[0]}</div><div class="s">${r[1]}</div><div class="s">${r[2]}</div><div class="p">${r[3]}</div><div class="p">${r[4]}</div></div>`).join('');
+
+// ---------- cue tables ----------
+const ENT = $$('[data-at]').map(el => ({el, t: T(el.dataset.at), anim: el.dataset.anim || 'up', dur: +(el.dataset.dur || (el.dataset.anim === 'pop' ? .42 : .5))}));
+const KS = $$('[data-k]').map(el => { const p = el.dataset.k.split(';'); return {el, a: T(p[0]), b: p[1] ? T(p[1]) : null}; });
+const CNT = $$('[data-count]').map(el => { const c = el.dataset.cue || el.closest('[data-at]').dataset.at; return {el, n: +el.dataset.count, t: T(c), last: null}; });
+const DOTS = $$('.dots').map(el => ({el, kids: [...el.children], n: +el.dataset.n, t: T(el.dataset.fill), last: -1}));
+const BARS = $$('.bar i').map(el => ({el, w: +el.dataset.w, t: T(el.dataset.fill)}));
+const SC = TL.scenes.map((s, i) => ({el: document.getElementById(s.id), base: FMT === 'h' ? +(document.getElementById(s.id).dataset.hs || 1) : 1, s: i === 0 ? -9 : s.s, e: i + 1 < TL.scenes.length ? TL.scenes[i+1].s : 1e9}));
+const chips = $$('#chips .chip');
+const CHIPCOL = ['#5EB6FF','#5EB6FF','#FFD84D','#FFD84D'];
+
+// ---------- captions ----------
+const MAXW = FMT === 'v' ? 3 : 9, MAXC = FMT === 'v' ? 17 : 46;
+const CHUNKS = [];
+TL.scenes.forEach(s => s.lines.forEach(l => {
+  let cur = [], len = 0;
+  const flush = () => { if(cur.length){ CHUNKS.push({s: cur[0].s, e: cur[cur.length-1].e, words: cur}); cur = []; len = 0; } };
+  l.words.forEach((w, i) => {
+    if(cur.length && (cur.length >= MAXW || len + w.w.length > MAXC)) flush();
+    cur.push(w); len += w.w.length + 1;
+    const rest = l.words.length - i - 1;
+    if(/[.?!:]$/.test(w.w) || (/,$/.test(w.w) && cur.length >= 2 && rest >= 2)) flush();
+  });
+  flush();
+}));
+const capIn = $('#cap .in');
+let capKey = '';
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+const blobA = $('.blob.a'), blobB = $('.blob.b'), prog = $('#prog');
+const W = innerWidth, H = innerHeight;
+const sens = .87, spec = .84;
+
+window.renderAt = function(t){
+  // background drift
+  blobA.style.transform = `translate(${-250 + Math.sin(t*.21)*160}px,${-300 + Math.cos(t*.17)*120}px)`;
+  blobB.style.transform = `translate(${W - 600 + Math.cos(t*.19)*150}px,${H - 600 + Math.sin(t*.23)*140}px)`;
+  prog.style.width = (clamp(t / TL.total) * 100) + '%';
+
+  for(const s of SC){
+    const kin = clamp((t - (s.s - .2)) / .3), kout = clamp((t - (s.e - .47)) / .25);
+    const o = kin * (1 - kout);
+    s.el.style.display = o <= 0 ? 'none' : 'flex';
+    s.el.style.opacity = o;
+    s.el.style.transform = `scale(${(1 + .03*kout) * s.base})`;
+  }
+  for(const a of ENT){
+    const p = clamp((t - a.t) / a.dur);
+    const e = eo(p);
+    a.el.style.opacity = Math.min(1, p * 2.2);
+    let tr = '';
+    if(a.anim === 'up') tr = `translateY(${(1 - e) * 46}px)`;
+    else if(a.anim === 'pop') tr = `scale(${p <= 0 ? .5 : .5 + .5 * back(p)})`;
+    a.el.style.transform = tr;
+  }
+  for(const k of KS){
+    let v = eo(clamp((t - k.a) / .4));
+    if(k.b != null) v *= 1 - eo(clamp((t - k.b) / .35));
+    k.el.style.setProperty('--k', v.toFixed(3));
+  }
+  for(const c of CNT){
+    const v = Math.round(c.n * eo(clamp((t - c.t) / .5)));
+    if(v !== c.last){ c.el.textContent = v; c.last = v; }
+  }
+  for(const d of DOTS){
+    const v = Math.round(d.n * eo(clamp((t - d.t) / 1.0)));
+    if(v !== d.last){ d.kids.forEach((k, i) => k.className = i < v ? 'f' : ''); d.last = v; }
+  }
+  for(const b of BARS) b.el.style.width = (b.w * eo(clamp((t - b.t) / .9))) + '%';
+
+  // chips wobble then settle + colour
+  const settle = eo(clamp((t - T('intro.2')) / .5));
+  chips.forEach((c, i) => {
+    const p = clamp((t - T('intro.1@7') - i*.12) / .42);
+    const rot = Math.sin(t*9 + i*1.7) * 5 * (1 - settle) * p;
+    c.style.transform = `scale(${p <= 0 ? .5 : .5 + .5*back(p)}) rotate(${rot}deg)`;
+    c.style.borderColor = settle > 0 ? CHIPCOL[i] : '';
+    c.style.color = settle > .5 ? CHIPCOL[i] : '';
+  });
+
+  // prevalence slider
+  const pp = .10 + .60 * eio(clamp((t - T('catch.1@4')) / 3.4));
+  const ppv = sens*pp / (sens*pp + (1-spec)*(1-pp));
+  const npv = spec*(1-pp) / (spec*(1-pp) + (1-sens)*pp);
+  $('#pval').textContent = Math.round(pp*100) + '%';
+  $('#ptrk').style.width = (pp*100) + '%';
+  $('#pknob').style.left = (pp*100) + '%';
+  $('#gppv').textContent = Math.round(ppv*100);
+  $('#gnpv').textContent = Math.round(npv*100);
+
+  // captions
+  let ch = null;
+  for(let i = 0; i < CHUNKS.length; i++){
+    const c = CHUNKS[i], nx = CHUNKS[i+1];
+    const end = nx ? Math.min(nx.s, c.e + .45) : c.e + .6;
+    if(t >= c.s - .04 && t < end){ ch = c; break; }
+  }
+  let html = '';
+  if(ch) html = ch.words.map(w => `<span class="w${t >= w.s - .02 && t < w.e ? ' a' : ''}">${esc(w.w)}</span>`).join('');
+  if(html !== capKey){ capIn.innerHTML = html; capKey = html; }
+  capIn.style.visibility = ch ? 'visible' : 'hidden';
+};
+if(FMT === 'h') $$('br.vbr').forEach(b => b.remove());
+window.renderAt(+(q.get('t') || 0));
+window.READY = true;
+</script>
+</body>
+</html>

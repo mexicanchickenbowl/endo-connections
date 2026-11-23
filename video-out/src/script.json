@@ -1,0 +1,64 @@
+[
+  {"id": "hook", "lines": [
+    {"say": "Your cold test is lying to you.", "show": "Your cold test is lying to you."},
+    {"say": "About one time in every six.", "show": "About one time in every six."}
+  ]},
+  {"id": "intro", "lines": [
+    {"say": "That's from Mainkar and Kim, twenty eighteen.", "show": "That's from Mainkar and Kim, 2018."},
+    {"say": "Twenty-eight studies, five pulp tests, and four numbers everybody mixes up.", "show": "28 studies, 5 pulp tests, and 4 numbers everybody mixes up."},
+    {"say": "Here's how to never mix them up again.", "show": "Here's how to never mix them up again."}
+  ]},
+  {"id": "rule", "lines": [
+    {"say": "Rule one.", "show": "Rule one."},
+    {"say": "The disease we're hunting is pulp necrosis.", "show": "The disease we're hunting is pulp necrosis."},
+    {"say": "So a positive test means, no response.", "show": "So a positive test means no response."}
+  ]},
+  {"id": "sens", "lines": [
+    {"say": "Picture one hundred necrotic teeth.", "show": "Picture 100 necrotic teeth."},
+    {"say": "Sensitivity asks: how many did the test catch?", "show": "Sensitivity asks: how many did the test catch?"},
+    {"say": "For cold, eighty-seven.", "show": "For cold, 87."},
+    {"say": "Now, one hundred vital teeth.", "show": "Now, 100 vital teeth."},
+    {"say": "Specificity asks: how many responded, like they should?", "show": "Specificity asks: how many responded like they should?"},
+    {"say": "Eighty-four.", "show": "84."},
+    {"say": "Both start with the truth, and grade the test.", "show": "Both start with the truth and grade the test."}
+  ]},
+  {"id": "pv", "lines": [
+    {"say": "But in the chair, you don't know the truth.", "show": "But in the chair, you don't know the truth."},
+    {"say": "You only know the result.", "show": "You only know the result."},
+    {"say": "So flip the question.", "show": "So flip the question."},
+    {"say": "Positive predictive value: this tooth didn't respond. What's the chance it's really necrotic?", "show": "Positive predictive value: this tooth didn't respond. What's the chance it's really necrotic?"},
+    {"say": "Negative predictive value: this tooth responded. What's the chance it's really vital?", "show": "Negative predictive value: this tooth responded. What's the chance it's really vital?"}
+  ]},
+  {"id": "cold", "lines": [
+    {"say": "Now, the numbers.", "show": "Now, the numbers."},
+    {"say": "Cold: sensitivity eighty-seven, specificity eighty-four.", "show": "Cold: sensitivity 87, specificity 84."},
+    {"say": "No response to cold? Eighty-one percent chance it's truly necrotic.", "show": "No response to cold? 81% chance it's truly necrotic."},
+    {"say": "So roughly one in five is a false alarm.", "show": "So roughly 1 in 5 is a false alarm."}
+  ]},
+  {"id": "ept", "lines": [
+    {"say": "The electric pulp test is the opposite personality.", "show": "The electric pulp test is the opposite personality."},
+    {"say": "Sensitivity is only seventy-two, so it misses necrotic teeth.", "show": "Sensitivity is only 72, so it misses necrotic teeth."},
+    {"say": "But specificity is ninety-three.", "show": "But specificity is 93."},
+    {"say": "So when it says no response, believe it. Positive predictive value: eighty-nine.", "show": "So when it says no response, believe it. Positive predictive value: 89."}
+  ]},
+  {"id": "rank", "lines": [
+    {"say": "Heat is the weakest: seventy-eight, and sixty-seven.", "show": "Heat is the weakest: 78 and 67."},
+    {"say": "The winners? Laser Doppler and pulse oximetry, both about ninety-seven percent accurate.", "show": "The winners? Laser Doppler and pulse oximetry, both about 97% accurate."},
+    {"say": "They test blood supply, not nerves.", "show": "They test blood supply, not nerves."}
+  ]},
+  {"id": "catch", "lines": [
+    {"say": "One catch.", "show": "One catch."},
+    {"say": "Predictive values shift with how common necrosis is in the teeth you're testing.", "show": "Predictive values shift with how common necrosis is in the teeth you're testing."},
+    {"say": "That's why the paper reports them as adjusted.", "show": "That's why the paper reports them as adjusted."}
+  ]},
+  {"id": "recap", "lines": [
+    {"say": "So, remember this.", "show": "So, remember this."},
+    {"say": "Cold: eighty-seven, eighty-four.", "show": "Cold: 87, 84."},
+    {"say": "Electric: seventy-two, ninety-three.", "show": "Electric: 72, 93."},
+    {"say": "Heat: last place.", "show": "Heat: last place."},
+    {"say": "And one test is never the whole diagnosis.", "show": "And one test is never the whole diagnosis."}
+  ]},
+  {"id": "cta", "lines": [
+    {"say": "Save this for boards, and send it to a co-resident who still mixes these up.", "show": "Save this for boards, and send it to a co-resident who still mixes these up."}
+  ]}
+]
