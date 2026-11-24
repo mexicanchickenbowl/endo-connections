@@ -8,7 +8,13 @@ t=LEAD; lines={}; scenes={}; out=[]
 for name,ids in PLAN:
     s0=t
     for lid in ids:
-        key=f"{lid}_t{picks.get(lid,0)}"; wl=words[key]
+        key=f"{lid}_t{picks.get(lid,0)}"; wl=[list(x) for x in words[key]]
+        import re
+        FIX=[(r"^(purple|pulpal|pulpul|popal|bubble)",'Pulpal'),(r"^(awatz|awats|awaits|owatz|al-watts)",'Owatz'),(r"^pulpit\w*",'pulpitis'),(r"^periridicular",'periradicular'),(r"^cecil's","Sessle's"),(r"^(sharov|shirov)",'Sharav'),(r"^(falas|felice)",'Falace'),(r"^cats",'cats'),(r"^catalis",'caudalis')]
+        for x in wl:
+            for pat,rep in FIX:
+                mm=re.match(pat,x[0],re.I)
+                if mm: x[0]=rep+x[0][mm.end():]; break
         raw,_=sf.read(f"{S}/vo2/{key}.wav"); raw=raw if raw.ndim==1 else raw.mean(1)
         raw=raw[:int(min(len(raw)/SR, wl[-1][2]+0.28)*SR)]
         idx=np.where(np.abs(raw)>0.01)[0]; off=max(0,idx[0]-int(.03*SR))/SR; raw=raw[int(off*SR):]
