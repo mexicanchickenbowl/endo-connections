@@ -4,9 +4,9 @@ For every chunk: generate -> trim -> transcribe (Whisper words + wav2vec2 IPA)
 -> must pass the chunk's IPA regex checks and roughly match the caption.
 Failing takes are regenerated with a new seed (best take kept).
 
-Usage: python tts.py OUT_DIR
+Usage: python tts.py OUT_DIR [content_module]
 """
-import difflib, hashlib, json, os, re, sys, time
+import difflib, hashlib, importlib, json, os, re, sys, time
 
 import librosa, numpy as np, soundfile as sf, torch
 from transformers.utils import logging as tl
@@ -18,7 +18,7 @@ from transformers import AutoModelForCTC, Wav2Vec2FeatureExtractor
 from huggingface_hub import hf_hub_download
 
 sys.path.insert(0, os.path.dirname(__file__))
-from content import SCENES
+SCENES = importlib.import_module(sys.argv[2] if len(sys.argv) > 2 else "content").SCENES
 
 OUT = sys.argv[1]
 os.makedirs(f"{OUT}/chunks", exist_ok=True)
@@ -70,8 +70,11 @@ for si, sc in enumerate(SCENES):
             y = tts.generate(ch["say"]).squeeze(0).numpy()
             y, _ = librosa.effects.trim(y, top_db=38)
             p = ipa(y)
-            segs, _ = wm.transcribe(y if SR == 16000 else librosa.resample(y, orig_sr=SR, target_sr=16000), beam_size=5)
+            segs, _ = wm.transcribe(librosa.resample(y, orig_sr=SR, target_sr=16000), beam_size=5,
+                                    word_timestamps=True)
+            segs = list(segs)
             heard = " ".join(s.text.strip() for s in segs)
+            wts = [(w.word.strip(), round(w.start, 3), round(w.end, 3)) for s_ in segs for w in (s_.words or [])]
             passed = [bool(re.search(c, p)) for c in ch["checks"]]
             s = sim(heard, ch["cap"])
             # guard against runaway/garbled takes: plausible speaking rate
@@ -80,7 +83,7 @@ for si, sc in enumerate(SCENES):
             ok_rate = 1.4 < wps < 4.2
             score = sum(passed) - len(passed) + s + (0 if ok_rate else -1)
             take = dict(scene=sc["id"], idx=ci, seed=seed, sim=round(s, 3), checks=passed, heard=heard,
-                        ipa=p, dur=round(dur, 3), wps=round(wps, 2), score=score, y=y)
+                        ipa=p, dur=round(dur, 3), wps=round(wps, 2), score=score, y=y, words=wts)
             if best is None or score > best["score"]:
                 best = take
             print(f"[{time.time()-t0:6.0f}s] {sc['id']}#{ci} try{attempt} sim={s:.2f} checks={passed} "

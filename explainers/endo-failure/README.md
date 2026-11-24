@@ -56,3 +56,27 @@ Takes that fail get regenerated with a new seed, up to 5 tries.
 | Siqueira | `See-kay-ruh` | /siːkeɪɹʌ/ |
 | Nair | as written | /naɪɚ/ |
 | *Actinomyces israelii*, *Propionibacterium propionicum*, actinomycosis, gutta-percha, isthmus, MB2, CBCT | as written | ✓ |
+
+## Instagram Reels cut (Vox style)
+
+`why-root-canals-fail-reel.mp4` is 1080×1920, 30 fps, 72 s, normalised to about −15 LUFS, 42 MB.
+`why-root-canals-fail-reel_nomusic.mp4` is the same cut with voice and sound effects only,
+so you can add audio from Instagram's library in the app.
+
+- **Script:** `content_reel.py`. It is a tighter, hook-first rewrite with the same pronunciation QA.
+  An added `daɪɪŋ` check caught "dying" being read as "dime".
+- **Renderer:** `render_reel.py`.
+- **Look:** paper texture with animated film grain, taped radiograph prints and polaroids, yellow
+  highlighter swipes, hand-drawn red circles and arrows, stamps, a constant slow camera
+  push, and whip-pan transitions.
+- **Captions:** word-by-word karaoke captions, timed from Whisper word timestamps aligned to the script.
+- **Audio:** an original synthesized music bed (Am–F–C–G pad, plucked arpeggio, soft kick) that
+  dips under the voice, plus whoosh and thump effects.
+- **Safe zones:** nothing important sits in the top 220 px, the bottom 420 px or the right-hand
+  button column. Run with `--preview --guides` to see these zones on the stills.
+- **Fonts:** Permanent Marker (Apache 2.0) and Caveat (OFL) are in `fonts/`.
+
+```bash
+python tts.py reel content_reel
+PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers python render_reel.py reel why-root-canals-fail-reel
+```
