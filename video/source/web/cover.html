@@ -1,0 +1,72 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Hidden Toothache Reel</title>
+<style>
+@font-face{font-family:Archivo;font-weight:600;src:url(node_modules/@fontsource/archivo/files/archivo-latin-600-normal.woff2)}
+@font-face{font-family:Archivo;font-weight:900;src:url(node_modules/@fontsource/archivo/files/archivo-latin-900-normal.woff2)}
+@font-face{font-family:Serif4;font-weight:400;font-style:italic;src:url(node_modules/@fontsource/source-serif-4/files/source-serif-4-latin-400-italic.woff2)}
+@font-face{font-family:Serif4;font-weight:700;src:url(node_modules/@fontsource/source-serif-4/files/source-serif-4-latin-700-normal.woff2)}
+@font-face{font-family:Plex;font-weight:400;src:url(node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2)}
+@font-face{font-family:Plex;font-weight:600;src:url(node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:500;src:url(node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2)}
+:root{--paper:#EEE7DA;--ink:#151413;--yellow:#FFDD1F;--red:#E2412F;--teal:#1E8C82;--card:#FBF8F2}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--paper)}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:Inter,sans-serif}
+.bgtex{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.35),rgba(0,0,0,0) 60%),radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 55%,rgba(60,40,20,.22) 100%)}
+#grain{position:absolute;inset:-100px;pointer-events:none;opacity:.3;mix-blend-mode:multiply;z-index:50;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .25  0 0 0 .55 0'/></filter><rect width='400' height='400' filter='url(%23n)'/></svg>")}
+.scene{position:absolute;inset:0;opacity:0}.cam{position:absolute;inset:0;transform-origin:50% 40%}
+.abs{position:absolute}
+.head{font-family:Archivo;font-weight:900;letter-spacing:-.02em;line-height:1.02}
+.big{font-family:Archivo;font-weight:900;letter-spacing:-.04em;line-height:.9}
+.mono{font-family:Plex}
+.hl{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'><path d='M3,9 C30,4 90,7 150,3 C170,2 188,4 197,6 L199,33 C170,37 120,34 60,37 C35,38 15,36 1,35 C3,26 0,17 3,9 Z' fill='%23FFDD1F'/></svg>");background-repeat:no-repeat;background-size:0% 82%;background-position:0 70%;padding:0 .08em;margin:0 -.08em;-webkit-box-decoration-break:clone}
+.kw{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .1em;margin-bottom:-.1em}.ki{display:inline-block}
+svg{overflow:visible}
+#arch,#tooth,#face,#wires{filter:drop-shadow(0 14px 16px rgba(70,45,15,.16))}
+.card{position:absolute;width:960px;left:60px;background:var(--card);padding:40px 46px 36px;box-shadow:0 30px 60px rgba(60,40,10,.25),0 8px 18px rgba(60,40,10,.15);opacity:0}
+.card .tape{position:absolute;top:-22px;left:50%;width:180px;height:46px;margin-left:-90px;background:rgba(255,231,120,.72);transform:rotate(-3deg)}
+.card .jr{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px solid var(--ink);padding-bottom:12px;margin-bottom:20px}
+.card .jn{font-family:Serif4;font-style:italic;font-size:32px}.card .yr{font-family:Plex;font-weight:600;font-size:32px;background:var(--ink);color:var(--paper);padding:2px 14px}
+.card .ti{font-family:Serif4;font-weight:700;font-size:44px;line-height:1.16;margin-bottom:18px}
+.card .au{font-family:Plex;font-size:24px;color:#3b3833;margin-bottom:8px}.card .in{font-family:Plex;font-size:24px;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.card .note{position:absolute;right:-14px;bottom:-30px;font-family:Plex;font-weight:600;font-size:24px;background:var(--red);color:#fff;padding:8px 16px;transform:rotate(3deg)}
+#srctag{position:absolute;left:60px;top:220px;z-index:40;font-family:Plex;font-size:24px;font-weight:600;display:flex;opacity:0}
+#srctag .l{background:var(--ink);color:var(--yellow);padding:9px 14px;letter-spacing:.12em}#srctag .r{background:var(--yellow);color:var(--ink);padding:9px 16px}
+#cap{position:absolute;left:50px;right:50px;top:1410px;text-align:center;z-index:45;font-family:Archivo;font-weight:900;font-size:70px;line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
+#cap .w{display:inline-block;padding:0 .12em;margin:0 .02em;border-radius:10px}
+#cap .w.on{background:var(--yellow);box-shadow:0 0 0 4px var(--ink) inset}
+#cap .chunk{display:inline-block;background:rgba(251,248,242,.92);padding:10px 22px 14px;border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.pill{position:absolute;font-family:Plex;font-weight:600;font-size:28px;padding:16px 20px;background:var(--card);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);opacity:0;width:440px;white-space:nowrap}
+.lbl{position:absolute;font-family:Plex;font-weight:600;font-size:26px;letter-spacing:.06em;text-transform:uppercase;opacity:0}
+.tile{background:#FBF8F2;border:4px solid #151413;box-shadow:10px 10px 0 #151413;height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;opacity:0}
+#endcard{position:absolute;inset:0;background:var(--ink);color:var(--paper);z-index:46;opacity:0}
+#wipe{position:absolute;top:-300px;height:2600px;width:700px;left:-1000px;background:var(--yellow);transform:skewX(-14deg);z-index:44;box-shadow:-40px 0 0 var(--ink)}
+
+#face{filter:drop-shadow(0 14px 16px rgba(70,45,15,.16))}
+</style></head><body><div id="stage"><div class="bgtex"></div>
+<div class="abs" style="left:0;right:0;top:300px;text-align:center"><span class="mono" style="font-weight:600;font-size:30px;letter-spacing:.16em;background:var(--ink);color:var(--paper);padding:12px 22px">FOR CLINICIANS · ENDO DX</span></div>
+<div class="abs head" style="left:40px;right:40px;top:380px;text-align:center;font-size:94px;line-height:1.05">They point to <span class="hl" style="background-size:100% 82%">#14</span>.</div>
+<div class="abs head" style="left:40px;right:40px;top:490px;text-align:center;font-size:150px;line-height:1.0">It’s <span style="color:#E2412F">#19</span>.</div>
+<svg id="arch" class="abs" style="left:40px;top:830px" width="1000" height="467" viewBox="0 0 1200 560"></svg>
+<div class="abs" style="left:60px;right:60px;top:1385px;text-align:center">
+  <div class="head" style="font-size:62px;line-height:1.1">Why patients can’t localize<br><span class="hl" style="background-size:100% 82%">pulpal pain</span></div>
+  <div class="mono" style="font-size:28px;margin-top:26px;color:#3b3833;font-weight:600;letter-spacing:.06em">6 STUDIES · 70 SECONDS</div>
+</div>
+<div id="grain"></div></div>
+<script src="illus.js"></script><script>
+const $=s=>document.querySelector(s),NS="http://www.w3.org/2000/svg";
+function el(tag,attrs={},parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+const A=$('#arch');const arch=ILLUS.buildArch(A);const tgt=arch.LL6,wrong=arch.UL6;
+const defs=el('defs',{},A);const rg=el('radialGradient',{id:'pg'},defs);el('stop',{offset:0,'stop-color':'#E2412F','stop-opacity':.9},rg);el('stop',{offset:1,'stop-color':'#E2412F','stop-opacity':0},rg);
+el('circle',{cx:tgt.x,cy:tgt.y,r:120,fill:'url(#pg)',style:'mix-blend-mode:multiply'},A);
+[40,75,110].forEach((r,i)=>el('circle',{cx:tgt.x,cy:tgt.y,r,fill:'none',stroke:'#E2412F','stroke-width':5,opacity:.85-i*.25},A));
+const xm=el('g',{transform:`translate(${wrong.x},${wrong.y})`},A);el('path',{d:'M-34,-34 L34,34 M34,-34 L-34,34',stroke:'#E2412F','stroke-width':14,'stroke-linecap':'round'},xm);
+const ret=el('g',{transform:`translate(${wrong.x-6},${wrong.y-40})`},A);const hand=el('g',{transform:'scale(.75) rotate(-14)'},ret);
+el('rect',{x:-36,y:-330,width:124,height:110,rx:10,fill:'#2F6FD6',stroke:'#151413','stroke-width':5},hand);el('rect',{x:-40,y:-236,width:132,height:26,rx:8,fill:'#FBF8F2',stroke:'#151413','stroke-width':5},hand);
+el('rect',{x:-17,y:-128,width:36,height:132,rx:18,fill:'#F1C6A0',stroke:'#151413','stroke-width':5},hand);el('rect',{x:-30,y:-214,width:112,height:116,rx:38,fill:'#F1C6A0',stroke:'#151413','stroke-width':5},hand);
+[24,50,74].forEach(x=>el('path',{d:`M${x-12},-104 C${x-12},-84 ${x+12},-84 ${x+12},-104`,fill:'#F1C6A0',stroke:'#151413','stroke-width':4.5},hand));
+el('path',{d:'M-30,-190 C-52,-170 -50,-128 -22,-118 C-8,-114 4,-124 0,-138 C-4,-150 -14,-160 -12,-186',fill:'#F1C6A0',stroke:'#151413','stroke-width':5},hand);
+const lab=(x,y,t,c)=>{const e=el('text',{x,y,'text-anchor':'middle','font-family':'Archivo','font-size':58,'font-weight':900,fill:c,stroke:'#EEE7DA','stroke-width':10,'paint-order':'stroke'},A);e.textContent=t};
+lab(wrong.x-30,wrong.y+100,'#14','#151413');lab(tgt.x+10,tgt.y+130,'#19','#E2412F');
+document.fonts.ready.then(()=>{window.READY=true;window.seek=()=>{}});
+</script></body></html>
