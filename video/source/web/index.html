@@ -104,7 +104,7 @@ svg{overflow:visible}
 
 <!-- ============ ANATOMY ============ -->
 <div class="scene" id="sc-ana"><div class="cam">
-  <svg id="tooth" class="abs" style="left:170px;top:60px" width="660" height="990" viewBox="0 0 600 900"></svg>
+  <svg id="tooth" class="abs" style="left:190px;top:84px" width="640" height="939" viewBox="0 0 600 880"></svg>
   <div class="abs kicker" id="ana-k" style="left:930px;top:150px;opacity:0"><span class="dot"></span>Inside the tooth</div>
   <div class="abs head" id="ana-h" style="left:930px;top:200px;font-size:84px;width:880px;opacity:0">The <span class="hl">pulp</span>: blood vessels and nerves</div>
   <div class="abs" id="fibers" style="left:930px;top:470px;width:900px">
@@ -224,6 +224,7 @@ svg{overflow:visible}
 </div>
 <script src="gsap.min.js"></script>
 <script src="timings.js"></script>
+<script src="illus.js"></script>
 <script>
 const $=s=>document.querySelector(s), NS="http://www.w3.org/2000/svg";
 function el(tag,attrs={},parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
@@ -259,63 +260,7 @@ const tags=[];
 
 /* ---------- dental arch (front view chart) ---------- */
 const WIDTH=[60,48,52,48,46,66,60,54], HUP=[118,100,124,100,96,88,82,76];
-function buildArch(svg,opts={}){
-  const defs=el('defs',{},svg);const uid='a'+Math.random().toString(36).slice(2,7);
-  const gU=el('linearGradient',{id:uid+'tu',x1:0,y1:0,x2:0,y2:1},defs);el('stop',{offset:0,'stop-color':'#E9DBBE'},gU);el('stop',{offset:.45,'stop-color':'#FBF6EA'},gU);el('stop',{offset:1,'stop-color':'#FFFFFF'},gU);
-  const gL=el('linearGradient',{id:uid+'tl',x1:0,y1:1,x2:0,y2:0},defs);el('stop',{offset:0,'stop-color':'#E9DBBE'},gL);el('stop',{offset:.45,'stop-color':'#FBF6EA'},gL);el('stop',{offset:1,'stop-color':'#FFFFFF'},gL);
-  const gG=el('linearGradient',{id:uid+'g',x1:0,y1:0,x2:0,y2:1},defs);el('stop',{offset:0,'stop-color':'#C9575A'},gG);el('stop',{offset:1,'stop-color':'#E8908A'},gG);
-  const gG2=el('linearGradient',{id:uid+'g2',x1:0,y1:1,x2:0,y2:0},defs);el('stop',{offset:0,'stop-color':'#C9575A'},gG2);el('stop',{offset:1,'stop-color':'#E8908A'},gG2);
-  const cx=600,TYPES=['I','I','C','P','P','M','M','M'];
-  const W0=[64,50,54,50,48,68,62,54],H0=[124,108,128,104,98,92,84,76];
-  const mouth=el('g',{},svg),gumG=el('g',{},svg),teethG=el('g',{},svg),hiG=el('g',{},svg);
-  // dark mouth interior
-  el('ellipse',{cx:600,cy:345,rx:300,ry:60,fill:'#B8504C',opacity:.75},mouth);
-  const teeth={};const gumPts={U:[],L:[]};
-  function edge(type,w,h){const L=-w/2,R=w/2;const c=h*.2;
-    if(type==='I')return `C${L+2},${h} ${L+w*.18},${h+2} 0,${h+2} C${R-w*.18},${h+2} ${R-2},${h} ${R-1},${h-c}`;
-    if(type==='C')return `C${L+3},${h-h*.04} ${-w*.22},${h+h*.02} 0,${h+h*.1} C${w*.22},${h+h*.02} ${R-3},${h-h*.04} ${R-1},${h-c}`;
-    if(type==='P')return `C${L+3},${h} ${-w*.25},${h+h*.04} 0,${h+h*.05} C${w*.25},${h+h*.04} ${R-3},${h} ${R-1},${h-c}`;
-    return `C${L+2},${h} ${L+w*.1},${h+3} ${-w*.24},${h+3} C${-w*.1},${h+3} ${-w*.06},${h-3} 0,${h-4} C${w*.06},${h-3} ${w*.1},${h+3} ${w*.24},${h+3} C${R-w*.1},${h+3} ${R-2},${h} ${R-1},${h-c}`}
-  for(const jaw of ['U','L']){let x=0;
-    for(let i=0;i<8;i++){const persp=1-i*.035;const w=W0[i]*persp,h=H0[i]*(jaw==='L'?.86:1)*persp,type=TYPES[i];
-      for(const side of [-1,1]){const xc=cx+side*(x+w/2+2);const curve=Math.pow((x+w/2)/300,2)*46;
-        const occ=jaw==='U'?262-curve:292+curve; const gum=jaw==='U'?occ-h:occ+h;
-        const cw=w*.78;const L=-w/2,R=w/2;
-        const d=`M${-cw/2},-14 L${-cw/2},0 C${L},${h*.25} ${L},${h*.5} ${L+1},${h-h*.2} ${edge(type,w,h)} C${R},${h*.5} ${R},${h*.25} ${cw/2},0 L${cw/2},-14 Z`;
-        const g=el('g',{transform:`translate(${xc},${gum}) scale(1,${jaw==='U'?1:-1})`},teethG);
-        const shade=i>=5?.10+(i-5)*.07:i*.02;
-        const p=el('path',{d,fill:`url(#${uid}t${jaw==='U'?'u':'l'})`,stroke:'#151413','stroke-width':3.2,'stroke-linejoin':'round'},g);
-        el('path',{d,fill:'#3B1714',opacity:shade},g);
-        el('path',{d:`M${-w*.22},${h*.25} C${-w*.26},${h*.45} ${-w*.24},${h*.62} ${-w*.16},${h*.72}`,stroke:'#FFFFFF','stroke-width':4,fill:'none','stroke-linecap':'round',opacity:.9},g);
-        const id=jaw+(side<0?'R':'L')+(i+1);
-        teeth[id]={p,g,x:xc,y:jaw==='U'?gum+h*.55:gum-h*.55,w,h};
-        gumPts[jaw].push([xc-side*w/2,xc+side*w/2,gum,h,xc]);
-      }
-      x+=w+4;}
-  }
-  // gums with scalloped margins and papillae
-  for(const jaw of ['U','L']){const s=jaw==='U'?1:-1;const pts=gumPts[jaw].slice().sort((a,b)=>a[4]-b[4]);
-    let d='';pts.forEach((p,k)=>{const l=Math.min(p[0],p[1]),r=Math.max(p[0],p[1]),gy=p[2],h=p[3];
-      const pap=gy+s*h*.2, zen=gy-s*h*.04;
-      if(k===0)d+=`M${l-6},${pap}`;
-      d+=` C${l+(r-l)*.15},${zen} ${r-(r-l)*.15},${zen} ${r+2},${pap}`;});
-    const first=pts[0],last=pts[pts.length-1];const top=jaw==='U'?20:540;
-    const margin=d;
-    d+=` L${last[1]+400},${pts[pts.length-1][2]} L${last[1]+400},${top} L${first[0]-400},${top} L${first[0]-400},${first[2]} Z`;
-    el('path',{d,fill:`url(#${uid}${jaw==='U'?'g':'g2'})`},gumG);
-    el('path',{d:margin,fill:'none',stroke:'#151413','stroke-width':4,'stroke-linejoin':'round'},gumG);
-    // stipple highlight
-    for(let k=0;k<26;k++){const p=pts[k%pts.length];el('circle',{cx:p[4]+((k*37)%11-5),cy:jaw==='U'?p[2]-28-((k*13)%30):p[2]+28+((k*13)%30),r:2.2,fill:'#F4B3A8',opacity:.6},gumG)}
-  }
-  svg.appendChild(gumG);
-  const lens='M210,40 L990,40 C1110,40 1170,170 1170,275 C1170,380 1110,510 990,510 L210,510 C90,510 30,380 30,275 C30,170 90,40 210,40 Z';
-  const cp=el('clipPath',{id:uid+'m'},defs);el('path',{d:lens},cp);
-  const inner=el('g',{'clip-path':`url(#${uid}m)`},svg);
-  el('rect',{x:0,y:0,width:1200,height:560,fill:`url(#${uid}g)`},inner);
-  el('path',{d:'M20,170 C300,250 900,250 1180,170 L1180,380 C900,300 300,300 20,380 Z',fill:'#3B1714'},inner);
-  [mouth,teethG,hiG,gumG].forEach(n=>inner.appendChild(n));
-  el('path',{d:lens,fill:'none',stroke:'#151413','stroke-width':6},svg);
-  return teeth}
+const buildArch=ILLUS.buildArch;
 const arch=buildArch($('#arch'));
 // gums suggestion
 // pain glow on lower-left first molar (LL6)
@@ -334,8 +279,8 @@ el('rect',{x:-30,y:-214,width:112,height:116,rx:38,fill:'#F1C6A0',stroke:'#15141
 el('path',{d:'M-30,-190 C-52,-170 -50,-128 -22,-118 C-8,-114 4,-124 0,-138 C-4,-150 -14,-160 -12,-186',fill:'#F1C6A0',stroke:'#151413','stroke-width':5,'stroke-linejoin':'round'},hand);
 el('path',{d:'M-8,-8 C-4,-2 6,-2 10,-8',stroke:'#D99A7A','stroke-width':4,fill:'none','stroke-linecap':'round'},hand);
 const xmark=el('g',{opacity:0,transform:`translate(${wrong.x},${wrong.y})`},$('#arch'));el('path',{d:'M-34,-34 L34,34 M34,-34 L-34,34',stroke:'#E2412F','stroke-width':14,'stroke-linecap':'round'},xmark);
-const truth=el('text',{x:tgt.x,y:tgt.y+130,'text-anchor':'middle','font-size':26,'font-weight':600,fill:'#E2412F',opacity:0},$('#arch'));truth.textContent='ACTUAL SOURCE';
-const guess=el('text',{x:wrong.x,y:wrong.y-110,'text-anchor':'middle','font-size':26,'font-weight':600,fill:'#151413',opacity:0},$('#arch'));guess.textContent='PATIENT POINTS HERE';
+const truth=el('text',{x:tgt.x+64,y:tgt.y+10,'text-anchor':'start','font-size':26,'font-weight':600,fill:'#E2412F',opacity:0},$('#arch'));truth.textContent='ACTUAL SOURCE';
+const guess=el('text',{x:wrong.x+64,y:wrong.y+10,'text-anchor':'start','font-size':26,'font-weight':600,fill:'#151413',opacity:0},$('#arch'));guess.textContent='PATIENT POINTS HERE';
 const R='R', side_lbl=[el('text',{x:40,y:275,'font-size':22,'font-weight':600,fill:'#6E665B'},$('#arch')),el('text',{x:1160,y:275,'font-size':22,'font-weight':600,fill:'#6E665B','text-anchor':'end'},$('#arch'))];side_lbl[0].textContent='RIGHT';side_lbl[1].textContent='LEFT';
 
 /* ---------- HOOK timeline ---------- */
@@ -398,36 +343,20 @@ to(0,'#nB',{opacity:1,duration:.01},W('e5','thirty',.8)-.2);counter($('#nB'),W('
 /* ---------- ANATOMY ---------- */
 scene('anatomy','#sc-ana');
 const ts=$('#tooth');
-const tdefs=el('defs',{},ts);
-const lg=(id,c1,c2,v=true)=>{const g=el('linearGradient',{id,x1:0,y1:0,x2:v?0:1,y2:v?1:0},tdefs);el('stop',{offset:0,'stop-color':c1},g);el('stop',{offset:1,'stop-color':c2},g)};
-lg('enG','#FFFFFF','#E9DFCC');lg('deG','#F8EBCD','#E3C996');
-{const g=el('radialGradient',{id:'puG',cx:.5,cy:.3,r:.7},tdefs);el('stop',{offset:0,'stop-color':'#F49384'},g);el('stop',{offset:1,'stop-color':'#C8483A'},g)}
-const pat=el('pattern',{id:'bonepat',width:28,height:28,patternUnits:'userSpaceOnUse'},tdefs);el('rect',{width:28,height:28,fill:'#E2D3B8'},pat);el('circle',{cx:7,cy:9,r:3.2,fill:'#CDB894'},pat);el('circle',{cx:20,cy:21,r:2.4,fill:'#CDB894'},pat);
-const bone=el('path',{d:'M20,420 C80,400 120,395 150,410 L150,410 L450,410 C480,395 520,400 580,420 L580,900 L20,900 Z',fill:'url(#bonepat)',stroke:'#151413','stroke-width':3,opacity:0},ts);
-const gum=el('path',{d:'M20,360 C70,330 110,330 135,350 L140,425 C110,405 70,405 20,420 Z M580,360 C530,330 490,330 465,350 L460,425 C490,405 530,405 580,420 Z',fill:'#E59A8C',stroke:'#151413','stroke-width':3,opacity:0},ts);
-const pdlD='M462,360 C462,400 462,420 456,452 L436,772 C432,822 388,826 380,775 L352,526 C344,500 256,500 248,526 L220,775 C212,826 168,822 164,772 L144,452 C138,420 138,400 138,360';
-const pdl=el('path',{d:pdlD,fill:'none',stroke:'#1E8C82','stroke-width':16,'stroke-linecap':'round',opacity:0},ts);
-const outer=el('path',{d:'M118,300 C100,200 135,100 205,88 C245,82 262,118 300,118 C338,118 355,82 395,88 C465,100 500,200 482,300 C478,360 462,400 452,450 L432,770 C428,815 392,820 386,772 L356,520 C346,485 254,485 244,520 L214,772 C208,820 172,815 168,770 L148,450 C138,400 122,360 118,300 Z',fill:'url(#enG)',stroke:'#151413','stroke-width':5,'stroke-linejoin':'round'},ts);
-const dentin=el('path',{d:'M148,305 C134,220 162,140 214,126 C246,120 264,150 300,150 C336,150 354,120 386,126 C438,140 466,220 452,305 C449,360 438,400 430,450 L413,762 C410,792 400,792 398,768 L366,512 C352,470 248,470 234,512 L202,768 C200,792 190,792 187,762 L170,450 C162,400 151,360 148,305 Z',fill:'url(#deG)',stroke:'#151413','stroke-width':2.5,opacity:0},ts);
-const pulp=el('path',{d:'M222,250 C220,212 250,200 270,222 C285,238 315,238 330,222 C350,200 380,212 378,250 L376,330 C374,365 368,400 364,440 L404,758 C406,772 397,774 395,762 L352,470 C340,446 260,446 248,470 L205,762 C203,774 194,772 196,758 L236,440 C232,400 226,365 224,330 Z',fill:'#E46A59',stroke:'#151413','stroke-width':3,opacity:0},ts);
-const tub=el('g',{opacity:0},ts);{const cp=el('clipPath',{id:'dentClip'},tdefs);el('path',{d:dentin.getAttribute('d')},cp);tub.setAttribute('clip-path','url(#dentClip)');
- for(let k=0;k<44;k++){const a=Math.PI*(1.05+k/43*0.9);const x0=300+Math.cos(a)*70,y0=280+Math.sin(a)*60;el('path',{d:`M${x0},${y0} q${Math.cos(a)*60+8},${Math.sin(a)*60} ${Math.cos(a)*170},${Math.sin(a)*170}`,stroke:'#C9A46A','stroke-width':1.6,fill:'none',opacity:.6},tub)}
- for(let k=0;k<16;k++){const y=470+k*18;[[150,250],[350,450]].forEach(([a,b])=>el('path',{d:`M${a+ (k*3)%10},${y} L${b-(k*5)%12},${y+6}`,stroke:'#C9A46A','stroke-width':1.4,opacity:.45},tub))}}
-ts.insertBefore(tub,pulp);
-const vessels=['M250,240 C262,290 286,320 292,350 C298,390 330,420 352,460 L388,760','M350,240 C338,290 314,320 308,350 C302,390 270,420 248,460 L212,760'].map((d,i)=>el('path',{d,fill:'none',stroke:i?'#3B6FD0':'#B3261B','stroke-width':3,opacity:0,'stroke-dasharray':i?'0':'0'},ts));
-const nervePaths=['M262,232 C272,280 300,300 300,340 C300,380 340,410 362,452 L398,760','M338,232 C328,280 300,300 300,340 C300,380 260,410 238,452 L202,760','M300,240 C300,280 290,320 300,360 C315,400 350,430 365,470 L399,755'];
+const T=ILLUS.buildTooth(ts);
+const bone=T.G.bone, gum=T.gum, pdl=T.G.pdlG, pdlD=T.pdlD, outer=T.outer, dentin=T.dentin, pulp=T.pulp, tub=T.tub, vessels=T.vessels, nervePaths=T.nervePaths;
 const nerves=nervePaths.map((d,i)=>el('path',{d,fill:'none',stroke:i==2?'#B82A1C':'#7A1A10','stroke-width':4,opacity:0,'stroke-linecap':'round'},ts));
 const pulses=[];for(let k=0;k<10;k++){const fast=k<5;pulses.push({c:el('circle',{r:fast?9:12,fill:fast?'#FFDD1F':'#B82A1C',stroke:'#151413','stroke-width':2,opacity:0},ts),path:nerves[k%2==0?0:1],fast,off:k*0.2})}
 const recDots=[];const pdlLen=(()=>{const p=el('path',{d:pdlD},ts);const L=p.getTotalLength();for(let i=0;i<34;i++){const pt=p.getPointAtLength(L*(i+.5)/34);recDots.push(el('circle',{cx:pt.x,cy:pt.y,r:7,fill:'#FFDD1F',stroke:'#151413','stroke-width':2.5,opacity:0},ts))}p.remove();return L})();
 const stamp=el('g',{opacity:0,transform:'translate(300,300) rotate(-10)'},ts);el('rect',{x:-200,y:-48,width:400,height:96,fill:'none',stroke:'#E2412F','stroke-width':8},stamp);const stx=el('text',{x:0,y:16,'text-anchor':'middle','font-size':40,'font-weight':600,fill:'#E2412F','font-family':'Plex'},stamp);stx.textContent='NO PROPRIOCEPTORS';
-const arrow=el('g',{opacity:0},ts);el('path',{d:'M300,-70 L300,50 M268,18 L300,54 L332,18',stroke:'#151413','stroke-width':12,fill:'none','stroke-linecap':'round','stroke-linejoin':'round'},arrow);const bt=el('text',{x:330,y:-20,'font-size':34,'font-weight':600,fill:'#151413'},arrow);bt.textContent='BITE';
+const arrow=el('g',{opacity:0},ts);el('path',{d:'M300,-30 L300,94 M268,62 L300,98 L332,62',stroke:'#151413','stroke-width':12,fill:'none','stroke-linecap':'round','stroke-linejoin':'round'},arrow);const bt=el('text',{x:330,y:20,'font-size':34,'font-weight':600,fill:'#151413'},arrow);bt.textContent='BITE';
 const pin=el('g',{opacity:0},ts);el('path',{d:'M0,0 C-30,-40 -40,-60 -40,-80 A40,40 0 1 1 40,-80 C40,-60 30,-40 0,0 Z',fill:'#E2412F',stroke:'#151413','stroke-width':4},pin);el('circle',{cx:0,cy:-80,r:14,fill:'#FFFDF8'},pin);
 // draw-on
 [outer].forEach(p=>{const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;p.style.fillOpacity=0});
 gsap.set(ts,{x:-60,opacity:1});
 to(0,outer,{strokeDashoffset:0,duration:1.6,ease:"power2.inOut"},S('a1'));to(0,outer,{fillOpacity:1,duration:.6},S('a1')+1.2);
-to(0,[bone,gum],{opacity:1,duration:.8},S('a1')+.9);to(0,dentin,{opacity:1,duration:.6},S('a1')+1.4);to(0,tub,{opacity:1,duration:.8},S('a1')+1.8);
-to(0,pulp,{opacity:1,duration:.6},S('a2')+.2);
+to(0,[bone,gum],{opacity:1,duration:.8},S('a1')+.9);to(0,[dentin,T.G.gloss],{opacity:1,duration:.6},S('a1')+1.4);to(0,pdl,{opacity:.45,duration:.6},S('a1')+1.4);to(0,tub,{opacity:1,duration:.8},S('a1')+1.8);
+to(0,[pulp,T.G.odo],{opacity:1,duration:.6},S('a2')+.2);
 kin('#ana-h',S('a2')+.1);hl(W('a2','pulp',.3)+.1,'#ana-h .hl');
 to(0,vessels,{opacity:.85,duration:.6,stagger:.15},W('a2','blood',.6));to(0,nerves,{opacity:1,duration:.6,stagger:.15},W('a2','nerves',.85));
 hide(S('a3')-.1,'#ana-h',.4);
@@ -452,7 +381,7 @@ hide(S('a6')-.15,['#ana-pdl','#ana-pdl2'],.4);
 kin('#ana-bite',W('a6','bite',.45)-.3);hl(W('a6','point',.85)-.2,'#ana-bite .hl');
 gsap.set(arrow,{y:-60});to(0,arrow,{opacity:1,y:0,duration:.5,ease:"power2.in"},W('a6','bite',.45)-.4);
 ticks.push(t=>{const t0=W('a6','bite',.45);if(t<t0||t>E('a6')+.3)return;recDots.forEach((d,i)=>{const f=.5+.5*Math.sin((t-t0)*9-i*.4);d.setAttribute('r',6+f*5)})});
-gsap.set(pin,{x:300,y:-120,scale:.8,opacity:0});to(0,arrow,{opacity:0,duration:.25},W('a6','point',.85)-.3);to(0,pin,{opacity:1,y:70,duration:.6,ease:"bounce.out"},W('a6','point',.85)-.1);SFXL.push(['pop',W('a6','point',.85)+.2]);
+gsap.set(pin,{x:300,y:-60,scale:.8,opacity:0});to(0,arrow,{opacity:0,duration:.25},W('a6','point',.85)-.3);to(0,pin,{opacity:1,y:116,duration:.6,ease:"bounce.out"},W('a6','point',.85)-.1);SFXL.push(['pop',W('a6','point',.85)+.2]);
 // a7 Owatz
 hide(S('a7')-.2,['#ana-bite',arrow,pin],.4);
 to(0,ts,{x:-110,scale:.82,transformOrigin:'50% 50%',duration:.9,ease:"power3.inOut"},S('a7')-.2);
@@ -505,30 +434,10 @@ scene('spread','#sc-spr');
 const fs=$('#face');const fdefs=el('defs',{},fs);
 const mkGrad=(id,col)=>{const g=el('radialGradient',{id},fdefs);el('stop',{offset:'0','stop-color':col,'stop-opacity':col=='#2F6FD6'?.55:.78},g);el('stop',{offset:'.6','stop-color':col,'stop-opacity':.35},g);el('stop',{offset:'1','stop-color':col,'stop-opacity':0},g)};
 mkGrad('gr','#E2412F');mkGrad('gb','#2F6FD6');
-const headD='M372,38 C262,30 182,84 160,170 C150,212 150,236 136,268 L96,338 C88,352 94,362 110,364 L126,366 C120,384 124,396 136,400 C126,410 128,424 140,430 C132,450 138,470 162,478 C186,484 212,478 230,494 C250,512 262,540 268,580 L274,690 L486,690 C470,620 462,560 482,500 C524,420 548,330 538,240 C526,128 470,46 372,38 Z';
-const blobG=el('g',{},fs);const clip=el('clipPath',{id:'hc'},fdefs);el('path',{d:headD},clip);blobG.setAttribute('clip-path','url(#hc)');
-const skin=el('path',{d:headD,fill:'#F3CDAA'},fs);fs.insertBefore(skin,blobG);
-const deco=el('g',{'clip-path':'url(#hc)'},fs);fs.insertBefore(deco,blobG);
-el('path',{d:'M60,0 L640,0 L640,520 L478,488 C462,420 452,340 430,270 C410,232 360,206 300,196 C240,188 190,196 150,214 L60,190 Z',fill:'#2A2522'},deco);el('path',{d:'M392,262 C398,290 400,320 396,348',stroke:'#2A2522','stroke-width':16,'stroke-linecap':'round',fill:'none'},deco);
-['M400,150 C360,120 300,112 250,130','M470,250 C450,200 420,170 380,160','M500,360 C495,320 485,290 470,270'].forEach(d=>el('path',{d,stroke:'#4A403A','stroke-width':6,fill:'none','stroke-linecap':'round'},deco));
-el('rect',{x:0,y:612,width:640,height:120,fill:'#1E8C82'},deco);
-el('path',{d:'M262,612 C300,650 420,655 486,612',stroke:'#151413','stroke-width':5,fill:'none'},deco);
-el('path',{d:'M180,300 C200,280 250,282 268,300',fill:'#E9B892',opacity:.7},deco);
-const xr=el('g',{opacity:.55},deco);
-el('path',{d:'M140,440 C190,470 270,470 330,446 C360,432 372,400 372,330 C372,300 378,284 392,276',fill:'none',stroke:'#B9805F','stroke-width':6,'stroke-dasharray':'2 10','stroke-linecap':'round'},xr);
-el('path',{d:'M128,360 C180,372 250,370 320,350 C340,344 352,330 356,316',fill:'none',stroke:'#B9805F','stroke-width':6,'stroke-dasharray':'2 10','stroke-linecap':'round'},xr);
-for(let k=0;k<7;k++){const x=140+k*21,w=k>3?20:16;el('rect',{x,y:366,width:w,height:22,rx:6,fill:'#FFF8EC',stroke:'#B9805F','stroke-width':2.5},xr);el('rect',{x:x+3,y:392,width:w,height:20,rx:6,fill:'#FFF8EC',stroke:'#B9805F','stroke-width':2.5},xr)}
-const head=el('path',{d:headD,fill:'none',stroke:'#151413','stroke-width':6,'stroke-linejoin':'round'},fs);
-el('path',{d:'M404,276 C420,262 456,280 450,318 C446,340 430,350 424,372 C420,388 404,392 398,378 C392,350 394,300 404,276 Z',fill:'#F3CDAA',stroke:'#151413','stroke-width':5,'stroke-linecap':'round'},fs);
-el('path',{d:'M190,222 C204,210 228,210 244,218',fill:'none',stroke:'#2A2522','stroke-width':8,'stroke-linecap':'round'},fs);
-el('ellipse',{cx:214,cy:246,rx:7,ry:9,fill:'#151413'},fs);
-el('path',{d:'M418,286 C432,284 440,300 434,316',fill:'none',stroke:'#C98C6A','stroke-width':5,'stroke-linecap':'round'},fs);
-el('path',{d:'M112,366 C118,370 124,372 130,370',fill:'none',stroke:'#B04A44','stroke-width':5,'stroke-linecap':'round'},fs);
-const upT={x:238,y:377},loT={x:242,y:402};
-const toothU=el('rect',{x:upT.x-11,y:upT.y-11,width:22,height:23,rx:6,fill:'#FFFDF8',stroke:'#151413','stroke-width':3.5,opacity:0},fs);
-const toothL=el('rect',{x:loT.x-11,y:loT.y-10,width:22,height:21,rx:6,fill:'#FFFDF8',stroke:'#E2412F','stroke-width':4},fs);
-const blobR=[[loT.x,loT.y,1],[330,300,.8],[380,210,.7],[330,470,.75],[420,330,.7],[300,560,.55]].map(([x,y,w])=>({c:el('circle',{cx:x,cy:y,r:0,fill:'url(#gr)'},blobG),w}));
-const blobB=[[upT.x,upT.y,1],[300,320,.8],[350,250,.7],[340,440,.6],[410,360,.6]].map(([x,y,w])=>({c:el('circle',{cx:x,cy:y,r:0,fill:'url(#gb)'},blobG),w}));
+const H=ILLUS.buildHead(fs);const blobG=H.blobG,upT=H.upT,loT=H.loT;
+const toothL=el('rect',{x:loT.x-12,y:loT.y-12,width:24,height:24,rx:6,fill:'none',stroke:'#E2412F','stroke-width':4.5},fs);
+const blobR=[[loT.x,loT.y,1],[372,470,.8],[415,335,.75],[330,250,.7],[245,385,.7],[330,560,.55]].map(([x,y,w])=>({c:el('circle',{cx:x,cy:y,r:0,fill:'url(#gr)'},blobG),w}));
+const blobB=[[upT.x,upT.y,1],[250,370,.8],[320,280,.7],[400,320,.6],[205,330,.6]].map(([x,y,w])=>({c:el('circle',{cx:x,cy:y,r:0,fill:'url(#gb)'},blobG),w}));
 blobG.style.mixBlendMode='multiply';
 // intensity drives radius
 const spr={i:0,b:0};
@@ -547,7 +456,7 @@ hide(S('s4')-.2,['#spr-q'],.4);
 to(0,spr,{i:0,b:0,duration:.9,ease:"power2.inOut"},S('s4')-.2);
 card(S('s4')+.05,'#card-fal',-120);hl(S('s4')+1.1,'#card-fal .hl',.8);
 tags.push([S('s4')+.3,E('s5')+.3,'Falace et al. · J Orofac Pain 1996;10(3):232–9']);
-const scrib=[];const bands=[[330,160,320],[372,170,300],[300,420,300],[410,260,240],[280,300,220]];
+const scrib=[];const bands=[[300,240,300],[352,214,330],[406,252,290],[255,330,220]];
 bands.forEach(([x,y0,h],i)=>{let d=`M${x},${y0}`;for(let k=0;k<14;k++){d+=` L${x+(k%2?22:-22)+Math.sin(k*1.7+i)*5},${y0+(k+1)*h/14}`}scrib.push(el('path',{d,fill:'none',stroke:'#E2412F','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round',opacity:.75},blobG))});
 scrib.forEach(p=>{const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L});
 to(0,scrib,{strokeDashoffset:0,duration:.9,stagger:.35,ease:"power1.inOut"},W('s4','draw',.75));
@@ -564,7 +473,7 @@ card(S('l2')+.05,'#card-dun',-120);hl(S('l2')+1.0,'#card-dun .hl',.7);
 tags.push([S('l2')+.3,E('l3')+.3,'Ashaibi et al. · Clin Exp Dent Res 2025;11(1):e70012']);
 gsap.set('#arch2',{opacity:0,y:30});to(0,'#arch2',{opacity:1,y:0,duration:.8},S('l1')+.3);
 // fade lower arch, bolts on upper teeth
-const a2=$('#arch2');Object.entries(arch2).forEach(([k,v])=>{if(k[0]==='L')v.p.setAttribute('opacity',.25)});
+const a2=$('#arch2');arch2._groups.L.setAttribute('opacity',.28);
 const bolts=['UR1','UL6','UR6'].map(k=>{const t=arch2[k];const g=el('g',{transform:`translate(${t.x},${t.y-10})`,opacity:0},a2);el('path',{d:'M6,-34 L-12,4 L2,4 L-6,34 L14,-6 L0,-6 Z',fill:'#FFDD1F',stroke:'#151413','stroke-width':3,'stroke-linejoin':'round'},g);return g});
 bolts.forEach((b,i)=>to(0,b,{opacity:1,duration:.15,yoyo:true,repeat:5,ease:"none"},W('l2','pulses',.4)+i*.45));
 show(S('l3')-.1,'#dbars',.4);

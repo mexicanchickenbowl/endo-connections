@@ -6,7 +6,7 @@ A ~3.5 min explainer on why patients struggle to localize pulpal pain.
 1. `tts/gen.py`: Chatterbox TTS (ResembleAI, default voice, CPU) narrates each line in `script.json`.
 2. `qa.py`: faster-whisper transcribes every take, picks the best take per line (`picks.json`), and records word timestamps (`words.json`).
 3. `assemble.py`: lays the takes on a timeline and writes `narration.wav` + `web/timings.js`.
-4. `web/index.html`: a deterministic GSAP timeline (`window.seek(t)`); the motion syncs to word timestamps.
+4. `web/illus.js` builds the vector illustrations (occlusal arches, molar section, head profile); `web/index.html` is a deterministic GSAP timeline (`window.seek(t)`); the motion syncs to word timestamps.
 5. `render.js`: Playwright captures frames (30 fps) and exports the SFX cue list.
 6. `mix.py`: narration + ducked music bed + synthesized SFX, loudness-normalized to −16 LUFS with a peak limiter.
 7. `build.sh`: runs the whole thing and encodes the MP4.
