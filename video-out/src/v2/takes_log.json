@@ -1,0 +1,974 @@
+{
+ "hook.0": {
+  "say": "You hold a frozen cotton pellet against a tooth, and nothing happens.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "hook.0_t0.wav",
+    "dur": 2.97,
+    "heard": "You hold a frozen cotton pellet against a tooth, and nothing happens.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "hook.0_t1.wav",
+    "dur": 3.1,
+    "heard": "You hold a frozen cotton pellet against a tooth and nothing happens.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "hook.1": {
+  "say": "No response. So the pulp is necrotic, right?",
+  "takes": [
+   {
+    "n": 0,
+    "file": "hook.1_t0.wav",
+    "dur": 2.43,
+    "heard": "No response. So the pulp is necrotic, right?",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "hook.1_t1.wav",
+    "dur": 2.36,
+    "heard": "No response. So, the pulp is necrotic, right?",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "hook.2": {
+  "say": "Well, not always. About one time in six, the cold test gets it wrong.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "hook.2_t0.wav",
+    "dur": 3.95,
+    "heard": "Well, not always. About one time in six, the cold test gets it wrong.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "hook.2_t1.wav",
+    "dur": 3.8,
+    "heard": "Well, not always. About one time in six, the cold test gets it wrong.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "intro.0": {
+  "say": "That number comes from a twenty eighteen meta-analysis by Mainkar and Kim.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "intro.0_t0.wav",
+    "dur": 3.32,
+    "heard": "That number comes from a 2018 meta -analysis by Mankar and Kim.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "intro.0_t1.wav",
+    "dur": 3.75,
+    "heard": "That number comes from a 2018 meta -analysis by Mainkar and Kim.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "intro.1": {
+  "say": "They pooled twenty-eight studies, covering five different pulp tests.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "intro.1_t0.wav",
+    "dur": 2.95,
+    "heard": "They pulled 28 studies covering five different pulp tests.",
+    "wer": 0.111,
+    "dur_ok": true,
+    "clean": false
+   },
+   {
+    "n": 1,
+    "file": "intro.1_t1.wav",
+    "dur": 2.89,
+    "heard": "They pooled 28 studies covering five different pulp tests.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "intro.2": {
+  "say": "And to make sense of the results, you need four ideas that trip up almost everyone.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "intro.2_t0.wav",
+    "dur": 4.23,
+    "heard": "And to make sense of the results, you need four ideas that trip up almost everyone.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "intro.2_t1.wav",
+    "dur": 4.07,
+    "heard": "And to make sense of the results, you need four ideas that trip up almost everyone.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "rule.0": {
+  "say": "First, a quick flip in thinking.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "rule.0_t0.wav",
+    "dur": 1.79,
+    "heard": "First, a quick flip in thinking.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "rule.0_t1.wav",
+    "dur": 1.77,
+    "heard": "First, a quick flip in thinking.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "rule.1": {
+  "say": "In pulp testing, the condition we're hunting for is necrosis.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "rule.1_t0.wav",
+    "dur": 3.41,
+    "heard": "and pulp testing, the condition we're hunting for is necrosis.",
+    "wer": 0.1,
+    "dur_ok": true,
+    "clean": false
+   },
+   {
+    "n": 1,
+    "file": "rule.1_t1.wav",
+    "dur": 3.09,
+    "heard": "In Pope testing, the condition we're hunting for is necrosis.",
+    "wer": 0.1,
+    "dur_ok": true,
+    "clean": false
+   },
+   {
+    "n": 2,
+    "file": "rule.1_t2.wav",
+    "dur": 3.29,
+    "heard": "In pulp testing, the condition we're hunting for is necrosis.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 3,
+    "file": "rule.1_t3.wav",
+    "dur": 2.88,
+    "heard": "And pulp testing, the condition we're hunting for is necrosis.",
+    "wer": 0.1,
+    "dur_ok": true,
+    "clean": false
+   }
+  ],
+  "chosen": 2,
+  "rounds": 2
+ },
+ "rule.2": {
+  "say": "So a positive test is actually the tooth that doesn't respond.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "rule.2_t0.wav",
+    "dur": 3.13,
+    "heard": "So, a positive test is actually the tooth that doesn't respond.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "rule.2_t1.wav",
+    "dur": 3.3,
+    "heard": "So, a positive test is actually the tooth that doesn't repond.",
+    "wer": 0.091,
+    "dur_ok": true,
+    "clean": false
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "sens.0": {
+  "say": "Imagine a hundred teeth we know are necrotic.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "sens.0_t0.wav",
+    "dur": 2.34,
+    "heard": "Imagine a hundred teeth we know are necrotic.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "sens.0_t1.wav",
+    "dur": 2.03,
+    "heard": "Imagine a hundred teeth we know are necrotic.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "sens.1": {
+  "say": "Sensitivity asks: how many does the test catch? For cold, eighty-seven.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "sens.1_t0.wav",
+    "dur": 4.05,
+    "heard": "Sensitivity asks, how many does the test catch for cold 87?",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "sens.1_t1.wav",
+    "dur": 3.79,
+    "heard": "Sensitivity asks, How many does the test catch? for cold 87",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "sens.2": {
+  "say": "Now take a hundred teeth we know are vital.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "sens.2_t0.wav",
+    "dur": 2.05,
+    "heard": "Now take a hundred teeth we know are vital.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "sens.2_t1.wav",
+    "dur": 2.21,
+    "heard": "Now take 100 teeth we know are vital.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "sens.3": {
+  "say": "Specificity asks: how many respond the way they should? Eighty-four.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "sens.3_t0.wav",
+    "dur": 4.12,
+    "heard": "Specificity asks, how many respond the way they should?",
+    "wer": 0.1,
+    "dur_ok": true,
+    "clean": false
+   },
+   {
+    "n": 1,
+    "file": "sens.3_t1.wav",
+    "dur": 3.75,
+    "heard": "Specificity asks, how many respond the way they should? Eighty -four.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 2,
+    "file": "sens.3_t2.wav",
+    "dur": 4.11,
+    "heard": "Specificity asks, how many respond the way they should? Eighty -four.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 3,
+    "file": "sens.3_t3.wav",
+    "dur": 4.0,
+    "heard": "Specificity asks, how many respond the way they should? Eighty -four.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 4,
+    "file": "sens.3_t4.wav",
+    "dur": 3.74,
+    "heard": "Specificity asks, how many respond to the way they should?",
+    "wer": 0.2,
+    "dur_ok": true,
+    "clean": false
+   },
+   {
+    "n": 5,
+    "file": "sens.3_t5.wav",
+    "dur": 3.57,
+    "heard": "Specificity asks, how many respond the way they should? Eighty -four.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 6,
+    "file": "sens.3_t6.wav",
+    "dur": 3.46,
+    "heard": "Specificity asks, how many respond the way they should? Eighty -four.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 7,
+    "file": "sens.3_t7.wav",
+    "dur": 3.74,
+    "heard": "Specificity asks, how many respond the way they should?",
+    "wer": 0.1,
+    "dur_ok": true,
+    "clean": false
+   }
+  ],
+  "chosen": 2,
+  "rounds": 4
+ },
+ "sens.4": {
+  "say": "Both of these start with the truth, and then grade the test.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "sens.4_t0.wav",
+    "dur": 2.77,
+    "heard": "Both of these start with the truth, and then grade the test.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "sens.4_t1.wav",
+    "dur": 3.03,
+    "heard": "Both of these start with the truth, and then grade the test.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "pv.0": {
+  "say": "But in the chair, you don't know the truth. You only see the result.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "pv.0_t0.wav",
+    "dur": 3.19,
+    "heard": "But in the chair, you don't know the truth, you only see the result.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "pv.0_t1.wav",
+    "dur": 3.07,
+    "heard": "But in the chair, you don't know the truth. You only see the result.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "pv.1": {
+  "say": "So the question flips.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "pv.1_t0.wav",
+    "dur": 1.33,
+    "heard": "So the question flips.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "pv.1_t1.wav",
+    "dur": 1.48,
+    "heard": "So, the question flips.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "pv.2": {
+  "say": "If a tooth doesn't respond, what's the chance it's really necrotic? That's the positive predictive value.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "pv.2_t0.wav",
+    "dur": 4.61,
+    "heard": "If a tooth doesn't respond, what's the chance it's really necrotic? That's the positive predictive value.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "pv.2_t1.wav",
+    "dur": 4.89,
+    "heard": "If a tooth doesn't respond, what's the chance it's really necrotic? That's the positive predictive value.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "pv.3": {
+  "say": "And if it does respond, what's the chance it's really vital? That's the negative predictive value.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "pv.3_t0.wav",
+    "dur": 5.22,
+    "heard": "And, if it does respond, what's the chance it's really vital? That's the negative predictive value.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "pv.3_t1.wav",
+    "dur": 5.02,
+    "heard": "And if it does respond, what's the chance it's really vital? That's the negative predictive value.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "cold.0": {
+  "say": "For the cold test, those come out to eighty-one and eighty-seven percent.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "cold.0_t0.wav",
+    "dur": 3.51,
+    "heard": "For the cold test, those come out to 81 and 87 percent.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "cold.0_t1.wav",
+    "dur": 3.49,
+    "heard": "For the cold test, those come out to 81 and 87%.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "cold.1": {
+  "say": "Which means roughly one in five teeth that don't respond to cold are actually still vital.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "cold.1_t0.wav",
+    "dur": 4.1,
+    "heard": "which means roughly 1 in 5 teeth that don't respond to cold are actually still vital.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "cold.1_t1.wav",
+    "dur": 4.17,
+    "heard": "which means roughly 1 in 5 teeth that don't respond to cold are actually still vital.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "ept.0": {
+  "say": "The electric pulp test has almost the opposite personality.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "ept.0_t0.wav",
+    "dur": 2.78,
+    "heard": "The electric pulp test has almost the opposite personality.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "ept.0_t1.wav",
+    "dur": 2.77,
+    "heard": "The electric pulp test has almost the opposite personality.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "ept.1": {
+  "say": "Its sensitivity is only seventy-two, so it misses a lot of necrotic teeth.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "ept.1_t0.wav",
+    "dur": 3.54,
+    "heard": "Its sensitivity is only 72, so it misses a lot of necrotic teeth.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "ept.1_t1.wav",
+    "dur": 3.69,
+    "heard": "Its sensitivity is only 72, so it misses a lot of necrotic teeth.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "ept.2": {
+  "say": "But its specificity is ninety-three.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "ept.2_t0.wav",
+    "dur": 2.2,
+    "heard": "but its specificity is 93.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "ept.2_t1.wav",
+    "dur": 2.38,
+    "heard": "but its specificity is 93.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "ept.3": {
+  "say": "So when the electric test says no response, you can mostly trust it. Its positive predictive value is eighty-nine.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "ept.3_t0.wav",
+    "dur": 5.42,
+    "heard": "So when the electric test says no response, you can mostly trust it. Its positive predictive value is 89.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "ept.3_t1.wav",
+    "dur": 6.14,
+    "heard": "So when the electric test says no response, you can mostly trust it. Its positive predictive value is 89.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "rank.0": {
+  "say": "Heat testing comes in last, at seventy-eight and sixty-seven.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "rank.0_t0.wav",
+    "dur": 3.6,
+    "heard": "Heat testing comes in last at 78 and 67.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "rank.0_t1.wav",
+    "dur": 3.16,
+    "heard": "Heat testing comes in last at 78 and 67.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "rank.1": {
+  "say": "The clear winners are laser Doppler flowmetry and pulse oximetry, both around ninety-seven percent accurate.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "rank.1_t0.wav",
+    "dur": 5.06,
+    "heard": "The clear winners are laser Doppler filamentary and pulse oximetry, both around 97 % accurate.",
+    "wer": 0.071,
+    "dur_ok": true,
+    "clean": false
+   },
+   {
+    "n": 1,
+    "file": "rank.1_t1.wav",
+    "dur": 5.43,
+    "heard": "The clear winners are laser Doppler flowmetry and pulse oximetry, both around 97 % accurate.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "rank.2": {
+  "say": "They look at blood supply, the real marker of a living pulp, instead of nerve response.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "rank.2_t0.wav",
+    "dur": 4.37,
+    "heard": "They look at blood supply, the real marker of a living pulp, instead of nerve response.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "rank.2_t1.wav",
+    "dur": 4.31,
+    "heard": "They look at let's apply, the real marker of a living pope instead of nerve response.",
+    "wer": 0.188,
+    "dur_ok": true,
+    "clean": false
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "catch.0": {
+  "say": "There's one catch.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "catch.0_t0.wav",
+    "dur": 0.83,
+    "heard": "There's one catch.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "catch.0_t1.wav",
+    "dur": 1.02,
+    "heard": "There's one catch.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "catch.1": {
+  "say": "Predictive values aren't fixed. They shift with how common necrosis is in the teeth you're testing.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "catch.1_t0.wav",
+    "dur": 4.5,
+    "heard": "Predictive values aren't fixed. They shift with how common necrosis is in the teeth you're testing.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "catch.1_t1.wav",
+    "dur": 4.4,
+    "heard": "Predictive values aren't fixed. They shift with how common necrosis is in the teeth you're testing.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "catch.2": {
+  "say": "That's why the paper reports adjusted predictive values.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "catch.2_t0.wav",
+    "dur": 2.72,
+    "heard": "That's why the paper reports adjusted predictive values.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "catch.2_t1.wav",
+    "dur": 2.99,
+    "heard": "That's why the paper reports adjusted predictive values.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "recap.0": {
+  "say": "So, here's what to remember.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "recap.0_t0.wav",
+    "dur": 1.52,
+    "heard": "So, here's what to remember.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "recap.0_t1.wav",
+    "dur": 1.6,
+    "heard": "So, here's what to remember.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "recap.1": {
+  "say": "Cold: eighty-seven and eighty-four.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "recap.1_t0.wav",
+    "dur": 2.06,
+    "heard": "Cold, 87 and 84.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "recap.1_t1.wav",
+    "dur": 1.91,
+    "heard": "Cold, 87 and 84.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ },
+ "recap.2": {
+  "say": "Electric: seventy-two and ninety-three.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "recap.2_t0.wav",
+    "dur": 2.27,
+    "heard": "Electric, 72 and 93.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "recap.2_t1.wav",
+    "dur": 2.3,
+    "heard": "Electric, 72 and 93.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "recap.3": {
+  "say": "Heat: last place.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "recap.3_t0.wav",
+    "dur": 1.18,
+    "heard": "Heat, last place.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "recap.3_t1.wav",
+    "dur": 1.25,
+    "heard": "Heat, last place.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "recap.4": {
+  "say": "And no single test makes the diagnosis on its own.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "recap.4_t0.wav",
+    "dur": 2.57,
+    "heard": "and no single test makes the diagnosis on its own.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "recap.4_t1.wav",
+    "dur": 2.61,
+    "heard": "and no single test makes the diagnosis on its own.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 1,
+  "rounds": 1
+ },
+ "cta.0": {
+  "say": "Save this one for boards, and send it to the co-resident who still mixes these up.",
+  "takes": [
+   {
+    "n": 0,
+    "file": "cta.0_t0.wav",
+    "dur": 3.62,
+    "heard": "Save this one for boards and send it to the co -resident who still mixes these up.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   },
+   {
+    "n": 1,
+    "file": "cta.0_t1.wav",
+    "dur": 3.43,
+    "heard": "Save this one for boards, and send it to the co -resident who still mixes these up.",
+    "wer": 0.0,
+    "dur_ok": true,
+    "clean": true
+   }
+  ],
+  "chosen": 0,
+  "rounds": 1
+ }
+}

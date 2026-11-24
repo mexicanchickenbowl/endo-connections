@@ -1,0 +1,199 @@
+1
+00:00:00,450 --> 00:00:03,702
+You hold a frozen cotton pellet against a tooth, and nothing happens.
+
+2
+00:00:03,932 --> 00:00:06,509
+No response. So the pulp is necrotic, right?
+
+3
+00:00:06,779 --> 00:00:08,289
+Well, not always.
+
+4
+00:00:08,139 --> 00:00:10,881
+About 1 time in 6, the cold test gets it wrong.
+
+5
+00:00:11,351 --> 00:00:15,255
+That number comes from a 2018 meta-analysis by Mainkar and Kim.
+
+6
+00:00:15,405 --> 00:00:18,448
+They pooled 28 studies, covering 5 different pulp tests.
+
+7
+00:00:18,598 --> 00:00:21,648
+And to make sense of the results, you need four ideas that
+
+8
+00:00:21,498 --> 00:00:22,980
+trip up almost everyone.
+
+9
+00:00:23,450 --> 00:00:25,391
+First, a quick flip in thinking.
+
+10
+00:00:25,541 --> 00:00:28,984
+In pulp testing, the condition we're hunting for is necrosis.
+
+11
+00:00:29,134 --> 00:00:32,413
+So a positive test is actually the tooth that doesn't respond.
+
+12
+00:00:32,883 --> 00:00:35,375
+Imagine 100 teeth we know are necrotic.
+
+13
+00:00:35,525 --> 00:00:38,055
+Sensitivity asks: how many does the test catch?
+
+14
+00:00:37,905 --> 00:00:39,729
+For cold, 87.
+
+15
+00:00:39,879 --> 00:00:42,237
+Now take 100 teeth we know are vital.
+
+16
+00:00:42,387 --> 00:00:45,870
+Specificity asks: how many respond the way they should?
+
+17
+00:00:45,720 --> 00:00:46,648
+84.
+
+18
+00:00:46,798 --> 00:00:49,983
+Both of these start with the truth, and then grade the test.
+
+19
+00:00:50,453 --> 00:00:52,623
+But in the chair, you don't know the truth.
+
+20
+00:00:52,473 --> 00:00:53,793
+You only see the result.
+
+21
+00:00:53,943 --> 00:00:55,572
+So the question flips.
+
+22
+00:00:55,722 --> 00:00:59,072
+If a tooth doesn't respond, what's the chance it's really necrotic?
+
+23
+00:00:58,922 --> 00:01:00,764
+That's the positive predictive value.
+
+24
+00:01:00,913 --> 00:01:04,563
+And if it does respond, what's the chance it's really vital?
+
+25
+00:01:04,413 --> 00:01:06,283
+That's the negative predictive value.
+
+26
+00:01:06,753 --> 00:01:10,411
+For the cold test, those come out to 81 and 87%.
+
+27
+00:01:10,561 --> 00:01:13,551
+Which means roughly 1 in 5 teeth that don't respond to cold
+
+28
+00:01:13,401 --> 00:01:14,880
+are actually still vital.
+
+29
+00:01:15,350 --> 00:01:18,279
+The electric pulp test has almost the opposite personality.
+
+30
+00:01:18,429 --> 00:01:21,899
+Its sensitivity is only 72, so it misses a lot of necrotic
+
+31
+00:01:21,749 --> 00:01:22,265
+teeth.
+
+32
+00:01:22,415 --> 00:01:24,946
+But its specificity is 93.
+
+33
+00:01:25,096 --> 00:01:28,386
+So when the electric test says no response, you can mostly trust
+
+34
+00:01:28,236 --> 00:01:31,389
+it. Its positive predictive value is 89.
+
+35
+00:01:31,859 --> 00:01:35,611
+Heat testing comes in last, at 78 and 67.
+
+36
+00:01:35,761 --> 00:01:39,811
+The clear winners are laser Doppler flowmetry and pulse oximetry, both around
+
+37
+00:01:39,661 --> 00:01:41,345
+97% accurate.
+
+38
+00:01:41,495 --> 00:01:44,745
+They look at blood supply, the real marker of a living pulp,
+
+39
+00:01:44,595 --> 00:01:46,011
+instead of nerve response.
+
+40
+00:01:46,481 --> 00:01:47,652
+There's one catch.
+
+41
+00:01:47,802 --> 00:01:49,732
+Predictive values aren't fixed.
+
+42
+00:01:49,582 --> 00:01:52,448
+They shift with how common necrosis is in the teeth you're testing.
+
+43
+00:01:52,598 --> 00:01:55,740
+That's why the paper reports adjusted predictive values.
+
+44
+00:01:56,210 --> 00:01:57,962
+So, here's what to remember.
+
+45
+00:01:58,112 --> 00:02:00,317
+Cold: 87 and 84.
+
+46
+00:02:00,467 --> 00:02:02,919
+Electric: 72 and 93.
+
+47
+00:02:03,069 --> 00:02:04,470
+Heat: last place.
+
+48
+00:02:04,620 --> 00:02:07,376
+And no single test makes the diagnosis on its own.
+
+49
+00:02:07,846 --> 00:02:10,516
+Save this one for boards, and send it to the co-resident who
+
+50
+00:02:10,366 --> 00:02:11,619
+still mixes these up.

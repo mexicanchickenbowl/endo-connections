@@ -1,0 +1,203 @@
+[
+ {
+  "id": "hook",
+  "lines": [
+   {
+    "say": "You hold a frozen cotton pellet against a tooth, and nothing happens.",
+    "pause": 0.38,
+    "show": "You hold a frozen cotton pellet against a tooth, and nothing happens."
+   },
+   {
+    "say": "No response. So the pulp is necrotic, right?",
+    "pause": 0.42,
+    "show": "No response. So the pulp is necrotic, right?"
+   },
+   {
+    "say": "Well, not always. About one time in six, the cold test gets it wrong.",
+    "show": "Well, not always. About 1 time in 6, the cold test gets it wrong."
+   }
+  ]
+ },
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "That number comes from a twenty eighteen meta-analysis by Mainkar and Kim.",
+    "show": "That number comes from a 2018 meta-analysis by Mainkar and Kim."
+   },
+   {
+    "say": "They pooled twenty-eight studies, covering five different pulp tests.",
+    "show": "They pooled 28 studies, covering 5 different pulp tests."
+   },
+   {
+    "say": "And to make sense of the results, you need four ideas that trip up almost everyone.",
+    "show": "And to make sense of the results, you need four ideas that trip up almost everyone."
+   }
+  ]
+ },
+ {
+  "id": "rule",
+  "lines": [
+   {
+    "say": "First, a quick flip in thinking.",
+    "show": "First, a quick flip in thinking."
+   },
+   {
+    "say": "In pulp testing, the condition we're hunting for is necrosis.",
+    "show": "In pulp testing, the condition we're hunting for is necrosis."
+   },
+   {
+    "say": "So a positive test is actually the tooth that doesn't respond.",
+    "show": "So a positive test is actually the tooth that doesn't respond."
+   }
+  ]
+ },
+ {
+  "id": "sens",
+  "lines": [
+   {
+    "say": "Imagine a hundred teeth we know are necrotic.",
+    "show": "Imagine 100 teeth we know are necrotic."
+   },
+   {
+    "say": "Sensitivity asks: how many does the test catch? For cold, eighty-seven.",
+    "show": "Sensitivity asks: how many does the test catch? For cold, 87."
+   },
+   {
+    "say": "Now take a hundred teeth we know are vital.",
+    "show": "Now take 100 teeth we know are vital."
+   },
+   {
+    "say": "Specificity asks: how many respond the way they should? Eighty-four.",
+    "show": "Specificity asks: how many respond the way they should? 84."
+   },
+   {
+    "say": "Both of these start with the truth, and then grade the test.",
+    "show": "Both of these start with the truth, and then grade the test."
+   }
+  ]
+ },
+ {
+  "id": "pv",
+  "lines": [
+   {
+    "say": "But in the chair, you don't know the truth. You only see the result.",
+    "show": "But in the chair, you don't know the truth. You only see the result."
+   },
+   {
+    "say": "So the question flips.",
+    "show": "So the question flips."
+   },
+   {
+    "say": "If a tooth doesn't respond, what's the chance it's really necrotic? That's the positive predictive value.",
+    "show": "If a tooth doesn't respond, what's the chance it's really necrotic? That's the positive predictive value."
+   },
+   {
+    "say": "And if it does respond, what's the chance it's really vital? That's the negative predictive value.",
+    "show": "And if it does respond, what's the chance it's really vital? That's the negative predictive value."
+   }
+  ]
+ },
+ {
+  "id": "cold",
+  "lines": [
+   {
+    "say": "For the cold test, those come out to eighty-one and eighty-seven percent.",
+    "show": "For the cold test, those come out to 81 and 87%."
+   },
+   {
+    "say": "Which means roughly one in five teeth that don't respond to cold are actually still vital.",
+    "show": "Which means roughly 1 in 5 teeth that don't respond to cold are actually still vital."
+   }
+  ]
+ },
+ {
+  "id": "ept",
+  "lines": [
+   {
+    "say": "The electric pulp test has almost the opposite personality.",
+    "show": "The electric pulp test has almost the opposite personality."
+   },
+   {
+    "say": "Its sensitivity is only seventy-two, so it misses a lot of necrotic teeth.",
+    "show": "Its sensitivity is only 72, so it misses a lot of necrotic teeth."
+   },
+   {
+    "say": "But its specificity is ninety-three.",
+    "show": "But its specificity is 93."
+   },
+   {
+    "say": "So when the electric test says no response, you can mostly trust it. Its positive predictive value is eighty-nine.",
+    "show": "So when the electric test says no response, you can mostly trust it. Its positive predictive value is 89."
+   }
+  ]
+ },
+ {
+  "id": "rank",
+  "lines": [
+   {
+    "say": "Heat testing comes in last, at seventy-eight and sixty-seven.",
+    "show": "Heat testing comes in last, at 78 and 67."
+   },
+   {
+    "say": "The clear winners are laser Doppler flowmetry and pulse oximetry, both around ninety-seven percent accurate.",
+    "show": "The clear winners are laser Doppler flowmetry and pulse oximetry, both around 97% accurate."
+   },
+   {
+    "say": "They look at blood supply, the real marker of a living pulp, instead of nerve response.",
+    "show": "They look at blood supply, the real marker of a living pulp, instead of nerve response."
+   }
+  ]
+ },
+ {
+  "id": "catch",
+  "lines": [
+   {
+    "say": "There's one catch.",
+    "show": "There's one catch."
+   },
+   {
+    "say": "Predictive values aren't fixed. They shift with how common necrosis is in the teeth you're testing.",
+    "show": "Predictive values aren't fixed. They shift with how common necrosis is in the teeth you're testing."
+   },
+   {
+    "say": "That's why the paper reports adjusted predictive values.",
+    "show": "That's why the paper reports adjusted predictive values."
+   }
+  ]
+ },
+ {
+  "id": "recap",
+  "lines": [
+   {
+    "say": "So, here's what to remember.",
+    "show": "So, here's what to remember."
+   },
+   {
+    "say": "Cold: eighty-seven and eighty-four.",
+    "show": "Cold: 87 and 84."
+   },
+   {
+    "say": "Electric: seventy-two and ninety-three.",
+    "show": "Electric: 72 and 93."
+   },
+   {
+    "say": "Heat: last place.",
+    "show": "Heat: last place."
+   },
+   {
+    "say": "And no single test makes the diagnosis on its own.",
+    "show": "And no single test makes the diagnosis on its own."
+   }
+  ]
+ },
+ {
+  "id": "cta",
+  "lines": [
+   {
+    "say": "Save this one for boards, and send it to the co-resident who still mixes these up.",
+    "show": "Save this one for boards, and send it to the co-resident who still mixes these up."
+   }
+  ]
+ }
+]
