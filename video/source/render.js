@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const [,, url, mode, a, b, outdir] = process.argv;
 (async () => {
   const browser = await chromium.launch({ args: ['--allow-file-access-from-files'] });
-  const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
+  const page = await browser.newPage({ viewport: { width: +(process.env.VW||1920), height: +(process.env.VH||1080) }, deviceScaleFactor: 1 });
   const errs = [];
   page.on('pageerror', e => errs.push(e.message));
   page.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });

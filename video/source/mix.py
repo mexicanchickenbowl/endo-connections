@@ -2,14 +2,16 @@
 import json, sys, numpy as np, soundfile as sf, librosa, pyloudnorm as pyln
 from scipy.signal import butter, sosfilt, sosfiltfilt
 
+import os
 S = sys.argv[1]; music = sys.argv[2]
+TMF = os.environ.get("TMF", f"{S}/web/timings.js"); NARR = os.environ.get("NARR", f"{S}/narration.wav"); SFXF = os.environ.get("SFXF", f"{S}/sfx.json"); OUTF = os.environ.get("OUTF", f"{S}/final_mix.wav")
 SR = 48000
-tm = json.loads(open(f"{S}/web/timings.js").read()[len("window.TIMINGS="):-1])
+tm = json.loads(open(TMF).read()[len("window.TIMINGS="):-1])
 total = tm["total"]; N = int(total * SR)
 rng = np.random.default_rng(7)
 
 # --- narration
-v, vsr = sf.read(f"{S}/narration.wav")
+v, vsr = sf.read(NARR)
 v = librosa.resample(v, orig_sr=vsr, target_sr=SR)
 v = np.pad(v, (0, max(0, N - len(v))))[:N]
 # gentle voice polish: high-pass 80 Hz + light presence boost via parallel band
@@ -33,6 +35,7 @@ gain_db = -17 - 9 * env  # -17 dB in gaps, -26 dB under voice
 t = np.arange(N) / SR
 # lift during title card and end card
 for key, lift in (("title", 7), ("end", 6)):
+    if key not in tm["scenes"]: continue
     a, b = tm["scenes"][key]["s"], tm["scenes"][key]["e"]
     w = np.clip((t - a + .3) / .6, 0, 1) * np.clip((b - t) / 1.2, 0, 1)
     gain_db += lift * w
@@ -82,7 +85,7 @@ def ticks():
 LIB = {"whoosh": lambda: whoosh(), "swoosh": lambda: whoosh(.7, 200, 5000, .26), "marker": marker, "hit": hit,
        "thump": thump, "buzz": buzz, "pop": pop, "ticks": ticks}
 fx = np.zeros(N)
-for name, ts in json.load(open(f"{S}/sfx.json")):
+for name, ts in json.load(open(SFXF)):
     y = LIB[name]()
     i = int(max(0, ts) * SR)
     if name in ("whoosh", "swoosh"): i = max(0, i - int(.25 * SR))  # peak lands on the motion
@@ -101,5 +104,5 @@ g = minimum_filter1d(g, size=int(.012 * SR)); g = uniform_filter1d(g, size=int(.
 mix = mix * g[:, None]
 peak = np.abs(mix).max()
 if peak > .98: mix = mix / peak * .98
-sf.write(f"{S}/final_mix.wav", mix, SR, subtype="PCM_24")
+sf.write(OUTF, mix, SR, subtype="PCM_24")
 print("loudness before", round(loud, 1), "peak", round(peak, 3), "dur", round(total, 2))
