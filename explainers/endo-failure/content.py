@@ -121,7 +121,9 @@ SCENES = [
               "Extruded root canal filling, or other exogenous material, can keep the tissue around the apex inflamed, with no bacteria involved at all."),
             C("Large pieces of gutta-percha are usually well tolerated."),
             C("But fine particles, and gutta-percha contaminated with talc, attract macrophages and foreign body giant cells."),
-            C("Cellulose fibers shed from paper points have also been found driving persistent lesions."),
+            C("Cellulose fibers shed from paper points have also been found sustaining persistent lesions.",
+              "Cellulose fibers, shed from paper points, have also been found sustaining persistent lesions.",
+              [r"s[ɛe]lj[uʊ]ː?l[oə]ʊ?[sz]f"]),
         ],
     },
     {
