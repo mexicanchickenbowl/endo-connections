@@ -41,7 +41,7 @@ for key, lift in (("title", 7), ("end", 6)):
     gain_db += lift * w
 g = 10 ** (gain_db / 20)
 fade_in = np.clip(t / 1.5, 0, 1); fade_out = np.clip((total - t) / 4.0, 0, 1)
-m = m * g * fade_in * fade_out
+m = m * g * fade_in * fade_out * float(os.environ.get("MUSIC_GAIN", "1"))
 
 # --- SFX synthesis
 def env_ar(n, att, rel):
