@@ -58,7 +58,7 @@ SCENES = [
         "chunks": [
             C("Here's the mnemonic: If Endo Fails, Consider Cysts and Scars."),
             C("I: intraradicular infection. E: extraradicular infection. F: foreign body reaction.",
-              "I: intra-radicular infection. E: extra-radicular infection. F: foreign body reaction.",
+              "I is intra-radicular infection. E is extra-radicular infection. F is foreign body reaction.",
               [RADICULAR]),
             C("C: cholesterol crystals. C: true cysts. And S: scar tissue.",
               checks=[CHOLESTEROL]),
