@@ -40,16 +40,23 @@ endodontics, toothache, referred pain, dental pain, pulpitis, dentistry, dental 
 ## Instagram Reel — clinician cut (`the-hidden-toothache-reel-clinicians.mp4`, 1:12, 1080×1920) — USE THIS ONE
 
 **Caption**
-Patient points to #14. The source is #19. 🦷
+Your patient points to #14. The problem is #19. 🦷
 
-Localization was 73% overall, but 89% with periradicular symptoms vs. 30% without (McCarthy et al., J Endod 2010). The pulp's A-δ and C fibers carry no proprioceptive information; localization comes once the PDL is involved. Mechanical allodynia was present in 57% of irreversible pulpitis cases (Owatz et al., J Endod 2007). Add convergence in subnucleus caudalis (Sessle et al., Pain 1986) and intensity-driven referral that overlaps between arches (Sharav 1984; Falace 1996), and the finger becomes unreliable.
+Why localization fails, by the numbers:
+• Endo emergencies: 73% localized overall. 89% with periradicular symptoms, only 30% without (McCarthy et al., J Endod 2010)
+• Pulpal A-δ and C fibers carry no proprioceptive input. Localization comes from the PDL
+• Mechanical allodynia in 57% of irreversible pulpitis (Owatz et al., J Endod 2007)
+• Single neurons in subnucleus caudalis receive convergent input from pulp, skin, mucosa and muscle (Sessle et al., Pain 1986)
+• As intensity rises, referral spreads, with extensive overlap between arches (Sharav et al. 1984; Falace et al. 1996)
 
-Clinical takeaway: reproduce the chief complaint, test adjacent and opposing teeth, and when it's still unclear, use selective anesthesia starting with the maxillary arch.
+Chairside: reproduce the chief complaint. Test adjacent and opposing teeth. Cold, percussion, bite test. Still unsure? Selective anesthesia, maxillary arch first.
 
-Sources: McCarthy 2010 · Owatz 2007 · Bender 2000 · Sessle 1986 · Sharav 1984 · Falace 1996. Full explainer on YouTube.
-Music: "Infinite Perspective," Kevin MacLeod (incompetech.com), CC BY 4.0 · AI narration
+What's the most convincing referred-pain case you've seen? 👇
+Save this for your next emergency.
 
-#endodontics #endodontist #endo #dentistry #dentalstudent #pulpitis #referredpain #rootcanal #dentaleducation #orofacialpain
+Music: "Infinite Perspective" by Kevin MacLeod (incompetech.com), CC BY 4.0 · AI narration
+
+#endodontics #endodontist #endo #dentistry #rootcanal #pulpitis #referredpain #dentalstudent #dentalresidency #orofacialpain
 
 Cover frame suggestion: the hook (~0:02, "Patient points to #14 / The source is #19").
 
