@@ -1,0 +1,264 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Hidden Toothache Reel</title>
+<style>
+@font-face{font-family:Archivo;font-weight:600;src:url(node_modules/@fontsource/archivo/files/archivo-latin-600-normal.woff2)}
+@font-face{font-family:Archivo;font-weight:900;src:url(node_modules/@fontsource/archivo/files/archivo-latin-900-normal.woff2)}
+@font-face{font-family:Serif4;font-weight:400;font-style:italic;src:url(node_modules/@fontsource/source-serif-4/files/source-serif-4-latin-400-italic.woff2)}
+@font-face{font-family:Serif4;font-weight:700;src:url(node_modules/@fontsource/source-serif-4/files/source-serif-4-latin-700-normal.woff2)}
+@font-face{font-family:Plex;font-weight:400;src:url(node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2)}
+@font-face{font-family:Plex;font-weight:600;src:url(node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:500;src:url(node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2)}
+:root{--paper:#EEE7DA;--ink:#151413;--yellow:#FFDD1F;--red:#E2412F;--teal:#1E8C82;--card:#FBF8F2}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--paper)}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:Inter,sans-serif}
+.bgtex{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.35),rgba(0,0,0,0) 60%),radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 55%,rgba(60,40,20,.22) 100%)}
+#grain{position:absolute;inset:-100px;pointer-events:none;opacity:.3;mix-blend-mode:multiply;z-index:50;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .25  0 0 0 .55 0'/></filter><rect width='400' height='400' filter='url(%23n)'/></svg>")}
+.scene{position:absolute;inset:0;opacity:0}.cam{position:absolute;inset:0;transform-origin:50% 40%}
+.abs{position:absolute}
+.head{font-family:Archivo;font-weight:900;letter-spacing:-.02em;line-height:1.02}
+.big{font-family:Archivo;font-weight:900;letter-spacing:-.04em;line-height:.9}
+.mono{font-family:Plex}
+.hl{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'><path d='M3,9 C30,4 90,7 150,3 C170,2 188,4 197,6 L199,33 C170,37 120,34 60,37 C35,38 15,36 1,35 C3,26 0,17 3,9 Z' fill='%23FFDD1F'/></svg>");background-repeat:no-repeat;background-size:0% 82%;background-position:0 70%;padding:0 .08em;margin:0 -.08em;-webkit-box-decoration-break:clone}
+.kw{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .1em;margin-bottom:-.1em}.ki{display:inline-block}
+svg{overflow:visible}
+#arch,#tooth,#face,#wires{filter:drop-shadow(0 14px 16px rgba(70,45,15,.16))}
+.card{position:absolute;width:960px;left:60px;background:var(--card);padding:40px 46px 36px;box-shadow:0 30px 60px rgba(60,40,10,.25),0 8px 18px rgba(60,40,10,.15);opacity:0}
+.card .tape{position:absolute;top:-22px;left:50%;width:180px;height:46px;margin-left:-90px;background:rgba(255,231,120,.72);transform:rotate(-3deg)}
+.card .jr{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px solid var(--ink);padding-bottom:12px;margin-bottom:20px}
+.card .jn{font-family:Serif4;font-style:italic;font-size:32px}.card .yr{font-family:Plex;font-weight:600;font-size:32px;background:var(--ink);color:var(--paper);padding:2px 14px}
+.card .ti{font-family:Serif4;font-weight:700;font-size:44px;line-height:1.16;margin-bottom:18px}
+.card .au{font-family:Plex;font-size:24px;color:#3b3833;margin-bottom:8px}.card .in{font-family:Plex;font-size:24px;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.card .note{position:absolute;right:-14px;bottom:-30px;font-family:Plex;font-weight:600;font-size:24px;background:var(--red);color:#fff;padding:8px 16px;transform:rotate(3deg)}
+#srctag{position:absolute;left:60px;top:220px;z-index:40;font-family:Plex;font-size:24px;font-weight:600;display:flex;opacity:0}
+#srctag .l{background:var(--ink);color:var(--yellow);padding:9px 14px;letter-spacing:.12em}#srctag .r{background:var(--yellow);color:var(--ink);padding:9px 16px}
+#cap{position:absolute;left:50px;right:50px;top:1410px;text-align:center;z-index:45;font-family:Archivo;font-weight:900;font-size:70px;line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
+#cap .w{display:inline-block;padding:0 .12em;margin:0 .02em;border-radius:10px}
+#cap .w.on{background:var(--yellow);box-shadow:0 0 0 4px var(--ink) inset}
+#cap .chunk{display:inline-block;background:rgba(251,248,242,.92);padding:10px 22px 14px;border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.pill{position:absolute;font-family:Plex;font-weight:600;font-size:28px;padding:16px 20px;background:var(--card);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);opacity:0;width:440px;white-space:nowrap}
+.lbl{position:absolute;font-family:Plex;font-weight:600;font-size:26px;letter-spacing:.06em;text-transform:uppercase;opacity:0}
+.tile{background:#FBF8F2;border:4px solid #151413;box-shadow:10px 10px 0 #151413;height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;opacity:0}
+#endcard{position:absolute;inset:0;background:var(--ink);color:var(--paper);z-index:46;opacity:0}
+#wipe{position:absolute;top:-300px;height:2600px;width:700px;left:-1000px;background:var(--yellow);transform:skewX(-14deg);z-index:44;box-shadow:-40px 0 0 var(--ink)}
+
+#face{filter:drop-shadow(0 14px 16px rgba(70,45,15,.16))}
+</style></head><body><div id="stage"><div class="bgtex"></div>
+
+<div class="scene" id="sc-hook"><div class="cam">
+  <div class="abs head" id="hq" style="left:60px;right:60px;top:225px;text-align:center;font-size:88px">Patient points to <span class="hl">#14</span><br>The source is <span class="hl" id="hl19">#19</span></div>
+  <svg id="arch" class="abs" style="left:40px;top:650px" width="1000" height="467" viewBox="0 0 1200 560"></svg>
+  <div class="abs head" id="hwhy" style="left:70px;right:70px;top:560px;font-size:112px;opacity:0">Every endodontist has <span class="hl">seen this.</span></div>
+</div></div>
+
+<div class="scene" id="sc-ev"><div class="cam">
+  <div class="card" id="card-mcc" style="top:270px;transform:rotate(-1.5deg)"><div class="tape"></div>
+    <div class="jr"><span class="jn">Journal of Endodontics</span><span class="yr">2010</span></div>
+    <div class="ti">Frequency of <span class="hl">localization of the painful tooth</span> by patients presenting for an endodontic emergency</div>
+    <div class="au">McCarthy PJ, McClanahan S, Hodges J, Bowles WR</div><div class="in">University of Minnesota</div>
+    <div class="note">n = 79 emergency patients</div></div>
+  <div class="abs" id="ov" style="left:60px;right:60px;top:860px;text-align:center;opacity:0"><div class="big" style="font-size:200px" id="n73">0%</div><div class="mono" style="font-size:30px;margin-top:14px">localized correctly overall</div></div>
+  <div class="abs" id="bars" style="left:0;top:0;width:1080px;height:1920px;opacity:0">
+    <div class="abs" style="left:80px;top:1240px;width:920px;height:5px;background:var(--ink)"></div>
+    <div class="abs" id="barA" style="left:150px;bottom:680px;width:330px;height:0;background:var(--teal)"></div>
+    <div class="abs" id="barB" style="left:600px;bottom:680px;width:330px;height:0;background:var(--red)"></div>
+    <div class="abs big" id="nA" style="left:150px;width:330px;text-align:center;font-size:120px;opacity:0">0%</div>
+    <div class="abs big" id="nB" style="left:600px;width:330px;text-align:center;font-size:120px;opacity:0">0%</div>
+    <div class="abs lbl" id="lA" style="left:100px;top:1256px;width:430px;text-align:center">+ Periradicular sx</div>
+    <div class="abs lbl" id="lB" style="left:550px;top:1256px;width:430px;text-align:center">No periradicular sx</div>
+  </div>
+</div></div>
+
+<div class="scene" id="sc-pulp"><div class="cam">
+  <svg id="tooth" class="abs" style="left:230px;top:270px" width="620" height="909" viewBox="0 0 600 880"></svg>
+  <div class="abs head" id="ph1" style="left:60px;right:60px;top:1210px;text-align:center;font-size:64px;opacity:0">A-δ + C fibers, <span class="hl">no proprioceptors</span></div>
+  <div class="abs head" id="ph2" style="left:60px;right:60px;top:1210px;text-align:center;font-size:64px;opacity:0">PDL mechanoreceptors <span class="hl">localize</span></div>
+  <div class="card" id="card-owz" style="top:300px;transform:rotate(1.5deg)"><div class="tape"></div>
+    <div class="jr"><span class="jn">Journal of Endodontics</span><span class="yr">2007</span></div>
+    <div class="ti" style="font-size:42px">The incidence of <span class="hl">mechanical allodynia</span> in patients with irreversible pulpitis</div>
+    <div class="au">Owatz CB, Khan AA, Schindler WG, Schwartz SA, Keiser K, Hargreaves KM</div><div class="in">UT Health Science Center, San Antonio</div></div>
+  <div class="abs" id="o57" style="left:60px;right:60px;top:860px;text-align:center;opacity:0"><div class="big" style="font-size:220px"><span class="hl" id="n57">0%</span></div><div class="mono" style="font-size:30px;margin-top:18px">of irreversible pulpitis patients<br>had mechanical allodynia</div></div>
+</div></div>
+
+<div class="scene" id="sc-conv"><div class="cam">
+  <div class="abs head" id="cvh" style="left:60px;right:60px;top:290px;text-align:center;font-size:104px;opacity:0"><span class="hl">Convergence</span></div>
+  <div class="abs mono" id="cvs" style="left:70px;right:70px;top:300px;text-align:center;font-size:30px;line-height:1.45;opacity:0">Single neurons, multiple inputs<br><span style="color:#6E665B;font-size:24px">Sessle et al., Pain 1986;27:219–35 (cat)</span></div>
+  <svg id="wires" class="abs" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="pill" id="p0" style="left:60px;top:480px">Tooth pulp</div>
+  <div class="pill" id="p1" style="left:580px;top:480px">Facial skin</div>
+  <div class="pill" id="p2" style="left:60px;top:600px">Oral mucosa</div>
+  <div class="pill" id="p3" style="left:580px;top:600px">Jaw &amp; neck muscle</div>
+  <div class="abs lbl" id="relayL" style="left:620px;top:860px;width:420px">Subnucleus<br>caudalis</div>
+  <div class="abs lbl" id="brainL" style="left:680px;top:1120px;width:340px">Thalamus → cortex:<br>“where?”</div>
+</div></div>
+
+<div class="scene" id="sc-spr"><div class="cam">
+  <div class="abs head" id="sh" style="left:60px;right:60px;top:300px;text-align:center;font-size:84px;opacity:0">More intensity,<br><span class="hl">more referral</span></div>
+  <svg id="face" class="abs" style="left:150px;top:470px" width="780" height="910" viewBox="0 0 600 700"></svg>
+  <div class="abs" id="legend" style="left:80px;top:1260px;right:80px;display:flex;justify-content:center;gap:40px;font-family:Plex;font-weight:600;font-size:26px;opacity:0">
+    <span><span style="display:inline-block;width:22px;height:22px;border-radius:50%;background:#E2412F;vertical-align:-3px;margin-right:10px"></span>#19 source</span>
+    <span><span style="display:inline-block;width:22px;height:22px;border-radius:50%;background:#2F6FD6;vertical-align:-3px;margin-right:10px"></span>#14 source</span>
+    <span style="color:#7B4BA8">overlap</span></div>
+</div></div>
+
+<div class="scene" id="sc-cl"><div class="cam">
+  <div class="abs head" id="clh" style="left:60px;right:60px;top:260px;text-align:center;font-size:84px;opacity:0">Reproduce the<br><span class="hl">chief complaint</span></div>
+  <div class="abs" id="tiles" style="left:80px;top:540px;width:920px;display:grid;grid-template-columns:1fr 1fr;gap:40px"></div>
+  <div class="abs head" id="clf" style="left:60px;right:60px;top:600px;text-align:center;font-size:132px;opacity:0">Trust the tests,<br><span class="hl">not the finger.</span></div>
+</div></div>
+
+<div id="srctag"><span class="l">SOURCE</span><span class="r" id="srctxt"></span></div>
+<div id="cap"></div>
+<div id="wipe"></div>
+<div id="endcard">
+  <div class="abs mono" style="left:80px;top:360px;font-size:28px;font-weight:600;letter-spacing:.16em;color:var(--yellow)">FOR CLINICIANS</div>
+  <div class="abs head" style="left:80px;top:420px;font-size:140px;line-height:.95">The Hidden<br>Toothache</div>
+  <div class="abs mono" style="left:80px;top:780px;right:80px;font-size:25px;line-height:1.6;color:#E9E2D5">
+   McCarthy et al. J Endod 2010;36:801–5<br>Owatz et al. J Endod 2007;33:552–6<br>Bender. J Endod 2000;26:175–9<br>Sessle et al. Pain 1986;27:219–35<br>Sharav et al. Pain 1984;20:363–70<br>Falace et al. J Orofac Pain 1996;10:232–9</div>
+  <div class="abs mono" style="left:80px;top:1240px;right:80px;font-size:22px;line-height:1.5;color:#9C958A">Music: “Infinite Perspective” Kevin MacLeod (incompetech.com), CC BY 4.0 · Narration: Chatterbox TTS (AI voice)</div>
+</div>
+<div id="grain"></div></div>
+<script src="gsap.min.js"></script><script src="dds_timings.js"></script><script src="illus.js"></script>
+<script>
+const $=s=>document.querySelector(s),NS="http://www.w3.org/2000/svg";
+function el(tag,attrs={},parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+const TM=window.TIMINGS,S=id=>TM.lines[id].s,E=id=>TM.lines[id].e;
+const norm=w=>w.toLowerCase().replace(/[^a-z0-9]/g,'');const NUMW={thirty:'3',seventy:'7',fifty:'5',eighty:'8',fourteen:'14',nineteen:'19'};
+function W(id,word,fb=0,nth=0){const L=TM.lines[id];const n=norm(word),d=NUMW[n];let c=0;for(const [w,t] of L.words){const x=norm(w);if(x.startsWith(n)||(d&&/^[0-9]/.test(x)&&x.startsWith(d))){if(c===nth)return t;c++}}return L.s+fb*(L.e-L.s)}
+const tl=gsap.timeline({paused:true}),ticks=[],SFXL=[];window.SFXL=SFXL;
+const to=(t,target,vars,pos)=>tl.to(target,Object.assign({duration:.7,ease:"power3.out"},vars),pos);
+const show=(t,sel,d=.6)=>to(0,sel,{opacity:1,duration:d},t);const hide=(t,sel,d=.4)=>to(0,sel,{opacity:0,duration:d,ease:"power2.in"},t);
+const hl=(t,sel,d=.55)=>{SFXL.push(['marker',t]);return to(0,sel,{backgroundSize:"100% 82%",duration:d,ease:"power2.inOut"},t)};
+function splitWords(node){for(const ch of [...node.childNodes]){if(ch.nodeType===3){const fr=document.createDocumentFragment();ch.textContent.split(/(\s+)/).forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){fr.appendChild(document.createTextNode(p))}else{const o=document.createElement('span');o.className='kw';const i=document.createElement('span');i.className='ki';i.textContent=p;o.appendChild(i);fr.appendChild(o)}});node.replaceChild(fr,ch)}else if(ch.nodeType===1&&ch.tagName!=='BR')splitWords(ch)}}
+function kin(sel,t,st=.06){const e=$(sel);if(!e.dataset.split){splitWords(e);e.dataset.split=1}const k=e.querySelectorAll('.ki');gsap.set(k,{yPercent:115});tl.set(e,{opacity:1},t);to(0,k,{yPercent:0,duration:.6,stagger:st,ease:"power4.out"},t)}
+function card(t,sel){SFXL.push(['whoosh',t]);gsap.set(sel,{y:60,x:-80});to(0,sel,{opacity:1,x:0,y:0,duration:.9,ease:"back.out(1.2)"},t)}
+function counter(elm,t0,t1,a,b){ticks.push(t=>{const p=Math.min(1,Math.max(0,(t-t0)/(t1-t0)));elm.textContent=Math.round(a+(b-a)*(1-Math.pow(1-p,3)))+'%'})}
+function absPos(e,stop){let x=0,y=0,n=e;while(n&&n!==stop){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent}return {x,y}}
+function circ(t,sel,o={}){const e=$(sel);const par=e.offsetParent;const p=absPos(e,par);const pad=o.pad||24;const w=e.offsetWidth+pad*2,h=e.offsetHeight+pad*1.4;
+  const sv=el('svg',{width:w+40,height:h+40,style:`position:absolute;left:${p.x-pad-20}px;top:${p.y-pad*.7-20}px;overflow:visible;z-index:5`});par.appendChild(sv);
+  let d='';let sd=sel.length*7;const rnd=()=>{sd=(sd*9301+49297)%233280;return sd/233280};const cx=(w+40)/2,cy=(h+40)/2;
+  for(let k=0;k<=46;k++){const a=-1.9+k/46*Math.PI*2*1.12;const j=1+(rnd()-.5)*.05+(k/46)*.06;d+=(k?' L':'M')+(cx+Math.cos(a)*w/2*j).toFixed(1)+','+(cy+Math.sin(a)*h/2*j).toFixed(1)}
+  const pth=el('path',{d,fill:'none',stroke:'#E2412F','stroke-width':8,'stroke-linecap':'round'},sv);const L=pth.getTotalLength();pth.style.strokeDasharray=L;pth.style.strokeDashoffset=L;to(0,pth,{strokeDashoffset:0,duration:.6,ease:"power2.inOut"},t);SFXL.push(['marker',t])}
+function scene(name,sel){const sc=TM.scenes[name];gsap.set(sel,{opacity:0,x:140});to(0,sel,{opacity:1,x:0,duration:.7},sc.s-.25);if(name!=='close')to(0,sel,{opacity:0,x:-140,duration:.45,ease:"power2.in"},sc.e+.1);else to(0,sel,{opacity:0,duration:.4},sc.e+.1);to(0,sel+' .cam',{scale:1.04,duration:sc.e-sc.s+.5,ease:"none"},sc.s-.25)}
+function wipe(t){SFXL.push(['swoosh',t-.15]);to(0,'#wipe',{left:1900,duration:.8,ease:"power2.inOut"},t-.5);tl.set('#wipe',{left:-1000},t+.35)}
+const tags=[];
+
+/* ---- HOOK (r1, r2) ---- */
+scene('hook','#sc-hook');kin('#hq',S('r1')-.1,.07);
+const arch=ILLUS.buildArch($('#arch'));const tgt=arch.LL6,wrong=arch.UL6;
+gsap.set('#arch',{opacity:0,y:40});to(0,'#arch',{opacity:1,y:0,duration:.8},S('r1')-.1);
+const A=$('#arch');const defs=el('defs',{},A);const rg=el('radialGradient',{id:'pg'},defs);el('stop',{offset:0,'stop-color':'#E2412F','stop-opacity':.85},rg);el('stop',{offset:1,'stop-color':'#E2412F','stop-opacity':0},rg);
+const glow=el('circle',{cx:tgt.x,cy:tgt.y,r:10,fill:'url(#pg)',opacity:0,style:'mix-blend-mode:multiply'},A);
+const rings=[0,1,2].map(()=>el('circle',{cx:tgt.x,cy:tgt.y,r:20,fill:'none',stroke:'#E2412F','stroke-width':5,opacity:0},A));
+to(0,glow,{attr:{r:110},opacity:1,duration:1},S('r1')+.2);
+ticks.push(t=>{const t0=S('r1')+.4,t1=E('r2');rings.forEach((r,i)=>{if(t<t0||t>t1){r.setAttribute('opacity',0);return}const ph=((t-t0)/1.5+i/3)%1;r.setAttribute('r',20+ph*95);r.setAttribute('opacity',(1-ph)*.9)})});
+const ret=el('g',{opacity:0},A);const hand=el('g',{transform:'scale(.72) rotate(-14)'},ret);
+el('rect',{x:-36,y:-330,width:124,height:110,rx:10,fill:'#2F6FD6',stroke:'#151413','stroke-width':5},hand);el('rect',{x:-40,y:-236,width:132,height:26,rx:8,fill:'#FBF8F2',stroke:'#151413','stroke-width':5},hand);
+el('rect',{x:-17,y:-128,width:36,height:132,rx:18,fill:'#F1C6A0',stroke:'#151413','stroke-width':5},hand);el('rect',{x:-30,y:-214,width:112,height:116,rx:38,fill:'#F1C6A0',stroke:'#151413','stroke-width':5},hand);
+[24,50,74].forEach(x=>el('path',{d:`M${x-12},-104 C${x-12},-84 ${x+12},-84 ${x+12},-104`,fill:'#F1C6A0',stroke:'#151413','stroke-width':4.5},hand));
+el('path',{d:'M-30,-190 C-52,-170 -50,-128 -22,-118 C-8,-114 4,-124 0,-138 C-4,-150 -14,-160 -12,-186',fill:'#F1C6A0',stroke:'#151413','stroke-width':5},hand);
+const tSrc=W('r1','source',.55);
+ticks.push(t=>{const t0=S('r1')+.1,t1=tSrc-.35;if(t<t0){ret.setAttribute('opacity',0);return}
+  const pts=[[arch.UR3.x,arch.UR3.y],[arch.UL2.x,arch.UL2.y],[arch.UL4.x,arch.UL4.y],[wrong.x,wrong.y]];
+  const p=Math.min(1,(t-t0)/(t1-t0)),f=p*(pts.length-1),i=Math.min(pts.length-2,Math.floor(f));let u=f-i;u=u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;
+  const x=pts[i][0]+(pts[i+1][0]-pts[i][0])*u,y=pts[i][1]+(pts[i+1][1]-pts[i][1])*u;const tap=t>t1&&t<t1+.45?Math.max(0,Math.sin((t-t1)*14)):0;
+  ret.setAttribute('transform',`translate(${x},${y-36-tap*14})`);ret.setAttribute('opacity',Math.min(1,(t-t0)*3,Math.max(0,(tSrc+.6-t)/.4)))});
+const xm=el('g',{opacity:0,transform:`translate(${wrong.x},${wrong.y})`},A);el('path',{d:'M-34,-34 L34,34 M34,-34 L-34,34',stroke:'#E2412F','stroke-width':14,'stroke-linecap':'round'},xm);
+to(0,xm,{opacity:1,duration:.2},tSrc-.2);SFXL.push(['buzz',tSrc-.2]);
+const lab=(x,y,txt,col)=>{const g=el('g',{opacity:0},A);const tx=el('text',{x,y,'text-anchor':'middle','font-family':'Archivo','font-size':52,'font-weight':900,fill:col},g);tx.textContent=txt;return g};
+const l14=lab(wrong.x-20,wrong.y+96,'#14','#151413'),l19=lab(tgt.x+10,tgt.y+120,'#19','#E2412F');
+to(0,l14,{opacity:1,duration:.3},W('r1','fourteen',.35));hl(W('r1','fourteen',.35)+.05,'#hq .hl');to(0,l19,{opacity:1,duration:.3},W('r1','nineteen',.85));hl(W('r1','nineteen',.85)+.05,'#hl19');
+to(0,['#arch','#hq'],{opacity:0,duration:.4,ease:"power2.in"},S('r2')-.2);kin('#hwhy',S('r2')+.05);hl(W('r2','seen',.4),'#hwhy .hl');
+
+/* ---- EVIDENCE (r3, r4) ---- */
+scene('ev','#sc-ev');wipe(TM.scenes.ev.s);card(S('r3')+.05,'#card-mcc');hl(S('r3')+1,'#card-mcc .hl',.8);
+tags.push([S('r3')+.3,E('r4')+.3,'McCarthy et al. · J Endod 2010;36:801–5']);
+const t73=W('r3','seventy',.85,1);show(t73-.2,'#ov',.4);counter($('#n73'),t73-.2,t73+.8,0,73);
+hide(S('r4')-.15,'#ov',.3);show(S('r4'),'#bars',.3);show(S('r4')+.05,'#lA',.4);
+const t89=W('r4','eighty',.35);to(0,'#barA',{height:89*3.6,duration:1.2,ease:"power2.out"},t89-.25);show(t89-.25,'#nA',.1);counter($('#nA'),t89-.25,t89+.9,0,89);
+const t30=W('r4','thirty',.85);show(W('r4','without',.6)-.1,'#lB',.4);to(0,'#barB',{height:30*3.6,duration:1,ease:"power2.out"},t30-.25);show(t30-.25,'#nB',.1);counter($('#nB'),t30-.25,t30+.8,0,30);
+ticks.push(()=>{const a=parseFloat($('#barA').style.height)||0,b=parseFloat($('#barB').style.height)||0;$('#nA').style.top=(1240-a-140)+'px';$('#nB').style.top=(1240-b-140)+'px'});
+$('#nB').style.top=(1240-108-140)+'px';circ(t30+.8,'#nB',{pad:16});
+
+/* ---- PULP / PDL (r5, r6, r7) ---- */
+scene('pulp','#sc-pulp');wipe(TM.scenes.pulp.s);
+const ts=$('#tooth');const T=ILLUS.buildTooth(ts);const outer=T.outer;
+{const L=outer.getTotalLength();outer.style.strokeDasharray=L;outer.style.strokeDashoffset=L;outer.style.fillOpacity=0}
+to(0,outer,{strokeDashoffset:0,duration:1.1,ease:"power2.inOut"},S('r5')-.2);to(0,outer,{fillOpacity:1,duration:.4},S('r5')+.6);
+to(0,[T.G.bone,T.gum],{opacity:1,duration:.6},S('r5')+.4);to(0,[T.dentin,T.G.gloss,T.tub,T.pulp,T.G.odo,...T.vessels],{opacity:1,duration:.5},S('r5')+.8);to(0,T.G.pdlG,{opacity:.45,duration:.5},S('r5')+.8);
+const nerves=T.nervePaths.map((d,i)=>el('path',{d,fill:'none',stroke:i==2?'#B82A1C':'#7A1A10','stroke-width':4,opacity:0,'stroke-linecap':'round'},ts));to(0,nerves,{opacity:1,duration:.4},W('r5','innervated',.2));
+const pulses=[];for(let k=0;k<8;k++){const fast=k<4;pulses.push({c:el('circle',{r:fast?9:12,fill:fast?'#FFDD1F':'#B82A1C',stroke:'#151413','stroke-width':2,opacity:0},ts),path:nerves[k%2],fast,off:k*.23})}
+ticks.push(t=>{const st=W('r5','delta',.35),en=E('r6')+.3;pulses.forEach(p=>{if(t<st||t>en){p.c.setAttribute('opacity',0);return}const L=p.path.getTotalLength();const ph=((t-st)*(p.fast?.8:.3)+p.off)%1;const pt=p.path.getPointAtLength(ph*L);p.c.setAttribute('cx',pt.x);p.c.setAttribute('cy',pt.y);p.c.setAttribute('opacity',Math.min(1,(t-st)*3))})});
+kin('#ph1',W('r5','delta',.35)-.3);hl(W('r5','proprioceptors',.45),'#ph1 .hl');
+const stamp=el('g',{opacity:0,transform:'translate(300,330) rotate(-10)'},ts);el('rect',{x:-215,y:-50,width:430,height:100,fill:'none',stroke:'#E2412F','stroke-width':9},stamp);const sx=el('text',{x:0,y:16,'text-anchor':'middle','font-size':44,'font-weight':600,fill:'#E2412F','font-family':'Plex'},stamp);sx.textContent='NO PROPRIOCEPTORS';
+gsap.set(stamp,{scale:2.2,svgOrigin:'300 330'});to(0,stamp,{opacity:1,scale:1,duration:.35,ease:"back.out(2.5)",svgOrigin:'300 330'},W('r5','proprioceptors',.45)+.1);SFXL.push(['thump',W('r5','proprioceptors',.45)+.25]);
+tags.push([W('r5','delta',.35),E('r5')+.2,'Bender · J Endod 2000;26:175–9']);
+hide(S('r6')-.2,['#ph1',stamp]);kin('#ph2',S('r6'));hl(W('r6','localize',.45),'#ph2 .hl');to(0,T.G.pdlG,{opacity:1,duration:.6},W('r6','periodontal',.35));
+const rec=[];{const p=el('path',{d:T.pdlD},ts);const L=p.getTotalLength();for(let i=0;i<30;i++){const pt=p.getPointAtLength(L*(i+.5)/30);rec.push(el('circle',{cx:pt.x,cy:pt.y,r:7,fill:'#FFDD1F',stroke:'#151413','stroke-width':2.5,opacity:0},ts))}p.remove()}
+to(0,rec,{opacity:1,duration:.2,stagger:.03},W('r6','mechanoreceptors',.35));
+const arrow=el('g',{opacity:0},ts);el('path',{d:'M300,-30 L300,94 M268,62 L300,98 L332,62',stroke:'#151413','stroke-width':12,fill:'none','stroke-linecap':'round','stroke-linejoin':'round'},arrow);
+gsap.set(arrow,{y:-50});to(0,arrow,{opacity:1,y:0,duration:.4,ease:"power2.in"},W('r6','percussion',.7)-.2);
+ticks.push(t=>{const t0=W('r6','percussion',.7);if(t<t0||t>E('r6')+.3)return;rec.forEach((d,i)=>d.setAttribute('r',6+5*(.5+.5*Math.sin((t-t0)*9-i*.4))))});
+hide(S('r7')-.2,['#ph2',arrow]);to(0,'#tooth',{opacity:.12,duration:.5},S('r7')-.2);card(S('r7')+.05,'#card-owz');hl(S('r7')+.9,'#card-owz .hl',.7);
+const t57=W('r7','fifty',.6);show(t57-.2,'#o57',.4);hl(t57+.1,'#n57',.5);counter($('#n57'),t57-.2,t57+.7,0,57);
+tags.push([S('r7')+.3,E('r7')+.3,'Owatz et al. · J Endod 2007;33:552–6']);
+
+/* ---- CONVERGENCE (r8) ---- */
+scene('conv','#sc-conv');wipe(TM.scenes.conv.s);kin('#cvh',S('r8'));hl(W('r8','convergence',.15)+.2,'#cvh .hl');
+const wsv=$('#wires');const relay={x:540,y:860},brain={x:540,y:1130};const srcs=[[290,560],[790,560],[290,680],[790,680]];
+const wp=srcs.map(([x,y])=>el('path',{d:`M${x},${y+12} C${x},${y+140} ${relay.x},${relay.y-170} ${relay.x},${relay.y-50}`,fill:'none',stroke:'#151413','stroke-width':5},wsv));
+const outP=el('path',{d:`M${relay.x},${relay.y+50} L${brain.x},${brain.y-80}`,fill:'none',stroke:'#151413','stroke-width':9},wsv);
+[...wp,outP].forEach(p=>{const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L});
+const neuron=el('g',{opacity:0,transform:`translate(${relay.x},${relay.y})`},wsv);for(let a=0;a<8;a++){const r=a/8*Math.PI*2;el('path',{d:`M0,0 Q${Math.cos(r+.4)*50},${Math.sin(r+.4)*50} ${Math.cos(r)*80},${Math.sin(r)*80}`,stroke:'#151413','stroke-width':6,fill:'none','stroke-linecap':'round'},neuron)}
+const ncore=el('circle',{r:46,fill:'#FFDD1F',stroke:'#151413','stroke-width':6},neuron);
+const bnode=el('g',{opacity:0,transform:`translate(${brain.x},${brain.y})`},wsv);
+el('path',{d:'M-88,14 C-112,-22 -88,-74 -40,-68 C-28,-102 26,-104 42,-72 C88,-86 116,-36 92,-2 C112,30 82,70 42,58 C24,86 -30,82 -42,54 C-84,62 -104,40 -88,14 Z',fill:'#F2B3B0',stroke:'#151413','stroke-width':6},bnode);
+['M-60,-20 C-40,-36 -20,-10 0,-30 C18,-46 40,-24 60,-36','M-66,16 C-44,0 -24,28 0,8 C24,-10 46,18 70,4','M-40,44 C-24,30 -6,52 14,36 C30,24 44,42 56,34'].forEach(d=>el('path',{d,fill:'none',stroke:'#C47A78','stroke-width':5,'stroke-linecap':'round'},bnode));
+const qm=el('text',{y:30,'text-anchor':'middle','font-size':90,'font-weight':900,fill:'#E2412F','font-family':'Archivo',opacity:0},bnode);qm.textContent='?';
+to(0,neuron,{opacity:1,duration:.4},W('r8','neurons',.55)-.2);show(W('r8','subnucleus',.65)-.1,'#relayL',.4);
+hide(W('r8','sessle',.4)-.3,'#cvh');show(W('r8','sessle',.4),'#cvs',.4);tags.push([W('r8','sessle',.4),E('r8')+.3,'Sessle et al. · Pain 1986;27:219–35']);
+const wt=['pulp','skin','mucosa','muscle'].map((w,i)=>W('r8',w,.75+i*.06));
+['#p0','#p1','#p2','#p3'].forEach((s,i)=>{gsap.set(s,{y:30});to(0,s,{opacity:1,y:0,duration:.4},wt[i]-.2);to(0,wp[i],{strokeDashoffset:0,duration:.6},wt[i]-.1);to(0,s,{backgroundColor:'#FFDD1F',duration:.2},wt[i]+.3)});
+to(0,outP,{strokeDashoffset:0,duration:.5},E('r8')-.6);to(0,bnode,{opacity:1,duration:.3},E('r8')-.3);show(E('r8')-.2,'#brainL',.3);to(0,qm,{opacity:1,duration:.3},E('r8'));
+const dots=[];wp.forEach((p,i)=>{for(let k=0;k<2;k++)dots.push({p,i,k,c:el('circle',{r:11,fill:i==0?'#E2412F':'#FFDD1F',stroke:'#151413','stroke-width':3,opacity:0},wsv)})});
+ticks.push(t=>{const en=E('r8')+.4;dots.forEach(o=>{const st=wt[o.i]+.5;if(t<st||t>en){o.c.setAttribute('opacity',0);return}const L=o.p.getTotalLength(),ph=((t-st)*.6+o.k/2)%1,pt=o.p.getPointAtLength(ph*L);o.c.setAttribute('cx',pt.x);o.c.setAttribute('cy',pt.y);o.c.setAttribute('opacity',ph<.08?ph/.08:ph>.92?(1-ph)/.08:1)});
+  if(t>wt[3]&&t<en)ncore.setAttribute('r',46*(1+.12*Math.sin((t-wt[3])*8)))});
+
+/* ---- SPREAD (r9) ---- */
+scene('spr','#sc-spr');wipe(TM.scenes.spr.s);kin('#sh',S('r9'));hl(W('r9','spreads',.3)+.1,'#sh .hl');
+const fs=$('#face');const fdefs=el('defs',{},fs);
+const mkGrad=(id,col,o)=>{const g=el('radialGradient',{id},fdefs);el('stop',{offset:'0','stop-color':col,'stop-opacity':o},g);el('stop',{offset:'.6','stop-color':col,'stop-opacity':.32},g);el('stop',{offset:'1','stop-color':col,'stop-opacity':0},g)};
+mkGrad('gr','#E2412F',.78);mkGrad('gb','#2F6FD6',.55);
+gsap.set('#face',{opacity:0,x:40});to(0,'#face',{opacity:1,x:0,duration:.7},S('r9')-.1);
+const H=ILLUS.buildHead(fs);const blobG=H.blobG,upT=H.upT,loT=H.loT;
+const mk=(x,y,c)=>el('rect',{x:x-12,y:y-12,width:24,height:24,rx:6,fill:'none',stroke:c,'stroke-width':4.5},fs);mk(loT.x,loT.y,'#E2412F');mk(upT.x,upT.y,'#2F6FD6');
+const bR=[[loT.x,loT.y,1],[372,470,.8],[415,335,.75],[330,250,.7],[245,385,.7],[330,560,.55]].map(([x,y,w])=>({c:el('circle',{cx:x,cy:y,r:0,fill:'url(#gr)'},blobG),w}));
+const bB=[[upT.x,upT.y,1],[250,370,.8],[320,280,.7],[400,320,.6],[205,330,.6],[380,450,.6]].map(([x,y,w])=>({c:el('circle',{cx:x,cy:y,r:0,fill:'url(#gb)'},blobG),w}));
+const sp={i:0,b:0};
+ticks.push(()=>{bR.forEach((b,k)=>b.c.setAttribute('r',Math.max(0,sp.i*180-k*22)*b.w));bB.forEach((b,k)=>b.c.setAttribute('r',Math.max(0,sp.b*175-k*24)*b.w))});
+to(0,sp,{i:1,duration:2.6,ease:"power1.inOut"},S('r9')+.3);to(0,sp,{b:1,duration:2.4,ease:"power1.inOut"},S('r9')+1.2);
+show(W('r9','overlap',.8)-.3,'#legend',.4);
+tags.push([W('r9','sharav',.35)-.1,E('r9')+.3,'Sharav et al. Pain 1984 · Falace et al. J Orofac Pain 1996']);
+
+/* ---- CLINICAL (r10, r11) ---- */
+scene('cl','#sc-cl');wipe(TM.scenes.cl.s);kin('#clh',S('r10'));hl(W('r10','chief',.25)+.1,'#clh .hl');
+const tileDefs=[['cold','Cold test','<path d="M60,10 L60,110 M17,35 L103,85 M17,85 L103,35 M48,18 L60,30 L72,18 M48,102 L60,90 L72,102" stroke="#151413" stroke-width="8" fill="none" stroke-linecap="round"/>'],
+ ['percussion','Percussion','<rect x="20" y="20" width="56" height="34" rx="6" fill="#FFDD1F" stroke="#151413" stroke-width="7"/><path d="M60,54 L96,108" stroke="#151413" stroke-width="10" stroke-linecap="round"/>'],
+ ['bite','Bite test','<path d="M20,20 L100,20 L100,44 Q60,56 20,44 Z" fill="#FBF8F2" stroke="#151413" stroke-width="7"/><path d="M20,100 L100,100 L100,76 Q60,64 20,76 Z" fill="#FBF8F2" stroke="#151413" stroke-width="7"/><rect x="34" y="52" width="52" height="16" rx="5" fill="#E2412F" stroke="#151413" stroke-width="5"/>'],
+ ['selective','Selective anesthesia<br><span style="font-size:22px;color:#B82A1C">maxillary arch first</span>','<path d="M18,102 L40,80 M30,70 L50,90 M40,80 L86,34 L96,44 L50,90 Z M86,34 L104,16 M90,24 L100,34" stroke="#151413" stroke-width="7" fill="#FBF8F2" stroke-linecap="round" stroke-linejoin="round"/>']];
+$('#tiles').innerHTML=tileDefs.map(([k,n,s],i)=>`<div class="tile" id="tl${i}"><svg width="100" height="100" viewBox="0 0 120 120">${s}</svg><div class="mono" style="font-weight:600;font-size:28px;text-transform:uppercase;text-align:center;line-height:1.3;padding:0 14px">${n}</div></div>`).join('');
+tileDefs.forEach(([k],i)=>{gsap.set('#tl'+i,{y:50});to(0,'#tl'+i,{opacity:1,y:0,duration:.45,ease:"back.out(1.6)"},W('r10',k,.3+i*.15)-.15)});
+to(0,'#tl3',{backgroundColor:'#FFDD1F',duration:.3},W('r10','maxillary',.9));
+hide(S('r11')-.25,['#clh','#tiles']);kin('#clf',S('r11'));hl(W('r11','finger',.85)-.15,'#clf .hl');
+to(0,'#endcard',{opacity:1,duration:.5,ease:"none"},TM.scenes.end.s);SFXL.push(['hit',TM.scenes.end.s+.1]);
+/* ---- captions: 1-3 word chunks, active word highlighted ---- */
+const CH=[];for(const id in TM.lines){const ws=[];TM.lines[id].words.forEach(w=>{if(/^%/.test(w[0])&&ws.length){const p=ws[ws.length-1];ws[ws.length-1]=[p[0]+w[0],p[1],w[2]]}else ws.push(w)});let cur=[];ws.forEach((w,i)=>{cur.push(w);const txt=cur.map(x=>x[0]).join(' ');const brk=/[.,?!:;]$/.test(w[0])||cur.length>=3||txt.length>16||i===ws.length-1;if(brk){CH.push(cur);cur=[]}})}
+CH.forEach((c,i)=>{c.start=c[0][1]-.05;c.end=(CH[i+1]&&CH[i+1][0][1]-c[c.length-1][2]<.6)?CH[i+1][0][1]-.05:c[c.length-1][2]+.25});
+let lastKey='';ticks.push(t=>{const c=CH.find(c=>t>=c.start&&t<c.end);const cap=$('#cap');if(!c||t>TM.scenes.end.s){if(lastKey){cap.innerHTML='';lastKey=''}return}
+  const ai=c.findIndex((w,j)=>t>=w[1]-.03&&(j===c.length-1||t<c[j+1][1]-.03));const key=CH.indexOf(c)+':'+ai;if(key===lastKey)return;lastKey=key;
+  cap.innerHTML='<span class="chunk">'+c.map((w,j)=>`<span class="w${j===ai?' on':''}">${w[0].replace(/^(\d+) %/,'$1%')}</span>`).join(' ')+'</span>'});
+ticks.push(t=>{let cur=null;for(const x of tags)if(t>=x[0]&&t<=x[1])cur=x;const g=$('#srctag');if(!cur){g.style.opacity=0;return}$('#srctxt').textContent=cur[2];g.style.opacity=Math.min(1,(t-cur[0])/.3,(cur[1]-t)/.3)});
+ticks.push(t=>{const f=Math.floor(t*12);$('#grain').style.transform=`translate(${(f*37)%90-45}px,${(f*53)%90-45}px)`});
+window.seek=t=>{tl.seek(t,false);ticks.forEach(f=>f(t))};window.TOTAL=TM.total;
+document.fonts.ready.then(()=>{window.seek(0);window.READY=true});
+</script></body></html>

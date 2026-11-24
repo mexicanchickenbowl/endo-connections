@@ -37,7 +37,23 @@ endodontics, toothache, referred pain, dental pain, pulpitis, dentistry, dental 
 
 **Settings to choose at upload**: visibility (public / unlisted / private), audience = "not made for kids", category = Education. Disclose altered or synthetic content: the narration is an AI voice.
 
-## Instagram Reel (`the-hidden-toothache-reel.mp4`, 1:22, 1080×1920)
+## Instagram Reel — clinician cut (`the-hidden-toothache-reel-clinicians.mp4`, 1:12, 1080×1920) — USE THIS ONE
+
+**Caption**
+Patient points to #14. The source is #19. 🦷
+
+Localization was 73% overall, but 89% with periradicular symptoms vs. 30% without (McCarthy et al., J Endod 2010). The pulp's A-δ and C fibers carry no proprioceptive information; localization comes once the PDL is involved. Mechanical allodynia was present in 57% of irreversible pulpitis cases (Owatz et al., J Endod 2007). Add convergence in subnucleus caudalis (Sessle et al., Pain 1986) and intensity-driven referral that overlaps between arches (Sharav 1984; Falace 1996), and the finger becomes unreliable.
+
+Clinical takeaway: reproduce the chief complaint, test adjacent and opposing teeth, and when it's still unclear, use selective anesthesia starting with the maxillary arch.
+
+Sources: McCarthy 2010 · Owatz 2007 · Bender 2000 · Sessle 1986 · Sharav 1984 · Falace 1996. Full explainer on YouTube.
+Music: "Infinite Perspective," Kevin MacLeod (incompetech.com), CC BY 4.0 · AI narration
+
+#endodontics #endodontist #endo #dentistry #dentalstudent #pulpitis #referredpain #rootcanal #dentaleducation #orofacialpain
+
+Cover frame suggestion: the hook (~0:02, "Patient points to #14 / The source is #19").
+
+## Instagram Reel — general-audience cut (`the-hidden-toothache-reel.mp4`, 1:22, 1080×1920)
 
 **Caption**
 Point to the tooth that hurts. 🦷 Sounds easy, but when the pain is still inside the pulp, patients pick the right tooth only ~30% of the time (McCarthy et al., J Endod 2010).
